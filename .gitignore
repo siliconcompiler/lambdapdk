@@ -1,0 +1,11 @@
+
+#Editor files
+*~
+*~
+*.log
+tmp*
+a.out
+*.vcd
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
