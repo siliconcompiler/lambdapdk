@@ -1,0 +1,583 @@
+* Copyright 2022 GlobalFoundries PDK Authors
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*     https://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+
+***************
+***************
+***************
+
+.OPTIONS PARSER model_binning=true
+**
+*******************************************************************************
+* Document No.      : SM-BB-000149
+* Revision          : 1
+* Process Name      : 0.18um MCU 10V high voltage process
+* Process ID        : TH18300G1A
+*					  TH18300G4A
+* Wafer ID          : TNL4435202 (10V LDNMOS & LDPMOS)
+************************************************************************************************
+* Models included in this release :
+*
+*      ModelName          Description
+*      ---------          -----------
+*      nmos_10p0_asym     BSIM4 based HV subcircuit model for 10V LDNMOS (*)
+*      pmos_10p0_asym     BSIM4 based HV subcircuit model for 10V LDPMOS (*)
+************************************************************************************************
+*
+***************************************************************************************************
+* Fixed-Corner Sections
+***************************************************************************************************
+.LIB typical
+.PARAM
++ NMOS_10P0_ASYM_DTOX=0 NMOS_10P0_ASYM_DXL=0 NMOS_10P0_ASYM_DXW=0 NMOS_10P0_ASYM_DVTH0=0
++ NMOS_10P0_ASYM_DRDSW=1 NMOS_10P0_ASYM_DRDRIFT=1 NMOS_10P0_ASYM_DVSAT=1 NMOS_10P0_ASYM_DU0=1
++ NMOS_10P0_ASYM_DCGS=1 NMOS_10P0_ASYM_DCGD=1 NMOS_10P0_ASYM_DCJS=1 NMOS_10P0_ASYM_DCJD=1
++ PMOS_10P0_ASYM_DTOX=0 PMOS_10P0_ASYM_DXL=0 PMOS_10P0_ASYM_DXW=0 PMOS_10P0_ASYM_DVTH0=0
++ PMOS_10P0_ASYM_DRDSW=1 PMOS_10P0_ASYM_DRDRIFT=1 PMOS_10P0_ASYM_DVSAT=1 PMOS_10P0_ASYM_DU0=1
++ PMOS_10P0_ASYM_DCGS=1 PMOS_10P0_ASYM_DCGD=1 PMOS_10P0_ASYM_DCJS=1 PMOS_10P0_ASYM_DCJD=1
+*************10V************
+.LIB smbb000149.xyce nmos_10p0_asym_t
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.LIB smbb000149.xyce pmos_10p0_asym_t
+.LIB smbb000149.xyce noise_corner
+.ENDL
+
+
+.LIB ss
+
+.PARAM
++ NMOS_10P0_ASYM_DTOX=8E-10 NMOS_10P0_ASYM_DXL=6e-008 NMOS_10P0_ASYM_DXW=-3.46E-8 NMOS_10P0_ASYM_DVTH0=0.112
++ NMOS_10P0_ASYM_DRDSW=1.2 NMOS_10P0_ASYM_DRDRIFT=1.271 NMOS_10P0_ASYM_DVSAT=0.926
++ NMOS_10P0_ASYM_DU0=0.95 NMOS_10P0_ASYM_DCGS=1.1 NMOS_10P0_ASYM_DCGD=1.2 NMOS_10P0_ASYM_DCJS=1.1
++ NMOS_10P0_ASYM_DCJD=1.2 PMOS_10P0_ASYM_DTOX=8E-10 PMOS_10P0_ASYM_DXL=9.914e-008
++ PMOS_10P0_ASYM_DXW=-1E-7 PMOS_10P0_ASYM_DVTH0=-0.0936 PMOS_10P0_ASYM_DRDSW=1.11
++ PMOS_10P0_ASYM_DRDRIFT=1.144 PMOS_10P0_ASYM_DVSAT=0.91 PMOS_10P0_ASYM_DU0=0.964
++ PMOS_10P0_ASYM_DCGS=1.1 PMOS_10P0_ASYM_DCGD=1.2 PMOS_10P0_ASYM_DCJS=1.1 PMOS_10P0_ASYM_DCJD=1.2
+.LIB smbb000149.xyce nmos_10p0_asym_t
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.LIB smbb000149.xyce pmos_10p0_asym_t
+.LIB smbb000149.xyce noise_corner
+.ENDL
+
+
+.LIB ff
+
+.PARAM
++ NMOS_10P0_ASYM_DTOX=-8E-10 NMOS_10P0_ASYM_DXL=-6e-008 NMOS_10P0_ASYM_DXW=3.46E-8
++ NMOS_10P0_ASYM_DVTH0=-0.10388 NMOS_10P0_ASYM_DRDSW=0.868 NMOS_10P0_ASYM_DRDRIFT=0.8245
++ NMOS_10P0_ASYM_DVSAT=1.033 NMOS_10P0_ASYM_DU0=1.04 NMOS_10P0_ASYM_DCGS=0.9 NMOS_10P0_ASYM_DCGD=0.8
++ NMOS_10P0_ASYM_DCJS=0.9 NMOS_10P0_ASYM_DCJD=0.8 PMOS_10P0_ASYM_DTOX=-8E-10 PMOS_10P0_ASYM_DXL=-6.804e-008
++ PMOS_10P0_ASYM_DXW=8.46E-8 PMOS_10P0_ASYM_DVTH0=0.099 PMOS_10P0_ASYM_DRDSW=0.91
++ PMOS_10P0_ASYM_DRDRIFT=0.89 PMOS_10P0_ASYM_DVSAT=1.06 PMOS_10P0_ASYM_DU0=1.03 PMOS_10P0_ASYM_DCGS=0.9
++ PMOS_10P0_ASYM_DCGD=0.8 PMOS_10P0_ASYM_DCJS=0.9 PMOS_10P0_ASYM_DCJD=0.8
+.LIB smbb000149.xyce nmos_10p0_asym_t
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.LIB smbb000149.xyce pmos_10p0_asym_t
+.LIB smbb000149.xyce noise_corner
+.ENDL
+
+.LIB sf
+
+
+.PARAM
++ NMOS_10P0_ASYM_DTOX=0 NMOS_10P0_ASYM_DXL=5.024e-008 NMOS_10P0_ASYM_DXW=0 NMOS_10P0_ASYM_DVTH0=0.068
++ NMOS_10P0_ASYM_DRDSW=1.2 NMOS_10P0_ASYM_DRDRIFT=1.156 NMOS_10P0_ASYM_DVSAT=0.928
++ NMOS_10P0_ASYM_DU0=0.97 NMOS_10P0_ASYM_DCGS=1.07 NMOS_10P0_ASYM_DCGD=1.14 NMOS_10P0_ASYM_DCJS=1.07
++ NMOS_10P0_ASYM_DCJD=1.14 PMOS_10P0_ASYM_DTOX=0 PMOS_10P0_ASYM_DXL=-7.004e-008 PMOS_10P0_ASYM_DXW=0
++ PMOS_10P0_ASYM_DVTH0=0.057672 PMOS_10P0_ASYM_DRDSW=0.91 PMOS_10P0_ASYM_DRDRIFT=0.92
++ PMOS_10P0_ASYM_DVSAT=1.012 PMOS_10P0_ASYM_DU0=1.03 PMOS_10P0_ASYM_DCGS=0.93 PMOS_10P0_ASYM_DCGD=0.86
++ PMOS_10P0_ASYM_DCJS=0.93 PMOS_10P0_ASYM_DCJD=0.86
+.LIB smbb000149.xyce nmos_10p0_asym_t
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.LIB smbb000149.xyce pmos_10p0_asym_t
+.LIB smbb000149.xyce noise_corner
+.ENDL
+
+.LIB fs
+
+.PARAM
++ NMOS_10P0_ASYM_DTOX=0 NMOS_10P0_ASYM_DXL=-5.02e-008 NMOS_10P0_ASYM_DXW=0 NMOS_10P0_ASYM_DVTH0=-0.058169
++ NMOS_10P0_ASYM_DRDSW=0.868 NMOS_10P0_ASYM_DRDRIFT=0.89748 NMOS_10P0_ASYM_DVSAT=1.045
++ NMOS_10P0_ASYM_DU0=1.034 NMOS_10P0_ASYM_DCGS=0.93 NMOS_10P0_ASYM_DCGD=0.86 NMOS_10P0_ASYM_DCJS=0.93
++ NMOS_10P0_ASYM_DCJD=0.86 PMOS_10P0_ASYM_DTOX=0 PMOS_10P0_ASYM_DXL=9.414e-008 PMOS_10P0_ASYM_DXW=0
++ PMOS_10P0_ASYM_DVTH0=-0.056 PMOS_10P0_ASYM_DRDSW=1.11 PMOS_10P0_ASYM_DRDRIFT=1.06
++ PMOS_10P0_ASYM_DVSAT=0.989 PMOS_10P0_ASYM_DU0=0.97 PMOS_10P0_ASYM_DCGS=1.07 PMOS_10P0_ASYM_DCGD=1.14
++ PMOS_10P0_ASYM_DCJS=1.07 PMOS_10P0_ASYM_DCJD=1.14
+.LIB smbb000149.xyce nmos_10p0_asym_t
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.LIB smbb000149.xyce pmos_10p0_asym_t
+.LIB smbb000149.xyce noise_corner
+.ENDL
+
+
+.LIB statistical
+
+.PARAM
++ MC_VSAT2_10V={agauss(0, 1, 3)} MC_RD_10V_2={agauss(0, 1, 3)} MC_U0_10V_2={agauss(0, 1, 3)}
++ MC_CGOL_10V_2={agauss(0, 1, 3)} MC_VSATN2_10V={agauss(0, 1, 3)} MC_RDN_10V_2={agauss(0, 1, 3)}
++ MC_U0N_10V_2={agauss(0, 1, 3)} MC_CGOLN_10V_2={agauss(0, 1, 3)} MC_VSATP2_10V={agauss(0, 1, 3)}
++ MC_U0P2_10V={agauss(0, 1, 3)} MC_RDP_10V_2={agauss(0, 1, 3)} MC_CGOLP_10V_2={agauss(0, 1, 3)}
++ MC_VSAT_10V={mc_vsat2_10v} MC_RD_10V={mc_rd_10V_2} MC_U0_10V={mc_u0_10V_2} MC_CGOL_10V={mc_cgol_10V_2}
++ MC_VSATN_10V={mc_vsatN2_10v} MC_RDN_10V={mc_rdn_10V_2} MC_U0N_10V={mc_u0n_10v_2}
++ MC_CGOLN_10V={mc_cgolN_10V_2} MC_VSATP_10V={mc_vsatP2_10v} MC_U0P_10V={mc_u0P2_10v}
++ MC_RDP_10V={mc_rdP_10V_2} MC_CGOLP_10V={mc_cgolP_10V_2}
+.PARAM
++ NMOS_10P0_ASYM_SIG_VTH='0.01675*(0.7*mc_sig_vth+0.7*mc_sig_vthN)*sw_stat_global*mc_skew'
++ NMOS_10P0_ASYM_DTOX='7.2e-11*(0.77*mc_toxe+0.63*mc_toxeN)*sw_stat_global*mc_skew'
++ NMOS_10P0_ASYM_DXL='5.3e-9*(0.71*mc_xl+0.69*mc_xlN)*sw_stat_global*mc_skew' NMOS_10P0_ASYM_DXW='3.25e-8*(0.77*mc_xw+0.63*mc_xwN)*sw_stat_global*mc_skew'
++ NMOS_10P0_ASYM_DVTH0='nmos_10p0_asym_sig_vth' NMOS_10P0_ASYM_DRDSW='(1 + 0.093*(0.77* mc_rd_10V + 0.63* mc_rdn_10V)*sw_stat_global*mc_skew)'
++ NMOS_10P0_ASYM_DRDRIFT='(1 + 0.037*(0.77* mc_rd_10V + 0.63* mc_rdn_10V)*sw_stat_global*mc_skew)'
++ NMOS_10P0_ASYM_DVSAT='(1 + 0.028*(0.77*mc_vsat_10v+0.63*mc_vsatN_10v)*sw_stat_global*mc_skew)'
++ NMOS_10P0_ASYM_DU0='(1 + 0.0157*(0.7*mc_u0_10v+0.7*mc_u0n_10v)*sw_stat_global*mc_skew)'
++ NMOS_10P0_ASYM_DCGS='(1+(12e-3* mc_cgol_10V+12e-3* mc_cgolN_10V)*sw_stat_global*mc_skew)'
++ NMOS_10P0_ASYM_DCGD='(1+(24e-3* mc_cgol_10V+24e-3* mc_cgolN_10V)*sw_stat_global*mc_skew)'
++ NMOS_10P0_ASYM_DCJS='(1+(12e-3* mc_cgol_10V+12e-3* mc_cgolN_10V)*sw_stat_global*mc_skew)'
++ NMOS_10P0_ASYM_DCJD='(1+(24e-3* mc_cgol_10V+24e-3* mc_cgolN_10V)*sw_stat_global*mc_skew)'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.PARAM
++ PMOS_10P0_ASYM_SIG_DVTH1='0.01692*(-0.7*mc_sig_vth+0.7*mc_sig_vthp)*sw_stat_global*mc_skew'
++ PMOS_10P0_ASYM_DTOX='7.143e-11*(0.77*mc_toxe+0.63*mc_toxep)*sw_stat_global*mc_skew'
++ PMOS_10P0_ASYM_DXL='1.7e-8*(0.71*mc_xl+0.69*mc_xlp)*sw_stat_global*mc_skew' PMOS_10P0_ASYM_DXW='7.4e-8*(0.77*mc_xw+0.63*mc_xwp)*sw_stat_global*mc_skew'
++ PMOS_10P0_ASYM_DVTH0='pmos_10p0_asym_sig_dvth1' PMOS_10P0_ASYM_DRDSW='(1 + 0.085*(0.77* mc_rd_10V + 0.63* mc_rdp_10V)*sw_stat_global*mc_skew)'
++ PMOS_10P0_ASYM_DRDRIFT='(1 + 0.032*(0.77* mc_rd_10V + 0.63* mc_rdp_10V)*sw_stat_global*mc_skew)'
++ PMOS_10P0_ASYM_DVSAT='(1 + 0.032*(0.77*mc_vsat_10v+0.63*mc_vsatP_10V)*sw_stat_global*mc_skew)'
++ PMOS_10P0_ASYM_DU0='(1 + 0.0097*(0.7*mc_u0_10v+0.7*mc_u0P_10V)*sw_stat_global*mc_skew)'
++ PMOS_10P0_ASYM_DCGS='(1+ (12e-3*mc_cgol_10V + 12e-3*mc_cgolp_10V)*sw_stat_global*mc_skew)'
++ PMOS_10P0_ASYM_DCGD='(1+ (24e-3*mc_cgol_10V + 24e-3*mc_cgolp_10V)*sw_stat_global*mc_skew)'
++ PMOS_10P0_ASYM_DCJS='(1+(12e-3*mc_cgol_10V + 12e-3*mc_cgolp_10V)*sw_stat_global*mc_skew)'
++ PMOS_10P0_ASYM_DCJD='(1+(24e-3*mc_cgol_10V + 24e-3*mc_cgolp_10V)*sw_stat_global*mc_skew)'
+
+
+
+
+.LIB smbb000149.xyce nmos_10p0_asym_t
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.LIB smbb000149.xyce pmos_10p0_asym_t
+.LIB smbb000149.xyce noise_corner
+.ENDL
+*
+
+.LIB noise_corner
+.PARAM
++ NMOS_10P0_ASYM_NOIA='(fnoicor==0)*1.1021E42 + (fnoicor==1)*2.5852e42' NMOS_10P0_ASYM_NOIB='(fnoicor==0)*2.8476E24 + (fnoicor==1)*6.5096e+024'
++ NMOS_10P0_ASYM_NOIC='(fnoicor==0)*8.75 + (fnoicor==1)*8.75' PMOS_10P0_ASYM_NOIA='(fnoicor==0)*2.9073e+041 + (fnoicor==1)*1.7073e+042'
++ PMOS_10P0_ASYM_NOIB='(fnoicor==0)*8.0736e+025 + (fnoicor==1)*2.4523e+026' PMOS_10P0_ASYM_NOIC='(fnoicor==0)*12780 + (fnoicor==1)*12780'
+.ENDL
+
+
+
+
+
+*
+*
+***************************************************************************************************
+* 10V LDNMOS Asym Model
+***************************************************************************************************
+*
+.LIB nmos_10p0_asym_t
+
+.SUBCKT nmos_10p0_asym d g s b
++ PARAMS: W=25E-6 L=0.6E-6 AD='w*1.48e-6' PD='2*(1.48e-6+w)' AS='w*0.48e-6' PS='(w+0.48e-6)*2'
++ NRD=0 NRS=0 NF=1 DTEMP=0 SA=0 SB=0 SD=0 PAR=1
+.PARAM
++ RDRIFT1=1.5433E3 WA=-1.6705E-8 RD=0.17322 RA=4.631E-3 RB=1.1181 LB=-1.0648E-6 WB=-2.8512E-7
++ TRX1=2.8643E-3 TRX2=1.0098E-5 TRTH1=5.5E-4 TRTH2=0 CGDL_D2=5.0343E-10 TOXEP=1.376E-8
++ LCGD_D2=6.4774E-10 CGDV_D=1.0253 CGD_VAL=0.20473 CGSL_S=1.2929E-10 LCGS=2.9695E-8
++ CGS_SLOPE=4.0853 CGS_VTH=0.10612 CGS_FACTOR=0.9 VTHD=4.18986E-2 CGD_VTHD=0.31232
++ CGB_SLOPE=1.0158 CGB_VTH=0.82325 CGB_AMP=1.3591E-9 CGB_MIN=7.4448E-10 CGB_POWER=2.5552
++ LCGD_D=1.4497E-7 POLAR_D=-1.0276E-3 POLARD_MIN=7.05 POLAR_S=-0.35192 POLARS_MIN=4.2
++ CGS_FACTOR2=1 CGDV_D2=-2.1473 CGDL_D=1.3222E-11 CGS_VTH1=0.20635
+.PARAM CGDS_FIXED='3.9*8.854e-12/toxep'
+
+
+
+
+
+
+
+
+Rdrift d d2
++ TC1={trx1} TC2={trx2} M={nf}
++ R='(rdrift1*nmos_10p0_asym_drdrift)*1.2e-6/(w/nf-wa)'
+Rd2 d2 d1
++ M={nf}
++ R='max(1e-2, (rd*nmos_10p0_asym_drdsw*(1+trth1*(temp+dtemp-25)+trth2*(temp+dtemp-25)*(temp+dtemp-25)))/(w/nf-wb)*(tanh(ra*(v(d,s)-rb*(l-lb)/(0.6e-6-lb)))))'
+M0 d1 g s b nmos_10p0_asym_core
++ AD={ad} AS={as} L={l} NF={nf} NRD={nrd} NRS={nrs} PD={pd} PS={ps} SA={sa}
++ SB={sb} SD={sd} W={w}
+C1_gd g d
++ C='nmos_10p0_asym_dcgd*(cgds_fixed*w*lcgd_d+ exp(polar_d*min(max(v(d,s)-vthd,0),polard_min))*cgdl_d*w*(1+tanh(cgdv_d/(1+cgd_val*max(v(d,g),0))*(v(g,d1)+cgd_vthd*(1+cgdv_d2*v(d,d1)) -nmos_10p0_asym_dvth0))))'
+C1_gd2 g d1
++ C='nmos_10p0_asym_dcgd*(cgds_fixed*w*lcgd_d2 + cgdl_d2*w*(1+tanh( cgdv_d/(1+cgd_val*max(v(d,g),0))*(v(g,d1)+cgd_vthd*(1+cgdv_d2*v(d,d1))  -nmos_10p0_asym_dvth0 ) )) )'
+C2_gs g s
++ C='nmos_10p0_asym_dcgs*(cgds_fixed*w*lcgs + cgsl_s*w*(1-tanh(cgs_slope*(v(s,g)+cgs_vth)))*(1 +cgs_factor/(1+cgs_factor2*exp(-v(g,d1)-cgs_vth1))*(1- exp(polar_s*min(max(v(d1,s)-vthd,0),polars_min)))))'
+C3_gb g b
++ C='(cgb_min +  cgb_amp/(1+(1/pow(max(1e-3, cgb_slope*(v(b,g)-cgb_vth + nmos_10p0_asym_dvth0)), cgb_power))) ) *w '
+.MODEL nmos_10p0_asym_core.1 NMOS
++ A0=1.0212 A1=-0.065307 A2=0.94 ACDE=0.54775 ACNQSMOD=0 AGIDL=5.7877E-16
++ AGS=0.13804 ALPHA0=-2.5481E-7 ALPHA1=0.59769 AT=3.3E4 B0=6.48E-6 B1=5.9519E-5
++ BETA0=37.485 BGIDL=1.171E9 BINUNIT=1 BVD=14.5 BVS=11 CAPMOD=2 CDSC=1.1424E-5
++ CDSCB=2.4894E-6 CDSCD=0 CGBO=1E-13 CGDL=0 CGDO=0 CGIDL=0.228 CGSL=0 CGSO=0
++ CIT=0 CJD='1.4914E-4*nmos_10p0_asym_dcjd' CJS='9.5E-4*nmos_10p0_asym_dcjs'
++ CJSWD='5.8719E-10*nmos_10p0_asym_dcjd' CJSWGD='5.8719E-10*nmos_10p0_asym_dcjd'
++ CJSWGS='1.33E-10*nmos_10p0_asym_dcjs' CJSWS='1.33E-10*nmos_10p0_asym_dcjs'
++ CKAPPAD=0.6 CKAPPAS=0.6 DELTA=0.01 DIOMOD=2 DLC=1.723E-7 DROUT=0.45 DSUB=0.56
++ DVT0=0.09762 DVT0W=3.4488 DVT1=0.021131 DVT1W=9.5865E4 DVT2=-0.046683
++ DVT2W=0.034426 DVTP0=0 DVTP1=0 DWB=-3.3647E-8 DWG=-2.9807E-8 EF=1.0914
++ EGIDL=0.0968 EM=4.1E7 EPSROX=3.9 ETA0=0.039833 ETAB=-1.2928 FNOIMOD=1 GEOMOD=0
++ IGBMOD=0 IGCMOD=0 JSD=1.6119E-6 JSS=6.88E-7 JSWD=4.824E-12 JSWGD=4.824E-12
++ JSWGS=4.88E-13 JSWS=4.88E-13 JTSD=1.4513E-4 K1=0.9621 K2=-7.2357E-3 K3=13.237
++ K3B=0.25485 KETA=-0.01362 KT1=-0.42425 KT1L=-1.8892E-8 KT2=-0.060553
++ LA0=-0.55504 LAGS=0 LAT=0 LBETA0=-11.164 LINT=0 LK1=0 LK2=0 LKETA=-3.3807E-3
++ LL=0 LLN=1 LMAX=20.01E-6 LMIN=6E-7 LNFACTOR=6.48E-7 LNOFF=1 LPE0=1.0439E-6
++ LPEB=6.2517E-7 LU0='5.2003E-3*nmos_10p0_asym_du0' LUA=4.2194E-10 LUA1=0
++ LUB=-1.9302E-18 LUB1=0 LUC=-4.7702E-11 LUTE=0.045577
++ LVSAT='9844*nmos_10p0_asym_dvsat' LVTH0=0 LW=0 LWL=0 LWN=1 MINV=0 MJD=0.30525
++ MJS=0.296 MJSWD=0.21757 MJSWGD=0.21757 MJSWGS=0.01 MJSWS=0.01 MOBMOD=0
++ MOIN=16.92 NDEP=1.7E17 NFACTOR=0.90694 NGATE=2.9861E21 NJD=1 NJS=1.0541
++ NOFF=1.9257 NOIA='nmos_10p0_asym_noia' NOIB='nmos_10p0_asym_noib'
++ NOIC='nmos_10p0_asym_noic' NSD=1E20 PARAMCHK=1 PAT=-9E3 PBD=0.43905
++ PBETA0=-0.645 PBS=0.606 PBSWD=0.48991 PBSWGD=0.48991 PBSWGS=0.48 PBSWS=0.48
++ PCLM=0.02794 PDIBLC1=0.46226 PDIBLC2=1.092E-4 PDIBLCB=-5E-3 PERMOD=1 PHIN=0
++ PKT1=0 PKT2=-0.09625 PPRT=0 PPRWB=0 PPRWG=0 PRDSW=0 PRT=200 PRWB=0.81
++ PRWG=0.037838 PSCBE1=4.9654E8 PSCBE2=1.6381E-7
++ PU0='3.9064E-3*nmos_10p0_asym_du0' PUA=0 PUA1=0 PUB=-6.8E-19 PUB1=0
++ PUC=-6.8588E-11 PUTE=0.17695 PVAG=0.9 PVSAT=-3.168E3 PVTH0=0.19879 RBODYMOD=0
++ RDSMOD=0 RDSW='200*nmos_10p0_asym_drdsw' RDSWMIN=500 RSH=7 TCJ=1.65E-3
++ TCJSW=1.61E-3 TCJSWG=1.61E-3 TEMPMOD=0 TNOIMOD=0 TNOM=25
++ TOXE='1.398E-8+nmos_10p0_asym_dtox' TPB=2.11E-3 TPBSW=1.9E-3 TPBSWG=1.9E-3
++ TRNQSMOD=0 U0='0.0486*nmos_10p0_asym_du0' UA=-1.05E-10 UA1=3.2446E-9
++ UB=3.0678E-18 UB1=-4.2148E-18 UC=1.0312E-10 UC1=-7.2993E-11 UTE=-1.3028
++ VFB=-0.55 VOFF=-0.092552 VOFFCV=-0.038 VOFFL=-1.4059E-8
++ VSAT='7.9784E4*nmos_10p0_asym_dvsat' VTH0='0.653 +nmos_10p0_asym_dvth0'
++ VTSD=2.16 W0=1E-6 WAGS=-0.012 WBETA0=2.034 WINT=0 WK3=0 WKT1=0 WL=0 WLN=1
++ WMAX=50.01E-6 WMIN=4E-6 WR=1 WU0='-0.020672*nmos_10p0_asym_du0' WVSAT=0 WVTH0=0
++ WW=0 WWL=0 WWN=1 XJ=1.5E-7 XJBVD=1 XJBVS=1 XL='0+nmos_10p0_asym_dxl' XPART=1
++ XTID=3 XTIS=3 XTSD=0.63818 XW='0+nmos_10p0_asym_dxw'
++ LEVEL=14
+***** Flag Parameter ***
+***** Geometry Range Parameter ***
+***** Process Parameter ***
+***** dW and dL Parameter ***
+***** Vth Related  Parameter ***
+***** Mobility Related Parameter ***
+***** Subthreshold Related Parameter ***
+***** Output Resistance Related Parameter ***
+***** GIDL Effect Parameters ***
+***** Flicker Noise Model Parameter ***
+***** Capacitance Parameter ***
+
+***** Souce/Drain Junction Diode Model Parameter ***
+
+
+
+
+
+***** Temperature coefficient ***
+
+
+
+
+
+
+
+
+
+
+
+.ENDS nmos_10p0_asym
+
+
+
+
+
+
+
+
+
+
+
+.ENDL nmos_10p0_asym_t
+
+*
+
+***************************************************************************************************
+* 10V LDPMOS Asym Model
+***************************************************************************************************
+*
+.LIB pmos_10p0_asym_t
+
+.SUBCKT pmos_10p0_asym d g s b
++ PARAMS: W=2.5E-5 L=6E-7 DTEMP=0 NF=1 AD='(w*1.78e-6)' PD='2*(w+1.78e-6)' AS='w*0.48e-6'
++ PS='(w+0.48e-6)*2' NRD=0 NRS=0 SA=0 SB=0 SD=0 PAR=1
+.PARAM
++ RDRIFT=5.751E-3 RD=0.94645 RA=1.1954E-3 RB=1.5957 LB=6.78E-6 WA=-6.5504E-7 WB=4.1955E-8
++ TRX1=2.836E-3 TRX2=7.4236E-6 TRD1=-3.7522E-3 CGDL_D2=4.3795E-10 TOXEP=1.568E-8
++ LCGD_D2=6.4774E-10 CGDV_D=1.0253 CGD_VAL=0.20473 CGSL_S=1.2929E-11 LCGS=6.4247E-9
++ CGS_SLOPE=0.81706 CGS_VTH=0.021224 CGS_FACTOR=0.9 VTHD=4.18986E-2 CGD_VTHD=0.31232
++ CGB_SLOPE=1.0219 CGB_VTH=0.89948 CGB_AMP=9.9049E-10 CGB_MIN=3.2564E-11 CGB_POWER=2.5552
++ LCGD_D=1.4497E-7 POLAR_D=-4.1926E-4 POLARD_MIN=7.05 POLAR_S=-0.35192 POLARS_MIN=4.2
++ CGS_FACTOR2=1 CGDV_D2=-1.2197 CGDL_D=1.6046E-11 CGS_VTH1=0.13041
+.PARAM CGDS_FIXED='3.9*8.854e-12/toxep'
+
+
+
+
+
+
+
+Rd1 d d2
++ TC1={trx1} TC2={trx2} M={nf} R='(rdrift*pmos_10p0_asym_drdrift)/(w/nf-wa)'
+Rd2 d2 d1
++ M={nf}
++ R='max(0.1, (rd*pmos_10p0_asym_drdsw*(1+trd1*(temp+dtemp-25))/(w/nf-wb)*(tanh(ra*(v(s,d)-rb*(l-lb)/(0.6e-6-lb))))))'
+M0 d1 g s b pmos_10p0_asym_core
++ AD={ad} AS={as} L={l} NF={nf} NRD={nrd} NRS={nrs} PD={pd} PS={ps} SA={sa}
++ SB={sb} SD={sd} W={w}
+C1_gd g d
++ C='pmos_10p0_asym_dcgd*(cgds_fixed*w*lcgd_d+ exp(polar_d*min(max(-v(d,s)-vthd,0),polard_min))*cgdl_d*w*(1+tanh(cgdv_d/(1+cgd_val*max(-v(d,g),0))*(-v(g,d1)+cgd_vthd*(1+cgdv_d2*-v(d,d1)) - pmos_10p0_asym_dvth0))))'
+C1_gd2 g d1
++ C='pmos_10p0_asym_dcgd*(cgds_fixed*w*lcgd_d2 + cgdl_d2*w*(1+tanh( cgdv_d/(1+cgd_val*max(-v(d,g),0))*(-v(g,d1)+cgd_vthd*(1+cgdv_d2*-v(d,d1)) - pmos_10p0_asym_dvth0   ) )) )'
+C2_gs g s
++ C='pmos_10p0_asym_dcgs*(cgds_fixed*w*lcgs + cgsl_s*w*(1-tanh(cgs_slope*(-v(s,g)+cgs_vth)))*(1 +cgs_factor/(1+cgs_factor2*exp(v(g,d1)-cgs_vth1))*(1- exp(polar_s*min(max(-v(d1,s)-vthd,0),polars_min)))))'
+C3_gb g b
++ C='(cgb_min +  cgb_amp/(1+(1/pow(max(1e-3, cgb_slope*(-v(b,g)-cgb_vth + pmos_10p0_asym_dvth0)), cgb_power))) ) *w '
+.MODEL pmos_10p0_asym_core.1 PMOS
++ A0=1.1348 A1=-0.07052 A2=1 ACDE=1 ACNQSMOD=0 AGIDL=3.7498E-17 AGS=0.0834
++ AIGBACC=0.43 AIGBINV=0.35 AIGC=0.43 AIGSD=0.43 ALPHA0=7.0634E-8 ALPHA1=0.14712
++ AT=3.96E3 B0=0 B1=0 BETA0=66.68 BGIDL=1.196E8 BIGBACC=0.054 BIGBINV=0.03
++ BIGC=0.054 BIGSD=0.054 BINUNIT=2 BVD=14.5 BVS=10.5 CAPMOD=2 CDSC=4.248E-4
++ CDSCB=6E-5 CDSCD=0 CGBO=0 CGDL=0 CGDO=0 CGIDL=0.5 CGSL=0 CGSO=0 CIGBACC=0.075
++ CIGBINV=6E-3 CIGC=0.075 CIGSD=0.075 CIT=0 CJD='3.2124E-4*pmos_10p0_asym_dcjd'
++ CJS='9.12E-4*pmos_10p0_asym_dcjs' CJSWD='5.4659E-10*pmos_10p0_asym_dcjd'
++ CJSWGD='5.4659E-10*pmos_10p0_asym_dcjd' CJSWGS='1.4649E-10*pmos_10p0_asym_dcjs'
++ CJSWS='1.4649E-10*pmos_10p0_asym_dcjs' CKAPPAD=0.6 CKAPPAS=0.6 CLC=1E-7 CLE=0.6
++ DELTA=0.01 DIOMOD=0 DLC=5.0579E-8 DROUT=0.56 DSUB=0.56 DVT0=4.0503 DVT0W=0
++ DVT1=0.16044 DVT1W=2.7518E4 DVT2=-0.038473 DVT2W=-0.032 DVTP0=0 DVTP1=0 DWB=0
++ DWG=1.0544E-8 EF=1.1237 EGIDL=0.8 EIGBINV=1.1 EM=4.1E7 EPSROX=3.9 ETA0=0.08
++ ETAB=-0.57865 EU=1.67 FNOIMOD=1 FPROUT=0 GEOMOD=0 IGBMOD=0 IGCMOD=0
++ JSD=5.2139E-7 JSS=2.0867E-7 JSWD=1.5E-13 JSWGD=1.5E-13 JSWGS=1.6088E-13
++ JSWS=1.6088E-13 JTSD=1.0891E-6 K1=1.09 K2=-0.014623 K3=5.4746 K3B=3.8727
++ KETA=-1.504E-3 KT1=-0.45028 KT1L=-4.1552E-8 KT2=-0.05137 LA0=-3.8459E-7 LAGS=0
++ LBETA0=-2.1875E-6 LINT=0 LKETA=-2.0415E-8 LL=0 LLPE0=0 LMAX=20.01E-6 LMIN=6E-7
++ LNOFF=1.2657E-6 LPE0=2.814E-7 LPEB=3.068E-7 LU0='2.7385E-9*pmos_10p0_asym_du0'
++ LUA=1.2893E-16 LUA1=0 LUB=0 LUB1=-2.0019E-25 LUC=5.88E-17 LUC1=0
++ LUTE=-1.1751E-7 LWL=0 MINV=0 MJD=0.31113 MJS=0.32713 MJSWD=0.39816
++ MJSWGD=0.39816 MJSWGS=0.056777 MJSWS=0.056777 MOBMOD=0 MOIN=11.1 NDEP=1.7E17
++ NFACTOR=1.096 NGATE=1E20 NIGBACC=1 NIGBINV=3 NIGC=1 NOFF=1.8144
++ NOIA='pmos_10p0_asym_noia' NOIB='pmos_10p0_asym_noib'
++ NOIC='pmos_10p0_asym_noic' NSD=1E20 NTOX=1 PAGS=6.4229E-13 PARAMCHK=1
++ PBD=0.63391 PBETA0=0 PBS=0.76836 PBSWD=0.77752 PBSWGD=0.77752 PBSWGS=0.5
++ PBSWS=0.5 PCLM=0.37315 PDIBLC1=0.09466 PDIBLC2=5.586E-8 PDIBLCB=0 PDITS=0
++ PDITSD=0 PDITSL=0 PDVT0=-2.3525E-12 PDVT1=0 PERMOD=1 PHIN=0.061992 PIGCD=1
++ PK2=-9.04E-14 PKETA=-7.5094e-014 PKT1=0 PKT2=-1.1E-13 PLPE0=0 POXEDGE=1 PRT=0
++ PRWB=1.24 PRWG=1 PSCBE1=5.9843E8 PSCBE2=9.3757E-8
++ PU0='-2E-15*pmos_10p0_asym_du0' PUA=6.315E-22 PUTE=1.0911E-13 PVAG=1.2 PVSAT=0
++ PVTH0=1.44E-14 RBODYMOD=0 RDSMOD=0 RDSW='200*pmos_10p0_asym_drdsw' RDSWMIN=0
++ RDW=100 RDWMIN=0 RSH=5.6 RSHG=0.4 RSW=100 RSWMIN=0 TEMPMOD=0 TNOIMOD=0
++ TOXE='1.568E-8+pmos_10p0_asym_dtox' TRNQSMOD=0 U0='0.013723*pmos_10p0_asym_du0'
++ UA=1.26E-9 UA1=5E-10 UB=7.2608E-19 UB1=-2.2324E-18 UC=-4.5217E-11
++ UC1=-3.0912E-11 UTE=-1.245 VBM=-3 VFB=-1 VFBCV=-1 VOFF=-0.08768
++ VOFFCV=-3.8635E-3 VOFFL=0 VSAT='71505*pmos_10p0_asym_dvsat'
++ VTH0='-0.888+pmos_10p0_asym_dvth0' VTSD=2.44 W0=3.24E-6 WAGS=6.5664E-9
++ WBETA0=4.86E-6 WDVT0=0 WDVT1=0 WINT=0 WK2=0 WKETA=2.68e-008 WKT1=0
++ WLPE0=-3.5894E-13 WMAX=50.01e-6 WMIN=4e-6 WR=1 WU0='-7E-10*pmos_10p0_asym_du0'
++ WUTE=-4E-8 WVSAT=0 WVTH0=0 WW=0 WWL=0 XJ=1.5E-7 XJBVD=1 XJBVS=1
++ XL=' 0 + pmos_10p0_asym_dxl' XTSD=0.92538 XW='0+ pmos_10p0_asym_dxw'
++ LEVEL=14
+***** Flag Parameter ***
+***** Geometry Range Parameter ***
+***** Process Parameter ***
+***** dW and dL Parameter ***
+***** Vth Related  Parameter ***
+***** Mobility Related Parameter ***
+***** Subthreshold Related Parameter ***
+***** Output Resistance Related Parameter ***
+***** Gate Dielectric Tunneling Current ***
+***** GIDL Effect Parameters ***
+
+
+
+
+
+
+***** Flicker Noise Model Parameter ***
+
+
+***** Capacitance Parameter ***
+
+
+***** Souce/Drain Junction Diode Model Parameter ***
+
+
+
+
+
+
+***** Temperature coefficient ***
+
+
+
+
+
+
+
+
+
+
+
+.ENDS pmos_10p0_asym
+
+
+
+
+
+
+.ENDL pmos_10p0_asym_t
+
+
+
+************************end of file*************************
+
+
+*

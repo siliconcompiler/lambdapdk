@@ -1,0 +1,195 @@
+# Copyright 2022 GlobalFoundries PDK Authors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+#===========================================================================================================================
+#------------------------------------------- GF 0.18 um MCU DRC RULE DECK --------------------------------------------------
+#===========================================================================================================================
+
+require 'time'
+require "logger"
+
+exec_start_time = Time.now
+
+logger = Logger.new(STDOUT)
+
+logger.formatter = proc do |severity, datetime, progname, msg|
+  "#{datetime}: Memory Usage (" + `pmap #{Process.pid} | tail -1`[10,40].strip + ") : #{msg}
+"
+end
+
+#=========================================
+#------------ FILE SETUP -----------------
+#=========================================
+
+# optionnal for a batch launch :   klayout -b -r gf_018mcu_density.drc -rd input=design.gds -rd report=gf180_ant_drc.txt
+
+logger.info("Starting running GF180MCU Klayout density checks DRC runset on %s" % [$input])
+
+if $input
+    source($input, $topcell)
+end
+
+logger.info("Loading database to memory is complete.")
+
+
+if $report
+    logger.info("GF180MCU Klayout density checks DRC runset output at: %s" % [$report])
+    report("GF180 DENSITY DRC runset", $report)
+else
+    logger.info("GF180MCU Klayout density checks DRC runset output at default location." % [File.join(File.dirname(RBA::CellView::active.filename), "gf180mcu_density.lyrdb").path])
+    report("GF180 DRC runset", File.join(File.dirname(RBA::CellView::active.filename), "gf180mcu_density.lyrdb"))
+end
+
+if $thr
+    threads($thr)
+else
+    threads(16)
+end
+
+# === TILING MODE ===
+if $run_mode == "tiling"
+    # use a tile size of 1mm - not used in deep mode-
+    # tiles(500.um)
+    # use a tile border of 10 micron:
+    # tile_borders(10.um)
+    tiles(1000)
+    logger.info("Tiling  mode is enabled.")
+
+elsif $run_mode == "deep"
+    #=== HIER MODE ===
+    deep
+    logger.info("deep  mode is enabled.")
+
+elsif $run_mode == "flat"
+    #=== FLAT MODE ===
+    flat
+    logger.info("flat  mode is enabled.")
+
+else
+    #=== FLAT MODE ===
+    flat
+    logger.info("flat  mode is enabled.")
+
+end # run_mode
+
+#======================================================================================================
+#--------------------------------------- LAYER DEFINITIONS --------------------------------------------
+#======================================================================================================
+
+poly2           = polygons(30,  0)
+metal1          = polygons(34,  0)
+metal2          = polygons(36,  0)
+metal3          = polygons(42,  0)
+metal4          = polygons(46,  0)
+metal5          = polygons(81,  0)
+metaltop        = polygons(53,  0)
+
+#======================================================================================================
+#--------------------------------------- LAYER DERIVATIONS --------------------------------------------
+#======================================================================================================
+
+# === LAYOUT EXTENT ===
+CHIP = extent.sized(0.0)
+
+#=======================================================================================
+#------------------------------------- SWITCHES ----------------------------------------
+#=======================================================================================
+
+logger.info("Evaluate switches.")
+
+# METAL_TOP
+if $metal_top
+    METAL_TOP = $metal_top
+else
+    METAL_TOP = "9K"
+end
+
+logger.info("METAL_TOP Selected is %s" % [METAL_TOP])
+
+
+#=========================================================================================================================
+#---------------------------------------------------- MAIN RUNSET --------------------------------------------------------
+#=========================================================================================================================
+
+logger.info("Starting GF180MCU DENSITY DRC rules.")
+
+
+logger.info("Executing rule PL.8")
+# Rule PL.8: Poly2 coverage over the entire die shall be 14%. Dummy poly2 lines must be added to meet the minimum poly2 density requirement.
+if ((poly2.area / CHIP.area)*100 < 14)
+    poly2.output("PL.8", "PL.8 : Poly2 coverage over the entire die shall be 14%. Dummy poly2 lines must be added to meet the minimum poly2 density requirement. : 14%")
+end
+
+logger.info("Executing rule M1.4")
+# Rule M1.4: Metal1 coverage over the entire die shall be >30% (Refer to section 13.0 for Dummy Metal fill guidelines. Customer needs to ensure enough dummy metal to satisfy Metal1 coverage)
+if ((metal1.area / CHIP.area)*100 < 30)
+    metal1.output("M1.4", "M1.4 : Metal1 coverage over the entire die shall be >30% (Refer to section 13.0 for Dummy Metal fill guidelines. Customer needs to ensure enough dummy metal to satisfy Metal1 coverage) : 30%")
+end
+
+logger.info("Executing rule M2.4")
+# Rule M2.4: Metal2 coverage over the entire die shall be >30% (Refer to section 13.0 for Dummy Metal fill guidelines. Customer needs to ensure enough dummy metal to satisfy Metal2 coverage)
+if ((metal2.area / CHIP.area)*100 < 30)
+    metal2.output("M2.4", "M2.4 : Metal2 coverage over the entire die shall be >30% (Refer to section 13.0 for Dummy Metal fill guidelines. Customer needs to ensure enough dummy metal to satisfy Metal2 coverage) : 30%")
+end
+
+logger.info("Executing rule M3.4")
+# Rule M3.4: metal3 coverage over the entire die shall be >30% (Refer to section 13.0 for Dummy Metal fill guidelines. Customer needs to ensure enough dummy metal to satisfy metal3 coverage)
+if ((metal3.area / CHIP.area)*100 < 30)
+    metal3.output("M3.4", "M3.4 : metal3 coverage over the entire die shall be >30% (Refer to section 13.0 for Dummy Metal fill guidelines. Customer needs to ensure enough dummy metal to satisfy metal3 coverage) : 30%")
+end
+
+logger.info("Executing rule M4.4")
+# Rule M4.4: metal4 coverage over the entire die shall be >30% (Refer to section 13.0 for Dummy Metal fill guidelines. Customer needs to ensure enough dummy metal to satisfy metal4 coverage)
+if ((metal4.area / CHIP.area)*100 < 30)
+    metal4.output("M4.4", "M4.4 : metal4 coverage over the entire die shall be >30% (Refer to section 13.0 for Dummy Metal fill guidelines. Customer needs to ensure enough dummy metal to satisfy metal4 coverage) : 30%")
+end
+
+logger.info("Executing rule M5.4")
+# Rule M5.4: metal5 coverage over the entire die shall be >30% (Refer to section 13.0 for Dummy Metal fill guidelines. Customer needs to ensure enough dummy metal to satisfy metal5 coverage)
+if ((metal5.area / CHIP.area)*100 < 30)
+    metal5.output("M5.4", "M5.4 : metal5 coverage over the entire die shall be >30% (Refer to section 13.0 for Dummy Metal fill guidelines. Customer needs to ensure enough dummy metal to satisfy metal5 coverage) : 30%")
+end
+
+if METAL_TOP == "6K"
+    logger.info("Executing rule MT.3")
+    # Rule MT.3: MetalTop coverage over the entire die shall be >30% (Refer to section 10.3 for Dummy Metal-fill guidelines. Customer needs to ensure enough dummy metal to satisfy Metaln coverage)
+    if ((metaltop.area / CHIP.area)*100 < 30)
+        metaltop.output("MT.3", "MT.3 : MetalTop coverage over the entire die shall be >30% (Refer to section 10.3 for Dummy Metal-fill guidelines. Customer needs to ensure enough dummy metal to satisfy Metaln coverage) : 30%")
+    end
+
+elsif METAL_TOP == "9K"
+    logger.info("Executing rule MT.3")
+    # Rule MT.3: MetalTop coverage over the entire die shall be >30% (Refer to section 10.3 for Dummy Metal-fill guidelines. Customer needs to ensure enough dummy metal to satisfy Metaln coverage)
+    if ((metaltop.area / CHIP.area)*100 < 30)
+    metaltop.output("MT.3", "MT.3 : MetalTop coverage over the entire die shall be >30% (Refer to section 10.3 for Dummy Metal-fill guidelines. Customer needs to ensure enough dummy metal to satisfy Metaln coverage) : 30%")
+    end
+
+elsif METAL_TOP == "30K"
+    logger.info("Executing rule MT30.7")
+    # Rule MT30.7: Thick MetalTop coverage over the entire die shall be >30% (Refer to section 13.0 for Dummy Metal-fill guidelines. Customer needs to ensure enough dummy metal to satisfy Metaln coverage).
+    if ((metaltop.area / CHIP.area)*100 < 30)
+    metaltop.output("MT30.7", "MT30.7 : Thick MetalTop coverage over the entire die shall be >30% (Refer to section 13.0 for Dummy Metal-fill guidelines. Customer needs to ensure enough dummy metal to satisfy Metaln coverage). : 30%")
+    end
+
+end #METAL_TOP
+
+exec_end_time = Time.now
+run_time = exec_end_time - exec_start_time
+logger.info("DRC Total Run time %f seconds" % [run_time])
+
+
+#===================================
+#--------------- END ---------------
+#===================================
+
