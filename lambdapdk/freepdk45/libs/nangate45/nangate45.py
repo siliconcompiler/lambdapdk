@@ -25,6 +25,10 @@ def setup(target=None):
     # version
     chip.set('package', 'version', version)
 
+    # hardened process/stackup
+    chip.set('asic', 'pdk', process)
+    chip.set('asic', 'stackup', stackup)
+
     # timing
     chip.add('model', 'timing', 'nldm', corner,
             f"{root}/nldm/NangateOpenCellLibrary_typical.lib")
