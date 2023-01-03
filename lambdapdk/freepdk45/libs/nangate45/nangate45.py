@@ -1,3 +1,4 @@
+import os
 import siliconcompiler
 
 ########################
@@ -76,3 +77,8 @@ def setup(target=None):
     chip.add('asic', 'cells','endcap', "FILLCELL_X1")
 
     return chip
+#########################
+if __name__ == "__main__":
+
+    chip = setup()
+    chip.write_manifest('nangate45.csv')
