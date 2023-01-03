@@ -1,4 +1,6 @@
+import os
 import siliconcompiler
+
 
 ########################
 # SiliconCompiler Setup
@@ -48,3 +50,12 @@ def setup(target=None):
 
     chip.set('pdk', process, 'display', 'klayout', stackup,
              f"{root}/klayout/freepdk45.lyp")
+
+
+    return chip
+
+#########################
+if __name__ == "__main__":
+
+    chip = setup()
+    chip.write_manifest('freepdk45.csv')
