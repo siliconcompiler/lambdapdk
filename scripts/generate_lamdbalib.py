@@ -4,9 +4,11 @@
 # Script for auto-generating lambda views using Yosys
 ###############################################################################
 
+import git
 import glob
 import os
 import shutil
+import tempfile
 import siliconcompiler
 
 from siliconcompiler.targets import (
@@ -16,9 +18,15 @@ from siliconcompiler.targets import (
 )
 
 if __name__ == "__main__":
-    root = os.path.join(os.path.dirname(__file__), '..')
+    # Clone clean copy of lambdalib
+    git_path = 'https://github.com/siliconcompiler/lambdalib.git'
+    repo_dir = tempfile.TemporaryDirectory(prefix='lambdalib_')
+    repo_work_dir = repo_dir.name
+    git.Repo.clone_from(git_path, repo_work_dir)
+
+    pdk_root = os.path.join(os.path.dirname(__file__), '..')
     # Get List of stdlib cells in lambdalib
-    cells_dir = os.path.join(root, 'submodules/lambdalib/stdlib/rtl')
+    cells_dir = os.path.join(repo_work_dir, 'stdlib', 'rtl')
     cells = glob.glob(f'{cells_dir}/la_*.v')
 
     exclude = ['la_decap',
@@ -55,7 +63,7 @@ if __name__ == "__main__":
         target = info["target"]
 
         for lib in info['libs']:
-            lambda_dir = f"{root}/lambdapdk/{pdk}/libs/{lib}/lambda"
+            lambda_dir = f"{pdk_root}/lambdapdk/{pdk}/libs/{lib}/lambda"
             shutil.rmtree(lambda_dir, ignore_errors=True)
             os.makedirs(lambda_dir, exist_ok=True)
 
