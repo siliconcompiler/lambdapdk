@@ -1,3 +1,8 @@
+This is a one time copy of the ASAP library. The golden version which might be updated fron time to time can be found at:
+
+https://github.com/The-OpenROAD-Project/asap7
+
+
 * BSD 3-Clause License
 * 
 * Copyright 2020 Lawrence T. Clark, Vinay Vashishtha, or Arizona State
