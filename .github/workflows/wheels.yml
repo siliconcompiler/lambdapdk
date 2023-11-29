@@ -1,0 +1,39 @@
+name: Wheels
+
+on:
+  workflow_dispatch:
+  release:
+    types:
+      - published
+
+jobs:
+  build_wheels:
+    name: Wheels lambdalib
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: true
+    - uses: hynek/build-and-inspect-python-package@v1
+
+  publish:
+    needs: [build_wheels]
+    runs-on: ubuntu-latest
+    if: github.event_name == 'release' && github.event.action == 'published' && !contains(github.event.release.body, 'NOPUBLISH')
+
+    steps:
+    - uses: actions/download-artifact@v3
+      with:
+        name: Packages
+        path: dist
+
+    - uses: pypa/gh-action-pypi-publish@v1.4.2
+      with:
+        user: __token__
+        password: ${{ secrets.PYPI_DEPLOY }}
+
+    - name: Add wheels to GitHub release artifacts
+      uses: softprops/action-gh-release@v1
+      with:
+        files: dist/*.whl

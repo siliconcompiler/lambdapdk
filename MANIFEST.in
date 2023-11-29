@@ -1,0 +1,7 @@
+# stuff we need to include into the sdist is handled automatically by
+# setuptools_scm - it includes all git-committed files.
+# but we want to exclude some committed files/dirs not needed in the sdist:
+prune .github
+prune scripts
+prune lambdapdk/*/base
+prune lambdapdk/*/libs/*

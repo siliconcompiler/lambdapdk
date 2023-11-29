@@ -9,6 +9,9 @@ a.out
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
+*.egg-info/
+dist/
 
 # sc files
 build/
+lambdapdk/_version.py

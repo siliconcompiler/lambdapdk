@@ -1,0 +1,33 @@
+name: CI
+on:
+  # Runs on all pushes to branches
+  push:
+  # Runs on all PRs
+  pull_request:
+  # Manual Dispatch
+  workflow_dispatch:
+
+jobs:
+  lint_python:
+    name: Lint Python Code
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v4
+      - name: Lint with Flake8
+        run: |
+          pip install --upgrade pip
+          pip install .[dev]
+          flake8 --statistics .
+
+  check_paths:
+    name: Run CI
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v4
+      - name: Run tests
+        run: |
+          pip install --upgrade pip
+          pip install -e .[dev]
+          pytest
