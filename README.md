@@ -1,12 +1,15 @@
-# lambdapdk
-Library of open source Process Design Kits (PDKs)
+# Lambdapdk Introduction
 
-Virtual PDKs:
+The Lambdapdk project includes a number of open source Process Design Kits (PDKs). The original source of these PDKs is documented in the README file for each PDK. Cell level mapping is included to the generic technology independent [Lambdalib](https://github.com/siliconcompiler/lambdalib) library.
+
+Lambdapdk is supported by the [SiliconCompiler](https://github.com/siliconcompiler/siliconcompiler) project.
+
+
+Supported PDKs:
+
 * [ASAP7](lambdapdk/asap7/README.md)
 * [FreePDK45](lambdapdk/freepdk45/base/README.md)
-
-Commercial PDKs:
-* [Skywater 130](lambdapdk/sky130/base/README.md)
+* [Skywater130](lambdapdk/sky130/base/README.md)
 
 # License
 
