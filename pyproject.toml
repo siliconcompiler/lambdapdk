@@ -33,7 +33,10 @@ dev = [
 exclude = [
     'build',
     'scripts/build',
-    'dist'
+    'dist',
+    # scripts from other repos
+    'lambdapdk/asap7/base/apr/example_innovus.tcl',
+    'lambdapdk/sky130/base/setup/netgen/lvs_setup.tcl'
 ]
 
 [tool.tclint.style]
