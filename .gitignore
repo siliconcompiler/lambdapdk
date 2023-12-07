@@ -14,4 +14,3 @@ dist/
 
 # sc files
 build/
-lambdapdk/_version.py
