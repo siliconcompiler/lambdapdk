@@ -28,10 +28,8 @@ jobs:
         name: Packages
         path: dist
 
-    - uses: pypa/gh-action-pypi-publish@v1.4.2
-      with:
-        user: __token__
-        password: ${{ secrets.PYPI_DEPLOY }}
+    - name: Publish
+      uses: pypa/gh-action-pypi-publish@v1.8.11
 
     - name: Add wheels to GitHub release artifacts
       uses: softprops/action-gh-release@v1
