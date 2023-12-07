@@ -20,7 +20,7 @@ jobs:
   publish:
     needs: [build_wheels]
     runs-on: ubuntu-latest
-    if: github.event_name == 'release' && github.event.action == 'published' && !contains(github.event.release.body, 'NOPUBLISH')
+    if: github.event_name == 'release' && github.event.action == 'published'
 
     steps:
     - uses: actions/download-artifact@v3

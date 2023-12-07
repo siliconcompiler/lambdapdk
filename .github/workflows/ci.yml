@@ -20,6 +20,18 @@ jobs:
           pip install .[dev]
           flake8 --statistics .
 
+  lint_tcl:
+    name: Lint TCL Code
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v4
+      - name: Lint with tclint
+        run: |
+          pip install --upgrade pip
+          pip install .[dev]
+          tclint .
+        
   check_paths:
     name: Run CI
     runs-on: ubuntu-latest
