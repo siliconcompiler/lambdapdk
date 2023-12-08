@@ -1,0 +1,327 @@
+# Copyright 2022 GlobalFoundries PDK Authors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+#=============================================================================================================================================================
+#--------------------------------------------------- GF 0.18um MCU DRC RULE DECK (MIM CAPACITOR OPTION A ) ---------------------------------------------------
+#=============================================================================================================================================================
+
+require 'time'
+require "logger"
+
+exec_start_time = Time.now
+
+logger = Logger.new(STDOUT)
+
+logger.formatter = proc do |severity, datetime, progname, msg|
+  "#{datetime}: Memory Usage (" + `pmap #{Process.pid} | tail -1`[10,40].strip + ") : #{msg}
+"
+end
+
+#================================================
+#----------------- FILE SETUP -------------------
+#================================================
+
+# optional for a batch launch :   klayout -b -r gf180mcu.drc -rd input=design.gds -rd report=gf180mcu_main.lyrdb
+
+logger.info("Starting running GF180MCU Klayout DRC runset on %s" % [$input])
+
+if $input
+    if $topcell
+        source($input, $topcell)
+    else
+        source($input)
+    end
+end
+
+logger.info("Loading database to memory is complete.")
+
+if $report
+    logger.info("GF180MCU Klayout DRC runset output at: %s" % [$report])
+    report("DRC Run Report at", $report)
+else
+    logger.info("GF180MCU Klayout DRC runset output at default location." % [File.join(File.dirname(RBA::CellView::active.filename), "gf180_drc.lyrdb").path])
+    report("DRC Run Report at", File.join(File.dirname(RBA::CellView::active.filename), "gf180_drc.lyrdb"))
+end
+
+if $thr
+    logger.info("Number of threads to use %s" % [$thr])
+    threads($thr)
+else
+    logger.info("Number of threads to use 16")
+    threads(16)
+end
+
+# === TILING MODE ===
+if $run_mode == "tiling"
+  # use a tile size of 1mm - not used in deep mode-
+  # tiles(500.um)
+  # use a tile border of 10 micron:
+  # tile_borders(10.um)
+  tiles(1000)
+  logger.info("Tiling  mode is enabled.")
+
+elsif $run_mode == "deep"
+  #=== HIER MODE ===
+  deep
+  logger.info("deep  mode is enabled.")
+
+elsif $run_mode == "flat"
+  #=== FLAT MODE ===
+  flat
+  logger.info("flat  mode is enabled.")
+
+else
+  #=== FLAT MODE ===
+  flat
+  logger.info("flat  mode is enabled.")
+
+end # run_mode
+
+#================================================
+#------------- LAYERS DEFINITIONS ---------------
+#================================================
+
+v5_xtor        = polygons(112, 1 )
+dualgate       = polygons(55 , 0 )
+poly2          = polygons(30 , 0 )
+nplus          = polygons(32 , 0 )
+pplus          = polygons(31 , 0 )
+comp           = polygons(22 , 0 )
+via1           = polygons(35 , 0 )
+metal2         = polygons(36 , 0 )
+via2           = polygons(38 , 0 )
+fusetop        = polygons(75 , 0 )
+cap_mk         = polygons(117, 5 )
+
+logger.info("Starting deriving base layers.")
+#================================================
+#------------- LAYERS DERIVATIONS ---------------
+#================================================
+
+ncomp      =  comp      & nplus
+pcomp      =  comp      & pplus
+tgate      =  poly2     & comp
+ngate      =  nplus     & tgate
+pgate      =  pplus     & tgate
+
+#================================================
+#------------------ SWITCHES --------------------
+#================================================
+logger.info("Evaluate switches.")
+
+# FEOL
+if $feol == "false"
+  FEOL = $feol
+  logger.info("FEOL is disabled.")
+else
+  FEOL = "true"
+  logger.info("FEOL is enabled.")
+end # FEOL
+
+# BEOL
+if $beol == "false"
+  BEOL = $beol
+  logger.info("BEOL is disabled.")
+else
+  BEOL = "true"
+  logger.info("BEOL is enabled.")
+end # BEOL
+
+# connectivity rules
+if $conn_drc == "true"
+  CONNECTIVITY_RULES = $conn_drc
+  logger.info("connectivity rules are enabled.")
+else
+  CONNECTIVITY_RULES = false
+  logger.info("connectivity rules are disabled.")
+end # connectivity rules
+
+# METAL_TOP
+if $metal_top
+  METAL_TOP = $metal_top
+else
+  METAL_TOP = "9K"
+end # METAL_TOP
+
+logger.info("METAL_TOP Selected is %s" % [METAL_TOP])
+
+# METAL_LEVEL
+if $metal_level
+  METAL_LEVEL = $metal_level
+else
+  METAL_LEVEL = "6LM"
+end # METAL_LEVEL
+
+logger.info("METAL_STACK Selected is %s" % [METAL_LEVEL])
+
+# WEDGE
+if $wedge == "false"
+  WEDGE = $wedge
+else
+  WEDGE = "true"
+end # WEDGE
+
+logger.info("Wedge enabled  %s" % [WEDGE])
+
+# BALL
+if $ball == "false"
+  BALL = $ball
+else
+  BALL = "true"
+end # BALL
+
+logger.info("Ball enabled  %s" % [BALL])
+
+# GOLD
+if $gold == "false"
+  GOLD = $gold
+else
+  GOLD = "true"
+end # GOLD
+
+logger.info("Gold enabled  %s" % [GOLD])
+
+if $mim_option
+  MIM_OPTION = $mim_option
+else
+  MIM_OPTION = "Nan"
+end
+
+logger.info("MIM Option selected %s" % [MIM_OPTION])
+
+# OFFGRID
+if $offgrid == "false"
+  OFFGRID = false
+else
+  OFFGRID = true
+end # OFFGRID
+
+logger.info("Offgrid enabled  %s" % [OFFGRID])
+
+#================================================
+#------------MIM CAPACITOR OPTION A -------------
+#================================================
+
+if MIM_OPTION == "A"
+logger.info("MIM Capacitor Option A section")
+
+mim_virtual = fusetop.sized(1.06.um).and(metal2.interacting(fusetop))
+# Rule MIM.1: Minimum MiM bottom plate spacing to the bottom plate metal (whether adjacent MiM or routing metal). is 1.2µm
+logger.info("Executing rule MIM.1")
+mim1_l1 = metal2.separation(mim_virtual ,transparent, 1.2.um).polygons(0.001)
+mim1_l1.output("MIM.1", "MIM.1 : Minimum MiM bottom plate spacing to the bottom plate metal (whether adjacent MiM or routing metal). : 1.2µm")
+mim1_l1.forget
+
+# Rule MIM.2: Minimum MiM bottom plate overlap of Via2 layer. [This is applicable for via2 within 1.06um oversize of FuseTop layer (referenced to virtual bottom plate)]. is 0.4µm
+logger.info("Executing rule MIM.2")
+mim2_l1 = metal2.enclosing(via2.overlapping(mim_virtual), 0.4.um, euclidian).polygons(0.001)
+mim2_l2 = via2.overlapping(mim_virtual).not_outside(metal2).not(metal2)
+mim2_l  = mim2_l1.or(mim2_l2)
+mim2_l.output("MIM.2", "MIM.2 : Minimum MiM bottom plate overlap of Via2 layer. [This is applicable for via2 within 1.06um oversize of FuseTop layer (referenced to virtual bottom plate)]. : 0.4µm")
+mim2_l1.forget
+mim2_l2.forget
+mim2_l.forget
+
+# Rule MIM.3: Minimum MiM bottom plate overlap of Top plate.
+logger.info("Executing rule MIM.3")
+mim3_l1 = mim_virtual.enclosing(fusetop,0.6.um).polygons(0.001).or(fusetop.not_inside(mim_virtual))
+mim3_l1.output("MIM.3", "MIM.3 : Minimum MiM bottom plate overlap of Top plate.")
+mim3_l1.forget
+
+mim_virtual.forget
+# Rule MIM.4: Minimum MiM top plate (FuseTop) overlap of Via2. is 0.4µm
+logger.info("Executing rule MIM.4")
+mim4_l1 = fusetop.enclosing(via2, 0.4.um, euclidian).polygons(0.001)
+mim4_l2 = via2.not_outside(fusetop).not(fusetop)
+mim4_l  = mim4_l1.or(mim4_l2)
+mim4_l.output("MIM.4", "MIM.4 : Minimum MiM top plate (FuseTop) overlap of Via2. : 0.4µm")
+mim4_l1.forget
+mim4_l2.forget
+mim4_l.forget
+
+# Rule MIM.5: Minimum spacing between top plate and the Via2 connecting to the bottom plate. is 0.4µm
+logger.info("Executing rule MIM.5")
+mim5_l1  = fusetop.separation(via2.interacting(metal2), 0.4.um, euclidian).polygons(0.001)
+mim5_l1.output("MIM.5", "MIM.5 : Minimum spacing between top plate and the Via2 connecting to the bottom plate. : 0.4µm")
+mim5_l1.forget
+
+# Rule MIM.6: Minimum spacing between unrelated top plates. is 0.6µm
+logger.info("Executing rule MIM.6")
+mim6_l1  = fusetop.space(0.6.um, euclidian).polygons(0.001)
+mim6_l1.output("MIM.6", "MIM.6 : Minimum spacing between unrelated top plates. : 0.6µm")
+mim6_l1.forget
+
+# Rule MIM.7: Min FuseTop enclosure by CAP_MK.
+logger.info("Executing rule MIM.7")
+mim7_l1 = fusetop.not_inside(cap_mk)
+mim7_l1.output("MIM.7", "MIM.7 : Min FuseTop enclosure by CAP_MK.")
+mim7_l1.forget
+
+# Rule MIM.8a: Minimum MIM cap area (defined by FuseTop area) (um2). is 25µm²
+logger.info("Executing rule MIM.8a")
+mim8a_l1  = fusetop.with_area(nil, 25.um)
+mim8a_l1.output("MIM.8a", "MIM.8a : Minimum MIM cap area (defined by FuseTop area) (um2). : 25µm²")
+mim8a_l1.forget
+# Rule MIM.8b: Maximum single MIM Cap area (Use multiple MIM caps in parallel connection if bigger capacitors are required) (um2). is 10000µm
+logger.info("Executing rule MIM.8b")
+mim8b_l1 = fusetop.with_area(10000.um,nil).not_in(fusetop.with_area(10000.um))
+mim8b_l1.output("MIM.8b", "MIM.8b : Maximum single MIM Cap area (Use multiple MIM caps in parallel connection if bigger capacitors are required) (um2). : 10000µm")
+mim8b_l1.forget
+
+# Rule MIM.9: Min. via spacing for sea of via on MIM top plate. is 0.5µm
+logger.info("Executing rule MIM.9")
+mim9_l1  = via2.inside(fusetop).space(0.5.um, euclidian).polygons(0.001)
+mim9_l1.output("MIM.9", "MIM.9 : Min. via spacing for sea of via on MIM top plate. : 0.5µm")
+mim9_l1.forget
+
+# Rule MIM.10: (a) There cannot be any Via1 touching MIM bottom plate Metal2. (b) MIM bottom plate Metal2 can only be connected through the higher Via (Via2).
+logger.info("Executing rule MIM.10")
+mim10_l1 = via1.interacting(metal2.interacting(fusetop))
+mim10_l1.output("MIM.10", "MIM.10 : (a) There cannot be any Via1 touching MIM bottom plate Metal2. (b) MIM bottom plate Metal2 can only be connected through the higher Via (Via2).")
+mim10_l1.forget
+
+mim11_large_metal2 = metal2.interacting(fusetop).with_area(10000, nil)
+mim11_large_metal2_violation = polygon_layer
+mim11_large_metal2.data.each do |p|
+  mim11_metal2_polygon_layer = polygon_layer
+  mim11_metal2_polygon_layer.data.insert(p)
+  fuse_in_polygon = fusetop.and(mim11_metal2_polygon_layer)
+  if(fuse_in_polygon.area > 10000)
+    mim11_bad_metal2_polygon = mim11_metal2_polygon_layer.interacting(fuse_in_polygon)
+    mim11_bad_metal2_polygon.data.each do |b|
+      b.num_points > 0 && mim11_large_metal2_violation.data.insert(b)
+    end
+  end
+end
+# Rule MIM.11: Bottom plate of multiple MIM caps can be shared (for common nodes) as long as total MIM area with that single common plate does not exceed MIM.8b rule. is -µm
+logger.info("Executing rule MIM.11")
+mim11_l1  = mim11_large_metal2_violation
+mim11_l1.output("MIM.11", "MIM.11 : Bottom plate of multiple MIM caps can be shared (for common nodes) as long as total MIM area with that single common plate does not exceed MIM.8b rule. : -µm")
+mim11_l1.forget
+
+mim11_large_metal2.forget
+mim11_large_metal2_violation.forget
+# rule MIM.12 is not a DRC check
+
+
+else
+logger.info("MIM Capacitor Option A not Selected")
+
+end #MIM_OPTION
+
+
+exec_end_time = Time.now
+run_time = exec_end_time - exec_start_time
+logger.info("DRC Run time %f seconds" % [run_time])
+

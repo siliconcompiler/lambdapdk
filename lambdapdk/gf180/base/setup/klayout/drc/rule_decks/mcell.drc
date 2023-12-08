@@ -1,0 +1,238 @@
+# Copyright 2022 GlobalFoundries PDK Authors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+#=============================================================================================================================================================
+#------------------------------------------------------------ GF 0.18um MCU DRC RULE DECK (MCELL) ------------------------------------------------------------
+#=============================================================================================================================================================
+
+require 'time'
+require "logger"
+
+exec_start_time = Time.now
+
+logger = Logger.new(STDOUT)
+
+logger.formatter = proc do |severity, datetime, progname, msg|
+  "#{datetime}: Memory Usage (" + `pmap #{Process.pid} | tail -1`[10,40].strip + ") : #{msg}
+"
+end
+
+#================================================
+#----------------- FILE SETUP -------------------
+#================================================
+
+# optional for a batch launch :   klayout -b -r gf180mcu.drc -rd input=design.gds -rd report=gf180mcu_main.lyrdb
+
+logger.info("Starting running GF180MCU Klayout DRC runset on %s" % [$input])
+
+if $input
+    if $topcell
+        source($input, $topcell)
+    else
+        source($input)
+    end
+end
+
+logger.info("Loading database to memory is complete.")
+
+if $report
+    logger.info("GF180MCU Klayout DRC runset output at: %s" % [$report])
+    report("DRC Run Report at", $report)
+else
+    logger.info("GF180MCU Klayout DRC runset output at default location." % [File.join(File.dirname(RBA::CellView::active.filename), "gf180_drc.lyrdb").path])
+    report("DRC Run Report at", File.join(File.dirname(RBA::CellView::active.filename), "gf180_drc.lyrdb"))
+end
+
+if $thr
+    logger.info("Number of threads to use %s" % [$thr])
+    threads($thr)
+else
+    logger.info("Number of threads to use 16")
+    threads(16)
+end
+
+# === TILING MODE ===
+if $run_mode == "tiling"
+  # use a tile size of 1mm - not used in deep mode-
+  # tiles(500.um)
+  # use a tile border of 10 micron:
+  # tile_borders(10.um)
+  tiles(1000)
+  logger.info("Tiling  mode is enabled.")
+
+elsif $run_mode == "deep"
+  #=== HIER MODE ===
+  deep
+  logger.info("deep  mode is enabled.")
+
+elsif $run_mode == "flat"
+  #=== FLAT MODE ===
+  flat
+  logger.info("flat  mode is enabled.")
+
+else
+  #=== FLAT MODE ===
+  flat
+  logger.info("flat  mode is enabled.")
+
+end # run_mode
+
+#================================================
+#------------- LAYERS DEFINITIONS ---------------
+#================================================
+
+v5_xtor        = polygons(112, 1 )
+dualgate       = polygons(55 , 0 )
+poly2          = polygons(30 , 0 )
+nplus          = polygons(32 , 0 )
+pplus          = polygons(31 , 0 )
+comp           = polygons(22 , 0 )
+mcell_feol_mk  = polygons(11 , 17)
+
+logger.info("Starting deriving base layers.")
+#================================================
+#------------- LAYERS DERIVATIONS ---------------
+#================================================
+
+ncomp      =  comp      & nplus
+pcomp      =  comp      & pplus
+tgate      =  poly2     & comp
+ngate      =  nplus     & tgate
+pgate      =  pplus     & tgate
+
+#================================================
+#------------------ SWITCHES --------------------
+#================================================
+logger.info("Evaluate switches.")
+
+# FEOL
+if $feol == "false"
+  FEOL = $feol
+  logger.info("FEOL is disabled.")
+else
+  FEOL = "true"
+  logger.info("FEOL is enabled.")
+end # FEOL
+
+# BEOL
+if $beol == "false"
+  BEOL = $beol
+  logger.info("BEOL is disabled.")
+else
+  BEOL = "true"
+  logger.info("BEOL is enabled.")
+end # BEOL
+
+# connectivity rules
+if $conn_drc == "true"
+  CONNECTIVITY_RULES = $conn_drc
+  logger.info("connectivity rules are enabled.")
+else
+  CONNECTIVITY_RULES = false
+  logger.info("connectivity rules are disabled.")
+end # connectivity rules
+
+# METAL_TOP
+if $metal_top
+  METAL_TOP = $metal_top
+else
+  METAL_TOP = "9K"
+end # METAL_TOP
+
+logger.info("METAL_TOP Selected is %s" % [METAL_TOP])
+
+# METAL_LEVEL
+if $metal_level
+  METAL_LEVEL = $metal_level
+else
+  METAL_LEVEL = "6LM"
+end # METAL_LEVEL
+
+logger.info("METAL_STACK Selected is %s" % [METAL_LEVEL])
+
+# WEDGE
+if $wedge == "false"
+  WEDGE = $wedge
+else
+  WEDGE = "true"
+end # WEDGE
+
+logger.info("Wedge enabled  %s" % [WEDGE])
+
+# BALL
+if $ball == "false"
+  BALL = $ball
+else
+  BALL = "true"
+end # BALL
+
+logger.info("Ball enabled  %s" % [BALL])
+
+# GOLD
+if $gold == "false"
+  GOLD = $gold
+else
+  GOLD = "true"
+end # GOLD
+
+logger.info("Gold enabled  %s" % [GOLD])
+
+if $mim_option
+  MIM_OPTION = $mim_option
+else
+  MIM_OPTION = "Nan"
+end
+
+logger.info("MIM Option selected %s" % [MIM_OPTION])
+
+# OFFGRID
+if $offgrid == "false"
+  OFFGRID = false
+else
+  OFFGRID = true
+end # OFFGRID
+
+logger.info("Offgrid enabled  %s" % [OFFGRID])
+
+#================================================
+#---------------------MCELL----------------------
+#================================================
+
+# Rule MC.1: min. mcell width is 0.4µm
+logger.info("Executing rule MC.1")
+mc1_l1  = mcell_feol_mk.width(0.4.um, euclidian).polygons(0.001)
+mc1_l1.output("MC.1", "MC.1 : min. mcell width : 0.4µm")
+mc1_l1.forget
+
+# Rule MC.2: min. mcell spacing is 0.4µm
+logger.info("Executing rule MC.2")
+mc2_l1  = mcell_feol_mk.space(0.4.um, euclidian).polygons(0.001)
+mc2_l1.output("MC.2", "MC.2 : min. mcell spacing : 0.4µm")
+mc2_l1.forget
+
+# Rule MC.3: Minimum Mcell area is 0.35µm²
+logger.info("Executing rule MC.3")
+mc3_l1  = mcell_feol_mk.with_area(nil, 0.35.um)
+mc3_l1.output("MC.3", "MC.3 : Minimum Mcell area : 0.35µm²")
+mc3_l1.forget
+# Rule MC.4: Minimum area enclosed by Mcell is 0.35µm²
+logger.info("Executing rule MC.4")
+mc4_l1  = mcell_feol_mk.holes.with_area(nil, 0.35.um)
+mc4_l1.output("MC.4", "MC.4 : Minimum area enclosed by Mcell : 0.35µm²")
+mc4_l1.forget
+
+exec_end_time = Time.now
+run_time = exec_end_time - exec_start_time
+logger.info("DRC Run time %f seconds" % [run_time])
+

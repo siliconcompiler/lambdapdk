@@ -1,0 +1,529 @@
+# Copyright 2022 GlobalFoundries PDK Authors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+#=============================================================================================================================================================
+#--------------------------------------------------------- GF 0.18um MCU DRC RULE DECK (10V LDNMOS) ----------------------------------------------------------
+#=============================================================================================================================================================
+
+require 'time'
+require "logger"
+
+exec_start_time = Time.now
+
+logger = Logger.new(STDOUT)
+
+logger.formatter = proc do |severity, datetime, progname, msg|
+  "#{datetime}: Memory Usage (" + `pmap #{Process.pid} | tail -1`[10,40].strip + ") : #{msg}
+"
+end
+
+#================================================
+#----------------- FILE SETUP -------------------
+#================================================
+
+# optional for a batch launch :   klayout -b -r gf180mcu.drc -rd input=design.gds -rd report=gf180mcu_main.lyrdb
+
+logger.info("Starting running GF180MCU Klayout DRC runset on %s" % [$input])
+
+if $input
+    if $topcell
+        source($input, $topcell)
+    else
+        source($input)
+    end
+end
+
+logger.info("Loading database to memory is complete.")
+
+if $report
+    logger.info("GF180MCU Klayout DRC runset output at: %s" % [$report])
+    report("DRC Run Report at", $report)
+else
+    logger.info("GF180MCU Klayout DRC runset output at default location." % [File.join(File.dirname(RBA::CellView::active.filename), "gf180_drc.lyrdb").path])
+    report("DRC Run Report at", File.join(File.dirname(RBA::CellView::active.filename), "gf180_drc.lyrdb"))
+end
+
+if $thr
+    logger.info("Number of threads to use %s" % [$thr])
+    threads($thr)
+else
+    logger.info("Number of threads to use 16")
+    threads(16)
+end
+
+# === TILING MODE ===
+if $run_mode == "tiling"
+  # use a tile size of 1mm - not used in deep mode-
+  # tiles(500.um)
+  # use a tile border of 10 micron:
+  # tile_borders(10.um)
+  tiles(1000)
+  logger.info("Tiling  mode is enabled.")
+
+elsif $run_mode == "deep"
+  #=== HIER MODE ===
+  deep
+  logger.info("deep  mode is enabled.")
+
+elsif $run_mode == "flat"
+  #=== FLAT MODE ===
+  flat
+  logger.info("flat  mode is enabled.")
+
+else
+  #=== FLAT MODE ===
+  flat
+  logger.info("flat  mode is enabled.")
+
+end # run_mode
+
+#================================================
+#------------- LAYERS DEFINITIONS ---------------
+#================================================
+
+v5_xtor        = polygons(112, 1 )
+dualgate       = polygons(55 , 0 )
+poly2          = polygons(30 , 0 )
+nplus          = polygons(32 , 0 )
+pplus          = polygons(31 , 0 )
+comp           = polygons(22 , 0 )
+dnwell         = polygons(12 , 0 )
+nwell          = polygons(21 , 0 )
+sab            = polygons(49 , 0 )
+contact        = polygons(33 , 0 )
+mvsd           = polygons(210, 0 )
+ldmos_xtor     = polygons(226, 0 )
+
+logger.info("Starting deriving base layers.")
+#================================================
+#------------- LAYERS DERIVATIONS ---------------
+#================================================
+
+ncomp      =  comp      & nplus
+pcomp      =  comp      & pplus
+tgate      =  poly2     & comp
+ngate      =  nplus     & tgate
+pgate      =  pplus     & tgate
+
+#================================================
+#------------------ SWITCHES --------------------
+#================================================
+logger.info("Evaluate switches.")
+
+# FEOL
+if $feol == "false"
+  FEOL = $feol
+  logger.info("FEOL is disabled.")
+else
+  FEOL = "true"
+  logger.info("FEOL is enabled.")
+end # FEOL
+
+# BEOL
+if $beol == "false"
+  BEOL = $beol
+  logger.info("BEOL is disabled.")
+else
+  BEOL = "true"
+  logger.info("BEOL is enabled.")
+end # BEOL
+
+# connectivity rules
+if $conn_drc == "true"
+  CONNECTIVITY_RULES = $conn_drc
+  logger.info("connectivity rules are enabled.")
+else
+  CONNECTIVITY_RULES = false
+  logger.info("connectivity rules are disabled.")
+end # connectivity rules
+
+# METAL_TOP
+if $metal_top
+  METAL_TOP = $metal_top
+else
+  METAL_TOP = "9K"
+end # METAL_TOP
+
+logger.info("METAL_TOP Selected is %s" % [METAL_TOP])
+
+# METAL_LEVEL
+if $metal_level
+  METAL_LEVEL = $metal_level
+else
+  METAL_LEVEL = "6LM"
+end # METAL_LEVEL
+
+logger.info("METAL_STACK Selected is %s" % [METAL_LEVEL])
+
+# WEDGE
+if $wedge == "false"
+  WEDGE = $wedge
+else
+  WEDGE = "true"
+end # WEDGE
+
+logger.info("Wedge enabled  %s" % [WEDGE])
+
+# BALL
+if $ball == "false"
+  BALL = $ball
+else
+  BALL = "true"
+end # BALL
+
+logger.info("Ball enabled  %s" % [BALL])
+
+# GOLD
+if $gold == "false"
+  GOLD = $gold
+else
+  GOLD = "true"
+end # GOLD
+
+logger.info("Gold enabled  %s" % [GOLD])
+
+if $mim_option
+  MIM_OPTION = $mim_option
+else
+  MIM_OPTION = "Nan"
+end
+
+logger.info("MIM Option selected %s" % [MIM_OPTION])
+
+# OFFGRID
+if $offgrid == "false"
+  OFFGRID = false
+else
+  OFFGRID = true
+end # OFFGRID
+
+logger.info("Offgrid enabled  %s" % [OFFGRID])
+
+#================================================
+#-------------------10V LDNMOS-------------------
+#================================================
+
+# Rule MDN.1: Min MVSD width (for litho purpose). is 1µm
+logger.info("Executing rule MDN.1")
+mdn1_l1  = mvsd.width(1.um, euclidian).polygons(0.001)
+mdn1_l1.output("MDN.1", "MDN.1 : Min MVSD width (for litho purpose). : 1µm")
+mdn1_l1.forget
+
+if CONNECTIVITY_RULES
+logger.info("CONNECTIVITY_RULES section")
+
+connected_mdn_2a, unconnected_mdn_2b = conn_space(mvsd, 1, 2, euclidian)
+
+# Rule MDN.2a: Min MVSD space [Same Potential]. is 1µm
+logger.info("Executing rule MDN.2a")
+mdn2a_l1  = connected_mdn_2a
+mdn2a_l1.output("MDN.2a", "MDN.2a : Min MVSD space [Same Potential]. : 1µm")
+mdn2a_l1.forget
+
+# Rule MDN.2b: Min MVSD space [Diff Potential]. is 2µm
+logger.info("Executing rule MDN.2b")
+mdn2b_l1  = unconnected_mdn_2b
+mdn2b_l1.output("MDN.2b", "MDN.2b : Min MVSD space [Diff Potential]. : 2µm")
+mdn2b_l1.forget
+
+else
+logger.info("CONNECTIVITY_RULES disabled section")
+
+# Rule MDN.2b: Min MVSD space [Diff Potential]. is 2µm
+logger.info("Executing rule MDN.2b")
+mdn2b_l1  = mvsd.space(2.um, euclidian).polygons(0.001)
+mdn2b_l1.output("MDN.2b", "MDN.2b : Min MVSD space [Diff Potential]. : 2µm")
+mdn2b_l1.forget
+
+end #CONNECTIVITY_RULES
+
+gate_mdn = poly2.and(comp).inside(ldmos_xtor).inside(dualgate)
+# Rule MDN.3a: Min transistor channel length. is 0.6µm
+logger.info("Executing rule MDN.3a")
+mdn3a_l1 = gate_mdn.enclosing(mvsd, 0.6.um, euclidian).polygons(0.001)
+mdn3a_l1.output("MDN.3a", "MDN.3a : Min transistor channel length. : 0.6µm")
+mdn3a_l1.forget
+
+mvsd_mdn = mvsd.edges.and(ncomp).and(poly2)
+# Rule MDN.3b: Max transistor channel length.
+logger.info("Executing rule MDN.3b")
+mdn3b_l1 = poly2.edges.and(ncomp).or(mvsd_mdn).and(ldmos_xtor).and(dualgate).not(ngate.not(mvsd).edges.interacting(poly2.edges.and(ncomp).or(mvsd_mdn)).width(20.001.um).edges)
+mdn3b_l1.output("MDN.3b", "MDN.3b : Max transistor channel length.")
+mdn3b_l1.forget
+
+mvsd_mdn.forget
+# Rule MDN.4a: Min transistor channel width. is 4µm
+logger.info("Executing rule MDN.4a")
+mdn4a_l1  = gate_mdn.edges.not(mvsd).interacting(mvsd).width(4.um, euclidian).polygons(0.001)
+mdn4a_l1.output("MDN.4a", "MDN.4a : Min transistor channel width. : 4µm")
+mdn4a_l1.forget
+
+# Rule MDN.4b: Max transistor channel width.
+logger.info("Executing rule MDN.4b")
+mdn4b_l1 = gate_mdn.not(mvsd).interacting(nplus).not_interacting(gate_mdn.edges.not(mvsd).not(poly2.edges).width(50.001.um).polygons)
+mdn4b_l1.output("MDN.4b", "MDN.4b : Max transistor channel width.")
+mdn4b_l1.forget
+
+gate_mdn.forget
+pcomp_mdn5a = pcomp.not_interacting(ncomp).inside(ldmos_xtor).inside(dualgate)
+# Rule MDN.5ai: Min PCOMP (Pplus AND COMP) space to LDNMOS Drain MVSD (source and body tap non-butted). PCOMP (Pplus AND COMP) intercept with LDNMOS Drain MVSD is not allowed.
+logger.info("Executing rule MDN.5ai")
+mdn5ai_l1 = mvsd.and(pcomp_mdn5a).or(pcomp_mdn5a.separation(mvsd, 1.um, euclidian).polygons(0.001))
+mdn5ai_l1.output("MDN.5ai", "MDN.5ai : Min PCOMP (Pplus AND COMP) space to LDNMOS Drain MVSD (source and body tap non-butted). PCOMP (Pplus AND COMP) intercept with LDNMOS Drain MVSD is not allowed.")
+mdn5ai_l1.forget
+
+pcomp_mdn5a.forget
+# Rule MDN.5aii: Min PCOMP (Pplus AND COMP) space to LDNMOS Drain MVSD (source and body tap butted). PCOMP (Pplus AND COMP) intercept with LDNMOS Drain MVSD is not allowed. is 0.92µm
+logger.info("Executing rule MDN.5aii")
+mdn5aii_l1  = pcomp.interacting(ncomp).inside(ldmos_xtor).inside(dualgate).not(nplus).separation(mvsd, 0.92.um, euclidian).polygons(0.001)
+mdn5aii_l1.output("MDN.5aii", "MDN.5aii : Min PCOMP (Pplus AND COMP) space to LDNMOS Drain MVSD (source and body tap butted). PCOMP (Pplus AND COMP) intercept with LDNMOS Drain MVSD is not allowed. : 0.92µm")
+mdn5aii_l1.forget
+
+ncomp_mdn5b = ncomp.inside(ldmos_xtor).inside(dualgate)
+pcomp_mdn5b = pcomp.inside(ldmos_xtor).inside(dualgate)
+# Rule MDN.5b: Min PCOMP (Pplus AND COMP) space to LDNMOS Source (Nplus AND COMP). Use butted source and p-substrate tab otherwise and that is good for Latch-up immunity as well.
+logger.info("Executing rule MDN.5b")
+mdn5b_l1 = ncomp_mdn5b.not(poly2).not(mvsd).separation(pcomp_mdn5b, 0.4.um, euclidian).polygons.or(ncomp_mdn5b.not(poly2).not(mvsd).and(pcomp_mdn5b))
+mdn5b_l1.output("MDN.5b", "MDN.5b : Min PCOMP (Pplus AND COMP) space to LDNMOS Source (Nplus AND COMP). Use butted source and p-substrate tab otherwise and that is good for Latch-up immunity as well.")
+mdn5b_l1.forget
+
+ncomp_mdn5b.forget
+pcomp_mdn5b.forget
+mdn_5c_ncompsd = ncomp.inside(ldmos_xtor).inside(dualgate).interacting(mvsd).sized(0.36.um).sized(-0.36.um).extents
+mdn_5c_error = mdn_5c_ncompsd.edges.centers(0, 0.99).not_interacting(mdn_5c_ncompsd.drc(separation(pcomp, euclidian) <= 15.um).polygons(0.001))
+# Rule MDN.5c: Maximum distance of the nearest edge of the substrate tab from NCOMP edge. is 15µm
+logger.info("Executing rule MDN.5c")
+mdn5c_l1 = mdn_5c_error.and(ncomp).and(pcomp.holes).extended(0, 0, 0.001, 0.001)
+mdn5c_l1.output("MDN.5c", "MDN.5c : Maximum distance of the nearest edge of the substrate tab from NCOMP edge. : 15µm")
+mdn5c_l1.forget
+
+mdn_5c_ncompsd.forget
+mdn_5c_error.forget
+# Rule MDN.6: ALL LDNMOS shall be covered by Dualgate layer.
+logger.info("Executing rule MDN.6")
+mdn6_l1 = ncomp.not(poly2).not(mvsd).or(ngate.not(mvsd)).or(ncomp.and(mvsd)).inside(ldmos_xtor).not_inside(dualgate)
+mdn6_l1.output("MDN.6", "MDN.6 : ALL LDNMOS shall be covered by Dualgate layer.")
+mdn6_l1.forget
+
+# Rule MDN.6a: Min Dualgate enclose NCOMP.
+logger.info("Executing rule MDN.6a")
+mdn6a_l1 = dualgate.enclosing(ncomp.inside(ldmos_xtor), 0.5.um, euclidian).polygons(0.001).or(ncomp.inside(ldmos_xtor).not_inside(dualgate))
+mdn6a_l1.output("MDN.6a", "MDN.6a : Min Dualgate enclose NCOMP.")
+mdn6a_l1.forget
+
+# Rule MDN.7: Each LDNMOS shall be covered by LDMOS_XTOR (GDS#226) mark layer.
+logger.info("Executing rule MDN.7")
+mdn7_l1 = ncomp.interacting(mvsd).not(poly2).not(mvsd).or(ngate.interacting(mvsd).not(mvsd)).or(ncomp.and(mvsd)).inside(dualgate).not_inside(ldmos_xtor)
+mdn7_l1.output("MDN.7", "MDN.7 : Each LDNMOS shall be covered by LDMOS_XTOR (GDS#226) mark layer.")
+mdn7_l1.forget
+
+# Rule MDN.7a: Min LDMOS_XTOR enclose Dualgate.
+logger.info("Executing rule MDN.7a")
+mdn7a_l1 = dualgate.not_outside(ldmos_xtor).not(ldmos_xtor).or(dualgate.interacting(mvsd).not_inside(ldmos_xtor))
+mdn7a_l1.output("MDN.7a", "MDN.7a : Min LDMOS_XTOR enclose Dualgate.")
+mdn7a_l1.forget
+
+if CONNECTIVITY_RULES
+logger.info("CONNECTIVITY_RULES section")
+
+connected_mdn_8a, unconnected_mdn_8b = conn_separation(mvsd, nwell, 1, 2, euclidian)
+
+# Rule MDN.8a: Min LDNMOS drain MVSD space to any other equal potential Nwell space.
+logger.info("Executing rule MDN.8a")
+mdn8a_l1 = connected_mdn_8a.or(mvsd.not_outside(nwell))
+mdn8a_l1.output("MDN.8a", "MDN.8a : Min LDNMOS drain MVSD space to any other equal potential Nwell space.")
+mdn8a_l1.forget
+
+# Rule MDN.8b: Min LDNMOS drain MVSD space to any other different potential Nwell space.
+logger.info("Executing rule MDN.8b")
+mdn8b_l1 = unconnected_mdn_8b.or(mvsd.not_outside(nwell))
+mdn8b_l1.output("MDN.8b", "MDN.8b : Min LDNMOS drain MVSD space to any other different potential Nwell space.")
+mdn8b_l1.forget
+
+else
+logger.info("CONNECTIVITY_RULES disabled section")
+
+# Rule MDN.8b: Min LDNMOS drain MVSD space to any other different potential Nwell space.
+logger.info("Executing rule MDN.8b")
+mdn8b_l1 = mvsd.separation(nwell, 2.um, euclidian).polygons(0.001).or(mvsd.not_outside(nwell))
+mdn8b_l1.output("MDN.8b", "MDN.8b : Min LDNMOS drain MVSD space to any other different potential Nwell space.")
+mdn8b_l1.forget
+
+end #CONNECTIVITY_RULES
+
+# Rule MDN.9: Min LDNMOS drain MVSD space to NCOMP (Nplus AND COMP) outside LDNMOS drain MVSD. is 4µm
+logger.info("Executing rule MDN.9")
+mdn9_l1  = mvsd.inside(dualgate).inside(ldmos_xtor).separation(ncomp.not_interacting(mvsd), 4.um, euclidian).polygons(0.001)
+mdn9_l1.output("MDN.9", "MDN.9 : Min LDNMOS drain MVSD space to NCOMP (Nplus AND COMP) outside LDNMOS drain MVSD. : 4µm")
+mdn9_l1.forget
+
+# rule MDN.10 is not a DRC check
+
+poly_mdn10 = poly2.inside(dualgate).inside(ldmos_xtor.interacting(mvsd))
+# Rule MDN.10a: Min LDNMOS POLY2 width. is 1.2µm
+logger.info("Executing rule MDN.10a")
+mdn10a_l1  = poly_mdn10.width(1.2.um, euclidian).polygons(0.001)
+mdn10a_l1.output("MDN.10a", "MDN.10a : Min LDNMOS POLY2 width. : 1.2µm")
+mdn10a_l1.forget
+
+# Rule MDN.10b: Min POLY2 extension beyond COMP in the width direction of the transistor (other than the LDNMOS drain direction). is 0.4µm
+logger.info("Executing rule MDN.10b")
+mdn10b_l1 = poly_mdn10.edges.enclosing(ncomp.interacting(poly_mdn10).edges.interacting(ncomp.edges.not_interacting(poly2)), 0.4.um, euclidian)
+mdn10b_l1.output("MDN.10b", "MDN.10b : Min POLY2 extension beyond COMP in the width direction of the transistor (other than the LDNMOS drain direction). : 0.4µm")
+mdn10b_l1.forget
+
+mdn_10c_all_errors   = poly_mdn10.drc(enclosing(ncomp.interacting(poly_mdn10), euclidian) != 0.2.um)
+mdn_10c_error_region = ncomp.inside(dualgate).inside(ldmos_xtor).sized(0.36.um).sized(-0.36.um).extents.and(mvsd).and(poly2)
+# Rule MDN.10c: Min/Max POLY2 extension beyond COMP on the field towards LDNMOS drain COMP direction.
+logger.info("Executing rule MDN.10c")
+mdn10c_l1 = mdn_10c_all_errors.and(mdn_10c_error_region)
+mdn10c_l1.output("MDN.10c", "MDN.10c : Min/Max POLY2 extension beyond COMP on the field towards LDNMOS drain COMP direction.")
+mdn10c_l1.forget
+
+mdn_10c_all_errors.forget
+mdn_10c_error_region.forget
+mdn_10d_field   = ncomp.and(poly2).sized(1.um, 0).and(poly2)
+mdn_10d_not_max = ncomp.inside(mvsd).inside(dualgate).inside(ldmos_xtor).drc(separation(mdn_10d_field) <= 0.16.um)
+mdn_10d_max     = ncomp.sized(0.36.um).sized(-0.36.um).extents.not(mdn_10d_not_max.polygons).not(ncomp).not(poly2).inside(mvsd)
+mdn_10d_min     = ncomp.inside(mvsd).inside(dualgate).inside(ldmos_xtor).separation(mdn_10d_field , 0.16.um).polygons(0.001)
+mdn_10d_overlap = ncomp.inside(mvsd).inside(dualgate).inside(ldmos_xtor).and(poly2)
+# Rule MDN.10d: Min/Max POLY2 on field space to LDNMOS drain COMP.
+logger.info("Executing rule MDN.10d")
+mdn10d_l1 = mdn_10d_max.or(mdn_10d_min).or(mdn_10d_overlap)
+mdn10d_l1.output("MDN.10d", "MDN.10d : Min/Max POLY2 on field space to LDNMOS drain COMP.")
+mdn10d_l1.forget
+
+mdn_10d_field.forget
+mdn_10d_not_max.forget
+mdn_10d_max.forget
+mdn_10d_min.forget
+mdn_10d_overlap.forget
+# Rule MDN.10ei: Min POLY2 space to Psub tap (source and body tap non-butted).
+logger.info("Executing rule MDN.10ei")
+mdn10ei_l1 = poly_mdn10.separation(pcomp.not_interacting(ncomp), 0.4.um).polygons(0.001).or(poly_mdn10.and(pcomp.not(nplus).not_interacting(ncomp.not(pplus))))
+mdn10ei_l1.output("MDN.10ei", "MDN.10ei : Min POLY2 space to Psub tap (source and body tap non-butted).")
+mdn10ei_l1.forget
+
+# Rule MDN.10eii: Min POLY2 space to Psub tap (source and body tap butted). is 0.32µm
+logger.info("Executing rule MDN.10eii")
+mdn10eii_l1  = poly_mdn10.separation(pcomp.not(nplus).interacting(ncomp.not(pplus)), 0.32.um, euclidian).polygons(0.001)
+mdn10eii_l1.output("MDN.10eii", "MDN.10eii : Min POLY2 space to Psub tap (source and body tap butted). : 0.32µm")
+mdn10eii_l1.forget
+
+# Rule MDN.10f: Poly2 interconnect in HV region (LDMOS_XTOR marked region) not allowed. Also, any Poly2 interconnect with poly2 to substrate potential greater than 6V is not allowed.
+logger.info("Executing rule MDN.10f")
+mdn10f_l1 = poly_mdn10.not(nplus).interacting(poly_mdn10.and(nplus),2).or(poly2.and(ldmos_xtor).interacting(poly2.not(ldmos_xtor)))
+mdn10f_l1.output("MDN.10f", "MDN.10f : Poly2 interconnect in HV region (LDMOS_XTOR marked region) not allowed. Also, any Poly2 interconnect with poly2 to substrate potential greater than 6V is not allowed.")
+mdn10f_l1.forget
+
+poly_mdn10.forget
+mdn_11_layer      = ldmos_xtor.and(mvsd).and(comp).and(poly2).and(nplus)
+mdn_11_max        = mdn_11_layer.not(mdn_11_layer.drc(width <= 0.4.um).polygons)
+mdn_11_min        = mdn_11_layer.width(0.4.um).polygons(0.001).not_interacting(mdn_11_max)
+mdn_11_no_channel = mvsd.covering(ncomp).outside(tgate).inside(dualgate).inside(ldmos_xtor).or(mvsd.not_covering(ncomp.not_interacting(poly2)).inside(dualgate).inside(ldmos_xtor))
+# Rule MDN.11: Min/Max MVSD overlap channel COMP ((((LDMOS_XTOR AND MVSD) AND COMP) AND POLY2) AND NPlus).
+logger.info("Executing rule MDN.11")
+mdn11_l1 = mdn_11_max.or(mdn_11_min).or(mdn_11_no_channel)
+mdn11_l1.output("MDN.11", "MDN.11 : Min/Max MVSD overlap channel COMP ((((LDMOS_XTOR AND MVSD) AND COMP) AND POLY2) AND NPlus).")
+mdn11_l1.forget
+
+mdn_11_layer.forget
+mdn_11_max.forget
+mdn_11_min.forget
+mdn_11_no_channel.forget
+mdn12_a = mvsd.covering(ncomp.not_interacting(poly2)).enclosing(ncomp, 0.5.um, transparent).polygons(0.001).outside(poly2).inside(dualgate).inside(ldmos_xtor)
+mdn12_b = mvsd.not_covering(ncomp.not_interacting(poly2)).inside(dualgate).inside(ldmos_xtor)
+# Rule MDN.12: Min MVSD enclose NCOMP in the LDNMOS drain and in the direction along the transistor width.
+logger.info("Executing rule MDN.12")
+mdn12_l1 = mdn12_a.or(mdn12_b)
+mdn12_l1.output("MDN.12", "MDN.12 : Min MVSD enclose NCOMP in the LDNMOS drain and in the direction along the transistor width.")
+mdn12_l1.forget
+
+mdn12_a.forget
+mdn12_b.forget
+# rule MDN.13 is not a DRC check
+
+# Rule MDN.13a: Max single finger width. is 50µm
+logger.info("Executing rule MDN.13a")
+mdn13a_l1 = poly2.and(ncomp).not(mvsd).inside(dualgate).inside(ldmos_xtor).drc(length > 50.um)
+mdn13a_l1.output("MDN.13a", "MDN.13a : Max single finger width. : 50µm")
+mdn13a_l1.forget
+
+mdn_source = ncomp.interacting(poly2.and(dualgate).and(ldmos_xtor).and(mvsd)).not(poly2)
+mdn_ldnmos = poly2.and(ncomp).and(dualgate).not(mvsd).inside(ldmos_xtor)
+# Rule MDN.13b: Layout shall have alternative source & drain.
+logger.info("Executing rule MDN.13b")
+mdn13b_l1 = mdn_ldnmos.not_interacting(mdn_source,1,1).or(mdn_ldnmos.not_interacting(mvsd,1,1)).or(mdn_source.interacting(mvsd))
+mdn13b_l1.output("MDN.13b", "MDN.13b : Layout shall have alternative source & drain.")
+mdn13b_l1.forget
+
+mdn_13c_source_side = mdn_ldnmos.interacting(mdn_source.interacting(mdn_ldnmos, 2, 2).or(mdn_source.interacting(pcomp.interacting(mdn_source, 2, 2))))
+# Rule MDN.13c: Both sides of the transistor shall be terminated by source.
+logger.info("Executing rule MDN.13c")
+mdn13c_l1 = mvsd.covering(ncomp.not_interacting(poly2)).interacting(ncomp, 2, 2).interacting(mdn_13c_source_side)
+mdn13c_l1.output("MDN.13c", "MDN.13c : Both sides of the transistor shall be terminated by source.")
+mdn13c_l1.forget
+
+mdn_13c_source_side.forget
+mdn_13d_single      = mvsd.covering(ncomp.not_interacting(poly2)).interacting(ncomp, 2, 2).inside(ldmos_xtor)
+mdn_13d_multi       = mvsd.covering(ncomp.not_interacting(poly2)).interacting(ncomp, 3, 3).inside(ldmos_xtor)
+mdn_13d_butted_well = mdn_source.sized(1.um).sized(-1.um).extents.not(pcomp).interacting(mdn_ldnmos,2,2)
+# Rule MDN.13d: Every two poly fingers shall be surrounded by a P-sub guard ring. (Exclude the case when each LDNMOS transistor have full width butting to well tap).
+logger.info("Executing rule MDN.13d")
+mdn13d_l1 = pcomp.holes.covering(mdn_13d_single, 2).or(pcomp.holes.covering(mdn_13d_single).covering(mdn_13d_multi)).or(mdn_13d_butted_well)
+mdn13d_l1.output("MDN.13d", "MDN.13d : Every two poly fingers shall be surrounded by a P-sub guard ring. (Exclude the case when each LDNMOS transistor have full width butting to well tap).")
+mdn13d_l1.forget
+
+mdn_13d_single.forget
+mdn_13d_multi.forget
+mdn_13d_butted_well.forget
+mdn_source.forget
+mdn_ldnmos.forget
+# Rule MDN.14: Min MVSD space to any DNWELL.
+logger.info("Executing rule MDN.14")
+mdn14_l1 = mvsd.separation(dnwell,6.0.um).polygons(0.001).or(mvsd.not_outside(dnwell))
+mdn14_l1.output("MDN.14", "MDN.14 : Min MVSD space to any DNWELL.")
+mdn14_l1.forget
+
+# Rule MDN.15a: Min LDNMOS drain COMP width. is 0.22µm
+logger.info("Executing rule MDN.15a")
+mdn15a_l1  = comp.inside(mvsd).inside(dualgate).inside(ldmos_xtor).width(0.22.um, euclidian).polygons(0.001)
+mdn15a_l1.output("MDN.15a", "MDN.15a : Min LDNMOS drain COMP width. : 0.22µm")
+mdn15a_l1.forget
+
+# Rule MDN.15b: Min LDNMOS drain COMP enclose contact. is 0µm
+logger.info("Executing rule MDN.15b")
+mdn15b_l1 = contact.interacting(ncomp.inside(mvsd).inside(dualgate).inside(ldmos_xtor)).not_inside(ncomp.inside(mvsd))
+mdn15b_l1.output("MDN.15b", "MDN.15b : Min LDNMOS drain COMP enclose contact. : 0µm")
+mdn15b_l1.forget
+
+# rule MDN.16 is not a DRC check
+
+mdn_17_blockages = pcomp.holes.not(ncomp.or(poly2).interacting(mvsd)).covering(dnwell.or(nwell)).inside(dualgate).inside(ldmos_xtor.interacting(mvsd))
+mdn_17_mos_in_gr = ngate.not(mvsd).not_inside(pcomp.holes).inside(dualgate).inside(ldmos_xtor.interacting(mvsd))
+mdn_17_gr_in_ldmos_mk = ldmos_xtor.interacting(mvsd).and(dualgate).not_covering(pcomp)
+# Rule MDN.17: It is recommended to surround the LDNMOS transistor with non-broken Psub guard ring to improve the latch up immunity. Guideline to improve the latch up immunity.
+logger.info("Executing rule MDN.17")
+mdn17_l1 = mdn_17_blockages.or(mdn_17_mos_in_gr).or(mdn_17_gr_in_ldmos_mk)
+mdn17_l1.output("MDN.17", "MDN.17 : It is recommended to surround the LDNMOS transistor with non-broken Psub guard ring to improve the latch up immunity. Guideline to improve the latch up immunity.")
+mdn17_l1.forget
+
+mdn_17_blockages.forget
+mdn_17_mos_in_gr.forget
+mdn_17_gr_in_ldmos_mk.forget
+
+exec_end_time = Time.now
+run_time = exec_end_time - exec_start_time
+logger.info("DRC Run time %f seconds" % [run_time])
+

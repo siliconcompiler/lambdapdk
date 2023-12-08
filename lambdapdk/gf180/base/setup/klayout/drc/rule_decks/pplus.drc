@@ -1,0 +1,421 @@
+# Copyright 2022 GlobalFoundries PDK Authors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+#=============================================================================================================================================================
+#------------------------------------------------------------ GF 0.18um MCU DRC RULE DECK (PPLUS) ------------------------------------------------------------
+#=============================================================================================================================================================
+
+require 'time'
+require "logger"
+
+exec_start_time = Time.now
+
+logger = Logger.new(STDOUT)
+
+logger.formatter = proc do |severity, datetime, progname, msg|
+  "#{datetime}: Memory Usage (" + `pmap #{Process.pid} | tail -1`[10,40].strip + ") : #{msg}
+"
+end
+
+#================================================
+#----------------- FILE SETUP -------------------
+#================================================
+
+# optional for a batch launch :   klayout -b -r gf180mcu.drc -rd input=design.gds -rd report=gf180mcu_main.lyrdb
+
+logger.info("Starting running GF180MCU Klayout DRC runset on %s" % [$input])
+
+if $input
+    if $topcell
+        source($input, $topcell)
+    else
+        source($input)
+    end
+end
+
+logger.info("Loading database to memory is complete.")
+
+if $report
+    logger.info("GF180MCU Klayout DRC runset output at: %s" % [$report])
+    report("DRC Run Report at", $report)
+else
+    logger.info("GF180MCU Klayout DRC runset output at default location." % [File.join(File.dirname(RBA::CellView::active.filename), "gf180_drc.lyrdb").path])
+    report("DRC Run Report at", File.join(File.dirname(RBA::CellView::active.filename), "gf180_drc.lyrdb"))
+end
+
+if $thr
+    logger.info("Number of threads to use %s" % [$thr])
+    threads($thr)
+else
+    logger.info("Number of threads to use 16")
+    threads(16)
+end
+
+# === TILING MODE ===
+if $run_mode == "tiling"
+  # use a tile size of 1mm - not used in deep mode-
+  # tiles(500.um)
+  # use a tile border of 10 micron:
+  # tile_borders(10.um)
+  tiles(1000)
+  logger.info("Tiling  mode is enabled.")
+
+elsif $run_mode == "deep"
+  #=== HIER MODE ===
+  deep
+  logger.info("deep  mode is enabled.")
+
+elsif $run_mode == "flat"
+  #=== FLAT MODE ===
+  flat
+  logger.info("flat  mode is enabled.")
+
+else
+  #=== FLAT MODE ===
+  flat
+  logger.info("flat  mode is enabled.")
+
+end # run_mode
+
+#================================================
+#------------- LAYERS DEFINITIONS ---------------
+#================================================
+
+v5_xtor        = polygons(112, 1 )
+dualgate       = polygons(55 , 0 )
+poly2          = polygons(30 , 0 )
+nplus          = polygons(32 , 0 )
+pplus          = polygons(31 , 0 )
+comp           = polygons(22 , 0 )
+dnwell         = polygons(12 , 0 )
+nwell          = polygons(21 , 0 )
+lvpwell        = polygons(204, 0 )
+sab            = polygons(49 , 0 )
+resistor       = polygons(62 , 0 )
+
+logger.info("Starting deriving base layers.")
+#================================================
+#------------- LAYERS DERIVATIONS ---------------
+#================================================
+
+ncomp      =  comp      & nplus
+pcomp      =  comp      & pplus
+tgate      =  poly2     & comp
+ngate      =  nplus     & tgate
+pgate      =  pplus     & tgate
+
+#================================================
+#------------------ SWITCHES --------------------
+#================================================
+logger.info("Evaluate switches.")
+
+# FEOL
+if $feol == "false"
+  FEOL = $feol
+  logger.info("FEOL is disabled.")
+else
+  FEOL = "true"
+  logger.info("FEOL is enabled.")
+end # FEOL
+
+# BEOL
+if $beol == "false"
+  BEOL = $beol
+  logger.info("BEOL is disabled.")
+else
+  BEOL = "true"
+  logger.info("BEOL is enabled.")
+end # BEOL
+
+# connectivity rules
+if $conn_drc == "true"
+  CONNECTIVITY_RULES = $conn_drc
+  logger.info("connectivity rules are enabled.")
+else
+  CONNECTIVITY_RULES = false
+  logger.info("connectivity rules are disabled.")
+end # connectivity rules
+
+# METAL_TOP
+if $metal_top
+  METAL_TOP = $metal_top
+else
+  METAL_TOP = "9K"
+end # METAL_TOP
+
+logger.info("METAL_TOP Selected is %s" % [METAL_TOP])
+
+# METAL_LEVEL
+if $metal_level
+  METAL_LEVEL = $metal_level
+else
+  METAL_LEVEL = "6LM"
+end # METAL_LEVEL
+
+logger.info("METAL_STACK Selected is %s" % [METAL_LEVEL])
+
+# WEDGE
+if $wedge == "false"
+  WEDGE = $wedge
+else
+  WEDGE = "true"
+end # WEDGE
+
+logger.info("Wedge enabled  %s" % [WEDGE])
+
+# BALL
+if $ball == "false"
+  BALL = $ball
+else
+  BALL = "true"
+end # BALL
+
+logger.info("Ball enabled  %s" % [BALL])
+
+# GOLD
+if $gold == "false"
+  GOLD = $gold
+else
+  GOLD = "true"
+end # GOLD
+
+logger.info("Gold enabled  %s" % [GOLD])
+
+if $mim_option
+  MIM_OPTION = $mim_option
+else
+  MIM_OPTION = "Nan"
+end
+
+logger.info("MIM Option selected %s" % [MIM_OPTION])
+
+# OFFGRID
+if $offgrid == "false"
+  OFFGRID = false
+else
+  OFFGRID = true
+end # OFFGRID
+
+logger.info("Offgrid enabled  %s" % [OFFGRID])
+
+#================================================
+#---------------------PPLUS----------------------
+#================================================
+
+
+if FEOL
+logger.info("FEOL section")
+
+# Rule PP.1: min. pplus width is 0.4µm
+logger.info("Executing rule PP.1")
+pp1_l1  = pplus.width(0.4.um, euclidian).polygons(0.001)
+pp1_l1.output("PP.1", "PP.1 : min. pplus width : 0.4µm")
+pp1_l1.forget
+
+# Rule PP.2: min. pplus spacing is 0.4µm
+logger.info("Executing rule PP.2")
+pp2_l1  = pplus.space(0.4.um, euclidian).polygons(0.001)
+pp2_l1.output("PP.2", "PP.2 : min. pplus spacing : 0.4µm")
+pp2_l1.forget
+
+# Rule PP.3a: Space to NCOMP for NCOMP (1) inside LVPWELL (2) outside NWELL and DNWELL. is 0.16µm
+logger.info("Executing rule PP.3a")
+pp3a_l1  = pplus.separation((ncomp.inside(lvpwell)).or(ncomp.outside(nwell).outside(dnwell)), 0.16.um, euclidian).polygons(0.001)
+pp3a_l1.output("PP.3a", "PP.3a : Space to NCOMP for NCOMP (1) inside LVPWELL (2) outside NWELL and DNWELL. : 0.16µm")
+pp3a_l1.forget
+
+pp_3bi = ncomp.edges.not(lvpwell.inside(dnwell).sized(0.429.um))
+# Rule PP.3bi: Space to NCOMP: For Inside DNWELL. (i) NCOMP space to LVPWELL >= 0.43um. is 0.08µm
+logger.info("Executing rule PP.3bi")
+pp3bi_l1  = pplus.inside(dnwell).edges.separation(pp_3bi, 0.08.um, euclidian).polygons(0.001)
+pp3bi_l1.output("PP.3bi", "PP.3bi : Space to NCOMP: For Inside DNWELL. (i) NCOMP space to LVPWELL >= 0.43um. : 0.08µm")
+pp3bi_l1.forget
+
+pp_3bi.forget
+pp_3bii = ncomp.edges.and(lvpwell.inside(dnwell).sized(0.429.um))
+# Rule PP.3bii: Space to NCOMP: For Inside DNWELL. (ii) NCOMP space to LVPWELL < 0.43um. is 0.16µm
+logger.info("Executing rule PP.3bii")
+pp3bii_l1  = pplus.inside(dnwell).edges.separation(pp_3bii, 0.16.um, euclidian).polygons(0.001)
+pp3bii_l1.output("PP.3bii", "PP.3bii : Space to NCOMP: For Inside DNWELL. (ii) NCOMP space to LVPWELL < 0.43um. : 0.16µm")
+pp3bii_l1.forget
+
+pp_3bii.forget
+pp_3ci_extend = nwell.outside(dnwell).sized(-0.429.um)
+pp_3ci = ncomp.edges.and(pp_3ci_extend)
+# Rule PP.3ci: Space to NCOMP: For Outside DNWELL, inside Nwell: (i) NWELL Overlap of NCOMP >= 0.43um. is 0.08µm
+logger.info("Executing rule PP.3ci")
+pp3ci_l1  = pplus.outside(dnwell).edges.separation(pp_3ci, 0.08.um, euclidian).polygons(0.001)
+pp3ci_l1.output("PP.3ci", "PP.3ci : Space to NCOMP: For Outside DNWELL, inside Nwell: (i) NWELL Overlap of NCOMP >= 0.43um. : 0.08µm")
+pp3ci_l1.forget
+
+pp_3ci_extend.forget
+pp_3ci.forget
+pp_3cii_extend = nwell.outside(dnwell).not(nwell.outside(dnwell).sized(-0.429.um))
+pp_3cii = ncomp.edges.and(pp_3cii_extend)
+# Rule PP.3cii: Space to NCOMP: For Outside DNWELL, inside Nwell: (ii) NWELL Overlap of NCOMP 0.43um. is 0.16µm
+logger.info("Executing rule PP.3cii")
+pp3cii_l1  = pplus.outside(dnwell).edges.separation(pp_3cii, 0.16.um, euclidian).polygons(0.001)
+pp3cii_l1.output("PP.3cii", "PP.3cii : Space to NCOMP: For Outside DNWELL, inside Nwell: (ii) NWELL Overlap of NCOMP 0.43um. : 0.16µm")
+pp3cii_l1.forget
+
+pp_3cii_extend.forget
+pp_3cii.forget
+# Rule PP.3d: Min/max space to a butted NCOMP.
+logger.info("Executing rule PP.3d")
+pp3d_l1 = pplus.not_outside(ncomp)
+pp3d_l1.output("PP.3d", "PP.3d : Min/max space to a butted NCOMP.")
+pp3d_l1.forget
+
+# Rule PP.3e: Space to NCOMP edge adjacent to a butting edge.
+logger.info("Executing rule PP.3e")
+pp3e_l1 = pplus.not_outside(ncomp)
+pp3e_l1.output("PP.3e", "PP.3e : Space to NCOMP edge adjacent to a butting edge.")
+pp3e_l1.forget
+
+# Rule PP.4a: Space related to N-channel gate at a butting edge parallel to gate. is 0.32µm
+logger.info("Executing rule PP.4a")
+pp4a_l1 = pplus.edges.and(ncomp.edges).separation(ngate.edges, 0.32.um, projection).polygons(0.001)
+pp4a_l1.output("PP.4a", "PP.4a : Space related to N-channel gate at a butting edge parallel to gate. : 0.32µm")
+pp4a_l1.forget
+
+pp_4b_poly = poly2.edges.interacting(ngate.edges.not(ncomp.edges)).centers(0, 0.99).and(ngate.sized(0.32.um))
+# Rule PP.4b: Within 0.32um of channel, space to N-channel gate extension perpendicular to the direction of Poly2.
+logger.info("Executing rule PP.4b")
+pp4b_l1 = pplus.interacting(pplus.edges.separation(pp_4b_poly, 0.22.um, projection).polygons(0.001))
+pp4b_l1.output("PP.4b", "PP.4b : Within 0.32um of channel, space to N-channel gate extension perpendicular to the direction of Poly2.")
+pp4b_l1.forget
+
+pp_4b_poly.forget
+# Rule PP.5a: Overlap of P-channel gate. is 0.23µm
+logger.info("Executing rule PP.5a")
+pp5a_l1 = pplus.enclosing(pgate, 0.23.um, euclidian).polygons(0.001)
+pp5a_l2 = pgate.not_outside(pplus).not(pplus)
+pp5a_l  = pp5a_l1.or(pp5a_l2)
+pp5a_l.output("PP.5a", "PP.5a : Overlap of P-channel gate. : 0.23µm")
+pp5a_l1.forget
+pp5a_l2.forget
+pp5a_l.forget
+
+# Rule PP.5b: Extension beyond COMP for COMP (1) Inside NWELL (2) outside LVPWELL but inside DNWELL. is 0.16µm
+logger.info("Executing rule PP.5b")
+pp5b_l1 = pplus.not_outside(nwell).or(pplus.outside(lvpwell).inside(dnwell)).edges.not(nplus).enclosing(comp.edges, 0.16.um, euclidian).polygons(0.001)
+pp5b_l1.output("PP.5b", "PP.5b : Extension beyond COMP for COMP (1) Inside NWELL (2) outside LVPWELL but inside DNWELL. : 0.16µm")
+pp5b_l1.forget
+
+pp_5ci_background = pplus.not_outside(lvpwell).inside(dnwell).edges.not(nplus.edges)
+pp_5ci_extend = lvpwell.inside(dnwell).sized(-0.429.um)
+pp_5ci_foreground = pcomp.not_outside(lvpwell).inside(dnwell).edges.not(nplus.edges).inside_part(pp_5ci_extend)
+# Rule PP.5ci: Extension beyond COMP: For Inside DNWELL, inside LVPWELL: (i) For LVPWELL overlap of Pplus >= 0.43um for LVPWELL tap. is 0.02µm
+logger.info("Executing rule PP.5ci")
+pp5ci_l1 = pp_5ci_background.enclosing(pp_5ci_foreground, 0.02.um, euclidian).polygons(0.001)
+pp5ci_l1.output("PP.5ci", "PP.5ci : Extension beyond COMP: For Inside DNWELL, inside LVPWELL: (i) For LVPWELL overlap of Pplus >= 0.43um for LVPWELL tap. : 0.02µm")
+pp5ci_l1.forget
+
+pp_5ci_background.forget
+pp_5ci_extend.forget
+pp_5ci_foreground.forget
+pp_5cii_background = pplus.not_outside(lvpwell).inside(dnwell).edges
+pp_5cii_extend = lvpwell.inside(dnwell).not(lvpwell.inside(dnwell).sized(-0.429.um))
+pp_5cii_foreground = pcomp.not_outside(lvpwell).inside(dnwell).edges.not(nplus.edges).and(pp_5cii_extend)
+# Rule PP.5cii: Extension beyond COMP: For Inside DNWELL, inside LVPWELL: (ii) For LVPWELL overlap of Pplus < 0.43um for the LVPWELL tap. is 0.16µm
+logger.info("Executing rule PP.5cii")
+pp5cii_l1 = pp_5cii_background.enclosing(pp_5cii_foreground, 0.16.um, projection).polygons(0.001)
+pp5cii_l1.output("PP.5cii", "PP.5cii : Extension beyond COMP: For Inside DNWELL, inside LVPWELL: (ii) For LVPWELL overlap of Pplus < 0.43um for the LVPWELL tap. : 0.16µm")
+pp5cii_l1.forget
+
+pp_5cii_background.forget
+pp_5cii_extend.forget
+pp_5cii_foreground.forget
+pp_5di_background = pplus.outside(dnwell).edges
+pp_5di_foreground = pcomp.outside(dnwell).edges.not(nplus.edges).not(nwell.outside(dnwell).sized(0.429.um))
+# Rule PP.5di: Extension beyond COMP: For Outside DNWELL (i) For Pplus to NWELL space >= 0.43um for Pfield or LVPWELL tap. is 0.02µm
+logger.info("Executing rule PP.5di")
+pp5di_l1 = pp_5di_background.enclosing(pp_5di_foreground, 0.02.um, projection).polygons(0.001)
+pp5di_l1.output("PP.5di", "PP.5di : Extension beyond COMP: For Outside DNWELL (i) For Pplus to NWELL space >= 0.43um for Pfield or LVPWELL tap. : 0.02µm")
+pp5di_l1.forget
+
+pp_5di_background.forget
+pp_5di_foreground.forget
+pp_5dii_background = pplus.outside(dnwell).edges
+pp_5dii_foreground = pcomp.outside(dnwell).edges.not(nplus.edges).and(nwell.outside(dnwell).sized(0.429.um))
+# Rule PP.5dii: Extension beyond COMP: For Outside DNWELL (ii) For Pplus to NWELL space < 0.43um for Pfield or LVPWELL tap. is 0.16µm
+logger.info("Executing rule PP.5dii")
+pp5dii_l1 = pp_5dii_background.enclosing(pp_5dii_foreground, 0.16.um, projection).polygons(0.001)
+pp5dii_l1.output("PP.5dii", "PP.5dii : Extension beyond COMP: For Outside DNWELL (ii) For Pplus to NWELL space < 0.43um for Pfield or LVPWELL tap. : 0.16µm")
+pp5dii_l1.forget
+
+pp_5dii_background.forget
+pp_5dii_foreground.forget
+# Rule PP.6: Overlap with PCOMP butted to NCOMP. is 0.22µm
+logger.info("Executing rule PP.6")
+pp6_l1 = comp.interacting(pplus).enclosing(ncomp.interacting(pplus), 0.22.um, projection).polygons
+pp6_l1.output("PP.6", "PP.6 : Overlap with PCOMP butted to NCOMP. : 0.22µm")
+pp6_l1.forget
+
+# Rule PP.7: Space to unrelated unsalicided Poly2. is 0.18µm
+logger.info("Executing rule PP.7")
+pp7_l1  = pplus.separation(poly2.and(sab), 0.18.um, euclidian).polygons(0.001)
+pp7_l1.output("PP.7", "PP.7 : Space to unrelated unsalicided Poly2. : 0.18µm")
+pp7_l1.forget
+
+# Rule PP.8a: Minimum Pplus area (um2). is 0.35µm²
+logger.info("Executing rule PP.8a")
+pp8a_l1  = pplus.with_area(nil, 0.35.um)
+pp8a_l1.output("PP.8a", "PP.8a : Minimum Pplus area (um2). : 0.35µm²")
+pp8a_l1.forget
+# Rule PP.8b: Minimum area enclosed by Pplus (um2). is 0.35µm²
+logger.info("Executing rule PP.8b")
+pp8b_l1  = pplus.holes.with_area(nil, 0.35.um)
+pp8b_l1.output("PP.8b", "PP.8b : Minimum area enclosed by Pplus (um2). : 0.35µm²")
+pp8b_l1.forget
+# Rule PP.9: Overlap of unsalicided Poly2. is 0.18µm
+logger.info("Executing rule PP.9")
+pp9_l1 = pplus.enclosing(poly2.not_interacting(resistor).and(sab), 0.18.um, euclidian).polygons(0.001)
+pp9_l2 = poly2.not_interacting(resistor).and(sab).not_outside(pplus).not(pplus)
+pp9_l  = pp9_l1.or(pp9_l2)
+pp9_l.output("PP.9", "PP.9 : Overlap of unsalicided Poly2. : 0.18µm")
+pp9_l1.forget
+pp9_l2.forget
+pp9_l.forget
+
+# Rule PP.10: Overlap of unsalicided COMP. is 0.18µm
+logger.info("Executing rule PP.10")
+pp10_l1 = pplus.enclosing(comp.and(sab), 0.18.um, euclidian).polygons(0.001)
+pp10_l1.output("PP.10", "PP.10 : Overlap of unsalicided COMP. : 0.18µm")
+pp10_l1.forget
+
+pp_11_in_dnwell = pplus.interacting(pplus.edges.and(ncomp.edges).and(lvpwell.inside(dnwell).sized(0.429.um)))
+pp_11_out_dnwell = pplus.interacting(pplus.edges.and(ncomp.edges).and(nwell.outside(dnwell).not(nwell.outside(dnwell).sized(-0.429.um))))
+# Rule PP.11: Butting Pplus and NCOMP is forbidden within 0.43um of Nwell edge (for outside DNWELL) and of LVPWELL edge (for inside DNWELL case).
+logger.info("Executing rule PP.11")
+pp11_l1 = pp_11_in_dnwell.or(pp_11_out_dnwell)
+pp11_l1.output("PP.11", "PP.11 : Butting Pplus and NCOMP is forbidden within 0.43um of Nwell edge (for outside DNWELL) and of LVPWELL edge (for inside DNWELL case).")
+pp11_l1.forget
+
+pp_11_in_dnwell.forget
+pp_11_out_dnwell.forget
+# Rule PP.12: Overlap with N-channel Poly2 gate extension is forbidden within 0.32um of N-channel gate.
+logger.info("Executing rule PP.12")
+pp12_l1 = pplus.interacting(pplus.edges.separation(ngate.edges.and(ncomp.edges), 0.32.um, euclidian).polygons(0.001))
+pp12_l1.output("PP.12", "PP.12 : Overlap with N-channel Poly2 gate extension is forbidden within 0.32um of N-channel gate.")
+pp12_l1.forget
+
+
+end #FEOL
+
+
+exec_end_time = Time.now
+run_time = exec_end_time - exec_start_time
+logger.info("DRC Run time %f seconds" % [run_time])
+

@@ -1,0 +1,43 @@
+from siliconcompiler import Library
+from lambdapdk import register_data_source
+
+
+def setup(chip):
+    libs = []
+
+    for config in ('64x8', '128x8', '256x8', '512x8'):
+        mem_name = f'gf180mcu_fd_ip_sram__sram{config}m8wm1'
+        lib = Library(chip, mem_name, package='lambdapdk')
+        register_data_source(lib)
+
+        path_base = 'lambdapdk/gf180/libs/gf180mcu_fd_ip_sram'
+
+        for stackup in ("3LM_1TM_6K",
+                        "3LM_1TM_9K",
+                        "3LM_1TM_11K",
+                        "3LM_1TM_30K",
+                        "4LM_1TM_6K",
+                        "4LM_1TM_9K",
+                        "4LM_1TM_11K",
+                        "4LM_1TM_30K",
+                        "5LM_1TM_9K",
+                        "5LM_1TM_11K",
+                        "6LM_1TM_9K"):
+            lib.add('output', stackup, 'lef', f'{path_base}/lef/{mem_name}.lef')
+            lib.add('output', stackup, 'gds', f'{path_base}/gds/{mem_name}.gds.gz')
+            lib.add('output', stackup, 'cdl', f'{path_base}/cdl/{mem_name}.cdl')
+
+        lib.add('output', 'slow', 'nldm',
+                f'{path_base}/nldm/{mem_name}__ss_125C_4v50.lib.gz')
+        lib.add('output', 'typical', 'nldm',
+                f'{path_base}/nldm/{mem_name}__tt_025C_5v00.lib.gz')
+        lib.add('output', 'fast', 'nldm',
+                f'{path_base}/nldm/{mem_name}__ff_n40C_5v50.lib.gz')
+
+        lib.set('option', 'file', 'openroad_pdngen', f'{path_base}/pdngen.tcl')
+
+        lib.set('option', 'ydir', f'{path_base}/lambda')
+
+        libs.append(lib)
+
+    return libs

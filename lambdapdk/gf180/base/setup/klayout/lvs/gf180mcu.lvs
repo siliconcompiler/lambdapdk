@@ -1,0 +1,1923 @@
+# Copyright 2022 GlobalFoundries PDK Authors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+#===========================================================================================================================
+#------------------------------------------- GF 0.18um MCU LVS RULE DECK --------------------------------------------------
+#===========================================================================================================================
+
+require 'time'
+require "logger"
+
+exec_start_time = Time.now
+
+logger = Logger.new(STDOUT)
+
+logger.formatter = proc do |severity, datetime, progname, msg|
+  "#{datetime}: Memory Usage (" + `pmap #{Process.pid} | tail -1`[10,40].strip + ") : #{msg}
+"
+end
+
+#================================================
+#----------------- FILE SETUP -------------------
+#================================================
+
+logger.info("Starting running GF180MCU Klayout LVS runset on %s" % [$input])
+
+#=== GET LAYOUT ===
+if $input
+  source($input)
+  logger.info("Layout file: #{$input}")
+else
+  logger.info("No layout loaded, please add your layout file")
+end
+
+#=== GET THREADS ===
+if $thr
+  threads($thr)
+  logger.info("Number of threads: #{$thr}")
+else
+  threads(16)
+  logger.info("Number of threads: 16")
+end
+
+#=== GET REPORT ===
+if $report
+  report_lvs($report)
+  logger.info("Final report: #{$report}")
+else
+  report_lvs(source.cell_name+".lvsdb")
+  logger.info("Final report: #{source.cell_name}.lvsdb")
+end
+
+#=== GET SUBSTRATE NAME ===
+if $lvs_sub
+  substrate_name = $lvs_sub
+  logger.info("Substrate name: #{$lvs_sub}")
+else
+  substrate_name = "gf180mcu_gnd"
+  logger.info("No substrate name given, default name is gf180mcu_gnd")
+end
+
+#=== NET NAMES OPTION ===
+# true: use net names instead of numbers
+# false: use numbers for nets
+if $spice_net_names == "true"
+  spice_with_net_names = true
+  logger.info("Extracted netlist with net names: #{$spice_net_names}")
+else
+  spice_with_net_names = true
+  logger.info("Extracted netlist with net names: true")
+end
+
+#=== COMMENTS OPTION ===
+# true: put in comments with details
+# false: no comments
+if $spice_comments == "true"
+  spice_with_comments = true
+  logger.info("Extracted netlist with comments in details: #{$spice_comments}")
+else
+  spice_with_comments = false
+  logger.info("Extracted netlist with comments in details: false")
+end
+
+if $target_netlist
+  target_netlist($target_netlist)
+  logger.info("Extracted netlist file: #{$target_netlist}")
+else
+  target_netlist(File.join(File.dirname(RBA::CellView::active.filename), source.cell_name+"_extracted.cir"), write_spice(spice_with_net_names, spice_with_comments),  "Extracted by KLayout with GF180 LVS runset on : #{Time.now.strftime("%d/%m/%Y %H:%M")}")
+  logger.info("Extracted netlist file: #{source.cell_name}_extracted.cir")
+end
+
+#=== EXTRACTION SCALE ===
+if $scale  == "true"
+  device_scaling(1000000)
+  logger.info("device_scaling: true")
+else
+  logger.info("device_scaling: false")
+end
+
+#=== PRINT DETAILS ===
+if $verbose == "true"
+  logger.info("Verbose mode: #{$verbose}")
+  verbose(true)
+else
+  verbose(false)
+  logger.info("Verbose mode: false")
+end
+
+# === TILING MODE ===
+if $run_mode == "tiling"
+  # use a tile size of 1mm - not used in deep mode-
+  # tiles(500.um)
+  # use a tile border of 10 micron:
+  # tile_borders(10.um)
+  tiles(1000)
+  logger.info("Tiling  mode is enabled.")
+
+elsif $run_mode == "deep"
+  #=== HIER MODE ===
+  deep
+  logger.info("deep  mode is enabled.")
+
+elsif $run_mode == "flat"
+  #=== FLAT MODE ===
+  flat
+  logger.info("flat  mode is enabled.")
+
+else
+  #=== FLAT MODE ===
+  flat
+  logger.info("flat  mode is enabled.")
+
+end # run_mode
+
+
+#================================================
+# --------------- CUSTOM CLASSES ----------------
+#================================================
+
+#====================== CUSTOM READER =========================
+class SubcircuitModelsReader < RBA::NetlistSpiceReaderDelegate
+
+  def parse_element(s, element)
+    if element == "C"
+      super(s + " C=2e-16", element)
+    elsif element == "R"
+      super(s + " R=0", element)
+    else
+      super
+    end
+  end
+
+  # implements the delegate interface:
+  # take and translate the element
+  def element(circuit, el, name, model, value, nets, params)
+
+    if el == "C"
+      if nets.size != 2
+        error("Capacitor needs two nodes")
+      end
+
+      # provide a device class
+      cls = circuit.netlist.device_class_by_name(model)
+      if ! cls
+        cls = RBA::DeviceClassCapacitor::new
+        cls.name = model
+        circuit.netlist.add(cls)
+      end
+
+      # create a device
+      device = circuit.create_device(cls, name)
+
+      # and configure the device
+      [ "A", "B" ].each_with_index do |t,index|
+        device.connect_terminal(t, nets[index])
+      end
+
+      # parameters in the model are given in micrometer units, so
+      # we need to translate the parameter values from SI to um values:
+      device.set_parameter("A", ((params["W"] || 0.0) * (params["L"] || 0.0)) * 1e12)
+      device.set_parameter("P", ((params["W"] || 0.0) + (params["L"] || 0.0)) * 2e6)
+      device.set_parameter("C", (params["C"] || 0.0))
+
+    elsif el == "R"
+      if nets.size == 3
+        # provide a device class
+        cls = circuit.netlist.device_class_by_name(model)
+        if ! cls
+          cls = RBA::DeviceClassResistorWithBulk::new
+          cls.name = model
+          circuit.netlist.add(cls)
+        end
+
+        # create a device
+        device = circuit.create_device(cls, name)
+
+        # and configure the device
+        [ "A", "B", "W" ].each_with_index do |t,index|
+          device.connect_terminal(t, nets[index])
+        end
+
+      elsif nets.size == 2
+        # provide a device class
+        cls = circuit.netlist.device_class_by_name(model)
+        if ! cls
+          cls = RBA::DeviceClassResistor::new
+          cls.name = model
+          circuit.netlist.add(cls)
+        end
+
+        # create a device
+        device = circuit.create_device(cls, name)
+
+        # and configure the device
+        [ "A", "B" ].each_with_index do |t,index|
+          device.connect_terminal(t, nets[index])
+        end
+
+      else
+        error("Resistor needs two or three nodes")
+
+      end
+
+      # parameters in the model are given in micrometer units, so
+      # we need to translate the parameter values from SI to um values:
+      device.set_parameter("W", ((params["W"] || 0.0) * (params["PAR"] || 1.0)) * 1e6)
+      device.set_parameter("L", ((params["L"] || 0.0) * (params["S"] || 1.0)) * 1e6)
+      device.set_parameter("R", (params["R"] * (params["S"] || 1.0) / (params["PAR"] || 1.0)))
+
+    else
+      return super
+
+    end
+    return true
+
+  end
+
+end
+
+# Instantiate a reader using the new delegate
+reader = RBA::NetlistSpiceReader::new(SubcircuitModelsReader::new)
+
+#=== GET NETLIST ===
+if $schematic
+  schematic($schematic, reader)
+  logger.info("Netlist file: #{$schematic}")
+else
+  puts "No schematic loaded , please add your netlist file"
+  logger.info("No schematic loaded , please add your netlist file")
+end
+
+class BResistor < RBA::DeviceClassResistorWithBulk
+  def initialize
+    super
+    enable_parameter("R", false)
+    enable_parameter("W", true)
+    enable_parameter("L", true)
+  end
+end
+
+class NResistor < RBA::DeviceClassResistor
+  def initialize
+    super
+    enable_parameter("R", false)
+    enable_parameter("W", true)
+    enable_parameter("L", true)
+  end
+end
+
+class MosCap < RBA::DeviceClassCapacitor
+  def initialize
+    super
+    enable_parameter("C", false)
+    enable_parameter("A", true)
+    enable_parameter("P", true)
+  end
+end
+
+class MIMCap < RBA::DeviceClassCapacitor
+  def initialize
+    super
+    enable_parameter("C", true)
+    enable_parameter("A", true)
+    enable_parameter("P", true)
+  end
+end
+
+#================================================
+#------------- LAYERS DERIVATIONS ---------------
+#================================================
+
+logger.info("Read in polygons from layers.")
+
+#=== DRAWINGS ===
+comp           = polygons(22 , 0 )
+dnwell         = polygons(12 , 0 )
+nwell          = polygons(21 , 0 )
+lvpwell        = polygons(204, 0 )
+dualgate       = polygons(55 , 0 )
+poly2          = polygons(30 , 0 )
+nplus          = polygons(32 , 0 )
+pplus          = polygons(31 , 0 )
+sab            = polygons(49 , 0 )
+esd            = polygons(24 , 0 )
+contact        = polygons(33 , 0 )
+metal1         = polygons(34 , 0 )
+via1           = polygons(35 , 0 )
+metal2         = polygons(36 , 0 )
+via2           = polygons(38 , 0 )
+metal3         = polygons(42 , 0 )
+via3           = polygons(40 , 0 )
+metal4         = polygons(46 , 0 )
+via4           = polygons(41 , 0 )
+metal5         = polygons(81 , 0 )
+via5           = polygons(82 , 0 )
+metaltop       = polygons(53 , 0 )
+pad            = polygons(37 , 0 )
+resistor       = polygons(62 , 0 )
+fhres          = polygons(227, 0 )
+fusetop        = polygons(75 , 0 )
+fusewindow_d   = polygons(96 , 1 )
+polyfuse       = polygons(220, 0 )
+mvsd           = polygons(210, 0 )
+mvpsd          = polygons(11 , 39)
+nat            = polygons(5  , 0 )
+comp_dummy     = polygons(22 , 4 )
+poly2_dummy    = polygons(30 , 4 )
+metal1_dummy   = polygons(34 , 4 )
+metal2_dummy   = polygons(36 , 4 )
+metal3_dummy   = polygons(42 , 4 )
+metal4_dummy   = polygons(46 , 4 )
+metal5_dummy   = polygons(81 , 4 )
+metaltop_dummy = polygons(53 , 4 )
+metal1_slot    = polygons(34 , 3 )
+metal2_slot    = polygons(36 , 3 )
+metal3_slot    = polygons(42 , 3 )
+metal4_slot    = polygons(46 , 3 )
+metal5_slot    = polygons(81 , 3 )
+metaltop_slot  = polygons(53 , 3 )
+ubmpperi       = polygons(183, 0 )
+ubmparray      = polygons(184, 0 )
+ubmeplate      = polygons(185, 0 )
+schottky_diode = polygons(241, 0 )
+zener          = polygons(178, 0 )
+res_mk         = polygons(110, 5 )
+opc_drc        = polygons(124, 5 )
+ndmy           = polygons(111, 5 )
+pmndmy         = polygons(152, 5 )
+v5_xtor        = polygons(112, 1 )
+cap_mk         = polygons(117, 5 )
+mos_cap_mk     = polygons(166, 5 )
+ind_mk         = polygons(151, 5 )
+diode_mk       = polygons(115, 5 )
+drc_bjt        = polygons(127, 5 )
+lvs_bjt        = polygons(118, 5 )
+mim_l_mk       = polygons(117, 10)
+latchup_mk     = polygons(137, 5 )
+guard_ring_mk  = polygons(167, 5 )
+otp_mk         = polygons(173, 5 )
+mtpmark        = polygons(122, 5 )
+neo_ee_mk      = polygons(88 , 17)
+sramcore       = polygons(108, 5 )
+lvs_rf         = polygons(100, 5 )
+lvs_drain      = polygons(100, 7 )
+ind_mk         = polygons(151, 5 )
+hvpolyrs       = polygons(123, 5 )
+lvs_io         = polygons(119, 5 )
+probe_mk       = polygons(13 , 17)
+esd_mk         = polygons(24 , 5 )
+lvs_source     = polygons(100, 8 )
+well_diode_mk  = polygons(153, 51)
+ldmos_xtor     = polygons(226, 0 )
+plfuse         = polygons(125, 5 )
+efuse_mk       = polygons(80 , 5 )
+mcell_feol_mk  = polygons(11 , 17)
+ymtp_mk        = polygons(86 , 17)
+dev_wf_mk      = polygons(128, 17)
+metal1_blk     = polygons(34 , 5 )
+metal2_blk     = polygons(36 , 5 )
+metal3_blk     = polygons(42 , 5 )
+metal4_blk     = polygons(46 , 5 )
+metal5_blk     = polygons(81 , 5 )
+metalt_blk     = polygons(53 , 5 )
+pr_bndry       = polygons(0  , 0 )
+mdiode         = polygons(116, 5 )
+metal1_res     = polygons(110, 11)
+metal2_res     = polygons(110, 12)
+metal3_res     = polygons(110, 13)
+metal4_res     = polygons(110, 14)
+metal5_res     = polygons(110, 15)
+metal6_res     = polygons(110, 16)
+border         = polygons(63 , 0 )
+
+logger.info("Read in labels from layers.")
+
+#=== LABELS ===
+comp_label     = labels(22 , 10)
+poly2_label    = labels(30 , 10)
+metal1_label   = labels(34 , 10)
+metal2_label   = labels(36 , 10)
+metal3_label   = labels(42 , 10)
+metal4_label   = labels(46 , 10)
+metal5_label   = labels(81 , 10)
+metaltop_label = labels(53 , 10)
+
+#=== BULK LAYER ===
+sub = polygon_layer
+
+#================================================
+#------------------ SWITCHES --------------------
+#================================================
+
+logger.info("Evaluate switches start.")
+
+# METAL_TOP
+if $metal_top
+  METAL_TOP = $metal_top
+else
+  METAL_TOP = "9K"
+end # METAL_TOP
+
+logger.info("METAL_TOP Selected is %s" % [METAL_TOP])
+
+# METAL_LEVEL
+if $metal_level
+  METAL_LEVEL = $metal_level
+else
+  METAL_LEVEL = "6LM"
+end # METAL_LEVEL
+
+logger.info("METAL_STACK Selected is %s" % [METAL_LEVEL])
+
+if $poly_res
+  POLY_RES = $poly_res
+else
+  POLY_RES = false
+end # POLY_RES
+
+logger.info("POLY_RES Selected is %s" % [POLY_RES])
+
+if $mim_option
+  MIM_OPTION = $mim_option
+else
+  MIM_OPTION = false
+end # MIM_OPTION
+
+if $mim_cap
+  MIM_CAP = $mim_cap
+else
+  MIM_CAP = false
+end # MIM_CAP
+
+logger.info("MIM Option selected %s" % [MIM_OPTION])
+
+if $schematic_simplify
+  SCH_SIMPLE = $schematic_simplify
+else
+  SCH_SIMPLE = false
+end # SCH_SIMPLE
+
+logger.info("SCH_SIMPLE enabled  %s" % [SCH_SIMPLE])
+
+if $net_only
+  NET_ONLY = true
+else
+  NET_ONLY = false
+end
+
+logger.info("NET_ONLY enabled  %s" % [NET_ONLY])
+
+if $top_lvl_pins
+  TOP_LVL_PINS = true
+else
+  TOP_LVL_PINS = false
+end
+
+logger.info("TOP_LVL_PINS enabled  %s" % [TOP_LVL_PINS])
+
+
+if $combine
+  COMBINE = true
+else
+  COMBINE = false
+end
+
+logger.info("COMBINE enabled  %s" % [COMBINE])
+
+if $purge
+  PURGE = true
+else
+  PURGE = false
+end
+
+logger.info("PURGE enabled  %s" % [PURGE])
+
+if $purge_nets
+  PURGE_NETS = true
+else
+  PURGE_NETS = false
+end
+
+logger.info("PURGE_NETS enabled  %s" % [PURGE_NETS])
+
+if $net_only || $top_lvl_pins || $combine || $purge || $purge_nets
+  SIMPLIFY = false
+else
+  SIMPLIFY = true
+end # SIMPLIFY
+
+logger.info("SIMPLIFY enabled  %s" % [SIMPLIFY])
+
+logger.info("Evaluate switches end.")
+
+#================================================
+#------------- METAL LEVEL SWITCHES -------------
+#================================================
+
+if METAL_LEVEL == "6LM"
+  top_via       = via5
+  topmin1_via   = via4
+  top_metal     = metaltop
+  topmin1_metal = metal5
+elsif METAL_LEVEL == "5LM"
+  top_via       = via4
+  topmin1_via   = via3
+  top_metal     = metal5
+  topmin1_metal = metal4
+elsif METAL_LEVEL == "4LM"
+  top_via       = via3
+  topmin1_via   = via2
+  top_metal     = metal4
+  topmin1_metal = metal3
+elsif METAL_LEVEL == "3LM"
+  top_via       = via2
+  topmin1_via   = via1
+  top_metal     = metal3
+  topmin1_metal = metal2
+elsif METAL_LEVEL == "2LM"
+  top_via       = via1
+  topmin1_via   = via1
+  top_metal     = metal2
+  topmin1_metal = metal1
+end #METAL_LEVEL
+
+#================================================================
+#------------------------- MAIN RUNSET --------------------------
+#================================================================
+
+logger.info("GF180 LVS rules started")
+
+#================================================
+#------------- LAYERS DERIVATIONS ---------------
+#================================================
+
+logger.info("Starting deriving base layers.")
+
+#==================================
+# ------ GENERAL DERIVATIONS ------
+#==================================
+
+ncomp           = comp.and(nplus)
+pcomp           = comp.and(pplus)
+tgate           = poly2.and(comp).not(res_mk)
+
+ngate           = nplus.and(tgate)
+nsd             = ncomp.outside(nwell).interacting(ngate).not(ngate).not(res_mk)
+ptap            = pcomp.outside(nwell).outside(dnwell).not(res_mk)
+
+pgate           = pplus.and(tgate)
+psd             = pcomp.inside(nwell).interacting(pgate).not(pgate).not(res_mk)
+ntap            = ncomp.inside(nwell).not(res_mk)
+
+ngate_dw        = ngate.and(lvpwell).and(dnwell)
+ptap_dw         = pcomp.inside(lvpwell).inside(dnwell).outside(well_diode_mk).not(res_mk)
+
+pgate_dw        = pgate.inside(dnwell).outside(lvpwell)
+ntap_dw         = ncomp.outside(lvpwell).inside(dnwell).not(res_mk)
+
+psd_dw          = pcomp.not(lvpwell).and(dnwell).interacting(pgate).not(pgate).not(res_mk)
+nwell_con       = nwell.not(res_mk)
+lvpwell_con     = lvpwell.not(res_mk)
+poly2_con       = poly2.not(res_mk).not(plfuse)
+
+metal1_con      = metal1.not(metal1_res)
+metal2_con      = metal2.not(metal2_res)
+metal3_con      = metal3.not(metal3_res)
+metaltop_con    = metaltop.not(metal6_res)
+
+#==================================
+# ------ MOSFET DERIVATIONS -------
+#==================================
+
+logger.info("Starting MOSFET DERIVATIONS")
+
+# ==============
+# ---- PMOS ----
+# ==============
+logger.info("Starting PMOS layers DERIVATIONS")
+
+# 3.3V PMOS transistor outside DNWELL
+pgate_3p3v = pgate.not(v5_xtor).not(dualgate).not(dnwell).not(sab).not_interacting(mos_cap_mk)
+
+# 5V PMOS transistor outside DNWELL
+pgate_5v = pgate.and(v5_xtor).and(dualgate).not(dnwell).not(sab).not_interacting(mos_cap_mk)
+
+# 6V PMOS transistor outside DNWELL
+pgate_6v = pgate.not(v5_xtor).and(dualgate).not(nat).not(ldmos_xtor).not(dnwell).not(sab).not_interacting(mos_cap_mk)
+
+# 3.3V PMOS transistor inside DNWELL
+pgate_3p3v_dw = pgate_dw.not(v5_xtor).not(dualgate).not(sab).not_interacting(mos_cap_mk)
+
+# 5V PMOS transistor inside DNWELL
+pgate_5v_dw = pgate_dw.and(v5_xtor).and(dualgate).not(sab).not_interacting(mos_cap_mk)
+
+# 6V PMOS transistor inside DNWELL
+pgate_6v_dw = pgate_dw.not(v5_xtor).and(dualgate).not(nat).not(ldmos_xtor).not(sab).not_interacting(mos_cap_mk)
+
+# LDPMOS transistor
+pgate_ldmos = pgate_dw.interacting(mvpsd).not(v5_xtor).and(dualgate).and(ldmos_xtor).and(dnwell).not(mvpsd).not_interacting(mos_cap_mk)
+pd_ldmos    = psd_dw.not(v5_xtor).and(dualgate).and(ldmos_xtor).and(dnwell).and(mvpsd)
+ps_ldmos    = psd_dw.not(v5_xtor).and(dualgate).and(ldmos_xtor).and(dnwell).not(mvpsd)
+psd_ldmos   = pcomp.not(v5_xtor).and(dualgate).and(ldmos_xtor).and(dnwell).interacting(mvpsd).sized(0.29.um).sized(-0.29.um).extents.not(pgate_ldmos)
+
+# ==============
+# ---- NMOS ----
+# ==============
+logger.info("Starting NMOS layers DERIVATIONS")
+
+# 3.3V NMOS transistor outside DNWELL
+ngate_3p3v = ngate.not(v5_xtor).not(dualgate).not(dnwell).not(sab).not_interacting(mos_cap_mk)
+
+# 5V NMOS transistor outside DNWELL
+ngate_5v = ngate.and(v5_xtor).and(dualgate).not(dnwell).not(sab).not_interacting(mos_cap_mk)
+
+# 6V NMOS transistor outside DNWELL
+ngate_6v = ngate.not(v5_xtor).and(dualgate).not(nat).not(ldmos_xtor).not(dnwell).not(sab).not_interacting(mos_cap_mk)
+
+# 3.3V NMOS transistor inside DNWELL
+ngate_3p3v_dw = ngate_dw.not(v5_xtor).not(dualgate).not(sab).not_interacting(mos_cap_mk)
+
+# 5V NMOS transistor inside DNWELL
+ngate_5v_dw = ngate_dw.and(v5_xtor).and(dualgate).not(sab).not_interacting(mos_cap_mk)
+
+# 6V NMOS transistor inside DNWELL
+ngate_6v_dw = ngate_dw.not(v5_xtor).and(dualgate).not(nat).not(ldmos_xtor).not(sab).not_interacting(mos_cap_mk)
+
+# Native Vt NMOS transistor
+ngate_nat = ngate.not(v5_xtor).and(dualgate).and(nat).not_interacting(mos_cap_mk)
+
+# LDNMOS transistor
+ngate_ldmos = ngate.interacting(mvsd).not(v5_xtor).and(dualgate).and(ldmos_xtor).not(dnwell).not(mvsd).not_interacting(mos_cap_mk)
+nd_ldmos    = ncomp.not(ngate).not(v5_xtor).and(dualgate).and(ldmos_xtor).not(dnwell).and(mvsd)
+ns_ldmos    = nsd.not(v5_xtor).and(dualgate).and(ldmos_xtor).not(dnwell).not(mvsd)
+nsd_ldmos   = ncomp.not(v5_xtor).and(dualgate).and(ldmos_xtor).not(dnwell).interacting(mvsd).sized(0.37.um).sized(-0.37.um).extents.not(ngate_ldmos)
+
+#================================
+# ------ BJT DERIVATIONS --------
+#================================
+logger.info("Starting BJT DERIVATIONS")
+
+# ==============
+# ---- vnpn ----
+# ==============
+logger.info("Starting vnpn layers DERIVATIONS")
+
+# vnpn general nodes DERIVATIONS
+vnpn_e = ncomp.interacting(lvs_bjt).inside(dnwell)
+vnpn_b = pcomp.and(lvpwell).inside(dnwell).inside(drc_bjt)
+vnpn_c = ncomp.inside(dnwell).outside(lvs_bjt).inside(drc_bjt)
+
+# vnpn_10x10 nodes DERIVATIONS
+vnpn_10x10_e = vnpn_e.with_area(99.5.um,100.5.um).interacting(vnpn_e.edges.with_length(9.8.um,10.2.um))
+vnpn_10x10_b = vnpn_b.interacting(vnpn_b.extents.interacting(vnpn_10x10_e))
+vnpn_10x10_c = vnpn_c.interacting(vnpn_c.extents.interacting(vnpn_10x10_e))
+
+# vnpn_5x5 nodes DERIVATIONS
+vnpn_5x5_e = vnpn_e.with_area(24.5.um,25.5.um).interacting(vnpn_e.edges.with_length(4.8.um,5.2.um))
+vnpn_5x5_b = vnpn_b.interacting(vnpn_b.extents.interacting(vnpn_5x5_e))
+vnpn_5x5_c = vnpn_c.interacting(vnpn_c.extents.interacting(vnpn_5x5_e))
+
+# vnpn_0p54x16 nodes DERIVATIONS
+vnpn_0p54x16_e = vnpn_e.with_area(8.um,9.um).interacting(vnpn_e.edges.with_length(15.5.um,16.5.um))
+vnpn_0p54x16_b = vnpn_b.interacting(vnpn_b.extents.interacting(vnpn_0p54x16_e))
+vnpn_0p54x16_c = vnpn_c.interacting(vnpn_c.extents.interacting(vnpn_0p54x16_e))
+
+# vnpn_0p54x8 nodes DERIVATIONS
+vnpn_0p54x8_e = vnpn_e.with_area(4.um,5.um).interacting(vnpn_e.edges.with_length(7.5.um,8.5.um))
+vnpn_0p54x8_b = vnpn_b.interacting(vnpn_b.extents.interacting(vnpn_0p54x8_e))
+vnpn_0p54x8_c = vnpn_c.interacting(vnpn_c.extents.interacting(vnpn_0p54x8_e))
+
+# vnpn_0p54x4 nodes DERIVATIONS
+vnpn_0p54x4_e = vnpn_e.with_area(1.5.um,2.5.um).interacting(vnpn_e.edges.with_length(3.8.um,4.2.um))
+vnpn_0p54x4_b = vnpn_b.interacting(vnpn_b.extents.interacting(vnpn_0p54x4_e))
+vnpn_0p54x4_c = vnpn_c.interacting(vnpn_c.extents.interacting(vnpn_0p54x4_e))
+
+# vnpn_0p54x2 nodes DERIVATIONS
+vnpn_0p54x2_e = vnpn_e.with_area(0.8.um,1.5.um).interacting(vnpn_e.edges.with_length(1.8.um,2.2.um))
+vnpn_0p54x2_b = vnpn_b.interacting(vnpn_b.extents.interacting(vnpn_0p54x2_e))
+vnpn_0p54x2_c = vnpn_c.interacting(vnpn_c.extents.interacting(vnpn_0p54x2_e))
+
+# ==============
+# ---- vpnp ----
+# ==============
+logger.info("Starting vpnp layers DERIVATIONS")
+
+# vpnp general nodes DERIVATIONS
+vpnp_e = pcomp.inside(nwell).interacting(lvs_bjt)
+vpnp_b = ncomp.and(nwell).inside(drc_bjt)
+vpnp_c = ptap.outside(lvs_bjt).inside(drc_bjt)
+
+# vpnp_10x10 nodes DERIVATIONS
+vpnp_10x10_e = vpnp_e.with_area(99.5.um,100.5.um).interacting(vpnp_e.edges.with_length(9.8.um,10.2.um))
+vpnp_10x10_b = vpnp_b.interacting(vpnp_b.extents.interacting(vpnp_10x10_e))
+vpnp_10x10_c = vpnp_c.interacting(vpnp_c.extents.interacting(vpnp_10x10_e))
+
+# vpnp_5x5 nodes DERIVATIONS
+vpnp_5x5_e = vpnp_e.with_area(24.5.um,25.5.um).interacting(vpnp_e.edges.with_length(4.8.um,5.2.um))
+vpnp_5x5_b = vpnp_b.interacting(vpnp_b.extents.interacting(vpnp_5x5_e))
+vpnp_5x5_c = vpnp_c.interacting(vpnp_c.extents.interacting(vpnp_5x5_e))
+
+# vpnp_0p42x10 nodes DERIVATIONS
+vpnp_0p42x10_e = vpnp_e.with_area(4.um,4.5.um).interacting(vpnp_e.edges.with_length(9.8.um,10.2.um))
+vpnp_0p42x10_b = vpnp_b.interacting(vpnp_b.extents.interacting(vpnp_0p42x10_e))
+vpnp_0p42x10_c = vpnp_c.interacting(vpnp_c.extents.interacting(vpnp_0p42x10_e))
+
+# vpnp_0p42x5 nodes DERIVATIONS
+vpnp_0p42x5_e = vpnp_e.with_area(2.um,2.2.um).interacting(vpnp_e.edges.with_length(4.8.um,5.2.um))
+vpnp_0p42x5_b = vpnp_b.interacting(vpnp_b.extents.interacting(vpnp_0p42x5_e))
+vpnp_0p42x5_c = vpnp_c.interacting(vpnp_c.extents.interacting(vpnp_0p42x5_e))
+
+#================================
+# ----- DIODE DERIVATIONS -------
+#================================
+logger.info("Starting DIODE DERIVATIONS")
+
+# np_3p3 diode
+np_3p3_terminal_n = ncomp.not(v5_xtor).not(dualgate).outside(dnwell).interacting(diode_mk)
+
+# np_3p3_dw diode
+np_3p3_dw_terminal_n = ncomp.not(v5_xtor).not(dualgate).inside(dnwell).interacting(diode_mk)
+
+# np_6p0 diode
+np_6p0_terminal_n = ncomp.and(dualgate).outside(dnwell).interacting(diode_mk)
+
+# np_6p0_dw diode
+np_6p0_dw_terminal_n = ncomp.and(dualgate).inside(dnwell).interacting(diode_mk)
+
+# pn_3p3 diode
+pn_3p3_terminal_p = pcomp.not(v5_xtor).not(dualgate).outside(dnwell).interacting(diode_mk)
+
+# pn_3p3_dw diode
+pn_3p3_dw_terminal_p = pcomp.not(v5_xtor).not(dualgate).inside(dnwell).interacting(diode_mk)
+
+# pn_6p0 diode
+pn_6p0_terminal_p = pcomp.and(dualgate).outside(dnwell).interacting(diode_mk)
+
+# pn_6p0_dw diode
+pn_6p0_dw_terminal_p = pcomp.and(dualgate).inside(dnwell).interacting(diode_mk)
+
+# nwp_3p3 diode
+nwp_3p3_terminal_p = pcomp.not(v5_xtor).not(dualgate).outside(dnwell).interacting(well_diode_mk)
+nwp_3p3_terminal_n = well_diode_mk.not(v5_xtor).not(dualgate).covering(nwell)
+
+# nwp_6p0 diode
+nwp_6p0_terminal_p = pcomp.and(dualgate).outside(dnwell).interacting(well_diode_mk)
+nwp_6p0_terminal_n = well_diode_mk.and(dualgate).covering(nwell)
+
+# dnwpw_3p3 diode
+dnwpw_3p3_terminal_p = lvpwell.not(v5_xtor).not(dualgate).interacting(well_diode_mk)
+
+# dnwpw_6p0 diode
+dnwpw_6p0_terminal_p = lvpwell.and(dualgate).interacting(well_diode_mk)
+
+# dnwps_3p3 diode
+dnwps_3p3_terminal_p = ptap.extents.not_interacting(lvpwell).not_covering(v5_xtor).not_covering(dualgate).interacting(well_diode_mk)
+
+# dnwps_6p0 diode
+dnwps_6p0_terminal_p = ptap.extents.not_interacting(lvpwell).covering(dualgate).interacting(well_diode_mk)
+
+# sc_diode diode
+sc_diode_terminal_n = ncomp.inside(dnwell).inside(schottky_diode)
+sc_diode_terminal_p = metal1.inside(dnwell).not_interacting(sc_diode_terminal_n)
+
+#================================
+# ---- RESISTOR DERIVATIONS -----
+#================================
+logger.info("Starting RESISTOR DERIVATIONS")
+
+# ===============
+# --DIFF & WELL--
+# ===============
+
+# NPLUS_U
+nplus_u_layer     = ncomp.and(lvpwell).and(sab).and(res_mk).not(dnwell)
+nplus_cont        = ncomp.outside(nwell).not_interacting(ngate).interacting(res_mk).not(res_mk)
+
+# NPLUS_U_DW
+nplus_u_dw_layer = ncomp.and(lvpwell).and(sab).and(res_mk).and(dnwell)
+
+# PPLUS_U
+pplus_u_layer = pcomp.and(nwell).and(sab).and(res_mk).not(dnwell)
+pplus_cont    = pcomp.inside(nwell).not_interacting(pgate).interacting(res_mk).not(res_mk)
+
+# PPLUS_U_DW
+pplus_u_dw_layer = pcomp.and(sab).and(res_mk).and(dnwell)
+pplus_dw_cont    = pcomp.not(lvpwell).and(dnwell).not_interacting(pgate).interacting(res_mk).not(res_mk)
+
+# NPLUS_S
+nplus_s_layer = ncomp.and(lvpwell).and(res_mk).not_interacting(sab).not(dnwell)
+
+# NPLUS_S_DW
+nplus_s_dw_layer = ncomp.and(lvpwell).and(res_mk).and(dnwell).not_interacting(sab)
+
+# PPLUS_S
+pplus_s_layer = pcomp.and(nwell).and(res_mk).not_interacting(sab).not(dnwell)
+
+# PPLUS_S_DW
+pplus_s_dw_layer = pcomp.not_interacting(sab).and(res_mk).and(dnwell).not_interacting(sab)
+
+# NWELL
+nwell_res = nwell.and(res_mk).not(dnwell).not_covering(comp)
+
+# PWELL
+pwell_res = lvpwell.and(res_mk).and(dnwell).not_covering(comp)
+
+# ==============
+# ---- POLY ----
+# ==============
+
+# NPOLYF_U
+npolyf_u_layer                = nplus.and(poly2).and(sab).and(res_mk).not(dnwell)
+
+# NPOLYF_U_DW
+npolyf_u_dw_layer             = nplus.and(poly2).and(sab).and(res_mk).and(dnwell)
+
+# PPOLYF_U
+ppolyf_u_layer                = pplus.and(poly2).and(sab).and(res_mk).not_interacting(resistor).not(dnwell)
+
+# PPOLYF_U_DW
+ppolyf_u_dw_layer             = pplus.and(poly2).and(sab).and(res_mk).not_interacting(resistor).and(dnwell)
+
+# NPOLYF_S
+npolyf_s_layer                = nplus.and(poly2).and(res_mk).not(dnwell).not_interacting(sab)
+
+# NPOLYF_S_DW
+npolyf_s_dw_layer             = nplus.and(poly2).and(res_mk).and(dnwell).not_interacting(sab)
+
+# PPOLYF_S
+ppolyf_s_layer                = pplus.and(poly2).and(res_mk).not(dnwell).not_interacting(sab)
+
+# PPOLYF_S_DW
+ppolyf_s_dw_layer             = pplus.and(poly2).and(res_mk).and(dnwell).not_interacting(sab)
+
+# ==============
+# --H-POLY RES--
+# ==============
+
+if POLY_RES == "1k"
+
+  # PPOLYF_U_1K
+  ppolyf_u_1k_layer             = poly2.and(sab).and(res_mk).and(resistor).not(dnwell).not(v5_xtor).not(dualgate)
+
+  # PPOLYF_U_DW_1K
+  ppolyf_u_1k_dw_layer          = poly2.and(res_mk).and(dnwell).and(resistor).not(v5_xtor).not(dualgate)
+
+  # PPOLYF_U_1K_6p0
+  ppolyf_u_1k_6p0_layer         = poly2.and(sab).and(res_mk).and(resistor).not(dnwell).not(v5_xtor).and(dualgate)
+
+  # PPOLYF_U_DW_1K_6p0
+  ppolyf_u_1k_6p0_dw_layer      = poly2.and(res_mk).and(dnwell).and(resistor).not(v5_xtor).and(dualgate)
+
+elsif POLY_RES == "2k"
+
+  # PPOLYF_U_2K
+  ppolyf_u_2k_layer             = poly2.and(sab).and(res_mk).and(resistor).not(dnwell).not(v5_xtor).not(dualgate)
+
+  # PPOLYF_U_DW_2K
+  ppolyf_u_2k_dw_layer          = poly2.and(res_mk).and(dnwell).and(resistor).not(v5_xtor).not(dualgate)
+
+  # PPOLYF_U_2K_6p0
+  ppolyf_u_2k_6p0_layer         = poly2.and(sab).and(res_mk).and(resistor).not(dnwell).not(v5_xtor).and(dualgate)
+
+  # PPOLYF_U_DW_2K_6p0
+  ppolyf_u_2k_6p0_dw_layer      = poly2.and(res_mk).and(dnwell).and(resistor).not(v5_xtor).and(dualgate)
+
+elsif POLY_RES == "3k"
+
+  # PPOLYF_U_3K
+  ppolyf_u_3k_layer             = poly2.and(sab).and(res_mk).and(resistor).not(dnwell).not(v5_xtor).not(dualgate)
+
+  # PPOLYF_U_DW_3K
+  ppolyf_u_3k_dw_layer          = poly2.and(res_mk).and(dnwell).and(resistor).not(v5_xtor).not(dualgate)
+
+  # PPOLYF_U_3K_6p0
+  ppolyf_u_3k_6p0_layer         = poly2.and(sab).and(res_mk).and(resistor).not(dnwell).not(v5_xtor).and(dualgate)
+
+  # PPOLYF_U_DW_3K_6p0
+  ppolyf_u_3k_6p0_dw_layer      = poly2.and(res_mk).and(dnwell).and(resistor).not(v5_xtor).and(dualgate)
+
+end
+
+
+# ===============
+# ---- METAL ----
+# ===============
+
+# Metal1 resistor
+rm1_res = metal1.and(metal1_res)
+
+# Metal2 resistor
+rm2_res = metal2.and(metal2_res)
+
+# Metal3 resistor
+rm3_res = metal3.and(metal3_res)
+
+# Metaltop resistor
+tm_res = metaltop.and(metal6_res)
+
+#==================================
+# ------ MIMCAP DERIVATIONS -------
+#==================================
+logger.info("Starting MIMCAP DERIVATIONS")
+
+# mim option A
+mim_virtual = fusetop.sized(1.06.um).and(metal2.interacting(fusetop))
+metal2_ncap = metal2_con.not(mim_virtual)
+fuse_cap    = fusetop.interacting(cap_mk).interacting(mim_l_mk)
+
+# mim_option B
+mimtm_virtual   = fusetop.sized(1.06.um).and(topmin1_metal.interacting(fusetop))
+metal3_ncap     = metal3_con.not(mimtm_virtual)
+metal4_ncap     = metal4.not(mimtm_virtual)
+metal5_ncap     = metal5.not(mimtm_virtual)
+
+
+#==================================
+# ------ MOSCAP DERIVATIONS -------
+#==================================
+logger.info("Starting MOSCAP DERIVATIONS")
+
+# nmoscap_3p3 capacitor
+nmos_gate_3p3 = ngate.not(v5_xtor).not(dualgate).outside(dnwell).interacting(mos_cap_mk)
+
+# nmoscap_3p3_dw capacitor
+nmos_gate_3p3_dw = ngate.not(v5_xtor).not(dualgate).inside(dnwell).interacting(mos_cap_mk)
+
+# pmoscap_3p3 capacitor
+pmos_gate_3p3 = pgate.not(v5_xtor).not(dualgate).outside(dnwell).interacting(mos_cap_mk)
+
+# pmoscap_3p3_dw capacitor
+pmos_gate_3p3_dw = pgate.not(v5_xtor).not(dualgate).inside(dnwell).interacting(mos_cap_mk)
+
+# nmoscap_6p0 capacitor
+nmos_gate_6p0 = ngate.and(dualgate).outside(dnwell).interacting(mos_cap_mk)
+
+# nmoscap_6p0_dw capacitor
+nmos_gate_6p0_dw = ngate.and(dualgate).inside(dnwell).interacting(mos_cap_mk)
+
+# pmoscap_6p0 capacitor
+pmos_gate_6p0 = pgate.and(dualgate).outside(dnwell).interacting(mos_cap_mk)
+
+# pmoscap_6p0_dw capacitor
+pmos_gate_6p0_dw = pgate.and(dualgate).inside(dnwell).interacting(mos_cap_mk)
+
+# nmoscap_3p3_b capacitor
+nmoscap_3p3_b = ngate.not(v5_xtor).not(dualgate).inside(nwell).interacting(mos_cap_mk)
+
+# pmoscap_3p3_b capacitor
+pmoscap_3p3_b = pgate.not(v5_xtor).not(dualgate).inside(ptap).interacting(mos_cap_mk)
+
+# nmoscap_6p0_b capacitor
+nmoscap_6p0_b = ngate.and(dualgate).inside(nwell).interacting(mos_cap_mk)
+
+# pmoscap_6p0_b capacitor
+pmoscap_6p0_b = pgate.and(dualgate).inside(ptap).interacting(mos_cap_mk)
+
+#================================
+# ------ ESD DERIVATIONS --------
+#================================
+logger.info("Starting MOS SAB DERIVATIONS")
+
+# ==============
+# ---- PMOS ----
+# ==============
+logger.info("Starting PMOS SAB DERIVATIONS")
+
+# 3.3V ESD PMOS transistor outside DNWELL
+pgate_sab_3p3v = pgate.not(v5_xtor).not(dualgate).not(dnwell).and(esd_mk).interacting(sab)
+
+# 5V ESD PMOS transistor outside DNWELL
+pgate_sab_5v = pgate.and(v5_xtor).and(dualgate).not(dnwell).and(esd_mk).interacting(sab)
+
+# 6V ESD PMOS transistor outside DNWELL
+pgate_sab_6v = pgate.not(v5_xtor).and(dualgate).not(dnwell).and(esd_mk).interacting(sab)
+
+# 3.3V ESD PMOS transistor inside DNWELL
+pgate_dw_sab_3p3v = pgate_dw.not(v5_xtor).not(dualgate).and(esd_mk).interacting(sab)
+
+# 5V ESD PMOS transistor inside DNWELL
+pgate_dw_sab_5v = pgate_dw.and(v5_xtor).and(dualgate).and(esd_mk).interacting(sab)
+
+# 6V ESD PMOS transistor inside DNWELL
+pgate_dw_sab_6v = pgate_dw.not(v5_xtor).and(dualgate).and(esd_mk).interacting(sab)
+
+# ==============
+# ---- NMOS ----
+# ==============
+logger.info("Starting NMOS SAB DERIVATIONS")
+
+# 3.3V ESD NMOS transistor outside DNWELL
+ngate_sab_3p3v = ngate.not(v5_xtor).not(dualgate).not(dnwell).and(esd_mk).interacting(sab)
+
+# 5V ESD NMOS transistor outside DNWELL
+ngate_sab_5v = ngate.and(v5_xtor).and(dualgate).not(dnwell).and(esd_mk).interacting(sab)
+
+# 6V ESD NMOS transistor outside DNWELL
+ngate_sab_6v = ngate.not(v5_xtor).and(dualgate).not(dnwell).and(esd_mk).interacting(sab)
+
+# 3.3V ESD NMOS transistor inside DNWELL
+ngate_dw_sab_3p3v = ngate_dw.not(v5_xtor).not(dualgate).and(esd_mk).interacting(sab)
+
+# 5V ESD NMOS transistor inside DNWELL
+ngate_dw_sab_5v = ngate_dw.and(v5_xtor).and(dualgate).and(esd_mk).interacting(sab)
+
+# 6V ESD NMOS transistor inside DNWELL
+ngate_dw_sab_6v = ngate_dw.not(v5_xtor).and(dualgate).and(esd_mk).interacting(sab)
+
+#================================
+# ------ EFUSE DERIVATIONS ------
+#================================
+logger.info("Starting NMOS EFUSE DERIVATIONS")
+
+cathode         = poly2.inside(efuse_mk).not(lvs_source.or(plfuse))
+anode           = poly2.and(lvs_source).inside(efuse_mk)
+efuse_link      = (poly2).and(plfuse).inside(efuse_mk)
+efuse_con_layer = cathode | anode
+
+
+#================================================
+#------------ DEVICES CONNECTIVITY --------------
+#================================================
+
+logger.info("Starting GF180 LVS connectivity setup")
+
+#================================
+# ----- GENERAL CONNECTIONS -----
+#================================
+logger.info("Starting GF180 LVS connectivity setup (Inter-layer)")
+
+# Inter-layer
+connect(sub         ,          ptap)
+connect(lvpwell_con ,          ptap)
+connect(lvpwell_con ,       ptap_dw)
+connect(dnwell      ,       ntap_dw)
+connect(nwell_con   ,          ntap)
+connect(ptap        ,       contact)
+connect(ptap_dw     ,       contact)
+connect(ntap        ,       contact)
+connect(ntap_dw     ,       contact)
+connect(psd         ,       contact)
+connect(psd_dw      ,       contact)
+connect(nsd         ,       contact)
+connect(poly2_con   ,       contact)
+connect(contact     ,    metal1_con)
+connect(metal1_con  ,          via1)
+connect(via1        ,   metal2_ncap)
+connect(metal2_ncap ,          via2)
+connect(via2        ,   metal3_ncap)
+connect(metal3_ncap ,          via3)
+connect(via3        ,   metal4_ncap)
+connect(metal4_ncap ,          via4)
+connect(via4        ,   metal5_ncap)
+connect(metal5_ncap ,          via5)
+connect(via5        ,  metaltop_con)
+
+logger.info("Starting GF180 LVS connectivity setup (Attaching labels)")
+
+# Attaching labels
+connect(comp        ,     comp_label)
+connect(poly2_con   ,    poly2_label)
+connect(metal1_con  ,   metal1_label)
+connect(metal2_ncap ,   metal2_label)
+connect(metal3_ncap ,   metal3_label)
+connect(metal4_ncap ,   metal4_label)
+connect(metal5_ncap ,   metal5_label)
+connect(metaltop_con, metaltop_label)
+
+logger.info("Starting GF180 LVS connectivity setup (Global)")
+
+# Global
+connect_global(sub  ,         substrate_name)
+
+logger.info("Starting GF180 LVS connectivity setup (Multifinger Devices)")
+
+# Multifinger Devices
+connect_implicit("*")
+
+#================================
+# ----- MOSFET CONNECTIONS ------
+#================================
+logger.info("Starting LVS MOSFET CONNECTIONS")
+
+connect(psd_dw,  contact)
+
+connect(nd_ldmos, contact)
+connect(ns_ldmos, contact)
+
+connect(pd_ldmos, contact)
+connect(ps_ldmos, contact)
+
+
+#================================
+# ------ BJT CONNECTIONS --------
+#================================
+logger.info("Starting LVS BJT CONNECTIONS")
+
+# ==============
+# ---- vnpn ----
+# ==============
+
+# vnpn_10x10 nodes connections
+connect(vnpn_10x10_e,contact)
+connect(vnpn_10x10_b,contact)
+connect(vnpn_10x10_c,contact)
+
+# vnpn_5x5 nodes connections
+connect(vnpn_5x5_e,contact)
+connect(vnpn_5x5_b,contact)
+connect(vnpn_5x5_c,contact)
+
+# vnpn_0p54x16 nodes connections
+connect(vnpn_0p54x16_e,contact)
+connect(vnpn_0p54x16_b,contact)
+connect(vnpn_0p54x16_c,contact)
+
+# vnpn_0p54x8 nodes connections
+connect(vnpn_0p54x8_e,contact)
+connect(vnpn_0p54x8_b,contact)
+connect(vnpn_0p54x8_c,contact)
+
+# vnpn_0p54x4 nodes connections
+connect(vnpn_0p54x4_e,contact)
+connect(vnpn_0p54x4_b,contact)
+connect(vnpn_0p54x4_c,contact)
+
+# vnpn_0p54x2 nodes connections
+connect(vnpn_0p54x2_e,contact)
+connect(vnpn_0p54x2_b,contact)
+connect(vnpn_0p54x2_c,contact)
+
+# ==============
+# ---- vpnp ----
+# ==============
+
+# vpnp_10x10 nodes connections
+connect(vpnp_10x10_e,contact)
+connect(vpnp_10x10_b,contact)
+connect(vpnp_10x10_c,contact)
+
+# vpnp_5x5 nodes connections
+connect(vpnp_5x5_e,contact)
+connect(vpnp_5x5_b,contact)
+connect(vpnp_5x5_c,contact)
+
+# vpnp_0p42x10 nodes connections
+connect(vpnp_0p42x10_e,contact)
+connect(vpnp_0p42x10_b,contact)
+connect(vpnp_0p42x10_c,contact)
+
+# vpnp_0p42x5 nodes connections
+connect(vpnp_0p42x5_e,contact)
+connect(vpnp_0p42x5_b,contact)
+connect(vpnp_0p42x5_c,contact)
+
+
+#================================
+# ----- DIODE CONNECTIONS -------
+#================================
+
+logger.info("Starting LVS DIODE CONNECTIONS")
+
+# np_3p3 diode
+connect(np_3p3_terminal_n,contact)
+
+# np_3p3_dw diode
+connect(np_3p3_dw_terminal_n,contact)
+
+# np_6p0 diode
+connect(np_6p0_terminal_n,contact)
+
+# np_6p0_dw diode
+connect(np_6p0_dw_terminal_n,contact)
+
+# pn_3p3 diode
+connect(pn_3p3_terminal_p,contact)
+
+# pn_3p3_dw diode
+connect(pn_3p3_dw_terminal_p,contact)
+
+# pn_6p0 diode
+connect(pn_6p0_terminal_p,contact)
+
+# pn_6p0_dw diode
+connect(pn_6p0_dw_terminal_p,contact)
+
+# nwp_3p3 diode
+connect(nwp_3p3_terminal_p,contact)
+connect(nwp_3p3_terminal_n,nwell)
+
+# nwp_6p0 diode
+connect(nwp_6p0_terminal_p,contact)
+connect(nwp_6p0_terminal_n,nwell)
+
+# dnwpw_3p3 diode
+connect(dnwpw_3p3_terminal_p,contact)
+
+# dnwpw_6p0 diode
+connect(dnwpw_6p0_terminal_p,contact)
+
+# dnwps_3p3 diode
+connect(dnwps_3p3_terminal_p,ptap)
+
+# dnwps_6p0 diode
+connect(dnwps_6p0_terminal_p,ptap)
+
+# sc_diode diode
+connect(sc_diode_terminal_n,contact)
+connect(sc_diode_terminal_p,schottky_diode)
+
+#================================
+# ---- RESISTOR DERIVATIONS -----
+#================================
+
+logger.info("Starting LVS RESISTOR CONNECTIONS")
+
+connect(nplus_cont   , contact)
+connect(pplus_cont   , contact)
+connect(pplus_dw_cont, contact)
+
+#==================================
+# ------ MIMCAP CONNECTIONS -------
+#==================================
+
+logger.info("Starting LVS MIMCAP CONNECTIONS")
+
+if MIM_OPTION == "A"
+
+  # mim option A
+  connect(metal2,mim_virtual)
+  connect(fuse_cap,via2)
+
+elsif MIM_OPTION == "B"
+
+  # mim_option B
+  connect(topmin1_metal,mimtm_virtual)
+  connect(fuse_cap,top_via)
+
+end
+
+#================================
+# ------ EFUSE CONNECTIONS ------
+#================================
+
+logger.info("Starting LVS EFUSE CONNECTIONS")
+
+connect(cathode,  contact)
+connect(anode,  contact)
+
+
+#================================================
+#------------- DEVICES EXTRACTION ---------------
+#================================================
+
+logger.info("Starting GF180 LVS DEVICES EXTRACTION")
+
+#================================
+# ----- MOSFET EXTRACTION -------
+#================================
+logger.info("Starting MOSFET EXTRACTION")
+
+# ==============
+# ---- PMOS ----
+# ==============
+logger.info("Starting PMOS EXTRACTION")
+
+# 3.3V PMOS transistor outside DNWELL
+logger.info("Extracting 3.3V PMOS transistor outside DNWEL")
+extract_devices(mos4("pmos_3p3"), { "SD" => psd, "G" => pgate_3p3v, "tS" => psd, "tD" => psd, "tG" => poly2_con, "W" => nwell_con })
+
+# 5V PMOS transistor outside DNWELL
+logger.info("Extracting 5V PMOS transistor outside DNWELL")
+extract_devices(mos4("pmos_5p0"), { "SD" => psd, "G" => pgate_5v,   "tS" => psd, "tD" => psd, "tG" => poly2_con, "W" => nwell_con })
+
+# 6V PMOS transistor outside DNWELL
+logger.info("Extracting 6V PMOS transistor outside DNWELL")
+extract_devices(mos4("pmos_6p0"), { "SD" => psd, "G" => pgate_6v,   "tS" => psd, "tD" => psd, "tG" => poly2_con, "W" => nwell_con })
+
+# 3.3V PMOS transistor inside DNWELL
+logger.info("Extracting 3.3V PMOS transistor inside DNWELL")
+extract_devices(mos4("pmos_3p3_dw"), { "SD" => psd_dw, "G" => pgate_3p3v_dw,   "tS" => psd_dw, "tD" => psd_dw, "tG" => poly2_con, "W" => dnwell })
+
+# 5V PMOS transistor inside DNWELL
+logger.info("Extracting 5V PMOS transistor inside DNWELL")
+extract_devices(mos4("pmos_5p0_dw"), { "SD" => psd_dw, "G" => pgate_5v_dw,   "tS" => psd_dw, "tD" => psd_dw, "tG" => poly2_con, "W" => dnwell })
+
+# 6V PMOS transistor inside DNWELL
+logger.info("Extracting 6V PMOS transistor inside DNWELL")
+extract_devices(mos4("pmos_6p0_dw"), { "SD" => psd_dw, "G" => pgate_6v_dw,   "tS" => psd_dw, "tD" => psd_dw, "tG" => poly2_con, "W" => dnwell })
+
+# LDPMOS transistor
+logger.info("Extracting LDPMOS transistor")
+extract_devices(mos4("pmos_10p0_asym"), { "SD" => psd_ldmos, "G" => pgate_ldmos, "tS" => ps_ldmos, "tD" => pd_ldmos, "tG" => poly2_con, "W" => dnwell })
+
+# ==============
+# ---- NMOS ----
+# ==============
+
+logger.info("Starting NMOS EXTRACTION")
+
+# 3.3V NMOS transistor outside DNWELL
+logger.info("3.3V NMOS transistor outside DNWELL")
+extract_devices(mos4("nmos_3p3"), { "SD" => nsd, "G" => ngate_3p3v, "tS" => nsd, "tD" => nsd, "tG" => poly2_con, "W" => sub })
+
+# 5V NMOS transistor outside DNWELL
+logger.info("5V NMOS transistor outside DNWELL")
+extract_devices(mos4("nmos_5p0"), { "SD" => nsd, "G" => ngate_5v,   "tS" => nsd, "tD" => nsd, "tG" => poly2_con,   "W" => sub })
+
+# 6V NMOS transistor outside DNWELL
+logger.info("6V NMOS transistor outside DNWELL")
+extract_devices(mos4("nmos_6p0"), { "SD" => nsd, "G" => ngate_6v,   "tS" => nsd, "tD" => nsd, "tG" => poly2_con,   "W" => sub })
+
+# 3.3V NMOS transistor inside DNWELL
+logger.info("3.3V NMOS transistor inside DNWELL")
+extract_devices(mos4("nmos_3p3_dw"), { "SD" => nsd, "G" => ngate_3p3v_dw, "tS" => nsd, "tD" => nsd, "tG" => poly2_con, "W" => lvpwell_con })
+
+# 5V NMOS transistor inside DNWELL
+logger.info("5V NMOS transistor inside DNWELL")
+extract_devices(mos4("nmos_5p0_dw"), { "SD" => nsd, "G" => ngate_5v_dw,   "tS" => nsd, "tD" => nsd, "tG" => poly2_con,   "W" => lvpwell_con })
+
+# 6V NMOS transistor inside DNWELL
+logger.info("6V NMOS transistor inside DNWELL")
+extract_devices(mos4("nmos_6p0_dw"), { "SD" => nsd, "G" => ngate_6v_dw,   "tS" => nsd, "tD" => nsd, "tG" => poly2_con,   "W" => lvpwell_con })
+
+# Native Vt NMOS transistor
+logger.info("Native Vt NMOS transistor")
+extract_devices(mos4("nmos_6p0_nat"), { "SD" => nsd, "G" => ngate_nat, "tS" => nsd, "tD" => nsd, "tG" => poly2_con, "W" => sub })
+
+# LDNMOS transistor
+logger.info("Extracting LDNMOS transistor")
+extract_devices(mos4("nmos_10p0_asym"), { "SD" => nsd_ldmos, "G" => ngate_ldmos, "tS" => ns_ldmos, "tD" => nd_ldmos, "tG" => poly2_con, "W" => sub })
+
+
+#================================
+# ------- BJT EXTRACTION --------
+#================================
+logger.info("Starting BJT EXTRACTION")
+
+# ====================
+# ------ vnpn --------
+# ====================
+logger.info("Starting vnpn BJT EXTRACTION")
+
+# vnpn_10x10 BJT
+ignore_parameter("vnpn_10x10","AE")
+logger.info("Extracting vnpn_10x10 BJT")
+extract_devices(bjt4("vnpn_10x10"), { "C" => vnpn_10x10_c.extents , "B" => vnpn_10x10_b.extents , "E" => vnpn_10x10_e,"S" => sub.extents,
+                                  "tC" => vnpn_10x10_c , "tB" => vnpn_10x10_b, "tE" => vnpn_10x10_e, "tS" => sub })
+
+# vnpn_5x5 BJT
+ignore_parameter("vnpn_5x5","AE")
+logger.info("Extracting vnpn_5x5 BJT")
+extract_devices(bjt4("vnpn_5x5"), { "C" => vnpn_5x5_c.extents , "B" => vnpn_5x5_b.extents , "E" => vnpn_5x5_e,"S" => sub.extents,
+                                "tC" => vnpn_5x5_c , "tB" => vnpn_5x5_b, "tE" => vnpn_5x5_e, "tS" => sub })
+
+# vnpn_0p54x16 BJT
+ignore_parameter("vnpn_0p54x16","AE")
+logger.info("Extracting vnpn_0p54x16 BJT")
+extract_devices(bjt4("vnpn_0p54x16"), { "C" => vnpn_0p54x16_c.extents , "B" => vnpn_0p54x16_b.extents , "E" => vnpn_0p54x16_e,"S" => sub.extents,
+                                    "tC" => vnpn_0p54x16_c , "tB" => vnpn_0p54x16_b, "tE" => vnpn_0p54x16_e, "tS" => sub })
+
+# vnpn_0p54x8 BJT
+ignore_parameter("vnpn_0p54x8","AE")
+logger.info("Extracting vnpn_0p54x8 BJT")
+extract_devices(bjt4("vnpn_0p54x8"), { "C" => vnpn_0p54x8_c.extents , "B" => vnpn_0p54x8_b.extents , "E" => vnpn_0p54x8_e,"S" => sub.extents,
+                                   "tC" => vnpn_0p54x8_c , "tB" => vnpn_0p54x8_b, "tE" => vnpn_0p54x8_e, "tS" => sub })
+
+# vnpn_0p54x4 BJT
+ignore_parameter("vnpn_0p54x4","AE")
+logger.info("Extracting vnpn_0p54x4 BJT")
+extract_devices(bjt4("vnpn_0p54x4"), { "C" => vnpn_0p54x4_c.extents , "B" => vnpn_0p54x4_b.extents , "E" => vnpn_0p54x4_e,"S" => sub.extents,
+                                   "tC" => vnpn_0p54x4_c , "tB" => vnpn_0p54x4_b, "tE" => vnpn_0p54x4_e, "tS" => sub })
+
+# vnpn_0p54x2 BJT
+ignore_parameter("vnpn_0p54x2","AE")
+logger.info("Extracting vnpn_0p54x2 BJT")
+extract_devices(bjt4("vnpn_0p54x2"), { "C" => vnpn_0p54x2_c.extents , "B" => vnpn_0p54x2_b.extents , "E" => vnpn_0p54x2_e,"S" => sub.extents,
+                                   "tC" => vnpn_0p54x2_c , "tB" => vnpn_0p54x2_b, "tE" => vnpn_0p54x2_e, "tS" => sub })
+
+# ====================
+# ------- vpnp--------
+# ====================
+logger.info("Starting vpnp BJT EXTRACTION")
+
+# vpnp_10x10 BJT
+ignore_parameter("vpnp_10x10","AE")
+logger.info("Extracting vpnp_10x10 BJT")
+extract_devices(bjt3("vpnp_10x10"), { "C" => vpnp_10x10_c.extents , "B" => vpnp_10x10_b.extents , "E" => vpnp_10x10_e,
+                                  "tC" => vpnp_10x10_c , "tB" => vpnp_10x10_b, "tE" => vpnp_10x10_e })
+
+# vpnp_5x5 BJT
+ignore_parameter("vpnp_5x5","AE")
+logger.info("Extracting vpnp_5x5 BJT")
+extract_devices(bjt3("vpnp_5x5"), { "C" => vpnp_5x5_c.extents , "B" => vpnp_5x5_b.extents , "E" => vpnp_5x5_e,
+                                "tC" => vpnp_5x5_c , "tB" => vpnp_5x5_b, "tE" => vpnp_5x5_e })
+
+# vpnp_0p42x10 BJT
+ignore_parameter("vpnp_0p42x10","AE")
+logger.info("Extracting vpnp_0p42x10 BJT")
+extract_devices(bjt3("vpnp_0p42x10"), { "C" => vpnp_0p42x10_c.extents , "B" => vpnp_0p42x10_b.extents , "E" => vpnp_0p42x10_e,
+                                    "tC" => vpnp_0p42x10_c , "tB" => vpnp_0p42x10_b, "tE" => vpnp_0p42x10_e })
+
+# vpnp_0p42x5 BJT
+ignore_parameter("vpnp_0p42x5","AE")
+logger.info("Extracting vpnp_0p42x5 BJT")
+extract_devices(bjt3("vpnp_0p42x5"), { "C" => vpnp_0p42x5_c.extents , "B" => vpnp_0p42x5_b.extents , "E" => vpnp_0p42x5_e,
+                                   "tC" => vpnp_0p42x5_c , "tB" => vpnp_0p42x5_b, "tE" => vpnp_0p42x5_e })
+
+
+#================================
+# ------ DIODE EXTRACTION -------
+#================================
+logger.info("Starting DIODE EXTRACTION")
+
+# np_3p3 diode
+logger.info("Extracting np_3p3 diode")
+extract_devices(diode("np_3p3"), { "N" => np_3p3_terminal_n , "P" => lvpwell_con})
+
+# np_3p3_dw diode
+logger.info("Extracting np_3p3_dw diode")
+extract_devices(diode("np_3p3_dw"), { "N" => np_3p3_dw_terminal_n , "P" => lvpwell_con})
+
+# np_6p0 diode
+logger.info("Extracting np_6p0 diode")
+extract_devices(diode("np_6p0"), { "N" => np_6p0_terminal_n , "P" => lvpwell_con})
+
+# np_6p0_dw diode
+logger.info("Extracting np_6p0_dw diode")
+extract_devices(diode("np_6p0_dw"), { "N" => np_6p0_dw_terminal_n , "P" => lvpwell_con})
+
+# pn_3p3 diode
+logger.info("Extracting pn_3p3 diode")
+extract_devices(diode("pn_3p3"), { "N" => nwell_con , "P" => pn_3p3_terminal_p})
+
+# pn_3p3_dw diode
+logger.info("Extractingpn_3p3_dw diode")
+extract_devices(diode("pn_3p3_dw"), { "N" => nwell_con , "P" => pn_3p3_dw_terminal_p})
+
+# pn_6p0 diode
+logger.info("Extracting pn_6p0 diode")
+extract_devices(diode("pn_6p0"), { "N" => nwell_con , "P" => pn_6p0_terminal_p})
+
+# pn_6p0_dw diode
+logger.info("Extracting pn_6p0_dw diode")
+extract_devices(diode("pn_6p0_dw"), { "N" => nwell_con , "P" => pn_6p0_dw_terminal_p})
+
+# nwp_3p3 diode
+logger.info("Extracting nwp_3p3 diode")
+extract_devices(diode("nwp_3p3"), { "N" => nwp_3p3_terminal_n , "P" => nwp_3p3_terminal_p})
+
+# nwp_6p0 diode
+logger.info("Extracting nwp_6p0 diode")
+extract_devices(diode("nwp_6p0"), { "N" => nwp_6p0_terminal_n , "P" => nwp_6p0_terminal_p})
+
+# dnwpw_3p3 diode
+logger.info("Extracting dnwpw_3p3 diode")
+extract_devices(diode("dnwpw_3p3"), { "N" => dnwell , "P" => dnwpw_3p3_terminal_p})
+
+# dnwpw_6p0 diode
+logger.info("Extracting dnwpw_6p0 diode")
+extract_devices(diode("dnwpw_6p0"), { "N" => dnwell , "P" => dnwpw_6p0_terminal_p})
+
+# dnwps_3p3 diode
+logger.info("Extracting dnwps_3p3 diode")
+extract_devices(diode("dnwps_3p3"), { "N" => dnwell , "P" => dnwps_3p3_terminal_p})
+
+# dnwps_6p0 diode
+logger.info("Extracting dnwps_6p0 diode")
+extract_devices(diode("dnwps_6p0"), { "N" => dnwell , "P" => dnwps_6p0_terminal_p})
+
+# sc_diode diode
+logger.info("Extracting sc_diode diode")
+extract_devices(diode("sc_diode"), { "N" => sc_diode_terminal_n , "P" => schottky_diode})
+
+
+#================================
+# ---- RESISTOR EXTRACTIONS -----
+#================================
+logger.info("Starting RESISTOR EXTRACTION")
+
+# ===============
+# --DIFF & WELL--
+# ===============
+
+# NPLUS_U
+logger.info("Extracting NPLUS_U device")
+extract_devices(resistor_with_bulk("nplus_u", 60, BResistor), { "R" => nplus_u_layer, "C" => nplus_cont, "W" => sub})
+
+# NPLUS_U_DW
+logger.info("Extracting NPLUS_U_DW device")
+extract_devices(resistor_with_bulk("nplus_u_dw", 60, BResistor), { "R" => nplus_u_dw_layer, "C" => nplus_cont, "W" => lvpwell_con })
+
+# PPLUS_U
+logger.info("Extracting PPLUS_U device")
+extract_devices(resistor_with_bulk("pplus_u", 185, BResistor), { "R" => pplus_u_layer, "C" => pplus_cont, "W" => nwell_con})
+
+# PPLUS_U_DW
+logger.info("Extracting PPLUS_U_DW device")
+extract_devices(resistor_with_bulk("pplus_u_dw", 185, BResistor), { "R" => pplus_u_dw_layer, "C" => pplus_dw_cont, "W" => dnwell })
+
+# NPLUS_S
+logger.info("Extracting NPLUS_S device")
+extract_devices(resistor_with_bulk("nplus_s", 6.3, BResistor), { "R" => nplus_s_layer, "C" => nplus_cont, "W" => sub})
+
+# NPLUS_S_DW
+logger.info("Extracting NPLUS_S_DW device")
+extract_devices(resistor_with_bulk("nplus_s_dw", 6.3, BResistor), { "R" => nplus_s_dw_layer, "C" => nplus_cont, "W" => lvpwell_con })
+
+# PPLUS_S
+logger.info("Extracting PPLUS_S device")
+extract_devices(resistor_with_bulk("pplus_s", 7, BResistor), { "R" => pplus_s_layer, "C" => pplus_cont, "W" => nwell_con})
+
+# PPLUS_S_DW
+logger.info("Extracting PPLUS_S_DW device")
+extract_devices(resistor_with_bulk("pplus_s_dw", 7, BResistor), { "R" => pplus_s_dw_layer, "C" => pplus_dw_cont, "W" => dnwell })
+
+# NWELL
+logger.info("Extracting NWELL device")
+extract_devices(resistor_with_bulk("nwell", 1000, BResistor), { "R" => nwell_res, "C" => nwell_con, "W" => sub})
+
+# PWELL
+logger.info("Extracting PWELL device")
+extract_devices(resistor_with_bulk("pwell", 1000, BResistor), { "R" => pwell_res, "C" => lvpwell_con, "W" => dnwell})
+
+# ==============
+# ---- POLY ----
+# ==============
+
+# NPOLYF_U
+extract_devices(resistor_with_bulk("npolyf_u", 310, BResistor), { "R" => npolyf_u_layer, "C" => poly2_con, "W" => sub})
+
+# NPOLYF_U_DW
+extract_devices(resistor_with_bulk("npolyf_u_dw", 310, BResistor), { "R" => npolyf_u_dw_layer, "C" => poly2_con, "W" => dnwell })
+
+# PPOLYF_U
+extract_devices(resistor_with_bulk("ppolyf_u", 350, BResistor), { "R" => ppolyf_u_layer, "C" => poly2_con, "W" => sub})
+
+# PPOLYF_U_DW
+extract_devices(resistor_with_bulk("ppolyf_u_dw", 350, BResistor), { "R" => ppolyf_u_dw_layer, "C" => poly2_con, "W" => dnwell })
+
+# NPOLYF_S
+extract_devices(resistor_with_bulk("npolyf_s", 6.8, BResistor), { "R" => npolyf_s_layer, "C" => poly2_con, "W" => sub})
+
+# NPOLYF_S_DW
+extract_devices(resistor_with_bulk("npolyf_s_dw", 6.8, BResistor), { "R" => npolyf_s_dw_layer, "C" => poly2_con, "W" => dnwell })
+
+# PPOLYF_S
+extract_devices(resistor_with_bulk("ppolyf_s", 7.3, BResistor), { "R" => ppolyf_s_layer, "C" => poly2_con, "W" => sub})
+
+# PPOLYF_S_DW
+extract_devices(resistor_with_bulk("ppolyf_s_dw", 7.3, BResistor), { "R" => ppolyf_s_dw_layer, "C" => poly2_con, "W" => dnwell })
+
+# ==============
+# --H-POLY RES--
+# ==============
+
+if POLY_RES == "1k"
+
+  # PPOLYF_U_1K
+  extract_devices(resistor_with_bulk("ppolyf_u_1k", 1000, BResistor), { "R" => ppolyf_u_1k_layer, "C" => poly2_con, "W" => sub})
+
+  # PPOLYF_U_DW_1K
+  extract_devices(resistor_with_bulk("ppolyf_u_1k_dw", 1000, BResistor), { "R" => ppolyf_u_1k_dw_layer, "C" => poly2_con, "W" => dnwell })
+
+  # PPOLYF_U_1K_6p0
+  extract_devices(resistor_with_bulk("ppolyf_u_1k_6p0", 1000, BResistor), { "R" => ppolyf_u_1k_6p0_layer, "C" => poly2_con, "W" => sub})
+
+  # PPOLYF_U_DW_1K_6p0
+  extract_devices(resistor_with_bulk("ppolyf_u_1k_6p0_dw", 1000, BResistor), { "R" => ppolyf_u_1k_6p0_dw_layer, "C" => poly2_con, "W" => dnwell })
+
+elsif POLY_RES == "2k"
+
+  # PPOLYF_U_2K
+  extract_devices(resistor_with_bulk("ppolyf_u_2k", 2000, BResistor), { "R" => ppolyf_u_2k_layer, "C" => poly2_con, "W" => sub})
+
+  # PPOLYF_U_DW_2K
+  extract_devices(resistor_with_bulk("ppolyf_u_2k_dw", 2000, BResistor), { "R" => ppolyf_u_2k_dw_layer, "C" => poly2_con, "W" => dnwell })
+
+  # PPOLYF_U_2K_6p0
+  extract_devices(resistor_with_bulk("ppolyf_u_2k_6p0", 2000, BResistor), { "R" => ppolyf_u_2k_6p0_layer, "C" => poly2_con, "W" => sub})
+
+  # PPOLYF_U_DW_2K_6p0
+  extract_devices(resistor_with_bulk("ppolyf_u_2k_6p0_dw", 2000, BResistor), { "R" => ppolyf_u_2k_6p0_dw_layer, "C" => poly2_con, "W" => dnwell })
+
+elsif POLY_RES == "3k"
+
+  # PPOLYF_U_3K
+  extract_devices(resistor_with_bulk("ppolyf_u_3k", 3000, BResistor), { "R" => ppolyf_u_3k_layer, "C" => poly2_con, "W" => sub})
+
+  # PPOLYF_U_DW_3K
+  extract_devices(resistor_with_bulk("ppolyf_u_3k_dw", 3000, BResistor), { "R" => ppolyf_u_3k_dw_layer, "C" => poly2_con, "W" => dnwell })
+
+  # PPOLYF_U_3K_6p0
+  extract_devices(resistor_with_bulk("ppolyf_u_3k_6p0", 3000, BResistor), { "R" => ppolyf_u_3k_6p0_layer, "C" => poly2_con, "W" => sub})
+
+  # PPOLYF_U_DW_3K_6p0
+  extract_devices(resistor_with_bulk("ppolyf_u_3k_6p0_dw", 3000, BResistor), { "R" => ppolyf_u_3k_6p0_dw_layer, "C" => poly2_con, "W" => dnwell })
+
+end
+
+
+# ===============
+# ---- METAL ----
+# ===============
+
+# RM1
+logger.info("Extracting RM1 device")
+extract_devices(resistor("rm1", 0.09, NResistor), { "R" => rm1_res, "C" => metal1_con })
+
+# RM2
+logger.info("Extracting RM2 device")
+extract_devices(resistor("rm2", 0.09, NResistor), { "R" => rm2_res, "C" => metal2_ncap })
+
+# RM3
+logger.info("Extracting RM3 device")
+extract_devices(resistor("rm3", 0.09, NResistor), { "R" => rm3_res, "C" => metal3_ncap })
+
+if METAL_TOP == "6K"
+
+  # TM6K
+  logger.info("Extracting TM6K device")
+  extract_devices(resistor("tm6k", 0.06, NResistor), { "R" => tm_res, "C" => metaltop_con })
+
+elsif METAL_TOP == "9K"
+
+  # TM9K
+  logger.info("Extracting TM9K device")
+  extract_devices(resistor("tm9k", 0.04, NResistor), { "R" => tm_res, "C" => metaltop_con })
+
+elsif METAL_TOP == "11K"
+
+  # TM11K
+  logger.info("Extracting TM11K device")
+  extract_devices(resistor("tm11k", 0.04, NResistor), { "R" => tm_res, "C" => metaltop_con })
+
+elsif METAL_TOP == "30K"
+
+  # TM30K
+  logger.info("Extracting TM30K device")
+  extract_devices(resistor("tm30k", 0.0095, NResistor), { "R" => tm_res, "C" => metaltop_con })
+
+end
+
+
+#==================================
+# ------- MIMCAP EXTRACTION -------
+#==================================
+logger.info("Starting MIMCAP EXTRACTION")
+
+if MIM_OPTION == "A"
+
+  if MIM_CAP == "1"
+
+    # mim_1p0fF capacitor
+    logger.info("Extracting mim_1p0fF device")
+    extract_devices(capacitor("mim_1p0fF", 1.0e-15, MIMCap), { "P1" => mim_virtual, "P2" => fuse_cap })
+    tolerance("mim_1p0fF", "C", :relative => 0.25)
+
+  elsif MIM_CAP == "1.5"
+
+    # mim_1p5fF capacitor
+    logger.info("Extracting mim_1p5fF device")
+    extract_devices(capacitor("mim_1p5fF", 1.5e-15, MIMCap), { "P1" => mim_virtual, "P2" => fuse_cap })
+    tolerance("mim_1p5fF", "C", :relative => 0.25)
+
+  elsif MIM_CAP == "2"
+
+    # mim_single_2p0fF capacitor
+    logger.info("Extracting mim_single_2p0fF device")
+    extract_devices(capacitor("mim_single_2p0fF", 2.0e-15, MIMCap), { "P1" => mim_virtual, "P2" => fuse_cap })
+    tolerance("mim_single_2p0fF", "C", :relative => 0.25)
+
+  end
+
+elsif MIM_OPTION == "B"
+
+  if MIM_CAP == "1"
+
+    # mim_1p0fF capacitor
+    logger.info("Extracting mim_1p0fF device")
+    extract_devices(capacitor("mim_1p0fF", 1.0e-15, MIMCap), { "P1" => mimtm_virtual, "P2" => fuse_cap })
+    tolerance("mim_1p0fF", "C", :relative => 0.25)
+
+  elsif MIM_CAP == "1.5"
+
+    # mim_1p5fF capacitor
+    logger.info("Extracting mim_1p5fF device")
+    extract_devices(capacitor("mim_1p5fF", 1.5e-15, MIMCap), { "P1" => mimtm_virtual, "P2" => fuse_cap })
+    tolerance("mim_1p5fF", "C", :relative => 0.25)
+
+  elsif MIM_CAP == "2"
+
+    # mim_single_2p0fF capacitor
+    logger.info("Extracting mim_single_2p0fF device")
+    extract_devices(capacitor("mim_single_2p0fF", 2.0e-15, MIMCap), { "P1" => mimtm_virtual, "P2" => fuse_cap })
+    tolerance("mim_single_2p0fF", "C", :relative => 0.25)
+
+  end
+
+end
+
+
+#==================================
+# ------- MOSCAP EXTRACTION -------
+#==================================
+logger.info("Starting MOSCAP EXTRACTION")
+
+#nmoscap_3p3
+logger.info("Extracting nmoscap_3p3 device")
+extract_devices(capacitor("nmoscap_3p3", 4.4e-15, MosCap), { "P1" => nmos_gate_3p3, "P2" => lvpwell_con, "tA" => poly2_con, "tB" => nsd})
+
+#nmoscap_3p3_dw
+logger.info("Extracting nmoscap_3p3_dw device")
+extract_devices(capacitor("nmoscap_3p3_dw", 4.4e-15, MosCap), { "P1" => nmos_gate_3p3_dw, "P2" => lvpwell_con, "tA" => poly2_con, "tB" => nsd })
+
+#pmoscap_3p3
+logger.info("Extracting pmoscap_3p3 device")
+extract_devices(capacitor("pmoscap_3p3", 4.4e-15, MosCap), { "P1" => pmos_gate_3p3, "P2" => nwell_con, "tA" => poly2_con, "tB" => psd })
+
+#pmoscap_3p3_dw
+logger.info("Extracting pmoscap_3p3_dw device")
+extract_devices(capacitor("pmoscap_3p3_dw", 4.4e-15, MosCap), { "P1" => pmos_gate_3p3_dw, "P2" => dnwell, "tA" => poly2_con, "tB" => psd_dw })
+
+#nmoscap_6p0
+logger.info("Extracting nmoscap_6p0 device")
+extract_devices(capacitor("nmoscap_6p0", 2.3e-15, MosCap), { "P1" => nmos_gate_6p0, "P2" => lvpwell_con, "tA" => poly2_con, "tB" => nsd })
+
+#nmoscap_6p0_dw
+logger.info("Extracting nmoscap_6p0_dw device")
+extract_devices(capacitor("nmoscap_6p0_dw", 2.3e-15, MosCap), { "P1" => nmos_gate_6p0_dw, "P2" => lvpwell_con, "tA" => poly2_con, "tB" => nsd })
+
+#pmoscap_6p0
+logger.info("Extracting pmoscap_6p0 device")
+extract_devices(capacitor("pmoscap_6p0", 2.3e-15, MosCap), { "P1" => pmos_gate_6p0, "P2" => nwell_con, "tA" => poly2_con, "tB" => psd })
+
+#pmoscap_6p0
+logger.info("Extracting pmoscap_6p0 device")
+extract_devices(capacitor("pmoscap_6p0_dw", 2.3e-15, MosCap), { "P1" => pmos_gate_6p0_dw, "P2" => dnwell, "tA" => poly2_con, "tB" => psd_dw  })
+
+# nmoscap_3p3_b capacitor
+extract_devices(capacitor("nmoscap_3p3_b", 4.4e-15, MosCap), { "P1" => nmoscap_3p3_b, "P2" => nwell_con, "tA" => poly2_con, "tB" => ntap })
+
+#pmoscap_3p3_b
+logger.info("Extracting pmoscap_3p3_b device")
+extract_devices(capacitor("pmoscap_3p3_b", 4.4e-15, MosCap), { "P1" => pmoscap_3p3_b, "P2" => ptap, "tA" => poly2_con, "tB" => ptap })
+
+#nmoscap_6p0_b
+logger.info("Extracting nmoscap_6p0_b device")
+extract_devices(capacitor("nmoscap_6p0_b", 2.3e-15, MosCap), { "P1" => nmoscap_6p0_b, "P2" => nwell_con, "tA" => poly2_con, "tB" => ntap })
+
+#pmoscap_6p0_b
+logger.info("Extracting pmoscap_6p0_b device")
+extract_devices(capacitor("pmoscap_6p0_b", 2.3e-15, MosCap), { "P1" => pmoscap_6p0_b, "P2" => ptap, "tA" => poly2_con, "tB" => ptap })
+
+
+#================================
+# ------- ESD EXTRACTION --------
+#================================
+logger.info("Starting MOS SAB EXTRACTION")
+
+# ==============
+# ---- PMOS ----
+# ==============
+logger.info("Starting PMOS SAB EXTRACTION")
+
+#3.3V ESD PMOS transistor outside DNWELL
+logger.info("Extracting 3.3V ESD PMOS transistor outside DNWELL device")
+extract_devices(mos4("pmos_3p3_sab"), { "SD" => psd, "G" => pgate_sab_3p3v, "tS" => psd, "tD" => psd, "tG" => poly2_con, "W" => nwell_con })
+
+#5V ESD PMOS transistor outside DNWELL
+logger.info("Extracting 5V ESD PMOS transistor outside DNWELL device")
+extract_devices(mos4("pmos_5p0_sab"), { "SD" => psd, "G" => pgate_sab_5v, "tS" => psd, "tD" => psd, "tG" => poly2_con, "W" => nwell_con })
+
+#6V ESD PMOS transistor outside DNWELL
+logger.info("Extracting 6V ESD PMOS transistor outside DNWELL device")
+extract_devices(mos4("pmos_6p0_sab"), { "SD" => psd, "G" => pgate_sab_6v, "tS" => psd, "tD" => psd, "tG" => poly2_con, "W" => nwell_con })
+
+#3.3V ESD PMOS transistor inside DNWELL
+logger.info("Extracting 3.3V ESD PMOS transistor inside DNWELL device")
+extract_devices(mos4("pmos_3p3_dw_sab"), { "SD" => psd_dw, "G" => pgate_dw_sab_3p3v, "tS" => psd_dw, "tD" => psd_dw, "tG" => poly2_con, "W" => dnwell })
+
+#5V ESD PMOS transistor inside DNWELL
+logger.info("Extracting 5V ESD PMOS transistor inside DNWELL device")
+extract_devices(mos4("pmos_5p0_dw_sab"), { "SD" => psd_dw, "G" => pgate_dw_sab_5v, "tS" => psd_dw, "tD" => psd_dw, "tG" => poly2_con, "W" => dnwell })
+
+#6V ESD PMOS transistor inside DNWELL
+logger.info("Extracting 6V ESD PMOS transistor inside DNWELL device")
+extract_devices(mos4("pmos_6p0_dw_sab"), { "SD" => psd_dw, "G" => pgate_dw_sab_6v, "tS" => psd_dw, "tD" => psd_dw, "tG" => poly2_con, "W" => dnwell })
+
+# ==============
+# ---- NMOS ----
+# ==============
+logger.info("Starting NMOS SAB EXTRACTION")
+
+#3.3V ESD NMOS transistor outside DNWELL
+logger.info("Extracting 3.3V ESD NMOS transistor outside DNWELL device")
+extract_devices(mos4("nmos_3p3_sab"), { "SD" => nsd, "G" => ngate_sab_3p3v, "tS" => nsd, "tD" => nsd, "tG" => poly2_con, "W" => sub })
+
+#5V ESD NMOS transistor outside DNWELL
+logger.info("Extracting 5V ESD NMOS transistor outside DNWELL device")
+extract_devices(mos4("nmos_5p0_sab"), { "SD" => nsd, "G" => ngate_sab_5v, "tS" => nsd, "tD" => nsd, "tG" => poly2_con, "W" => sub })
+
+#6V ESD NMOS transistor outside DNWELL
+logger.info("Extracting 6V ESD NMOS transistor outside DNWELL device")
+extract_devices(mos4("nmos_6p0_sab"), { "SD" => nsd, "G" => ngate_sab_6v, "tS" => nsd, "tD" => nsd, "tG" => poly2_con, "W" => sub })
+
+#3.3V ESD NMOS transistor inside DNWELL
+logger.info("Extracting 3.3V ESD NMOS transistor inside DNWELL device")
+extract_devices(mos4("nmos_3p3_dw_sab"), { "SD" => nsd, "G" => ngate_dw_sab_3p3v, "tS" => nsd, "tD" => nsd, "tG" => poly2_con, "W" => lvpwell_con })
+
+#5V ESD NMOS transistor inside DNWELL
+logger.info("Extracting 5V ESD NMOS transistor inside DNWELL device")
+extract_devices(mos4("nmos_5p0_dw_sab"), { "SD" => nsd, "G" => ngate_dw_sab_5v, "tS" => nsd, "tD" => nsd, "tG" => poly2_con, "W" => lvpwell_con })
+
+#6V ESD NMOS transistor inside DNWELL
+logger.info("Extracting 6V ESD NMOS transistor inside DNWELL device")
+extract_devices(mos4("nmos_6p0_dw_sab"), { "SD" => nsd, "G" => ngate_dw_sab_6v, "tS" => nsd, "tD" => nsd, "tG" => poly2_con, "W" => lvpwell_con })
+
+
+#================================
+# ------ EFUSE EXTRACTIONS ------
+#================================
+logger.info("Starting EFUSE EXTRACTION")
+
+extract_devices(resistor("efuse", 28.5714), { "R" => efuse_link, "C" => efuse_con_layer, "tA" => anode, "tB" => cathode })
+ignore_parameter("efuse", "R")
+
+
+#================================================
+#------------- COMPARISON OPTIONS ---------------
+#================================================
+
+logger.info("Starting GF180 LVS comparison section")
+
+#=== FLATTEN CELLS ===
+align
+
+#=== NETLIST EXTRACTION ===
+if SIMPLIFY
+  netlist.simplify
+end
+
+#=== NETLIST OPTIONS ===
+if NET_ONLY
+  netlist
+end
+
+if TOP_LVL_PINS
+  netlist.make_top_level_pins
+end
+
+if COMBINE
+  netlist.combine_devices
+end
+
+if PURGE
+  netlist.purge
+end
+
+if PURGE_NETS
+  netlist.purge_nets
+end
+
+#=== SCHEMATIC OPTIONS ===
+if SCH_SIMPLE
+  schematic.simplify
+end
+
+#=== IGNORE EXTREME VALUES ===
+max_res(1e7)
+min_caps(1e-16)
+
+
+compare
+
+exec_end_time = Time.now
+run_time = exec_end_time - exec_start_time
+logger.info("DRC Total Run time %f seconds" % [run_time])
+
+
+
+
+if ! compare
+  logger.info("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
+  logger.error("ERROR : Netlists don't match")
+  logger.info("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
+else
+  logger.info("==========================================")
+  logger.info("INFO : Congratulations! Netlists match.")
+  logger.info("==========================================")
+end
+
+
+

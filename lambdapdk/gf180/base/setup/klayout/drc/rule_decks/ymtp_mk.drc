@@ -1,0 +1,316 @@
+# Copyright 2022 GlobalFoundries PDK Authors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+#=============================================================================================================================================================
+#----------------------------------------------------------- GF 0.18um MCU DRC RULE DECK (YMTP_MK) -----------------------------------------------------------
+#=============================================================================================================================================================
+
+require 'time'
+require "logger"
+
+exec_start_time = Time.now
+
+logger = Logger.new(STDOUT)
+
+logger.formatter = proc do |severity, datetime, progname, msg|
+  "#{datetime}: Memory Usage (" + `pmap #{Process.pid} | tail -1`[10,40].strip + ") : #{msg}
+"
+end
+
+#================================================
+#----------------- FILE SETUP -------------------
+#================================================
+
+# optional for a batch launch :   klayout -b -r gf180mcu.drc -rd input=design.gds -rd report=gf180mcu_main.lyrdb
+
+logger.info("Starting running GF180MCU Klayout DRC runset on %s" % [$input])
+
+if $input
+    if $topcell
+        source($input, $topcell)
+    else
+        source($input)
+    end
+end
+
+logger.info("Loading database to memory is complete.")
+
+if $report
+    logger.info("GF180MCU Klayout DRC runset output at: %s" % [$report])
+    report("DRC Run Report at", $report)
+else
+    logger.info("GF180MCU Klayout DRC runset output at default location." % [File.join(File.dirname(RBA::CellView::active.filename), "gf180_drc.lyrdb").path])
+    report("DRC Run Report at", File.join(File.dirname(RBA::CellView::active.filename), "gf180_drc.lyrdb"))
+end
+
+if $thr
+    logger.info("Number of threads to use %s" % [$thr])
+    threads($thr)
+else
+    logger.info("Number of threads to use 16")
+    threads(16)
+end
+
+# === TILING MODE ===
+if $run_mode == "tiling"
+  # use a tile size of 1mm - not used in deep mode-
+  # tiles(500.um)
+  # use a tile border of 10 micron:
+  # tile_borders(10.um)
+  tiles(1000)
+  logger.info("Tiling  mode is enabled.")
+
+elsif $run_mode == "deep"
+  #=== HIER MODE ===
+  deep
+  logger.info("deep  mode is enabled.")
+
+elsif $run_mode == "flat"
+  #=== FLAT MODE ===
+  flat
+  logger.info("flat  mode is enabled.")
+
+else
+  #=== FLAT MODE ===
+  flat
+  logger.info("flat  mode is enabled.")
+
+end # run_mode
+
+#================================================
+#------------- LAYERS DEFINITIONS ---------------
+#================================================
+
+v5_xtor        = polygons(112, 1 )
+dualgate       = polygons(55 , 0 )
+poly2          = polygons(30 , 0 )
+nplus          = polygons(32 , 0 )
+pplus          = polygons(31 , 0 )
+comp           = polygons(22 , 0 )
+dnwell         = polygons(12 , 0 )
+nwell          = polygons(21 , 0 )
+otp_mk         = polygons(173, 5 )
+plfuse         = polygons(125, 5 )
+ymtp_mk        = polygons(86 , 17)
+
+logger.info("Starting deriving base layers.")
+#================================================
+#------------- LAYERS DERIVATIONS ---------------
+#================================================
+
+ncomp      =  comp      & nplus
+pcomp      =  comp      & pplus
+tgate      =  poly2     & comp
+ngate      =  nplus     & tgate
+pgate      =  pplus     & tgate
+
+#================================================
+#------------------ SWITCHES --------------------
+#================================================
+logger.info("Evaluate switches.")
+
+# FEOL
+if $feol == "false"
+  FEOL = $feol
+  logger.info("FEOL is disabled.")
+else
+  FEOL = "true"
+  logger.info("FEOL is enabled.")
+end # FEOL
+
+# BEOL
+if $beol == "false"
+  BEOL = $beol
+  logger.info("BEOL is disabled.")
+else
+  BEOL = "true"
+  logger.info("BEOL is enabled.")
+end # BEOL
+
+# connectivity rules
+if $conn_drc == "true"
+  CONNECTIVITY_RULES = $conn_drc
+  logger.info("connectivity rules are enabled.")
+else
+  CONNECTIVITY_RULES = false
+  logger.info("connectivity rules are disabled.")
+end # connectivity rules
+
+# METAL_TOP
+if $metal_top
+  METAL_TOP = $metal_top
+else
+  METAL_TOP = "9K"
+end # METAL_TOP
+
+logger.info("METAL_TOP Selected is %s" % [METAL_TOP])
+
+# METAL_LEVEL
+if $metal_level
+  METAL_LEVEL = $metal_level
+else
+  METAL_LEVEL = "6LM"
+end # METAL_LEVEL
+
+logger.info("METAL_STACK Selected is %s" % [METAL_LEVEL])
+
+# WEDGE
+if $wedge == "false"
+  WEDGE = $wedge
+else
+  WEDGE = "true"
+end # WEDGE
+
+logger.info("Wedge enabled  %s" % [WEDGE])
+
+# BALL
+if $ball == "false"
+  BALL = $ball
+else
+  BALL = "true"
+end # BALL
+
+logger.info("Ball enabled  %s" % [BALL])
+
+# GOLD
+if $gold == "false"
+  GOLD = $gold
+else
+  GOLD = "true"
+end # GOLD
+
+logger.info("Gold enabled  %s" % [GOLD])
+
+if $mim_option
+  MIM_OPTION = $mim_option
+else
+  MIM_OPTION = "Nan"
+end
+
+logger.info("MIM Option selected %s" % [MIM_OPTION])
+
+# OFFGRID
+if $offgrid == "false"
+  OFFGRID = false
+else
+  OFFGRID = true
+end # OFFGRID
+
+logger.info("Offgrid enabled  %s" % [OFFGRID])
+
+#================================================
+#--------------------YMTP_MK---------------------
+#================================================
+
+# Rule Y.NW.2b_3.3V: Min. Nwell Space (Outside DNWELL, Inside YMTP_MK) [Different potential]. is 1µm
+logger.info("Executing rule Y.NW.2b_3.3V")
+ynw2b_l1  = nwell.outside(dnwell).inside(ymtp_mk).space(1.um, euclidian).polygons(0.001).not_interacting(v5_xtor).not_interacting(dualgate)
+ynw2b_l1.output("Y.NW.2b_3.3V", "Y.NW.2b_3.3V : Min. Nwell Space (Outside DNWELL, Inside YMTP_MK) [Different potential]. : 1µm")
+ynw2b_l1.forget
+
+# Rule Y.NW.2b_5V: Min. Nwell Space (Outside DNWELL, Inside YMTP_MK) [Different potential]. is 1µm
+logger.info("Executing rule Y.NW.2b_5V")
+ynw2b_l1  = nwell.outside(dnwell).inside(ymtp_mk).space(1.um, euclidian).polygons(0.001).overlapping(dualgate)
+ynw2b_l1.output("Y.NW.2b_5V", "Y.NW.2b_5V : Min. Nwell Space (Outside DNWELL, Inside YMTP_MK) [Different potential]. : 1µm")
+ynw2b_l1.forget
+
+# rule Y.DF.4d_3.3V is not a DRC check
+
+# rule Y.DF.4d_5V is not a DRC check
+
+# Rule Y.DF.6_5V: Min. COMP extend beyond gate (it also means source/drain overhang) inside YMTP_MK. is 0.15µm
+logger.info("Executing rule Y.DF.6_5V")
+ydf6_l1 = comp.not(otp_mk).inside(ymtp_mk).enclosing(poly2.inside(ymtp_mk), 0.15.um, euclidian).polygons(0.001).overlapping(dualgate)
+ydf6_l1.output("Y.DF.6_5V", "Y.DF.6_5V : Min. COMP extend beyond gate (it also means source/drain overhang) inside YMTP_MK. : 0.15µm")
+ydf6_l1.forget
+
+# Rule Y.DF.16_3.3V: Min. space from (Nwell outside DNWELL) to (unrelated NCOMP outside Nwell and DNWELL) (inside YMTP_MK). is 0.27µm
+logger.info("Executing rule Y.DF.16_3.3V")
+ydf16_l1  = ncomp.outside(nwell).outside(dnwell).separation(nwell.outside(dnwell), 0.27.um, euclidian).polygons(0.001).not_interacting(v5_xtor).not_interacting(dualgate)
+ydf16_l1.output("Y.DF.16_3.3V", "Y.DF.16_3.3V : Min. space from (Nwell outside DNWELL) to (unrelated NCOMP outside Nwell and DNWELL) (inside YMTP_MK). : 0.27µm")
+ydf16_l1.forget
+
+# Rule Y.DF.16_5V: Min. space from (Nwell outside DNWELL) to (unrelated NCOMP outside Nwell and DNWELL) (inside YMTP_MK). is 0.23µm
+logger.info("Executing rule Y.DF.16_5V")
+ydf16_l1  = ncomp.outside(nwell).outside(dnwell).separation(nwell.outside(dnwell), 0.23.um, euclidian).polygons(0.001).overlapping(dualgate)
+ydf16_l1.output("Y.DF.16_5V", "Y.DF.16_5V : Min. space from (Nwell outside DNWELL) to (unrelated NCOMP outside Nwell and DNWELL) (inside YMTP_MK). : 0.23µm")
+ydf16_l1.forget
+
+# Rule Y.PL.1_3.3V: Interconnect Width (inside YMTP_MK). is 0.13µm
+logger.info("Executing rule Y.PL.1_3.3V")
+ypl1_l1  = poly2.outside(plfuse).and(ymtp_mk).width(0.13.um, euclidian).polygons(0.001).not_interacting(v5_xtor).not_interacting(dualgate)
+ypl1_l1.output("Y.PL.1_3.3V", "Y.PL.1_3.3V : Interconnect Width (inside YMTP_MK). : 0.13µm")
+ypl1_l1.forget
+
+# Rule Y.PL.1_5V: Interconnect Width (inside YMTP_MK). This rule is currently not applicable for 5V.
+logger.info("Executing rule Y.PL.1_5V")
+ypl1_l1 = poly2.outside(plfuse).and(ymtp_mk).overlapping(dualgate)
+ypl1_l1.output("Y.PL.1_5V", "Y.PL.1_5V : Interconnect Width (inside YMTP_MK). This rule is currently not applicable for 5V.")
+ypl1_l1.forget
+
+# Rule Y.PL.2_3.3V: Gate Width (Channel Length) (inside YMTP_MK). is 0.13µm
+logger.info("Executing rule Y.PL.2_3.3V")
+ypl2_l1  = poly2.edges.and(tgate.edges).not(otp_mk).and(ymtp_mk).width(0.13.um, euclidian).polygons(0.001).not_interacting(v5_xtor).not_interacting(dualgate)
+ypl2_l1.output("Y.PL.2_3.3V", "Y.PL.2_3.3V : Gate Width (Channel Length) (inside YMTP_MK). : 0.13µm")
+ypl2_l1.forget
+
+# Rule Y.PL.2_5V: Gate Width (Channel Length) (inside YMTP_MK). is 0.47µm
+logger.info("Executing rule Y.PL.2_5V")
+ypl2_l1  = poly2.edges.and(tgate.edges).not(otp_mk).and(ymtp_mk).width(0.47.um, euclidian).polygons(0.001).overlapping(dualgate)
+ypl2_l1.output("Y.PL.2_5V", "Y.PL.2_5V : Gate Width (Channel Length) (inside YMTP_MK). : 0.47µm")
+ypl2_l1.forget
+
+# Rule Y.PL.4_5V: Poly2 extension beyond COMP to form Poly2 end cap (inside YMTP_MK). is 0.16µm
+logger.info("Executing rule Y.PL.4_5V")
+ypl4_l1 = poly2.and(ymtp_mk).enclosing(comp.and(ymtp_mk), 0.16.um, euclidian).polygons(0.001).overlapping(dualgate)
+ypl4_l1.output("Y.PL.4_5V", "Y.PL.4_5V : Poly2 extension beyond COMP to form Poly2 end cap (inside YMTP_MK). : 0.16µm")
+ypl4_l1.forget
+
+# Rule Y.PL.5a_3.3V: Space from field Poly2 to unrelated COMP (inside YMTP_MK). Space from field Poly2 to Guard-ring (inside YMTP_MK). is 0.04µm
+logger.info("Executing rule Y.PL.5a_3.3V")
+ypl5a_l1  = poly2.and(ymtp_mk).separation(comp.and(ymtp_mk), 0.04.um, euclidian).polygons(0.001).not_interacting(v5_xtor).not_interacting(dualgate)
+ypl5a_l1.output("Y.PL.5a_3.3V", "Y.PL.5a_3.3V : Space from field Poly2 to unrelated COMP (inside YMTP_MK). Space from field Poly2 to Guard-ring (inside YMTP_MK). : 0.04µm")
+ypl5a_l1.forget
+
+# Rule Y.PL.5a_5V: Space from field Poly2 to unrelated COMP (inside YMTP_MK). Space from field Poly2 to Guard-ring (inside YMTP_MK). is 0.2µm
+logger.info("Executing rule Y.PL.5a_5V")
+ypl5a_l1  = poly2.and(ymtp_mk).separation(comp.and(ymtp_mk), 0.2.um, euclidian).polygons(0.001).overlapping(dualgate)
+ypl5a_l1.output("Y.PL.5a_5V", "Y.PL.5a_5V : Space from field Poly2 to unrelated COMP (inside YMTP_MK). Space from field Poly2 to Guard-ring (inside YMTP_MK). : 0.2µm")
+ypl5a_l1.forget
+
+# Rule Y.PL.5b_3.3V: Space from field Poly2 to related COMP (inside YMTP_MK). is 0.04µm
+logger.info("Executing rule Y.PL.5b_3.3V")
+ypl5b_l1  = poly2.and(ymtp_mk).separation(comp.and(ymtp_mk), 0.04.um, euclidian).polygons(0.001).not_interacting(v5_xtor).not_interacting(dualgate)
+ypl5b_l1.output("Y.PL.5b_3.3V", "Y.PL.5b_3.3V : Space from field Poly2 to related COMP (inside YMTP_MK). : 0.04µm")
+ypl5b_l1.forget
+
+# Rule Y.PL.5b_5V: Space from field Poly2 to related COMP (inside YMTP_MK). is 0.2µm
+logger.info("Executing rule Y.PL.5b_5V")
+ypl5b_l1  = poly2.and(ymtp_mk).separation(comp.and(ymtp_mk), 0.2.um, euclidian).polygons(0.001).overlapping(dualgate)
+ypl5b_l1.output("Y.PL.5b_5V", "Y.PL.5b_5V : Space from field Poly2 to related COMP (inside YMTP_MK). : 0.2µm")
+ypl5b_l1.forget
+
+# rule Y.PL.6_3.3V is not a DRC check
+
+# rule Y.PL.6_5V is not a DRC check
+
+# rule Y.LU.3_3.3V is not yet implemented
+
+# rule Y.LU.3_5V is not yet implemented
+
+
+exec_end_time = Time.now
+run_time = exec_end_time - exec_start_time
+logger.info("DRC Run time %f seconds" % [run_time])
+
