@@ -10,8 +10,6 @@ jobs:
   build_wheels:
     name: Wheels lambdapdk
     runs-on: ubuntu-latest
-    permissions:
-      id-token: write
 
     steps:
     - uses: actions/checkout@v4
@@ -22,6 +20,8 @@ jobs:
   publish:
     needs: [build_wheels]
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
     if: github.event_name == 'release' && github.event.action == 'published'
 
     steps:
