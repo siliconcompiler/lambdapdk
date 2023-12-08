@@ -1,9 +1,5 @@
 import os
-import pkg_resources
-try:
-    __version__ = pkg_resources.get_distribution('lambdapdk').version
-except:  # noqa E722
-    __version__ = None
+__version__ = "0.1.1"
 
 
 def register_data_source(chip):
