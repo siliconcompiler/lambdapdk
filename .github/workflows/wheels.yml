@@ -8,7 +8,7 @@ on:
 
 jobs:
   build_wheels:
-    name: Wheels lambdalib
+    name: Wheels lambdapdk
     runs-on: ubuntu-latest
 
     steps:
