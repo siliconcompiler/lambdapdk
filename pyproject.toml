@@ -1,0 +1,44 @@
+[build-system]
+requires = [
+    "setuptools >= 61.2"
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lambdapdk"
+authors = [{name = "Zero ASIC"}]
+description = "Library of open source Process Design Kits"
+readme = "README.md"
+urls = {Homepage = "https://github.com/siliconcompiler/lambdapdk"}
+requires-python = ">= 3.8"
+license = {file = "LICENSE"}
+dependencies = [
+    "siliconcompiler >= 0.17.0"
+]
+version = "0.1.0"
+
+[tool.pytest.ini_options]
+testpaths = "tests"
+timeout = "60"
+
+[project.optional-dependencies]
+# Dev dependencies.
+dev = [
+    "flake8 >= 5.0.0",
+    "pytest >= 6.2.4",
+    "pytest-timeout >= 2.1.0",
+    "tclint >= 0.1.4"
+]
+
+[tool.tclint]
+exclude = [
+    'build',
+    'scripts/build',
+    'dist',
+    # scripts from other repos
+    'lambdapdk/asap7/base/apr/example_innovus.tcl',
+    'lambdapdk/sky130/base/setup/netgen/lvs_setup.tcl'
+]
+
+[tool.tclint.style]
+line-length = 100
