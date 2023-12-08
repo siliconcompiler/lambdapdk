@@ -15,7 +15,10 @@ license = {file = "LICENSE"}
 dependencies = [
     "siliconcompiler >= 0.17.0"
 ]
-version = "0.1.0"
+dynamic = ['version']
+
+[tool.setuptools.dynamic]
+version = {attr = "lambdapdk.__version__"}
 
 [tool.pytest.ini_options]
 testpaths = "tests"
