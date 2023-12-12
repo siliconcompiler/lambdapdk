@@ -45,8 +45,8 @@ def setup(chip):
 
     pdkdir = os.path.join('lambdapdk', 'freepdk45', 'base')
 
-    register_data_source(chip)
     pdk = siliconcompiler.PDK(chip, process, package='lambdapdk')
+    register_data_source(pdk)
 
     # process name
     pdk.set('pdk', process, 'foundry', foundry)

@@ -6,11 +6,10 @@ def setup(chip):
     libs = []
     stackup = '5M1LI'
 
-    register_data_source(chip)
-
     for config in ('64x256',):
         mem_name = f'sky130_sram_1rw1r_{config}_8'
         lib = Library(chip, mem_name, package='lambdapdk')
+        register_data_source(lib)
         path_base = 'lambdapdk/sky130/libs/sky130sram'
         lib.add('output', stackup, 'lef', f'{path_base}/{mem_name}/lef/{mem_name}.lef.gz')
         lib.add('output', stackup, 'gds', f'{path_base}/{mem_name}/gds/{mem_name}.gds')

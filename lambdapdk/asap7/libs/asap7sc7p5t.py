@@ -4,8 +4,8 @@ from lambdapdk import register_data_source
 
 
 def _setup_lib(chip, libname, suffix):
-    register_data_source(chip)
     lib = siliconcompiler.Library(chip, libname, package='lambdapdk')
+    register_data_source(lib)
 
     process = 'asap7'
     stackup = '10M'
