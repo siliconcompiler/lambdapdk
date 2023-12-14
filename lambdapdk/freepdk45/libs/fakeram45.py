@@ -7,11 +7,10 @@ def setup(chip):
     stackup = '10M'
     corner = 'typical'
 
-    register_data_source(chip)
-
     for config in ('64x32', '128x32', '256x32', '256x64', '512x32', '512x64'):
         mem_name = f'fakeram45_{config}'
         lib = Library(chip, mem_name, package='lambdapdk')
+        register_data_source(lib)
         path_base = 'lambdapdk/freepdk45/libs/fakeram45'
         lib.add('output', stackup, 'lef', f'{path_base}/lef/{mem_name}.lef')
         lib.add('output', corner, 'nldm', f'{path_base}/nldm/{mem_name}.lib')

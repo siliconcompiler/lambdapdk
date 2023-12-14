@@ -14,8 +14,8 @@ def setup(chip):
     version = 'r1p0'
     corner = 'typical'
 
-    register_data_source(chip)
     lib = siliconcompiler.Library(chip, libname, package='lambdapdk')
+    register_data_source(lib)
 
     libdir = os.path.join('lambdapdk', process, 'libs', libname)
 

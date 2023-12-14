@@ -6,11 +6,10 @@ def setup(chip):
     libs = []
     stackup = '10M'
 
-    register_data_source(chip)
-
     for config in ('64x32', '128x32', '256x32', '256x64', '512x32', '512x64'):
         mem_name = f'fakeram7_{config}'
         lib = Library(chip, mem_name, package='lambdapdk')
+        register_data_source(lib)
         path_base = 'lambdapdk/asap7/libs/fakeram7'
         lib.add('output', stackup, 'lef', f'{path_base}/lef/{mem_name}.lef')
 

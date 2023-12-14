@@ -15,8 +15,8 @@ def setup(chip):
 
     libdir = os.path.join('lambdapdk', 'sky130', 'libs', libname)
 
-    register_data_source(chip)
     lib = siliconcompiler.Library(chip, libname, package='lambdapdk')
+    register_data_source(lib)
 
     # version
     lib.set('package', 'version', version)
