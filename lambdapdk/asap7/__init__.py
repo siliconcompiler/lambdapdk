@@ -73,6 +73,8 @@ def setup(chip):
     # Klayout setup file
     pdk.set('pdk', process, 'layermap', 'klayout', 'def', 'klayout', stackup,
             pdkdir + '/setup/klayout/asap7.lyt')
+    pdk.set('pdk', process, 'layermap', 'klayout', 'def', 'gds', stackup,
+            pdkdir + '/apr/asap7.layermap')
 
     pdk.set('pdk', process, 'display', 'klayout', stackup,
             pdkdir + '/setup/klayout/asap7.lyp')
@@ -104,6 +106,12 @@ def setup(chip):
             pdkdir + '/pex/openroad/typical.tcl')
     pdk.set('pdk', process, 'pexmodel', 'openroad-openrcx', stackup, 'typical',
             pdkdir + '/pex/openroad/typical.rules')
+
+    # Hide the DIEAREA layer 235/*.
+    pdk.set('pdk', process, 'var', 'klayout', 'hide_layers', stackup, '235/0')
+    pdk.set('pdk', process, 'var', 'klayout', 'hide_layers', stackup, '235/5')
+    # Hide boundary layer
+    pdk.set('pdk', process, 'var', 'klayout', 'hide_layers', stackup, '100/0')
 
     return pdk
 
