@@ -1,5 +1,5 @@
 import os
-__version__ = "0.1.3"
+__version__ = "0.1.4"
 
 
 def register_data_source(chip):
