@@ -1,1847 +1,1307 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-properties>
  <properties>
-  <frame-color>#e8f8f5</frame-color>
-  <fill-color>#e8f8f5</fill-color>
+  <expanded>false</expanded>
+  <frame-color>#ffff00</frame-color>
+  <fill-color>#ffff00</fill-color>
   <frame-brightness>0</frame-brightness>
   <fill-brightness>0</fill-brightness>
-  <dither-pattern>I1</dither-pattern>
-  <line-style/>
+  <dither-pattern>C3</dither-pattern>
+  <line-style>C18</line-style>
   <valid>true</valid>
   <visible>true</visible>
   <transparent>false</transparent>
-  <width/>
+  <width>1</width>
   <marked>false</marked>
   <xfill>false</xfill>
   <animation>0</animation>
-  <name>1    / 0     well drawing</name>
+  <name>well drawing - 1/0</name>
   <source>1/0@1</source>
  </properties>
  <properties>
-  <frame-color>#e8f8f5</frame-color>
-  <fill-color>#e8f8f5</fill-color>
+  <expanded>false</expanded>
+  <frame-color>#ffff00</frame-color>
+  <fill-color>#ffff00</fill-color>
   <frame-brightness>0</frame-brightness>
   <fill-brightness>0</fill-brightness>
-  <dither-pattern>I3</dither-pattern>
-  <line-style/>
+  <dither-pattern>I1</dither-pattern>
+  <line-style>C18</line-style>
   <valid>true</valid>
   <visible>true</visible>
   <transparent>false</transparent>
-  <width/>
+  <width>1</width>
   <marked>false</marked>
   <xfill>false</xfill>
   <animation>0</animation>
-  <name>1    / 251   well pin</name>
+  <name>well pin - 1/251</name>
   <source>1/251@1</source>
  </properties>
  <properties>
-  <frame-color>#e8f6f3</frame-color>
-  <fill-color>#e8f6f3</fill-color>
+  <expanded>false</expanded>
+  <frame-color>#00ff00</frame-color>
+  <fill-color>#00cc66</fill-color>
   <frame-brightness>0</frame-brightness>
   <fill-brightness>0</fill-brightness>
-  <dither-pattern>I1</dither-pattern>
-  <line-style/>
+  <dither-pattern>C24</dither-pattern>
+  <line-style>C18</line-style>
   <valid>true</valid>
   <visible>true</visible>
   <transparent>false</transparent>
-  <width/>
+  <width>1</width>
   <marked>false</marked>
   <xfill>false</xfill>
   <animation>0</animation>
-  <name>2    / 0     fin drawing</name>
+  <name>fin drawing - 2/0</name>
   <source>2/0@1</source>
  </properties>
  <properties>
-  <frame-color>#eafaf1</frame-color>
-  <fill-color>#eafaf1</fill-color>
+  <expanded>false</expanded>
+  <frame-color>#009aff</frame-color>
+  <fill-color>#009aff</fill-color>
   <frame-brightness>0</frame-brightness>
   <fill-brightness>0</fill-brightness>
-  <dither-pattern>I1</dither-pattern>
-  <line-style/>
+  <dither-pattern>C25</dither-pattern>
+  <line-style>C17</line-style>
   <valid>true</valid>
   <visible>true</visible>
   <transparent>false</transparent>
-  <width/>
+  <width>1</width>
   <marked>false</marked>
   <xfill>false</xfill>
   <animation>0</animation>
-  <name>7    / 0     Gate drawing</name>
-  <source>7/0@1</source>
- </properties>
- <properties>
-  <frame-color>#eafaf1</frame-color>
-  <fill-color>#eafaf1</fill-color>
-  <frame-brightness>0</frame-brightness>
-  <fill-brightness>0</fill-brightness>
-  <dither-pattern>I3</dither-pattern>
-  <line-style/>
-  <valid>true</valid>
-  <visible>true</visible>
-  <transparent>false</transparent>
-  <width/>
-  <marked>false</marked>
-  <xfill>false</xfill>
-  <animation>0</animation>
-  <name>7    / 251   Gate pin</name>
-  <source>7/251@1</source>
- </properties>
- <properties>
-  <frame-color>#eafaf1</frame-color>
-  <fill-color>#eafaf1</fill-color>
-  <frame-brightness>0</frame-brightness>
-  <fill-brightness>0</fill-brightness>
-  <dither-pattern>I5</dither-pattern>
-  <line-style/>
-  <valid>true</valid>
-  <visible>true</visible>
-  <transparent>false</transparent>
-  <width/>
-  <marked>false</marked>
-  <xfill>false</xfill>
-  <animation>0</animation>
-  <name>7    / 2     Gate label</name>
-  <source>7/2@1</source>
- </properties>
- <properties>
-  <frame-color>#eafaf1</frame-color>
-  <fill-color>#eafaf1</fill-color>
-  <frame-brightness>0</frame-brightness>
-  <fill-brightness>0</fill-brightness>
-  <dither-pattern>I7</dither-pattern>
-  <line-style/>
-  <valid>true</valid>
-  <visible>true</visible>
-  <transparent>false</transparent>
-  <width/>
-  <marked>false</marked>
-  <xfill>false</xfill>
-  <animation>0</animation>
-  <name>7    / 3     Gate net</name>
-  <source>7/3@1</source>
- </properties>
- <properties>
-  <frame-color>#e9f7ef</frame-color>
-  <fill-color>#e9f7ef</fill-color>
-  <frame-brightness>0</frame-brightness>
-  <fill-brightness>0</fill-brightness>
-  <dither-pattern>I1</dither-pattern>
-  <line-style/>
-  <valid>true</valid>
-  <visible>true</visible>
-  <transparent>false</transparent>
-  <width/>
-  <marked>false</marked>
-  <xfill>false</xfill>
-  <animation>0</animation>
-  <name>8    / 0     Dummy drawing</name>
+  <name>Dummy drawing - 8/0</name>
   <source>8/0@1</source>
  </properties>
  <properties>
-  <frame-color>#ebf5fb</frame-color>
-  <fill-color>#ebf5fb</fill-color>
+  <expanded>false</expanded>
+  <frame-color>#ff8000</frame-color>
+  <fill-color>#ff8000</fill-color>
   <frame-brightness>0</frame-brightness>
   <fill-brightness>0</fill-brightness>
-  <dither-pattern>I1</dither-pattern>
-  <line-style/>
+  <dither-pattern>C24</dither-pattern>
+  <line-style>C11</line-style>
   <valid>true</valid>
   <visible>true</visible>
   <transparent>false</transparent>
-  <width/>
+  <width>3</width>
   <marked>false</marked>
   <xfill>false</xfill>
   <animation>0</animation>
-  <name>10   / 0     GCut drawing</name>
-  <source>10/0@1</source>
- </properties>
- <properties>
-  <frame-color>#eaf2f8</frame-color>
-  <fill-color>#eaf2f8</fill-color>
-  <frame-brightness>0</frame-brightness>
-  <fill-brightness>0</fill-brightness>
-  <dither-pattern>I1</dither-pattern>
-  <line-style/>
-  <valid>true</valid>
-  <visible>true</visible>
-  <transparent>false</transparent>
-  <width/>
-  <marked>false</marked>
-  <xfill>false</xfill>
-  <animation>0</animation>
-  <name>11   / 0     Active drawing</name>
-  <source>11/0@1</source>
- </properties>
- <properties>
-  <frame-color>#f5eef8</frame-color>
-  <fill-color>#f5eef8</fill-color>
-  <frame-brightness>0</frame-brightness>
-  <fill-brightness>0</fill-brightness>
-  <dither-pattern>I1</dither-pattern>
-  <line-style/>
-  <valid>true</valid>
-  <visible>true</visible>
-  <transparent>false</transparent>
-  <width/>
-  <marked>false</marked>
-  <xfill>false</xfill>
-  <animation>0</animation>
-  <name>12   / 0     Nselect drawing</name>
-  <source>12/0@1</source>
- </properties>
- <properties>
-  <frame-color>#f4ecf7</frame-color>
-  <fill-color>#f4ecf7</fill-color>
-  <frame-brightness>0</frame-brightness>
-  <fill-brightness>0</fill-brightness>
-  <dither-pattern>I1</dither-pattern>
-  <line-style/>
-  <valid>true</valid>
-  <visible>true</visible>
-  <transparent>false</transparent>
-  <width/>
-  <marked>false</marked>
-  <xfill>false</xfill>
-  <animation>0</animation>
-  <name>13   / 0     Pselect drawing</name>
-  <source>13/0@1</source>
- </properties>
- <properties>
-  <frame-color>#ebedef</frame-color>
-  <fill-color>#ebedef</fill-color>
-  <frame-brightness>0</frame-brightness>
-  <fill-brightness>0</fill-brightness>
-  <dither-pattern>I1</dither-pattern>
-  <line-style/>
-  <valid>true</valid>
-  <visible>true</visible>
-  <transparent>false</transparent>
-  <width/>
-  <marked>false</marked>
-  <xfill>false</xfill>
-  <animation>0</animation>
-  <name>16   / 0     LIG drawing</name>
+  <name>LIG drawing - 16/0</name>
   <source>16/0@1</source>
  </properties>
  <properties>
-  <frame-color>#ebedef</frame-color>
-  <fill-color>#ebedef</fill-color>
+  <expanded>false</expanded>
+  <frame-color>#ff8000</frame-color>
+  <fill-color>#ff8000</fill-color>
   <frame-brightness>0</frame-brightness>
   <fill-brightness>0</fill-brightness>
-  <dither-pattern>I3</dither-pattern>
-  <line-style/>
+  <dither-pattern>I1</dither-pattern>
+  <line-style>C18</line-style>
   <valid>true</valid>
   <visible>true</visible>
   <transparent>false</transparent>
-  <width/>
+  <width>1</width>
   <marked>false</marked>
   <xfill>false</xfill>
   <animation>0</animation>
-  <name>16   / 251   LIG pin</name>
+  <name>LIG pin - 16/251</name>
   <source>16/251@1</source>
  </properties>
  <properties>
-  <frame-color>#ebedef</frame-color>
-  <fill-color>#ebedef</fill-color>
+  <expanded>false</expanded>
+  <frame-color>#ff8000</frame-color>
+  <fill-color>#ff8000</fill-color>
   <frame-brightness>0</frame-brightness>
   <fill-brightness>0</fill-brightness>
-  <dither-pattern>I5</dither-pattern>
-  <line-style/>
+  <dither-pattern>I1</dither-pattern>
+  <line-style>C18</line-style>
   <valid>true</valid>
   <visible>true</visible>
   <transparent>false</transparent>
-  <width/>
+  <width>1</width>
   <marked>false</marked>
   <xfill>false</xfill>
   <animation>0</animation>
-  <name>16   / 2     LIG label</name>
+  <name>LIG label - 16/2</name>
   <source>16/2@1</source>
  </properties>
  <properties>
-  <frame-color>#ebedef</frame-color>
-  <fill-color>#ebedef</fill-color>
+  <expanded>false</expanded>
+  <frame-color>#ff8000</frame-color>
+  <fill-color>#ff8000</fill-color>
   <frame-brightness>0</frame-brightness>
   <fill-brightness>0</fill-brightness>
-  <dither-pattern>I7</dither-pattern>
-  <line-style/>
+  <dither-pattern>C24</dither-pattern>
+  <line-style>C11</line-style>
   <valid>true</valid>
   <visible>true</visible>
   <transparent>false</transparent>
-  <width/>
+  <width>3</width>
   <marked>false</marked>
   <xfill>false</xfill>
   <animation>0</animation>
-  <name>16   / 3     LIG net</name>
+  <name>LIG net - 16/3</name>
   <source>16/3@1</source>
  </properties>
  <properties>
-  <frame-color>#ebedef</frame-color>
-  <fill-color>#ebedef</fill-color>
+  <expanded>false</expanded>
+  <frame-color>#ffff00</frame-color>
+  <fill-color>#ffff00</fill-color>
   <frame-brightness>0</frame-brightness>
   <fill-brightness>0</fill-brightness>
-  <dither-pattern>I9</dither-pattern>
-  <line-style/>
+  <dither-pattern>C25</dither-pattern>
+  <line-style>C11</line-style>
   <valid>true</valid>
   <visible>true</visible>
   <transparent>false</transparent>
-  <width/>
+  <width>3</width>
   <marked>false</marked>
   <xfill>false</xfill>
   <animation>0</animation>
-  <name>16   / 4     LIG blockage</name>
-  <source>16/4@1</source>
- </properties>
- <properties>
-  <frame-color>#eaecee</frame-color>
-  <fill-color>#eaecee</fill-color>
-  <frame-brightness>0</frame-brightness>
-  <fill-brightness>0</fill-brightness>
-  <dither-pattern>I1</dither-pattern>
-  <line-style/>
-  <valid>true</valid>
-  <visible>true</visible>
-  <transparent>false</transparent>
-  <width/>
-  <marked>false</marked>
-  <xfill>false</xfill>
-  <animation>0</animation>
-  <name>17   / 0     LISD drawing</name>
+  <name>LISD drawing - 17/0</name>
   <source>17/0@1</source>
  </properties>
  <properties>
-  <frame-color>#eaecee</frame-color>
-  <fill-color>#eaecee</fill-color>
+  <expanded>false</expanded>
+  <frame-color>#ffff00</frame-color>
+  <fill-color>#ffff00</fill-color>
   <frame-brightness>0</frame-brightness>
   <fill-brightness>0</fill-brightness>
-  <dither-pattern>I3</dither-pattern>
-  <line-style/>
+  <dither-pattern>I1</dither-pattern>
+  <line-style>C18</line-style>
   <valid>true</valid>
   <visible>true</visible>
   <transparent>false</transparent>
-  <width/>
+  <width>1</width>
   <marked>false</marked>
   <xfill>false</xfill>
   <animation>0</animation>
-  <name>17   / 251   LISD pin</name>
+  <name>LISD pin - 17/251</name>
   <source>17/251@1</source>
  </properties>
  <properties>
-  <frame-color>#eaecee</frame-color>
-  <fill-color>#eaecee</fill-color>
+  <expanded>false</expanded>
+  <frame-color>#ffff00</frame-color>
+  <fill-color>#ffff00</fill-color>
   <frame-brightness>0</frame-brightness>
   <fill-brightness>0</fill-brightness>
-  <dither-pattern>I5</dither-pattern>
-  <line-style/>
+  <dither-pattern>I1</dither-pattern>
+  <line-style>C18</line-style>
   <valid>true</valid>
   <visible>true</visible>
   <transparent>false</transparent>
-  <width/>
+  <width>1</width>
   <marked>false</marked>
   <xfill>false</xfill>
   <animation>0</animation>
-  <name>17   / 2     LISD label</name>
+  <name>LISD label - 17/2</name>
   <source>17/2@1</source>
  </properties>
  <properties>
-  <frame-color>#eaecee</frame-color>
-  <fill-color>#eaecee</fill-color>
+  <expanded>false</expanded>
+  <frame-color>#ffff00</frame-color>
+  <fill-color>#ffff00</fill-color>
   <frame-brightness>0</frame-brightness>
   <fill-brightness>0</fill-brightness>
-  <dither-pattern>I7</dither-pattern>
-  <line-style/>
+  <dither-pattern>C25</dither-pattern>
+  <line-style>C11</line-style>
   <valid>true</valid>
   <visible>true</visible>
   <transparent>false</transparent>
-  <width/>
+  <width>3</width>
   <marked>false</marked>
   <xfill>false</xfill>
   <animation>0</animation>
-  <name>17   / 3     LISD net</name>
+  <name>LISD net - 17/3</name>
   <source>17/3@1</source>
  </properties>
  <properties>
-  <frame-color>#eaecee</frame-color>
-  <fill-color>#eaecee</fill-color>
+  <expanded>false</expanded>
+  <frame-color>#ff00ff</frame-color>
+  <fill-color>#ff00ff</fill-color>
   <frame-brightness>0</frame-brightness>
   <fill-brightness>0</fill-brightness>
-  <dither-pattern>I9</dither-pattern>
-  <line-style/>
+  <dither-pattern>C25</dither-pattern>
+  <line-style>C18</line-style>
   <valid>true</valid>
   <visible>true</visible>
   <transparent>false</transparent>
-  <width/>
+  <width>1</width>
   <marked>false</marked>
-  <xfill>false</xfill>
+  <xfill>true</xfill>
   <animation>0</animation>
-  <name>17   / 4     LISD blockage</name>
-  <source>17/4@1</source>
- </properties>
- <properties>
-  <frame-color>#fef9e7</frame-color>
-  <fill-color>#fef9e7</fill-color>
-  <frame-brightness>0</frame-brightness>
-  <fill-brightness>0</fill-brightness>
-  <dither-pattern>I1</dither-pattern>
-  <line-style/>
-  <valid>true</valid>
-  <visible>true</visible>
-  <transparent>false</transparent>
-  <width/>
-  <marked>false</marked>
-  <xfill>false</xfill>
-  <animation>0</animation>
-  <name>18   / 0     V0 drawing</name>
+  <name>V0 drawing - 18/0</name>
   <source>18/0@1</source>
  </properties>
  <properties>
-  <frame-color>#fef9e7</frame-color>
-  <fill-color>#fef9e7</fill-color>
+  <expanded>false</expanded>
+  <frame-color>#0000ff</frame-color>
+  <fill-color>#0000ff</fill-color>
   <frame-brightness>0</frame-brightness>
   <fill-brightness>0</fill-brightness>
-  <dither-pattern>I3</dither-pattern>
-  <line-style/>
+  <dither-pattern>C18</dither-pattern>
+  <line-style>C18</line-style>
   <valid>true</valid>
   <visible>true</visible>
   <transparent>false</transparent>
-  <width/>
+  <width>1</width>
   <marked>false</marked>
   <xfill>false</xfill>
   <animation>0</animation>
-  <name>18   / 4     V0 blockage</name>
-  <source>18/4@1</source>
- </properties>
- <properties>
-  <frame-color>#fef9e7</frame-color>
-  <fill-color>#fef9e7</fill-color>
-  <frame-brightness>0</frame-brightness>
-  <fill-brightness>0</fill-brightness>
-  <dither-pattern>I5</dither-pattern>
-  <line-style/>
-  <valid>true</valid>
-  <visible>true</visible>
-  <transparent>false</transparent>
-  <width/>
-  <marked>false</marked>
-  <xfill>false</xfill>
-  <animation>0</animation>
-  <name>18   / 251   V0 PIN</name>
-  <source>18/251@1</source>
- </properties>
- <properties>
-  <frame-color>#fef5e7</frame-color>
-  <fill-color>#fef5e7</fill-color>
-  <frame-brightness>0</frame-brightness>
-  <fill-brightness>0</fill-brightness>
-  <dither-pattern>I1</dither-pattern>
-  <line-style/>
-  <valid>true</valid>
-  <visible>true</visible>
-  <transparent>false</transparent>
-  <width/>
-  <marked>false</marked>
-  <xfill>false</xfill>
-  <animation>0</animation>
-  <name>19   / 0     M1 drawing</name>
+  <name>M1 drawing - 19/0</name>
   <source>19/0@1</source>
  </properties>
  <properties>
-  <frame-color>#fef5e7</frame-color>
-  <fill-color>#fef5e7</fill-color>
+  <expanded>false</expanded>
+  <frame-color>#0000ff</frame-color>
+  <fill-color>#0000ff</fill-color>
   <frame-brightness>0</frame-brightness>
   <fill-brightness>0</fill-brightness>
-  <dither-pattern>I3</dither-pattern>
-  <line-style/>
+  <dither-pattern>I1</dither-pattern>
+  <line-style>C18</line-style>
   <valid>true</valid>
   <visible>true</visible>
   <transparent>false</transparent>
-  <width/>
+  <width>1</width>
   <marked>false</marked>
   <xfill>false</xfill>
   <animation>0</animation>
-  <name>19   / 251   M1 pin</name>
+  <name>M1 pin - 19/251</name>
   <source>19/251@1</source>
  </properties>
  <properties>
-  <frame-color>#fef5e7</frame-color>
-  <fill-color>#fef5e7</fill-color>
+  <expanded>false</expanded>
+  <frame-color>#0000ff</frame-color>
+  <fill-color>#0000ff</fill-color>
   <frame-brightness>0</frame-brightness>
   <fill-brightness>0</fill-brightness>
-  <dither-pattern>I5</dither-pattern>
-  <line-style/>
+  <dither-pattern>I1</dither-pattern>
+  <line-style>C18</line-style>
   <valid>true</valid>
   <visible>true</visible>
   <transparent>false</transparent>
-  <width/>
+  <width>1</width>
   <marked>false</marked>
   <xfill>false</xfill>
   <animation>0</animation>
-  <name>19   / 2     M1 label</name>
+  <name>M1 label - 19/2</name>
   <source>19/2@1</source>
  </properties>
  <properties>
-  <frame-color>#fef5e7</frame-color>
-  <fill-color>#fef5e7</fill-color>
+  <expanded>false</expanded>
+  <frame-color>#0000ff</frame-color>
+  <fill-color>#0000ff</fill-color>
   <frame-brightness>0</frame-brightness>
   <fill-brightness>0</fill-brightness>
-  <dither-pattern>I7</dither-pattern>
-  <line-style/>
+  <dither-pattern>C18</dither-pattern>
+  <line-style>C18</line-style>
   <valid>true</valid>
   <visible>true</visible>
   <transparent>false</transparent>
-  <width/>
+  <width>1</width>
   <marked>false</marked>
   <xfill>false</xfill>
   <animation>0</animation>
-  <name>19   / 3     M1 net</name>
+  <name>M1 net - 19/3</name>
   <source>19/3@1</source>
  </properties>
  <properties>
-  <frame-color>#fef5e7</frame-color>
-  <fill-color>#fef5e7</fill-color>
+  <expanded>false</expanded>
+  <frame-color>#0000ff</frame-color>
+  <fill-color>#0000ff</fill-color>
   <frame-brightness>0</frame-brightness>
   <fill-brightness>0</fill-brightness>
-  <dither-pattern>I9</dither-pattern>
-  <line-style/>
+  <dither-pattern>C18</dither-pattern>
+  <line-style>C18</line-style>
   <valid>true</valid>
   <visible>true</visible>
   <transparent>false</transparent>
-  <width/>
+  <width>1</width>
   <marked>false</marked>
   <xfill>false</xfill>
   <animation>0</animation>
-  <name>19   / 4     M1 blockage</name>
+  <name>M1 blockage - 19/4</name>
   <source>19/4@1</source>
  </properties>
  <properties>
-  <frame-color>#fdf2e9</frame-color>
-  <fill-color>#fdf2e9</fill-color>
+  <expanded>false</expanded>
+  <frame-color>#ff8000</frame-color>
+  <fill-color>#ff8000</fill-color>
   <frame-brightness>0</frame-brightness>
   <fill-brightness>0</fill-brightness>
-  <dither-pattern>I1</dither-pattern>
-  <line-style/>
+  <dither-pattern>C25</dither-pattern>
+  <line-style>C18</line-style>
   <valid>true</valid>
   <visible>true</visible>
   <transparent>false</transparent>
-  <width/>
+  <width>1</width>
   <marked>false</marked>
-  <xfill>false</xfill>
+  <xfill>true</xfill>
   <animation>0</animation>
-  <name>21   / 0     V1 drawing</name>
+  <name>V1 drawing - 21/0</name>
   <source>21/0@1</source>
  </properties>
  <properties>
-  <frame-color>#fdf2e9</frame-color>
-  <fill-color>#fdf2e9</fill-color>
+  <expanded>false</expanded>
+  <frame-color>#00ffff</frame-color>
+  <fill-color>#00ffff</fill-color>
   <frame-brightness>0</frame-brightness>
   <fill-brightness>0</fill-brightness>
-  <dither-pattern>I3</dither-pattern>
-  <line-style/>
+  <dither-pattern>C18</dither-pattern>
+  <line-style>C18</line-style>
   <valid>true</valid>
   <visible>true</visible>
   <transparent>false</transparent>
-  <width/>
+  <width>1</width>
   <marked>false</marked>
   <xfill>false</xfill>
   <animation>0</animation>
-  <name>21   / 4     V1 blockage</name>
-  <source>21/4@1</source>
- </properties>
- <properties>
-  <frame-color>#fdf2e9</frame-color>
-  <fill-color>#fdf2e9</fill-color>
-  <frame-brightness>0</frame-brightness>
-  <fill-brightness>0</fill-brightness>
-  <dither-pattern>I5</dither-pattern>
-  <line-style/>
-  <valid>true</valid>
-  <visible>true</visible>
-  <transparent>false</transparent>
-  <width/>
-  <marked>false</marked>
-  <xfill>false</xfill>
-  <animation>0</animation>
-  <name>21   / 251   V1 PIN</name>
-  <source>21/251@1</source>
- </properties>
- <properties>
-  <frame-color>#fbeee6</frame-color>
-  <fill-color>#fbeee6</fill-color>
-  <frame-brightness>0</frame-brightness>
-  <fill-brightness>0</fill-brightness>
-  <dither-pattern>I1</dither-pattern>
-  <line-style/>
-  <valid>true</valid>
-  <visible>true</visible>
-  <transparent>false</transparent>
-  <width/>
-  <marked>false</marked>
-  <xfill>false</xfill>
-  <animation>0</animation>
-  <name>20   / 0     M2 drawing</name>
+  <name>M2 drawing - 20/0</name>
   <source>20/0@1</source>
  </properties>
  <properties>
-  <frame-color>#fbeee6</frame-color>
-  <fill-color>#fbeee6</fill-color>
+  <expanded>false</expanded>
+  <frame-color>#00ffff</frame-color>
+  <fill-color>#00ffff</fill-color>
   <frame-brightness>0</frame-brightness>
   <fill-brightness>0</fill-brightness>
-  <dither-pattern>I3</dither-pattern>
-  <line-style/>
+  <dither-pattern>I1</dither-pattern>
+  <line-style>C18</line-style>
   <valid>true</valid>
   <visible>true</visible>
   <transparent>false</transparent>
-  <width/>
+  <width>1</width>
   <marked>false</marked>
   <xfill>false</xfill>
   <animation>0</animation>
-  <name>20   / 251   M2 pin</name>
+  <name>M2 pin - 20/251</name>
   <source>20/251@1</source>
  </properties>
  <properties>
-  <frame-color>#fbeee6</frame-color>
-  <fill-color>#fbeee6</fill-color>
+  <expanded>false</expanded>
+  <frame-color>#00ffff</frame-color>
+  <fill-color>#00ffff</fill-color>
   <frame-brightness>0</frame-brightness>
   <fill-brightness>0</fill-brightness>
-  <dither-pattern>I5</dither-pattern>
-  <line-style/>
+  <dither-pattern>I1</dither-pattern>
+  <line-style>C18</line-style>
   <valid>true</valid>
   <visible>true</visible>
   <transparent>false</transparent>
-  <width/>
+  <width>1</width>
   <marked>false</marked>
   <xfill>false</xfill>
   <animation>0</animation>
-  <name>20   / 2     M2 label</name>
+  <name>M2 label - 20/2</name>
   <source>20/2@1</source>
  </properties>
  <properties>
-  <frame-color>#fbeee6</frame-color>
-  <fill-color>#fbeee6</fill-color>
+  <expanded>false</expanded>
+  <frame-color>#00ffff</frame-color>
+  <fill-color>#00ffff</fill-color>
   <frame-brightness>0</frame-brightness>
   <fill-brightness>0</fill-brightness>
-  <dither-pattern>I7</dither-pattern>
-  <line-style/>
+  <dither-pattern>C18</dither-pattern>
+  <line-style>C18</line-style>
   <valid>true</valid>
   <visible>true</visible>
   <transparent>false</transparent>
-  <width/>
+  <width>1</width>
   <marked>false</marked>
   <xfill>false</xfill>
   <animation>0</animation>
-  <name>20   / 3     M2 net</name>
+  <name>M2 net - 20/3</name>
   <source>20/3@1</source>
  </properties>
  <properties>
-  <frame-color>#fbeee6</frame-color>
-  <fill-color>#fbeee6</fill-color>
+  <expanded>false</expanded>
+  <frame-color>#00ffff</frame-color>
+  <fill-color>#00ffff</fill-color>
   <frame-brightness>0</frame-brightness>
   <fill-brightness>0</fill-brightness>
-  <dither-pattern>I9</dither-pattern>
-  <line-style/>
+  <dither-pattern>I1</dither-pattern>
+  <line-style>C18</line-style>
   <valid>true</valid>
   <visible>true</visible>
   <transparent>false</transparent>
-  <width/>
+  <width>1</width>
   <marked>false</marked>
   <xfill>false</xfill>
   <animation>0</animation>
-  <name>20   / 4     M2 blockage</name>
+  <name>M2 blockage - 20/4</name>
   <source>20/4@1</source>
  </properties>
  <properties>
-  <frame-color>#fdedec</frame-color>
-  <fill-color>#fdedec</fill-color>
+  <expanded>false</expanded>
+  <frame-color>#d9e6ff</frame-color>
+  <fill-color>#d9e6ff</fill-color>
   <frame-brightness>0</frame-brightness>
   <fill-brightness>0</fill-brightness>
-  <dither-pattern>I1</dither-pattern>
-  <line-style/>
+  <dither-pattern>C25</dither-pattern>
+  <line-style>C18</line-style>
   <valid>true</valid>
   <visible>true</visible>
   <transparent>false</transparent>
-  <width/>
+  <width>1</width>
   <marked>false</marked>
-  <xfill>false</xfill>
+  <xfill>true</xfill>
   <animation>0</animation>
-  <name>25   / 0     V2 drawing</name>
+  <name>V2 drawing - 25/0</name>
   <source>25/0@1</source>
  </properties>
  <properties>
-  <frame-color>#fdedec</frame-color>
-  <fill-color>#fdedec</fill-color>
+  <expanded>false</expanded>
+  <frame-color>#ffbff2</frame-color>
+  <fill-color>#ffbff2</fill-color>
   <frame-brightness>0</frame-brightness>
   <fill-brightness>0</fill-brightness>
-  <dither-pattern>I3</dither-pattern>
-  <line-style/>
+  <dither-pattern>C18</dither-pattern>
+  <line-style>C18</line-style>
   <valid>true</valid>
   <visible>true</visible>
   <transparent>false</transparent>
-  <width/>
+  <width>1</width>
   <marked>false</marked>
   <xfill>false</xfill>
   <animation>0</animation>
-  <name>25   / 4     V2 blockage</name>
-  <source>25/4@1</source>
- </properties>
- <properties>
-  <frame-color>#fdedec</frame-color>
-  <fill-color>#fdedec</fill-color>
-  <frame-brightness>0</frame-brightness>
-  <fill-brightness>0</fill-brightness>
-  <dither-pattern>I5</dither-pattern>
-  <line-style/>
-  <valid>true</valid>
-  <visible>true</visible>
-  <transparent>false</transparent>
-  <width/>
-  <marked>false</marked>
-  <xfill>false</xfill>
-  <animation>0</animation>
-  <name>25   / 251   V2 PIN</name>
-  <source>25/251@1</source>
- </properties>
- <properties>
-  <frame-color>#f9ebea</frame-color>
-  <fill-color>#f9ebea</fill-color>
-  <frame-brightness>0</frame-brightness>
-  <fill-brightness>0</fill-brightness>
-  <dither-pattern>I1</dither-pattern>
-  <line-style/>
-  <valid>true</valid>
-  <visible>true</visible>
-  <transparent>false</transparent>
-  <width/>
-  <marked>false</marked>
-  <xfill>false</xfill>
-  <animation>0</animation>
-  <name>30   / 0     M3 drawing</name>
+  <name>M3 drawing - 30/0</name>
   <source>30/0@1</source>
  </properties>
  <properties>
-  <frame-color>#f9ebea</frame-color>
-  <fill-color>#f9ebea</fill-color>
+  <expanded>false</expanded>
+  <frame-color>#ffbff2</frame-color>
+  <fill-color>#ffbff2</fill-color>
   <frame-brightness>0</frame-brightness>
   <fill-brightness>0</fill-brightness>
-  <dither-pattern>I3</dither-pattern>
-  <line-style/>
+  <dither-pattern>I1</dither-pattern>
+  <line-style>C18</line-style>
   <valid>true</valid>
   <visible>true</visible>
   <transparent>false</transparent>
-  <width/>
+  <width>1</width>
   <marked>false</marked>
   <xfill>false</xfill>
   <animation>0</animation>
-  <name>30   / 251   M3 pin</name>
+  <name>M3 pin - 30/251</name>
   <source>30/251@1</source>
  </properties>
  <properties>
-  <frame-color>#f9ebea</frame-color>
-  <fill-color>#f9ebea</fill-color>
+  <expanded>false</expanded>
+  <frame-color>#ffbff2</frame-color>
+  <fill-color>#ffbff2</fill-color>
   <frame-brightness>0</frame-brightness>
   <fill-brightness>0</fill-brightness>
-  <dither-pattern>I5</dither-pattern>
-  <line-style/>
+  <dither-pattern>I1</dither-pattern>
+  <line-style>C18</line-style>
   <valid>true</valid>
   <visible>true</visible>
   <transparent>false</transparent>
-  <width/>
+  <width>1</width>
   <marked>false</marked>
   <xfill>false</xfill>
   <animation>0</animation>
-  <name>30   / 2     M3 label</name>
+  <name>M3 label - 30/2</name>
   <source>30/2@1</source>
  </properties>
  <properties>
-  <frame-color>#f9ebea</frame-color>
-  <fill-color>#f9ebea</fill-color>
+  <expanded>false</expanded>
+  <frame-color>#ffbff2</frame-color>
+  <fill-color>#ffbff2</fill-color>
   <frame-brightness>0</frame-brightness>
   <fill-brightness>0</fill-brightness>
-  <dither-pattern>I7</dither-pattern>
-  <line-style/>
+  <dither-pattern>C18</dither-pattern>
+  <line-style>C18</line-style>
   <valid>true</valid>
   <visible>true</visible>
   <transparent>false</transparent>
-  <width/>
+  <width>1</width>
   <marked>false</marked>
   <xfill>false</xfill>
   <animation>0</animation>
-  <name>30   / 3     M3 net</name>
+  <name>M3 net - 30/3</name>
   <source>30/3@1</source>
  </properties>
  <properties>
-  <frame-color>#f9ebea</frame-color>
-  <fill-color>#f9ebea</fill-color>
+  <expanded>false</expanded>
+  <frame-color>#ffbff2</frame-color>
+  <fill-color>#ffbff2</fill-color>
   <frame-brightness>0</frame-brightness>
   <fill-brightness>0</fill-brightness>
-  <dither-pattern>I9</dither-pattern>
-  <line-style/>
+  <dither-pattern>I1</dither-pattern>
+  <line-style>C18</line-style>
   <valid>true</valid>
   <visible>true</visible>
   <transparent>false</transparent>
-  <width/>
+  <width>1</width>
   <marked>false</marked>
   <xfill>false</xfill>
   <animation>0</animation>
-  <name>30   / 4     M3 blockage</name>
+  <name>M3 blockage - 30/4</name>
   <source>30/4@1</source>
  </properties>
  <properties>
-  <frame-color>#fdfefe</frame-color>
-  <fill-color>#fdfefe</fill-color>
+  <expanded>false</expanded>
+  <frame-color>#ffffcc</frame-color>
+  <fill-color>#ffffcc</fill-color>
   <frame-brightness>0</frame-brightness>
   <fill-brightness>0</fill-brightness>
-  <dither-pattern>I1</dither-pattern>
-  <line-style/>
+  <dither-pattern>C25</dither-pattern>
+  <line-style>C18</line-style>
   <valid>true</valid>
   <visible>true</visible>
   <transparent>false</transparent>
-  <width/>
+  <width>1</width>
   <marked>false</marked>
-  <xfill>false</xfill>
+  <xfill>true</xfill>
   <animation>0</animation>
-  <name>35   / 0     V3 drawing</name>
+  <name>V3 drawing - 35/0</name>
   <source>35/0@1</source>
  </properties>
  <properties>
-  <frame-color>#fdfefe</frame-color>
-  <fill-color>#fdfefe</fill-color>
+  <expanded>false</expanded>
+  <frame-color>#c08040</frame-color>
+  <fill-color>#c08040</fill-color>
   <frame-brightness>0</frame-brightness>
   <fill-brightness>0</fill-brightness>
-  <dither-pattern>I3</dither-pattern>
-  <line-style/>
+  <dither-pattern>C25</dither-pattern>
+  <line-style>C18</line-style>
   <valid>true</valid>
   <visible>true</visible>
   <transparent>false</transparent>
-  <width/>
+  <width>1</width>
   <marked>false</marked>
   <xfill>false</xfill>
   <animation>0</animation>
-  <name>35   / 4     V3 blockage</name>
-  <source>35/4@1</source>
- </properties>
- <properties>
-  <frame-color>#fdfefe</frame-color>
-  <fill-color>#fdfefe</fill-color>
-  <frame-brightness>0</frame-brightness>
-  <fill-brightness>0</fill-brightness>
-  <dither-pattern>I5</dither-pattern>
-  <line-style/>
-  <valid>true</valid>
-  <visible>true</visible>
-  <transparent>false</transparent>
-  <width/>
-  <marked>false</marked>
-  <xfill>false</xfill>
-  <animation>0</animation>
-  <name>35   / 251   V3 PIN</name>
-  <source>35/251@1</source>
- </properties>
- <properties>
-  <frame-color>#f8f9f9</frame-color>
-  <fill-color>#f8f9f9</fill-color>
-  <frame-brightness>0</frame-brightness>
-  <fill-brightness>0</fill-brightness>
-  <dither-pattern>I1</dither-pattern>
-  <line-style/>
-  <valid>true</valid>
-  <visible>true</visible>
-  <transparent>false</transparent>
-  <width/>
-  <marked>false</marked>
-  <xfill>false</xfill>
-  <animation>0</animation>
-  <name>40   / 0     M4 drawing</name>
+  <name>M4 drawing - 40/0</name>
   <source>40/0@1</source>
  </properties>
  <properties>
-  <frame-color>#f8f9f9</frame-color>
-  <fill-color>#f8f9f9</fill-color>
+  <expanded>false</expanded>
+  <frame-color>#c08040</frame-color>
+  <fill-color>#c08040</fill-color>
   <frame-brightness>0</frame-brightness>
   <fill-brightness>0</fill-brightness>
-  <dither-pattern>I3</dither-pattern>
-  <line-style/>
+  <dither-pattern>I1</dither-pattern>
+  <line-style>C18</line-style>
   <valid>true</valid>
   <visible>true</visible>
   <transparent>false</transparent>
-  <width/>
+  <width>1</width>
   <marked>false</marked>
   <xfill>false</xfill>
   <animation>0</animation>
-  <name>40   / 251   M4 pin</name>
+  <name>M4 pin - 40/251</name>
   <source>40/251@1</source>
  </properties>
  <properties>
-  <frame-color>#f8f9f9</frame-color>
-  <fill-color>#f8f9f9</fill-color>
+  <expanded>false</expanded>
+  <frame-color>#c08040</frame-color>
+  <fill-color>#c08040</fill-color>
   <frame-brightness>0</frame-brightness>
   <fill-brightness>0</fill-brightness>
-  <dither-pattern>I5</dither-pattern>
-  <line-style/>
+  <dither-pattern>I1</dither-pattern>
+  <line-style>C18</line-style>
   <valid>true</valid>
   <visible>true</visible>
   <transparent>false</transparent>
-  <width/>
+  <width>1</width>
   <marked>false</marked>
   <xfill>false</xfill>
   <animation>0</animation>
-  <name>40   / 2     M4 label</name>
+  <name>M4 label - 40/2</name>
   <source>40/2@1</source>
  </properties>
  <properties>
-  <frame-color>#f8f9f9</frame-color>
-  <fill-color>#f8f9f9</fill-color>
+  <expanded>false</expanded>
+  <frame-color>#c08040</frame-color>
+  <fill-color>#c08040</fill-color>
   <frame-brightness>0</frame-brightness>
   <fill-brightness>0</fill-brightness>
-  <dither-pattern>I7</dither-pattern>
-  <line-style/>
+  <dither-pattern>C25</dither-pattern>
+  <line-style>C18</line-style>
   <valid>true</valid>
   <visible>true</visible>
   <transparent>false</transparent>
-  <width/>
+  <width>1</width>
   <marked>false</marked>
   <xfill>false</xfill>
   <animation>0</animation>
-  <name>40   / 3     M4 net</name>
+  <name>M4 net - 40/3</name>
   <source>40/3@1</source>
  </properties>
  <properties>
-  <frame-color>#f8f9f9</frame-color>
-  <fill-color>#f8f9f9</fill-color>
+  <expanded>false</expanded>
+  <frame-color>#c08040</frame-color>
+  <fill-color>#c08040</fill-color>
   <frame-brightness>0</frame-brightness>
   <fill-brightness>0</fill-brightness>
-  <dither-pattern>I9</dither-pattern>
-  <line-style/>
+  <dither-pattern>I1</dither-pattern>
+  <line-style>C18</line-style>
   <valid>true</valid>
   <visible>true</visible>
   <transparent>false</transparent>
-  <width/>
+  <width>1</width>
   <marked>false</marked>
   <xfill>false</xfill>
   <animation>0</animation>
-  <name>40   / 4     M4 blockage</name>
+  <name>M4 blockage - 40/4</name>
   <source>40/4@1</source>
  </properties>
  <properties>
-  <frame-color>#f4f6f6</frame-color>
-  <fill-color>#f4f6f6</fill-color>
+  <expanded>false</expanded>
+  <frame-color>#5e00e6</frame-color>
+  <fill-color>#5e00e6</fill-color>
   <frame-brightness>0</frame-brightness>
   <fill-brightness>0</fill-brightness>
-  <dither-pattern>I1</dither-pattern>
-  <line-style/>
+  <dither-pattern>C25</dither-pattern>
+  <line-style>C18</line-style>
   <valid>true</valid>
   <visible>true</visible>
   <transparent>false</transparent>
-  <width/>
+  <width>1</width>
   <marked>false</marked>
-  <xfill>false</xfill>
+  <xfill>true</xfill>
   <animation>0</animation>
-  <name>45   / 0     V4 drawing</name>
+  <name>V4 drawing - 45/0</name>
   <source>45/0@1</source>
  </properties>
  <properties>
-  <frame-color>#f4f6f6</frame-color>
-  <fill-color>#f4f6f6</fill-color>
+  <expanded>false</expanded>
+  <frame-color>#39bfff</frame-color>
+  <fill-color>#39bfff</fill-color>
   <frame-brightness>0</frame-brightness>
   <fill-brightness>0</fill-brightness>
-  <dither-pattern>I3</dither-pattern>
-  <line-style/>
+  <dither-pattern>C25</dither-pattern>
+  <line-style>C18</line-style>
   <valid>true</valid>
   <visible>true</visible>
   <transparent>false</transparent>
-  <width/>
+  <width>1</width>
   <marked>false</marked>
   <xfill>false</xfill>
   <animation>0</animation>
-  <name>45   / 4     V4 blockage</name>
-  <source>45/4@1</source>
- </properties>
- <properties>
-  <frame-color>#f4f6f6</frame-color>
-  <fill-color>#f4f6f6</fill-color>
-  <frame-brightness>0</frame-brightness>
-  <fill-brightness>0</fill-brightness>
-  <dither-pattern>I5</dither-pattern>
-  <line-style/>
-  <valid>true</valid>
-  <visible>true</visible>
-  <transparent>false</transparent>
-  <width/>
-  <marked>false</marked>
-  <xfill>false</xfill>
-  <animation>0</animation>
-  <name>45   / 251   V4 PIN</name>
-  <source>45/251@1</source>
- </properties>
- <properties>
-  <frame-color>#f2f4f4</frame-color>
-  <fill-color>#f2f4f4</fill-color>
-  <frame-brightness>0</frame-brightness>
-  <fill-brightness>0</fill-brightness>
-  <dither-pattern>I1</dither-pattern>
-  <line-style/>
-  <valid>true</valid>
-  <visible>true</visible>
-  <transparent>false</transparent>
-  <width/>
-  <marked>false</marked>
-  <xfill>false</xfill>
-  <animation>0</animation>
-  <name>50   / 0     M5 drawing</name>
+  <name>M5 drawing - 50/0</name>
   <source>50/0@1</source>
  </properties>
  <properties>
-  <frame-color>#f2f4f4</frame-color>
-  <fill-color>#f2f4f4</fill-color>
+  <expanded>false</expanded>
+  <frame-color>#39bfff</frame-color>
+  <fill-color>#39bfff</fill-color>
   <frame-brightness>0</frame-brightness>
   <fill-brightness>0</fill-brightness>
-  <dither-pattern>I3</dither-pattern>
-  <line-style/>
+  <dither-pattern>I1</dither-pattern>
+  <line-style>C18</line-style>
   <valid>true</valid>
   <visible>true</visible>
   <transparent>false</transparent>
-  <width/>
+  <width>1</width>
   <marked>false</marked>
   <xfill>false</xfill>
   <animation>0</animation>
-  <name>50   / 251   M5 pin</name>
+  <name>M5 pin - 50/251</name>
   <source>50/251@1</source>
  </properties>
  <properties>
-  <frame-color>#f2f4f4</frame-color>
-  <fill-color>#f2f4f4</fill-color>
+  <expanded>false</expanded>
+  <frame-color>#39bfff</frame-color>
+  <fill-color>#39bfff</fill-color>
   <frame-brightness>0</frame-brightness>
   <fill-brightness>0</fill-brightness>
-  <dither-pattern>I5</dither-pattern>
-  <line-style/>
+  <dither-pattern>I1</dither-pattern>
+  <line-style>C18</line-style>
   <valid>true</valid>
   <visible>true</visible>
   <transparent>false</transparent>
-  <width/>
+  <width>1</width>
   <marked>false</marked>
   <xfill>false</xfill>
   <animation>0</animation>
-  <name>50   / 2     M5 label</name>
+  <name>M5 label - 50/2</name>
   <source>50/2@1</source>
  </properties>
  <properties>
-  <frame-color>#f2f4f4</frame-color>
-  <fill-color>#f2f4f4</fill-color>
+  <expanded>false</expanded>
+  <frame-color>#39bfff</frame-color>
+  <fill-color>#39bfff</fill-color>
   <frame-brightness>0</frame-brightness>
   <fill-brightness>0</fill-brightness>
-  <dither-pattern>I7</dither-pattern>
-  <line-style/>
+  <dither-pattern>C25</dither-pattern>
+  <line-style>C18</line-style>
   <valid>true</valid>
   <visible>true</visible>
   <transparent>false</transparent>
-  <width/>
+  <width>1</width>
   <marked>false</marked>
   <xfill>false</xfill>
   <animation>0</animation>
-  <name>50   / 3     M5 net</name>
+  <name>M5 net - 50/3</name>
   <source>50/3@1</source>
  </properties>
  <properties>
-  <frame-color>#f2f4f4</frame-color>
-  <fill-color>#f2f4f4</fill-color>
+  <expanded>false</expanded>
+  <frame-color>#39bfff</frame-color>
+  <fill-color>#39bfff</fill-color>
   <frame-brightness>0</frame-brightness>
   <fill-brightness>0</fill-brightness>
-  <dither-pattern>I9</dither-pattern>
-  <line-style/>
+  <dither-pattern>I1</dither-pattern>
+  <line-style>C18</line-style>
   <valid>true</valid>
   <visible>true</visible>
   <transparent>false</transparent>
-  <width/>
+  <width>1</width>
   <marked>false</marked>
   <xfill>false</xfill>
   <animation>0</animation>
-  <name>50   / 4     M5 blockage</name>
+  <name>M5 blockage - 50/4</name>
   <source>50/4@1</source>
  </properties>
  <properties>
-  <frame-color>#d1f2eb</frame-color>
-  <fill-color>#d1f2eb</fill-color>
+  <expanded>false</expanded>
+  <frame-color>#00cc66</frame-color>
+  <fill-color>#00cc66</fill-color>
   <frame-brightness>0</frame-brightness>
   <fill-brightness>0</fill-brightness>
-  <dither-pattern>I1</dither-pattern>
-  <line-style/>
+  <dither-pattern>C25</dither-pattern>
+  <line-style>C18</line-style>
   <valid>true</valid>
   <visible>true</visible>
   <transparent>false</transparent>
-  <width/>
+  <width>1</width>
   <marked>false</marked>
-  <xfill>false</xfill>
+  <xfill>true</xfill>
   <animation>0</animation>
-  <name>55   / 0     V5 drawing</name>
+  <name>V5 drawing - 55/0</name>
   <source>55/0@1</source>
  </properties>
  <properties>
-  <frame-color>#d1f2eb</frame-color>
-  <fill-color>#d1f2eb</fill-color>
+  <expanded>false</expanded>
+  <frame-color>#ff0000</frame-color>
+  <fill-color>#ff0000</fill-color>
   <frame-brightness>0</frame-brightness>
   <fill-brightness>0</fill-brightness>
-  <dither-pattern>I3</dither-pattern>
-  <line-style/>
+  <dither-pattern>C21</dither-pattern>
+  <line-style>C18</line-style>
   <valid>true</valid>
   <visible>true</visible>
   <transparent>false</transparent>
-  <width/>
+  <width>1</width>
   <marked>false</marked>
   <xfill>false</xfill>
   <animation>0</animation>
-  <name>55   / 4     V5 blockage</name>
-  <source>55/4@1</source>
- </properties>
- <properties>
-  <frame-color>#d1f2eb</frame-color>
-  <fill-color>#d1f2eb</fill-color>
-  <frame-brightness>0</frame-brightness>
-  <fill-brightness>0</fill-brightness>
-  <dither-pattern>I5</dither-pattern>
-  <line-style/>
-  <valid>true</valid>
-  <visible>true</visible>
-  <transparent>false</transparent>
-  <width/>
-  <marked>false</marked>
-  <xfill>false</xfill>
-  <animation>0</animation>
-  <name>55   / 251   V5 PIN</name>
-  <source>55/251@1</source>
- </properties>
- <properties>
-  <frame-color>#d0ece7</frame-color>
-  <fill-color>#d0ece7</fill-color>
-  <frame-brightness>0</frame-brightness>
-  <fill-brightness>0</fill-brightness>
-  <dither-pattern>I1</dither-pattern>
-  <line-style/>
-  <valid>true</valid>
-  <visible>true</visible>
-  <transparent>false</transparent>
-  <width/>
-  <marked>false</marked>
-  <xfill>false</xfill>
-  <animation>0</animation>
-  <name>60   / 0     M6 drawing</name>
+  <name>M6 drawing - 60/0</name>
   <source>60/0@1</source>
  </properties>
  <properties>
-  <frame-color>#d0ece7</frame-color>
-  <fill-color>#d0ece7</fill-color>
+  <expanded>false</expanded>
+  <frame-color>#ff0000</frame-color>
+  <fill-color>#ff0000</fill-color>
   <frame-brightness>0</frame-brightness>
   <fill-brightness>0</fill-brightness>
-  <dither-pattern>I3</dither-pattern>
-  <line-style/>
+  <dither-pattern>I1</dither-pattern>
+  <line-style>C18</line-style>
   <valid>true</valid>
   <visible>true</visible>
   <transparent>false</transparent>
-  <width/>
+  <width>1</width>
   <marked>false</marked>
   <xfill>false</xfill>
   <animation>0</animation>
-  <name>60   / 251   M6 pin</name>
+  <name>M6 pin - 60/251</name>
   <source>60/251@1</source>
  </properties>
  <properties>
-  <frame-color>#d0ece7</frame-color>
-  <fill-color>#d0ece7</fill-color>
+  <expanded>false</expanded>
+  <frame-color>#ff0000</frame-color>
+  <fill-color>#ff0000</fill-color>
   <frame-brightness>0</frame-brightness>
   <fill-brightness>0</fill-brightness>
-  <dither-pattern>I5</dither-pattern>
-  <line-style/>
+  <dither-pattern>I1</dither-pattern>
+  <line-style>C18</line-style>
   <valid>true</valid>
   <visible>true</visible>
   <transparent>false</transparent>
-  <width/>
+  <width>1</width>
   <marked>false</marked>
   <xfill>false</xfill>
   <animation>0</animation>
-  <name>60   / 2     M6 label</name>
+  <name>M6 label - 60/2</name>
   <source>60/2@1</source>
  </properties>
  <properties>
-  <frame-color>#d0ece7</frame-color>
-  <fill-color>#d0ece7</fill-color>
+  <expanded>false</expanded>
+  <frame-color>#ff0000</frame-color>
+  <fill-color>#ff0000</fill-color>
   <frame-brightness>0</frame-brightness>
   <fill-brightness>0</fill-brightness>
-  <dither-pattern>I7</dither-pattern>
-  <line-style/>
+  <dither-pattern>C21</dither-pattern>
+  <line-style>C18</line-style>
   <valid>true</valid>
   <visible>true</visible>
   <transparent>false</transparent>
-  <width/>
+  <width>1</width>
   <marked>false</marked>
   <xfill>false</xfill>
   <animation>0</animation>
-  <name>60   / 3     M6 net</name>
+  <name>M6 net - 60/3</name>
   <source>60/3@1</source>
  </properties>
  <properties>
-  <frame-color>#d0ece7</frame-color>
-  <fill-color>#d0ece7</fill-color>
+  <expanded>false</expanded>
+  <frame-color>#ff0000</frame-color>
+  <fill-color>#ff0000</fill-color>
   <frame-brightness>0</frame-brightness>
   <fill-brightness>0</fill-brightness>
-  <dither-pattern>I9</dither-pattern>
-  <line-style/>
+  <dither-pattern>I1</dither-pattern>
+  <line-style>C18</line-style>
   <valid>true</valid>
   <visible>true</visible>
   <transparent>false</transparent>
-  <width/>
+  <width>1</width>
   <marked>false</marked>
   <xfill>false</xfill>
   <animation>0</animation>
-  <name>60   / 4     M6 blockage</name>
+  <name>M6 blockage - 60/4</name>
   <source>60/4@1</source>
  </properties>
  <properties>
-  <frame-color>#d5f5e3</frame-color>
-  <fill-color>#d5f5e3</fill-color>
+  <expanded>false</expanded>
+  <frame-color>#00ffff</frame-color>
+  <fill-color>#00ffff</fill-color>
   <frame-brightness>0</frame-brightness>
   <fill-brightness>0</fill-brightness>
-  <dither-pattern>I1</dither-pattern>
-  <line-style/>
+  <dither-pattern>C25</dither-pattern>
+  <line-style>C18</line-style>
   <valid>true</valid>
   <visible>true</visible>
   <transparent>false</transparent>
-  <width/>
+  <width>1</width>
   <marked>false</marked>
-  <xfill>false</xfill>
+  <xfill>true</xfill>
   <animation>0</animation>
-  <name>65   / 0     V6 drawing</name>
+  <name>V6 drawing - 65/0</name>
   <source>65/0@1</source>
  </properties>
  <properties>
-  <frame-color>#d5f5e3</frame-color>
-  <fill-color>#d5f5e3</fill-color>
+  <expanded>false</expanded>
+  <frame-color>#e1b4fa</frame-color>
+  <fill-color>#e1b4fa</fill-color>
   <frame-brightness>0</frame-brightness>
   <fill-brightness>0</fill-brightness>
-  <dither-pattern>I3</dither-pattern>
-  <line-style/>
+  <dither-pattern>C9</dither-pattern>
+  <line-style>C18</line-style>
   <valid>true</valid>
   <visible>true</visible>
   <transparent>false</transparent>
-  <width/>
+  <width>1</width>
   <marked>false</marked>
   <xfill>false</xfill>
   <animation>0</animation>
-  <name>65   / 4     V6 blockage</name>
-  <source>65/4@1</source>
- </properties>
- <properties>
-  <frame-color>#d5f5e3</frame-color>
-  <fill-color>#d5f5e3</fill-color>
-  <frame-brightness>0</frame-brightness>
-  <fill-brightness>0</fill-brightness>
-  <dither-pattern>I5</dither-pattern>
-  <line-style/>
-  <valid>true</valid>
-  <visible>true</visible>
-  <transparent>false</transparent>
-  <width/>
-  <marked>false</marked>
-  <xfill>false</xfill>
-  <animation>0</animation>
-  <name>65   / 251   V6 PIN</name>
-  <source>65/251@1</source>
- </properties>
- <properties>
-  <frame-color>#d4efdf</frame-color>
-  <fill-color>#d4efdf</fill-color>
-  <frame-brightness>0</frame-brightness>
-  <fill-brightness>0</fill-brightness>
-  <dither-pattern>I1</dither-pattern>
-  <line-style/>
-  <valid>true</valid>
-  <visible>true</visible>
-  <transparent>false</transparent>
-  <width/>
-  <marked>false</marked>
-  <xfill>false</xfill>
-  <animation>0</animation>
-  <name>70   / 0     M7 drawing</name>
+  <name>M7 drawing - 70/0</name>
   <source>70/0@1</source>
  </properties>
  <properties>
-  <frame-color>#d4efdf</frame-color>
-  <fill-color>#d4efdf</fill-color>
+  <expanded>false</expanded>
+  <frame-color>#e1b4fa</frame-color>
+  <fill-color>#e1b4fa</fill-color>
   <frame-brightness>0</frame-brightness>
   <fill-brightness>0</fill-brightness>
-  <dither-pattern>I3</dither-pattern>
-  <line-style/>
+  <dither-pattern>I1</dither-pattern>
+  <line-style>C18</line-style>
   <valid>true</valid>
   <visible>true</visible>
   <transparent>false</transparent>
-  <width/>
+  <width>1</width>
   <marked>false</marked>
   <xfill>false</xfill>
   <animation>0</animation>
-  <name>70   / 251   M7 pin</name>
+  <name>M7 pin - 70/251</name>
   <source>70/251@1</source>
  </properties>
  <properties>
-  <frame-color>#d4efdf</frame-color>
-  <fill-color>#d4efdf</fill-color>
+  <expanded>false</expanded>
+  <frame-color>#e1b4fa</frame-color>
+  <fill-color>#e1b4fa</fill-color>
   <frame-brightness>0</frame-brightness>
   <fill-brightness>0</fill-brightness>
-  <dither-pattern>I5</dither-pattern>
-  <line-style/>
+  <dither-pattern>I1</dither-pattern>
+  <line-style>C18</line-style>
   <valid>true</valid>
   <visible>true</visible>
   <transparent>false</transparent>
-  <width/>
+  <width>1</width>
   <marked>false</marked>
   <xfill>false</xfill>
   <animation>0</animation>
-  <name>70   / 2     M7 label</name>
+  <name>M7 label - 70/2</name>
   <source>70/2@1</source>
  </properties>
  <properties>
-  <frame-color>#d4efdf</frame-color>
-  <fill-color>#d4efdf</fill-color>
+  <expanded>false</expanded>
+  <frame-color>#e1b4fa</frame-color>
+  <fill-color>#e1b4fa</fill-color>
   <frame-brightness>0</frame-brightness>
   <fill-brightness>0</fill-brightness>
-  <dither-pattern>I7</dither-pattern>
-  <line-style/>
+  <dither-pattern>C9</dither-pattern>
+  <line-style>C18</line-style>
   <valid>true</valid>
   <visible>true</visible>
   <transparent>false</transparent>
-  <width/>
+  <width>1</width>
   <marked>false</marked>
   <xfill>false</xfill>
   <animation>0</animation>
-  <name>70   / 3     M7 net</name>
+  <name>M7 net - 70/3</name>
   <source>70/3@1</source>
  </properties>
  <properties>
-  <frame-color>#d4efdf</frame-color>
-  <fill-color>#d4efdf</fill-color>
+  <expanded>false</expanded>
+  <frame-color>#e1b4fa</frame-color>
+  <fill-color>#e1b4fa</fill-color>
   <frame-brightness>0</frame-brightness>
   <fill-brightness>0</fill-brightness>
-  <dither-pattern>I9</dither-pattern>
-  <line-style/>
+  <dither-pattern>I1</dither-pattern>
+  <line-style>C18</line-style>
   <valid>true</valid>
   <visible>true</visible>
   <transparent>false</transparent>
-  <width/>
+  <width>1</width>
   <marked>false</marked>
   <xfill>false</xfill>
   <animation>0</animation>
-  <name>70   / 4     M7 blockage</name>
+  <name>M7 blockage - 70/4</name>
   <source>70/4@1</source>
  </properties>
  <properties>
-  <frame-color>#d6eaf8</frame-color>
-  <fill-color>#d6eaf8</fill-color>
+  <expanded>false</expanded>
+  <frame-color>#ffffff</frame-color>
+  <fill-color>#ffffff</fill-color>
   <frame-brightness>0</frame-brightness>
   <fill-brightness>0</fill-brightness>
-  <dither-pattern>I1</dither-pattern>
-  <line-style/>
+  <dither-pattern>C25</dither-pattern>
+  <line-style>C18</line-style>
   <valid>true</valid>
   <visible>true</visible>
   <transparent>false</transparent>
-  <width/>
+  <width>1</width>
   <marked>false</marked>
-  <xfill>false</xfill>
+  <xfill>true</xfill>
   <animation>0</animation>
-  <name>75   / 0     V7 drawing</name>
+  <name>V7 drawing - 75/0</name>
   <source>75/0@1</source>
  </properties>
  <properties>
-  <frame-color>#d6eaf8</frame-color>
-  <fill-color>#d6eaf8</fill-color>
+  <expanded>false</expanded>
+  <frame-color>#268c6b</frame-color>
+  <fill-color>#268c6b</fill-color>
   <frame-brightness>0</frame-brightness>
   <fill-brightness>0</fill-brightness>
-  <dither-pattern>I3</dither-pattern>
-  <line-style/>
+  <dither-pattern>C3</dither-pattern>
+  <line-style>C18</line-style>
   <valid>true</valid>
   <visible>true</visible>
   <transparent>false</transparent>
-  <width/>
+  <width>1</width>
   <marked>false</marked>
   <xfill>false</xfill>
   <animation>0</animation>
-  <name>75   / 4     V7 blockage</name>
-  <source>75/4@1</source>
- </properties>
- <properties>
-  <frame-color>#d6eaf8</frame-color>
-  <fill-color>#d6eaf8</fill-color>
-  <frame-brightness>0</frame-brightness>
-  <fill-brightness>0</fill-brightness>
-  <dither-pattern>I5</dither-pattern>
-  <line-style/>
-  <valid>true</valid>
-  <visible>true</visible>
-  <transparent>false</transparent>
-  <width/>
-  <marked>false</marked>
-  <xfill>false</xfill>
-  <animation>0</animation>
-  <name>75   / 251   V7 PIN</name>
-  <source>75/251@1</source>
- </properties>
- <properties>
-  <frame-color>#d4e6f1</frame-color>
-  <fill-color>#d4e6f1</fill-color>
-  <frame-brightness>0</frame-brightness>
-  <fill-brightness>0</fill-brightness>
-  <dither-pattern>I1</dither-pattern>
-  <line-style/>
-  <valid>true</valid>
-  <visible>true</visible>
-  <transparent>false</transparent>
-  <width/>
-  <marked>false</marked>
-  <xfill>false</xfill>
-  <animation>0</animation>
-  <name>80   / 0     M8 drawing</name>
+  <name>M8 drawing - 80/0</name>
   <source>80/0@1</source>
  </properties>
  <properties>
-  <frame-color>#d4e6f1</frame-color>
-  <fill-color>#d4e6f1</fill-color>
+  <expanded>false</expanded>
+  <frame-color>#268c6b</frame-color>
+  <fill-color>#268c6b</fill-color>
   <frame-brightness>0</frame-brightness>
   <fill-brightness>0</fill-brightness>
-  <dither-pattern>I3</dither-pattern>
-  <line-style/>
+  <dither-pattern>I1</dither-pattern>
+  <line-style>C18</line-style>
   <valid>true</valid>
   <visible>true</visible>
   <transparent>false</transparent>
-  <width/>
+  <width>1</width>
   <marked>false</marked>
   <xfill>false</xfill>
   <animation>0</animation>
-  <name>80   / 251   M8 pin</name>
+  <name>M8 pin - 80/251</name>
   <source>80/251@1</source>
  </properties>
  <properties>
-  <frame-color>#d4e6f1</frame-color>
-  <fill-color>#d4e6f1</fill-color>
+  <expanded>false</expanded>
+  <frame-color>#268c6b</frame-color>
+  <fill-color>#268c6b</fill-color>
   <frame-brightness>0</frame-brightness>
   <fill-brightness>0</fill-brightness>
-  <dither-pattern>I5</dither-pattern>
-  <line-style/>
+  <dither-pattern>I1</dither-pattern>
+  <line-style>C18</line-style>
   <valid>true</valid>
   <visible>true</visible>
   <transparent>false</transparent>
-  <width/>
+  <width>1</width>
   <marked>false</marked>
   <xfill>false</xfill>
   <animation>0</animation>
-  <name>80   / 2     M8 label</name>
+  <name>M8 label - 80/2</name>
   <source>80/2@1</source>
  </properties>
  <properties>
-  <frame-color>#d4e6f1</frame-color>
-  <fill-color>#d4e6f1</fill-color>
+  <expanded>false</expanded>
+  <frame-color>#268c6b</frame-color>
+  <fill-color>#268c6b</fill-color>
   <frame-brightness>0</frame-brightness>
   <fill-brightness>0</fill-brightness>
-  <dither-pattern>I7</dither-pattern>
-  <line-style/>
+  <dither-pattern>C3</dither-pattern>
+  <line-style>C18</line-style>
   <valid>true</valid>
   <visible>true</visible>
   <transparent>false</transparent>
-  <width/>
+  <width>1</width>
   <marked>false</marked>
   <xfill>false</xfill>
   <animation>0</animation>
-  <name>80   / 3     M8 net</name>
+  <name>M8 net - 80/3</name>
   <source>80/3@1</source>
  </properties>
  <properties>
-  <frame-color>#d4e6f1</frame-color>
-  <fill-color>#d4e6f1</fill-color>
+  <expanded>false</expanded>
+  <frame-color>#268c6b</frame-color>
+  <fill-color>#268c6b</fill-color>
   <frame-brightness>0</frame-brightness>
   <fill-brightness>0</fill-brightness>
-  <dither-pattern>I9</dither-pattern>
-  <line-style/>
+  <dither-pattern>I1</dither-pattern>
+  <line-style>C18</line-style>
   <valid>true</valid>
   <visible>true</visible>
   <transparent>false</transparent>
-  <width/>
+  <width>1</width>
   <marked>false</marked>
   <xfill>false</xfill>
   <animation>0</animation>
-  <name>80   / 4     M8 blockage</name>
+  <name>M8 blockage - 80/4</name>
   <source>80/4@1</source>
  </properties>
  <properties>
-  <frame-color>#ebdef0</frame-color>
-  <fill-color>#ebdef0</fill-color>
+  <expanded>false</expanded>
+  <frame-color>#bf4026</frame-color>
+  <fill-color>#bf4026</fill-color>
   <frame-brightness>0</frame-brightness>
   <fill-brightness>0</fill-brightness>
-  <dither-pattern>I1</dither-pattern>
-  <line-style/>
+  <dither-pattern>C25</dither-pattern>
+  <line-style>C18</line-style>
   <valid>true</valid>
   <visible>true</visible>
   <transparent>false</transparent>
-  <width/>
+  <width>1</width>
   <marked>false</marked>
-  <xfill>false</xfill>
+  <xfill>true</xfill>
   <animation>0</animation>
-  <name>85   / 0     V8 drawing</name>
+  <name>V8 drawing - 85/0</name>
   <source>85/0@1</source>
  </properties>
  <properties>
-  <frame-color>#ebdef0</frame-color>
-  <fill-color>#ebdef0</fill-color>
+  <expanded>false</expanded>
+  <frame-color>#5e00e6</frame-color>
+  <fill-color>#5e00e6</fill-color>
   <frame-brightness>0</frame-brightness>
   <fill-brightness>0</fill-brightness>
-  <dither-pattern>I3</dither-pattern>
-  <line-style/>
+  <dither-pattern>C2</dither-pattern>
+  <line-style>C18</line-style>
   <valid>true</valid>
   <visible>true</visible>
   <transparent>false</transparent>
-  <width/>
+  <width>1</width>
   <marked>false</marked>
   <xfill>false</xfill>
   <animation>0</animation>
-  <name>85   / 4     V8 blockage</name>
-  <source>85/4@1</source>
- </properties>
- <properties>
-  <frame-color>#ebdef0</frame-color>
-  <fill-color>#ebdef0</fill-color>
-  <frame-brightness>0</frame-brightness>
-  <fill-brightness>0</fill-brightness>
-  <dither-pattern>I5</dither-pattern>
-  <line-style/>
-  <valid>true</valid>
-  <visible>true</visible>
-  <transparent>false</transparent>
-  <width/>
-  <marked>false</marked>
-  <xfill>false</xfill>
-  <animation>0</animation>
-  <name>85   / 251   V8 PIN</name>
-  <source>85/251@1</source>
- </properties>
- <properties>
-  <frame-color>#e8daef</frame-color>
-  <fill-color>#e8daef</fill-color>
-  <frame-brightness>0</frame-brightness>
-  <fill-brightness>0</fill-brightness>
-  <dither-pattern>I1</dither-pattern>
-  <line-style/>
-  <valid>true</valid>
-  <visible>true</visible>
-  <transparent>false</transparent>
-  <width/>
-  <marked>false</marked>
-  <xfill>false</xfill>
-  <animation>0</animation>
-  <name>90   / 0     M9 drawing</name>
+  <name>M9 drawing - 90/0</name>
   <source>90/0@1</source>
  </properties>
  <properties>
-  <frame-color>#e8daef</frame-color>
-  <fill-color>#e8daef</fill-color>
+  <expanded>false</expanded>
+  <frame-color>#5e00e6</frame-color>
+  <fill-color>#5e00e6</fill-color>
   <frame-brightness>0</frame-brightness>
   <fill-brightness>0</fill-brightness>
-  <dither-pattern>I3</dither-pattern>
-  <line-style/>
+  <dither-pattern>I1</dither-pattern>
+  <line-style>C18</line-style>
   <valid>true</valid>
   <visible>true</visible>
   <transparent>false</transparent>
-  <width/>
+  <width>1</width>
   <marked>false</marked>
   <xfill>false</xfill>
   <animation>0</animation>
-  <name>90   / 251   M9 pin</name>
+  <name>M9 pin - 90/251</name>
   <source>90/251@1</source>
  </properties>
  <properties>
-  <frame-color>#e8daef</frame-color>
-  <fill-color>#e8daef</fill-color>
+  <expanded>false</expanded>
+  <frame-color>#5e00e6</frame-color>
+  <fill-color>#5e00e6</fill-color>
   <frame-brightness>0</frame-brightness>
   <fill-brightness>0</fill-brightness>
-  <dither-pattern>I5</dither-pattern>
-  <line-style/>
+  <dither-pattern>I1</dither-pattern>
+  <line-style>C18</line-style>
   <valid>true</valid>
   <visible>true</visible>
   <transparent>false</transparent>
-  <width/>
+  <width>1</width>
   <marked>false</marked>
   <xfill>false</xfill>
   <animation>0</animation>
-  <name>90   / 2     M9 label</name>
+  <name>M9 label - 90/2</name>
   <source>90/2@1</source>
  </properties>
  <properties>
-  <frame-color>#e8daef</frame-color>
-  <fill-color>#e8daef</fill-color>
+  <expanded>false</expanded>
+  <frame-color>#5e00e6</frame-color>
+  <fill-color>#5e00e6</fill-color>
   <frame-brightness>0</frame-brightness>
   <fill-brightness>0</fill-brightness>
-  <dither-pattern>I7</dither-pattern>
-  <line-style/>
+  <dither-pattern>C2</dither-pattern>
+  <line-style>C18</line-style>
   <valid>true</valid>
   <visible>true</visible>
   <transparent>false</transparent>
-  <width/>
+  <width>1</width>
   <marked>false</marked>
   <xfill>false</xfill>
   <animation>0</animation>
-  <name>90   / 3     M9 net</name>
+  <name>M9 net - 90/3</name>
   <source>90/3@1</source>
  </properties>
  <properties>
-  <frame-color>#e8daef</frame-color>
-  <fill-color>#e8daef</fill-color>
+  <expanded>false</expanded>
+  <frame-color>#5e00e6</frame-color>
+  <fill-color>#5e00e6</fill-color>
   <frame-brightness>0</frame-brightness>
   <fill-brightness>0</fill-brightness>
-  <dither-pattern>I9</dither-pattern>
-  <line-style/>
+  <dither-pattern>I1</dither-pattern>
+  <line-style>C18</line-style>
   <valid>true</valid>
   <visible>true</visible>
   <transparent>false</transparent>
-  <width/>
+  <width>1</width>
   <marked>false</marked>
   <xfill>false</xfill>
   <animation>0</animation>
-  <name>90   / 4     M9 blockage</name>
+  <name>M9 blockage - 90/4</name>
   <source>90/4@1</source>
  </properties>
  <properties>
-  <frame-color>#d6dbdf</frame-color>
-  <fill-color>#d6dbdf</fill-color>
+  <expanded>false</expanded>
+  <frame-color>#00ff00</frame-color>
+  <fill-color>#ffffff</fill-color>
   <frame-brightness>0</frame-brightness>
   <fill-brightness>0</fill-brightness>
   <dither-pattern>I1</dither-pattern>
-  <line-style/>
+  <line-style>C18</line-style>
   <valid>true</valid>
   <visible>true</visible>
   <transparent>false</transparent>
-  <width/>
+  <width>1</width>
   <marked>false</marked>
-  <xfill>false</xfill>
+  <xfill>true</xfill>
   <animation>0</animation>
-  <name>95   / 0     V9 drawing</name>
+  <name>V9 drawing - 95/0</name>
   <source>95/0@1</source>
  </properties>
  <properties>
-  <frame-color>#d6dbdf</frame-color>
-  <fill-color>#d6dbdf</fill-color>
+  <expanded>false</expanded>
+  <frame-color>#ffbff2</frame-color>
+  <fill-color>#ffbff2</fill-color>
   <frame-brightness>0</frame-brightness>
   <fill-brightness>0</fill-brightness>
-  <dither-pattern>I3</dither-pattern>
-  <line-style/>
+  <dither-pattern>C21</dither-pattern>
+  <line-style>C18</line-style>
   <valid>true</valid>
   <visible>true</visible>
   <transparent>false</transparent>
-  <width/>
+  <width>1</width>
   <marked>false</marked>
   <xfill>false</xfill>
   <animation>0</animation>
-  <name>95   / 4     V9 blockage</name>
-  <source>95/4@1</source>
- </properties>
- <properties>
-  <frame-color>#d6dbdf</frame-color>
-  <fill-color>#d6dbdf</fill-color>
-  <frame-brightness>0</frame-brightness>
-  <fill-brightness>0</fill-brightness>
-  <dither-pattern>I5</dither-pattern>
-  <line-style/>
-  <valid>true</valid>
-  <visible>true</visible>
-  <transparent>false</transparent>
-  <width/>
-  <marked>false</marked>
-  <xfill>false</xfill>
-  <animation>0</animation>
-  <name>95   / 251   V9 PIN</name>
-  <source>95/251@1</source>
- </properties>
- <properties>
-  <frame-color>#d5d8dc</frame-color>
-  <fill-color>#d5d8dc</fill-color>
-  <frame-brightness>0</frame-brightness>
-  <fill-brightness>0</fill-brightness>
-  <dither-pattern>I1</dither-pattern>
-  <line-style/>
-  <valid>true</valid>
-  <visible>true</visible>
-  <transparent>false</transparent>
-  <width/>
-  <marked>false</marked>
-  <xfill>false</xfill>
-  <animation>0</animation>
-  <name>88   / 0     SDT drawing</name>
+  <name>SDT drawing - 88/0</name>
   <source>88/0@1</source>
  </properties>
  <properties>
-  <frame-color>#d5d8dc</frame-color>
-  <fill-color>#d5d8dc</fill-color>
-  <frame-brightness>0</frame-brightness>
-  <fill-brightness>0</fill-brightness>
-  <dither-pattern>I3</dither-pattern>
-  <line-style/>
-  <valid>true</valid>
-  <visible>true</visible>
-  <transparent>false</transparent>
-  <width/>
-  <marked>false</marked>
-  <xfill>false</xfill>
-  <animation>0</animation>
-  <name>88   / 4     SDT blockage</name>
-  <source>88/4@1</source>
- </properties>
- <properties>
-  <frame-color>#fcf3cf</frame-color>
-  <fill-color>#fcf3cf</fill-color>
+  <expanded>false</expanded>
+  <frame-color>#78ffff</frame-color>
+  <fill-color>#78ffff</fill-color>
   <frame-brightness>0</frame-brightness>
   <fill-brightness>0</fill-brightness>
   <dither-pattern>I1</dither-pattern>
-  <line-style/>
+  <line-style>C11</line-style>
   <valid>true</valid>
   <visible>true</visible>
   <transparent>false</transparent>
-  <width/>
+  <width>3</width>
   <marked>false</marked>
   <xfill>false</xfill>
   <animation>0</animation>
-  <name>97   / 0     SLVT drawing</name>
-  <source>97/0@1</source>
- </properties>
- <properties>
-  <frame-color>#fdebd0</frame-color>
-  <fill-color>#fdebd0</fill-color>
-  <frame-brightness>0</frame-brightness>
-  <fill-brightness>0</fill-brightness>
-  <dither-pattern>I1</dither-pattern>
-  <line-style/>
-  <valid>true</valid>
-  <visible>true</visible>
-  <transparent>false</transparent>
-  <width/>
-  <marked>false</marked>
-  <xfill>false</xfill>
-  <animation>0</animation>
-  <name>98   / 0     LVT drawing</name>
-  <source>98/0@1</source>
- </properties>
- <properties>
-  <frame-color>#fae5d3</frame-color>
-  <fill-color>#fae5d3</fill-color>
-  <frame-brightness>0</frame-brightness>
-  <fill-brightness>0</fill-brightness>
-  <dither-pattern>I1</dither-pattern>
-  <line-style/>
-  <valid>true</valid>
-  <visible>true</visible>
-  <transparent>false</transparent>
-  <width/>
-  <marked>false</marked>
-  <xfill>false</xfill>
-  <animation>0</animation>
-  <name>99   / 0     SRAMDRC drawing</name>
+  <name>SRAMDRC drawing - 99/0</name>
   <source>99/0@1</source>
  </properties>
  <properties>
-  <frame-color>#f6ddcc</frame-color>
-  <fill-color>#f6ddcc</fill-color>
+  <expanded>false</expanded>
+  <frame-color>#00cc66</frame-color>
+  <fill-color>#00cc66</fill-color>
   <frame-brightness>0</frame-brightness>
   <fill-brightness>0</fill-brightness>
   <dither-pattern>I1</dither-pattern>
-  <line-style/>
+  <line-style>C18</line-style>
   <valid>true</valid>
   <visible>true</visible>
   <transparent>false</transparent>
-  <width/>
+  <width>1</width>
   <marked>false</marked>
   <xfill>false</xfill>
   <animation>0</animation>
-  <name>100  / 0     BOUNDARY drawing</name>
-  <source>100/0@1</source>
- </properties>
- <properties>
-  <frame-color>#fadbd8</frame-color>
-  <fill-color>#fadbd8</fill-color>
-  <frame-brightness>0</frame-brightness>
-  <fill-brightness>0</fill-brightness>
-  <dither-pattern>I1</dither-pattern>
-  <line-style/>
-  <valid>true</valid>
-  <visible>true</visible>
-  <transparent>false</transparent>
-  <width/>
-  <marked>false</marked>
-  <xfill>false</xfill>
-  <animation>0</animation>
-  <name>101  / 0     TEXT drawing</name>
-  <source>101/0@1</source>
- </properties>
- <properties>
-  <frame-color>#f2d7d5</frame-color>
-  <fill-color>#f2d7d5</fill-color>
-  <frame-brightness>0</frame-brightness>
-  <fill-brightness>0</fill-brightness>
-  <dither-pattern>I1</dither-pattern>
-  <line-style/>
-  <valid>true</valid>
-  <visible>true</visible>
-  <transparent>false</transparent>
-  <width/>
-  <marked>false</marked>
-  <xfill>false</xfill>
-  <animation>0</animation>
-  <name>110  / 0     SRAMVT drawing</name>
+  <name>SRAMVT drawing - 110/0</name>
   <source>110/0@1</source>
  </properties>
  <properties>
-  <frame-color>#fbfcfc</frame-color>
-  <fill-color>#fbfcfc</fill-color>
+  <expanded>false</expanded>
+  <frame-color>#9900e6</frame-color>
+  <fill-color>#9900e6</fill-color>
   <frame-brightness>0</frame-brightness>
   <fill-brightness>0</fill-brightness>
   <dither-pattern>I1</dither-pattern>
-  <line-style/>
+  <line-style>C18</line-style>
   <valid>true</valid>
   <visible>true</visible>
   <transparent>false</transparent>
-  <width/>
+  <width>1</width>
   <marked>false</marked>
   <xfill>false</xfill>
   <animation>0</animation>
-  <name>3    / 251   P_SUB pin</name>
-  <source>3/251@1</source>
- </properties>
- <properties>
-  <frame-color>#f2f3f4</frame-color>
-  <fill-color>#f2f3f4</fill-color>
-  <frame-brightness>0</frame-brightness>
-  <fill-brightness>0</fill-brightness>
-  <dither-pattern>I1</dither-pattern>
-  <line-style/>
-  <valid>true</valid>
-  <visible>true</visible>
-  <transparent>false</transparent>
-  <width/>
-  <marked>false</marked>
-  <xfill>false</xfill>
-  <animation>0</animation>
-  <name>235  / 5     Die Area</name>
+  <name>Die area - 235/5</name>
   <source>235/5@1</source>
  </properties>
  <properties>
-  <frame-color>#80ff8d</frame-color>
-  <fill-color>#80ff8d</fill-color>
+  <expanded>false</expanded>
+  <frame-color>#9900e6</frame-color>
+  <fill-color>#9900e6</fill-color>
   <frame-brightness>0</frame-brightness>
   <fill-brightness>0</fill-brightness>
-  <dither-pattern>I5</dither-pattern>
-  <line-style/>
+  <dither-pattern>I1</dither-pattern>
+  <line-style>C18</line-style>
   <valid>true</valid>
   <visible>true</visible>
   <transparent>false</transparent>
-  <width/>
+  <width>1</width>
   <marked>false</marked>
   <xfill>false</xfill>
   <animation>0</animation>
-  <name/>
+  <name>Die area - 235/0</name>
   <source>235/0@1</source>
  </properties>
- <name>GDS Layers</name>
+ <name/>
  <custom-dither-pattern>
   <pattern>
    <line>*</line>
   </pattern>
-  <order>1</order>
+  <order>0</order>
   <name/>
  </custom-dither-pattern>
  <custom-dither-pattern>
@@ -1849,6 +1309,50 @@
    <line>................</line>
    <line>................</line>
    <line>................</line>
+   <line>*.....*.....*...</line>
+   <line>................</line>
+   <line>................</line>
+   <line>...*.....*......</line>
+   <line>................</line>
+   <line>................</line>
+   <line>*.....*.....*...</line>
+   <line>................</line>
+   <line>................</line>
+   <line>...*.....*......</line>
+   <line>................</line>
+   <line>................</line>
+   <line>*.....*.....*...</line>
+  </pattern>
+  <order>25</order>
+  <name>dot3a</name>
+ </custom-dither-pattern>
+ <custom-dither-pattern>
+  <pattern>
+   <line>................</line>
+   <line>................</line>
+   <line>................</line>
+   <line>....*...........</line>
+   <line>................</line>
+   <line>................</line>
+   <line>................</line>
+   <line>................</line>
+   <line>................</line>
+   <line>................</line>
+   <line>................</line>
+   <line>................</line>
+   <line>................</line>
+   <line>................</line>
+   <line>................</line>
+   <line>................</line>
+  </pattern>
+  <order>24</order>
+  <name>dotc2</name>
+ </custom-dither-pattern>
+ <custom-dither-pattern>
+  <pattern>
+   <line>..*.............</line>
+   <line>................</line>
+   <line>................</line>
    <line>................</line>
    <line>................</line>
    <line>................</line>
@@ -1863,272 +1367,74 @@
    <line>................</line>
    <line>................</line>
   </pattern>
-  <order>2</order>
-  <name>blank</name>
+  <order>23</order>
+  <name>dotc1</name>
  </custom-dither-pattern>
  <custom-dither-pattern>
   <pattern>
-   <line>****************</line>
-   <line>****************</line>
-   <line>****************</line>
-   <line>****************</line>
-   <line>****************</line>
-   <line>****************</line>
-   <line>****************</line>
-   <line>****************</line>
-   <line>****************</line>
-   <line>****************</line>
-   <line>****************</line>
-   <line>****************</line>
-   <line>****************</line>
-   <line>****************</line>
-   <line>****************</line>
-   <line>****************</line>
-  </pattern>
-  <order>3</order>
-  <name>solid</name>
- </custom-dither-pattern>
- <custom-dither-pattern>
-  <pattern>
-   <line>.*...*...*...*..</line>
-   <line>................</line>
-   <line>...*...*...*...*</line>
-   <line>................</line>
-   <line>.*...*...*...*..</line>
-   <line>................</line>
-   <line>...*...*...*...*</line>
-   <line>................</line>
-   <line>.*...*...*...*..</line>
-   <line>................</line>
-   <line>...*...*...*...*</line>
-   <line>................</line>
-   <line>.*...*...*...*..</line>
-   <line>................</line>
-   <line>...*...*...*...*</line>
-   <line>................</line>
-  </pattern>
-  <order>4</order>
-  <name>dots</name>
- </custom-dither-pattern>
- <custom-dither-pattern>
-  <pattern>
-   <line>................</line>
-   <line>................</line>
-   <line>................</line>
-   <line>****************</line>
-   <line>................</line>
-   <line>................</line>
-   <line>................</line>
-   <line>****************</line>
-   <line>................</line>
-   <line>................</line>
-   <line>................</line>
-   <line>****************</line>
-   <line>................</line>
-   <line>................</line>
-   <line>................</line>
-   <line>****************</line>
-  </pattern>
-  <order>5</order>
-  <name>hLine</name>
- </custom-dither-pattern>
- <custom-dither-pattern>
-  <pattern>
-   <line>................</line>
-   <line>................</line>
-   <line>................</line>
-   <line>................</line>
-   <line>................</line>
-   <line>................</line>
-   <line>................</line>
-   <line>****************</line>
-   <line>................</line>
-   <line>................</line>
-   <line>................</line>
-   <line>................</line>
-   <line>................</line>
-   <line>................</line>
-   <line>................</line>
-   <line>****************</line>
-  </pattern>
-  <order>6</order>
-  <name>hLine2</name>
- </custom-dither-pattern>
- <custom-dither-pattern>
-  <pattern>
-   <line>..*...*...*...*.</line>
-   <line>..*...*...*...*.</line>
-   <line>..*...*...*...*.</line>
-   <line>..*...*...*...*.</line>
-   <line>..*...*...*...*.</line>
-   <line>..*...*...*...*.</line>
-   <line>..*...*...*...*.</line>
-   <line>..*...*...*...*.</line>
-   <line>..*...*...*...*.</line>
-   <line>..*...*...*...*.</line>
-   <line>..*...*...*...*.</line>
-   <line>..*...*...*...*.</line>
-   <line>..*...*...*...*.</line>
-   <line>..*...*...*...*.</line>
-   <line>..*...*...*...*.</line>
-   <line>..*...*...*...*.</line>
-  </pattern>
-  <order>7</order>
-  <name>vLine</name>
- </custom-dither-pattern>
- <custom-dither-pattern>
-  <pattern>
-   <line>*......*.......*</line>
-   <line>*......*.......*</line>
-   <line>*......*.......*</line>
-   <line>*......*.......*</line>
-   <line>*......*.......*</line>
-   <line>*......*.......*</line>
-   <line>*......*.......*</line>
-   <line>*......*.......*</line>
-   <line>*......*.......*</line>
-   <line>*......*.......*</line>
-   <line>*......*.......*</line>
-   <line>*......*.......*</line>
-   <line>*......*.......*</line>
-   <line>*......*.......*</line>
-   <line>*......*.......*</line>
-   <line>*......*.......*</line>
-  </pattern>
-  <order>8</order>
-  <name>vLine2</name>
- </custom-dither-pattern>
- <custom-dither-pattern>
-  <pattern>
-   <line>*...*...*...*...</line>
-   <line>.*.*.*.*.*.*.*.*</line>
-   <line>..*...*...*...*.</line>
-   <line>.*.*.*.*.*.*.*.*</line>
-   <line>*...*...*...*...</line>
-   <line>.*.*.*.*.*.*.*.*</line>
-   <line>..*...*...*...*.</line>
-   <line>.*.*.*.*.*.*.*.*</line>
-   <line>*...*...*...*...</line>
-   <line>.*.*.*.*.*.*.*.*</line>
-   <line>..*...*...*...*.</line>
-   <line>.*.*.*.*.*.*.*.*</line>
-   <line>*...*...*...*...</line>
-   <line>.*.*.*.*.*.*.*.*</line>
-   <line>..*...*...*...*.</line>
-   <line>.*.*.*.*.*.*.*.*</line>
-  </pattern>
-  <order>9</order>
-  <name>cross</name>
- </custom-dither-pattern>
- <custom-dither-pattern>
-  <pattern>
-   <line>*...*...*...*...</line>
-   <line>.*.......*......</line>
-   <line>................</line>
-   <line>................</line>
-   <line>*....*..*....*..</line>
-   <line>....*.......*...</line>
-   <line>................</line>
-   <line>................</line>
-   <line>*...*...*...*...</line>
-   <line>.*.......*......</line>
-   <line>................</line>
-   <line>................</line>
-   <line>*....*..*....*..</line>
-   <line>....*.......*...</line>
-   <line>................</line>
-   <line>................</line>
-  </pattern>
-  <order>10</order>
-  <name>miniHatch</name>
- </custom-dither-pattern>
- <custom-dither-pattern>
-  <pattern>
-   <line>...*...*...*...*</line>
-   <line>...*...*...*...*</line>
-   <line>...*...*...*...*</line>
-   <line>****************</line>
-   <line>...*...*...*...*</line>
-   <line>...*...*...*...*</line>
-   <line>...*...*...*...*</line>
-   <line>****************</line>
-   <line>...*...*...*...*</line>
-   <line>...*...*...*...*</line>
-   <line>...*...*...*...*</line>
-   <line>****************</line>
-   <line>...*...*...*...*</line>
-   <line>...*...*...*...*</line>
-   <line>...*...*...*...*</line>
-   <line>****************</line>
-  </pattern>
-  <order>11</order>
-  <name>grid</name>
- </custom-dither-pattern>
- <custom-dither-pattern>
-  <pattern>
-   <line>...*...*...*...*</line>
-   <line>..*...*...*...*.</line>
-   <line>.*...*...*...*..</line>
-   <line>*...*...*...*...</line>
-   <line>...*...*...*...*</line>
-   <line>..*...*...*...*.</line>
-   <line>.*...*...*...*..</line>
-   <line>*...*...*...*...</line>
-   <line>...*...*...*...*</line>
-   <line>..*...*...*...*.</line>
-   <line>.*...*...*...*..</line>
-   <line>*...*...*...*...</line>
-   <line>...*...*...*...*</line>
-   <line>..*...*...*...*.</line>
-   <line>.*...*...*...*..</line>
-   <line>*...*...*...*...</line>
-  </pattern>
-  <order>12</order>
-  <name>slash</name>
- </custom-dither-pattern>
- <custom-dither-pattern>
-  <pattern>
-   <line>...*.......*....</line>
-   <line>..*.......*.....</line>
-   <line>.*.......*......</line>
-   <line>*.......*.......</line>
-   <line>.......*.......*</line>
-   <line>......*.......*.</line>
    <line>.....*.......*..</line>
-   <line>....*.......*...</line>
-   <line>...*.......*....</line>
-   <line>..*.......*.....</line>
-   <line>.*.......*......</line>
-   <line>*.......*.......</line>
-   <line>.......*.......*</line>
-   <line>......*.......*.</line>
    <line>.....*.......*..</line>
-   <line>....*.......*...</line>
+   <line>.....*.......*..</line>
+   <line>..****....****..</line>
+   <line>..*.......*.....</line>
+   <line>..*.......*.....</line>
+   <line>..*.......*.....</line>
+   <line>..****....****..</line>
+   <line>.....*.......*..</line>
+   <line>.....*.......*..</line>
+   <line>.....*.......*..</line>
+   <line>..****....****..</line>
+   <line>..*.......*.....</line>
+   <line>..*.......*.....</line>
+   <line>..*.......*.....</line>
+   <line>..****....****..</line>
   </pattern>
-  <order>13</order>
-  <name>halfslash</name>
+  <order>22</order>
+  <name>vcurb</name>
  </custom-dither-pattern>
  <custom-dither-pattern>
   <pattern>
-   <line>*...*...*...*...</line>
-   <line>.*...*...*...*..</line>
-   <line>..*...*...*...*.</line>
+   <line>................</line>
+   <line>................</line>
+   <line>...*****...*****</line>
    <line>...*...*...*...*</line>
-   <line>*...*...*...*...</line>
-   <line>.*...*...*...*..</line>
-   <line>..*...*...*...*.</line>
    <line>...*...*...*...*</line>
-   <line>*...*...*...*...</line>
-   <line>.*...*...*...*..</line>
-   <line>..*...*...*...*.</line>
+   <line>****...*****...*</line>
+   <line>................</line>
+   <line>................</line>
+   <line>................</line>
+   <line>................</line>
+   <line>...*****...*****</line>
    <line>...*...*...*...*</line>
-   <line>*...*...*...*...</line>
-   <line>.*...*...*...*..</line>
-   <line>..*...*...*...*.</line>
    <line>...*...*...*...*</line>
+   <line>****...*****...*</line>
+   <line>................</line>
+   <line>................</line>
   </pattern>
-  <order>14</order>
-  <name>backSlash</name>
+  <order>21</order>
+  <name>hcurb</name>
+ </custom-dither-pattern>
+ <custom-dither-pattern>
+  <pattern>
+   <line>*....*....*.....</line>
+   <line>*.....*....*....</line>
+   <line>.*....*.....*...</line>
+   <line>..*....*....*...</line>
+   <line>..*.....*....*..</line>
+   <line>...*....*.....*.</line>
+   <line>....*....*....*.</line>
+   <line>....*.....*....*</line>
+   <line>*....*....*.....</line>
+   <line>*.....*....*....</line>
+   <line>.*....*.....*...</line>
+   <line>..*....*....*...</line>
+   <line>..*.....*....*..</line>
+   <line>...*....*.....*.</line>
+   <line>....*....*....*.</line>
+   <line>....*.....*....*</line>
+  </pattern>
+  <order>20</order>
+  <name>vzigzag</name>
  </custom-dither-pattern>
  <custom-dither-pattern>
   <pattern>
@@ -2149,118 +1455,95 @@
    <line>.....**......**.</line>
    <line>.......*.......*</line>
   </pattern>
-  <order>15</order>
-  <name>hZigZag</name>
+  <order>19</order>
+  <name>hzigzag</name>
  </custom-dither-pattern>
  <custom-dither-pattern>
   <pattern>
-   <line>*....*....*.....</line>
-   <line>*.....*....*....</line>
-   <line>.*....*.....*...</line>
-   <line>..*....*....*...</line>
-   <line>..*.....*....*..</line>
-   <line>...*....*.....*.</line>
-   <line>....*....*....*.</line>
-   <line>....*.....*....*</line>
-   <line>*....*....*.....</line>
-   <line>*.....*....*....</line>
-   <line>.*....*.....*...</line>
-   <line>..*....*....*...</line>
-   <line>..*.....*....*..</line>
-   <line>...*....*.....*.</line>
-   <line>....*....*....*.</line>
-   <line>....*.....*....*</line>
-  </pattern>
-  <order>16</order>
-  <name>vZigZag</name>
- </custom-dither-pattern>
- <custom-dither-pattern>
-  <pattern>
-   <line>.....*....*....*</line>
-   <line>....*....*.....*</line>
-   <line>...*.....*....*.</line>
-   <line>...*....*....*..</line>
-   <line>..*....*.....*..</line>
-   <line>.*.....*....*...</line>
-   <line>.*....*....*....</line>
-   <line>*....*.....*....</line>
-   <line>.....*....*....*</line>
-   <line>....*....*.....*</line>
-   <line>...*.....*....*.</line>
-   <line>...*....*....*..</line>
-   <line>..*....*.....*..</line>
-   <line>.*.....*....*...</line>
-   <line>.*....*....*....</line>
-   <line>*....*.....*....</line>
-  </pattern>
-  <order>17</order>
-  <name>rvZigZag</name>
- </custom-dither-pattern>
- <custom-dither-pattern>
-  <pattern>
-   <line>................</line>
-   <line>................</line>
-   <line>...*****...*****</line>
+   <line>*...*...*...*...</line>
+   <line>.*...*...*...*..</line>
+   <line>..*...*...*...*.</line>
    <line>...*...*...*...*</line>
+   <line>*...*...*...*...</line>
+   <line>.*...*...*...*..</line>
+   <line>..*...*...*...*.</line>
    <line>...*...*...*...*</line>
-   <line>****...*****...*</line>
-   <line>................</line>
-   <line>................</line>
-   <line>................</line>
-   <line>................</line>
-   <line>...*****...*****</line>
+   <line>*...*...*...*...</line>
+   <line>.*...*...*...*..</line>
+   <line>..*...*...*...*.</line>
    <line>...*...*...*...*</line>
+   <line>*...*...*...*...</line>
+   <line>.*...*...*...*..</line>
+   <line>..*...*...*...*.</line>
    <line>...*...*...*...*</line>
-   <line>****...*****...*</line>
-   <line>................</line>
-   <line>................</line>
   </pattern>
   <order>18</order>
-  <name>hCurb</name>
+  <name>backslash</name>
  </custom-dither-pattern>
  <custom-dither-pattern>
   <pattern>
-   <line>.....*.......*..</line>
-   <line>.....*.......*..</line>
-   <line>.....*.......*..</line>
-   <line>..****....****..</line>
-   <line>..*.......*.....</line>
-   <line>..*.......*.....</line>
-   <line>..*.......*.....</line>
-   <line>..****....****..</line>
-   <line>.....*.......*..</line>
-   <line>.....*.......*..</line>
-   <line>.....*.......*..</line>
-   <line>..****....****..</line>
-   <line>..*.......*.....</line>
-   <line>..*.......*.....</line>
-   <line>..*.......*.....</line>
-   <line>..****....****..</line>
+   <line>..*...*...*...*.</line>
+   <line>..*...*...*...*.</line>
+   <line>..*...*...*...*.</line>
+   <line>..*...*...*...*.</line>
+   <line>..*...*...*...*.</line>
+   <line>..*...*...*...*.</line>
+   <line>..*...*...*...*.</line>
+   <line>..*...*...*...*.</line>
+   <line>..*...*...*...*.</line>
+   <line>..*...*...*...*.</line>
+   <line>..*...*...*...*.</line>
+   <line>..*...*...*...*.</line>
+   <line>..*...*...*...*.</line>
+   <line>..*...*...*...*.</line>
+   <line>..*...*...*...*.</line>
+   <line>..*...*...*...*.</line>
   </pattern>
-  <order>19</order>
-  <name>vCurb</name>
+  <order>17</order>
+  <name>vline</name>
  </custom-dither-pattern>
  <custom-dither-pattern>
   <pattern>
-   <line>****************</line>
-   <line>..*.......*.....</line>
-   <line>..*.......*.....</line>
-   <line>..*.......*.....</line>
-   <line>****************</line>
-   <line>......*.......*.</line>
-   <line>......*.......*.</line>
-   <line>......*.......*.</line>
-   <line>****************</line>
-   <line>..*.......*.....</line>
-   <line>..*.......*.....</line>
-   <line>..*.......*.....</line>
-   <line>****************</line>
-   <line>......*.......*.</line>
-   <line>......*.......*.</line>
-   <line>......*.......*.</line>
+   <line>*...*...*...*...</line>
+   <line>.*.*.*.*.*.*.*.*</line>
+   <line>..*...*...*...*.</line>
+   <line>.*.*.*.*.*.*.*.*</line>
+   <line>*...*...*...*...</line>
+   <line>.*.*.*.*.*.*.*.*</line>
+   <line>..*...*...*...*.</line>
+   <line>.*.*.*.*.*.*.*.*</line>
+   <line>*...*...*...*...</line>
+   <line>.*.*.*.*.*.*.*.*</line>
+   <line>..*...*...*...*.</line>
+   <line>.*.*.*.*.*.*.*.*</line>
+   <line>*...*...*...*...</line>
+   <line>.*.*.*.*.*.*.*.*</line>
+   <line>..*...*...*...*.</line>
+   <line>.*.*.*.*.*.*.*.*</line>
   </pattern>
-  <order>20</order>
-  <name>brick</name>
+  <order>16</order>
+  <name>x</name>
+ </custom-dither-pattern>
+ <custom-dither-pattern>
+  <pattern>
+   <line>................</line>
+   <line>....*...........</line>
+   <line>...*.*..........</line>
+   <line>..*...*.........</line>
+   <line>*********.......</line>
+   <line>................</line>
+   <line>................</line>
+   <line>................</line>
+   <line>...........*....</line>
+   <line>..........*.*...</line>
+   <line>.........*...*..</line>
+   <line>........*.....*.</line>
+   <line>.......*********</line>
+   <line>................</line>
+   <line>................</line>
+  </pattern>
+  <order>15</order>
+  <name>triangle</name>
  </custom-dither-pattern>
  <custom-dither-pattern>
   <pattern>
@@ -2281,780 +1564,388 @@
    <line>.....*.......*..</line>
    <line>.....*.......*..</line>
   </pattern>
-  <order>21</order>
+  <order>14</order>
   <name>dagger</name>
  </custom-dither-pattern>
  <custom-dither-pattern>
   <pattern>
-   <line>................</line>
-   <line>....*...........</line>
-   <line>...*.*..........</line>
-   <line>..*...*.........</line>
-   <line>.*.....*........</line>
-   <line>*********.......</line>
-   <line>................</line>
-   <line>................</line>
-   <line>................</line>
-   <line>...........*....</line>
-   <line>..........*.*...</line>
-   <line>.........*...*..</line>
-   <line>........*.....*.</line>
-   <line>.......*********</line>
-   <line>................</line>
-   <line>................</line>
-  </pattern>
-  <order>22</order>
-  <name>triangle</name>
- </custom-dither-pattern>
- <custom-dither-pattern>
-  <pattern>
-   <line>*...............</line>
-   <line>................</line>
-   <line>................</line>
-   <line>................</line>
-   <line>................</line>
-   <line>................</line>
-   <line>................</line>
-   <line>................</line>
-   <line>................</line>
-   <line>................</line>
-   <line>................</line>
-   <line>................</line>
-   <line>................</line>
-   <line>................</line>
-   <line>................</line>
-   <line>................</line>
-  </pattern>
-  <order>23</order>
-  <name>dot1</name>
- </custom-dither-pattern>
- <custom-dither-pattern>
-  <pattern>
-   <line>................</line>
-   <line>................</line>
-   <line>................</line>
-   <line>...***..........</line>
-   <line>...***..........</line>
-   <line>...***..........</line>
-   <line>................</line>
-   <line>................</line>
-   <line>................</line>
-   <line>................</line>
-   <line>................</line>
-   <line>................</line>
-   <line>................</line>
-   <line>................</line>
-   <line>................</line>
-   <line>................</line>
-  </pattern>
-  <order>24</order>
-  <name>dot2</name>
- </custom-dither-pattern>
- <custom-dither-pattern>
-  <pattern>
-   <line>................</line>
-   <line>................</line>
-   <line>..*.....*.....*.</line>
-   <line>................</line>
-   <line>................</line>
-   <line>.....*.....*....</line>
-   <line>................</line>
-   <line>................</line>
-   <line>..*.....*.....*.</line>
-   <line>................</line>
-   <line>................</line>
-   <line>.....*.....*....</line>
-   <line>................</line>
-   <line>................</line>
-   <line>..*.....*.....*.</line>
-   <line>................</line>
-  </pattern>
-  <order>25</order>
-  <name>dot3</name>
- </custom-dither-pattern>
- <custom-dither-pattern>
-  <pattern>
-   <line>................</line>
-   <line>................</line>
-   <line>.*...*.....*....</line>
-   <line>................</line>
-   <line>................</line>
-   <line>........*.....*.</line>
-   <line>................</line>
-   <line>................</line>
-   <line>.*...*.....*....</line>
-   <line>................</line>
-   <line>................</line>
-   <line>........*.....*.</line>
-   <line>................</line>
-   <line>................</line>
-   <line>.*...*.....*....</line>
-   <line>................</line>
-  </pattern>
-  <order>26</order>
-  <name>dot4</name>
- </custom-dither-pattern>
- <custom-dither-pattern>
-  <pattern>
-   <line>********........</line>
-   <line>********........</line>
-   <line>********........</line>
-   <line>********........</line>
-   <line>********........</line>
-   <line>********........</line>
-   <line>********........</line>
-   <line>********........</line>
-   <line>........********</line>
-   <line>........********</line>
-   <line>........********</line>
-   <line>........********</line>
-   <line>........********</line>
-   <line>........********</line>
-   <line>........********</line>
-   <line>........********</line>
-  </pattern>
-  <order>27</order>
-  <name>checker</name>
- </custom-dither-pattern>
- <custom-dither-pattern>
-  <pattern>
-   <line>..*...*...*.....</line>
-   <line>................</line>
-   <line>*...*...*...*...</line>
-   <line>................</line>
-   <line>..*...*...*...*.</line>
-   <line>................</line>
-   <line>*...*...*...*...</line>
-   <line>................</line>
-   <line>..*...*...*...*.</line>
-   <line>................</line>
-   <line>*...*...*...*...</line>
-   <line>................</line>
-   <line>..*...*...*...*.</line>
-   <line>................</line>
-   <line>....*...*...*...</line>
-   <line>...............*</line>
-  </pattern>
-  <order>28</order>
-  <name>viap</name>
- </custom-dither-pattern>
- <custom-dither-pattern>
-  <pattern>
-   <line>*...............</line>
-   <line>**..............</line>
-   <line>.**.............</line>
-   <line>..**............</line>
-   <line>...**...........</line>
-   <line>....**..........</line>
-   <line>.....**.........</line>
-   <line>......**........</line>
-   <line>.......**.......</line>
-   <line>........**......</line>
-   <line>.........**.....</line>
-   <line>..........**....</line>
-   <line>...........**...</line>
-   <line>............**..</line>
-   <line>.............**.</line>
-   <line>..............**</line>
-  </pattern>
-  <order>29</order>
-  <name>metal1S</name>
- </custom-dither-pattern>
- <custom-dither-pattern>
-  <pattern>
-   <line>*..............*</line>
-   <line>................</line>
-   <line>................</line>
-   <line>................</line>
-   <line>...........*....</line>
-   <line>.....*..........</line>
-   <line>................</line>
-   <line>................</line>
-   <line>................</line>
-   <line>..*.............</line>
-   <line>................</line>
-   <line>..........*.....</line>
-   <line>................</line>
-   <line>................</line>
-   <line>.....*..........</line>
-   <line>*..............*</line>
-  </pattern>
-  <order>30</order>
-  <name>metal2S</name>
- </custom-dither-pattern>
- <custom-dither-pattern>
-  <pattern>
-   <line>*.....***.....**</line>
-   <line>*.......*.......</line>
-   <line>***.....***.....</line>
+   <line>****************</line>
    <line>..*.......*.....</line>
-   <line>..***.....***...</line>
-   <line>....*.......*...</line>
-   <line>....***.....***.</line>
-   <line>......*.......*.</line>
-   <line>*.....***.....**</line>
-   <line>*.......*.......</line>
-   <line>***.....***.....</line>
    <line>..*.......*.....</line>
-   <line>..***.....***...</line>
-   <line>....*.......*...</line>
-   <line>....***.....***.</line>
+   <line>..*.......*.....</line>
+   <line>****************</line>
+   <line>......*.......*.</line>
+   <line>......*.......*.</line>
+   <line>......*.......*.</line>
+   <line>****************</line>
+   <line>..*.......*.....</line>
+   <line>..*.......*.....</line>
+   <line>..*.......*.....</line>
+   <line>****************</line>
+   <line>......*.......*.</line>
+   <line>......*.......*.</line>
    <line>......*.......*.</line>
   </pattern>
-  <order>31</order>
-  <name>gnd2S</name>
+  <order>13</order>
+  <name>brick</name>
  </custom-dither-pattern>
  <custom-dither-pattern>
   <pattern>
-   <line>...**......**...</line>
-   <line>....*.......*...</line>
-   <line>.....**......**.</line>
-   <line>......*.......*.</line>
-   <line>*......**......*</line>
-   <line>*.......*.......</line>
-   <line>.**......**.....</line>
+   <line>.....*.......*..</line>
+   <line>.....*.......*..</line>
+   <line>.....*.......*..</line>
+   <line>..****....****..</line>
+   <line>..*.......*.....</line>
+   <line>..*.......*.....</line>
+   <line>..*.......*.....</line>
+   <line>..****....****..</line>
+   <line>.....*.......*..</line>
+   <line>.....*.......*..</line>
+   <line>.....*.......*..</line>
+   <line>..****....****..</line>
+   <line>..*.......*.....</line>
+   <line>..*.......*.....</line>
+   <line>..*.......*.....</line>
+   <line>..****....****..</line>
+  </pattern>
+  <order>12</order>
+  <name>vCurb</name>
+ </custom-dither-pattern>
+ <custom-dither-pattern>
+  <pattern>
+   <line>................</line>
+   <line>................</line>
+   <line>...*****...*****</line>
+   <line>...*...*...*...*</line>
+   <line>...*...*...*...*</line>
+   <line>****...*****...*</line>
+   <line>................</line>
+   <line>................</line>
+   <line>................</line>
+   <line>................</line>
+   <line>...*****...*****</line>
+   <line>...*...*...*...*</line>
+   <line>...*...*...*...*</line>
+   <line>****...*****...*</line>
+   <line>................</line>
+   <line>................</line>
+  </pattern>
+  <order>11</order>
+  <name>hCurb</name>
+ </custom-dither-pattern>
+ <custom-dither-pattern>
+  <pattern>
+   <line>*....*....*.....</line>
+   <line>*.....*....*....</line>
+   <line>.*....*.....*...</line>
+   <line>..*....*....*...</line>
+   <line>..*.....*....*..</line>
+   <line>...*....*.....*.</line>
+   <line>....*....*....*.</line>
+   <line>....*.....*....*</line>
+   <line>*....*....*.....</line>
+   <line>*.....*....*....</line>
+   <line>.*....*.....*...</line>
+   <line>..*....*....*...</line>
+   <line>..*.....*....*..</line>
+   <line>...*....*.....*.</line>
+   <line>....*....*....*.</line>
+   <line>....*.....*....*</line>
+  </pattern>
+  <order>10</order>
+  <name>vZigZag</name>
+ </custom-dither-pattern>
+ <custom-dither-pattern>
+  <pattern>
+   <line>**......**......</line>
    <line>..*.......*.....</line>
    <line>...**......**...</line>
-   <line>....*.......*...</line>
-   <line>.....**......**.</line>
-   <line>......*.......*.</line>
-   <line>*......**......*</line>
+   <line>.....*.......*..</line>
+   <line>......**......**</line>
    <line>*.......*.......</line>
    <line>.**......**.....</line>
-   <line>..*.......*.....</line>
-  </pattern>
-  <order>32</order>
-  <name>vcc2S</name>
- </custom-dither-pattern>
- <custom-dither-pattern>
-  <pattern>
-   <line>*..**...*..**...</line>
-   <line>.*..*....*..*...</line>
-   <line>..*..**...*..**.</line>
-   <line>...*..*....*..*.</line>
-   <line>*...*..**...*..*</line>
-   <line>*....*..*....*..</line>
-   <line>.**...*..**...*.</line>
-   <line>..*....*..*....*</line>
-   <line>*..**...*..**...</line>
-   <line>.*..*....*..*...</line>
-   <line>..*..**...*..**.</line>
-   <line>...*..*....*..*.</line>
-   <line>*...*..**...*..*</line>
-   <line>*....*..*....*..</line>
-   <line>.**...*..**...*.</line>
-   <line>..*....*..*....*</line>
-  </pattern>
-  <order>33</order>
-  <name>vcc1S</name>
- </custom-dither-pattern>
- <custom-dither-pattern>
-  <pattern>
-   <line>................</line>
-   <line>................</line>
-   <line>................</line>
-   <line>..***.....**....</line>
-   <line>..*..*...*..*...</line>
-   <line>..*..*......*...</line>
-   <line>..***......*....</line>
-   <line>..*.......*.....</line>
-   <line>..*......*......</line>
-   <line>..*......****...</line>
-   <line>................</line>
-   <line>................</line>
-   <line>................</line>
-   <line>................</line>
-   <line>................</line>
-   <line>................</line>
-  </pattern>
-  <order>34</order>
-  <name>poly2p</name>
- </custom-dither-pattern>
- <custom-dither-pattern>
-  <pattern>
-   <line>**......**......</line>
-   <line>**......**......</line>
-   <line>................</line>
-   <line>................</line>
+   <line>...*.......*....</line>
    <line>....**......**..</line>
-   <line>....**......**..</line>
-   <line>................</line>
-   <line>................</line>
-   <line>**......**......</line>
-   <line>**......**......</line>
-   <line>................</line>
-   <line>................</line>
-   <line>....**......**..</line>
-   <line>....**......**..</line>
-   <line>................</line>
-   <line>................</line>
+   <line>......*.......*.</line>
+   <line>*......**......*</line>
+   <line>.*.......*......</line>
+   <line>..**......**....</line>
+   <line>....*.......*...</line>
+   <line>.....**......**.</line>
+   <line>.......*.......*</line>
   </pattern>
-  <order>35</order>
-  <name>contp</name>
+  <order>9</order>
+  <name>hZigZag</name>
  </custom-dither-pattern>
  <custom-dither-pattern>
   <pattern>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>...............*................</line>
-   <line>...............*................</line>
-   <line>.............*****..............</line>
-   <line>...............*................</line>
-   <line>...............*................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
+   <line>*...*...*...*...</line>
+   <line>.*...*...*...*..</line>
+   <line>..*...*...*...*.</line>
+   <line>...*...*...*...*</line>
+   <line>*...*...*...*...</line>
+   <line>.*...*...*...*..</line>
+   <line>..*...*...*...*.</line>
+   <line>...*...*...*...*</line>
+   <line>*...*...*...*...</line>
+   <line>.*...*...*...*..</line>
+   <line>..*...*...*...*.</line>
+   <line>...*...*...*...*</line>
+   <line>*...*...*...*...</line>
+   <line>.*...*...*...*..</line>
+   <line>..*...*...*...*.</line>
+   <line>...*...*...*...*</line>
   </pattern>
-  <order>36</order>
-  <name>pplusp</name>
- </custom-dither-pattern>
- <custom-dither-pattern>
-  <pattern>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>..........*...........*.........</line>
-   <line>..........*.....*.....*.........</line>
-   <line>...........*...*.*...*..........</line>
-   <line>...........*...*.*...*..........</line>
-   <line>............*.*...*.*...........</line>
-   <line>............*.*...*.*...........</line>
-   <line>.............*.....*............</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-  </pattern>
-  <order>37</order>
-  <name>wellp</name>
- </custom-dither-pattern>
- <custom-dither-pattern>
-  <pattern>
-   <line>.*.*.*.*.*.*.*.*</line>
-   <line>*.*.*.*.*.*.*.*.</line>
-   <line>.*.*.*.*.*.*.*.*</line>
-   <line>*.*.*.*.*.*.*.*.</line>
-   <line>.*.*.*.*.*.*.*.*</line>
-   <line>*.*.*.*.*.*.*.*.</line>
-   <line>.*.*.*.*.*.*.*.*</line>
-   <line>*.*.*.*.*.*.*.*.</line>
-   <line>.*.*.*.*.*.*.*.*</line>
-   <line>*.*.*.*.*.*.*.*.</line>
-   <line>.*.*.*.*.*.*.*.*</line>
-   <line>*.*.*.*.*.*.*.*.</line>
-   <line>.*.*.*.*.*.*.*.*</line>
-   <line>*.*.*.*.*.*.*.*.</line>
-   <line>.*.*.*.*.*.*.*.*</line>
-   <line>*.*.*.*.*.*.*.*.</line>
-  </pattern>
-  <order>38</order>
-  <name>checker1</name>
- </custom-dither-pattern>
- <custom-dither-pattern>
-  <pattern>
-   <line>**..**..**..**..</line>
-   <line>**..**..**..**..</line>
-   <line>..**..**..**..**</line>
-   <line>..**..**..**..**</line>
-   <line>**..**..**..**..</line>
-   <line>**..**..**..**..</line>
-   <line>..**..**..**..**</line>
-   <line>..**..**..**..**</line>
-   <line>**..**..**..**..</line>
-   <line>**..**..**..**..</line>
-   <line>..**..**..**..**</line>
-   <line>..**..**..**..**</line>
-   <line>**..**..**..**..</line>
-   <line>**..**..**..**..</line>
-   <line>..**..**..**..**</line>
-   <line>..**..**..**..**</line>
-  </pattern>
-  <order>39</order>
-  <name>checker2</name>
- </custom-dither-pattern>
- <custom-dither-pattern>
-  <pattern>
-   <line>**.***.***.***.*</line>
-   <line>*.*.*.*.*.*.*.*.</line>
-   <line>.***.***.***.***</line>
-   <line>*.*.*.*.*.*.*.*.</line>
-   <line>**.***.***.***.*</line>
-   <line>*.*.*.*.*.*.*.*.</line>
-   <line>.***.***.***.***</line>
-   <line>*.*.*.*.*.*.*.*.</line>
-   <line>**.***.***.***.*</line>
-   <line>*.*.*.*.*.*.*.*.</line>
-   <line>.***.***.***.***</line>
-   <line>*.*.*.*.*.*.*.*.</line>
-   <line>**.***.***.***.*</line>
-   <line>*.*.*.*.*.*.*.*.</line>
-   <line>.***.***.***.***</line>
-   <line>*.*.*.*.*.*.*.*.</line>
-  </pattern>
-  <order>40</order>
-  <name>invCross</name>
- </custom-dither-pattern>
- <custom-dither-pattern>
-  <pattern>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>........***....***...***........</line>
-   <line>.........**....***...**.........</line>
-   <line>.........**....***...**.........</line>
-   <line>.........**....*.*...**.........</line>
-   <line>.........***..**.**..**.........</line>
-   <line>..........**..**.**.**..........</line>
-   <line>..........**..**.**.**..........</line>
-   <line>..........**..**.**.**..........</line>
-   <line>..........**..*...*.**..........</line>
-   <line>...........***....***...........</line>
-   <line>...........***....***...........</line>
-   <line>...........***....***...........</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-  </pattern>
-  <order>41</order>
-  <name>wellBp</name>
- </custom-dither-pattern>
- <custom-dither-pattern>
-  <pattern>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>...........**********...........</line>
-   <line>...........*.........*..........</line>
-   <line>...........*....................</line>
-   <line>...........*....................</line>
-   <line>...........*....................</line>
-   <line>...........*....................</line>
-   <line>...........*....*****...........</line>
-   <line>...........*........*...........</line>
-   <line>...........*........*...........</line>
-   <line>...........*........*...........</line>
-   <line>...........**********...........</line>
-  </pattern>
-  <order>42</order>
-  <name>wellvtg</name>
- </custom-dither-pattern>
- <custom-dither-pattern>
-  <pattern>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>...........*....................</line>
-   <line>...........*.......*............</line>
-   <line>...........*.......*............</line>
-   <line>...........*.......*............</line>
-   <line>...........*.......*............</line>
-   <line>...........*********............</line>
-   <line>...........*.......*............</line>
-   <line>...........*.......*............</line>
-   <line>...........*.......*............</line>
-   <line>...........*.......*............</line>
-   <line>...........*.......*............</line>
-  </pattern>
-  <order>43</order>
-  <name>wellvth</name>
- </custom-dither-pattern>
- <custom-dither-pattern>
-  <pattern>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>...........*********............</line>
-   <line>...........*...*...*............</line>
-   <line>...............*................</line>
-   <line>...............*................</line>
-   <line>...............*................</line>
-   <line>...............*................</line>
-   <line>...............*................</line>
-   <line>...............*................</line>
-   <line>...............*................</line>
-   <line>...............*................</line>
-   <line>...............*................</line>
-  </pattern>
-  <order>44</order>
-  <name>thickox</name>
- </custom-dither-pattern>
- <custom-dither-pattern>
-  <pattern>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>..............****..............</line>
-   <line>............********............</line>
-   <line>............**...***............</line>
-   <line>...........**.....***...........</line>
-   <line>...........**...................</line>
-   <line>...........**...................</line>
-   <line>...........**...................</line>
-   <line>...........**...................</line>
-   <line>...........**.....***...........</line>
-   <line>............**...***............</line>
-   <line>............*******.............</line>
-   <line>..............****..............</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-   <line>................................</line>
-  </pattern>
-  <order>45</order>
-  <name>cwellBp</name>
- </custom-dither-pattern>
- <custom-dither-pattern>
-  <pattern>
-   <line>................</line>
-   <line>................</line>
-   <line>.......**.......</line>
-   <line>.......**.......</line>
-   <line>.......**.......</line>
-   <line>.......**.......</line>
-   <line>...**********...</line>
-   <line>................</line>
-   <line>................</line>
-   <line>.....******.....</line>
-   <line>....*..**..*....</line>
-   <line>...*...**...*...</line>
-   <line>.......**.......</line>
-   <line>.......**.......</line>
-   <line>................</line>
-   <line>................</line>
-  </pattern>
-  <order>46</order>
-  <name>capID</name>
- </custom-dither-pattern>
- <custom-dither-pattern>
-  <pattern>
-   <line>................</line>
-   <line>................</line>
-   <line>................</line>
-   <line>................</line>
-   <line>...*............</line>
-   <line>...*............</line>
-   <line>..*.*...........</line>
-   <line>..*.*...........</line>
-   <line>***.*..***......</line>
-   <line>.....*.*........</line>
-   <line>.....*.*........</line>
-   <line>......*.........</line>
-   <line>......*.........</line>
-   <line>................</line>
-   <line>................</line>
-   <line>................</line>
-  </pattern>
-  <order>47</order>
-  <name>resID</name>
- </custom-dither-pattern>
- <custom-dither-pattern>
-  <pattern>
-   <line>................</line>
-   <line>................</line>
-   <line>................</line>
-   <line>................</line>
-   <line>......*....*....</line>
-   <line>......**...*....</line>
-   <line>......*.*..*....</line>
-   <line>......*..*.*....</line>
-   <line>...****...****..</line>
-   <line>......*..*.*....</line>
-   <line>......*.*..*....</line>
-   <line>......**...*....</line>
-   <line>......*....*....</line>
-   <line>................</line>
-   <line>................</line>
-   <line>................</line>
-  </pattern>
-  <order>48</order>
-  <name>diodeID</name>
- </custom-dither-pattern>
- <custom-dither-pattern>
-  <pattern>
-   <line>****************</line>
-   <line>****************</line>
-   <line>**.*.*.***.*.*.*</line>
-   <line>****************</line>
-   <line>**.*.*.***.*.*.*</line>
-   <line>****************</line>
-   <line>**.*.*.***.*.*.*</line>
-   <line>****************</line>
-   <line>****************</line>
-   <line>****************</line>
-   <line>**.*.*.***.*.*.*</line>
-   <line>****************</line>
-   <line>**.*.*.***.*.*.*</line>
-   <line>****************</line>
-   <line>**.*.*.***.*.*.*</line>
-   <line>****************</line>
-  </pattern>
-  <order>49</order>
-  <name>sgrid</name>
- </custom-dither-pattern>
- <custom-line-style>
-  <pattern/>
-  <order>1</order>
-  <name/>
- </custom-line-style>
- <custom-line-style>
-  <pattern>***</pattern>
-  <order>2</order>
-  <name>solid</name>
- </custom-line-style>
- <custom-line-style>
-  <pattern>****..</pattern>
-  <order>3</order>
-  <name>dashed</name>
- </custom-line-style>
- <custom-line-style>
-  <pattern>*..</pattern>
-  <order>4</order>
-  <name>dots</name>
- </custom-line-style>
- <custom-line-style>
-  <pattern>***..*..</pattern>
-  <order>5</order>
-  <name>dashDot</name>
- </custom-line-style>
- <custom-line-style>
-  <pattern>**..</pattern>
-  <order>6</order>
-  <name>shortDash</name>
- </custom-line-style>
- <custom-line-style>
-  <pattern>****..**..</pattern>
-  <order>7</order>
-  <name>doubleDash</name>
- </custom-line-style>
- <custom-line-style>
-  <pattern>*...</pattern>
   <order>8</order>
-  <name>hidden</name>
- </custom-line-style>
+  <name>backSlash</name>
+ </custom-dither-pattern>
+ <custom-dither-pattern>
+  <pattern>
+   <line>...*...*...*...*</line>
+   <line>..*...*...*...*.</line>
+   <line>.*...*...*...*..</line>
+   <line>*...*...*...*...</line>
+   <line>...*...*...*...*</line>
+   <line>..*...*...*...*.</line>
+   <line>.*...*...*...*..</line>
+   <line>*...*...*...*...</line>
+   <line>...*...*...*...*</line>
+   <line>..*...*...*...*.</line>
+   <line>.*...*...*...*..</line>
+   <line>*...*...*...*...</line>
+   <line>...*...*...*...*</line>
+   <line>..*...*...*...*.</line>
+   <line>.*...*...*...*..</line>
+   <line>*...*...*...*...</line>
+  </pattern>
+  <order>7</order>
+  <name>slash</name>
+ </custom-dither-pattern>
+ <custom-dither-pattern>
+  <pattern>
+   <line>...*...*...*...*</line>
+   <line>...*...*...*...*</line>
+   <line>...*...*...*...*</line>
+   <line>****************</line>
+   <line>...*...*...*...*</line>
+   <line>...*...*...*...*</line>
+   <line>...*...*...*...*</line>
+   <line>****************</line>
+   <line>...*...*...*...*</line>
+   <line>...*...*...*...*</line>
+   <line>...*...*...*...*</line>
+   <line>****************</line>
+   <line>...*...*...*...*</line>
+   <line>...*...*...*...*</line>
+   <line>...*...*...*...*</line>
+   <line>****************</line>
+  </pattern>
+  <order>6</order>
+  <name>grid</name>
+ </custom-dither-pattern>
+ <custom-dither-pattern>
+  <pattern>
+   <line>*.......*.......</line>
+   <line>.*.....*.*.....*</line>
+   <line>..*...*...*...*.</line>
+   <line>...*.*.....*.*..</line>
+   <line>....*.......*...</line>
+   <line>...*.*.....*.*..</line>
+   <line>..*...*...*...*.</line>
+   <line>.*.....*.*.....*</line>
+   <line>*.......*.......</line>
+   <line>.*.....*.*.....*</line>
+   <line>..*...*...*...*.</line>
+   <line>...*.*.....*.*..</line>
+   <line>....*.......*...</line>
+   <line>...*.*.....*.*..</line>
+   <line>..*...*...*...*.</line>
+   <line>.*.....*.*.....*</line>
+  </pattern>
+  <order>5</order>
+  <name>cross</name>
+ </custom-dither-pattern>
+ <custom-dither-pattern>
+  <pattern>
+   <line>..*...*...*...*.</line>
+   <line>..*...*...*...*.</line>
+   <line>..*...*...*...*.</line>
+   <line>..*...*...*...*.</line>
+   <line>..*...*...*...*.</line>
+   <line>..*...*...*...*.</line>
+   <line>..*...*...*...*.</line>
+   <line>..*...*...*...*.</line>
+   <line>..*...*...*...*.</line>
+   <line>..*...*...*...*.</line>
+   <line>..*...*...*...*.</line>
+   <line>..*...*...*...*.</line>
+   <line>..*...*...*...*.</line>
+   <line>..*...*...*...*.</line>
+   <line>..*...*...*...*.</line>
+   <line>..*...*...*...*.</line>
+  </pattern>
+  <order>4</order>
+  <name>vLine</name>
+ </custom-dither-pattern>
+ <custom-dither-pattern>
+  <pattern>
+   <line>................</line>
+   <line>................</line>
+   <line>................</line>
+   <line>****************</line>
+   <line>................</line>
+   <line>................</line>
+   <line>................</line>
+   <line>****************</line>
+   <line>................</line>
+   <line>................</line>
+   <line>................</line>
+   <line>****************</line>
+   <line>................</line>
+   <line>................</line>
+   <line>................</line>
+   <line>****************</line>
+  </pattern>
+  <order>3</order>
+  <name>hLine</name>
+ </custom-dither-pattern>
+ <custom-dither-pattern>
+  <pattern>
+   <line>................</line>
+   <line>..*...*...*...*.</line>
+   <line>................</line>
+   <line>*...*...*...*...</line>
+   <line>................</line>
+   <line>..*...*...*...*.</line>
+   <line>................</line>
+   <line>*...*...*...*...</line>
+   <line>................</line>
+   <line>..*...*...*...*.</line>
+   <line>................</line>
+   <line>*...*...*...*...</line>
+   <line>................</line>
+   <line>..*...*...*...*.</line>
+   <line>................</line>
+   <line>*...*...*...*...</line>
+  </pattern>
+  <order>2</order>
+  <name>dots1</name>
+ </custom-dither-pattern>
+ <custom-dither-pattern>
+  <pattern>
+   <line>.*...*...*...*..</line>
+   <line>................</line>
+   <line>...*...*...*...*</line>
+   <line>................</line>
+   <line>.*...*...*...*..</line>
+   <line>................</line>
+   <line>...*...*...*...*</line>
+   <line>................</line>
+   <line>.*...*...*...*..</line>
+   <line>................</line>
+   <line>...*...*...*...*</line>
+   <line>................</line>
+   <line>.*...*...*...*..</line>
+   <line>................</line>
+   <line>...*...*...*...*</line>
+   <line>................</line>
+  </pattern>
+  <order>1</order>
+  <name>dots</name>
+ </custom-dither-pattern>
  <custom-line-style>
   <pattern/>
   <order>0</order>
   <name/>
+ </custom-line-style>
+ <custom-line-style>
+  <pattern>*...</pattern>
+  <order>18</order>
+  <name>thinDots</name>
+ </custom-line-style>
+ <custom-line-style>
+  <pattern>***</pattern>
+  <order>17</order>
+  <name>mLine</name>
+ </custom-line-style>
+ <custom-line-style>
+  <pattern>***</pattern>
+  <order>16</order>
+  <name>thick7</name>
+ </custom-line-style>
+ <custom-line-style>
+  <pattern>***</pattern>
+  <order>15</order>
+  <name>thick6</name>
+ </custom-line-style>
+ <custom-line-style>
+  <pattern>***</pattern>
+  <order>14</order>
+  <name>thick5</name>
+ </custom-line-style>
+ <custom-line-style>
+  <pattern>***</pattern>
+  <order>13</order>
+  <name>thick4</name>
+ </custom-line-style>
+ <custom-line-style>
+  <pattern>***.</pattern>
+  <order>12</order>
+  <name>thick3Dash</name>
+ </custom-line-style>
+ <custom-line-style>
+  <pattern>***</pattern>
+  <order>11</order>
+  <name>thick3</name>
+ </custom-line-style>
+ <custom-line-style>
+  <pattern>***</pattern>
+  <order>10</order>
+  <name>thick2</name>
+ </custom-line-style>
+ <custom-line-style>
+  <pattern>**...*..</pattern>
+  <order>9</order>
+  <name>shDashDot</name>
+ </custom-line-style>
+ <custom-line-style>
+  <pattern>***</pattern>
+  <order>8</order>
+  <name>thickLine</name>
+ </custom-line-style>
+ <custom-line-style>
+  <pattern>*...</pattern>
+  <order>7</order>
+  <name>hidden</name>
+ </custom-line-style>
+ <custom-line-style>
+  <pattern>****..**..</pattern>
+  <order>6</order>
+  <name>doubleDash</name>
+ </custom-line-style>
+ <custom-line-style>
+  <pattern>**..</pattern>
+  <order>5</order>
+  <name>shortDash</name>
+ </custom-line-style>
+ <custom-line-style>
+  <pattern>***..*..</pattern>
+  <order>4</order>
+  <name>dashDot</name>
+ </custom-line-style>
+ <custom-line-style>
+  <pattern>*..</pattern>
+  <order>3</order>
+  <name>dots</name>
+ </custom-line-style>
+ <custom-line-style>
+  <pattern>****..</pattern>
+  <order>2</order>
+  <name>dashed</name>
+ </custom-line-style>
+ <custom-line-style>
+  <pattern>***</pattern>
+  <order>1</order>
+  <name>solid</name>
  </custom-line-style>
 </layer-properties>
