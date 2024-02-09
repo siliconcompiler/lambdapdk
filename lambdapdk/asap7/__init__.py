@@ -108,10 +108,10 @@ def setup(chip):
             pdkdir + '/pex/openroad/typical.rules')
 
     # Hide the DIEAREA layer 235/*.
-    pdk.set('pdk', process, 'var', 'klayout', 'hide_layers', stackup, '235/0')
-    pdk.set('pdk', process, 'var', 'klayout', 'hide_layers', stackup, '235/5')
+    pdk.add('pdk', process, 'var', 'klayout', 'hide_layers', stackup, '235/0')
+    pdk.add('pdk', process, 'var', 'klayout', 'hide_layers', stackup, '235/5')
     # Hide boundary layer
-    pdk.set('pdk', process, 'var', 'klayout', 'hide_layers', stackup, '100/0')
+    pdk.add('pdk', process, 'var', 'klayout', 'hide_layers', stackup, '100/0')
 
     return pdk
 
