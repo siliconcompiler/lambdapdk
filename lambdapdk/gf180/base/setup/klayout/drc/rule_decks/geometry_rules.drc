@@ -1,0 +1,750 @@
+# Copyright 2022 GlobalFoundries PDK Authors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+#=============================================================================================================================================================
+#------------------------------------------------------- GF 0.18um MCU DRC RULE DECK (GEOMETRY RULES) --------------------------------------------------------
+#=============================================================================================================================================================
+
+require 'time'
+require "logger"
+
+exec_start_time = Time.now
+
+logger = Logger.new(STDOUT)
+
+logger.formatter = proc do |severity, datetime, progname, msg|
+  "#{datetime}: Memory Usage (" + `pmap #{Process.pid} | tail -1`[10,40].strip + ") : #{msg}
+"
+end
+
+#================================================
+#----------------- FILE SETUP -------------------
+#================================================
+
+# optional for a batch launch :   klayout -b -r gf180mcu.drc -rd input=design.gds -rd report=gf180mcu_main.lyrdb
+
+logger.info("Starting running GF180MCU Klayout DRC runset on %s" % [$input])
+
+if $input
+    if $topcell
+        source($input, $topcell)
+    else
+        source($input)
+    end
+end
+
+logger.info("Loading database to memory is complete.")
+
+if $report
+    logger.info("GF180MCU Klayout DRC runset output at: %s" % [$report])
+    report("DRC Run Report at", $report)
+else
+    logger.info("GF180MCU Klayout DRC runset output at default location." % [File.join(File.dirname(RBA::CellView::active.filename), "gf180_drc.lyrdb").path])
+    report("DRC Run Report at", File.join(File.dirname(RBA::CellView::active.filename), "gf180_drc.lyrdb"))
+end
+
+if $thr
+    logger.info("Number of threads to use %s" % [$thr])
+    threads($thr)
+else
+    logger.info("Number of threads to use 16")
+    threads(16)
+end
+
+# === TILING MODE ===
+if $run_mode == "tiling"
+  # use a tile size of 1mm - not used in deep mode-
+  # tiles(500.um)
+  # use a tile border of 10 micron:
+  # tile_borders(10.um)
+  tiles(1000)
+  logger.info("Tiling  mode is enabled.")
+
+elsif $run_mode == "deep"
+  #=== HIER MODE ===
+  deep
+  logger.info("deep  mode is enabled.")
+
+elsif $run_mode == "flat"
+  #=== FLAT MODE ===
+  flat
+  logger.info("flat  mode is enabled.")
+
+else
+  #=== FLAT MODE ===
+  flat
+  logger.info("flat  mode is enabled.")
+
+end # run_mode
+
+#================================================
+#------------- LAYERS DEFINITIONS ---------------
+#================================================
+
+v5_xtor        = polygons(112, 1 )
+dualgate       = polygons(55 , 0 )
+poly2          = polygons(30 , 0 )
+nplus          = polygons(32 , 0 )
+pplus          = polygons(31 , 0 )
+comp           = polygons(22 , 0 )
+comp           = polygons(22 , 0 )
+dnwell         = polygons(12 , 0 )
+nwell          = polygons(21 , 0 )
+lvpwell        = polygons(204, 0 )
+dualgate       = polygons(55 , 0 )
+poly2          = polygons(30 , 0 )
+nplus          = polygons(32 , 0 )
+pplus          = polygons(31 , 0 )
+sab            = polygons(49 , 0 )
+esd            = polygons(24 , 0 )
+contact        = polygons(33 , 0 )
+metal1         = polygons(34 , 0 )
+via1           = polygons(35 , 0 )
+metal2         = polygons(36 , 0 )
+via2           = polygons(38 , 0 )
+metal3         = polygons(42 , 0 )
+via3           = polygons(40 , 0 )
+metal4         = polygons(46 , 0 )
+via4           = polygons(41 , 0 )
+metal5         = polygons(81 , 0 )
+via5           = polygons(82 , 0 )
+metaltop       = polygons(53 , 0 )
+pad            = polygons(37 , 0 )
+resistor       = polygons(62 , 0 )
+fhres          = polygons(227, 0 )
+fusetop        = polygons(75 , 0 )
+fusewindow_d   = polygons(96 , 1 )
+polyfuse       = polygons(220, 0 )
+mvsd           = polygons(210, 0 )
+mvpsd          = polygons(11 , 39)
+nat            = polygons(5  , 0 )
+comp_dummy     = polygons(22 , 4 )
+poly2_dummy    = polygons(30 , 4 )
+metal1_dummy   = polygons(34 , 4 )
+metal2_dummy   = polygons(36 , 4 )
+metal3_dummy   = polygons(42 , 4 )
+metal4_dummy   = polygons(46 , 4 )
+metal5_dummy   = polygons(81 , 4 )
+metaltop_dummy = polygons(53 , 4 )
+comp_label     = polygons(22 , 10)
+poly2_label    = polygons(30 , 10)
+metal1_label   = polygons(34 , 10)
+metal2_label   = polygons(36 , 10)
+metal3_label   = polygons(42 , 10)
+metal4_label   = polygons(46 , 10)
+metal5_label   = polygons(81 , 10)
+metaltop_label = polygons(53 , 10)
+metal1_slot    = polygons(34 , 3 )
+metal2_slot    = polygons(36 , 3 )
+metal3_slot    = polygons(42 , 3 )
+metal4_slot    = polygons(46 , 3 )
+metal5_slot    = polygons(81 , 3 )
+metaltop_slot  = polygons(53 , 3 )
+ubmpperi       = polygons(183, 0 )
+ubmparray      = polygons(184, 0 )
+ubmeplate      = polygons(185, 0 )
+schottky_diode = polygons(241, 0 )
+zener          = polygons(178, 0 )
+res_mk         = polygons(110, 5 )
+opc_drc        = polygons(124, 5 )
+ndmy           = polygons(111, 5 )
+pmndmy         = polygons(152, 5 )
+v5_xtor        = polygons(112, 1 )
+cap_mk         = polygons(117, 5 )
+mos_cap_mk     = polygons(166, 5 )
+ind_mk         = polygons(151, 5 )
+diode_mk       = polygons(115, 5 )
+drc_bjt        = polygons(127, 5 )
+lvs_bjt        = polygons(118, 5 )
+mim_l_mk       = polygons(117, 10)
+latchup_mk     = polygons(137, 5 )
+guard_ring_mk  = polygons(167, 5 )
+otp_mk         = polygons(173, 5 )
+mtpmark        = polygons(122, 5 )
+neo_ee_mk      = polygons(88 , 17)
+sramcore       = polygons(108, 5 )
+lvs_rf         = polygons(100, 5 )
+lvs_drain      = polygons(100, 7 )
+ind_mk         = polygons(151, 5 )
+hvpolyrs       = polygons(123, 5 )
+lvs_io         = polygons(119, 5 )
+probe_mk       = polygons(13 , 17)
+esd_mk         = polygons(24 , 5 )
+lvs_source     = polygons(100, 8 )
+well_diode_mk  = polygons(153, 51)
+ldmos_xtor     = polygons(226, 0 )
+plfuse         = polygons(125, 5 )
+efuse_mk       = polygons(80 , 5 )
+mcell_feol_mk  = polygons(11 , 17)
+ymtp_mk        = polygons(86 , 17)
+dev_wf_mk      = polygons(128, 17)
+metal1_blk     = polygons(34 , 5 )
+metal2_blk     = polygons(36 , 5 )
+metal3_blk     = polygons(42 , 5 )
+metal4_blk     = polygons(46 , 5 )
+metal5_blk     = polygons(81 , 5 )
+metalt_blk     = polygons(53 , 5 )
+pr_bndry       = polygons(0  , 0 )
+mdiode         = polygons(116, 5 )
+metal1_res     = polygons(110, 11)
+metal2_res     = polygons(110, 12)
+metal3_res     = polygons(110, 13)
+metal4_res     = polygons(110, 14)
+metal5_res     = polygons(110, 15)
+metal6_res     = polygons(110, 16)
+border         = polygons(63 , 0 )
+
+logger.info("Starting deriving base layers.")
+#================================================
+#------------- LAYERS DERIVATIONS ---------------
+#================================================
+
+ncomp      =  comp      & nplus
+pcomp      =  comp      & pplus
+tgate      =  poly2     & comp
+ngate      =  nplus     & tgate
+pgate      =  pplus     & tgate
+
+#================================================
+#------------------ SWITCHES --------------------
+#================================================
+logger.info("Evaluate switches.")
+
+# FEOL
+if $feol == "false"
+  FEOL = $feol
+  logger.info("FEOL is disabled.")
+else
+  FEOL = "true"
+  logger.info("FEOL is enabled.")
+end # FEOL
+
+# BEOL
+if $beol == "false"
+  BEOL = $beol
+  logger.info("BEOL is disabled.")
+else
+  BEOL = "true"
+  logger.info("BEOL is enabled.")
+end # BEOL
+
+# connectivity rules
+if $conn_drc == "true"
+  CONNECTIVITY_RULES = $conn_drc
+  logger.info("connectivity rules are enabled.")
+else
+  CONNECTIVITY_RULES = false
+  logger.info("connectivity rules are disabled.")
+end # connectivity rules
+
+# METAL_TOP
+if $metal_top
+  METAL_TOP = $metal_top
+else
+  METAL_TOP = "9K"
+end # METAL_TOP
+
+logger.info("METAL_TOP Selected is %s" % [METAL_TOP])
+
+# METAL_LEVEL
+if $metal_level
+  METAL_LEVEL = $metal_level
+else
+  METAL_LEVEL = "6LM"
+end # METAL_LEVEL
+
+logger.info("METAL_STACK Selected is %s" % [METAL_LEVEL])
+
+# WEDGE
+if $wedge == "false"
+  WEDGE = $wedge
+else
+  WEDGE = "true"
+end # WEDGE
+
+logger.info("Wedge enabled  %s" % [WEDGE])
+
+# BALL
+if $ball == "false"
+  BALL = $ball
+else
+  BALL = "true"
+end # BALL
+
+logger.info("Ball enabled  %s" % [BALL])
+
+# GOLD
+if $gold == "false"
+  GOLD = $gold
+else
+  GOLD = "true"
+end # GOLD
+
+logger.info("Gold enabled  %s" % [GOLD])
+
+if $mim_option
+  MIM_OPTION = $mim_option
+else
+  MIM_OPTION = "Nan"
+end
+
+logger.info("MIM Option selected %s" % [MIM_OPTION])
+
+# OFFGRID
+if $offgrid == "false"
+  OFFGRID = false
+else
+  OFFGRID = true
+end # OFFGRID
+
+logger.info("Offgrid enabled  %s" % [OFFGRID])
+
+#================================================
+#-----------------GEOMETRY RULES-----------------
+#================================================
+
+if OFFGRID
+logger.info("OFFGRID-ANGLES section")
+
+logger.info("Executing rule comp_OFFGRID")
+comp.ongrid(0.005).output("comp_OFFGRID", "OFFGRID : OFFGRID vertex on comp")
+comp.with_angle(0 .. 45).output("comp_angle", "ACUTE : non 45 degree angle comp")
+
+logger.info("Executing rule dnwell_OFFGRID")
+dnwell.ongrid(0.005).output("dnwell_OFFGRID", "OFFGRID : OFFGRID vertex on dnwell")
+dnwell.with_angle(0 .. 45).output("dnwell_angle", "ACUTE : non 45 degree angle dnwell")
+
+logger.info("Executing rule nwell_OFFGRID")
+nwell.ongrid(0.005).output("nwell_OFFGRID", "OFFGRID : OFFGRID vertex on nwell")
+nwell.with_angle(0 .. 45).output("nwell_angle", "ACUTE : non 45 degree angle nwell")
+
+logger.info("Executing rule lvpwell_OFFGRID")
+lvpwell.ongrid(0.005).output("lvpwell_OFFGRID", "OFFGRID : OFFGRID vertex on lvpwell")
+lvpwell.with_angle(0 .. 45).output("lvpwell_angle", "ACUTE : non 45 degree angle lvpwell")
+
+logger.info("Executing rule dualgate_OFFGRID")
+dualgate.ongrid(0.005).output("dualgate_OFFGRID", "OFFGRID : OFFGRID vertex on dualgate")
+dualgate.with_angle(0 .. 45).output("dualgate_angle", "ACUTE : non 45 degree angle dualgate")
+
+logger.info("Executing rule poly2_OFFGRID")
+poly2.ongrid(0.005).output("poly2_OFFGRID", "OFFGRID : OFFGRID vertex on poly2")
+poly2.with_angle(0 .. 45).output("poly2_angle", "ACUTE : non 45 degree angle poly2")
+
+logger.info("Executing rule nplus_OFFGRID")
+nplus.ongrid(0.005).output("nplus_OFFGRID", "OFFGRID : OFFGRID vertex on nplus")
+nplus.with_angle(0 .. 45).output("nplus_angle", "ACUTE : non 45 degree angle nplus")
+
+logger.info("Executing rule pplus_OFFGRID")
+pplus.ongrid(0.005).output("pplus_OFFGRID", "OFFGRID : OFFGRID vertex on pplus")
+pplus.with_angle(0 .. 45).output("pplus_angle", "ACUTE : non 45 degree angle pplus")
+
+logger.info("Executing rule sab_OFFGRID")
+sab.ongrid(0.005).output("sab_OFFGRID", "OFFGRID : OFFGRID vertex on sab")
+sab.with_angle(0 .. 45).output("sab_angle", "ACUTE : non 45 degree angle sab")
+
+logger.info("Executing rule esd_OFFGRID")
+esd.ongrid(0.005).output("esd_OFFGRID", "OFFGRID : OFFGRID vertex on esd")
+esd.with_angle(0 .. 45).output("esd_angle", "ACUTE : non 45 degree angle esd")
+
+logger.info("Executing rule contact_OFFGRID")
+contact.ongrid(0.005).output("contact_OFFGRID", "OFFGRID : OFFGRID vertex on contact")
+contact.with_angle(0 .. 45).output("contact_angle", "ACUTE : non 45 degree angle contact")
+
+logger.info("Executing rule metal1_OFFGRID")
+metal1.ongrid(0.005).output("metal1_OFFGRID", "OFFGRID : OFFGRID vertex on metal1")
+metal1.with_angle(0 .. 45).output("metal1_angle", "ACUTE : non 45 degree angle metal1")
+
+logger.info("Executing rule via1_OFFGRID")
+via1.ongrid(0.005).output("via1_OFFGRID", "OFFGRID : OFFGRID vertex on via1")
+via1.with_angle(0 .. 45).output("via1_angle", "ACUTE : non 45 degree angle via1")
+
+logger.info("Executing rule metal2_OFFGRID")
+metal2.ongrid(0.005).output("metal2_OFFGRID", "OFFGRID : OFFGRID vertex on metal2")
+metal2.with_angle(0 .. 45).output("metal2_angle", "ACUTE : non 45 degree angle metal2")
+
+logger.info("Executing rule via2_OFFGRID")
+via2.ongrid(0.005).output("via2_OFFGRID", "OFFGRID : OFFGRID vertex on via2")
+via2.with_angle(0 .. 45).output("via2_angle", "ACUTE : non 45 degree angle via2")
+
+logger.info("Executing rule metal3_OFFGRID")
+metal3.ongrid(0.005).output("metal3_OFFGRID", "OFFGRID : OFFGRID vertex on metal3")
+metal3.with_angle(0 .. 45).output("metal3_angle", "ACUTE : non 45 degree angle metal3")
+
+logger.info("Executing rule via3_OFFGRID")
+via3.ongrid(0.005).output("via3_OFFGRID", "OFFGRID : OFFGRID vertex on via3")
+via3.with_angle(0 .. 45).output("via3_angle", "ACUTE : non 45 degree angle via3")
+
+logger.info("Executing rule metal4_OFFGRID")
+metal4.ongrid(0.005).output("metal4_OFFGRID", "OFFGRID : OFFGRID vertex on metal4")
+metal4.with_angle(0 .. 45).output("metal4_angle", "ACUTE : non 45 degree angle metal4")
+
+logger.info("Executing rule via4_OFFGRID")
+via4.ongrid(0.005).output("via4_OFFGRID", "OFFGRID : OFFGRID vertex on via4")
+via4.with_angle(0 .. 45).output("via4_angle", "ACUTE : non 45 degree angle via4")
+
+logger.info("Executing rule metal5_OFFGRID")
+metal5.ongrid(0.005).output("metal5_OFFGRID", "OFFGRID : OFFGRID vertex on metal5")
+metal5.with_angle(0 .. 45).output("metal5_angle", "ACUTE : non 45 degree angle metal5")
+
+logger.info("Executing rule via5_OFFGRID")
+via5.ongrid(0.005).output("via5_OFFGRID", "OFFGRID : OFFGRID vertex on via5")
+via5.with_angle(0 .. 45).output("via5_angle", "ACUTE : non 45 degree angle via5")
+
+logger.info("Executing rule metaltop_OFFGRID")
+metaltop.ongrid(0.005).output("metaltop_OFFGRID", "OFFGRID : OFFGRID vertex on metaltop")
+metaltop.with_angle(0 .. 45).output("metaltop_angle", "ACUTE : non 45 degree angle metaltop")
+
+logger.info("Executing rule pad_OFFGRID")
+pad.ongrid(0.005).output("pad_OFFGRID", "OFFGRID : OFFGRID vertex on pad")
+pad.with_angle(0 .. 45).output("pad_angle", "ACUTE : non 45 degree angle pad")
+
+logger.info("Executing rule resistor_OFFGRID")
+resistor.ongrid(0.005).output("resistor_OFFGRID", "OFFGRID : OFFGRID vertex on resistor")
+resistor.with_angle(0 .. 45).output("resistor_angle", "ACUTE : non 45 degree angle resistor")
+
+logger.info("Executing rule fhres_OFFGRID")
+fhres.ongrid(0.005).output("fhres_OFFGRID", "OFFGRID : OFFGRID vertex on fhres")
+fhres.with_angle(0 .. 45).output("fhres_angle", "ACUTE : non 45 degree angle fhres")
+
+logger.info("Executing rule fusetop_OFFGRID")
+fusetop.ongrid(0.005).output("fusetop_OFFGRID", "OFFGRID : OFFGRID vertex on fusetop")
+fusetop.with_angle(0 .. 45).output("fusetop_angle", "ACUTE : non 45 degree angle fusetop")
+
+logger.info("Executing rule fusewindow_d_OFFGRID")
+fusewindow_d.ongrid(0.005).output("fusewindow_d_OFFGRID", "OFFGRID : OFFGRID vertex on fusewindow_d")
+fusewindow_d.with_angle(0 .. 45).output("fusewindow_d_angle", "ACUTE : non 45 degree angle fusewindow_d")
+
+logger.info("Executing rule polyfuse_OFFGRID")
+polyfuse.ongrid(0.005).output("polyfuse_OFFGRID", "OFFGRID : OFFGRID vertex on polyfuse")
+polyfuse.with_angle(0 .. 45).output("polyfuse_angle", "ACUTE : non 45 degree angle polyfuse")
+
+logger.info("Executing rule mvsd_OFFGRID")
+mvsd.ongrid(0.005).output("mvsd_OFFGRID", "OFFGRID : OFFGRID vertex on mvsd")
+mvsd.with_angle(0 .. 45).output("mvsd_angle", "ACUTE : non 45 degree angle mvsd")
+
+logger.info("Executing rule mvpsd_OFFGRID")
+mvpsd.ongrid(0.005).output("mvpsd_OFFGRID", "OFFGRID : OFFGRID vertex on mvpsd")
+mvpsd.with_angle(0 .. 45).output("mvpsd_angle", "ACUTE : non 45 degree angle mvpsd")
+
+logger.info("Executing rule nat_OFFGRID")
+nat.ongrid(0.005).output("nat_OFFGRID", "OFFGRID : OFFGRID vertex on nat")
+nat.with_angle(0 .. 45).output("nat_angle", "ACUTE : non 45 degree angle nat")
+
+logger.info("Executing rule comp_dummy_OFFGRID")
+comp_dummy.ongrid(0.005).output("comp_dummy_OFFGRID", "OFFGRID : OFFGRID vertex on comp_dummy")
+comp_dummy.with_angle(0 .. 45).output("comp_dummy_angle", "ACUTE : non 45 degree angle comp_dummy")
+
+logger.info("Executing rule poly2_dummy_OFFGRID")
+poly2_dummy.ongrid(0.005).output("poly2_dummy_OFFGRID", "OFFGRID : OFFGRID vertex on poly2_dummy")
+poly2_dummy.with_angle(0 .. 45).output("poly2_dummy_angle", "ACUTE : non 45 degree angle poly2_dummy")
+
+logger.info("Executing rule metal1_dummy_OFFGRID")
+metal1_dummy.ongrid(0.005).output("metal1_dummy_OFFGRID", "OFFGRID : OFFGRID vertex on metal1_dummy")
+metal1_dummy.with_angle(0 .. 45).output("metal1_dummy_angle", "ACUTE : non 45 degree angle metal1_dummy")
+
+logger.info("Executing rule metal2_dummy_OFFGRID")
+metal2_dummy.ongrid(0.005).output("metal2_dummy_OFFGRID", "OFFGRID : OFFGRID vertex on metal2_dummy")
+metal2_dummy.with_angle(0 .. 45).output("metal2_dummy_angle", "ACUTE : non 45 degree angle metal2_dummy")
+
+logger.info("Executing rule metal3_dummy_OFFGRID")
+metal3_dummy.ongrid(0.005).output("metal3_dummy_OFFGRID", "OFFGRID : OFFGRID vertex on metal3_dummy")
+metal3_dummy.with_angle(0 .. 45).output("metal3_dummy_angle", "ACUTE : non 45 degree angle metal3_dummy")
+
+logger.info("Executing rule metal4_dummy_OFFGRID")
+metal4_dummy.ongrid(0.005).output("metal4_dummy_OFFGRID", "OFFGRID : OFFGRID vertex on metal4_dummy")
+metal4_dummy.with_angle(0 .. 45).output("metal4_dummy_angle", "ACUTE : non 45 degree angle metal4_dummy")
+
+logger.info("Executing rule metal5_dummy_OFFGRID")
+metal5_dummy.ongrid(0.005).output("metal5_dummy_OFFGRID", "OFFGRID : OFFGRID vertex on metal5_dummy")
+metal5_dummy.with_angle(0 .. 45).output("metal5_dummy_angle", "ACUTE : non 45 degree angle metal5_dummy")
+
+logger.info("Executing rule metaltop_dummy_OFFGRID")
+metaltop_dummy.ongrid(0.005).output("metaltop_dummy_OFFGRID", "OFFGRID : OFFGRID vertex on metaltop_dummy")
+metaltop_dummy.with_angle(0 .. 45).output("metaltop_dummy_angle", "ACUTE : non 45 degree angle metaltop_dummy")
+
+logger.info("Executing rule comp_label_OFFGRID")
+comp_label.ongrid(0.005).output("comp_label_OFFGRID", "OFFGRID : OFFGRID vertex on comp_label")
+comp_label.with_angle(0 .. 45).output("comp_label_angle", "ACUTE : non 45 degree angle comp_label")
+
+logger.info("Executing rule poly2_label_OFFGRID")
+poly2_label.ongrid(0.005).output("poly2_label_OFFGRID", "OFFGRID : OFFGRID vertex on poly2_label")
+poly2_label.with_angle(0 .. 45).output("poly2_label_angle", "ACUTE : non 45 degree angle poly2_label")
+
+logger.info("Executing rule metal1_label_OFFGRID")
+metal1_label.ongrid(0.005).output("metal1_label_OFFGRID", "OFFGRID : OFFGRID vertex on metal1_label")
+metal1_label.with_angle(0 .. 45).output("metal1_label_angle", "ACUTE : non 45 degree angle metal1_label")
+
+logger.info("Executing rule metal2_label_OFFGRID")
+metal2_label.ongrid(0.005).output("metal2_label_OFFGRID", "OFFGRID : OFFGRID vertex on metal2_label")
+metal2_label.with_angle(0 .. 45).output("metal2_label_angle", "ACUTE : non 45 degree angle metal2_label")
+
+logger.info("Executing rule metal3_label_OFFGRID")
+metal3_label.ongrid(0.005).output("metal3_label_OFFGRID", "OFFGRID : OFFGRID vertex on metal3_label")
+metal3_label.with_angle(0 .. 45).output("metal3_label_angle", "ACUTE : non 45 degree angle metal3_label")
+
+logger.info("Executing rule metal4_label_OFFGRID")
+metal4_label.ongrid(0.005).output("metal4_label_OFFGRID", "OFFGRID : OFFGRID vertex on metal4_label")
+metal4_label.with_angle(0 .. 45).output("metal4_label_angle", "ACUTE : non 45 degree angle metal4_label")
+
+logger.info("Executing rule metal5_label_OFFGRID")
+metal5_label.ongrid(0.005).output("metal5_label_OFFGRID", "OFFGRID : OFFGRID vertex on metal5_label")
+metal5_label.with_angle(0 .. 45).output("metal5_label_angle", "ACUTE : non 45 degree angle metal5_label")
+
+logger.info("Executing rule metaltop_label_OFFGRID")
+metaltop_label.ongrid(0.005).output("metaltop_label_OFFGRID", "OFFGRID : OFFGRID vertex on metaltop_label")
+metaltop_label.with_angle(0 .. 45).output("metaltop_label_angle", "ACUTE : non 45 degree angle metaltop_label")
+
+logger.info("Executing rule metal1_slot_OFFGRID")
+metal1_slot.ongrid(0.005).output("metal1_slot_OFFGRID", "OFFGRID : OFFGRID vertex on metal1_slot")
+metal1_slot.with_angle(0 .. 45).output("metal1_slot_angle", "ACUTE : non 45 degree angle metal1_slot")
+
+logger.info("Executing rule metal2_slot_OFFGRID")
+metal2_slot.ongrid(0.005).output("metal2_slot_OFFGRID", "OFFGRID : OFFGRID vertex on metal2_slot")
+metal2_slot.with_angle(0 .. 45).output("metal2_slot_angle", "ACUTE : non 45 degree angle metal2_slot")
+
+logger.info("Executing rule metal3_slot_OFFGRID")
+metal3_slot.ongrid(0.005).output("metal3_slot_OFFGRID", "OFFGRID : OFFGRID vertex on metal3_slot")
+metal3_slot.with_angle(0 .. 45).output("metal3_slot_angle", "ACUTE : non 45 degree angle metal3_slot")
+
+logger.info("Executing rule metal4_slot_OFFGRID")
+metal4_slot.ongrid(0.005).output("metal4_slot_OFFGRID", "OFFGRID : OFFGRID vertex on metal4_slot")
+metal4_slot.with_angle(0 .. 45).output("metal4_slot_angle", "ACUTE : non 45 degree angle metal4_slot")
+
+logger.info("Executing rule metal5_slot_OFFGRID")
+metal5_slot.ongrid(0.005).output("metal5_slot_OFFGRID", "OFFGRID : OFFGRID vertex on metal5_slot")
+metal5_slot.with_angle(0 .. 45).output("metal5_slot_angle", "ACUTE : non 45 degree angle metal5_slot")
+
+logger.info("Executing rule metaltop_slot_OFFGRID")
+metaltop_slot.ongrid(0.005).output("metaltop_slot_OFFGRID", "OFFGRID : OFFGRID vertex on metaltop_slot")
+metaltop_slot.with_angle(0 .. 45).output("metaltop_slot_angle", "ACUTE : non 45 degree angle metaltop_slot")
+
+logger.info("Executing rule ubmpperi_OFFGRID")
+ubmpperi.ongrid(0.005).output("ubmpperi_OFFGRID", "OFFGRID : OFFGRID vertex on ubmpperi")
+ubmpperi.with_angle(0 .. 45).output("ubmpperi_angle", "ACUTE : non 45 degree angle ubmpperi")
+
+logger.info("Executing rule ubmparray_OFFGRID")
+ubmparray.ongrid(0.005).output("ubmparray_OFFGRID", "OFFGRID : OFFGRID vertex on ubmparray")
+ubmparray.with_angle(0 .. 45).output("ubmparray_angle", "ACUTE : non 45 degree angle ubmparray")
+
+logger.info("Executing rule ubmeplate_OFFGRID")
+ubmeplate.ongrid(0.005).output("ubmeplate_OFFGRID", "OFFGRID : OFFGRID vertex on ubmeplate")
+ubmeplate.with_angle(0 .. 45).output("ubmeplate_angle", "ACUTE : non 45 degree angle ubmeplate")
+
+logger.info("Executing rule schottky_diode_OFFGRID")
+schottky_diode.ongrid(0.005).output("schottky_diode_OFFGRID", "OFFGRID : OFFGRID vertex on schottky_diode")
+schottky_diode.with_angle(0 .. 45).output("schottky_diode_angle", "ACUTE : non 45 degree angle schottky_diode")
+
+logger.info("Executing rule zener_OFFGRID")
+zener.ongrid(0.005).output("zener_OFFGRID", "OFFGRID : OFFGRID vertex on zener")
+zener.with_angle(0 .. 45).output("zener_angle", "ACUTE : non 45 degree angle zener")
+
+logger.info("Executing rule res_mk_OFFGRID")
+res_mk.ongrid(0.005).output("res_mk_OFFGRID", "OFFGRID : OFFGRID vertex on res_mk")
+res_mk.with_angle(0 .. 45).output("res_mk_angle", "ACUTE : non 45 degree angle res_mk")
+
+logger.info("Executing rule opc_drc_OFFGRID")
+opc_drc.ongrid(0.005).output("opc_drc_OFFGRID", "OFFGRID : OFFGRID vertex on opc_drc")
+opc_drc.with_angle(0 .. 45).output("opc_drc_angle", "ACUTE : non 45 degree angle opc_drc")
+
+logger.info("Executing rule ndmy_OFFGRID")
+ndmy.ongrid(0.005).output("ndmy_OFFGRID", "OFFGRID : OFFGRID vertex on ndmy")
+ndmy.with_angle(0 .. 45).output("ndmy_angle", "ACUTE : non 45 degree angle ndmy")
+
+logger.info("Executing rule pmndmy_OFFGRID")
+pmndmy.ongrid(0.005).output("pmndmy_OFFGRID", "OFFGRID : OFFGRID vertex on pmndmy")
+pmndmy.with_angle(0 .. 45).output("pmndmy_angle", "ACUTE : non 45 degree angle pmndmy")
+
+logger.info("Executing rule v5_xtor_OFFGRID")
+v5_xtor.ongrid(0.005).output("v5_xtor_OFFGRID", "OFFGRID : OFFGRID vertex on v5_xtor")
+v5_xtor.with_angle(0 .. 45).output("v5_xtor_angle", "ACUTE : non 45 degree angle v5_xtor")
+
+logger.info("Executing rule cap_mk_OFFGRID")
+cap_mk.ongrid(0.005).output("cap_mk_OFFGRID", "OFFGRID : OFFGRID vertex on cap_mk")
+cap_mk.with_angle(0 .. 45).output("cap_mk_angle", "ACUTE : non 45 degree angle cap_mk")
+
+logger.info("Executing rule mos_cap_mk_OFFGRID")
+mos_cap_mk.ongrid(0.005).output("mos_cap_mk_OFFGRID", "OFFGRID : OFFGRID vertex on mos_cap_mk")
+mos_cap_mk.with_angle(0 .. 45).output("mos_cap_mk_angle", "ACUTE : non 45 degree angle mos_cap_mk")
+
+logger.info("Executing rule ind_mk_OFFGRID")
+ind_mk.ongrid(0.005).output("ind_mk_OFFGRID", "OFFGRID : OFFGRID vertex on ind_mk")
+ind_mk.with_angle(0 .. 45).output("ind_mk_angle", "ACUTE : non 45 degree angle ind_mk")
+
+logger.info("Executing rule diode_mk_OFFGRID")
+diode_mk.ongrid(0.005).output("diode_mk_OFFGRID", "OFFGRID : OFFGRID vertex on diode_mk")
+diode_mk.with_angle(0 .. 45).output("diode_mk_angle", "ACUTE : non 45 degree angle diode_mk")
+
+logger.info("Executing rule drc_bjt_OFFGRID")
+drc_bjt.ongrid(0.005).output("drc_bjt_OFFGRID", "OFFGRID : OFFGRID vertex on drc_bjt")
+drc_bjt.with_angle(0 .. 45).output("drc_bjt_angle", "ACUTE : non 45 degree angle drc_bjt")
+
+logger.info("Executing rule lvs_bjt_OFFGRID")
+lvs_bjt.ongrid(0.005).output("lvs_bjt_OFFGRID", "OFFGRID : OFFGRID vertex on lvs_bjt")
+lvs_bjt.with_angle(0 .. 45).output("lvs_bjt_angle", "ACUTE : non 45 degree angle lvs_bjt")
+
+logger.info("Executing rule mim_l_mk_OFFGRID")
+mim_l_mk.ongrid(0.005).output("mim_l_mk_OFFGRID", "OFFGRID : OFFGRID vertex on mim_l_mk")
+mim_l_mk.with_angle(0 .. 45).output("mim_l_mk_angle", "ACUTE : non 45 degree angle mim_l_mk")
+
+logger.info("Executing rule latchup_mk_OFFGRID")
+latchup_mk.ongrid(0.005).output("latchup_mk_OFFGRID", "OFFGRID : OFFGRID vertex on latchup_mk")
+latchup_mk.with_angle(0 .. 45).output("latchup_mk_angle", "ACUTE : non 45 degree angle latchup_mk")
+
+logger.info("Executing rule guard_ring_mk_OFFGRID")
+guard_ring_mk.ongrid(0.005).output("guard_ring_mk_OFFGRID", "OFFGRID : OFFGRID vertex on guard_ring_mk")
+guard_ring_mk.with_angle(0 .. 45).output("guard_ring_mk_angle", "ACUTE : non 45 degree angle guard_ring_mk")
+
+logger.info("Executing rule otp_mk_OFFGRID")
+otp_mk.ongrid(0.005).output("otp_mk_OFFGRID", "OFFGRID : OFFGRID vertex on otp_mk")
+otp_mk.with_angle(0 .. 45).output("otp_mk_angle", "ACUTE : non 45 degree angle otp_mk")
+
+logger.info("Executing rule mtpmark_OFFGRID")
+mtpmark.ongrid(0.005).output("mtpmark_OFFGRID", "OFFGRID : OFFGRID vertex on mtpmark")
+mtpmark.with_angle(0 .. 45).output("mtpmark_angle", "ACUTE : non 45 degree angle mtpmark")
+
+logger.info("Executing rule neo_ee_mk_OFFGRID")
+neo_ee_mk.ongrid(0.005).output("neo_ee_mk_OFFGRID", "OFFGRID : OFFGRID vertex on neo_ee_mk")
+neo_ee_mk.with_angle(0 .. 45).output("neo_ee_mk_angle", "ACUTE : non 45 degree angle neo_ee_mk")
+
+logger.info("Executing rule sramcore_OFFGRID")
+sramcore.ongrid(0.005).output("sramcore_OFFGRID", "OFFGRID : OFFGRID vertex on sramcore")
+sramcore.with_angle(0 .. 45).output("sramcore_angle", "ACUTE : non 45 degree angle sramcore")
+
+logger.info("Executing rule lvs_rf_OFFGRID")
+lvs_rf.ongrid(0.005).output("lvs_rf_OFFGRID", "OFFGRID : OFFGRID vertex on lvs_rf")
+lvs_rf.with_angle(0 .. 45).output("lvs_rf_angle", "ACUTE : non 45 degree angle lvs_rf")
+
+logger.info("Executing rule lvs_drain_OFFGRID")
+lvs_drain.ongrid(0.005).output("lvs_drain_OFFGRID", "OFFGRID : OFFGRID vertex on lvs_drain")
+lvs_drain.with_angle(0 .. 45).output("lvs_drain_angle", "ACUTE : non 45 degree angle lvs_drain")
+
+logger.info("Executing rule ind_mk_OFFGRID")
+ind_mk.ongrid(0.005).output("ind_mk_OFFGRID", "OFFGRID : OFFGRID vertex on ind_mk")
+ind_mk.with_angle(0 .. 45).output("ind_mk_angle", "ACUTE : non 45 degree angle ind_mk")
+
+logger.info("Executing rule hvpolyrs_OFFGRID")
+hvpolyrs.ongrid(0.005).output("hvpolyrs_OFFGRID", "OFFGRID : OFFGRID vertex on hvpolyrs")
+hvpolyrs.with_angle(0 .. 45).output("hvpolyrs_angle", "ACUTE : non 45 degree angle hvpolyrs")
+
+logger.info("Executing rule lvs_io_OFFGRID")
+lvs_io.ongrid(0.005).output("lvs_io_OFFGRID", "OFFGRID : OFFGRID vertex on lvs_io")
+lvs_io.with_angle(0 .. 45).output("lvs_io_angle", "ACUTE : non 45 degree angle lvs_io")
+
+logger.info("Executing rule probe_mk_OFFGRID")
+probe_mk.ongrid(0.005).output("probe_mk_OFFGRID", "OFFGRID : OFFGRID vertex on probe_mk")
+probe_mk.with_angle(0 .. 45).output("probe_mk_angle", "ACUTE : non 45 degree angle probe_mk")
+
+logger.info("Executing rule esd_mk_OFFGRID")
+esd_mk.ongrid(0.005).output("esd_mk_OFFGRID", "OFFGRID : OFFGRID vertex on esd_mk")
+esd_mk.with_angle(0 .. 45).output("esd_mk_angle", "ACUTE : non 45 degree angle esd_mk")
+
+logger.info("Executing rule lvs_source_OFFGRID")
+lvs_source.ongrid(0.005).output("lvs_source_OFFGRID", "OFFGRID : OFFGRID vertex on lvs_source")
+lvs_source.with_angle(0 .. 45).output("lvs_source_angle", "ACUTE : non 45 degree angle lvs_source")
+
+logger.info("Executing rule well_diode_mk_OFFGRID")
+well_diode_mk.ongrid(0.005).output("well_diode_mk_OFFGRID", "OFFGRID : OFFGRID vertex on well_diode_mk")
+well_diode_mk.with_angle(0 .. 45).output("well_diode_mk_angle", "ACUTE : non 45 degree angle well_diode_mk")
+
+logger.info("Executing rule ldmos_xtor_OFFGRID")
+ldmos_xtor.ongrid(0.005).output("ldmos_xtor_OFFGRID", "OFFGRID : OFFGRID vertex on ldmos_xtor")
+ldmos_xtor.with_angle(0 .. 45).output("ldmos_xtor_angle", "ACUTE : non 45 degree angle ldmos_xtor")
+
+logger.info("Executing rule plfuse_OFFGRID")
+plfuse.ongrid(0.005).output("plfuse_OFFGRID", "OFFGRID : OFFGRID vertex on plfuse")
+plfuse.with_angle(0 .. 45).output("plfuse_angle", "ACUTE : non 45 degree angle plfuse")
+
+logger.info("Executing rule efuse_mk_OFFGRID")
+efuse_mk.ongrid(0.005).output("efuse_mk_OFFGRID", "OFFGRID : OFFGRID vertex on efuse_mk")
+efuse_mk.with_angle(0 .. 45).output("efuse_mk_angle", "ACUTE : non 45 degree angle efuse_mk")
+
+logger.info("Executing rule mcell_feol_mk_OFFGRID")
+mcell_feol_mk.ongrid(0.005).output("mcell_feol_mk_OFFGRID", "OFFGRID : OFFGRID vertex on mcell_feol_mk")
+mcell_feol_mk.with_angle(0 .. 45).output("mcell_feol_mk_angle", "ACUTE : non 45 degree angle mcell_feol_mk")
+
+logger.info("Executing rule ymtp_mk_OFFGRID")
+ymtp_mk.ongrid(0.005).output("ymtp_mk_OFFGRID", "OFFGRID : OFFGRID vertex on ymtp_mk")
+ymtp_mk.with_angle(0 .. 45).output("ymtp_mk_angle", "ACUTE : non 45 degree angle ymtp_mk")
+
+logger.info("Executing rule dev_wf_mk_OFFGRID")
+dev_wf_mk.ongrid(0.005).output("dev_wf_mk_OFFGRID", "OFFGRID : OFFGRID vertex on dev_wf_mk")
+dev_wf_mk.with_angle(0 .. 45).output("dev_wf_mk_angle", "ACUTE : non 45 degree angle dev_wf_mk")
+
+logger.info("Executing rule metal1_blk_OFFGRID")
+metal1_blk.ongrid(0.005).output("metal1_blk_OFFGRID", "OFFGRID : OFFGRID vertex on metal1_blk")
+metal1_blk.with_angle(0 .. 45).output("metal1_blk_angle", "ACUTE : non 45 degree angle metal1_blk")
+
+logger.info("Executing rule metal2_blk_OFFGRID")
+metal2_blk.ongrid(0.005).output("metal2_blk_OFFGRID", "OFFGRID : OFFGRID vertex on metal2_blk")
+metal2_blk.with_angle(0 .. 45).output("metal2_blk_angle", "ACUTE : non 45 degree angle metal2_blk")
+
+logger.info("Executing rule metal3_blk_OFFGRID")
+metal3_blk.ongrid(0.005).output("metal3_blk_OFFGRID", "OFFGRID : OFFGRID vertex on metal3_blk")
+metal3_blk.with_angle(0 .. 45).output("metal3_blk_angle", "ACUTE : non 45 degree angle metal3_blk")
+
+logger.info("Executing rule metal4_blk_OFFGRID")
+metal4_blk.ongrid(0.005).output("metal4_blk_OFFGRID", "OFFGRID : OFFGRID vertex on metal4_blk")
+metal4_blk.with_angle(0 .. 45).output("metal4_blk_angle", "ACUTE : non 45 degree angle metal4_blk")
+
+logger.info("Executing rule metal5_blk_OFFGRID")
+metal5_blk.ongrid(0.005).output("metal5_blk_OFFGRID", "OFFGRID : OFFGRID vertex on metal5_blk")
+metal5_blk.with_angle(0 .. 45).output("metal5_blk_angle", "ACUTE : non 45 degree angle metal5_blk")
+
+logger.info("Executing rule metalt_blk_OFFGRID")
+metalt_blk.ongrid(0.005).output("metalt_blk_OFFGRID", "OFFGRID : OFFGRID vertex on metalt_blk")
+metalt_blk.with_angle(0 .. 45).output("metalt_blk_angle", "ACUTE : non 45 degree angle metalt_blk")
+
+logger.info("Executing rule pr_bndry_OFFGRID")
+pr_bndry.ongrid(0.005).output("pr_bndry_OFFGRID", "OFFGRID : OFFGRID vertex on pr_bndry")
+pr_bndry.with_angle(0 .. 45).output("pr_bndry_angle", "ACUTE : non 45 degree angle pr_bndry")
+
+logger.info("Executing rule mdiode_OFFGRID")
+mdiode.ongrid(0.005).output("mdiode_OFFGRID", "OFFGRID : OFFGRID vertex on mdiode")
+mdiode.with_angle(0 .. 45).output("mdiode_angle", "ACUTE : non 45 degree angle mdiode")
+
+logger.info("Executing rule metal1_res_OFFGRID")
+metal1_res.ongrid(0.005).output("metal1_res_OFFGRID", "OFFGRID : OFFGRID vertex on metal1_res")
+metal1_res.with_angle(0 .. 45).output("metal1_res_angle", "ACUTE : non 45 degree angle metal1_res")
+
+logger.info("Executing rule metal2_res_OFFGRID")
+metal2_res.ongrid(0.005).output("metal2_res_OFFGRID", "OFFGRID : OFFGRID vertex on metal2_res")
+metal2_res.with_angle(0 .. 45).output("metal2_res_angle", "ACUTE : non 45 degree angle metal2_res")
+
+logger.info("Executing rule metal3_res_OFFGRID")
+metal3_res.ongrid(0.005).output("metal3_res_OFFGRID", "OFFGRID : OFFGRID vertex on metal3_res")
+metal3_res.with_angle(0 .. 45).output("metal3_res_angle", "ACUTE : non 45 degree angle metal3_res")
+
+logger.info("Executing rule metal4_res_OFFGRID")
+metal4_res.ongrid(0.005).output("metal4_res_OFFGRID", "OFFGRID : OFFGRID vertex on metal4_res")
+metal4_res.with_angle(0 .. 45).output("metal4_res_angle", "ACUTE : non 45 degree angle metal4_res")
+
+logger.info("Executing rule metal5_res_OFFGRID")
+metal5_res.ongrid(0.005).output("metal5_res_OFFGRID", "OFFGRID : OFFGRID vertex on metal5_res")
+metal5_res.with_angle(0 .. 45).output("metal5_res_angle", "ACUTE : non 45 degree angle metal5_res")
+
+logger.info("Executing rule metal6_res_OFFGRID")
+metal6_res.ongrid(0.005).output("metal6_res_OFFGRID", "OFFGRID : OFFGRID vertex on metal6_res")
+metal6_res.with_angle(0 .. 45).output("metal6_res_angle", "ACUTE : non 45 degree angle metal6_res")
+
+logger.info("Executing rule border_OFFGRID")
+border.ongrid(0.005).output("border_OFFGRID", "OFFGRID : OFFGRID vertex on border")
+border.with_angle(0 .. 45).output("border_angle", "ACUTE : non 45 degree angle border")
+
+end #OFFGRID-ANGLES
+
+
+exec_end_time = Time.now
+run_time = exec_end_time - exec_start_time
+logger.info("DRC Run time %f seconds" % [run_time])
+

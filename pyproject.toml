@@ -40,7 +40,11 @@ exclude = [
     'dist',
     # scripts from other repos
     'lambdapdk/asap7/base/apr/example_innovus.tcl',
-    'lambdapdk/sky130/base/setup/netgen/lvs_setup.tcl'
+    'lambdapdk/sky130/base/setup/netgen/lvs_setup.tcl',
+    'lambdapdk/gf180/base/setup/netgen/gf180mcuA_setup.tcl',
+    'lambdapdk/gf180/base/setup/netgen/setup.tcl',
+    'lambdapdk/gf180/base/setup/netgen/lvs_setup.tcl',
+    'lambdapdk/gf180/base/setup/magic/gf180mcuA.tcl'
 ]
 
 [tool.tclint.style]

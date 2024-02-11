@@ -14,7 +14,8 @@ import siliconcompiler
 from siliconcompiler.targets import (
     skywater130_demo,
     asap7_demo,
-    freepdk45_demo
+    freepdk45_demo,
+    gf180_demo
 )
 
 if __name__ == "__main__":
@@ -41,6 +42,13 @@ if __name__ == "__main__":
             "target": skywater130_demo,
             "libs": [
                 "sky130hd"
+            ]
+        },
+        "gf180": {
+            "target": gf180_demo,
+            "libs": [
+                "gf180mcu_fd_sc_mcu7t5v0",
+                "gf180mcu_fd_sc_mcu9t5v0"
             ]
         },
         "freepdk45": {

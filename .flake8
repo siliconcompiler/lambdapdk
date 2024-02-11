@@ -1,4 +1,4 @@
 [flake8]
 max-line-length = 100
-extend-exclude = build, dist, lambdapdk/gf180/base/klayout
+extend-exclude = build, dist, lambdapdk/gf180/base/setup/klayout
 

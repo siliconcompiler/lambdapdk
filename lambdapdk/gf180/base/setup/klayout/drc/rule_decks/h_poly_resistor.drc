@@ -1,0 +1,321 @@
+# Copyright 2022 GlobalFoundries PDK Authors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+#=============================================================================================================================================================
+#------------------------------------------------------- GF 0.18um MCU DRC RULE DECK (H POLY RESISTOR) -------------------------------------------------------
+#=============================================================================================================================================================
+
+require 'time'
+require "logger"
+
+exec_start_time = Time.now
+
+logger = Logger.new(STDOUT)
+
+logger.formatter = proc do |severity, datetime, progname, msg|
+  "#{datetime}: Memory Usage (" + `pmap #{Process.pid} | tail -1`[10,40].strip + ") : #{msg}
+"
+end
+
+#================================================
+#----------------- FILE SETUP -------------------
+#================================================
+
+# optional for a batch launch :   klayout -b -r gf180mcu.drc -rd input=design.gds -rd report=gf180mcu_main.lyrdb
+
+logger.info("Starting running GF180MCU Klayout DRC runset on %s" % [$input])
+
+if $input
+    if $topcell
+        source($input, $topcell)
+    else
+        source($input)
+    end
+end
+
+logger.info("Loading database to memory is complete.")
+
+if $report
+    logger.info("GF180MCU Klayout DRC runset output at: %s" % [$report])
+    report("DRC Run Report at", $report)
+else
+    logger.info("GF180MCU Klayout DRC runset output at default location." % [File.join(File.dirname(RBA::CellView::active.filename), "gf180_drc.lyrdb").path])
+    report("DRC Run Report at", File.join(File.dirname(RBA::CellView::active.filename), "gf180_drc.lyrdb"))
+end
+
+if $thr
+    logger.info("Number of threads to use %s" % [$thr])
+    threads($thr)
+else
+    logger.info("Number of threads to use 16")
+    threads(16)
+end
+
+# === TILING MODE ===
+if $run_mode == "tiling"
+  # use a tile size of 1mm - not used in deep mode-
+  # tiles(500.um)
+  # use a tile border of 10 micron:
+  # tile_borders(10.um)
+  tiles(1000)
+  logger.info("Tiling  mode is enabled.")
+
+elsif $run_mode == "deep"
+  #=== HIER MODE ===
+  deep
+  logger.info("deep  mode is enabled.")
+
+elsif $run_mode == "flat"
+  #=== FLAT MODE ===
+  flat
+  logger.info("flat  mode is enabled.")
+
+else
+  #=== FLAT MODE ===
+  flat
+  logger.info("flat  mode is enabled.")
+
+end # run_mode
+
+#================================================
+#------------- LAYERS DEFINITIONS ---------------
+#================================================
+
+v5_xtor        = polygons(112, 1 )
+dualgate       = polygons(55 , 0 )
+poly2          = polygons(30 , 0 )
+nplus          = polygons(32 , 0 )
+pplus          = polygons(31 , 0 )
+comp           = polygons(22 , 0 )
+sab            = polygons(49 , 0 )
+contact        = polygons(33 , 0 )
+resistor       = polygons(62 , 0 )
+res_mk         = polygons(110, 5 )
+
+logger.info("Starting deriving base layers.")
+#================================================
+#------------- LAYERS DERIVATIONS ---------------
+#================================================
+
+ncomp      =  comp      & nplus
+pcomp      =  comp      & pplus
+tgate      =  poly2     & comp
+ngate      =  nplus     & tgate
+pgate      =  pplus     & tgate
+
+#================================================
+#------------------ SWITCHES --------------------
+#================================================
+logger.info("Evaluate switches.")
+
+# FEOL
+if $feol == "false"
+  FEOL = $feol
+  logger.info("FEOL is disabled.")
+else
+  FEOL = "true"
+  logger.info("FEOL is enabled.")
+end # FEOL
+
+# BEOL
+if $beol == "false"
+  BEOL = $beol
+  logger.info("BEOL is disabled.")
+else
+  BEOL = "true"
+  logger.info("BEOL is enabled.")
+end # BEOL
+
+# connectivity rules
+if $conn_drc == "true"
+  CONNECTIVITY_RULES = $conn_drc
+  logger.info("connectivity rules are enabled.")
+else
+  CONNECTIVITY_RULES = false
+  logger.info("connectivity rules are disabled.")
+end # connectivity rules
+
+# METAL_TOP
+if $metal_top
+  METAL_TOP = $metal_top
+else
+  METAL_TOP = "9K"
+end # METAL_TOP
+
+logger.info("METAL_TOP Selected is %s" % [METAL_TOP])
+
+# METAL_LEVEL
+if $metal_level
+  METAL_LEVEL = $metal_level
+else
+  METAL_LEVEL = "6LM"
+end # METAL_LEVEL
+
+logger.info("METAL_STACK Selected is %s" % [METAL_LEVEL])
+
+# WEDGE
+if $wedge == "false"
+  WEDGE = $wedge
+else
+  WEDGE = "true"
+end # WEDGE
+
+logger.info("Wedge enabled  %s" % [WEDGE])
+
+# BALL
+if $ball == "false"
+  BALL = $ball
+else
+  BALL = "true"
+end # BALL
+
+logger.info("Ball enabled  %s" % [BALL])
+
+# GOLD
+if $gold == "false"
+  GOLD = $gold
+else
+  GOLD = "true"
+end # GOLD
+
+logger.info("Gold enabled  %s" % [GOLD])
+
+if $mim_option
+  MIM_OPTION = $mim_option
+else
+  MIM_OPTION = "Nan"
+end
+
+logger.info("MIM Option selected %s" % [MIM_OPTION])
+
+# OFFGRID
+if $offgrid == "false"
+  OFFGRID = false
+else
+  OFFGRID = true
+end # OFFGRID
+
+logger.info("Offgrid enabled  %s" % [OFFGRID])
+
+#================================================
+#----------------H POLY RESISTOR-----------------
+#================================================
+
+hres_poly = poly2.interacting(pplus).interacting(sab).interacting(res_mk).interacting(resistor)
+hres1_poly = poly2.interacting(pplus).interacting(sab).interacting(res_mk)
+# Rule HRES.1: Minimum space. Note : Merge if the spacing is less than 0.4 um. is 0.4µm
+logger.info("Executing rule HRES.1")
+hres1_l1  = resistor.interacting(hres1_poly).space(0.4.um, euclidian).polygons(0.001)
+hres1_l1.output("HRES.1", "HRES.1 : Minimum space. Note : Merge if the spacing is less than 0.4 um. : 0.4µm")
+hres1_l1.forget
+
+# Rule HRES.2: Minimum width of Poly2 resistor. is 1µm
+logger.info("Executing rule HRES.2")
+hres2_l1  = hres_poly.width(1.um, euclidian).polygons(0.001)
+hres2_l1.output("HRES.2", "HRES.2 : Minimum width of Poly2 resistor. : 1µm")
+hres2_l1.forget
+
+# Rule HRES.3: Minimum space between Poly2 resistors. is 0.4µm
+logger.info("Executing rule HRES.3")
+hres3_l1  = hres_poly.space(0.4.um, euclidian).polygons(0.001)
+hres3_l1.output("HRES.3", "HRES.3 : Minimum space between Poly2 resistors. : 0.4µm")
+hres3_l1.forget
+
+# Rule HRES.4: Minimum RESISTOR overlap of Poly2 resistor. is 0.4µm
+logger.info("Executing rule HRES.4")
+hres4_l1 = resistor.enclosing(hres_poly, 0.4.um, euclidian).polygons(0.001)
+hres4_l2 = hres_poly.not_outside(resistor).not(resistor)
+hres4_l  = hres4_l1.or(hres4_l2)
+hres4_l.output("HRES.4", "HRES.4 : Minimum RESISTOR overlap of Poly2 resistor. : 0.4µm")
+hres4_l1.forget
+hres4_l2.forget
+hres4_l.forget
+
+# Rule HRES.5: Minimum RESISTOR space to unrelated Poly2. is 0.3µm
+logger.info("Executing rule HRES.5")
+hres5_l1  = resistor.interacting(hres1_poly).separation(poly2.not_interacting(sab), 0.3.um, euclidian).polygons(0.001)
+hres5_l1.output("HRES.5", "HRES.5 : Minimum RESISTOR space to unrelated Poly2. : 0.3µm")
+hres5_l1.forget
+
+# Rule HRES.6: Minimum RESISTOR space to COMP.
+logger.info("Executing rule HRES.6")
+hres6_l1 = resistor.interacting(hres1_poly).separation(comp, 0.3.um, euclidian).polygons(0.001).or(comp.not_outside(resistor.interacting(poly2.interacting(pplus).interacting(sab).interacting(res_mk))))
+hres6_l1.output("HRES.6", "HRES.6 : Minimum RESISTOR space to COMP.")
+hres6_l1.forget
+
+hres1_poly.forget
+# Rule HRES.7: Minimum Pplus overlap of contact on Poly2 resistor. is 0.2µm
+logger.info("Executing rule HRES.7")
+hres7_l1 = pplus.enclosing(contact.inside(hres_poly), 0.2.um, euclidian).polygons(0.001)
+hres7_l2 = contact.inside(hres_poly).not_outside(pplus).not(pplus)
+hres7_l  = hres7_l1.or(hres7_l2)
+hres7_l.output("HRES.7", "HRES.7 : Minimum Pplus overlap of contact on Poly2 resistor. : 0.2µm")
+hres7_l1.forget
+hres7_l2.forget
+hres7_l.forget
+
+# Rule HRES.8: Space from salicide block to contact on Poly2 resistor.
+logger.info("Executing rule HRES.8")
+hres8_l1 = contact.inside(hres_poly).separation(sab,0.22.um).polygons(0.001).or(contact.inside(hres_poly).interacting(sab))
+hres8_l1.output("HRES.8", "HRES.8 : Space from salicide block to contact on Poly2 resistor.")
+hres8_l1.forget
+
+hres9_sab             = sab.interacting(pplus).interacting(res_mk).interacting(resistor)
+hres9_clear_sab       = hres9_sab.not(hres_poly)
+hres9_bad_inside_edge = hres9_sab.edges.inside_part(hres_poly).extended(0,0,0.001,0.001).interacting(hres9_clear_sab, 1, 1)
+hres9_sab_hole        = hres9_sab.holes.and(hres_poly)
+# Rule HRES.9: Minimum salicide block overlap of Poly2 resistor in width direction.
+logger.info("Executing rule HRES.9")
+hres9_l1 = hres9_sab.enclosing(hres_poly, 0.28.um, euclidian).polygons(0.001).or(hres9_bad_inside_edge).or(hres9_sab_hole)
+hres9_l1.output("HRES.9", "HRES.9 : Minimum salicide block overlap of Poly2 resistor in width direction.")
+hres9_l1.forget
+
+hres9_sab.forget
+hres9_clear_sab.forget
+hres9_bad_inside_edge.forget
+hres9_sab_hole.forget
+pplus1_hres10 = pplus.and(sab).drc(width != 0.1.um)
+pplus2_hres10 = pplus.not_overlapping(sab).edges
+# Rule HRES.10: Minimum & maximum Pplus overlap of SAB.
+logger.info("Executing rule HRES.10")
+hres10_l1 = pplus1_hres10.or(pplus2_hres10).extended(0, 0, 0.001, 0.001).interacting(hres_poly)
+hres10_l1.output("HRES.10", "HRES.10 : Minimum & maximum Pplus overlap of SAB.")
+hres10_l1.forget
+
+pplus1_hres10.forget
+pplus2_hres10.forget
+# rule HRES.11 is not a DRC check
+
+mk_hres12a = res_mk.edges.not(poly2.not(pplus).and(sab).edges).inside_part(poly2)
+# Rule HRES.12a: P type Poly2 resistor (high sheet rho) shall be covered by RES_MK marking. RES_MK length shall be coincide with resistor length (Defined by Pplus space) and width covering the width of Poly2.
+logger.info("Executing rule HRES.12a")
+hres12a_l1 = res_mk.interacting(resistor).interacting(mk_hres12a)
+hres12a_l1.output("HRES.12a", "HRES.12a : P type Poly2 resistor (high sheet rho) shall be covered by RES_MK marking. RES_MK length shall be coincide with resistor length (Defined by Pplus space) and width covering the width of Poly2. ")
+hres12a_l1.forget
+
+mk_hres12a.forget
+hres12b = res_mk.with_area(15000.01.um,nil).in(res_mk.interacting(res_mk.edges.with_length(80.01.um,nil)))
+# Rule HRES.12b: If the size of single RES_MK mark layer is greater than 15000 um2 and both side (X and Y) are greater than 80 um. Then the minimum spacing to adjacent RES_MK layer. is 20µm
+logger.info("Executing rule HRES.12b")
+hres12b_l1 = res_mk.interacting(hres_poly).drc(separation(hres12b) < 20.um).polygons(0.001)
+hres12b_l1.output("HRES.12b", "HRES.12b : If the size of single RES_MK mark layer is greater than 15000 um2 and both side (X and Y) are greater than 80 um. Then the minimum spacing to adjacent RES_MK layer. : 20µm")
+hres12b_l1.forget
+
+hres12b.forget
+hres_poly.forget
+
+exec_end_time = Time.now
+run_time = exec_end_time - exec_start_time
+logger.info("DRC Run time %f seconds" % [run_time])
+

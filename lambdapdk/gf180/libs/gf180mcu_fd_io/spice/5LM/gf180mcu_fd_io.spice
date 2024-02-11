@@ -1,0 +1,1069 @@
+* NGSPICE file created from gf180mcu_fd_io__asig_5p0.ext - technology: gf180mcuC
+
+.subckt x5LM_METAL_RAIL_PAD_60 VSUBS Bondpad_5LM_0/m2_n400_0# 5LM_METAL_RAIL_0/VDD
++ 5LM_METAL_RAIL_0/VSS 5LM_METAL_RAIL_0/DVDD 5LM_METAL_RAIL_0/DVSS
+.ends
+
+.subckt comp018green_esd_hbm w_n51_7356# a_1131_1121# M2_M1_CDNS_4066195314574_9/VSUBS
+D0 a_1131_1121# w_n51_7356# pn_6p0 pj=106u area=150p
+D1 M2_M1_CDNS_4066195314574_9/VSUBS a_1131_1121# np_6p0 pj=106u area=150p
+D2 M2_M1_CDNS_4066195314574_9/VSUBS a_1131_1121# np_6p0 pj=106u area=150p
+D3 a_1131_1121# w_n51_7356# pn_6p0 pj=106u area=150p
+D4 M2_M1_CDNS_4066195314574_9/VSUBS a_1131_1121# np_6p0 pj=106u area=150p
+D5 M2_M1_CDNS_4066195314574_9/VSUBS a_1131_1121# np_6p0 pj=106u area=150p
+D6 a_1131_1121# w_n51_7356# pn_6p0 pj=106u area=150p
+D7 a_1131_1121# w_n51_7356# pn_6p0 pj=106u area=150p
+.ends
+
+.subckt GF_NI_ASIG_5P0_BASE a_13985_889# m2_828_38097# comp018green_esd_hbm_0/a_1131_1121#
++ a_377_21145# m2_13160_36497# np_6p0_CDNS_406619531451_3/VSUBS w_2400_15668#
+Xcomp018green_esd_hbm_0 w_2400_15668# comp018green_esd_hbm_0/a_1131_1121# np_6p0_CDNS_406619531451_3/VSUBS
++ comp018green_esd_hbm
+X0 np_6p0_CDNS_406619531451_3/VSUBS w_2400_15668# np_6p0_CDNS_406619531451_3/VSUBS np_6p0_CDNS_406619531451_3/VSUBS nmos_6p0 w=15u l=15u
+D0 np_6p0_CDNS_406619531451_3/VSUBS w_2400_15668# np_6p0 pj=82u area=40p
+X1 np_6p0_CDNS_406619531451_3/VSUBS w_2400_15668# np_6p0_CDNS_406619531451_3/VSUBS np_6p0_CDNS_406619531451_3/VSUBS nmos_6p0 w=15u l=15u
+X2 np_6p0_CDNS_406619531451_3/VSUBS w_2400_15668# np_6p0_CDNS_406619531451_3/VSUBS np_6p0_CDNS_406619531451_3/VSUBS nmos_6p0 w=15u l=15u
+X3 np_6p0_CDNS_406619531451_3/VSUBS w_2400_15668# np_6p0_CDNS_406619531451_3/VSUBS np_6p0_CDNS_406619531451_3/VSUBS nmos_6p0 w=15u l=15u
+X4 np_6p0_CDNS_406619531451_3/VSUBS w_2400_15668# np_6p0_CDNS_406619531451_3/VSUBS np_6p0_CDNS_406619531451_3/VSUBS nmos_6p0 w=15u l=15u
+X5 np_6p0_CDNS_406619531451_3/VSUBS w_2400_15668# np_6p0_CDNS_406619531451_3/VSUBS np_6p0_CDNS_406619531451_3/VSUBS nmos_6p0 w=15u l=15u
+X6 np_6p0_CDNS_406619531451_3/VSUBS w_2400_15668# np_6p0_CDNS_406619531451_3/VSUBS np_6p0_CDNS_406619531451_3/VSUBS nmos_6p0 w=15u l=15u
+X7 np_6p0_CDNS_406619531451_3/VSUBS w_2400_15668# np_6p0_CDNS_406619531451_3/VSUBS np_6p0_CDNS_406619531451_3/VSUBS nmos_6p0 w=15u l=15u
+X8 np_6p0_CDNS_406619531451_3/VSUBS w_2400_15668# np_6p0_CDNS_406619531451_3/VSUBS np_6p0_CDNS_406619531451_3/VSUBS nmos_6p0 w=15u l=15u
+X9 np_6p0_CDNS_406619531451_3/VSUBS w_2400_15668# np_6p0_CDNS_406619531451_3/VSUBS np_6p0_CDNS_406619531451_3/VSUBS nmos_6p0 w=15u l=15u
+X10 np_6p0_CDNS_406619531451_3/VSUBS w_2400_15668# np_6p0_CDNS_406619531451_3/VSUBS np_6p0_CDNS_406619531451_3/VSUBS nmos_6p0 w=15u l=15u
+X11 np_6p0_CDNS_406619531451_3/VSUBS w_2400_15668# np_6p0_CDNS_406619531451_3/VSUBS np_6p0_CDNS_406619531451_3/VSUBS nmos_6p0 w=15u l=15u
+X12 np_6p0_CDNS_406619531451_3/VSUBS w_2400_15668# np_6p0_CDNS_406619531451_3/VSUBS np_6p0_CDNS_406619531451_3/VSUBS nmos_6p0 w=15u l=15u
+X13 np_6p0_CDNS_406619531451_3/VSUBS w_2400_15668# np_6p0_CDNS_406619531451_3/VSUBS np_6p0_CDNS_406619531451_3/VSUBS nmos_6p0 w=15u l=15u
+X14 np_6p0_CDNS_406619531451_3/VSUBS w_2400_15668# np_6p0_CDNS_406619531451_3/VSUBS np_6p0_CDNS_406619531451_3/VSUBS nmos_6p0 w=15u l=15u
+X15 np_6p0_CDNS_406619531451_3/VSUBS w_2400_15668# np_6p0_CDNS_406619531451_3/VSUBS np_6p0_CDNS_406619531451_3/VSUBS nmos_6p0 w=15u l=15u
+X16 np_6p0_CDNS_406619531451_3/VSUBS w_2400_15668# np_6p0_CDNS_406619531451_3/VSUBS np_6p0_CDNS_406619531451_3/VSUBS nmos_6p0 w=15u l=15u
+X17 np_6p0_CDNS_406619531451_3/VSUBS w_2400_15668# np_6p0_CDNS_406619531451_3/VSUBS np_6p0_CDNS_406619531451_3/VSUBS nmos_6p0 w=15u l=15u
+X18 np_6p0_CDNS_406619531451_3/VSUBS w_2400_15668# np_6p0_CDNS_406619531451_3/VSUBS np_6p0_CDNS_406619531451_3/VSUBS nmos_6p0 w=15u l=15u
+X19 np_6p0_CDNS_406619531451_3/VSUBS w_2400_15668# np_6p0_CDNS_406619531451_3/VSUBS np_6p0_CDNS_406619531451_3/VSUBS nmos_6p0 w=15u l=15u
+X20 np_6p0_CDNS_406619531451_3/VSUBS w_2400_15668# np_6p0_CDNS_406619531451_3/VSUBS np_6p0_CDNS_406619531451_3/VSUBS nmos_6p0 w=15u l=15u
+X21 np_6p0_CDNS_406619531451_3/VSUBS w_2400_15668# np_6p0_CDNS_406619531451_3/VSUBS np_6p0_CDNS_406619531451_3/VSUBS nmos_6p0 w=15u l=15u
+X22 np_6p0_CDNS_406619531451_3/VSUBS w_2400_15668# np_6p0_CDNS_406619531451_3/VSUBS np_6p0_CDNS_406619531451_3/VSUBS nmos_6p0 w=15u l=15u
+X23 np_6p0_CDNS_406619531451_3/VSUBS w_2400_15668# np_6p0_CDNS_406619531451_3/VSUBS np_6p0_CDNS_406619531451_3/VSUBS nmos_6p0 w=15u l=15u
+X24 np_6p0_CDNS_406619531451_3/VSUBS w_2400_15668# np_6p0_CDNS_406619531451_3/VSUBS np_6p0_CDNS_406619531451_3/VSUBS nmos_6p0 w=15u l=15u
+X25 np_6p0_CDNS_406619531451_3/VSUBS w_2400_15668# np_6p0_CDNS_406619531451_3/VSUBS np_6p0_CDNS_406619531451_3/VSUBS nmos_6p0 w=15u l=15u
+X26 np_6p0_CDNS_406619531451_3/VSUBS w_2400_15668# np_6p0_CDNS_406619531451_3/VSUBS np_6p0_CDNS_406619531451_3/VSUBS nmos_6p0 w=15u l=15u
+D1 np_6p0_CDNS_406619531451_3/VSUBS w_2400_15668# np_6p0 pj=82u area=40p
+X27 np_6p0_CDNS_406619531451_3/VSUBS w_2400_15668# np_6p0_CDNS_406619531451_3/VSUBS np_6p0_CDNS_406619531451_3/VSUBS nmos_6p0 w=15u l=15u
+X28 np_6p0_CDNS_406619531451_3/VSUBS w_2400_15668# np_6p0_CDNS_406619531451_3/VSUBS np_6p0_CDNS_406619531451_3/VSUBS nmos_6p0 w=15u l=15u
+X29 np_6p0_CDNS_406619531451_3/VSUBS w_2400_15668# np_6p0_CDNS_406619531451_3/VSUBS np_6p0_CDNS_406619531451_3/VSUBS nmos_6p0 w=15u l=15u
+X30 np_6p0_CDNS_406619531451_3/VSUBS w_2400_15668# np_6p0_CDNS_406619531451_3/VSUBS np_6p0_CDNS_406619531451_3/VSUBS nmos_6p0 w=15u l=15u
+X31 np_6p0_CDNS_406619531451_3/VSUBS w_2400_15668# np_6p0_CDNS_406619531451_3/VSUBS np_6p0_CDNS_406619531451_3/VSUBS nmos_6p0 w=15u l=15u
+X32 np_6p0_CDNS_406619531451_3/VSUBS w_2400_15668# np_6p0_CDNS_406619531451_3/VSUBS np_6p0_CDNS_406619531451_3/VSUBS nmos_6p0 w=15u l=15u
+D2 np_6p0_CDNS_406619531451_3/VSUBS w_2400_15668# np_6p0 pj=82u area=40p
+X33 np_6p0_CDNS_406619531451_3/VSUBS w_2400_15668# np_6p0_CDNS_406619531451_3/VSUBS np_6p0_CDNS_406619531451_3/VSUBS nmos_6p0 w=15u l=15u
+X34 np_6p0_CDNS_406619531451_3/VSUBS w_2400_15668# np_6p0_CDNS_406619531451_3/VSUBS np_6p0_CDNS_406619531451_3/VSUBS nmos_6p0 w=15u l=15u
+D3 np_6p0_CDNS_406619531451_3/VSUBS w_2400_15668# np_6p0 pj=82u area=40p
+X35 np_6p0_CDNS_406619531451_3/VSUBS w_2400_15668# np_6p0_CDNS_406619531451_3/VSUBS np_6p0_CDNS_406619531451_3/VSUBS nmos_6p0 w=15u l=15u
+.ends
+
+.subckt gf180mcu_fd_io__asig_5p0 DVDD VDD VSS
+X5LM_METAL_RAIL_PAD_60_0 VSS ASIG5V VDD VSS DVDD VSS x5LM_METAL_RAIL_PAD_60
+XGF_NI_ASIG_5P0_BASE_0 VSS VDD ASIG5V VSS VSS VSS DVDD GF_NI_ASIG_5P0_BASE
+.ends
+
+
+
+******* EOF
+
+* NGSPICE file created from gf180mcu_fd_io__asig_5p0.ext - technology: gf180mcuC
+
+
+
+******* EOF
+
+* NGSPICE file created from gf180mcu_fd_io__bi_24t.ext - technology: gf180mcuC
+
+.subckt pmos_6p0_esd w_0_12# a_278_44# a_974_132# a_120_132#
+X0 a_120_132# a_120_132# w_0_12# pplus_u r_width=30u r_length=30.28u
+X1 a_418_132# a_278_44# a_222_132# w_0_12# pmos_6p0_sab w=60u l=0.7u
+X2 a_974_132# a_974_132# w_0_12# pplus_u r_width=30u r_length=32.78u
+.ends
+
+.subckt comp018green_out_drv_pleg_6T_X pmos_6p0_esd_1/a_974_132# pmos_6p0_esd_0/a_120_132#
++ pmos_6p0_esd_0/a_278_44# pmos_6p0_esd_1/a_120_132# pmos_6p0_esd_1/w_0_12# pmos_6p0_esd_1/a_278_44#
+Xpmos_6p0_esd_0 pmos_6p0_esd_1/w_0_12# pmos_6p0_esd_0/a_278_44# pmos_6p0_esd_1/a_974_132#
++ pmos_6p0_esd_0/a_120_132# pmos_6p0_esd
+Xpmos_6p0_esd_1 pmos_6p0_esd_1/w_0_12# pmos_6p0_esd_1/a_278_44# pmos_6p0_esd_1/a_974_132#
++ pmos_6p0_esd_1/a_120_132# pmos_6p0_esd
+.ends
+
+.subckt comp018green_out_drv_pleg_6T_Y pmos_6p0_esd_0/w_0_12# pmos_6p0_esd_0/a_974_132#
++ pmos_6p0_esd_0/a_120_132# pmos_6p0_esd_0/a_278_44#
+Xpmos_6p0_esd_0 pmos_6p0_esd_0/w_0_12# pmos_6p0_esd_0/a_278_44# pmos_6p0_esd_0/a_974_132#
++ pmos_6p0_esd_0/a_120_132# pmos_6p0_esd
+.ends
+
+.subckt comp018green_out_paddrv_6T_PMOS_GROUP PMOS_metal_stack_5/m1_n44_0# PMOS_metal_stack_1/m1_n44_0#
++ a_9815_324# a_6280_324# PMOS_metal_stack_5/m1_340_0# a_4511_324# PMOS_metal_stack_1/m1_340_0#
++ a_7662_324# PMOS_metal_stack_2/m1_n44_0# PMOS_metal_stack_6/m1_340_0# PMOS_metal_stack_2/m1_340_0#
++ a_11201_324# a_5892_324# PMOS_metal_stack_3/m1_n44_0# a_4120_324# a_974_324# a_8049_324#
++ PMOS_metal_stack_3/m1_340_0# PMOS_metal_stack_4/m1_n44_0# a_9428_324# w_0_n878#
++ a_2360_324# a_2746_324# PMOS_metal_stack_4/m1_340_0#
+Xcomp018green_out_drv_pleg_6T_X_0 PMOS_metal_stack_1/m1_340_0# PMOS_metal_stack_1/m1_n44_0#
++ a_9815_324# w_0_n878# w_0_n878# a_11201_324# comp018green_out_drv_pleg_6T_X
+Xcomp018green_out_drv_pleg_6T_X_1 PMOS_metal_stack_4/m1_340_0# PMOS_metal_stack_4/m1_n44_0#
++ a_4511_324# PMOS_metal_stack_2/m1_n44_0# w_0_n878# a_5892_324# comp018green_out_drv_pleg_6T_X
+Xcomp018green_out_drv_pleg_6T_X_2 PMOS_metal_stack_2/m1_340_0# PMOS_metal_stack_3/m1_n44_0#
++ a_7662_324# PMOS_metal_stack_2/m1_n44_0# w_0_n878# a_6280_324# comp018green_out_drv_pleg_6T_X
+Xcomp018green_out_drv_pleg_6T_X_3 PMOS_metal_stack_6/m1_340_0# PMOS_metal_stack_5/m1_n44_0#
++ a_2360_324# w_0_n878# w_0_n878# a_974_324# comp018green_out_drv_pleg_6T_X
+Xcomp018green_out_drv_pleg_6T_Y_0 w_0_n878# PMOS_metal_stack_3/m1_340_0# PMOS_metal_stack_1/m1_n44_0#
++ a_9428_324# comp018green_out_drv_pleg_6T_Y
+Xcomp018green_out_drv_pleg_6T_Y_2 w_0_n878# PMOS_metal_stack_3/m1_340_0# PMOS_metal_stack_3/m1_n44_0#
++ a_8049_324# comp018green_out_drv_pleg_6T_Y
+Xcomp018green_out_drv_pleg_6T_Y_1 w_0_n878# PMOS_metal_stack_5/m1_340_0# PMOS_metal_stack_4/m1_n44_0#
++ a_4120_324# comp018green_out_drv_pleg_6T_Y
+Xcomp018green_out_drv_pleg_6T_Y_3 w_0_n878# PMOS_metal_stack_5/m1_340_0# PMOS_metal_stack_5/m1_n44_0#
++ a_2746_324# comp018green_out_drv_pleg_6T_Y
+.ends
+
+.subckt comp018green_out_drv_nleg_6T a_2010_44# a_206_44# a_1122_132# a_48_132# a_2226_132#
++ VSUBS
+X0 a_2226_132# a_2226_132# VSUBS nplus_u r_width=18.5u r_length=18.78u
+X1 a_1122_132# a_1122_132# VSUBS nplus_u r_width=18.5u r_length=22.28u
+X2 a_48_132# a_48_132# VSUBS nplus_u r_width=18.5u r_length=18.78u
+X3 a_366_132# a_206_44# a_150_132# VSUBS nmos_6p0_sab w=37u l=0.8u
+X4 a_1122_132# a_1122_132# VSUBS nplus_u r_width=18.5u r_length=22.28u
+X5 a_2170_132# a_2010_44# a_1254_132# VSUBS nmos_6p0_sab w=37u l=0.8u
+.ends
+
+.subckt comp018green_out_paddrv_6T_NMOS_GROUP a_7417_641# GR_NMOS_0/w_n1789_n834#
++ a_794_641# a_3002_641# a_2598_641# a_4806_641# nmos_metal_stack_3/m1_360_0# nmos_metal_stack_2/m1_n44_0#
++ a_9222_641# nmos_metal_stack_4/m1_360_0# nmos_metal_stack_3/m1_n44_0# nmos_metal_stack_1/m1_360_0#
++ a_7014_641# a_5210_8312# nmos_metal_stack_1/m1_n44_0# VSUBS nmos_metal_stack_2/m1_360_0#
+Xcomp018green_out_drv_nleg_6T_0 a_9222_641# a_7417_641# nmos_metal_stack_1/m1_360_0#
++ nmos_metal_stack_1/m1_n44_0# VSUBS VSUBS comp018green_out_drv_nleg_6T
+Xcomp018green_out_drv_nleg_6T_1 a_7014_641# a_5210_8312# nmos_metal_stack_2/m1_360_0#
++ nmos_metal_stack_2/m1_n44_0# nmos_metal_stack_1/m1_n44_0# VSUBS comp018green_out_drv_nleg_6T
+Xcomp018green_out_drv_nleg_6T_2 a_4806_641# a_3002_641# nmos_metal_stack_3/m1_360_0#
++ nmos_metal_stack_3/m1_n44_0# nmos_metal_stack_2/m1_n44_0# VSUBS comp018green_out_drv_nleg_6T
+Xcomp018green_out_drv_nleg_6T_3 a_2598_641# a_794_641# nmos_metal_stack_4/m1_360_0#
++ VSUBS nmos_metal_stack_3/m1_n44_0# VSUBS comp018green_out_drv_nleg_6T
+.ends
+
+.subckt comp018green_out_paddrv_24T comp018green_out_paddrv_6T_PMOS_GROUP_0/a_9428_324#
++ comp018green_out_paddrv_6T_PMOS_GROUP_0/PMOS_metal_stack_3/m1_n44_0# comp018green_out_paddrv_6T_PMOS_GROUP_0/a_2360_324#
++ m1_1417_9446# comp018green_out_paddrv_6T_PMOS_GROUP_0/a_2746_324# m1_11881_9446#
++ comp018green_out_paddrv_6T_NMOS_GROUP_0/nmos_metal_stack_3/m1_n44_0# comp018green_out_paddrv_6T_PMOS_GROUP_0/a_974_324#
++ comp018green_out_paddrv_6T_PMOS_GROUP_0/PMOS_metal_stack_4/m1_n44_0# comp018green_out_paddrv_6T_PMOS_GROUP_0/a_9815_324#
++ comp018green_out_paddrv_6T_PMOS_GROUP_0/a_4511_324# comp018green_out_paddrv_6T_PMOS_GROUP_0/a_6280_324#
++ comp018green_out_paddrv_6T_PMOS_GROUP_0/w_0_n878# comp018green_out_paddrv_6T_PMOS_GROUP_0/a_7662_324#
++ comp018green_out_paddrv_6T_PMOS_GROUP_0/PMOS_metal_stack_5/m1_n44_0# m1_1417_9278#
++ comp018green_out_paddrv_6T_PMOS_GROUP_0/PMOS_metal_stack_1/m1_n44_0# m1_11881_9278#
++ comp018green_out_paddrv_6T_PMOS_GROUP_0/a_11201_324# m1_1417_8952# m1_1417_9118#
++ m1_11881_8952# m1_11881_9118# comp018green_out_paddrv_6T_PMOS_GROUP_0/a_5892_324#
++ comp018green_out_paddrv_6T_NMOS_GROUP_0/nmos_metal_stack_1/m1_n44_0# comp018green_out_paddrv_6T_PMOS_GROUP_0/PMOS_metal_stack_2/m1_n44_0#
++ comp018green_out_paddrv_6T_PMOS_GROUP_0/a_4120_324# m1_n360_8482# comp018green_out_paddrv_6T_PMOS_GROUP_0/a_8049_324#
++ m2_1697_8943# comp018green_out_paddrv_6T_NMOS_GROUP_0/nmos_metal_stack_2/m1_n44_0#
++ VSUBS
+Xcomp018green_out_paddrv_6T_PMOS_GROUP_0 comp018green_out_paddrv_6T_PMOS_GROUP_0/PMOS_metal_stack_5/m1_n44_0#
++ comp018green_out_paddrv_6T_PMOS_GROUP_0/PMOS_metal_stack_1/m1_n44_0# comp018green_out_paddrv_6T_PMOS_GROUP_0/a_9815_324#
++ comp018green_out_paddrv_6T_PMOS_GROUP_0/a_6280_324# m2_1697_8943# comp018green_out_paddrv_6T_PMOS_GROUP_0/a_4511_324#
++ m2_1697_8943# comp018green_out_paddrv_6T_PMOS_GROUP_0/a_7662_324# comp018green_out_paddrv_6T_PMOS_GROUP_0/PMOS_metal_stack_2/m1_n44_0#
++ m2_1697_8943# m2_1697_8943# comp018green_out_paddrv_6T_PMOS_GROUP_0/a_11201_324#
++ comp018green_out_paddrv_6T_PMOS_GROUP_0/a_5892_324# comp018green_out_paddrv_6T_PMOS_GROUP_0/PMOS_metal_stack_3/m1_n44_0#
++ comp018green_out_paddrv_6T_PMOS_GROUP_0/a_4120_324# comp018green_out_paddrv_6T_PMOS_GROUP_0/a_974_324#
++ comp018green_out_paddrv_6T_PMOS_GROUP_0/a_8049_324# m2_1697_8943# comp018green_out_paddrv_6T_PMOS_GROUP_0/PMOS_metal_stack_4/m1_n44_0#
++ comp018green_out_paddrv_6T_PMOS_GROUP_0/a_9428_324# comp018green_out_paddrv_6T_PMOS_GROUP_0/w_0_n878#
++ comp018green_out_paddrv_6T_PMOS_GROUP_0/a_2360_324# comp018green_out_paddrv_6T_PMOS_GROUP_0/a_2746_324#
++ m2_1697_8943# comp018green_out_paddrv_6T_PMOS_GROUP
+Xcomp018green_out_paddrv_6T_NMOS_GROUP_0 m1_11881_9118# m1_n360_8482# m1_1417_8952#
++ m1_1417_9278# m1_1417_9118# m1_1417_9446# m2_1697_8943# comp018green_out_paddrv_6T_NMOS_GROUP_0/nmos_metal_stack_2/m1_n44_0#
++ m1_11881_8952# m2_1697_8943# comp018green_out_paddrv_6T_NMOS_GROUP_0/nmos_metal_stack_3/m1_n44_0#
++ m2_1697_8943# m1_11881_9278# m1_11881_9446# comp018green_out_paddrv_6T_NMOS_GROUP_0/nmos_metal_stack_1/m1_n44_0#
++ VSUBS m2_1697_8943# comp018green_out_paddrv_6T_NMOS_GROUP
+.ends
+
+.subckt comp018green_sigbuf_1 Z A ZB DVDD VDD VSS
+X0 a_457_354# A VDD VDD pmos_6p0 w=3u l=0.7u
+X1 VSS a_457_354# Z VSS nmos_6p0 w=1.5u l=0.7u
+X2 VSS Z ZB VSS nmos_6p0 w=1.5u l=0.7u
+X3 Z a_457_354# DVDD DVDD pmos_6p0 w=3u l=0.7u
+X4 ZB Z DVDD DVDD pmos_6p0 w=3u l=0.7u
+X5 DVDD Z ZB DVDD pmos_6p0 w=3u l=0.7u
+X6 a_457_354# A VSS VSS nmos_6p0 w=1.5u l=0.7u
+X7 ZB Z VSS VSS nmos_6p0 w=1.5u l=0.7u
+X8 DVDD a_457_354# Z DVDD pmos_6p0 w=3u l=0.7u
+X9 Z a_457_354# VSS VSS nmos_6p0 w=1.5u l=0.7u
+.ends
+
+.subckt comp018green_out_predrv SL SLB NDRIVE_X ENB A NDRIVE_Y PDRIVE_Y PDRIVE_X EN
++ DVDD DVSS
+X0 PDRIVE_Y a_1395_3267# DVDD DVDD pmos_6p0 w=12u l=0.7u
+X1 DVDD a_1395_3267# PDRIVE_X DVDD pmos_6p0 w=12u l=0.7u
+X2 PDRIVE_Y a_1395_3267# DVSS DVSS nmos_6p0 w=6u l=0.7u
+X3 DVSS a_1395_3267# PDRIVE_Y DVSS nmos_6p0 w=6u l=0.7u
+X4 NDRIVE_X SL NDRIVE_Y DVDD pmos_6p0 w=12u l=0.7u
+X5 a_1395_3267# ENB DVSS DVSS nmos_6p0 w=6u l=0.7u
+X6 DVDD a_1395_3267# PDRIVE_Y DVDD pmos_6p0 w=12u l=0.7u
+X7 NDRIVE_X a_335_226# DVSS DVSS nmos_6p0 w=6u l=0.7u
+X8 a_335_226# EN a_1395_3267# DVSS nmos_6p0 w=6u l=0.7u
+X9 NDRIVE_Y SL NDRIVE_X DVDD pmos_6p0 w=12u l=0.7u
+X10 DVSS a_335_226# NDRIVE_X DVSS nmos_6p0 w=6u l=0.7u
+X11 a_335_226# A DVDD DVDD pmos_6p0 w=12u l=0.7u
+X12 DVDD a_335_226# NDRIVE_Y DVDD pmos_6p0 w=12u l=0.7u
+X13 PDRIVE_X a_1395_3267# DVDD DVDD pmos_6p0 w=12u l=0.7u
+X14 PDRIVE_X DVDD PDRIVE_Y DVSS nmos_6p0 w=1.2u l=0.7u
+X15 PDRIVE_Y SLB PDRIVE_X DVSS nmos_6p0 w=6u l=0.7u
+X16 NDRIVE_Y a_335_226# DVSS DVSS nmos_6p0 w=6u l=0.7u
+X17 PDRIVE_X SLB PDRIVE_Y DVSS nmos_6p0 w=6u l=0.7u
+X18 NDRIVE_Y a_335_226# DVDD DVDD pmos_6p0 w=12u l=0.7u
+X19 a_335_226# ENB a_1395_3267# DVDD pmos_6p0 w=12u l=0.7u
+X20 DVSS A a_1395_3267# DVSS nmos_6p0 w=6u l=0.7u
+X21 DVDD EN a_335_226# DVDD pmos_6p0 w=12u l=0.7u
+X22 NDRIVE_Y DVSS NDRIVE_X DVDD pmos_6p0 w=1.2u l=0.7u
+X23 DVSS a_335_226# NDRIVE_Y DVSS nmos_6p0 w=6u l=0.7u
+.ends
+
+.subckt comp018green_out_sigbuf_a AB A OE DVDD VDD VSS
+X0 DVDD a_426_1958# a_1825_270# DVDD pmos_6p0 w=6u l=0.7u
+X1 a_426_270# OE VSS VSS nmos_6p0 w=3u l=0.7u
+X2 a_426_1958# OE VDD VDD pmos_6p0 w=3u l=0.7u
+X3 AB a_1825_270# VSS VSS nmos_6p0 w=3u l=0.7u
+X4 AB a_1825_270# DVDD DVDD pmos_6p0 w=6u l=0.7u
+X5 VSS a_426_1958# a_1825_270# VSS nmos_6p0 w=3u l=0.7u
+X6 a_426_1958# A a_426_270# VSS nmos_6p0 w=3u l=0.7u
+X7 VDD A a_426_1958# VDD pmos_6p0 w=3u l=0.7u
+.ends
+
+.subckt comp018green_out_sigbuf_oe ENB EN OE DVDD PDRV VDD VSS
+X0 VDD OE a_494_1958# VDD pmos_6p0 w=3u l=0.7u
+D0 VSS OE pn_6p0 pj=1.92u area=0.2304p
+D1 VSS PDRV pn_6p0 pj=1.92u area=0.2304p
+X1 DVDD a_494_1958# EN DVDD pmos_6p0 w=6u l=0.7u
+X2 a_494_270# PDRV VSS VSS nmos_6p0 w=3u l=0.7u
+X3 a_494_1958# OE a_494_270# VSS nmos_6p0 w=3u l=0.7u
+X4 a_494_1958# PDRV VDD VDD pmos_6p0 w=3u l=0.7u
+X5 VSS a_494_1958# EN VSS nmos_6p0 w=3u l=0.7u
+X6 ENB EN DVDD DVDD pmos_6p0 w=6u l=0.7u
+X7 ENB EN VSS VSS nmos_6p0 w=3u l=0.7u
+.ends
+
+.subckt comp018green_in_pupd A PU_B PD w_n83_53# DVDD DVSS a_6234_n7404#
+X0 a_404_1604# a_7646_1884# DVSS ppolyf_u r_width=0.8u r_length=35.7u
+X1 a_404_1604# a_7646_1324# DVSS ppolyf_u r_width=0.8u r_length=35.7u
+X2 DVSS PD a_6278_n7492# DVSS nmos_6p0 w=1.5u l=0.7u
+X3 a_404_1044# a_7646_1324# DVSS ppolyf_u r_width=0.8u r_length=35.7u
+X4 a_404_2164# a_6278_n7492# DVSS ppolyf_u r_width=0.8u r_length=35.7u
+X5 DVDD a_6234_n7404# a_6278_n7492# DVDD pmos_6p0 w=3u l=0.7u
+X6 a_404_484# a_7646_764# DVSS ppolyf_u r_width=0.8u r_length=35.7u
+X7 a_404_1044# a_7646_764# DVSS ppolyf_u r_width=0.8u r_length=35.7u
+X8 a_404_2164# a_7646_1884# DVSS ppolyf_u r_width=0.8u r_length=35.7u
+X9 a_404_484# A DVSS ppolyf_u r_width=0.8u r_length=23u
+.ends
+
+.subckt comp018green_std_xor2 B Z A VDD VSS
+X0 Z a_878_310# A VSS nmos_6p0 w=1.5u l=0.7u
+X1 a_602_354# a_878_310# Z VDD pmos_6p0 w=3u l=0.7u
+X2 a_602_354# A VSS VSS nmos_6p0 w=1.5u l=0.7u
+X3 VDD B a_878_310# VDD pmos_6p0 w=3u l=0.7u
+X4 VSS B a_878_310# VSS nmos_6p0 w=1.5u l=0.7u
+X5 a_602_354# A VDD VDD pmos_6p0 w=3u l=0.7u
+X6 a_602_354# B Z VSS nmos_6p0 w=1.5u l=0.7u
+X7 Z B A VDD pmos_6p0 w=3u l=0.7u
+.ends
+
+.subckt comp018green_std_nand2 A B Z VDD VSS
+X0 VDD B Z VDD pmos_6p0 w=3u l=0.7u
+X1 a_476_281# A VSS VSS nmos_6p0 w=3u l=0.7u
+X2 Z B a_476_281# VSS nmos_6p0 w=3u l=0.7u
+X3 Z A VDD VDD pmos_6p0 w=3u l=0.7u
+.ends
+
+.subckt comp018green_in_logic_pupd PD_IN PUB_OUT PDB_OUT VDD VSS comp018green_std_nand2_1/VDD
++ comp018green_std_xor2_0/VDD comp018green_std_xor2_0/A comp018green_std_nand2_1/Z
++ comp018green_std_xor2_0/B VSUBS
+Xcomp018green_std_xor2_0 comp018green_std_xor2_0/B comp018green_std_xor2_0/Z comp018green_std_xor2_0/A
++ comp018green_std_xor2_0/VDD VSUBS comp018green_std_xor2
+Xcomp018green_std_nand2_0 comp018green_std_xor2_0/Z comp018green_std_xor2_0/B comp018green_std_nand2_0/Z
++ comp018green_std_nand2_1/VDD VSUBS comp018green_std_nand2
+Xcomp018green_std_nand2_1 comp018green_std_xor2_0/A comp018green_std_xor2_0/Z comp018green_std_nand2_1/Z
++ comp018green_std_nand2_1/VDD VSUBS comp018green_std_nand2
+.ends
+
+.subckt comp018green_sigbuf Z A ZB DVDD VDD VSS
+X0 Z a_456_354# VSS VSS nmos_6p0 w=1.5u l=0.7u
+X1 Z a_456_354# DVDD DVDD pmos_6p0 w=3u l=0.7u
+X2 DVDD a_456_354# Z DVDD pmos_6p0 w=3u l=0.7u
+X3 ZB Z VSS VSS nmos_6p0 w=1.5u l=0.7u
+X4 VSS Z ZB VSS nmos_6p0 w=1.5u l=0.7u
+X5 DVDD Z ZB DVDD pmos_6p0 w=3u l=0.7u
+X6 VSS a_456_354# Z VSS nmos_6p0 w=1.5u l=0.7u
+X7 a_456_354# A VDD VDD pmos_6p0 w=3u l=0.7u
+X8 a_456_354# A VSS VSS nmos_6p0 w=1.5u l=0.7u
+X9 ZB Z DVDD DVDD pmos_6p0 w=3u l=0.7u
+.ends
+
+.subckt comp018green_in_drv A VSS Z a_2699_270# DVDD VDD
+X0 VSS Z a_2699_270# VSS nmos_6p0 w=1.5u l=0.7u
+X1 Z a_n180_263# VSS VSS nmos_6p0 w=1.25u l=0.7u
+X2 VDD Z a_2699_270# VDD pmos_6p0 w=3.5u l=0.7u
+X3 a_2699_270# Z VDD VDD pmos_6p0 w=3.5u l=0.7u
+X4 VSS a_n180_263# Z VSS nmos_6p0 w=1.25u l=0.7u
+X5 VSS Z a_2699_270# VSS nmos_6p0 w=1.5u l=0.7u
+X6 Z a_n180_263# VDD VDD pmos_6p0 w=2.5u l=0.7u
+X7 VSS A a_n180_263# VSS nmos_6p0 w=4u l=0.7u
+X8 a_n180_263# A VSS VSS nmos_6p0 w=4u l=0.7u
+X9 a_2699_270# Z VSS VSS nmos_6p0 w=1.5u l=0.7u
+X10 VDD a_n180_263# Z VDD pmos_6p0 w=2.5u l=0.7u
+X11 VDD Z a_2699_270# VDD pmos_6p0 w=3.5u l=0.7u
+X12 VDD a_n180_263# Z VDD pmos_6p0 w=2.5u l=0.7u
+X13 VSS Z a_2699_270# VSS nmos_6p0 w=1.5u l=0.7u
+X14 a_2699_270# Z VDD VDD pmos_6p0 w=3.5u l=0.7u
+X15 a_2699_270# Z VDD VDD pmos_6p0 w=3.5u l=0.7u
+X16 Z a_n180_263# VDD VDD pmos_6p0 w=2.5u l=0.7u
+X17 a_2699_270# Z VSS VSS nmos_6p0 w=1.5u l=0.7u
+X18 VDD Z a_2699_270# VDD pmos_6p0 w=3.5u l=0.7u
+X19 a_n180_263# A DVDD DVDD pmos_6p0 w=2u l=0.7u
+X20 a_2699_270# Z VSS VSS nmos_6p0 w=1.5u l=0.7u
+.ends
+
+.subckt comp018green_in_cms_smt IE CS A Z a_5355_608# m2_5364_1052# DVDD DVSS a_459_236#
+X0 DVDD a_459_236# a_599_280# DVDD pmos_6p0 w=4u l=0.7u
+X1 a_1887_280# IE DVSS DVSS nmos_6p0 w=3.2u l=0.7u
+X2 Z A a_3115_338# DVSS nmos_6p0 w=3u l=0.7u
+X3 a_1809_1797# CS DVDD DVDD pmos_6p0 w=1.5u l=0.7u
+X4 DVSS IE a_1887_280# DVSS nmos_6p0 w=3.2u l=0.7u
+X5 a_1887_280# IE DVSS DVSS nmos_6p0 w=3.2u l=0.7u
+X6 a_3115_338# a_1082_620# a_5355_608# DVSS nmos_6p0 w=1.3u l=0.7u
+X7 a_1082_620# a_599_280# Z DVDD pmos_6p0 w=2u l=0.7u
+X8 DVSS a_459_236# a_599_280# DVSS nmos_6p0 w=2u l=0.7u
+X9 DVSS a_1809_1797# a_3227_1730# DVDD pmos_6p0 w=1.9u l=0.7u
+X10 DVSS IE a_1887_280# DVSS nmos_6p0 w=3.2u l=0.7u
+X11 Z CS a_1809_1797# DVSS nmos_6p0 w=1.5u l=0.7u
+X12 Z IE DVDD DVDD pmos_6p0 w=2u l=0.7u
+X13 Z a_599_280# a_1809_1797# DVDD pmos_6p0 w=2u l=0.7u
+X14 a_1887_280# A a_3115_338# DVSS nmos_6p0 w=2.65u l=0.7u
+X15 DVDD CS a_1809_1797# DVDD pmos_6p0 w=1.5u l=0.7u
+X16 Z A a_3227_1730# DVDD pmos_6p0 w=2.15u l=0.7u
+X17 a_3115_338# A a_1887_280# DVSS nmos_6p0 w=2.65u l=0.7u
+X18 DVSS a_599_280# a_1082_620# DVSS nmos_6p0 w=1.5u l=0.7u
+X19 a_1887_280# A a_3115_338# DVSS nmos_6p0 w=2.65u l=0.7u
+X20 a_3227_1730# A Z DVDD pmos_6p0 w=2.15u l=0.7u
+X21 DVDD A a_3227_1730# DVDD pmos_6p0 w=1.9u l=0.7u
+X22 a_1887_280# IE DVSS DVSS nmos_6p0 w=3.2u l=0.7u
+X23 Z A a_3115_338# DVSS nmos_6p0 w=3u l=0.7u
+X24 a_599_280# a_459_236# DVDD DVDD pmos_6p0 w=4u l=0.7u
+X25 Z IE DVDD DVDD pmos_6p0 w=2u l=0.7u
+X26 a_3115_338# A Z DVSS nmos_6p0 w=3u l=0.7u
+X27 DVDD IE Z DVDD pmos_6p0 w=2u l=0.7u
+X28 a_1082_620# CS Z DVSS nmos_6p0 w=1.5u l=0.7u
+X29 a_3115_338# A a_1887_280# DVSS nmos_6p0 w=2.65u l=0.7u
+X30 a_3115_338# A Z DVSS nmos_6p0 w=3u l=0.7u
+X31 a_3227_1730# A DVDD DVDD pmos_6p0 w=1.9u l=0.7u
+X32 a_3227_1730# a_1809_1797# DVSS DVDD pmos_6p0 w=1.9u l=0.7u
+X33 a_599_280# a_459_236# DVSS DVSS nmos_6p0 w=2u l=0.7u
+.ends
+
+.subckt comp018green_inpath_cms_smt PAD IE CS PD PU VDD comp018green_in_logic_pupd_0/comp018green_std_xor2_0/VDD
++ comp018green_in_cms_smt_0/a_5355_608# comp018green_in_logic_pupd_0/VDD comp018green_in_pupd_0/w_n83_53#
++ comp018green_in_pupd_0/A comp018green_in_pupd_0/DVDD comp018green_sigbuf_2/VDD comp018green_sigbuf_1/VDD
++ comp018green_in_drv_0/DVDD m1_12910_4326# comp018green_sigbuf_3/DVDD comp018green_in_drv_0/VDD
++ comp018green_sigbuf_3/VDD comp018green_in_logic_pupd_0/comp018green_std_nand2_1/VDD
++ VSUBS comp018green_sigbuf_2/DVDD
+Xcomp018green_in_pupd_0 comp018green_in_pupd_0/A comp018green_in_pupd_0/PU_B comp018green_sigbuf_0/ZB
++ comp018green_in_pupd_0/w_n83_53# comp018green_in_pupd_0/DVDD VSUBS comp018green_sigbuf_2/Z
++ comp018green_in_pupd
+Xcomp018green_in_logic_pupd_0 PD comp018green_sigbuf_2/A comp018green_sigbuf_0/A comp018green_in_logic_pupd_0/VDD
++ VSUBS comp018green_in_logic_pupd_0/comp018green_std_nand2_1/VDD comp018green_in_logic_pupd_0/comp018green_std_xor2_0/VDD
++ PU comp018green_sigbuf_2/A PD VSUBS comp018green_in_logic_pupd
+Xcomp018green_sigbuf_0 comp018green_sigbuf_0/Z comp018green_sigbuf_0/A comp018green_sigbuf_0/ZB
++ comp018green_sigbuf_2/DVDD comp018green_sigbuf_3/VDD VSUBS comp018green_sigbuf
+Xcomp018green_sigbuf_1 comp018green_sigbuf_1/Z IE comp018green_sigbuf_1/ZB comp018green_sigbuf_3/DVDD
++ comp018green_sigbuf_1/VDD VSUBS comp018green_sigbuf
+Xcomp018green_sigbuf_2 comp018green_sigbuf_2/Z comp018green_sigbuf_2/A comp018green_sigbuf_2/ZB
++ comp018green_sigbuf_2/DVDD comp018green_sigbuf_2/VDD VSUBS comp018green_sigbuf
+Xcomp018green_sigbuf_3 comp018green_sigbuf_3/Z CS comp018green_sigbuf_3/ZB comp018green_sigbuf_3/DVDD
++ comp018green_sigbuf_3/VDD VSUBS comp018green_sigbuf
+Xcomp018green_in_drv_0 comp018green_in_drv_0/A VSUBS comp018green_in_drv_0/Z m1_12910_4326#
++ comp018green_in_drv_0/DVDD comp018green_in_drv_0/VDD comp018green_in_drv
+Xcomp018green_in_cms_smt_0 comp018green_sigbuf_1/Z comp018green_sigbuf_3/Z PAD comp018green_in_drv_0/A
++ comp018green_in_cms_smt_0/a_5355_608# PAD comp018green_in_drv_0/DVDD VSUBS comp018green_sigbuf_3/Z
++ comp018green_in_cms_smt
+D0 IE comp018green_sigbuf_1/VDD pn_6p0 pj=4u area=1p
+D1 CS comp018green_sigbuf_1/VDD pn_6p0 pj=4u area=1p
+D2 PD comp018green_sigbuf_1/VDD pn_6p0 pj=4u area=1p
+D3 PU comp018green_sigbuf_1/VDD pn_6p0 pj=4u area=1p
+.ends
+
+.subckt comp018green_esd_cdm IP_IN PAD DVDD DVSS w_n83_n83# a_537_566# w_454_3720#
+D0 IP_IN w_454_3720# pn_6p0 pj=42u area=20p
+X0 IP_IN PAD DVSS ppolyf_u r_width=2.5u r_length=2.8u
+D1 DVSS IP_IN np_6p0 pj=42u area=20p
+D2 IP_IN w_454_3720# pn_6p0 pj=42u area=20p
+D3 DVSS IP_IN np_6p0 pj=42u area=20p
+X1 IP_IN PAD DVSS ppolyf_u r_width=2.5u r_length=2.8u
+X2 IP_IN PAD DVSS ppolyf_u r_width=2.5u r_length=2.8u
+X3 IP_IN PAD DVSS ppolyf_u r_width=2.5u r_length=2.8u
+.ends
+
+.subckt GF_NI_BI_24T_BASE OE PU a_2331_55684# comp018green_out_paddrv_24T_0/comp018green_out_paddrv_6T_PMOS_GROUP_0/PMOS_metal_stack_5/m1_n44_0#
++ comp018green_out_paddrv_24T_0/comp018green_out_paddrv_6T_PMOS_GROUP_0/PMOS_metal_stack_1/m1_n44_0#
++ IE comp018green_out_paddrv_24T_0/comp018green_out_paddrv_6T_NMOS_GROUP_0/nmos_metal_stack_1/m1_n44_0#
++ comp018green_esd_cdm_0/w_454_3720# comp018green_out_paddrv_24T_0/comp018green_out_paddrv_6T_PMOS_GROUP_0/PMOS_metal_stack_2/m1_n44_0#
++ comp018green_inpath_cms_smt_0/VDD PD a_12390_41178# comp018green_out_paddrv_24T_0/comp018green_out_paddrv_6T_NMOS_GROUP_0/nmos_metal_stack_2/m1_n44_0#
++ comp018green_out_sigbuf_oe_1/DVDD m2_1886_52453# comp018green_out_paddrv_24T_0/comp018green_out_paddrv_6T_PMOS_GROUP_0/PMOS_metal_stack_3/m1_n44_0#
++ comp018green_sigbuf_1_0/VDD comp018green_esd_cdm_0/DVDD PAD comp018green_out_sigbuf_oe_0/VDD
++ CS comp018green_inpath_cms_smt_0/comp018green_in_logic_pupd_0/VDD Y comp018green_out_sigbuf_a_0/DVDD
++ A SL m1_3904_44430# m1_3608_46314# comp018green_inpath_cms_smt_0/comp018green_sigbuf_3/DVDD
++ comp018green_out_paddrv_24T_0/comp018green_out_paddrv_6T_NMOS_GROUP_0/nmos_metal_stack_3/m1_n44_0#
++ comp018green_sigbuf_1_0/DVDD comp018green_out_sigbuf_oe_2/VDD comp018green_inpath_cms_smt_0/comp018green_in_drv_0/DVDD
++ comp018green_inpath_cms_smt_0/comp018green_in_drv_0/VDD a_14203_641# comp018green_out_paddrv_24T_0/comp018green_out_paddrv_6T_PMOS_GROUP_0/PMOS_metal_stack_4/m1_n44_0#
++ comp018green_sigbuf_1_0/VSS comp018green_inpath_cms_smt_0/comp018green_sigbuf_2/DVDD
++ comp018green_out_predrv_3/DVDD comp018green_out_paddrv_24T_0/comp018green_out_paddrv_6T_PMOS_GROUP_0/w_0_n878#
+Xcomp018green_out_paddrv_24T_0 comp018green_out_predrv_1/PDRIVE_Y comp018green_out_paddrv_24T_0/comp018green_out_paddrv_6T_PMOS_GROUP_0/PMOS_metal_stack_3/m1_n44_0#
++ comp018green_out_predrv_0/PDRIVE_X comp018green_out_predrv_3/NDRIVE_Y comp018green_out_predrv_0/PDRIVE_Y
++ comp018green_out_predrv_2/NDRIVE_X comp018green_out_paddrv_24T_0/comp018green_out_paddrv_6T_NMOS_GROUP_0/nmos_metal_stack_3/m1_n44_0#
++ comp018green_out_predrv_0/PDRIVE_X comp018green_out_paddrv_24T_0/comp018green_out_paddrv_6T_PMOS_GROUP_0/PMOS_metal_stack_4/m1_n44_0#
++ comp018green_out_predrv_1/PDRIVE_X comp018green_out_predrv_3/PDRIVE_X comp018green_out_predrv_2/PDRIVE_X
++ comp018green_out_paddrv_24T_0/comp018green_out_paddrv_6T_PMOS_GROUP_0/w_0_n878#
++ comp018green_out_predrv_2/PDRIVE_X comp018green_out_paddrv_24T_0/comp018green_out_paddrv_6T_PMOS_GROUP_0/PMOS_metal_stack_5/m1_n44_0#
++ comp018green_out_predrv_3/NDRIVE_X comp018green_out_paddrv_24T_0/comp018green_out_paddrv_6T_PMOS_GROUP_0/PMOS_metal_stack_1/m1_n44_0#
++ comp018green_out_predrv_2/NDRIVE_Y comp018green_out_predrv_1/PDRIVE_X comp018green_out_predrv_0/NDRIVE_X
++ comp018green_out_predrv_0/NDRIVE_Y comp018green_out_predrv_1/NDRIVE_Y comp018green_out_predrv_1/NDRIVE_X
++ comp018green_out_predrv_3/PDRIVE_X comp018green_out_paddrv_24T_0/comp018green_out_paddrv_6T_NMOS_GROUP_0/nmos_metal_stack_1/m1_n44_0#
++ comp018green_out_paddrv_24T_0/comp018green_out_paddrv_6T_PMOS_GROUP_0/PMOS_metal_stack_2/m1_n44_0#
++ comp018green_out_predrv_3/PDRIVE_Y comp018green_out_predrv_3/DVDD comp018green_out_predrv_2/PDRIVE_Y
++ PAD comp018green_out_paddrv_24T_0/comp018green_out_paddrv_6T_NMOS_GROUP_0/nmos_metal_stack_2/m1_n44_0#
++ comp018green_sigbuf_1_0/VSS comp018green_out_paddrv_24T
+Xcomp018green_sigbuf_1_0 comp018green_sigbuf_1_0/Z SL comp018green_sigbuf_1_0/ZB comp018green_sigbuf_1_0/DVDD
++ comp018green_sigbuf_1_0/VDD comp018green_sigbuf_1_0/VSS comp018green_sigbuf_1
+Xcomp018green_out_predrv_0 comp018green_sigbuf_1_0/Z comp018green_sigbuf_1_0/ZB comp018green_out_predrv_0/NDRIVE_X
++ comp018green_out_predrv_0/ENB comp018green_out_predrv_3/A comp018green_out_predrv_0/NDRIVE_Y
++ comp018green_out_predrv_0/PDRIVE_Y comp018green_out_predrv_0/PDRIVE_X comp018green_out_predrv_0/EN
++ comp018green_out_predrv_3/DVDD comp018green_sigbuf_1_0/VSS comp018green_out_predrv
+Xcomp018green_out_predrv_1 comp018green_sigbuf_1_0/Z comp018green_sigbuf_1_0/ZB comp018green_out_predrv_1/NDRIVE_X
++ comp018green_out_predrv_1/ENB comp018green_out_predrv_3/A comp018green_out_predrv_1/NDRIVE_Y
++ comp018green_out_predrv_1/PDRIVE_Y comp018green_out_predrv_1/PDRIVE_X comp018green_out_predrv_1/EN
++ comp018green_out_predrv_3/DVDD comp018green_sigbuf_1_0/VSS comp018green_out_predrv
+Xcomp018green_out_sigbuf_a_0 comp018green_out_predrv_3/A A OE comp018green_out_sigbuf_a_0/DVDD
++ comp018green_sigbuf_1_0/VDD comp018green_sigbuf_1_0/VSS comp018green_out_sigbuf_a
+Xcomp018green_out_predrv_2 comp018green_sigbuf_1_0/Z comp018green_sigbuf_1_0/ZB comp018green_out_predrv_2/NDRIVE_X
++ comp018green_out_predrv_3/ENB comp018green_out_predrv_3/A comp018green_out_predrv_2/NDRIVE_Y
++ comp018green_out_predrv_2/PDRIVE_Y comp018green_out_predrv_2/PDRIVE_X comp018green_out_predrv_3/EN
++ comp018green_out_predrv_3/DVDD comp018green_sigbuf_1_0/VSS comp018green_out_predrv
+Xcomp018green_out_sigbuf_oe_0 comp018green_out_predrv_0/ENB comp018green_out_predrv_0/EN
++ OE comp018green_out_sigbuf_oe_1/DVDD comp018green_out_sigbuf_oe_0/PDRV comp018green_out_sigbuf_oe_0/VDD
++ comp018green_sigbuf_1_0/VSS comp018green_out_sigbuf_oe
+Xcomp018green_out_predrv_3 comp018green_sigbuf_1_0/Z comp018green_sigbuf_1_0/ZB comp018green_out_predrv_3/NDRIVE_X
++ comp018green_out_predrv_3/ENB comp018green_out_predrv_3/A comp018green_out_predrv_3/NDRIVE_Y
++ comp018green_out_predrv_3/PDRIVE_Y comp018green_out_predrv_3/PDRIVE_X comp018green_out_predrv_3/EN
++ comp018green_out_predrv_3/DVDD comp018green_sigbuf_1_0/VSS comp018green_out_predrv
+Xcomp018green_out_sigbuf_oe_1 comp018green_out_predrv_3/ENB comp018green_out_predrv_3/EN
++ OE comp018green_out_sigbuf_oe_1/DVDD comp018green_out_sigbuf_oe_1/PDRV comp018green_out_sigbuf_oe_2/VDD
++ comp018green_sigbuf_1_0/VSS comp018green_out_sigbuf_oe
+Xcomp018green_inpath_cms_smt_0 comp018green_esd_cdm_0/IP_IN IE CS PD PU comp018green_inpath_cms_smt_0/VDD
++ comp018green_inpath_cms_smt_0/comp018green_in_logic_pupd_0/VDD comp018green_inpath_cms_smt_0/comp018green_in_drv_0/DVDD
++ comp018green_inpath_cms_smt_0/comp018green_in_logic_pupd_0/VDD m1_3608_46314# comp018green_esd_cdm_0/IP_IN
++ comp018green_inpath_cms_smt_0/comp018green_in_drv_0/DVDD comp018green_out_sigbuf_oe_0/VDD
++ comp018green_out_sigbuf_oe_0/VDD comp018green_inpath_cms_smt_0/comp018green_in_drv_0/DVDD
++ Y comp018green_inpath_cms_smt_0/comp018green_sigbuf_3/DVDD comp018green_inpath_cms_smt_0/comp018green_in_drv_0/VDD
++ comp018green_out_sigbuf_oe_0/VDD comp018green_inpath_cms_smt_0/comp018green_in_logic_pupd_0/VDD
++ comp018green_sigbuf_1_0/VSS comp018green_inpath_cms_smt_0/comp018green_sigbuf_2/DVDD
++ comp018green_inpath_cms_smt
+Xcomp018green_out_sigbuf_oe_2 comp018green_out_predrv_1/ENB comp018green_out_predrv_1/EN
++ OE comp018green_out_sigbuf_a_0/DVDD comp018green_out_sigbuf_oe_2/VDD comp018green_out_sigbuf_oe_2/VDD
++ comp018green_sigbuf_1_0/VSS comp018green_out_sigbuf_oe
+Xcomp018green_esd_cdm_0 comp018green_esd_cdm_0/IP_IN PAD comp018green_esd_cdm_0/DVDD
++ comp018green_sigbuf_1_0/VSS comp018green_inpath_cms_smt_0/comp018green_in_drv_0/DVDD
++ comp018green_sigbuf_1_0/VSS comp018green_esd_cdm_0/w_454_3720# comp018green_esd_cdm
+X0 comp018green_sigbuf_1_0/VSS a_12390_41178# comp018green_sigbuf_1_0/VSS comp018green_sigbuf_1_0/VSS nmos_6p0 w=3u l=3u
+X1 comp018green_sigbuf_1_0/VSS a_12390_41178# comp018green_sigbuf_1_0/VSS comp018green_sigbuf_1_0/VSS nmos_6p0 w=3u l=3u
+X2 comp018green_out_sigbuf_oe_0/VDD comp018green_out_sigbuf_oe_0/PDRV comp018green_sigbuf_1_0/VSS ppolyf_u r_width=0.8u r_length=1.6u
+X3 comp018green_sigbuf_1_0/VSS comp018green_out_predrv_3/DVDD comp018green_sigbuf_1_0/VSS comp018green_sigbuf_1_0/VSS nmos_6p0 w=5u l=1.5u
+X4 comp018green_sigbuf_1_0/VSS comp018green_out_predrv_3/DVDD comp018green_sigbuf_1_0/VSS comp018green_sigbuf_1_0/VSS nmos_6p0 w=5u l=1.5u
+X5 comp018green_sigbuf_1_0/VSS comp018green_out_predrv_3/DVDD comp018green_sigbuf_1_0/VSS comp018green_sigbuf_1_0/VSS nmos_6p0 w=5u l=1.5u
+X6 comp018green_out_sigbuf_oe_0/VDD comp018green_out_sigbuf_oe_1/PDRV comp018green_sigbuf_1_0/VSS ppolyf_u r_width=0.8u r_length=1.6u
+X7 comp018green_sigbuf_1_0/VSS a_12390_41178# comp018green_sigbuf_1_0/VSS comp018green_sigbuf_1_0/VSS nmos_6p0 w=3u l=3u
+X8 comp018green_sigbuf_1_0/VSS comp018green_out_predrv_3/DVDD comp018green_sigbuf_1_0/VSS comp018green_sigbuf_1_0/VSS nmos_6p0 w=5u l=1.5u
+D0 A comp018green_sigbuf_1_0/VDD pn_6p0 pj=4u area=1p
+D1 SL comp018green_sigbuf_1_0/VDD pn_6p0 pj=4u area=1p
+X9 comp018green_sigbuf_1_0/VSS comp018green_out_predrv_3/DVDD comp018green_sigbuf_1_0/VSS comp018green_sigbuf_1_0/VSS nmos_6p0 w=5u l=1.5u
+X10 comp018green_sigbuf_1_0/VSS comp018green_out_predrv_3/DVDD comp018green_sigbuf_1_0/VSS comp018green_sigbuf_1_0/VSS nmos_6p0 w=5u l=1.5u
+X11 comp018green_sigbuf_1_0/VSS a_12390_41178# comp018green_sigbuf_1_0/VSS comp018green_sigbuf_1_0/VSS nmos_6p0 w=3u l=3u
+X12 comp018green_sigbuf_1_0/VSS comp018green_out_predrv_3/DVDD comp018green_sigbuf_1_0/VSS comp018green_sigbuf_1_0/VSS nmos_6p0 w=5u l=1.5u
+X13 comp018green_sigbuf_1_0/VSS comp018green_out_predrv_3/DVDD comp018green_sigbuf_1_0/VSS comp018green_sigbuf_1_0/VSS nmos_6p0 w=5u l=1.5u
+.ends
+
+
+
+******* EOF
+
+* NGSPICE file created from gf180mcu_fd_io__bi_24t.ext - technology: gf180mcuC
+
+
+
+******* EOF
+
+* NGSPICE file created from gf180mcu_fd_io__bi_t.ext - technology: gf180mcuC
+
+
+
+******* EOF
+
+* NGSPICE file created from gf180mcu_fd_io__bi_t.ext - technology: gf180mcuC
+
+
+
+******* EOF
+
+* NGSPICE file created from gf180mcu_fd_io__brk2.ext - technology: gf180mcuC
+
+.subckt GF_NI_BRK2_1 VSS
+.ends
+
+.subckt GF_NI_BRK2_0 VSS
+XGF_NI_BRK2_1_0 VSS GF_NI_BRK2_1
+.ends
+
+.subckt gf180mcu_fd_io__brk2 VSS
+XGF_NI_BRK2_0_0 VSS GF_NI_BRK2_0
+.ends
+
+
+
+******* EOF
+
+* NGSPICE file created from gf180mcu_fd_io__brk2.ext - technology: gf180mcuC
+
+
+
+******* EOF
+
+* NGSPICE file created from gf180mcu_fd_io__brk5.ext - technology: gf180mcuC
+
+.subckt GF_NI_BRK5_1 VSS
+.ends
+
+.subckt GF_NI_BRK5_0 VSS
+XGF_NI_BRK5_1_0 VSS GF_NI_BRK5_1
+.ends
+
+.subckt gf180mcu_fd_io__brk5 VSS
+XGF_NI_BRK5_0_0 VSS GF_NI_BRK5_0
+.ends
+
+
+
+******* EOF
+
+* NGSPICE file created from gf180mcu_fd_io__brk5.ext - technology: gf180mcuC
+
+
+
+******* EOF
+
+* NGSPICE file created from gf180mcu_fd_io__cor.ext - technology: gf180mcuC
+
+.subckt moscap_corner_1 a_5519_6541# a_5519_529# M1_PSUB_CDNS_40661953145678_2/VSUBS
+X0 M1_PSUB_CDNS_40661953145678_2/VSUBS a_5519_6541# M1_PSUB_CDNS_40661953145678_2/VSUBS M1_PSUB_CDNS_40661953145678_2/VSUBS nmos_6p0 w=25u l=10u
+X1 M1_PSUB_CDNS_40661953145678_2/VSUBS a_5519_529# M1_PSUB_CDNS_40661953145678_2/VSUBS M1_PSUB_CDNS_40661953145678_2/VSUBS nmos_6p0 w=25u l=10u
+X2 M1_PSUB_CDNS_40661953145678_2/VSUBS a_5519_6541# M1_PSUB_CDNS_40661953145678_2/VSUBS M1_PSUB_CDNS_40661953145678_2/VSUBS nmos_6p0 w=25u l=10u
+X3 M1_PSUB_CDNS_40661953145678_2/VSUBS a_5519_529# M1_PSUB_CDNS_40661953145678_2/VSUBS M1_PSUB_CDNS_40661953145678_2/VSUBS nmos_6p0 w=25u l=10u
+.ends
+
+.subckt moscap_corner a_647_6541# a_647_529# VMINUS
+X0 VMINUS a_647_6541# VMINUS VMINUS nmos_6p0 w=25u l=10u
+X1 VMINUS a_647_529# VMINUS VMINUS nmos_6p0 w=25u l=10u
+X2 VMINUS a_647_6541# VMINUS VMINUS nmos_6p0 w=25u l=10u
+X3 VMINUS a_647_529# VMINUS VMINUS nmos_6p0 w=25u l=10u
+X4 VMINUS a_647_6541# VMINUS VMINUS nmos_6p0 w=25u l=10u
+X5 VMINUS a_647_529# VMINUS VMINUS nmos_6p0 w=25u l=10u
+X6 VMINUS a_647_6541# VMINUS VMINUS nmos_6p0 w=25u l=10u
+X7 VMINUS a_647_529# VMINUS VMINUS nmos_6p0 w=25u l=10u
+.ends
+
+.subckt nmos_clamp_20_50_4 M2_M1_CDNS_40661953145792_0/VSUBS w_n51_n51# a_1237_1481#
+X0 M2_M1_CDNS_40661953145792_0/VSUBS a_1237_1481# w_n51_n51# M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X1 w_n51_n51# a_1237_1481# M2_M1_CDNS_40661953145792_0/VSUBS M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X2 w_n51_n51# a_1237_1481# M2_M1_CDNS_40661953145792_0/VSUBS M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X3 w_n51_n51# a_1237_1481# M2_M1_CDNS_40661953145792_0/VSUBS M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X4 M2_M1_CDNS_40661953145792_0/VSUBS a_1237_1481# w_n51_n51# M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X5 M2_M1_CDNS_40661953145792_0/VSUBS a_1237_1481# w_n51_n51# M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X6 w_n51_n51# a_1237_1481# M2_M1_CDNS_40661953145792_0/VSUBS M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X7 M2_M1_CDNS_40661953145792_0/VSUBS a_1237_1481# w_n51_n51# M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X8 w_n51_n51# a_1237_1481# M2_M1_CDNS_40661953145792_0/VSUBS M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X9 w_n51_n51# a_1237_1481# M2_M1_CDNS_40661953145792_0/VSUBS M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X10 w_n51_n51# a_1237_1481# M2_M1_CDNS_40661953145792_0/VSUBS M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X11 M2_M1_CDNS_40661953145792_0/VSUBS a_1237_1481# w_n51_n51# M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X12 w_n51_n51# a_1237_1481# M2_M1_CDNS_40661953145792_0/VSUBS M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X13 w_n51_n51# a_1237_1481# M2_M1_CDNS_40661953145792_0/VSUBS M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X14 M2_M1_CDNS_40661953145792_0/VSUBS a_1237_1481# w_n51_n51# M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X15 M2_M1_CDNS_40661953145792_0/VSUBS a_1237_1481# w_n51_n51# M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X16 w_n51_n51# a_1237_1481# M2_M1_CDNS_40661953145792_0/VSUBS M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X17 w_n51_n51# a_1237_1481# M2_M1_CDNS_40661953145792_0/VSUBS M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X18 w_n51_n51# a_1237_1481# M2_M1_CDNS_40661953145792_0/VSUBS M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X19 w_n51_n51# a_1237_1481# M2_M1_CDNS_40661953145792_0/VSUBS M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X20 w_n51_n51# a_1237_1481# M2_M1_CDNS_40661953145792_0/VSUBS M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X21 M2_M1_CDNS_40661953145792_0/VSUBS a_1237_1481# w_n51_n51# M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X22 M2_M1_CDNS_40661953145792_0/VSUBS a_1237_1481# w_n51_n51# M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X23 M2_M1_CDNS_40661953145792_0/VSUBS a_1237_1481# w_n51_n51# M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X24 w_n51_n51# a_1237_1481# M2_M1_CDNS_40661953145792_0/VSUBS M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X25 w_n51_n51# a_1237_1481# M2_M1_CDNS_40661953145792_0/VSUBS M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X26 w_n51_n51# a_1237_1481# M2_M1_CDNS_40661953145792_0/VSUBS M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X27 M2_M1_CDNS_40661953145792_0/VSUBS a_1237_1481# w_n51_n51# M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X28 M2_M1_CDNS_40661953145792_0/VSUBS a_1237_1481# w_n51_n51# M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X29 w_n51_n51# a_1237_1481# M2_M1_CDNS_40661953145792_0/VSUBS M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X30 w_n51_n51# a_1237_1481# M2_M1_CDNS_40661953145792_0/VSUBS M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X31 M2_M1_CDNS_40661953145792_0/VSUBS a_1237_1481# w_n51_n51# M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X32 M2_M1_CDNS_40661953145792_0/VSUBS a_1237_1481# w_n51_n51# M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X33 M2_M1_CDNS_40661953145792_0/VSUBS a_1237_1481# w_n51_n51# M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X34 M2_M1_CDNS_40661953145792_0/VSUBS a_1237_1481# w_n51_n51# M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X35 w_n51_n51# a_1237_1481# M2_M1_CDNS_40661953145792_0/VSUBS M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X36 w_n51_n51# a_1237_1481# M2_M1_CDNS_40661953145792_0/VSUBS M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X37 w_n51_n51# a_1237_1481# M2_M1_CDNS_40661953145792_0/VSUBS M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X38 w_n51_n51# a_1237_1481# M2_M1_CDNS_40661953145792_0/VSUBS M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X39 M2_M1_CDNS_40661953145792_0/VSUBS a_1237_1481# w_n51_n51# M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X40 M2_M1_CDNS_40661953145792_0/VSUBS a_1237_1481# w_n51_n51# M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X41 M2_M1_CDNS_40661953145792_0/VSUBS a_1237_1481# w_n51_n51# M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X42 M2_M1_CDNS_40661953145792_0/VSUBS a_1237_1481# w_n51_n51# M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X43 w_n51_n51# a_1237_1481# M2_M1_CDNS_40661953145792_0/VSUBS M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X44 w_n51_n51# a_1237_1481# M2_M1_CDNS_40661953145792_0/VSUBS M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X45 w_n51_n51# a_1237_1481# M2_M1_CDNS_40661953145792_0/VSUBS M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X46 M2_M1_CDNS_40661953145792_0/VSUBS a_1237_1481# w_n51_n51# M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X47 M2_M1_CDNS_40661953145792_0/VSUBS a_1237_1481# w_n51_n51# M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X48 w_n51_n51# a_1237_1481# M2_M1_CDNS_40661953145792_0/VSUBS M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X49 w_n51_n51# a_1237_1481# M2_M1_CDNS_40661953145792_0/VSUBS M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X50 M2_M1_CDNS_40661953145792_0/VSUBS a_1237_1481# w_n51_n51# M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X51 w_n51_n51# a_1237_1481# M2_M1_CDNS_40661953145792_0/VSUBS M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X52 M2_M1_CDNS_40661953145792_0/VSUBS a_1237_1481# w_n51_n51# M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X53 w_n51_n51# a_1237_1481# M2_M1_CDNS_40661953145792_0/VSUBS M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X54 M2_M1_CDNS_40661953145792_0/VSUBS a_1237_1481# w_n51_n51# M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X55 w_n51_n51# a_1237_1481# M2_M1_CDNS_40661953145792_0/VSUBS M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X56 M2_M1_CDNS_40661953145792_0/VSUBS a_1237_1481# w_n51_n51# M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X57 M2_M1_CDNS_40661953145792_0/VSUBS a_1237_1481# w_n51_n51# M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X58 M2_M1_CDNS_40661953145792_0/VSUBS a_1237_1481# w_n51_n51# M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X59 w_n51_n51# a_1237_1481# M2_M1_CDNS_40661953145792_0/VSUBS M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X60 M2_M1_CDNS_40661953145792_0/VSUBS a_1237_1481# w_n51_n51# M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X61 w_n51_n51# a_1237_1481# M2_M1_CDNS_40661953145792_0/VSUBS M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X62 M2_M1_CDNS_40661953145792_0/VSUBS a_1237_1481# w_n51_n51# M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X63 M2_M1_CDNS_40661953145792_0/VSUBS a_1237_1481# w_n51_n51# M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X64 w_n51_n51# a_1237_1481# M2_M1_CDNS_40661953145792_0/VSUBS M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X65 w_n51_n51# a_1237_1481# M2_M1_CDNS_40661953145792_0/VSUBS M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X66 M2_M1_CDNS_40661953145792_0/VSUBS a_1237_1481# w_n51_n51# M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X67 M2_M1_CDNS_40661953145792_0/VSUBS a_1237_1481# w_n51_n51# M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X68 M2_M1_CDNS_40661953145792_0/VSUBS a_1237_1481# w_n51_n51# M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X69 w_n51_n51# a_1237_1481# M2_M1_CDNS_40661953145792_0/VSUBS M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X70 M2_M1_CDNS_40661953145792_0/VSUBS a_1237_1481# w_n51_n51# M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X71 M2_M1_CDNS_40661953145792_0/VSUBS a_1237_1481# w_n51_n51# M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X72 M2_M1_CDNS_40661953145792_0/VSUBS a_1237_1481# w_n51_n51# M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X73 M2_M1_CDNS_40661953145792_0/VSUBS a_1237_1481# w_n51_n51# M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X74 w_n51_n51# a_1237_1481# M2_M1_CDNS_40661953145792_0/VSUBS M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X75 w_n51_n51# a_1237_1481# M2_M1_CDNS_40661953145792_0/VSUBS M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X76 M2_M1_CDNS_40661953145792_0/VSUBS a_1237_1481# w_n51_n51# M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X77 w_n51_n51# a_1237_1481# M2_M1_CDNS_40661953145792_0/VSUBS M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X78 w_n51_n51# a_1237_1481# M2_M1_CDNS_40661953145792_0/VSUBS M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+X79 M2_M1_CDNS_40661953145792_0/VSUBS a_1237_1481# w_n51_n51# M2_M1_CDNS_40661953145792_0/VSUBS nmos_6p0 w=50u l=0.7u
+.ends
+
+.subckt comp018green_esd_rc_v5p0_1 VRC VPLUS VMINUS
+X0 a_n2054_4325# a_n2334_17198# VMINUS ppolyf_u r_width=0.8u r_length=63.855u
+X1 a_n934_4325# a_n654_17198# VMINUS ppolyf_u r_width=0.8u r_length=63.855u
+X2 VMINUS VRC VMINUS VMINUS nmos_6p0 w=25u l=10u
+X3 a_n3174_4325# a_n3454_17198# VMINUS ppolyf_u r_width=0.8u r_length=63.855u
+X4 VMINUS VRC VMINUS VMINUS nmos_6p0 w=25u l=10u
+X5 VRC a_n654_17198# VMINUS ppolyf_u r_width=0.8u r_length=63.855u
+X6 VMINUS VRC VMINUS VMINUS nmos_6p0 w=25u l=10u
+X7 VMINUS VRC VMINUS VMINUS nmos_6p0 w=25u l=10u
+X8 VMINUS VRC VMINUS VMINUS nmos_6p0 w=25u l=10u
+X9 VMINUS VRC VMINUS VMINUS nmos_6p0 w=25u l=10u
+X10 a_n2614_4325# a_n2894_17198# VMINUS ppolyf_u r_width=0.8u r_length=63.855u
+X11 a_n2054_4325# a_n1774_17198# VMINUS ppolyf_u r_width=0.8u r_length=63.855u
+X12 a_n1494_4325# a_n1214_17198# VMINUS ppolyf_u r_width=0.8u r_length=63.855u
+X13 a_n3174_4325# a_n2894_17198# VMINUS ppolyf_u r_width=0.8u r_length=63.855u
+X14 a_n2614_4325# a_n2334_17198# VMINUS ppolyf_u r_width=0.8u r_length=63.855u
+X15 a_n934_4325# a_n1214_17198# VMINUS ppolyf_u r_width=0.8u r_length=63.855u
+X16 VMINUS VRC VMINUS VMINUS nmos_6p0 w=25u l=10u
+X17 VPLUS a_n3454_17198# VMINUS ppolyf_u r_width=0.8u r_length=63.855u
+X18 a_n1494_4325# a_n1774_17198# VMINUS ppolyf_u r_width=0.8u r_length=63.855u
+X19 VMINUS VRC VMINUS VMINUS nmos_6p0 w=25u l=10u
+.ends
+
+.subckt comp018green_esd_clamp_v5p0_1 top_route_0/VSUBS comp018green_esd_rc_v5p0_1_0/VPLUS
+Xnmos_clamp_20_50_4_0 top_route_0/VSUBS comp018green_esd_rc_v5p0_1_0/VPLUS a_4685_27789#
++ nmos_clamp_20_50_4
+Xcomp018green_esd_rc_v5p0_1_0 comp018green_esd_rc_v5p0_1_0/VRC comp018green_esd_rc_v5p0_1_0/VPLUS
++ top_route_0/VSUBS comp018green_esd_rc_v5p0_1
+X0 comp018green_esd_rc_v5p0_1_0/VPLUS a_3781_27789# a_4685_27789# comp018green_esd_rc_v5p0_1_0/VPLUS pmos_6p0 w=5u l=0.7u
+X1 a_4685_27789# a_3781_27789# top_route_0/VSUBS top_route_0/VSUBS nmos_6p0 w=5u l=0.7u
+X2 top_route_0/VSUBS a_3781_27789# a_4685_27789# top_route_0/VSUBS nmos_6p0 w=5u l=0.7u
+X3 comp018green_esd_rc_v5p0_1_0/VPLUS a_3781_27789# a_4685_27789# comp018green_esd_rc_v5p0_1_0/VPLUS pmos_6p0 w=5u l=0.7u
+X4 comp018green_esd_rc_v5p0_1_0/VPLUS a_3781_27789# a_4685_27789# comp018green_esd_rc_v5p0_1_0/VPLUS pmos_6p0 w=5u l=0.7u
+X5 a_3781_27789# a_2805_27789# top_route_0/VSUBS top_route_0/VSUBS nmos_6p0 w=5u l=0.7u
+X6 top_route_0/VSUBS a_2805_27789# a_3781_27789# top_route_0/VSUBS nmos_6p0 w=5u l=0.7u
+X7 comp018green_esd_rc_v5p0_1_0/VPLUS a_3781_27789# a_4685_27789# comp018green_esd_rc_v5p0_1_0/VPLUS pmos_6p0 w=5u l=0.7u
+X8 a_4685_27789# a_3781_27789# comp018green_esd_rc_v5p0_1_0/VPLUS comp018green_esd_rc_v5p0_1_0/VPLUS pmos_6p0 w=5u l=0.7u
+X9 a_3781_27789# a_2805_27789# comp018green_esd_rc_v5p0_1_0/VPLUS comp018green_esd_rc_v5p0_1_0/VPLUS pmos_6p0 w=5u l=0.7u
+X10 a_4685_27789# a_3781_27789# comp018green_esd_rc_v5p0_1_0/VPLUS comp018green_esd_rc_v5p0_1_0/VPLUS pmos_6p0 w=5u l=0.7u
+X11 a_2805_27789# comp018green_esd_rc_v5p0_1_0/VRC comp018green_esd_rc_v5p0_1_0/VPLUS comp018green_esd_rc_v5p0_1_0/VPLUS pmos_6p0 w=5u l=0.7u
+X12 comp018green_esd_rc_v5p0_1_0/VPLUS a_2805_27789# a_3781_27789# comp018green_esd_rc_v5p0_1_0/VPLUS pmos_6p0 w=5u l=0.7u
+X13 a_4685_27789# a_3781_27789# comp018green_esd_rc_v5p0_1_0/VPLUS comp018green_esd_rc_v5p0_1_0/VPLUS pmos_6p0 w=5u l=0.7u
+X14 a_4685_27789# a_3781_27789# comp018green_esd_rc_v5p0_1_0/VPLUS comp018green_esd_rc_v5p0_1_0/VPLUS pmos_6p0 w=5u l=0.7u
+X15 a_3781_27789# a_2805_27789# top_route_0/VSUBS top_route_0/VSUBS nmos_6p0 w=5u l=0.7u
+X16 a_4685_27789# a_3781_27789# comp018green_esd_rc_v5p0_1_0/VPLUS comp018green_esd_rc_v5p0_1_0/VPLUS pmos_6p0 w=5u l=0.7u
+X17 comp018green_esd_rc_v5p0_1_0/VPLUS a_3781_27789# a_4685_27789# comp018green_esd_rc_v5p0_1_0/VPLUS pmos_6p0 w=5u l=0.7u
+X18 top_route_0/VSUBS a_3781_27789# a_4685_27789# top_route_0/VSUBS nmos_6p0 w=5u l=0.7u
+X19 a_4685_27789# a_3781_27789# top_route_0/VSUBS top_route_0/VSUBS nmos_6p0 w=5u l=0.7u
+X20 comp018green_esd_rc_v5p0_1_0/VPLUS a_3781_27789# a_4685_27789# comp018green_esd_rc_v5p0_1_0/VPLUS pmos_6p0 w=5u l=0.7u
+X21 a_3781_27789# a_2805_27789# top_route_0/VSUBS top_route_0/VSUBS nmos_6p0 w=5u l=0.7u
+X22 top_route_0/VSUBS a_2805_27789# a_3781_27789# top_route_0/VSUBS nmos_6p0 w=5u l=0.7u
+X23 comp018green_esd_rc_v5p0_1_0/VPLUS a_3781_27789# a_4685_27789# comp018green_esd_rc_v5p0_1_0/VPLUS pmos_6p0 w=5u l=0.7u
+X24 a_4685_27789# a_3781_27789# comp018green_esd_rc_v5p0_1_0/VPLUS comp018green_esd_rc_v5p0_1_0/VPLUS pmos_6p0 w=5u l=0.7u
+X25 comp018green_esd_rc_v5p0_1_0/VPLUS a_3781_27789# a_4685_27789# comp018green_esd_rc_v5p0_1_0/VPLUS pmos_6p0 w=5u l=0.7u
+X26 a_3781_27789# a_2805_27789# comp018green_esd_rc_v5p0_1_0/VPLUS comp018green_esd_rc_v5p0_1_0/VPLUS pmos_6p0 w=5u l=0.7u
+X27 top_route_0/VSUBS a_3781_27789# a_4685_27789# top_route_0/VSUBS nmos_6p0 w=5u l=0.7u
+X28 comp018green_esd_rc_v5p0_1_0/VPLUS a_3781_27789# a_4685_27789# comp018green_esd_rc_v5p0_1_0/VPLUS pmos_6p0 w=5u l=0.7u
+X29 a_4685_27789# a_3781_27789# comp018green_esd_rc_v5p0_1_0/VPLUS comp018green_esd_rc_v5p0_1_0/VPLUS pmos_6p0 w=5u l=0.7u
+X30 comp018green_esd_rc_v5p0_1_0/VPLUS a_3781_27789# a_4685_27789# comp018green_esd_rc_v5p0_1_0/VPLUS pmos_6p0 w=5u l=0.7u
+X31 a_4685_27789# a_3781_27789# comp018green_esd_rc_v5p0_1_0/VPLUS comp018green_esd_rc_v5p0_1_0/VPLUS pmos_6p0 w=5u l=0.7u
+X32 a_4685_27789# a_3781_27789# comp018green_esd_rc_v5p0_1_0/VPLUS comp018green_esd_rc_v5p0_1_0/VPLUS pmos_6p0 w=5u l=0.7u
+X33 a_4685_27789# a_3781_27789# top_route_0/VSUBS top_route_0/VSUBS nmos_6p0 w=5u l=0.7u
+X34 a_4685_27789# a_3781_27789# comp018green_esd_rc_v5p0_1_0/VPLUS comp018green_esd_rc_v5p0_1_0/VPLUS pmos_6p0 w=5u l=0.7u
+X35 a_2805_27789# comp018green_esd_rc_v5p0_1_0/VRC top_route_0/VSUBS top_route_0/VSUBS nmos_6p0 w=5u l=0.7u
+X36 a_4685_27789# a_3781_27789# comp018green_esd_rc_v5p0_1_0/VPLUS comp018green_esd_rc_v5p0_1_0/VPLUS pmos_6p0 w=5u l=0.7u
+X37 top_route_0/VSUBS a_2805_27789# a_3781_27789# top_route_0/VSUBS nmos_6p0 w=5u l=0.7u
+X38 comp018green_esd_rc_v5p0_1_0/VPLUS a_3781_27789# a_4685_27789# comp018green_esd_rc_v5p0_1_0/VPLUS pmos_6p0 w=5u l=0.7u
+X39 comp018green_esd_rc_v5p0_1_0/VPLUS comp018green_esd_rc_v5p0_1_0/VRC a_2805_27789# comp018green_esd_rc_v5p0_1_0/VPLUS pmos_6p0 w=5u l=0.7u
+X40 comp018green_esd_rc_v5p0_1_0/VPLUS comp018green_esd_rc_v5p0_1_0/VRC a_2805_27789# comp018green_esd_rc_v5p0_1_0/VPLUS pmos_6p0 w=5u l=0.7u
+X41 a_2805_27789# comp018green_esd_rc_v5p0_1_0/VRC comp018green_esd_rc_v5p0_1_0/VPLUS comp018green_esd_rc_v5p0_1_0/VPLUS pmos_6p0 w=5u l=0.7u
+X42 comp018green_esd_rc_v5p0_1_0/VPLUS a_3781_27789# a_4685_27789# comp018green_esd_rc_v5p0_1_0/VPLUS pmos_6p0 w=5u l=0.7u
+X43 a_4685_27789# a_3781_27789# comp018green_esd_rc_v5p0_1_0/VPLUS comp018green_esd_rc_v5p0_1_0/VPLUS pmos_6p0 w=5u l=0.7u
+.ends
+
+.subckt comp018green_esd_rc_v5p0 VRC VPLUS VMINUS
+X0 VMINUS VRC VMINUS VMINUS nmos_6p0 w=25u l=10u
+X1 VMINUS VRC VMINUS VMINUS nmos_6p0 w=25u l=10u
+X2 a_353_1149# a_13226_869# VMINUS ppolyf_u r_width=0.8u r_length=63.855u
+X3 a_353_2269# a_13226_1989# VMINUS ppolyf_u r_width=0.8u r_length=63.855u
+X4 a_353_3389# a_13226_3109# VMINUS ppolyf_u r_width=0.8u r_length=63.855u
+X5 VMINUS VRC VMINUS VMINUS nmos_6p0 w=25u l=10u
+X6 a_353_2829# a_13226_3109# VMINUS ppolyf_u r_width=0.8u r_length=63.855u
+X7 VMINUS VRC VMINUS VMINUS nmos_6p0 w=25u l=10u
+X8 a_353_1709# a_13226_1989# VMINUS ppolyf_u r_width=0.8u r_length=63.855u
+X9 a_353_1709# a_13226_1429# VMINUS ppolyf_u r_width=0.8u r_length=63.855u
+X10 a_353_2829# a_13226_2549# VMINUS ppolyf_u r_width=0.8u r_length=63.855u
+X11 VRC a_13226_3669# VMINUS ppolyf_u r_width=0.8u r_length=63.855u
+X12 VMINUS VRC VMINUS VMINUS nmos_6p0 w=25u l=10u
+X13 VMINUS VRC VMINUS VMINUS nmos_6p0 w=25u l=10u
+X14 VPLUS a_13226_869# VMINUS ppolyf_u r_width=0.8u r_length=63.855u
+X15 VMINUS VRC VMINUS VMINUS nmos_6p0 w=25u l=10u
+X16 a_353_1149# a_13226_1429# VMINUS ppolyf_u r_width=0.8u r_length=63.855u
+X17 a_353_2269# a_13226_2549# VMINUS ppolyf_u r_width=0.8u r_length=63.855u
+X18 a_353_3389# a_13226_3669# VMINUS ppolyf_u r_width=0.8u r_length=63.855u
+X19 VMINUS VRC VMINUS VMINUS nmos_6p0 w=25u l=10u
+.ends
+
+.subckt comp018green_esd_clamp_v5p0_2 comp018green_esd_rc_v5p0_0/VPLUS top_route_1_0/VSUBS
+Xnmos_clamp_20_50_4_0 top_route_1_0/VSUBS comp018green_esd_rc_v5p0_0/VPLUS a_4685_27789#
++ nmos_clamp_20_50_4
+Xcomp018green_esd_rc_v5p0_0 comp018green_esd_rc_v5p0_0/VRC comp018green_esd_rc_v5p0_0/VPLUS
++ top_route_1_0/VSUBS comp018green_esd_rc_v5p0
+X0 comp018green_esd_rc_v5p0_0/VPLUS a_3781_27789# a_4685_27789# comp018green_esd_rc_v5p0_0/VPLUS pmos_6p0 w=5u l=0.7u
+X1 a_4685_27789# a_3781_27789# top_route_1_0/VSUBS top_route_1_0/VSUBS nmos_6p0 w=5u l=0.7u
+X2 top_route_1_0/VSUBS a_3781_27789# a_4685_27789# top_route_1_0/VSUBS nmos_6p0 w=5u l=0.7u
+X3 comp018green_esd_rc_v5p0_0/VPLUS a_3781_27789# a_4685_27789# comp018green_esd_rc_v5p0_0/VPLUS pmos_6p0 w=5u l=0.7u
+X4 comp018green_esd_rc_v5p0_0/VPLUS a_3781_27789# a_4685_27789# comp018green_esd_rc_v5p0_0/VPLUS pmos_6p0 w=5u l=0.7u
+X5 a_3781_27789# a_2805_27789# top_route_1_0/VSUBS top_route_1_0/VSUBS nmos_6p0 w=5u l=0.7u
+X6 top_route_1_0/VSUBS a_2805_27789# a_3781_27789# top_route_1_0/VSUBS nmos_6p0 w=5u l=0.7u
+X7 comp018green_esd_rc_v5p0_0/VPLUS a_3781_27789# a_4685_27789# comp018green_esd_rc_v5p0_0/VPLUS pmos_6p0 w=5u l=0.7u
+X8 a_4685_27789# a_3781_27789# comp018green_esd_rc_v5p0_0/VPLUS comp018green_esd_rc_v5p0_0/VPLUS pmos_6p0 w=5u l=0.7u
+X9 a_3781_27789# a_2805_27789# comp018green_esd_rc_v5p0_0/VPLUS comp018green_esd_rc_v5p0_0/VPLUS pmos_6p0 w=5u l=0.7u
+X10 a_4685_27789# a_3781_27789# comp018green_esd_rc_v5p0_0/VPLUS comp018green_esd_rc_v5p0_0/VPLUS pmos_6p0 w=5u l=0.7u
+X11 a_2805_27789# comp018green_esd_rc_v5p0_0/VRC comp018green_esd_rc_v5p0_0/VPLUS comp018green_esd_rc_v5p0_0/VPLUS pmos_6p0 w=5u l=0.7u
+X12 comp018green_esd_rc_v5p0_0/VPLUS a_2805_27789# a_3781_27789# comp018green_esd_rc_v5p0_0/VPLUS pmos_6p0 w=5u l=0.7u
+X13 a_4685_27789# a_3781_27789# comp018green_esd_rc_v5p0_0/VPLUS comp018green_esd_rc_v5p0_0/VPLUS pmos_6p0 w=5u l=0.7u
+X14 a_4685_27789# a_3781_27789# comp018green_esd_rc_v5p0_0/VPLUS comp018green_esd_rc_v5p0_0/VPLUS pmos_6p0 w=5u l=0.7u
+X15 a_3781_27789# a_2805_27789# top_route_1_0/VSUBS top_route_1_0/VSUBS nmos_6p0 w=5u l=0.7u
+X16 a_4685_27789# a_3781_27789# comp018green_esd_rc_v5p0_0/VPLUS comp018green_esd_rc_v5p0_0/VPLUS pmos_6p0 w=5u l=0.7u
+X17 comp018green_esd_rc_v5p0_0/VPLUS a_3781_27789# a_4685_27789# comp018green_esd_rc_v5p0_0/VPLUS pmos_6p0 w=5u l=0.7u
+X18 top_route_1_0/VSUBS a_3781_27789# a_4685_27789# top_route_1_0/VSUBS nmos_6p0 w=5u l=0.7u
+X19 a_4685_27789# a_3781_27789# top_route_1_0/VSUBS top_route_1_0/VSUBS nmos_6p0 w=5u l=0.7u
+X20 comp018green_esd_rc_v5p0_0/VPLUS a_3781_27789# a_4685_27789# comp018green_esd_rc_v5p0_0/VPLUS pmos_6p0 w=5u l=0.7u
+X21 a_3781_27789# a_2805_27789# top_route_1_0/VSUBS top_route_1_0/VSUBS nmos_6p0 w=5u l=0.7u
+X22 top_route_1_0/VSUBS a_2805_27789# a_3781_27789# top_route_1_0/VSUBS nmos_6p0 w=5u l=0.7u
+X23 comp018green_esd_rc_v5p0_0/VPLUS a_3781_27789# a_4685_27789# comp018green_esd_rc_v5p0_0/VPLUS pmos_6p0 w=5u l=0.7u
+X24 a_4685_27789# a_3781_27789# comp018green_esd_rc_v5p0_0/VPLUS comp018green_esd_rc_v5p0_0/VPLUS pmos_6p0 w=5u l=0.7u
+X25 comp018green_esd_rc_v5p0_0/VPLUS a_3781_27789# a_4685_27789# comp018green_esd_rc_v5p0_0/VPLUS pmos_6p0 w=5u l=0.7u
+X26 a_3781_27789# a_2805_27789# comp018green_esd_rc_v5p0_0/VPLUS comp018green_esd_rc_v5p0_0/VPLUS pmos_6p0 w=5u l=0.7u
+X27 top_route_1_0/VSUBS a_3781_27789# a_4685_27789# top_route_1_0/VSUBS nmos_6p0 w=5u l=0.7u
+X28 comp018green_esd_rc_v5p0_0/VPLUS a_3781_27789# a_4685_27789# comp018green_esd_rc_v5p0_0/VPLUS pmos_6p0 w=5u l=0.7u
+X29 a_4685_27789# a_3781_27789# comp018green_esd_rc_v5p0_0/VPLUS comp018green_esd_rc_v5p0_0/VPLUS pmos_6p0 w=5u l=0.7u
+X30 comp018green_esd_rc_v5p0_0/VPLUS a_3781_27789# a_4685_27789# comp018green_esd_rc_v5p0_0/VPLUS pmos_6p0 w=5u l=0.7u
+X31 a_4685_27789# a_3781_27789# comp018green_esd_rc_v5p0_0/VPLUS comp018green_esd_rc_v5p0_0/VPLUS pmos_6p0 w=5u l=0.7u
+X32 a_4685_27789# a_3781_27789# comp018green_esd_rc_v5p0_0/VPLUS comp018green_esd_rc_v5p0_0/VPLUS pmos_6p0 w=5u l=0.7u
+X33 a_4685_27789# a_3781_27789# top_route_1_0/VSUBS top_route_1_0/VSUBS nmos_6p0 w=5u l=0.7u
+X34 a_4685_27789# a_3781_27789# comp018green_esd_rc_v5p0_0/VPLUS comp018green_esd_rc_v5p0_0/VPLUS pmos_6p0 w=5u l=0.7u
+X35 a_2805_27789# comp018green_esd_rc_v5p0_0/VRC top_route_1_0/VSUBS top_route_1_0/VSUBS nmos_6p0 w=5u l=0.7u
+X36 a_4685_27789# a_3781_27789# comp018green_esd_rc_v5p0_0/VPLUS comp018green_esd_rc_v5p0_0/VPLUS pmos_6p0 w=5u l=0.7u
+X37 top_route_1_0/VSUBS a_2805_27789# a_3781_27789# top_route_1_0/VSUBS nmos_6p0 w=5u l=0.7u
+X38 comp018green_esd_rc_v5p0_0/VPLUS a_3781_27789# a_4685_27789# comp018green_esd_rc_v5p0_0/VPLUS pmos_6p0 w=5u l=0.7u
+X39 comp018green_esd_rc_v5p0_0/VPLUS comp018green_esd_rc_v5p0_0/VRC a_2805_27789# comp018green_esd_rc_v5p0_0/VPLUS pmos_6p0 w=5u l=0.7u
+X40 comp018green_esd_rc_v5p0_0/VPLUS comp018green_esd_rc_v5p0_0/VRC a_2805_27789# comp018green_esd_rc_v5p0_0/VPLUS pmos_6p0 w=5u l=0.7u
+X41 a_2805_27789# comp018green_esd_rc_v5p0_0/VRC comp018green_esd_rc_v5p0_0/VPLUS comp018green_esd_rc_v5p0_0/VPLUS pmos_6p0 w=5u l=0.7u
+X42 comp018green_esd_rc_v5p0_0/VPLUS a_3781_27789# a_4685_27789# comp018green_esd_rc_v5p0_0/VPLUS pmos_6p0 w=5u l=0.7u
+X43 a_4685_27789# a_3781_27789# comp018green_esd_rc_v5p0_0/VPLUS comp018green_esd_rc_v5p0_0/VPLUS pmos_6p0 w=5u l=0.7u
+.ends
+
+.subckt ESD_CLAMP_COR power_via_cor_3_0/m1_14757_49610# power_via_cor_5_0/m1_14757_35210#
++ power_via_cor_5_0/m1_14757_49610# power_via_cor_3_0/m1_14757_35210# comp018green_esd_clamp_v5p0_1_0/comp018green_esd_rc_v5p0_1_0/VPLUS
++ comp018green_esd_clamp_v5p0_2_0/comp018green_esd_rc_v5p0_0/VPLUS VSUBS
+Xcomp018green_esd_clamp_v5p0_1_0 VSUBS comp018green_esd_clamp_v5p0_1_0/comp018green_esd_rc_v5p0_1_0/VPLUS
++ comp018green_esd_clamp_v5p0_1
+Xcomp018green_esd_clamp_v5p0_2_0 comp018green_esd_clamp_v5p0_2_0/comp018green_esd_rc_v5p0_0/VPLUS
++ VSUBS comp018green_esd_clamp_v5p0_2
+.ends
+
+.subckt moscap_corner_2 a_647_6541# a_5519_529# VMINUS
+X0 VMINUS a_647_6541# VMINUS VMINUS nmos_6p0 w=25u l=10u
+X1 VMINUS a_647_6541# VMINUS VMINUS nmos_6p0 w=25u l=10u
+X2 VMINUS a_5519_529# VMINUS VMINUS nmos_6p0 w=25u l=10u
+X3 VMINUS a_647_6541# VMINUS VMINUS nmos_6p0 w=25u l=10u
+X4 VMINUS a_5519_529# VMINUS VMINUS nmos_6p0 w=25u l=10u
+X5 VMINUS a_647_6541# VMINUS VMINUS nmos_6p0 w=25u l=10u
+.ends
+
+.subckt moscap_corner_3 a_7955_529# a_3083_6541# VMINUS
+X0 VMINUS a_3083_6541# VMINUS VMINUS nmos_6p0 w=25u l=10u
+X1 VMINUS a_7955_529# VMINUS VMINUS nmos_6p0 w=25u l=10u
+X2 VMINUS a_3083_6541# VMINUS VMINUS nmos_6p0 w=25u l=10u
+X3 VMINUS a_3083_6541# VMINUS VMINUS nmos_6p0 w=25u l=10u
+.ends
+
+.subckt GF_NI_COR_BASE DVSS DVDD VSS VDD ESD_CLAMP_COR_0/power_via_cor_3_0/m1_14757_35210#
++ moscap_routing_0/a_n30340_n40567# ESD_CLAMP_COR_0/power_via_cor_3_0/m1_14757_49610#
++ ESD_CLAMP_COR_0/power_via_cor_5_0/m1_14757_35210# moscap_corner_0/a_647_6541# moscap_corner_6/a_647_529#
++ ESD_CLAMP_COR_0/power_via_cor_5_0/m1_14757_49610# moscap_corner_6/a_647_6541# ESD_CLAMP_COR_0/comp018green_esd_clamp_v5p0_1_0/comp018green_esd_rc_v5p0_1_0/VPLUS
++ moscap_corner_4/a_647_529# moscap_corner_0/a_647_529# ESD_CLAMP_COR_0/comp018green_esd_clamp_v5p0_2_0/comp018green_esd_rc_v5p0_0/VPLUS
++ moscap_corner_1/a_647_529# moscap_corner_4/a_647_6541# ESD_CLAMP_COR_0/VSUBS
+Xmoscap_corner_1_0 moscap_corner_6/a_647_6541# moscap_corner_6/a_647_529# ESD_CLAMP_COR_0/VSUBS
++ moscap_corner_1
+Xmoscap_corner_0 moscap_corner_0/a_647_6541# moscap_corner_0/a_647_529# ESD_CLAMP_COR_0/VSUBS
++ moscap_corner
+Xmoscap_corner_1 moscap_corner_1/a_647_529# moscap_corner_1/a_647_529# ESD_CLAMP_COR_0/VSUBS
++ moscap_corner
+Xmoscap_corner_2 moscap_corner_4/a_647_6541# moscap_corner_4/a_647_529# ESD_CLAMP_COR_0/VSUBS
++ moscap_corner
+Xmoscap_corner_3 moscap_corner_6/a_647_6541# moscap_corner_6/a_647_529# ESD_CLAMP_COR_0/VSUBS
++ moscap_corner
+Xmoscap_corner_5 moscap_corner_6/a_647_6541# moscap_corner_6/a_647_529# ESD_CLAMP_COR_0/VSUBS
++ moscap_corner
+Xmoscap_corner_4 moscap_corner_4/a_647_6541# moscap_corner_4/a_647_529# ESD_CLAMP_COR_0/VSUBS
++ moscap_corner
+Xmoscap_corner_6 moscap_corner_6/a_647_6541# moscap_corner_6/a_647_529# ESD_CLAMP_COR_0/VSUBS
++ moscap_corner
+XESD_CLAMP_COR_0 ESD_CLAMP_COR_0/power_via_cor_3_0/m1_14757_49610# ESD_CLAMP_COR_0/power_via_cor_5_0/m1_14757_35210#
++ ESD_CLAMP_COR_0/power_via_cor_5_0/m1_14757_49610# ESD_CLAMP_COR_0/power_via_cor_3_0/m1_14757_35210#
++ ESD_CLAMP_COR_0/comp018green_esd_clamp_v5p0_1_0/comp018green_esd_rc_v5p0_1_0/VPLUS
++ ESD_CLAMP_COR_0/comp018green_esd_clamp_v5p0_2_0/comp018green_esd_rc_v5p0_0/VPLUS
++ ESD_CLAMP_COR_0/VSUBS ESD_CLAMP_COR
+Xmoscap_corner_2_0 moscap_corner_4/a_647_6541# moscap_corner_4/a_647_529# ESD_CLAMP_COR_0/VSUBS
++ moscap_corner_2
+Xmoscap_corner_3_0 moscap_corner_1/a_647_529# moscap_corner_1/a_647_529# ESD_CLAMP_COR_0/VSUBS
++ moscap_corner_3
+.ends
+
+.subckt gf180mcu_fd_io__cor VSS VDD
+XGF_NI_COR_BASE_0 GF_NI_COR_BASE_0/DVSS GF_NI_COR_BASE_0/DVDD VSS VDD VSS VSS VSS
++ VSS VSS VSS VSS VSS VDD VSS VSS VSS VSS VSS VSS GF_NI_COR_BASE
+.ends
+
+
+
+******* EOF
+
+* NGSPICE file created from gf180mcu_fd_io__cor.ext - technology: gf180mcuC
+
+
+
+******* EOF
+
+* NGSPICE file created from gf180mcu_fd_io__dvdd.ext - technology: gf180mcuC
+
+
+
+******* EOF
+
+* NGSPICE file created from gf180mcu_fd_io__dvdd.ext - technology: gf180mcuC
+
+
+
+******* EOF
+
+* NGSPICE file created from gf180mcu_fd_io__dvss.ext - technology: gf180mcuC
+
+
+
+******* EOF
+
+* NGSPICE file created from gf180mcu_fd_io__dvss.ext - technology: gf180mcuC
+
+
+
+******* EOF
+
+* NGSPICE file created from gf180mcu_fd_io__fill1.ext - technology: gf180mcuC
+
+.subckt gf180mcu_fd_io__fill1 DVDD DVSS VSS VDD
+.ends
+
+
+
+******* EOF
+
+* NGSPICE file created from gf180mcu_fd_io__fill1.ext - technology: gf180mcuC
+
+
+
+******* EOF
+
+* NGSPICE file created from gf180mcu_fd_io__fill5.ext - technology: gf180mcuC
+
+.subckt POLY_SUB_FILL a_1165_n91# a_1077_1# VSUBS
+X0 a_1077_1# a_1165_n91# a_1077_1# VSUBS nmos_6p0 w=1.5u l=1.5u
+X1 a_1077_1# a_1165_n91# a_1077_1# VSUBS nmos_6p0 w=1.5u l=1.5u
+.ends
+
+.subckt GF_NI_FILL5_1 VSS VDD DVSS DVDD
+XPOLY_SUB_FILL_0[0] VDD VSS VSS POLY_SUB_FILL
+XPOLY_SUB_FILL_0[1] VDD VSS VSS POLY_SUB_FILL
+XPOLY_SUB_FILL_0[2] VDD VSS VSS POLY_SUB_FILL
+XPOLY_SUB_FILL_0[3] VDD VSS VSS POLY_SUB_FILL
+XPOLY_SUB_FILL_0[4] VDD VSS VSS POLY_SUB_FILL
+XPOLY_SUB_FILL_0[5] VDD VSS VSS POLY_SUB_FILL
+XPOLY_SUB_FILL_0[6] VDD VSS VSS POLY_SUB_FILL
+XPOLY_SUB_FILL_0[7] VDD VSS VSS POLY_SUB_FILL
+XPOLY_SUB_FILL_0[8] VDD VSS VSS POLY_SUB_FILL
+XPOLY_SUB_FILL_0[9] VDD VSS VSS POLY_SUB_FILL
+XPOLY_SUB_FILL_0[10] VDD VSS VSS POLY_SUB_FILL
+XPOLY_SUB_FILL_0[11] VDD VSS VSS POLY_SUB_FILL
+XPOLY_SUB_FILL_0[12] VDD VSS VSS POLY_SUB_FILL
+XPOLY_SUB_FILL_0[13] VDD VSS VSS POLY_SUB_FILL
+XPOLY_SUB_FILL_0[14] VDD VSS VSS POLY_SUB_FILL
+XPOLY_SUB_FILL_0[15] VDD VSS VSS POLY_SUB_FILL
+XPOLY_SUB_FILL_0[16] VDD VSS VSS POLY_SUB_FILL
+XPOLY_SUB_FILL_0[17] VDD VSS VSS POLY_SUB_FILL
+XPOLY_SUB_FILL_0[18] VDD VSS VSS POLY_SUB_FILL
+XPOLY_SUB_FILL_0[19] VDD VSS VSS POLY_SUB_FILL
+XPOLY_SUB_FILL_0[20] VDD VSS VSS POLY_SUB_FILL
+XPOLY_SUB_FILL_0[21] VDD VSS VSS POLY_SUB_FILL
+XPOLY_SUB_FILL_0[22] VDD VSS VSS POLY_SUB_FILL
+XPOLY_SUB_FILL_0[23] VDD VSS VSS POLY_SUB_FILL
+XPOLY_SUB_FILL_0[24] VDD VSS VSS POLY_SUB_FILL
+XPOLY_SUB_FILL_0[25] VDD VSS VSS POLY_SUB_FILL
+XPOLY_SUB_FILL_0[26] VDD VSS VSS POLY_SUB_FILL
+XPOLY_SUB_FILL_0[27] VDD VSS VSS POLY_SUB_FILL
+XPOLY_SUB_FILL_0[28] VDD VSS VSS POLY_SUB_FILL
+XPOLY_SUB_FILL_0[29] VDD VSS VSS POLY_SUB_FILL
+XPOLY_SUB_FILL_0[30] VDD VSS VSS POLY_SUB_FILL
+XPOLY_SUB_FILL_0[31] VDD VSS VSS POLY_SUB_FILL
+XPOLY_SUB_FILL_0[32] VDD VSS VSS POLY_SUB_FILL
+XPOLY_SUB_FILL_0[33] VDD VSS VSS POLY_SUB_FILL
+XPOLY_SUB_FILL_0[34] VDD VSS VSS POLY_SUB_FILL
+.ends
+
+.subckt GF_NI_FILL5_0 DVSS DVDD VDD VSS
+XGF_NI_FILL5_1_0 VSS VDD DVSS DVDD GF_NI_FILL5_1
+.ends
+
+.subckt gf180mcu_fd_io__fill5 DVDD VDD DVSS VSS
+XGF_NI_FILL5_0_0 DVSS DVDD VDD VSS GF_NI_FILL5_0
+.ends
+
+
+
+******* EOF
+
+* NGSPICE file created from gf180mcu_fd_io__fill5.ext - technology: gf180mcuC
+
+
+
+******* EOF
+
+* NGSPICE file created from gf180mcu_fd_io__fill10.ext - technology: gf180mcuC
+
+.subckt POLY_SUB_FILL_1 a_597_223# a_685_131# VSUBS
+X0 a_597_223# a_685_131# a_597_223# VSUBS nmos_6p0 w=7u l=6u
+X1 a_597_223# a_685_131# a_597_223# VSUBS nmos_6p0 w=7u l=6u
+.ends
+
+.subckt GF_NI_FILL10_1 VSS VDD DVSS DVDD
+XPOLY_SUB_FILL_1_0[0] VSS VDD VSS POLY_SUB_FILL_1
+XPOLY_SUB_FILL_1_0[1] VSS VDD VSS POLY_SUB_FILL_1
+XPOLY_SUB_FILL_1_0[2] VSS VDD VSS POLY_SUB_FILL_1
+XPOLY_SUB_FILL_1_0[3] VSS VDD VSS POLY_SUB_FILL_1
+XPOLY_SUB_FILL_1_0[4] VSS VDD VSS POLY_SUB_FILL_1
+XPOLY_SUB_FILL_1_0[5] VSS VDD VSS POLY_SUB_FILL_1
+XPOLY_SUB_FILL_1_0[6] VSS VDD VSS POLY_SUB_FILL_1
+XPOLY_SUB_FILL_1_0[7] VSS VDD VSS POLY_SUB_FILL_1
+XPOLY_SUB_FILL_1_0[8] VSS VDD VSS POLY_SUB_FILL_1
+XPOLY_SUB_FILL_1_0[9] VSS VDD VSS POLY_SUB_FILL_1
+XPOLY_SUB_FILL_1_0[10] VSS VDD VSS POLY_SUB_FILL_1
+XPOLY_SUB_FILL_1_0[11] VSS VDD VSS POLY_SUB_FILL_1
+XPOLY_SUB_FILL_1_0[12] VSS VDD VSS POLY_SUB_FILL_1
+XPOLY_SUB_FILL_1_0[13] VSS VDD VSS POLY_SUB_FILL_1
+XPOLY_SUB_FILL_1_0[14] VSS VDD VSS POLY_SUB_FILL_1
+XPOLY_SUB_FILL_1_0[15] VSS VDD VSS POLY_SUB_FILL_1
+.ends
+
+.subckt GF_NI_FILL10_0 DVSS DVDD VDD VSS
+XGF_NI_FILL10_1_0 VSS VDD DVSS DVDD GF_NI_FILL10_1
+.ends
+
+.subckt gf180mcu_fd_io__fill10 DVDD DVSS VDD VSS
+XGF_NI_FILL10_0_0 DVSS DVDD VDD VSS GF_NI_FILL10_0
+.ends
+
+
+
+******* EOF
+
+* NGSPICE file created from gf180mcu_fd_io__fill10.ext - technology: gf180mcuC
+
+
+
+******* EOF
+
+* NGSPICE file created from gf180mcu_fd_io__fillnc.ext - technology: gf180mcuC
+
+.subckt gf180mcu_fd_io__fillnc VSS VDD DVSS DVDD
+.ends
+
+
+
+******* EOF
+
+* NGSPICE file created from gf180mcu_fd_io__fillnc.ext - technology: gf180mcuC
+
+
+
+******* EOF
+
+* NGSPICE file created from gf180mcu_fd_io__in_c.ext - technology: gf180mcuC
+
+
+
+******* EOF
+
+* NGSPICE file created from gf180mcu_fd_io__in_c.ext - technology: gf180mcuC
+
+
+
+******* EOF
+
+* NGSPICE file created from gf180mcu_fd_io__in_s.ext - technology: gf180mcuC
+
+
+
+******* EOF
+
+* NGSPICE file created from gf180mcu_fd_io__in_s.ext - technology: gf180mcuC
+
+
+
+******* EOF
+
