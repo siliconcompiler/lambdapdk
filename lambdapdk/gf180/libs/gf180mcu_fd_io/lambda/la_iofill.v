@@ -13,7 +13,7 @@ module la_iofill
 
    // TODO: Use type to select fill size
    gf180mcu_fd_io__fill1
-     iovdd (.DVDD(vddio),
+     iofill (.DVDD(vddio),
 	    .DVSS(vssio),
 	    .VDD(vdd),
 	    .VSS(vss));
