@@ -13,7 +13,7 @@ module la_iocorner
     );
 
    gf180mcu_fd_io__cor
-     iovss (.DVDD(vddio),
+     corner (.DVDD(vddio),
 	    .DVSS(vssio),
 	    .VDD(vdd),
 	    .VSS(vss));

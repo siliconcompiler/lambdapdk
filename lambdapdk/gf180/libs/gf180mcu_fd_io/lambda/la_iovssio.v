@@ -13,7 +13,7 @@ module la_iovssio
     );
 
    gf180mcu_fd_io__dvss
-     iovss (.DVDD(vddio),
+     iovssio (.DVDD(vddio),
 	    .DVSS(vssio),
 	    .VDD(vdd));
 

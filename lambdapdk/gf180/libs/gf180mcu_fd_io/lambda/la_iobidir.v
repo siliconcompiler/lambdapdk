@@ -34,7 +34,7 @@ module la_iobidir
    // rnmos #1 (PAD, pwr, ~OE && PU && ~PD);
 
    gf180mcu_fd_io__bi_t
-     iovdd (.PAD(pad),
+     gpio (.PAD(pad),
 	    .A(a),
 	    .Y(z),
 	    .IE(ie),
