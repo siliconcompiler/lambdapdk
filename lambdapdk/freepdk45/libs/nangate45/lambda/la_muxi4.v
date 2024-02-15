@@ -17,7 +17,7 @@
 //    assign z = ~((d0 & ~s1 & ~s0) |
 // 		(d1 & ~s1 &  s0) |
 // 		(d2 &  s1 & ~s0) |
-// 		(d2 &  s1 &  s0));
+// 		(d3 &  s1 &  s0));
 // 
 // endmodule
 
@@ -41,25 +41,26 @@ module la_muxi4(d0, d1, d2, d3, s0, s1, z);
   wire s1;
   output z;
   wire z;
-  AND2_X1 _3_ (
-    .A1(s1),
-    .A2(d2),
-    .ZN(_0_)
-  );
-  MUX2_X1 _4_ (
+  MUX2_X1 _3_ (
     .A(d0),
     .B(d1),
     .S(s0),
     .Z(_1_)
   );
-  INV_X1 _5_ (
-    .A(s1),
-    .ZN(_2_)
+  MUX2_X1 _4_ (
+    .A(d2),
+    .B(d3),
+    .S(s0),
+    .Z(_2_)
   );
-  AOI21_X1 _6_ (
+  MUX2_X2 _5_ (
+    .A(_1_),
+    .B(_2_),
+    .S(s1),
+    .Z(_0_)
+  );
+  INV_X1 _6_ (
     .A(_0_),
-    .B1(_1_),
-    .B2(_2_),
     .ZN(z)
   );
 endmodule
