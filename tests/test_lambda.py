@@ -20,6 +20,8 @@ def test_la_stdlib(module, path):
         libs = [libs]
     for lib in libs:
         lib_name = lib.design
+        if "lambdalib" in lib_name:
+            continue
         assert lambdalib.check(path.format(lib_name=lib_name), 'stdlib')
 
 

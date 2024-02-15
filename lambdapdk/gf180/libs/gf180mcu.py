@@ -129,6 +129,12 @@ def setup(chip):
 
         libs.append(lib)
 
+        lambda_lib = siliconcompiler.Library(chip, f'lambdalib_{libname}', package='lambdapdk')
+        register_data_source(lambda_lib)
+        lambda_lib.add('option', 'ydir', libdir + '/lambda')
+
+        libs.append(lambda_lib)
+
     return libs
 
 

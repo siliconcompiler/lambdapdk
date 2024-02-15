@@ -23,4 +23,10 @@ def setup(chip):
 
         libs.append(lib)
 
+    lambda_lib = Library(chip, 'lambdalib_fakeram45', package='lambdapdk')
+    register_data_source(lambda_lib)
+    lambda_lib.add('option', 'ydir', 'lambdapdk/freepdk45/libs/fakeram45/lambda')
+
+    libs.append(lambda_lib)
+
     return libs

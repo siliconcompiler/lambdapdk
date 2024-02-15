@@ -1,4 +1,4 @@
-from siliconcompiler import Library
+from siliconcompiler import Chip, Library
 from lambdapdk import register_data_source
 
 
@@ -26,4 +26,16 @@ def setup(chip):
 
         libs.append(lib)
 
+    lambda_lib = Library(chip, 'lambdalib_gf130sram', package='lambdapdk')
+    register_data_source(lambda_lib)
+    lambda_lib.add('option', 'ydir', 'lambdapdk/sky130/libs/sky130sram/lambda')
+
+    libs.append(lambda_lib)
+
     return libs
+
+
+#########################
+if __name__ == "__main__":
+    for lib in setup(Chip('<lib>')):
+        lib.write_manifest(f'{lib.top()}.json')

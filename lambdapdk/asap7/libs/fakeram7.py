@@ -24,4 +24,8 @@ def setup(chip):
 
         libs.append(lib)
 
+    lambda_lib = Library(chip, 'lambdalib_fakeram7', package='lambdapdk')
+    register_data_source(lambda_lib)
+    lambda_lib.add('option', 'ydir', 'lambdapdk/asap7/libs/fakeram7/lambda')
+
     return libs

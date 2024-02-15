@@ -98,7 +98,11 @@ def setup(chip):
         lib.set('option', 'var', f'{tool}_tielow_cell', "LOGIC0_X1")
         lib.set('option', 'var', f'{tool}_tielow_port', "Z")
 
-    return lib
+    lambda_lib = siliconcompiler.Library(chip, 'lambdalib_nangate45', package='lambdapdk')
+    register_data_source(lambda_lib)
+    lambda_lib.add('option', 'ydir', 'lambdapdk/freepdk45/libs/nangate45/lambda')
+
+    return [lib, lambda_lib]
 
 
 #########################

@@ -53,16 +53,14 @@ def setup(chip):
                                             'gf180mcu_fd_io__fill10',
                                             'gf180mcu_fd_io__fillnc'])
 
-        lib.set('option', 'ydir', os.path.join(libdir, 'lambda'))
-        lib.set('option', 'idir', os.path.join(libdir, 'lambda'))
+    lambda_lib = siliconcompiler.Library(chip, 'lambdalib_gf180mcu_fd_io', package='lambdapdk')
+    register_data_source(lambda_lib)
+    lambda_lib.add('option', 'ydir', 'lambdapdk/gf180/libs/gf180mcu_fd_io/lambda')
 
-        libs.append(lib)
-
-    return libs
+    return [lib, lambda_lib]
 
 
 #########################
 if __name__ == "__main__":
-    lib = setup(siliconcompiler.Chip('<lib>'))
-    lib.write_manifest(f'{lib.top()}.json')
-    lib.check_filepaths()
+    for lib in setup(siliconcompiler.Chip('<lib>')):
+        lib.write_manifest(f'{lib.top()}.json')

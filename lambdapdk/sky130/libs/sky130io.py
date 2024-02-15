@@ -37,10 +37,14 @@ def setup(chip):
 
     lib.set('output', 'blackbox', 'verilog', os.path.join(libdir, 'bb', 'sky130_io.blackbox.v'))
 
-    return lib
+    lambda_lib = siliconcompiler.Library(chip, f'lambdalib_{libname}', package='lambdapdk')
+    register_data_source(lambda_lib)
+    lambda_lib.add('option', 'ydir', 'lambdapdk/sky130/libs/sky130io/lambda')
+
+    return [lib, lambda_lib]
 
 
 #########################
 if __name__ == "__main__":
-    lib = setup(siliconcompiler.Chip('<lib>'))
-    lib.write_manifest(f'{lib.top()}.json')
+    for lib in setup(siliconcompiler.Chip('<lib>')):
+        lib.write_manifest(f'{lib.top()}.json')
