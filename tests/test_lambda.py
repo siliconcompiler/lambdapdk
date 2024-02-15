@@ -21,3 +21,13 @@ def test_la_stdlib(module, path):
     for lib in libs:
         lib_name = lib.design
         assert lambdalib.check(path.format(lib_name=lib_name), 'stdlib')
+
+
+@pytest.mark.parametrize('path', [
+    'lambdapdk/asap7/libs/fakeram7/lambda',
+    'lambdapdk/freepdk45/libs/fakeram45/lambda',
+    'lambdapdk/sky130/libs/sky130sram/lambda',
+    'lambdapdk/gf180/libs/gf180mcu_fd_ip_sram/lambda',
+    ])
+def test_la_ramlib(path):
+    assert lambdalib.check(path, 'ramlib')

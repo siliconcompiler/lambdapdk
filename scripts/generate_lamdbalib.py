@@ -15,9 +15,9 @@ from siliconcompiler.targets import (
 )
 
 if __name__ == "__main__":
-    pdk_root = os.path.dirname(os.path.dirname(__file__))
+    pdk_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-    pdks = {
+    libs = {
         "sky130": {
             "target": skywater130_demo,
             "libs": [
@@ -47,8 +47,33 @@ if __name__ == "__main__":
         },
     }
 
-    for pdk, info in pdks.items():
+    for pdk, info in libs.items():
         target = info["target"]
 
-        for lib in info['libs']:
-            lambdalib.generate(target, lib, f"{pdk_root}/lambdapdk/{pdk}/libs/{lib}/lambda")
+        # for lib in info['libs']:
+        #     lambdalib.generate(target, lib, f"{pdk_root}/lambdapdk/{pdk}/libs/{lib}/lambda")
+
+    srams = {
+        "asap7": {
+            "name": "fakeram7",
+            "implementations": ["la_spram"]
+        },
+        "freepdk45": {
+            "name": "fakeram45",
+            "implementations": ["la_spram"]
+        },
+        "sky130": {
+            "name": "sky130sram",
+            "implementations": ["la_spram"]
+        },
+        "gf180": {
+            "name": "gf180mcu_fd_ip_sram",
+            "implementations": ["la_spram"]
+        },
+    }
+
+    for pdk, info in srams.items():
+        lib = info['name']
+        lambdalib.copy(f"{pdk_root}/lambdapdk/{pdk}/libs/{lib}/lambda",
+                       la_lib='ramlib',
+                       exclude=info['implementations'])
