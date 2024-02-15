@@ -17,7 +17,7 @@
 //    assign z = ~((d0 & ~s1 & ~s0) |
 // 		(d1 & ~s1 &  s0) |
 // 		(d2 &  s1 & ~s0) |
-// 		(d2 &  s1 &  s0));
+// 		(d3 &  s1 &  s0));
 // 
 // endmodule
 
@@ -25,8 +25,6 @@
 
 module la_muxi4(d0, d1, d2, d3, s0, s1, z);
   wire _0_;
-  wire _1_;
-  wire _2_;
   input d0;
   wire d0;
   input d1;
@@ -41,25 +39,17 @@ module la_muxi4(d0, d1, d2, d3, s0, s1, z);
   wire s1;
   output z;
   wire z;
-  gf180mcu_fd_sc_mcu9t5v0__clkinv_2 _3_ (
-    .I(s1),
-    .ZN(_0_)
-  );
-  gf180mcu_fd_sc_mcu9t5v0__mux2_2 _4_ (
+  gf180mcu_fd_sc_mcu9t5v0__mux4_2 _1_ (
     .I0(d0),
     .I1(d1),
-    .S(s0),
-    .Z(_1_)
+    .I2(d2),
+    .I3(d3),
+    .S0(s0),
+    .S1(s1),
+    .Z(_0_)
   );
-  gf180mcu_fd_sc_mcu9t5v0__and2_2 _5_ (
-    .A1(s1),
-    .A2(d2),
-    .Z(_2_)
-  );
-  gf180mcu_fd_sc_mcu9t5v0__aoi21_2 _6_ (
-    .A1(_0_),
-    .A2(_1_),
-    .B(_2_),
+  gf180mcu_fd_sc_mcu9t5v0__clkinv_2 _2_ (
+    .I(_0_),
     .ZN(z)
   );
 endmodule

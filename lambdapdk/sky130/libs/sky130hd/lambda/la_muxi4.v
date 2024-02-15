@@ -17,7 +17,7 @@
 //    assign z = ~((d0 & ~s1 & ~s0) |
 // 		(d1 & ~s1 &  s0) |
 // 		(d2 &  s1 & ~s0) |
-// 		(d2 &  s1 &  s0));
+// 		(d3 &  s1 &  s0));
 // 
 // endmodule
 
@@ -39,16 +39,17 @@ module la_muxi4(d0, d1, d2, d3, s0, s1, z);
   wire s1;
   output z;
   wire z;
-  sky130_fd_sc_hd__mux2_4 _1_ (
+  sky130_fd_sc_hd__mux4_2 _1_ (
     .A0(d0),
     .A1(d1),
-    .S(s0),
+    .A2(d2),
+    .A3(d3),
+    .S0(s0),
+    .S1(s1),
     .X(_0_)
   );
-  sky130_fd_sc_hd__mux2i_1 _2_ (
-    .A0(_0_),
-    .A1(d2),
-    .S(s1),
+  sky130_fd_sc_hd__inv_1 _2_ (
+    .A(_0_),
     .Y(z)
   );
 endmodule

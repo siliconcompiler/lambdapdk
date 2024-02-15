@@ -17,7 +17,7 @@
 //    assign z = (d0 & ~s1 & ~s0) |
 // 	      (d1 & ~s1 &  s0) |
 // 	      (d2 &  s1 & ~s0) |
-// 	      (d2 &  s1 &  s0);
+// 	      (d3 &  s1 &  s0);
 // 
 // endmodule
 
@@ -29,6 +29,7 @@ module la_mux4(d0, d1, d2, d3, s0, s1, z);
   wire _02_;
   wire _03_;
   wire _04_;
+  wire _05_;
   input d0;
   wire d0;
   input d1;
@@ -43,34 +44,41 @@ module la_mux4(d0, d1, d2, d3, s0, s1, z);
   wire s1;
   output z;
   wire z;
-  INVx2_ASAP7_75t_SL _05_ (
-    .A(s1),
-    .Y(_02_)
-  );
   INVx2_ASAP7_75t_SL _06_ (
     .A(s0),
-    .Y(_03_)
-  );
-  AND2x2_ASAP7_75t_SL _07_ (
-    .A(s0),
-    .B(d1),
     .Y(_04_)
   );
-  AO21x1_ASAP7_75t_SL _08_ (
-    .A1(_03_),
-    .A2(d0),
-    .B(_04_),
+  INVx2_ASAP7_75t_SL _07_ (
+    .A(s1),
+    .Y(_05_)
+  );
+  OR2x4_ASAP7_75t_SL _08_ (
+    .A(d0),
+    .B(s1),
     .Y(_00_)
   );
-  AND2x2_ASAP7_75t_SL _09_ (
-    .A(s1),
-    .B(d2),
+  OA21x2_ASAP7_75t_SL _09_ (
+    .A1(_05_),
+    .A2(d2),
+    .B(_00_),
     .Y(_01_)
   );
-  AO21x1_ASAP7_75t_SL _10_ (
-    .A1(_02_),
-    .A2(_00_),
-    .B(_01_),
+  OR2x2_ASAP7_75t_SL _10_ (
+    .A(s1),
+    .B(d1),
+    .Y(_02_)
+  );
+  OA211x2_ASAP7_75t_SL _11_ (
+    .A1(_05_),
+    .A2(d3),
+    .B(_02_),
+    .C(s0),
+    .Y(_03_)
+  );
+  AO21x1_ASAP7_75t_SL _12_ (
+    .A1(_04_),
+    .A2(_01_),
+    .B(_03_),
     .Y(z)
   );
 endmodule

@@ -17,7 +17,7 @@
 //    assign z = (d0 & ~s1 & ~s0) |
 // 	      (d1 & ~s1 &  s0) |
 // 	      (d2 &  s1 & ~s0) |
-// 	      (d2 &  s1 &  s0);
+// 	      (d3 &  s1 &  s0);
 // 
 // endmodule
 
@@ -25,6 +25,7 @@
 
 module la_mux4(d0, d1, d2, d3, s0, s1, z);
   wire _0_;
+  wire _1_;
   input d0;
   wire d0;
   input d1;
@@ -39,16 +40,22 @@ module la_mux4(d0, d1, d2, d3, s0, s1, z);
   wire s1;
   output z;
   wire z;
-  MUX2_X1 _1_ (
-    .A(d0),
-    .B(d1),
-    .S(s0),
-    .Z(_0_)
-  );
   MUX2_X1 _2_ (
-    .A(_0_),
+    .A(d0),
     .B(d2),
     .S(s1),
+    .Z(_0_)
+  );
+  MUX2_X1 _3_ (
+    .A(d1),
+    .B(d3),
+    .S(s1),
+    .Z(_1_)
+  );
+  MUX2_X1 _4_ (
+    .A(_0_),
+    .B(_1_),
+    .S(s0),
     .Z(z)
   );
 endmodule
