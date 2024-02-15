@@ -6,6 +6,7 @@
 
 import os
 import lambdalib
+import multiprocessing
 
 from siliconcompiler.targets import (
     skywater130_demo,
@@ -47,11 +48,19 @@ if __name__ == "__main__":
         },
     }
 
+    procs = []
     for pdk, info in libs.items():
         target = info["target"]
 
         for lib in info['libs']:
-            lambdalib.generate(target, lib, f"{pdk_root}/lambdapdk/{pdk}/libs/{lib}/lambda")
+            p = multiprocessing.Process(target=lambdalib.generate,
+                                        args=(target.__name__,
+                                              lib,
+                                              f"{pdk_root}/lambdapdk/{pdk}/libs/{lib}/lambda"))
+            procs.append(p)
+            p.start()
+    for proc in procs:
+        proc.join()
 
     srams = {
         "asap7": {
