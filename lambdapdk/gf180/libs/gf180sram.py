@@ -40,8 +40,6 @@ def setup(chip):
 
         lib.set('option', 'file', 'openroad_pdngen', f'{path_base}/pdngen.tcl')
 
-        lib.set('option', 'ydir', f'{path_base}/lambda')
-
         libs.append(lib)
 
     lambda_lib = Library(chip, 'lambdalib_gf180sram', package='lambdapdk')

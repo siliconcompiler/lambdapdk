@@ -20,8 +20,6 @@ def setup(chip):
 
         lib.set('option', 'var', 'klayout_allow_missing_cell', mem_name)
 
-        lib.set('option', 'ydir', f'{path_base}/lambda')
-
         libs.append(lib)
 
     lambda_lib = Library(chip, 'lambdalib_fakeram7', package='lambdapdk')
