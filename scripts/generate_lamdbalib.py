@@ -4,12 +4,8 @@
 # Script for auto-generating lambda views using Yosys
 ###############################################################################
 
-import git
-import glob
 import os
-import shutil
-import tempfile
-import siliconcompiler
+import lambdalib
 
 from siliconcompiler.targets import (
     skywater130_demo,
@@ -19,25 +15,9 @@ from siliconcompiler.targets import (
 )
 
 if __name__ == "__main__":
-    # Clone clean copy of lambdalib
-    git_path = 'https://github.com/siliconcompiler/lambdalib.git'
-    repo_dir = tempfile.TemporaryDirectory(prefix='lambdalib_')
-    repo_work_dir = repo_dir.name
-    git.Repo.clone_from(git_path, repo_work_dir)
+    pdk_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-    pdk_root = os.path.join(os.path.dirname(__file__), '..')
-    # Get List of stdlib cells in lambdalib
-    cells_dir = os.path.join(repo_work_dir, 'stdlib', 'rtl')
-    cells = glob.glob(f'{cells_dir}/la_*.v')
-
-    exclude = ['la_decap',
-               'la_keeper',
-               'la_footer',
-               'la_header',
-               'la_antenna']
-
-    # TODO: make script less janky
-    pdks = {
+    libs = {
         "sky130": {
             "target": skywater130_demo,
             "libs": [
@@ -67,33 +47,65 @@ if __name__ == "__main__":
         },
     }
 
-    for pdk, info in pdks.items():
+    for pdk, info in libs.items():
         target = info["target"]
 
         for lib in info['libs']:
-            lambda_dir = f"{pdk_root}/lambdapdk/{pdk}/libs/{lib}/lambda"
-            shutil.rmtree(lambda_dir, ignore_errors=True)
-            os.makedirs(lambda_dir, exist_ok=True)
+            lambdalib.generate(target, lib, f"{pdk_root}/lambdapdk/{pdk}/libs/{lib}/lambda")
 
-            for verilog in cells:
-                cell_name, _ = os.path.splitext(os.path.basename(verilog))
+    srams = {
+        "asap7": {
+            "name": "fakeram7",
+            "implementations": ["la_spram"]
+        },
+        "freepdk45": {
+            "name": "fakeram45",
+            "implementations": ["la_spram"]
+        },
+        "sky130": {
+            "name": "sky130sram",
+            "implementations": ["la_spram"]
+        },
+        "gf180": {
+            "name": "gf180mcu_fd_ip_sram",
+            "implementations": ["la_spram"]
+        },
+    }
 
-                if cell_name in exclude:
-                    continue
+    for pdk, info in srams.items():
+        lib = info['name']
+        lambdalib.copy(f"{pdk_root}/lambdapdk/{pdk}/libs/{lib}/lambda",
+                       la_lib='ramlib',
+                       exclude=info['implementations'])
 
-                jobname = f"{target.__name__}-{lib}"
+    iolib = {
+        "sky130": {
+            "name": "sky130io",
+            "implementations": ["la_iobidir",
+                                "la_iocorner",
+                                "la_iocut",
+                                "la_iopoc",
+                                "la_iovdd",
+                                "la_iovddio",
+                                "la_iovss",
+                                "la_iovssio"]
+        },
+        "gf180": {
+            "name": "gf180mcu_fd_io",
+            "implementations": ["la_ioanalog",
+                                "la_iobidir",
+                                "la_iocorner",
+                                "la_iocut",
+                                "la_iopoc",
+                                "la_iovdd",
+                                "la_iovddio",
+                                "la_iovss",
+                                "la_iovssio"]
+        },
+    }
 
-                chip = siliconcompiler.Chip(cell_name)
-                chip.input(verilog)
-                chip.load_target(target)
-                chip.set('asic', 'logiclib', lib)
-                chip.set('option', 'to', 'syn')
-                chip.set('option', 'quiet', True)
-                chip.set('option', 'resume', True)
-                chip.set('option', 'jobname', jobname)
-
-                chip.add('option', 'ydir', cells_dir)
-                chip.run()
-
-                shutil.copy(chip.find_result("vg", step="syn", index=0),
-                            lambda_dir)
+    for pdk, info in iolib.items():
+        lib = info['name']
+        lambdalib.copy(f"{pdk_root}/lambdapdk/{pdk}/libs/{lib}/lambda",
+                       la_lib='iolib',
+                       exclude=info['implementations'])
