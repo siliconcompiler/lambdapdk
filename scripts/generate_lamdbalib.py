@@ -50,8 +50,8 @@ if __name__ == "__main__":
     for pdk, info in libs.items():
         target = info["target"]
 
-        # for lib in info['libs']:
-        #     lambdalib.generate(target, lib, f"{pdk_root}/lambdapdk/{pdk}/libs/{lib}/lambda")
+        for lib in info['libs']:
+            lambdalib.generate(target, lib, f"{pdk_root}/lambdapdk/{pdk}/libs/{lib}/lambda")
 
     srams = {
         "asap7": {
@@ -76,4 +76,36 @@ if __name__ == "__main__":
         lib = info['name']
         lambdalib.copy(f"{pdk_root}/lambdapdk/{pdk}/libs/{lib}/lambda",
                        la_lib='ramlib',
+                       exclude=info['implementations'])
+
+    iolib = {
+        "sky130": {
+            "name": "sky130io",
+            "implementations": ["la_iobidir",
+                                "la_iocorner",
+                                "la_iocut",
+                                "la_iopoc",
+                                "la_iovdd",
+                                "la_iovddio",
+                                "la_iovss",
+                                "la_iovssio"]
+        },
+        "gf180": {
+            "name": "gf180mcu_fd_io",
+            "implementations": ["la_ioanalog",
+                                "la_iobidir",
+                                "la_iocorner",
+                                "la_iocut",
+                                "la_iopoc",
+                                "la_iovdd",
+                                "la_iovddio",
+                                "la_iovss",
+                                "la_iovssio"]
+        },
+    }
+
+    for pdk, info in iolib.items():
+        lib = info['name']
+        lambdalib.copy(f"{pdk_root}/lambdapdk/{pdk}/libs/{lib}/lambda",
+                       la_lib='iolib',
                        exclude=info['implementations'])
