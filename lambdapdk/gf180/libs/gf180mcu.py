@@ -32,6 +32,10 @@ def setup(chip):
         lib.add('output', 'fast', 'nldm',
                 libdir + f'/nldm/gf180mcu_fd_sc_mcu{libtype}5v0__ff_n40C_5v50.lib.gz')
 
+        for corner in ('slow', 'typical', 'fast'):
+            lib.add('output', corner, 'spice',
+                    libdir + f'/spice/gf180mcu_fd_sc_mcu{libtype}5v0.spice')
+
         for stackup in ("3LM_1TM_6K",
                         "3LM_1TM_9K",
                         "3LM_1TM_11K",

@@ -18,6 +18,7 @@ def setup(chip):
         for corner in ('slow', 'fast', 'typical'):
             lib.add('output', corner, 'nldm',
                     f'{path_base}/{mem_name}/nldm/{mem_name}_TT_1p8V_25C.lib')
+            lib.add('output', corner, 'spice', f'{path_base}/{mem_name}/spice/{mem_name}.sp')
 
         lib.set('option', 'file', 'openroad_pdngen', f'{path_base}/pdngen.tcl')
 
