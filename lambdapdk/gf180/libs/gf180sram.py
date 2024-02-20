@@ -34,6 +34,10 @@ def setup(chip):
         lib.add('output', 'fast', 'nldm',
                 f'{path_base}/nldm/{mem_name}__ff_n40C_5v50.lib.gz')
 
+        for corner in ('slow', 'typical', 'fast'):
+            lib.add('output', corner, 'spice',
+                    f'{path_base}/spice/{mem_name}.spice')
+
         lib.set('option', 'file', 'openroad_pdngen', f'{path_base}/pdngen.tcl')
 
         lib.set('option', 'ydir', f'{path_base}/lambda')

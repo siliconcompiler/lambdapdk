@@ -27,6 +27,8 @@ def _setup_lib(chip, libname, suffix):
     for corner_name, lib_corner in corners.items():
         lib.add('output', corner_name, 'nldm',
                 libdir + '/nldm/' + libname + '_' + lib_corner + '.lib.gz')
+        # spice
+        lib.add('output', corner_name, 'spice', libdir + '/netlist/' + libname + '.sp')
 
     # lef
     lib.add('output', stackup, 'lef', libdir + '/lef/' + libname + '.lef')
