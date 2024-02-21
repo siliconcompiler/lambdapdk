@@ -70,6 +70,15 @@ def setup(chip):
     pdk.set('pdk', process, 'minlayer', stackup, 'M2')
     pdk.set('pdk', process, 'maxlayer', stackup, 'M7')
 
+    # Device models
+    # TODO: need to resolve corners
+    chip.set('pdk', process, 'devmodel', 'xyce', 'spice_FF', stackup,
+             pdkdir + '/spice/hspice/7nm_FF_160803.pm')
+    chip.set('pdk', process, 'devmodel', 'xyce', 'spice_SS', stackup,
+             pdkdir + '/spice/hspice/7nm_SS_160803.pm')
+    chip.set('pdk', process, 'devmodel', 'xyce', 'spice_TT', stackup,
+             pdkdir + '/spice/hspice/7nm_TT_160803.pm')
+
     # Klayout setup file
     pdk.set('pdk', process, 'layermap', 'klayout', 'def', 'klayout', stackup,
             pdkdir + '/setup/klayout/asap7.lyt')
