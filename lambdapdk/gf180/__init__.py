@@ -76,6 +76,14 @@ def setup(chip):
         pdk.set('pdk', process, 'display', 'klayout', stackup,
                 pdkdir + '/setup/klayout/tech/gf180mcu.lyp')
 
+        # Device models
+        pdk.set('pdk', process, 'devmodel', 'xyce', 'spice', stackup,
+                pdkdir + '/spice/xyce/design.xyce')
+        pdk.set('pdk', process, 'devmodel', 'xyce', 'spice', stackup,
+                pdkdir + '/spice/xyce/sm141064.xyce')
+        pdk.set('pdk', process, 'devmodel', 'xyce', 'spice', stackup,
+                pdkdir + '/spice/xyce/smbb000149.xyce')
+
         # Openroad global routing grid derating
         openroad_layer_adjustments = {
                 'Metal1': 0.0,
