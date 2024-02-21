@@ -3419,3 +3419,5 @@ MM3 VDD A net048 VDD pmos_slvt w=81.0n l=20n nfin=3
 .ENDS
 
 
+.SUBCKT TAPCELL_ASAP7_75t_SL VDD VSS
+.ENDS
