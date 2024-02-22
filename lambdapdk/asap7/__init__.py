@@ -70,6 +70,10 @@ def setup(chip):
     pdk.set('pdk', process, 'minlayer', stackup, 'M2')
     pdk.set('pdk', process, 'maxlayer', stackup, 'M7')
 
+    # Device models
+    pdk.set('pdk', process, 'devmodel', 'xyce', 'hspice', stackup,
+            pdkdir + '/spice/hspice/7nm.lib')
+
     # Klayout setup file
     pdk.set('pdk', process, 'layermap', 'klayout', 'def', 'klayout', stackup,
             pdkdir + '/setup/klayout/asap7.lyt')

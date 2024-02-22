@@ -1,0 +1,13 @@
+* ASAP7 device model library
+
+.LIB TT
+.INCLUDE "7nm_TT_160803.pm"
+.ENDL TT
+
+.LIB FF
+.INCLUDE "7nm_FF_160803.pm"
+.ENDL FF
+
+.LIB SS
+.INCLUDE "7nm_SS_160803.pm"
+.ENDL SS
