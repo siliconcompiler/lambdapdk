@@ -70,7 +70,7 @@
 
 .LIB smbb000149.xyce pmos_10p0_asym_t
 .LIB smbb000149.xyce noise_corner
-.ENDL
+.ENDL typical
 
 
 .LIB ss
@@ -107,7 +107,7 @@
 
 .LIB smbb000149.xyce pmos_10p0_asym_t
 .LIB smbb000149.xyce noise_corner
-.ENDL
+.ENDL ss
 
 
 .LIB ff
@@ -145,7 +145,7 @@
 
 .LIB smbb000149.xyce pmos_10p0_asym_t
 .LIB smbb000149.xyce noise_corner
-.ENDL
+.ENDL ff
 
 .LIB sf
 
@@ -183,7 +183,7 @@
 
 .LIB smbb000149.xyce pmos_10p0_asym_t
 .LIB smbb000149.xyce noise_corner
-.ENDL
+.ENDL sf
 
 .LIB fs
 
@@ -218,7 +218,7 @@
 
 .LIB smbb000149.xyce pmos_10p0_asym_t
 .LIB smbb000149.xyce noise_corner
-.ENDL
+.ENDL fs
 
 
 .LIB statistical
@@ -294,7 +294,7 @@
 
 .LIB smbb000149.xyce pmos_10p0_asym_t
 .LIB smbb000149.xyce noise_corner
-.ENDL
+.ENDL statistical
 *
 
 .LIB noise_corner
@@ -302,7 +302,7 @@
 + NMOS_10P0_ASYM_NOIA='(fnoicor==0)*1.1021E42 + (fnoicor==1)*2.5852e42' NMOS_10P0_ASYM_NOIB='(fnoicor==0)*2.8476E24 + (fnoicor==1)*6.5096e+024'
 + NMOS_10P0_ASYM_NOIC='(fnoicor==0)*8.75 + (fnoicor==1)*8.75' PMOS_10P0_ASYM_NOIA='(fnoicor==0)*2.9073e+041 + (fnoicor==1)*1.7073e+042'
 + PMOS_10P0_ASYM_NOIB='(fnoicor==0)*8.0736e+025 + (fnoicor==1)*2.4523e+026' PMOS_10P0_ASYM_NOIC='(fnoicor==0)*12780 + (fnoicor==1)*12780'
-.ENDL
+.ENDL noise_corner
 
 
 
