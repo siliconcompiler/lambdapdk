@@ -1,4 +1,4 @@
-from siliconcompiler import Library
+from siliconcompiler import Chip, Library
 from lambdapdk import register_data_source
 
 
@@ -40,8 +40,18 @@ def setup(chip):
 
         lib.set('option', 'file', 'openroad_pdngen', f'{path_base}/pdngen.tcl')
 
-        lib.set('option', 'ydir', f'{path_base}/lambda')
-
         libs.append(lib)
 
+    lambda_lib = Library(chip, 'lambdalib_gf180sram', package='lambdapdk')
+    register_data_source(lambda_lib)
+    lambda_lib.add('option', 'ydir', 'lambdapdk/gf180/libs/gf180mcu_fd_ip_sram/lambda')
+
+    libs.append(lambda_lib)
+
     return libs
+
+
+#########################
+if __name__ == "__main__":
+    for lib in setup(Chip('<lib>')):
+        lib.write_manifest(f'{lib.top()}.json')

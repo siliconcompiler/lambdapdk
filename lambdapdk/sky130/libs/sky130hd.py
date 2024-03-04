@@ -145,10 +145,14 @@ def setup(chip):
         lib.set('option', 'var', f'{tool}_tielow_cell', "sky130_fd_sc_hd__conb_1")
         lib.set('option', 'var', f'{tool}_tielow_port', "LO")
 
-    return lib
+    lambda_lib = siliconcompiler.Library(chip, f'lambdalib_{libname}', package='lambdapdk')
+    register_data_source(lambda_lib)
+    lambda_lib.add('option', 'ydir', 'lambdapdk/sky130/libs/sky130hd/lambda')
+
+    return [lib, lambda_lib]
 
 
 #########################
 if __name__ == "__main__":
-    lib = setup(siliconcompiler.Chip('<lib>'))
-    lib.write_manifest(f'{lib.top()}.json')
+    for lib in setup(siliconcompiler.Chip('<lib>')):
+        lib.write_manifest(f'{lib.top()}.json')
