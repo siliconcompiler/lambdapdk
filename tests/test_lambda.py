@@ -2,10 +2,10 @@ import pytest
 from siliconcompiler import Chip
 import lambdalib
 
-from lambdapdk.asap7.libs import asap7sc7p5t
-from lambdapdk.freepdk45.libs import nangate45
-from lambdapdk.sky130.libs import sky130hd
-from lambdapdk.gf180.libs import gf180mcu
+from lambdapdk.asap7.libs import asap7sc7p5t, fakeram7
+from lambdapdk.freepdk45.libs import nangate45, fakeram45
+from lambdapdk.gf180.libs import gf180mcu, gf180io, gf180sram
+from lambdapdk.sky130.libs import sky130hd, sky130io, sky130sram
 
 
 @pytest.mark.parametrize('module,path', [
@@ -41,3 +41,21 @@ def test_la_ramlib(path):
     ])
 def test_la_iolib(path):
     assert lambdalib.check(path, 'iolib')
+
+
+@pytest.mark.parametrize('module', [
+    asap7sc7p5t, fakeram7,
+    nangate45, fakeram45,
+    gf180mcu, gf180io, gf180sram,
+    sky130hd, sky130io, sky130sram
+])
+def test_lambdalib_is_present(module):
+    chip = Chip('<lib>')
+    chip.use(module)
+
+    has_lambda = False
+    for libs in chip.getkeys('library'):
+        if libs.startswith('lambdalib_'):
+            has_lambda = True
+
+    assert has_lambda, f"{module.__name__} does not have a lambdalib"
