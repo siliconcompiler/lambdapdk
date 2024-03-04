@@ -52,12 +52,13 @@ def setup(chip):
                                             'gf180mcu_fd_io__fill5',
                                             'gf180mcu_fd_io__fill10',
                                             'gf180mcu_fd_io__fillnc'])
+        libs.append(lib)
 
     lambda_lib = siliconcompiler.Library(chip, 'lambdalib_gf180mcu_fd_io', package='lambdapdk')
     register_data_source(lambda_lib)
     lambda_lib.add('option', 'ydir', 'lambdapdk/gf180/libs/gf180mcu_fd_io/lambda')
 
-    return [lib, lambda_lib]
+    return [*libs, lambda_lib]
 
 
 #########################
