@@ -38,6 +38,9 @@ def setup(chip):
     lib.add('output', stackup, 'gds', libdir + '/gds/sky130_fd_sc_hd.gds')
     lib.add('output', stackup, 'cdl', libdir + '/cdl/sky130_fd_sc_hd.cdl')
 
+    lib.add('output', 'rtl', 'verilog', libdir + '/verilog/sky130_fd_sc_hd.v')
+    lib.add('output', 'rtl', 'verilog', libdir + '/verilog/primitives.v')
+
     # antenna cells
     lib.add('asic', 'cells', 'antenna', 'sky130_fd_sc_hd__diode_2')
 
