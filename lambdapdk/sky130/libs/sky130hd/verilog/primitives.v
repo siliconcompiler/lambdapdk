@@ -1,4 +1,5 @@
-// This file is copied from OpenPDKs in open_pdks/sky130/sky130A/libs.ref/sky130_fd_sc_hd/verilog/
+// This file is copied from OpenPDKs at commit 6d4d11780c40b20ee63cc98e645307a9bf2b2ab8
+// open_pdks/sky130/sky130A/libs.ref/sky130_fd_sc_hd/verilog/primitives.v
 /**
  * Copyright 2020 The SkyWater PDK Authors
  *
