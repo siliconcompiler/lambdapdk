@@ -42,8 +42,6 @@ def setup(chip):
     rev = 'v0_0_2'
     stackup = '5M1LI'
 
-    # TODO: eventually support hs libtype as well
-    libtype = 'unithd'
     node = 130
     # TODO: dummy numbers, only matter for cost estimation
     wafersize = 300
@@ -69,8 +67,9 @@ def setup(chip):
     # APR Setup
     # TODO: remove libtype
     for tool in ('openroad', 'klayout', 'magic'):
-        pdk.set('pdk', process, 'aprtech', tool, stackup, libtype, 'lef',
-                pdkdir + '/apr/sky130_fd_sc_hd.tlef')
+        for libtype in ('hd', 'hdll'):
+            pdk.set('pdk', process, 'aprtech', tool, stackup, libtype, 'lef',
+                    pdkdir + f'/apr/sky130_fd_sc_{libtype}.tlef')
 
     pdk.set('pdk', process, 'minlayer', stackup, 'met1')
     pdk.set('pdk', process, 'maxlayer', stackup, 'met5')
