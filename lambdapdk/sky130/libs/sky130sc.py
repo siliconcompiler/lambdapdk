@@ -11,6 +11,56 @@ def setup(chip):
     stackup = '5M1LI'
     version = 'v0_0_2'
 
+    dontuse = {
+        'hd': [
+            'sky130_fd_sc_hd__lpflow_bleeder_1',
+            'sky130_fd_sc_hd__lpflow_clkbufkapwr_1',
+            'sky130_fd_sc_hd__lpflow_clkbufkapwr_16',
+            'sky130_fd_sc_hd__lpflow_clkbufkapwr_2',
+            'sky130_fd_sc_hd__lpflow_clkbufkapwr_4',
+            'sky130_fd_sc_hd__lpflow_clkbufkapwr_8',
+            'sky130_fd_sc_hd__lpflow_clkinvkapwr_1',
+            'sky130_fd_sc_hd__lpflow_clkinvkapwr_16',
+            'sky130_fd_sc_hd__lpflow_clkinvkapwr_2',
+            'sky130_fd_sc_hd__lpflow_clkinvkapwr_4',
+            'sky130_fd_sc_hd__lpflow_clkinvkapwr_8',
+            'sky130_fd_sc_hd__lpflow_decapkapwr_12',
+            'sky130_fd_sc_hd__lpflow_decapkapwr_3',
+            'sky130_fd_sc_hd__lpflow_decapkapwr_4',
+            'sky130_fd_sc_hd__lpflow_decapkapwr_6',
+            'sky130_fd_sc_hd__lpflow_decapkapwr_8',
+            'sky130_fd_sc_hd__lpflow_inputiso0n_1',
+            'sky130_fd_sc_hd__lpflow_inputiso0p_1',
+            'sky130_fd_sc_hd__lpflow_inputiso1n_1',
+            'sky130_fd_sc_hd__lpflow_inputiso1p_1',
+            'sky130_fd_sc_hd__lpflow_inputisolatch_1',
+            'sky130_fd_sc_hd__lpflow_isobufsrc_1',
+            'sky130_fd_sc_hd__lpflow_isobufsrc_16',
+            'sky130_fd_sc_hd__lpflow_isobufsrc_2',
+            'sky130_fd_sc_hd__lpflow_isobufsrc_4',
+            'sky130_fd_sc_hd__lpflow_isobufsrc_8',
+            'sky130_fd_sc_hd__lpflow_isobufsrckapwr_16',
+            'sky130_fd_sc_hd__lpflow_lsbuf_lh_hl_isowell_tap_1',
+            'sky130_fd_sc_hd__lpflow_lsbuf_lh_hl_isowell_tap_2',
+            'sky130_fd_sc_hd__lpflow_lsbuf_lh_hl_isowell_tap_4',
+            'sky130_fd_sc_hd__lpflow_lsbuf_lh_isowell_4',
+            'sky130_fd_sc_hd__lpflow_lsbuf_lh_isowell_tap_1',
+            'sky130_fd_sc_hd__lpflow_lsbuf_lh_isowell_tap_2',
+            'sky130_fd_sc_hd__lpflow_lsbuf_lh_isowell_tap_4'
+        ],
+        'hdll': [
+            'sky130_fd_sc_hdll__inputiso0p_1',
+            'sky130_fd_sc_hdll__inputiso0n_1',
+            'sky130_fd_sc_hdll__inputiso1p_1',
+            'sky130_fd_sc_hdll__inputiso1n_1',
+            'sky130_fd_sc_hdll__isobufsrc_1',
+            'sky130_fd_sc_hdll__isobufsrc_2',
+            'sky130_fd_sc_hdll__isobufsrc_4',
+            'sky130_fd_sc_hdll__isobufsrc_8',
+            'sky130_fd_sc_hdll__isobufsrc_16',
+        ]
+    }
+
     libs = []
     for libtype, sites, slow_v in (("hd", ["unithd", "unithddbl"], "1v40"),
                                    ("hdll", ["unithd", "unithddbl"], "1v44")):
@@ -82,42 +132,9 @@ def setup(chip):
 
         lib.add('asic', 'cells', 'dontuse', [
             f'sky130_fd_sc_{libtype}__probe_p_8',
-            f'sky130_fd_sc_{libtype}__probec_p_8',
-            f'sky130_fd_sc_{libtype}__lpflow_bleeder_1',
-            f'sky130_fd_sc_{libtype}__lpflow_clkbufkapwr_1',
-            f'sky130_fd_sc_{libtype}__lpflow_clkbufkapwr_16',
-            f'sky130_fd_sc_{libtype}__lpflow_clkbufkapwr_2',
-            f'sky130_fd_sc_{libtype}__lpflow_clkbufkapwr_4',
-            f'sky130_fd_sc_{libtype}__lpflow_clkbufkapwr_8',
-            f'sky130_fd_sc_{libtype}__lpflow_clkinvkapwr_1',
-            f'sky130_fd_sc_{libtype}__lpflow_clkinvkapwr_16',
-            f'sky130_fd_sc_{libtype}__lpflow_clkinvkapwr_2',
-            f'sky130_fd_sc_{libtype}__lpflow_clkinvkapwr_4',
-            f'sky130_fd_sc_{libtype}__lpflow_clkinvkapwr_8',
-            f'sky130_fd_sc_{libtype}__lpflow_decapkapwr_12',
-            f'sky130_fd_sc_{libtype}__lpflow_decapkapwr_3',
-            f'sky130_fd_sc_{libtype}__lpflow_decapkapwr_4',
-            f'sky130_fd_sc_{libtype}__lpflow_decapkapwr_6',
-            f'sky130_fd_sc_{libtype}__lpflow_decapkapwr_8',
-            f'sky130_fd_sc_{libtype}__lpflow_inputiso0n_1',
-            f'sky130_fd_sc_{libtype}__lpflow_inputiso0p_1',
-            f'sky130_fd_sc_{libtype}__lpflow_inputiso1n_1',
-            f'sky130_fd_sc_{libtype}__lpflow_inputiso1p_1',
-            f'sky130_fd_sc_{libtype}__lpflow_inputisolatch_1',
-            f'sky130_fd_sc_{libtype}__lpflow_isobufsrc_1',
-            f'sky130_fd_sc_{libtype}__lpflow_isobufsrc_16',
-            f'sky130_fd_sc_{libtype}__lpflow_isobufsrc_2',
-            f'sky130_fd_sc_{libtype}__lpflow_isobufsrc_4',
-            f'sky130_fd_sc_{libtype}__lpflow_isobufsrc_8',
-            f'sky130_fd_sc_{libtype}__lpflow_isobufsrckapwr_16',
-            f'sky130_fd_sc_{libtype}__lpflow_lsbuf_lh_hl_isowell_tap_1',
-            f'sky130_fd_sc_{libtype}__lpflow_lsbuf_lh_hl_isowell_tap_2',
-            f'sky130_fd_sc_{libtype}__lpflow_lsbuf_lh_hl_isowell_tap_4',
-            f'sky130_fd_sc_{libtype}__lpflow_lsbuf_lh_isowell_4',
-            f'sky130_fd_sc_{libtype}__lpflow_lsbuf_lh_isowell_tap_1',
-            f'sky130_fd_sc_{libtype}__lpflow_lsbuf_lh_isowell_tap_2',
-            f'sky130_fd_sc_{libtype}__lpflow_lsbuf_lh_isowell_tap_4'
+            f'sky130_fd_sc_{libtype}__probec_p_8'
         ])
+        lib.add('asic', 'cells', 'dontuse', dontuse[libtype])
 
         # tie cells
         lib.add('asic', 'cells', 'tie', [f'sky130_fd_sc_{libtype}__conb_1'])
