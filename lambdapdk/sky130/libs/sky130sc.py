@@ -137,7 +137,7 @@ def setup(chip):
         lib.add('asic', 'cells', 'dontuse', dontuse[libtype])
 
         # tie cells
-        lib.add('asic', 'cells', 'tie', [f'sky130_fd_sc_{libtype}__conb_1'])
+        lib.add('asic', 'cells', 'tie', f'sky130_fd_sc_{libtype}__conb_1')
 
         # Defaults for OpenROAD tool variables
         lib.set('option', 'var', 'openroad_place_density', '0.6')
