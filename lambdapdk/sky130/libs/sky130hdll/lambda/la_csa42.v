@@ -33,14 +33,6 @@ module la_csa42(a, b, c, d, cin, sum, carry, cout);
   wire _03_;
   wire _04_;
   wire _05_;
-  wire _06_;
-  wire _07_;
-  wire _08_;
-  wire _09_;
-  wire _10_;
-  wire _11_;
-  wire _12_;
-  wire _13_;
   input a;
   wire a;
   input b;
@@ -57,66 +49,52 @@ module la_csa42(a, b, c, d, cin, sum, carry, cout);
   wire d;
   output sum;
   wire sum;
-  sky130_fd_sc_hdll__inv_1 _14_ (
-    .A(a),
-    .Y(_00_)
-  );
-  sky130_fd_sc_hdll__inv_1 _15_ (
-    .A(d),
-    .Y(_05_)
-  );
-  sky130_fd_sc_hdll__inv_1 _16_ (
+  sky130_fd_sc_hdll__xnor3_1 _06_ (
     .A(b),
-    .Y(_01_)
+    .B(a),
+    .C(c),
+    .X(_05_)
   );
-  sky130_fd_sc_hdll__inv_1 _17_ (
-    .A(cin),
-    .Y(_06_)
-  );
-  sky130_fd_sc_hdll__inv_1 _18_ (
-    .A(c),
-    .Y(_02_)
-  );
-  sky130_fd_sc_hdll__inv_1 _19_ (
-    .A(_04_),
-    .Y(_07_)
-  );
-  sky130_fd_sc_hdll__inv_1 _20_ (
-    .A(_09_),
-    .Y(sum)
-  );
-  sky130_fd_sc_hdll__inv_1 _21_ (
-    .A(_03_),
-    .Y(cout)
-  );
-  sky130_fd_sc_hdll__inv_1 _22_ (
-    .A(_08_),
-    .Y(carry)
-  );
-  sky130_fd_sc_hdll__fa_1 _23_ (
-    .A(_00_),
-    .B(_01_),
-    .CIN(_02_),
-    .COUT(_03_),
-    .SUM(_04_)
-  );
-  sky130_fd_sc_hdll__fa_1 _24_ (
-    .A(_05_),
-    .B(_06_),
-    .CIN(_07_),
-    .COUT(_08_),
-    .SUM(_09_)
-  );
-  sky130_fd_sc_hdll__ha_1 _25_ (
+  sky130_fd_sc_hdll__xor2_1 _07_ (
     .A(d),
     .B(cin),
-    .COUT(_10_),
-    .SUM(_11_)
+    .X(_00_)
   );
-  sky130_fd_sc_hdll__ha_1 _26_ (
-    .A(a),
-    .B(b),
-    .COUT(_12_),
-    .SUM(_13_)
+  sky130_fd_sc_hdll__xnor2_1 _08_ (
+    .A(_05_),
+    .B(_00_),
+    .Y(sum)
+  );
+  sky130_fd_sc_hdll__nand2_6 _09_ (
+    .A(d),
+    .B(cin),
+    .Y(_01_)
+  );
+  sky130_fd_sc_hdll__nor2_1 _10_ (
+    .A(d),
+    .B(cin),
+    .Y(_02_)
+  );
+  sky130_fd_sc_hdll__a21oi_1 _11_ (
+    .A1(_05_),
+    .A2(_01_),
+    .B1(_02_),
+    .Y(carry)
+  );
+  sky130_fd_sc_hdll__nor2_1 _12_ (
+    .A(b),
+    .B(a),
+    .Y(_03_)
+  );
+  sky130_fd_sc_hdll__a21oi_1 _13_ (
+    .A1(b),
+    .A2(a),
+    .B1(c),
+    .Y(_04_)
+  );
+  sky130_fd_sc_hdll__nor2_1 _14_ (
+    .A(_03_),
+    .B(_04_),
+    .Y(cout)
   );
 endmodule

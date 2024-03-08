@@ -24,6 +24,7 @@
 module la_csa32(a, b, c, sum, carry);
   wire _0_;
   wire _1_;
+  wire _2_;
   input a;
   wire a;
   input b;
@@ -34,17 +35,30 @@ module la_csa32(a, b, c, sum, carry);
   wire carry;
   output sum;
   wire sum;
-  sky130_fd_sc_hdll__fa_1 _2_ (
-    .A(a),
-    .B(b),
-    .CIN(c),
-    .COUT(carry),
-    .SUM(sum)
+  sky130_fd_sc_hdll__xnor2_2 _3_ (
+    .A(b),
+    .B(c),
+    .Y(_0_)
   );
-  sky130_fd_sc_hdll__ha_1 _3_ (
+  sky130_fd_sc_hdll__xnor2_1 _4_ (
     .A(a),
-    .B(b),
-    .COUT(_0_),
-    .SUM(_1_)
+    .B(_0_),
+    .Y(sum)
+  );
+  sky130_fd_sc_hdll__nand2_1 _5_ (
+    .A(b),
+    .B(c),
+    .Y(_1_)
+  );
+  sky130_fd_sc_hdll__o21ai_1 _6_ (
+    .A1(b),
+    .A2(c),
+    .B1(a),
+    .Y(_2_)
+  );
+  sky130_fd_sc_hdll__nand2_1 _7_ (
+    .A(_1_),
+    .B(_2_),
+    .Y(carry)
   );
 endmodule

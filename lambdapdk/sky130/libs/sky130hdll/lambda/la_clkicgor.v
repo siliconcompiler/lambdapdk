@@ -25,6 +25,7 @@
 
 module la_clkicgor(clk, te, en, eclk);
   wire _0_;
+  wire _1_;
   input clk;
   wire clk;
   output eclk;
@@ -34,19 +35,23 @@ module la_clkicgor(clk, te, en, eclk);
   wire en_stable;
   input te;
   wire te;
-  sky130_fd_sc_hdll__or2_1 _1_ (
+  sky130_fd_sc_hdll__or2_1 _2_ (
     .A(te),
     .B(en),
     .X(_0_)
   );
-  sky130_fd_sc_hdll__nand2b_1 _2_ (
+  sky130_fd_sc_hdll__nand2b_1 _3_ (
     .A_N(clk),
     .B(en_stable),
     .Y(eclk)
   );
-  sky130_fd_sc_hdll__dlxtp_1 _3_ (
+  sky130_fd_sc_hdll__inv_1 _4_ (
+    .A(clk),
+    .Y(_1_)
+  );
+  sky130_fd_sc_hdll__dlxtn_1 _5_ (
     .D(_0_),
-    .GATE(clk),
+    .GATE_N(_1_),
     .Q(en_stable)
   );
 endmodule
