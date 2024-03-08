@@ -147,8 +147,10 @@ def setup(chip):
         lib.set('option', 'var', 'openroad_macro_place_channel', ['80', '80'])
 
         # Yosys techmap
+        # TODO: separate this out properly for the different libraries
         lib.add('option', 'file', 'yosys_techmap', libdir + '/techmap/yosys/cells_latch.v')
-        lib.add('option', 'file', 'yosys_addermap', libdir + '/techmap/yosys/cells_adders.v')
+        if libtype == "hd":
+            lib.add('option', 'file', 'yosys_addermap', libdir + '/techmap/yosys/cells_adders.v')
 
         # Openroad specific files
         lib.set('option', 'file', 'openroad_pdngen',
