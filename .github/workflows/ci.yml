@@ -2,6 +2,8 @@ name: CI
 on:
   # Runs on all pushes to branches
   push:
+    branches:
+      - 'main'
   # Runs on all PRs
   pull_request:
   # Manual Dispatch
