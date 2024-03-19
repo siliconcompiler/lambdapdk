@@ -57,9 +57,9 @@ LAYER pwell
   PROPERTY LEF58_TYPE "TYPE PWELL ;" ;
 END pwell
 
-LAYER dummycut
+LAYER licon
   TYPE CUT ;
-END dummycut
+END licon
 
 LAYER li1
   TYPE ROUTING ;
