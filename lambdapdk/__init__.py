@@ -9,7 +9,7 @@ def register_data_source(chip):
         chip,
         "lambdapdk",
         "lambdapdk",
-        "git+https://github.com/siliconcompiler/lambdapdk.git",
+        "https://github.com/siliconcompiler/lambdapdk/archive/refs/tags/",
         alternative_ref=f"v{__version__}",
         python_module_path_append=".."
     )
