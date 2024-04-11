@@ -13,7 +13,7 @@ urls = {Homepage = "https://github.com/siliconcompiler/lambdapdk"}
 requires-python = ">= 3.8"
 license = {file = "LICENSE"}
 dependencies = [
-    "siliconcompiler >= 0.20.2"
+    "siliconcompiler >= 0.21.8"
 ]
 dynamic = ['version']
 
@@ -27,11 +27,11 @@ timeout = "60"
 [project.optional-dependencies]
 # Dev dependencies.
 dev = [
-    "flake8 >= 5.0.0",
-    "pytest >= 6.2.4",
-    "pytest-timeout >= 2.1.0",
-    "tclint >= 0.1.4",
-    "lambdalib >= 0.2.0"
+    "flake8 == 7.0.0",
+    "pytest == 8.1.1",
+    "pytest-timeout == 2.3.1",
+    "tclint == 0.2.2",
+    "lambdalib == 0.2.0"
 ]
 
 [tool.tclint]
