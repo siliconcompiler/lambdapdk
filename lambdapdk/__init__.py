@@ -1,7 +1,7 @@
 import siliconcompiler.package as sc_package
 
 
-__version__ = "0.1.14"
+__version__ = "0.1.15"
 
 
 def register_data_source(chip):
