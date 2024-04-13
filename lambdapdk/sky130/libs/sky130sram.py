@@ -24,7 +24,7 @@ def setup(chip):
 
         libs.append(lib)
 
-    lambda_lib = Library(chip, 'lambdalib_gf130sram', package='lambdapdk')
+    lambda_lib = Library(chip, 'lambdalib_sky130sram', package='lambdapdk')
     register_data_source(lambda_lib)
     lambda_lib.add('option', 'ydir', 'lambdapdk/sky130/libs/sky130sram/lambda')
 
