@@ -1,6 +1,6 @@
 /*****************************************************************************
- * Function: Single Port RAM
- * Copyright: Lambda Project Authors. ALl rights Reserved.
+ * Function: Single Port ram
+ * Copyright: Lambda Project Authors. All rights Reserved.
  * License:  MIT (see LICENSE file in Lambda repository)
  *
  * Docs:
@@ -14,7 +14,7 @@
  * supplied on a per macro basis.
  *
  * Technologoy specific implementations of "la_spram" would generally include
- * one ore more hardcoded instantiations of RAM modules with a generate
+ * one ore more hardcoded instantiations of ram modules with a generate
  * statement relying on the "TYPE" to select between the list of modules
  * at build time.
  *
@@ -28,31 +28,38 @@ module la_spram
     parameter TESTW  = 128          // Width of asic test interface
     )
    (// Memory interface
-    input 		clk, // write clock
-    input 		ce, // chip enable
-    input 		we, // write enable
-    input [DW-1:0] 	wmask, //per bit write mask
-    input [AW-1:0] 	addr,//write address
-    input [DW-1:0] 	din, //write data
-    output [DW-1:0] dout,//read output data
+    input clk, // write clock
+    input ce, // chip enable
+    input we, // write enable
+    input [DW-1:0] wmask, //per bit write mask
+    input [AW-1:0] addr, //write address
+    input [DW-1:0] din, //write data
+    output [DW-1:0] dout, //read output data
     // Power signals
-    input 		vss, // ground signal
-    input 		vdd, // memory core array power
-    input 		vddio, // periphery/io power
+    input vss, // ground signal
+    input vdd, // memory core array power
+    input vddio, // periphery/io power
     // Generic interfaces
-    input [CTRLW-1:0] 	ctrl, // pass through ASIC control interface
-    input [TESTW-1:0] 	test // pass through ASIC test interface
+    input [CTRLW-1:0] ctrl, // pass through ASIC control interface
+    input [TESTW-1:0] test // pass through ASIC test interface
     );
 
     // Determine which memory to select
-    localparam MEM_TYPE = "sky130_sram_1rw1r_64x256_8";
+    localparam MEM_TYPE = (TYPE != "DEFAULT") ? TYPE :
+      "sky130_sram_1rw1r_64x256_8";
 
-    localparam MEM_WIDTH = 64;
+    localparam MEM_WIDTH = 
+      (MEM_TYPE == "sky130_sram_1rw1r_64x256_8") ? 64 :
+      0;
  
-    localparam MEM_DEPTH = 8;
+    localparam MEM_DEPTH = 
+      (MEM_TYPE == "sky130_sram_1rw1r_64x256_8") ? 8 :
+      0;
 
     // Create memories
     localparam MEM_ADDRS = 2**(AW - MEM_DEPTH) < 1 ? 1 : 2**(AW - MEM_DEPTH);
+
+    
 
     generate
       genvar o;
@@ -93,29 +100,25 @@ module la_spram
             end
           end
 
-          wire write_enable;
-          assign write_enable = ce && we && selected;
-          wire read_enable;
-          assign read_enable = ce && ~we && selected;
-
+          wire ce_in;
+          wire we_in;
+          assign ce_in = ce && selected;
+          assign we_in = we && selected;
+          
           if (MEM_TYPE == "sky130_sram_1rw1r_64x256_8")
             sky130_sram_1rw1r_64x256_8 memory (
-              // write port
-                .clk0(clk),
-                .csb0(write_enable),
-                .web0(write_enable),
-                .wmask0({mem_wmask[24],
-                         mem_wmask[16],
-                         mem_wmask[8],
-                         mem_wmask[0]}),
-                .addr0(mem_addr),
-                .din0(mem_din),
-                .dout0(),
-                // read port
-                .clk1(clk),
-                .csb1(read_enable),
-                .addr1(mem_addr),
-                .dout1(mem_dout));
+              .addr0(mem_addr),
+              .addr1(mem_addr),
+              .clk0(clk),
+              .clk1(clk),
+              .csb0(ce_in && we_in),
+              .csb1(ce_in && ~we_in),
+              .din0(mem_din),
+              .dout0(),
+              .dout1(mem_dout),
+              .web0(ce_in && we_in),
+              .wmask0({mem_wmask[24], mem_wmask[16], mem_wmask[8], mem_wmask[0]})
+            );
         end
       end
     endgenerate

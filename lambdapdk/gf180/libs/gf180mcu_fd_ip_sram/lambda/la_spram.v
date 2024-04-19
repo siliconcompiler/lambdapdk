@@ -1,6 +1,6 @@
 /*****************************************************************************
- * Function: Single Port RAM
- * Copyright: Lambda Project Authors. ALl rights Reserved.
+ * Function: Single Port ram
+ * Copyright: Lambda Project Authors. All rights Reserved.
  * License:  MIT (see LICENSE file in Lambda repository)
  *
  * Docs:
@@ -14,7 +14,7 @@
  * supplied on a per macro basis.
  *
  * Technologoy specific implementations of "la_spram" would generally include
- * one ore more hardcoded instantiations of RAM modules with a generate
+ * one ore more hardcoded instantiations of ram modules with a generate
  * statement relying on the "TYPE" to select between the list of modules
  * at build time.
  *
@@ -28,45 +28,47 @@ module la_spram
     parameter TESTW  = 128          // Width of asic test interface
     )
    (// Memory interface
-    input 		clk, // write clock
-    input 		ce, // chip enable
-    input 		we, // write enable
-    input [DW-1:0] 	wmask, //per bit write mask
-    input [AW-1:0] 	addr,//write address
-    input [DW-1:0] 	din, //write data
-    output [DW-1:0] dout,//read output data
+    input clk, // write clock
+    input ce, // chip enable
+    input we, // write enable
+    input [DW-1:0] wmask, //per bit write mask
+    input [AW-1:0] addr, //write address
+    input [DW-1:0] din, //write data
+    output [DW-1:0] dout, //read output data
     // Power signals
-    input 		vss, // ground signal
-    input 		vdd, // memory core array power
-    input 		vddio, // periphery/io power
+    input vss, // ground signal
+    input vdd, // memory core array power
+    input vddio, // periphery/io power
     // Generic interfaces
-    input [CTRLW-1:0] 	ctrl, // pass through ASIC control interface
-    input [TESTW-1:0] 	test // pass through ASIC test interface
+    input [CTRLW-1:0] ctrl, // pass through ASIC control interface
+    input [TESTW-1:0] test // pass through ASIC test interface
     );
 
     // Determine which memory to select
-    localparam MEM_TYPE = 
+    localparam MEM_TYPE = (TYPE != "DEFAULT") ? TYPE :
       (AW >= 9) ? "gf180mcu_fd_ip_sram__sram512x8m8wm1" :
       (AW == 8) ? "gf180mcu_fd_ip_sram__sram256x8m8wm1" :
       (AW == 7) ? "gf180mcu_fd_ip_sram__sram128x8m8wm1" :
       "gf180mcu_fd_ip_sram__sram64x8m8wm1";
 
     localparam MEM_WIDTH = 
-      (MEM_TYPE == "gf180mcu_fd_ip_sram__sram512x8m8wm1") ? 8 :
-      (MEM_TYPE == "gf180mcu_fd_ip_sram__sram256x8m8wm1") ? 8 :
       (MEM_TYPE == "gf180mcu_fd_ip_sram__sram128x8m8wm1") ? 8 :
+      (MEM_TYPE == "gf180mcu_fd_ip_sram__sram256x8m8wm1") ? 8 :
+      (MEM_TYPE == "gf180mcu_fd_ip_sram__sram512x8m8wm1") ? 8 :
       (MEM_TYPE == "gf180mcu_fd_ip_sram__sram64x8m8wm1") ? 8 :
       0;
  
     localparam MEM_DEPTH = 
-      (MEM_TYPE == "gf180mcu_fd_ip_sram__sram512x8m8wm1") ? 9 :
-      (MEM_TYPE == "gf180mcu_fd_ip_sram__sram256x8m8wm1") ? 8 :
       (MEM_TYPE == "gf180mcu_fd_ip_sram__sram128x8m8wm1") ? 7 :
+      (MEM_TYPE == "gf180mcu_fd_ip_sram__sram256x8m8wm1") ? 8 :
+      (MEM_TYPE == "gf180mcu_fd_ip_sram__sram512x8m8wm1") ? 9 :
       (MEM_TYPE == "gf180mcu_fd_ip_sram__sram64x8m8wm1") ? 6 :
       0;
 
     // Create memories
     localparam MEM_ADDRS = 2**(AW - MEM_DEPTH) < 1 ? 1 : 2**(AW - MEM_DEPTH);
+
+    
 
     generate
       genvar o;
@@ -111,43 +113,47 @@ module la_spram
           wire we_in;
           assign ce_in = ce && selected;
           assign we_in = we && selected;
-
+          
           if (MEM_TYPE == "gf180mcu_fd_ip_sram__sram512x8m8wm1")
             gf180mcu_fd_ip_sram__sram512x8m8wm1 memory (
-              .CLK(clk),
-              .CEN(~ce_in),
-              .GWEN(~we_in),
-              .WEN(~mem_wmask),
               .A(mem_addr),
+              .CEN(~ce_in),
+              .CLK(clk),
               .D(mem_din),
-              .Q(mem_dout));
+              .GWEN(~we_in),
+              .Q(mem_dout),
+              .WEN(~mem_wmask)
+            );
           else if (MEM_TYPE == "gf180mcu_fd_ip_sram__sram256x8m8wm1")
             gf180mcu_fd_ip_sram__sram256x8m8wm1 memory (
-              .CLK(clk),
-              .CEN(~ce_in),
-              .GWEN(~we_in),
-              .WEN(~mem_wmask),
               .A(mem_addr),
+              .CEN(~ce_in),
+              .CLK(clk),
               .D(mem_din),
-              .Q(mem_dout));
+              .GWEN(~we_in),
+              .Q(mem_dout),
+              .WEN(~mem_wmask)
+            );
           else if (MEM_TYPE == "gf180mcu_fd_ip_sram__sram128x8m8wm1")
             gf180mcu_fd_ip_sram__sram128x8m8wm1 memory (
-              .CLK(clk),
-              .CEN(~ce_in),
-              .GWEN(~we_in),
-              .WEN(~mem_wmask),
               .A(mem_addr),
+              .CEN(~ce_in),
+              .CLK(clk),
               .D(mem_din),
-              .Q(mem_dout));
+              .GWEN(~we_in),
+              .Q(mem_dout),
+              .WEN(~mem_wmask)
+            );
           else if (MEM_TYPE == "gf180mcu_fd_ip_sram__sram64x8m8wm1")
             gf180mcu_fd_ip_sram__sram64x8m8wm1 memory (
-              .CLK(clk),
-              .CEN(~ce_in),
-              .GWEN(~we_in),
-              .WEN(~mem_wmask),
               .A(mem_addr),
+              .CEN(~ce_in),
+              .CLK(clk),
               .D(mem_din),
-              .Q(mem_dout));
+              .GWEN(~we_in),
+              .Q(mem_dout),
+              .WEN(~mem_wmask)
+            );
         end
       end
     endgenerate

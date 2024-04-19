@@ -1,6 +1,6 @@
 /*****************************************************************************
- * Function: Single Port RAM
- * Copyright: Lambda Project Authors. ALl rights Reserved.
+ * Function: Single Port ram
+ * Copyright: Lambda Project Authors. All rights Reserved.
  * License:  MIT (see LICENSE file in Lambda repository)
  *
  * Docs:
@@ -14,7 +14,7 @@
  * supplied on a per macro basis.
  *
  * Technologoy specific implementations of "la_spram" would generally include
- * one ore more hardcoded instantiations of RAM modules with a generate
+ * one ore more hardcoded instantiations of ram modules with a generate
  * statement relying on the "TYPE" to select between the list of modules
  * at build time.
  *
@@ -28,49 +28,51 @@ module la_spram
     parameter TESTW  = 128          // Width of asic test interface
     )
    (// Memory interface
-    input 		clk, // write clock
-    input 		ce, // chip enable
-    input 		we, // write enable
-    input [DW-1:0] 	wmask, //per bit write mask
-    input [AW-1:0] 	addr,//write address
-    input [DW-1:0] 	din, //write data
-    output [DW-1:0] dout,//read output data
+    input clk, // write clock
+    input ce, // chip enable
+    input we, // write enable
+    input [DW-1:0] wmask, //per bit write mask
+    input [AW-1:0] addr, //write address
+    input [DW-1:0] din, //write data
+    output [DW-1:0] dout, //read output data
     // Power signals
-    input 		vss, // ground signal
-    input 		vdd, // memory core array power
-    input 		vddio, // periphery/io power
+    input vss, // ground signal
+    input vdd, // memory core array power
+    input vddio, // periphery/io power
     // Generic interfaces
-    input [CTRLW-1:0] 	ctrl, // pass through ASIC control interface
-    input [TESTW-1:0] 	test // pass through ASIC test interface
+    input [CTRLW-1:0] ctrl, // pass through ASIC control interface
+    input [TESTW-1:0] test // pass through ASIC test interface
     );
 
     // Determine which memory to select
-    localparam MEM_TYPE = 
+    localparam MEM_TYPE = (TYPE != "DEFAULT") ? TYPE :
       (AW >= 9) ? (DW >= 64) ? "fakeram7_512x64" : "fakeram7_512x32" :
       (AW == 8) ? (DW >= 64) ? "fakeram7_256x64" : "fakeram7_256x32" :
       (AW == 7) ? "fakeram7_128x32" :
       "fakeram7_64x32";
 
     localparam MEM_WIDTH = 
-      (MEM_TYPE == "fakeram7_512x64") ? 64 :
-      (MEM_TYPE == "fakeram7_512x32") ? 32 :
-      (MEM_TYPE == "fakeram7_256x64") ? 64 :
-      (MEM_TYPE == "fakeram7_256x32") ? 32 :
       (MEM_TYPE == "fakeram7_128x32") ? 32 :
+      (MEM_TYPE == "fakeram7_256x32") ? 32 :
+      (MEM_TYPE == "fakeram7_256x64") ? 64 :
+      (MEM_TYPE == "fakeram7_512x32") ? 32 :
+      (MEM_TYPE == "fakeram7_512x64") ? 64 :
       (MEM_TYPE == "fakeram7_64x32") ? 32 :
       0;
  
     localparam MEM_DEPTH = 
-      (MEM_TYPE == "fakeram7_512x64") ? 9 :
-      (MEM_TYPE == "fakeram7_512x32") ? 9 :
-      (MEM_TYPE == "fakeram7_256x64") ? 8 :
-      (MEM_TYPE == "fakeram7_256x32") ? 8 :
       (MEM_TYPE == "fakeram7_128x32") ? 7 :
+      (MEM_TYPE == "fakeram7_256x32") ? 8 :
+      (MEM_TYPE == "fakeram7_256x64") ? 8 :
+      (MEM_TYPE == "fakeram7_512x32") ? 9 :
+      (MEM_TYPE == "fakeram7_512x64") ? 9 :
       (MEM_TYPE == "fakeram7_64x32") ? 6 :
       0;
 
     // Create memories
     localparam MEM_ADDRS = 2**(AW - MEM_DEPTH) < 1 ? 1 : 2**(AW - MEM_DEPTH);
+
+    
 
     generate
       genvar o;
@@ -115,61 +117,67 @@ module la_spram
           wire we_in;
           assign ce_in = ce && selected;
           assign we_in = we && selected;
-
-          if (MEM_TYPE == "fakeram7_512x64")
-            fakeram7_512x64 memory (
-              .clk(clk),
-              .addr_in(mem_addr),
-              .ce_in(ce_in),
-              .rd_out(mem_dout),
-              .we_in(we_in),
-              .w_mask_in(mem_wmask),
-              .wd_in(mem_din));
-          else if (MEM_TYPE == "fakeram7_512x32")
+          
+          if (MEM_TYPE == "fakeram7_512x32")
             fakeram7_512x32 memory (
-              .clk(clk),
               .addr_in(mem_addr),
               .ce_in(ce_in),
+              .clk(clk),
               .rd_out(mem_dout),
-              .we_in(we_in),
               .w_mask_in(mem_wmask),
-              .wd_in(mem_din));
+              .wd_in(mem_din),
+              .we_in(we_in)
+            );
+          else if (MEM_TYPE == "fakeram7_512x64")
+            fakeram7_512x64 memory (
+              .addr_in(mem_addr),
+              .ce_in(ce_in),
+              .clk(clk),
+              .rd_out(mem_dout),
+              .w_mask_in(mem_wmask),
+              .wd_in(mem_din),
+              .we_in(we_in)
+            );
           else if (MEM_TYPE == "fakeram7_256x64")
             fakeram7_256x64 memory (
-              .clk(clk),
               .addr_in(mem_addr),
               .ce_in(ce_in),
+              .clk(clk),
               .rd_out(mem_dout),
-              .we_in(we_in),
               .w_mask_in(mem_wmask),
-              .wd_in(mem_din));
+              .wd_in(mem_din),
+              .we_in(we_in)
+            );
           else if (MEM_TYPE == "fakeram7_256x32")
             fakeram7_256x32 memory (
-              .clk(clk),
               .addr_in(mem_addr),
               .ce_in(ce_in),
+              .clk(clk),
               .rd_out(mem_dout),
-              .we_in(we_in),
               .w_mask_in(mem_wmask),
-              .wd_in(mem_din));
+              .wd_in(mem_din),
+              .we_in(we_in)
+            );
           else if (MEM_TYPE == "fakeram7_128x32")
             fakeram7_128x32 memory (
-              .clk(clk),
               .addr_in(mem_addr),
               .ce_in(ce_in),
+              .clk(clk),
               .rd_out(mem_dout),
-              .we_in(we_in),
               .w_mask_in(mem_wmask),
-              .wd_in(mem_din));
+              .wd_in(mem_din),
+              .we_in(we_in)
+            );
           else if (MEM_TYPE == "fakeram7_64x32")
             fakeram7_64x32 memory (
-              .clk(clk),
               .addr_in(mem_addr),
               .ce_in(ce_in),
+              .clk(clk),
               .rd_out(mem_dout),
-              .we_in(we_in),
               .w_mask_in(mem_wmask),
-              .wd_in(mem_din));
+              .wd_in(mem_din),
+              .we_in(we_in)
+            );
         end
       end
     endgenerate
