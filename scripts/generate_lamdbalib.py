@@ -8,6 +8,8 @@ import os
 import lambdalib
 import multiprocessing
 
+from lambdalib.utils import write_la_spram
+
 from siliconcompiler.targets import (
     skywater130_demo,
     asap7_demo,
@@ -62,22 +64,125 @@ if __name__ == "__main__":
     for proc in procs:
         proc.join()
 
+    asap7_spram_port_map = [
+        ("clk", "clk"),
+        ("addr_in", "mem_addr"),
+        ("ce_in", "ce_in"),
+        ("rd_out", "mem_dout"),
+        ("we_in", "we_in"),
+        ("w_mask_in", "mem_wmask"),
+        ("wd_in", "mem_din")
+    ]
+
+    freepdk45_spram_port_map = [
+        ("clk", "clk"),
+        ("addr_in", "mem_addr"),
+        ("ce_in", "ce_in"),
+        ("rd_out", "mem_dout"),
+        ("we_in", "we_in"),
+        ("w_mask_in", "mem_wmask"),
+        ("wd_in", "mem_din")
+    ]
+
+    gf180_spram_port_map = [
+        ("CLK", "clk"),
+        ("CEN", "~ce_in"),
+        ("GWEN", "~we_in"),
+        ("WEN", "~mem_wmask"),
+        ("A", "mem_addr"),
+        ("D", "mem_din"),
+        ("Q", "mem_dout")
+    ]
+
+    sky130_spram_port_map = [
+        ("clk0", "clk"),
+        ("csb0", "ce_in && we_in"),
+        ("web0", "ce_in && we_in"),
+        ("wmask0", "{mem_wmask[24], mem_wmask[16], mem_wmask[8], mem_wmask[0]}"),
+        ("addr0", "mem_addr"),
+        ("din0", "mem_din"),
+        ("dout0", ""),
+        ("clk1", "clk"),
+        ("csb1", "ce_in && ~we_in"),
+        ("addr1", "mem_addr"),
+        ("dout1", "mem_dout"),
+    ]
+
     srams = {
         "asap7": {
             "name": "fakeram7",
-            "implementations": ["la_spram"]
+            "implementations": ["la_spram"],
+            "la_spram": {
+                "fakeram7_512x32": {
+                    "DW": 32, "AW": 9, "port_map": asap7_spram_port_map
+                },
+                "fakeram7_512x64": {
+                    "DW": 64, "AW": 9, "port_map": asap7_spram_port_map
+                },
+                "fakeram7_256x64": {
+                    "DW": 64, "AW": 8, "port_map": asap7_spram_port_map
+                },
+                "fakeram7_256x32": {
+                    "DW": 32, "AW": 8, "port_map": asap7_spram_port_map
+                },
+                "fakeram7_128x32": {
+                    "DW": 32, "AW": 7, "port_map": asap7_spram_port_map
+                },
+                "fakeram7_64x32": {
+                    "DW": 32, "AW": 6, "port_map": asap7_spram_port_map
+                }
+            }
         },
         "freepdk45": {
             "name": "fakeram45",
-            "implementations": ["la_spram"]
-        },
-        "sky130": {
-            "name": "sky130sram",
-            "implementations": ["la_spram"]
+            "implementations": ["la_spram"],
+            "la_spram": {
+                "fakeram45_512x32": {
+                    "DW": 32, "AW": 9, "port_map": freepdk45_spram_port_map
+                },
+                "fakeram45_512x64": {
+                    "DW": 64, "AW": 9, "port_map": freepdk45_spram_port_map
+                },
+                "fakeram45_256x64": {
+                    "DW": 64, "AW": 8, "port_map": freepdk45_spram_port_map
+                },
+                "fakeram45_256x32": {
+                    "DW": 32, "AW": 8, "port_map": freepdk45_spram_port_map
+                },
+                "fakeram45_128x32": {
+                    "DW": 32, "AW": 7, "port_map": freepdk45_spram_port_map
+                },
+                "fakeram45_64x32": {
+                    "DW": 32, "AW": 6, "port_map": freepdk45_spram_port_map
+                }
+            }
         },
         "gf180": {
             "name": "gf180mcu_fd_ip_sram",
-            "implementations": ["la_spram"]
+            "implementations": ["la_spram"],
+            "la_spram": {
+                "gf180mcu_fd_ip_sram__sram512x8m8wm1": {
+                    "DW": 8, "AW": 9, "port_map": gf180_spram_port_map
+                },
+                "gf180mcu_fd_ip_sram__sram256x8m8wm1": {
+                    "DW": 8, "AW": 8, "port_map": gf180_spram_port_map
+                },
+                "gf180mcu_fd_ip_sram__sram128x8m8wm1": {
+                    "DW": 8, "AW": 7, "port_map": gf180_spram_port_map
+                },
+                "gf180mcu_fd_ip_sram__sram64x8m8wm1": {
+                    "DW": 8, "AW": 6, "port_map": gf180_spram_port_map
+                }
+            }
+        },
+        "sky130": {
+            "name": "sky130sram",
+            "implementations": ["la_spram"],
+            "la_spram": {
+                "sky130_sram_1rw1r_64x256_8": {
+                    "DW": 64, "AW": 8, "port_map": sky130_spram_port_map
+                }
+            }
         },
     }
 
@@ -86,6 +191,9 @@ if __name__ == "__main__":
         lambdalib.copy(f"{pdk_root}/lambdapdk/{pdk}/libs/{lib}/lambda",
                        la_lib='ramlib',
                        exclude=info['implementations'])
+        for ram in info['implementations']:
+            with open(f"{pdk_root}/lambdapdk/{pdk}/libs/{lib}/lambda/{ram}.v", "w") as f:
+                write_la_spram(f, info[ram])
 
     iolib = {
         "sky130": {
