@@ -4,9 +4,11 @@
 //# License:  MIT (see LICENSE file in Lambda repository)                     #
 //#############################################################################
 
-module la_antenna #(parameter PROP = "DEFAULT")   (
+module la_antenna #(
+    parameter PROP = "DEFAULT"
+) (
     input  vss,
     output z
-    );
+);
 
 endmodule

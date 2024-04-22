@@ -10,10 +10,10 @@ def _setup_lib(chip, libname, suffix):
     process = 'asap7'
     stackup = '10M'
     libtype = '7p5t'
-    rev = 'r1p7'
-    corners = {'typical': 'tt',
-               'fast': 'ff',
-               'slow': 'ss'}
+    rev = '28'
+    corners = {'typical': 'TT',
+               'fast': 'FF',
+               'slow': 'SS'}
 
     libdir = os.path.join('lambdapdk', process, 'libs', libname)
 
@@ -25,19 +25,20 @@ def _setup_lib(chip, libname, suffix):
 
     # timing
     for corner_name, lib_corner in corners.items():
-        lib.add('output', corner_name, 'nldm',
-                libdir + '/nldm/' + libname + '_' + lib_corner + '.lib.gz')
+        for lib_type in ('AO', 'INVBUF', 'OA', 'SEQ', 'SIMPLE'):
+            lib.add('output', corner_name, 'nldm',
+                    libdir + f'/nldm/asap7sc7p5t_{lib_type}_{suffix}VT_{lib_corner}_nldm.lib.gz')
         # spice
-        lib.add('output', corner_name, 'spice', libdir + '/netlist/' + libname + '.sp')
+        lib.add('output', corner_name, 'spice', libdir + f'/netlist/asap7sc7p5t_28_{suffix}.sp')
 
     # lef
-    lib.add('output', stackup, 'lef', libdir + '/lef/' + libname + '.lef')
+    lib.add('output', stackup, 'lef', libdir + f'/lef/asap7sc7p5t_28_{suffix}.lef')
 
     # gds
-    lib.add('output', stackup, 'gds', libdir + '/gds/' + libname + '.gds')
+    lib.add('output', stackup, 'gds', libdir + f'/gds/asap7sc7p5t_28_{suffix}.gds.gz')
 
     # cdl
-    lib.add('output', stackup, 'cdl', libdir + '/netlist/' + libname + '.cdl')
+    lib.add('output', stackup, 'cdl', libdir + f'/netlist/asap7sc7p5t_28_{suffix}.cdl')
 
     # lib arch
     lib.set('asic', 'libarch', libtype)
@@ -67,12 +68,10 @@ def _setup_lib(chip, libname, suffix):
                                        f"DECAPx10_ASAP7_75t_{suffix}"])
 
     # Stupid small cells
-    lib.add('asic', 'cells', 'dontuse', ["[!ASYNC]*x1_ASAP7*",
-                                         "*x1p*_ASAP7*",
+    lib.add('asic', 'cells', 'dontuse', ["*x1p*_ASAP7*",
                                          "*xp*_ASAP7*",
                                          "SDF*",
-                                         "ICG*",
-                                         "DFFH*"])
+                                         "ICG*"])
 
     # Tapcell
     lib.add('asic', 'cells', 'tap', f"TAPCELL_ASAP7_75t_{suffix}")
@@ -84,7 +83,7 @@ def _setup_lib(chip, libname, suffix):
     lib.add('option', 'file', 'yosys_techmap', libdir + '/techmap/yosys/cells_latch.v')
     lib.add('option', 'file', 'yosys_addermap', libdir + '/techmap/yosys/cells_adders.v')
     lib.set('option', 'file', 'yosys_dff_liberty',
-            libdir + '/nldm/' + libname + '_' + 'ss.lib.gz')
+            libdir + f'/nldm/asap7sc7p5t_SEQ_{suffix}VT_SS_nldm.lib.gz')
 
     # Defaults for OpenROAD tool variables
     lib.set('option', 'var', 'openroad_place_density', '0.60')
