@@ -4,8 +4,10 @@
 //# License:  MIT (see LICENSE file in Lambda repository)                     #
 //#############################################################################
 
-module la_keeper #(parameter PROP = "DEFAULT")   (
+module la_keeper #(
+    parameter PROP = "DEFAULT"
+) (
     inout z
-    );
+);
 
 endmodule

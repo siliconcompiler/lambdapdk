@@ -4,9 +4,11 @@
 //# License:  MIT (see LICENSE file in Lambda repository)                     #
 //#############################################################################
 
-module la_decap #(parameter PROP = "DEFAULT")   (
+module la_decap #(
+    parameter PROP = "DEFAULT"
+) (
     input  vss,
     output vdd
-    );
+);
 
 endmodule
