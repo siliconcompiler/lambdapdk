@@ -65,6 +65,9 @@ def setup(chip):
             for tool in ('openroad', 'klayout', 'magic'):
                 pdk.set('pdk', process, 'aprtech', tool, stackup, libtype, 'lef',
                         pdkdir + f'/apr/gf180mcu_{stackup}_{libtype}_tech.lef')
+        if stackup in ('6LM_1TM_9K', '5LM_1TM_9K'):
+            pdk.set('pdk', process, 'layermap', 'klayout', 'def', 'gds', stackup,
+                    pdkdir + f'/apr/gf180mcu_{stackup}_9t_edi2gds.layermap')
         max_layer = int(stackup[0])
 
         pdk.set('pdk', process, 'minlayer', stackup, 'Metal1')
@@ -133,6 +136,10 @@ def setup(chip):
                     pdkdir + '/pex/openroad/' + base_name + '.tcl')
             pdk.set('pdk', process, 'pexmodel', 'openroad-openrcx', stackup, corner,
                     pdkdir + '/pex/openroad/' + base_name + '.rules')
+
+        pdk.add('pdk', process, 'var', 'klayout', 'hide_layers', stackup, 'Dualgate')
+        pdk.add('pdk', process, 'var', 'klayout', 'hide_layers', stackup, 'V5_XTOR')
+        pdk.add('pdk', process, 'var', 'klayout', 'hide_layers', stackup, 'PR_bndry')
 
     return pdk
 
