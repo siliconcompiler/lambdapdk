@@ -116,6 +116,9 @@ def setup(chip):
     pdk.add('pdk', process, 'var', 'klayout', 'hide_layers', stackup, '235/5')
     # Hide boundary layer
     pdk.add('pdk', process, 'var', 'klayout', 'hide_layers', stackup, '100/0')
+    # Hide vt layers
+    pdk.add('pdk', process, 'var', 'klayout', 'hide_layers', stackup, '97/0')
+    pdk.add('pdk', process, 'var', 'klayout', 'hide_layers', stackup, '98/0')
 
     return pdk
 
