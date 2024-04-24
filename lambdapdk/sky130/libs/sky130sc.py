@@ -163,6 +163,13 @@ def setup(chip):
         lib.set('option', 'var', 'openroad_cts_clock_buffer', f"sky130_fd_sc_{libtype}__clkbuf_4")
 
         lib.set('option', 'var', 'yosys_abc_clock_multiplier', "1000")  # convert from ns -> ps
+
+        cap_table = {
+            'hd': 1.872,
+            'hdll': 1.911
+        }
+        lib.set('option', 'var', 'yosys_abc_constraint_load', f"{4 * cap_table[libtype]}fF")
+
         lib.set('option', 'var', 'yosys_driver_cell', f"sky130_fd_sc_{libtype}__buf_4")
         lib.set('option', 'var', 'yosys_buffer_cell', f"sky130_fd_sc_{libtype}__buf_4")
         lib.set('option', 'var', 'yosys_buffer_input', "A")

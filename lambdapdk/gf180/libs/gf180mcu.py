@@ -115,6 +115,12 @@ def setup(chip):
         lib.set('option', 'var', 'openroad_cts_distance_between_buffers', "100")
 
         lib.set('option', 'var', 'yosys_abc_clock_multiplier', "1000")  # convert from ns -> ps
+
+        cap_table = {  # __buf_1
+            '7t': 2.521,
+            '9t': 3.673
+        }
+        lib.set('option', 'var', 'yosys_abc_constraint_load', f"{4 * cap_table[libtype]}fF")
         lib.set('option', 'var', 'yosys_driver_cell', f"gf180mcu_fd_sc_mcu{libtype}5v0__buf_4")
         lib.set('option', 'var', 'yosys_buffer_cell', f"gf180mcu_fd_sc_mcu{libtype}5v0__buf_4")
         lib.set('option', 'var', 'yosys_buffer_input', "I")
