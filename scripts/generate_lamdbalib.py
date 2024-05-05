@@ -17,7 +17,8 @@ from siliconcompiler.targets import (
     skywater130_demo,
     asap7_demo,
     freepdk45_demo,
-    gf180_demo
+    gf180_demo,
+    ihp130_demo
 )
 
 pdk_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -51,6 +52,12 @@ libs = {
             "asap7sc7p5t_slvt"
         ]
     },
+    "ihp130": {
+        "target": ihp130_demo,
+        "libs": [
+            "sg13g2_stdcell"
+        ]
+    }
 }
 
 
@@ -268,7 +275,30 @@ def auxlib(verible_bin):
                     'la_tbuf'
                 ]
             },
-        }
+        },
+        "ihp130": {
+            "sg13g2_stdcell": {
+                "implemented": [
+                    'la_antenna',
+                    'la_clkicgand',
+                    'la_clkicgor',
+                    'la_pwrbuf',
+                    'la_tbuf',
+                    'la_dsync',
+                    'la_rsync'
+                ],
+                "missing": [
+                    'la_decap',
+                    'la_footer',
+                    'la_header',
+                    'la_ibuf',
+                    'la_idiff',
+                    'la_keeper',
+                    'la_obuf',
+                    'la_odiff'
+                ]
+            }
+        },
     }
 
     procs = []
@@ -363,6 +393,26 @@ def ramlib(verible_bin):
         ("dout1", "mem_dout"),
     ]
 
+    ihp130_spram_port_map = [
+        ("A_CLK", "clk"),
+        ("A_MEN", "~ce_in"),
+        ("A_WEN", "~we_in"),
+        ("A_REN", "we_in"),
+        ("A_ADDR", "mem_addr"),
+        ("A_DIN", "mem_din"),
+        ("A_DLY", "1'b1"),
+        ("A_DOUT", "mem_dout"),
+        ("A_BM", "mem_wmask"),
+        ("A_BIST_CLK", "1'b0"),
+        ("A_BIST_EN", "1'b0"),
+        ("A_BIST_MEN", "1'b0"),
+        ("A_BIST_WEN", "1'b0"),
+        ("A_BIST_REN", "1'b0"),
+        ("A_BIST_ADDR", "'b0"),
+        ("A_BIST_DIN", "'b0"),
+        ("A_BIST_BM", "'b0")
+    ]
+
     srams = {
         "asap7": {
             "name": "fakeram7",
@@ -437,6 +487,30 @@ def ramlib(verible_bin):
                 "sky130_sram_1rw1r_64x256_8": {
                     "DW": 64, "AW": 8, "port_map": sky130_spram_port_map
                 }
+            }
+        },
+        "ihp130": {
+            "name": "sg13g2_sram",
+            "implementations": ["la_spram"],
+            "la_spram": {
+                "RM_IHPSG13_1P_1024x64_c2_bm_bist": {
+                    "DW": 64, "AW": 10, "port_map": ihp130_spram_port_map
+                },
+                "RM_IHPSG13_1P_2048x64_c2_bm_bist": {
+                    "DW": 64, "AW": 11, "port_map": ihp130_spram_port_map
+                },
+                "RM_IHPSG13_1P_256x48_c2_bm_bist": {
+                    "DW": 48, "AW": 8, "port_map": ihp130_spram_port_map
+                },
+                "RM_IHPSG13_1P_256x64_c2_bm_bist": {
+                    "DW": 64, "AW": 8, "port_map": ihp130_spram_port_map
+                },
+                "RM_IHPSG13_1P_512x64_c2_bm_bist": {
+                    "DW": 64, "AW": 9, "port_map": ihp130_spram_port_map
+                },
+                "RM_IHPSG13_1P_64x64_c2_bm_bist": {
+                    "DW": 64, "AW": 6, "port_map": ihp130_spram_port_map
+                },
             }
         },
     }
