@@ -1,0 +1,6000 @@
+{
+    "schemaversion": {
+        "type": "str",
+        "scope": "global",
+        "require": "all",
+        "lock": true,
+        "switch": [
+            "-schemaversion <str>"
+        ],
+        "shorthelp": "Schema version number",
+        "notes": null,
+        "pernode": "never",
+        "node": {
+            "default": {
+                "default": {
+                    "value": "0.40.4",
+                    "signature": null
+                }
+            }
+        }
+    },
+    "design": {
+        "type": "str",
+        "scope": "global",
+        "require": "all",
+        "lock": false,
+        "switch": [
+            "-design <str>"
+        ],
+        "shorthelp": "Design top module name",
+        "notes": null,
+        "pernode": "never",
+        "node": {
+            "default": {
+                "default": {
+                    "value": null,
+                    "signature": null
+                }
+            },
+            "global": {
+                "global": {
+                    "value": "ihp130",
+                    "signature": null
+                }
+            }
+        }
+    },
+    "constraint": {
+        "outline": {
+            "type": "[(float,float)]",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-constraint_outline <(float,float)>"
+            ],
+            "shorthelp": "Constraint: Layout outline",
+            "notes": null,
+            "pernode": "optional",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": [],
+                        "signature": []
+                    }
+                }
+            },
+            "unit": "um"
+        },
+        "corearea": {
+            "type": "[(float,float)]",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-constraint_corearea <(float,float)>"
+            ],
+            "shorthelp": "Constraint: Layout core area",
+            "notes": null,
+            "pernode": "optional",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": [],
+                        "signature": []
+                    }
+                }
+            },
+            "unit": "um"
+        },
+        "coremargin": {
+            "type": "float",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-constraint_coremargin <float>"
+            ],
+            "shorthelp": "Constraint: Layout core margin",
+            "notes": null,
+            "pernode": "optional",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            },
+            "unit": "um"
+        },
+        "density": {
+            "type": "float",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-constraint_density <float>"
+            ],
+            "shorthelp": "Constraint: Layout density",
+            "notes": null,
+            "pernode": "optional",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "aspectratio": {
+            "type": "float",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-constraint_aspectratio <float>"
+            ],
+            "shorthelp": "Constraint: Layout aspect ratio",
+            "notes": null,
+            "pernode": "optional",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": "1.0",
+                        "signature": null
+                    }
+                }
+            }
+        }
+    },
+    "option": {
+        "remote": {
+            "type": "bool",
+            "scope": "job",
+            "require": "all",
+            "lock": false,
+            "switch": [
+                "-remote <bool>"
+            ],
+            "shorthelp": "Enable remote processing",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": false,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "credentials": {
+            "type": "file",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-credentials <file>"
+            ],
+            "shorthelp": "User credentials file",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null,
+                        "date": [],
+                        "author": [],
+                        "filehash": [],
+                        "package": []
+                    }
+                }
+            },
+            "hashalgo": "sha256",
+            "copy": false
+        },
+        "cache": {
+            "type": "file",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-cache <file>"
+            ],
+            "shorthelp": "User cache directory",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null,
+                        "date": [],
+                        "author": [],
+                        "filehash": [],
+                        "package": []
+                    }
+                }
+            },
+            "hashalgo": "sha256",
+            "copy": false
+        },
+        "nice": {
+            "type": "int",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-nice <int>"
+            ],
+            "shorthelp": "Tool execution scheduling priority",
+            "notes": null,
+            "pernode": "optional",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "mode": {
+            "type": "enum",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-mode <str>"
+            ],
+            "shorthelp": "Compilation mode",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            },
+            "enum": [
+                "asic",
+                "fpga",
+                "sim"
+            ]
+        },
+        "target": {
+            "type": "str",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-target <str>"
+            ],
+            "shorthelp": "Compilation target",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "pdk": {
+            "type": "str",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-pdk <str>"
+            ],
+            "shorthelp": "PDK target",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "uselambda": {
+            "type": "bool",
+            "scope": "job",
+            "require": "all",
+            "lock": false,
+            "switch": [
+                "-uselambda <bool>"
+            ],
+            "shorthelp": "Use lambda scaling",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": false,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "stackup": {
+            "type": "str",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-stackup <str>"
+            ],
+            "shorthelp": "Stackup target",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "flow": {
+            "type": "str",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-flow <str>"
+            ],
+            "shorthelp": "Flow target",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "optmode": {
+            "type": "str",
+            "scope": "job",
+            "require": "all",
+            "lock": false,
+            "switch": [
+                "-O<str>",
+                "-optmode <str>"
+            ],
+            "shorthelp": "Optimization mode",
+            "notes": null,
+            "pernode": "optional",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": "O0",
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "frontend": {
+            "type": "str",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-frontend <str>"
+            ],
+            "shorthelp": "Compilation frontend",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": "verilog",
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "cfg": {
+            "type": "[file]",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-cfg <file>"
+            ],
+            "shorthelp": "Configuration manifest",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": [],
+                        "signature": [],
+                        "date": [],
+                        "author": [],
+                        "filehash": [],
+                        "package": []
+                    }
+                }
+            },
+            "hashalgo": "sha256",
+            "copy": false
+        },
+        "loglevel": {
+            "type": "enum",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-loglevel <str>"
+            ],
+            "shorthelp": "Logging level",
+            "notes": null,
+            "pernode": "optional",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": "INFO",
+                        "signature": null
+                    }
+                }
+            },
+            "enum": [
+                "NOTSET",
+                "INFO",
+                "DEBUG",
+                "WARNING",
+                "ERROR",
+                "CRITICAL"
+            ]
+        },
+        "builddir": {
+            "type": "dir",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-builddir <dir>"
+            ],
+            "shorthelp": "Build directory",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": "build",
+                        "signature": null,
+                        "package": []
+                    }
+                }
+            },
+            "copy": false
+        },
+        "jobname": {
+            "type": "str",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-jobname <str>"
+            ],
+            "shorthelp": "Job name",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": "job0",
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "from": {
+            "type": "[str]",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-from <str>"
+            ],
+            "shorthelp": "Start flowgraph execution from",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": [],
+                        "signature": []
+                    }
+                }
+            }
+        },
+        "to": {
+            "type": "[str]",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-to <str>"
+            ],
+            "shorthelp": "End flowgraph execution with",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": [],
+                        "signature": []
+                    }
+                }
+            }
+        },
+        "prune": {
+            "type": "[(str,str)]",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-prune 'node <(str,str)>'"
+            ],
+            "shorthelp": "Prune flowgraph branches starting with",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": [],
+                        "signature": []
+                    }
+                }
+            }
+        },
+        "breakpoint": {
+            "type": "bool",
+            "scope": "job",
+            "require": "all",
+            "lock": false,
+            "switch": [
+                "-breakpoint <bool>"
+            ],
+            "shorthelp": "Breakpoint list",
+            "notes": null,
+            "pernode": "optional",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": false,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "metricoff": {
+            "type": "[str]",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-metricoff '<str>'"
+            ],
+            "shorthelp": "Metric summary filter",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": [],
+                        "signature": []
+                    }
+                }
+            }
+        },
+        "library": {
+            "type": "[str]",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-library <str>"
+            ],
+            "shorthelp": "Soft libraries",
+            "notes": null,
+            "pernode": "optional",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": [],
+                        "signature": []
+                    }
+                }
+            }
+        },
+        "clean": {
+            "type": "bool",
+            "scope": "job",
+            "require": "all",
+            "lock": false,
+            "switch": [
+                "-clean <bool>"
+            ],
+            "shorthelp": "Clean up after run",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": false,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "hash": {
+            "type": "bool",
+            "scope": "job",
+            "require": "all",
+            "lock": false,
+            "switch": [
+                "-hash <bool>"
+            ],
+            "shorthelp": "Enable file hashing",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": false,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "nodisplay": {
+            "type": "bool",
+            "scope": "job",
+            "require": "all",
+            "lock": false,
+            "switch": [
+                "-nodisplay <bool>"
+            ],
+            "shorthelp": "Headless execution",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": false,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "quiet": {
+            "type": "bool",
+            "scope": "job",
+            "require": "all",
+            "lock": false,
+            "switch": [
+                "-quiet <bool>"
+            ],
+            "shorthelp": "Quiet execution",
+            "notes": null,
+            "pernode": "optional",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": false,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "jobincr": {
+            "type": "bool",
+            "scope": "job",
+            "require": "all",
+            "lock": false,
+            "switch": [
+                "-jobincr <bool>"
+            ],
+            "shorthelp": "Autoincrement jobname",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": false,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "novercheck": {
+            "type": "bool",
+            "scope": "job",
+            "require": "all",
+            "lock": false,
+            "switch": [
+                "-novercheck <bool>"
+            ],
+            "shorthelp": "Disable version checking",
+            "notes": null,
+            "pernode": "optional",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": false,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "relax": {
+            "type": "bool",
+            "scope": "job",
+            "require": "all",
+            "lock": false,
+            "switch": [
+                "-relax <bool>"
+            ],
+            "shorthelp": "Relax design checking",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": false,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "resume": {
+            "type": "bool",
+            "scope": "job",
+            "require": "all",
+            "lock": false,
+            "switch": [
+                "-resume <bool>"
+            ],
+            "shorthelp": "Resume build",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": false,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "track": {
+            "type": "bool",
+            "scope": "job",
+            "require": "all",
+            "lock": false,
+            "switch": [
+                "-track <bool>"
+            ],
+            "shorthelp": "Enable provenance tracking",
+            "notes": null,
+            "pernode": "optional",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": false,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "trace": {
+            "type": "bool",
+            "scope": "job",
+            "require": "all",
+            "lock": false,
+            "switch": [
+                "-trace <bool>"
+            ],
+            "shorthelp": "Enable debug traces",
+            "notes": null,
+            "pernode": "optional",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": false,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "skipall": {
+            "type": "bool",
+            "scope": "job",
+            "require": "all",
+            "lock": false,
+            "switch": [
+                "-skipall <bool>"
+            ],
+            "shorthelp": "Skip all tasks",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": false,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "skipcheck": {
+            "type": "bool",
+            "scope": "job",
+            "require": "all",
+            "lock": false,
+            "switch": [
+                "-skipcheck <bool>"
+            ],
+            "shorthelp": "Skip manifest check",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": false,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "copyall": {
+            "type": "bool",
+            "scope": "job",
+            "require": "all",
+            "lock": false,
+            "switch": [
+                "-copyall <bool>"
+            ],
+            "shorthelp": "Copy all inputs to build directory",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": false,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "show": {
+            "type": "bool",
+            "scope": "job",
+            "require": "all",
+            "lock": false,
+            "switch": [
+                "-show <bool>"
+            ],
+            "shorthelp": "Show layout",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": false,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "autoinstall": {
+            "type": "bool",
+            "scope": "job",
+            "require": "all",
+            "lock": false,
+            "switch": [
+                "-autoinstall <bool>"
+            ],
+            "shorthelp": "Option: auto install packages",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": false,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "entrypoint": {
+            "type": "str",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-entrypoint <str>"
+            ],
+            "shorthelp": "Program entry point",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "idir": {
+            "type": "[dir]",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "+incdir+<dir>",
+                "-I <dir>",
+                "-idir <dir>"
+            ],
+            "shorthelp": "Design search paths",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": [],
+                        "signature": [],
+                        "package": []
+                    }
+                }
+            },
+            "copy": false
+        },
+        "ydir": {
+            "type": "[dir]",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-y <dir>",
+                "-ydir <dir>"
+            ],
+            "shorthelp": "Design module search paths",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": [],
+                        "signature": [],
+                        "package": []
+                    }
+                }
+            },
+            "copy": false
+        },
+        "vlib": {
+            "type": "[file]",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-v <file>",
+                "-vlib <file>"
+            ],
+            "shorthelp": "Design libraries",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": [],
+                        "signature": [],
+                        "date": [],
+                        "author": [],
+                        "filehash": [],
+                        "package": []
+                    }
+                }
+            },
+            "hashalgo": "sha256",
+            "copy": false
+        },
+        "define": {
+            "type": "[str]",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-D<str>",
+                "-define <str>"
+            ],
+            "shorthelp": "Design pre-processor symbol",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": [],
+                        "signature": []
+                    }
+                }
+            }
+        },
+        "libext": {
+            "type": "[str]",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "+libext+<str>",
+                "-libext <str>"
+            ],
+            "shorthelp": "Design file extensions",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": [],
+                        "signature": []
+                    }
+                }
+            }
+        },
+        "cmdfile": {
+            "type": "[file]",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-f <file>",
+                "-cmdfile <file>"
+            ],
+            "shorthelp": "Design compilation command file",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": [],
+                        "signature": [],
+                        "date": [],
+                        "author": [],
+                        "filehash": [],
+                        "package": []
+                    }
+                }
+            },
+            "hashalgo": "sha256",
+            "copy": false
+        },
+        "flowcontinue": {
+            "type": "bool",
+            "scope": "job",
+            "require": "all",
+            "lock": false,
+            "switch": [
+                "-flowcontinue <bool>"
+            ],
+            "shorthelp": "Flow continue-on-error",
+            "notes": null,
+            "pernode": "optional",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": false,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "continue": {
+            "type": "bool",
+            "scope": "job",
+            "require": "all",
+            "lock": false,
+            "switch": [
+                "-continue <bool>"
+            ],
+            "shorthelp": "Implementation continue-on-error",
+            "notes": null,
+            "pernode": "optional",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": false,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "timeout": {
+            "type": "float",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-timeout <float>"
+            ],
+            "shorthelp": "Option: Timeout value",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            },
+            "unit": "s"
+        },
+        "strict": {
+            "type": "bool",
+            "scope": "job",
+            "require": "all",
+            "lock": false,
+            "switch": [
+                "-strict <bool>"
+            ],
+            "shorthelp": "Option: Strict checking",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": false,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "scheduler": {
+            "name": {
+                "type": "enum",
+                "scope": "job",
+                "require": null,
+                "lock": false,
+                "switch": [
+                    "-scheduler <str>"
+                ],
+                "shorthelp": "Option: Scheduler platform",
+                "notes": null,
+                "pernode": "optional",
+                "node": {
+                    "default": {
+                        "default": {
+                            "value": null,
+                            "signature": null
+                        }
+                    }
+                },
+                "enum": [
+                    "slurm",
+                    "lsf",
+                    "sge"
+                ]
+            },
+            "cores": {
+                "type": "int",
+                "scope": "job",
+                "require": null,
+                "lock": false,
+                "switch": [
+                    "-cores <int>"
+                ],
+                "shorthelp": "Option: Scheduler core constraint",
+                "notes": null,
+                "pernode": "optional",
+                "node": {
+                    "default": {
+                        "default": {
+                            "value": null,
+                            "signature": null
+                        }
+                    }
+                }
+            },
+            "memory": {
+                "type": "int",
+                "scope": "job",
+                "require": null,
+                "lock": false,
+                "switch": [
+                    "-memory <int>"
+                ],
+                "shorthelp": "Option: Scheduler memory constraint",
+                "notes": null,
+                "pernode": "optional",
+                "node": {
+                    "default": {
+                        "default": {
+                            "value": null,
+                            "signature": null
+                        }
+                    }
+                },
+                "unit": "MB"
+            },
+            "queue": {
+                "type": "str",
+                "scope": "job",
+                "require": null,
+                "lock": false,
+                "switch": [
+                    "-queue <str>"
+                ],
+                "shorthelp": "Option: Scheduler queue",
+                "notes": null,
+                "pernode": "optional",
+                "node": {
+                    "default": {
+                        "default": {
+                            "value": null,
+                            "signature": null
+                        }
+                    }
+                }
+            },
+            "defer": {
+                "type": "str",
+                "scope": "job",
+                "require": null,
+                "lock": false,
+                "switch": [
+                    "-defer <str>"
+                ],
+                "shorthelp": "Option: Scheduler start time",
+                "notes": null,
+                "pernode": "optional",
+                "node": {
+                    "default": {
+                        "default": {
+                            "value": null,
+                            "signature": null
+                        }
+                    }
+                }
+            },
+            "options": {
+                "type": "[str]",
+                "scope": "job",
+                "require": null,
+                "lock": false,
+                "switch": [
+                    "-scheduler_options <str>"
+                ],
+                "shorthelp": "Option: Scheduler arguments",
+                "notes": null,
+                "pernode": "optional",
+                "node": {
+                    "default": {
+                        "default": {
+                            "value": [],
+                            "signature": []
+                        }
+                    }
+                }
+            },
+            "msgevent": {
+                "type": "str",
+                "scope": "job",
+                "require": null,
+                "lock": false,
+                "switch": [
+                    "-msgevent <str>"
+                ],
+                "shorthelp": "Option: Message event trigger",
+                "notes": null,
+                "pernode": "optional",
+                "node": {
+                    "default": {
+                        "default": {
+                            "value": "NONE",
+                            "signature": null
+                        }
+                    }
+                }
+            },
+            "msgcontact": {
+                "type": "[str]",
+                "scope": "job",
+                "require": null,
+                "lock": false,
+                "switch": [
+                    "-msgcontact <str>"
+                ],
+                "shorthelp": "Option: Message contact",
+                "notes": null,
+                "pernode": "optional",
+                "node": {
+                    "default": {
+                        "default": {
+                            "value": [],
+                            "signature": []
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "arg": {
+        "step": {
+            "type": "str",
+            "scope": "scratch",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-arg_step <str>"
+            ],
+            "shorthelp": "ARG: Step argument",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "index": {
+            "type": "str",
+            "scope": "scratch",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-arg_index <str>"
+            ],
+            "shorthelp": "ARG: Index argument",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            }
+        }
+    },
+    "unit": {
+        "time": {
+            "type": "str",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-unit_time '<str>'"
+            ],
+            "shorthelp": "Unit: time",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": "ns",
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "length": {
+            "type": "str",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-unit_length '<str>'"
+            ],
+            "shorthelp": "Unit: length",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": "um",
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "mass": {
+            "type": "str",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-unit_mass '<str>'"
+            ],
+            "shorthelp": "Unit: mass",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": "g",
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "temperature": {
+            "type": "str",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-unit_temperature '<str>'"
+            ],
+            "shorthelp": "Unit: temperature",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": "C",
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "capacitance": {
+            "type": "str",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-unit_capacitance '<str>'"
+            ],
+            "shorthelp": "Unit: capacitance",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": "pf",
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "resistance": {
+            "type": "str",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-unit_resistance '<str>'"
+            ],
+            "shorthelp": "Unit: resistance",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": "ohm",
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "inductance": {
+            "type": "str",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-unit_inductance '<str>'"
+            ],
+            "shorthelp": "Unit: inductance",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": "nh",
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "voltage": {
+            "type": "str",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-unit_voltage '<str>'"
+            ],
+            "shorthelp": "Unit: voltage",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": "mv",
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "current": {
+            "type": "str",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-unit_current '<str>'"
+            ],
+            "shorthelp": "Unit: current",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": "mA",
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "power": {
+            "type": "str",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-unit_power '<str>'"
+            ],
+            "shorthelp": "Unit: power",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": "mw",
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "energy": {
+            "type": "str",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-unit_energy '<str>'"
+            ],
+            "shorthelp": "Unit: energy",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": "pj",
+                        "signature": null
+                    }
+                }
+            }
+        }
+    },
+    "fpga": {
+        "partname": {
+            "type": "str",
+            "scope": "job",
+            "require": "fpga",
+            "lock": false,
+            "switch": [
+                "-fpga_partname <str>"
+            ],
+            "shorthelp": "FPGA: part name",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "board": {
+            "type": "str",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-fpga_board <str>"
+            ],
+            "shorthelp": "FPGA: board name",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "program": {
+            "type": "bool",
+            "scope": "job",
+            "require": "all",
+            "lock": false,
+            "switch": [
+                "-fpga_program <bool>"
+            ],
+            "shorthelp": "FPGA: program enable",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": false,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "flash": {
+            "type": "bool",
+            "scope": "job",
+            "require": "all",
+            "lock": false,
+            "switch": [
+                "-fpga_flash <bool>"
+            ],
+            "shorthelp": "FPGA: flash enable",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": false,
+                        "signature": null
+                    }
+                }
+            }
+        }
+    },
+    "asic": {
+        "logiclib": {
+            "type": "[str]",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-asic_logiclib <str>"
+            ],
+            "shorthelp": "ASIC: logic libraries",
+            "notes": null,
+            "pernode": "optional",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": [],
+                        "signature": []
+                    }
+                }
+            }
+        },
+        "macrolib": {
+            "type": "[str]",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-asic_macrolib <str>"
+            ],
+            "shorthelp": "ASIC: macro libraries",
+            "notes": null,
+            "pernode": "optional",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": [],
+                        "signature": []
+                    }
+                }
+            }
+        },
+        "delaymodel": {
+            "type": "str",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-asic_delaymodel <str>"
+            ],
+            "shorthelp": "ASIC: delay model",
+            "notes": null,
+            "pernode": "optional",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "cells": {
+            "decap": {
+                "type": "[str]",
+                "scope": "job",
+                "require": null,
+                "lock": false,
+                "switch": [
+                    "-asic_cells_decap '<str>'"
+                ],
+                "shorthelp": "ASIC: decap cell list",
+                "notes": null,
+                "pernode": "optional",
+                "node": {
+                    "default": {
+                        "default": {
+                            "value": [],
+                            "signature": []
+                        }
+                    }
+                }
+            },
+            "delay": {
+                "type": "[str]",
+                "scope": "job",
+                "require": null,
+                "lock": false,
+                "switch": [
+                    "-asic_cells_delay '<str>'"
+                ],
+                "shorthelp": "ASIC: delay cell list",
+                "notes": null,
+                "pernode": "optional",
+                "node": {
+                    "default": {
+                        "default": {
+                            "value": [],
+                            "signature": []
+                        }
+                    }
+                }
+            },
+            "tie": {
+                "type": "[str]",
+                "scope": "job",
+                "require": null,
+                "lock": false,
+                "switch": [
+                    "-asic_cells_tie '<str>'"
+                ],
+                "shorthelp": "ASIC: tie cell list",
+                "notes": null,
+                "pernode": "optional",
+                "node": {
+                    "default": {
+                        "default": {
+                            "value": [],
+                            "signature": []
+                        }
+                    }
+                }
+            },
+            "hold": {
+                "type": "[str]",
+                "scope": "job",
+                "require": null,
+                "lock": false,
+                "switch": [
+                    "-asic_cells_hold '<str>'"
+                ],
+                "shorthelp": "ASIC: hold cell list",
+                "notes": null,
+                "pernode": "optional",
+                "node": {
+                    "default": {
+                        "default": {
+                            "value": [],
+                            "signature": []
+                        }
+                    }
+                }
+            },
+            "clkbuf": {
+                "type": "[str]",
+                "scope": "job",
+                "require": null,
+                "lock": false,
+                "switch": [
+                    "-asic_cells_clkbuf '<str>'"
+                ],
+                "shorthelp": "ASIC: clkbuf cell list",
+                "notes": null,
+                "pernode": "optional",
+                "node": {
+                    "default": {
+                        "default": {
+                            "value": [],
+                            "signature": []
+                        }
+                    }
+                }
+            },
+            "clkdelay": {
+                "type": "[str]",
+                "scope": "job",
+                "require": null,
+                "lock": false,
+                "switch": [
+                    "-asic_cells_clkdelay '<str>'"
+                ],
+                "shorthelp": "ASIC: clkdelay cell list",
+                "notes": null,
+                "pernode": "optional",
+                "node": {
+                    "default": {
+                        "default": {
+                            "value": [],
+                            "signature": []
+                        }
+                    }
+                }
+            },
+            "clkinv": {
+                "type": "[str]",
+                "scope": "job",
+                "require": null,
+                "lock": false,
+                "switch": [
+                    "-asic_cells_clkinv '<str>'"
+                ],
+                "shorthelp": "ASIC: clkinv cell list",
+                "notes": null,
+                "pernode": "optional",
+                "node": {
+                    "default": {
+                        "default": {
+                            "value": [],
+                            "signature": []
+                        }
+                    }
+                }
+            },
+            "clkgate": {
+                "type": "[str]",
+                "scope": "job",
+                "require": null,
+                "lock": false,
+                "switch": [
+                    "-asic_cells_clkgate '<str>'"
+                ],
+                "shorthelp": "ASIC: clkgate cell list",
+                "notes": null,
+                "pernode": "optional",
+                "node": {
+                    "default": {
+                        "default": {
+                            "value": [],
+                            "signature": []
+                        }
+                    }
+                }
+            },
+            "clkicg": {
+                "type": "[str]",
+                "scope": "job",
+                "require": null,
+                "lock": false,
+                "switch": [
+                    "-asic_cells_clkicg '<str>'"
+                ],
+                "shorthelp": "ASIC: clkicg cell list",
+                "notes": null,
+                "pernode": "optional",
+                "node": {
+                    "default": {
+                        "default": {
+                            "value": [],
+                            "signature": []
+                        }
+                    }
+                }
+            },
+            "clklogic": {
+                "type": "[str]",
+                "scope": "job",
+                "require": null,
+                "lock": false,
+                "switch": [
+                    "-asic_cells_clklogic '<str>'"
+                ],
+                "shorthelp": "ASIC: clklogic cell list",
+                "notes": null,
+                "pernode": "optional",
+                "node": {
+                    "default": {
+                        "default": {
+                            "value": [],
+                            "signature": []
+                        }
+                    }
+                }
+            },
+            "dontuse": {
+                "type": "[str]",
+                "scope": "job",
+                "require": null,
+                "lock": false,
+                "switch": [
+                    "-asic_cells_dontuse '<str>'"
+                ],
+                "shorthelp": "ASIC: dontuse cell list",
+                "notes": null,
+                "pernode": "optional",
+                "node": {
+                    "default": {
+                        "default": {
+                            "value": [],
+                            "signature": []
+                        }
+                    }
+                }
+            },
+            "filler": {
+                "type": "[str]",
+                "scope": "job",
+                "require": null,
+                "lock": false,
+                "switch": [
+                    "-asic_cells_filler '<str>'"
+                ],
+                "shorthelp": "ASIC: filler cell list",
+                "notes": null,
+                "pernode": "optional",
+                "node": {
+                    "default": {
+                        "default": {
+                            "value": [],
+                            "signature": []
+                        }
+                    }
+                }
+            },
+            "tap": {
+                "type": "[str]",
+                "scope": "job",
+                "require": null,
+                "lock": false,
+                "switch": [
+                    "-asic_cells_tap '<str>'"
+                ],
+                "shorthelp": "ASIC: tap cell list",
+                "notes": null,
+                "pernode": "optional",
+                "node": {
+                    "default": {
+                        "default": {
+                            "value": [],
+                            "signature": []
+                        }
+                    }
+                }
+            },
+            "endcap": {
+                "type": "[str]",
+                "scope": "job",
+                "require": null,
+                "lock": false,
+                "switch": [
+                    "-asic_cells_endcap '<str>'"
+                ],
+                "shorthelp": "ASIC: endcap cell list",
+                "notes": null,
+                "pernode": "optional",
+                "node": {
+                    "default": {
+                        "default": {
+                            "value": [],
+                            "signature": []
+                        }
+                    }
+                }
+            },
+            "antenna": {
+                "type": "[str]",
+                "scope": "job",
+                "require": null,
+                "lock": false,
+                "switch": [
+                    "-asic_cells_antenna '<str>'"
+                ],
+                "shorthelp": "ASIC: antenna cell list",
+                "notes": null,
+                "pernode": "optional",
+                "node": {
+                    "default": {
+                        "default": {
+                            "value": [],
+                            "signature": []
+                        }
+                    }
+                }
+            }
+        },
+        "libarch": {
+            "type": "str",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-asic_libarch '<str>'"
+            ],
+            "shorthelp": "ASIC: library architecture",
+            "notes": null,
+            "pernode": "optional",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            }
+        }
+    },
+    "pdk": {
+        "ihp130": {
+            "foundry": {
+                "type": "str",
+                "scope": "global",
+                "require": "asic",
+                "lock": false,
+                "switch": [
+                    "-pdk_foundry 'pdkname <str>'"
+                ],
+                "shorthelp": "PDK: foundry name",
+                "notes": null,
+                "pernode": "never",
+                "node": {
+                    "default": {
+                        "default": {
+                            "value": null,
+                            "signature": null
+                        }
+                    },
+                    "global": {
+                        "global": {
+                            "value": "ihp",
+                            "signature": null
+                        }
+                    }
+                }
+            },
+            "node": {
+                "type": "float",
+                "scope": "global",
+                "require": "asic",
+                "lock": false,
+                "switch": [
+                    "-pdk_node 'pdkname <float>'"
+                ],
+                "shorthelp": "PDK: process node",
+                "notes": null,
+                "pernode": "never",
+                "node": {
+                    "default": {
+                        "default": {
+                            "value": null,
+                            "signature": null
+                        }
+                    },
+                    "global": {
+                        "global": {
+                            "value": 130.0,
+                            "signature": null
+                        }
+                    }
+                }
+            },
+            "lambda": {
+                "type": "float",
+                "scope": "global",
+                "require": "asic",
+                "lock": false,
+                "switch": [
+                    "-pdk_lambda 'pdkname <float>'"
+                ],
+                "shorthelp": "PDK: Lambda value",
+                "notes": null,
+                "pernode": "never",
+                "node": {
+                    "default": {
+                        "default": {
+                            "value": "1e-06",
+                            "signature": null
+                        }
+                    }
+                }
+            },
+            "version": {
+                "type": "str",
+                "scope": "global",
+                "require": null,
+                "lock": false,
+                "switch": [
+                    "-pdk_version 'pdkname <str>'"
+                ],
+                "shorthelp": "PDK: version",
+                "notes": null,
+                "pernode": "never",
+                "node": {
+                    "default": {
+                        "default": {
+                            "value": null,
+                            "signature": null
+                        }
+                    },
+                    "global": {
+                        "global": {
+                            "value": "dceb7e6bd1a877182c3ba32c2e238be08368fa3f",
+                            "signature": null
+                        }
+                    }
+                }
+            },
+            "stackup": {
+                "type": "[str]",
+                "scope": "global",
+                "require": "asic",
+                "lock": false,
+                "switch": [
+                    "-pdk_stackup 'pdkname <str>'"
+                ],
+                "shorthelp": "PDK: metal stackups",
+                "notes": null,
+                "pernode": "never",
+                "node": {
+                    "default": {
+                        "default": {
+                            "value": [],
+                            "signature": []
+                        }
+                    },
+                    "global": {
+                        "global": {
+                            "value": [
+                                "5M2TL"
+                            ],
+                            "signature": []
+                        }
+                    }
+                }
+            },
+            "minlayer": {
+                "5M2TL": {
+                    "type": "str",
+                    "scope": "global",
+                    "require": "asic",
+                    "lock": false,
+                    "switch": [
+                        "-pdk_minlayer 'pdk stackup <str>'"
+                    ],
+                    "shorthelp": "PDK: minimum routing layer",
+                    "notes": null,
+                    "pernode": "never",
+                    "node": {
+                        "default": {
+                            "default": {
+                                "value": null,
+                                "signature": null
+                            }
+                        },
+                        "global": {
+                            "global": {
+                                "value": "Metal2",
+                                "signature": null
+                            }
+                        }
+                    }
+                }
+            },
+            "maxlayer": {
+                "5M2TL": {
+                    "type": "str",
+                    "scope": "global",
+                    "require": "asic",
+                    "lock": false,
+                    "switch": [
+                        "-pdk_maxlayer 'pdk stackup <str>'"
+                    ],
+                    "shorthelp": "PDK: maximum routing layer",
+                    "notes": null,
+                    "pernode": "never",
+                    "node": {
+                        "default": {
+                            "default": {
+                                "value": null,
+                                "signature": null
+                            }
+                        },
+                        "global": {
+                            "global": {
+                                "value": "Metal5",
+                                "signature": null
+                            }
+                        }
+                    }
+                }
+            },
+            "wafersize": {
+                "type": "float",
+                "scope": "global",
+                "require": "asic",
+                "lock": false,
+                "switch": [
+                    "-pdk_wafersize 'pdkname <float>'"
+                ],
+                "shorthelp": "PDK: wafer size",
+                "notes": null,
+                "pernode": "never",
+                "node": {
+                    "default": {
+                        "default": {
+                            "value": null,
+                            "signature": null
+                        }
+                    },
+                    "global": {
+                        "global": {
+                            "value": 300.0,
+                            "signature": null
+                        }
+                    }
+                },
+                "unit": "mm"
+            },
+            "panelsize": {
+                "type": "[(float,float)]",
+                "scope": "global",
+                "require": null,
+                "lock": false,
+                "switch": [
+                    "-pdk_panelsize 'pdkname <(float,float)>'"
+                ],
+                "shorthelp": "PDK: panel size",
+                "notes": null,
+                "pernode": "never",
+                "node": {
+                    "default": {
+                        "default": {
+                            "value": [],
+                            "signature": []
+                        }
+                    }
+                },
+                "unit": "mm"
+            },
+            "unitcost": {
+                "type": "float",
+                "scope": "global",
+                "require": null,
+                "lock": false,
+                "switch": [
+                    "-pdk_unitcost 'pdkname <float>'"
+                ],
+                "shorthelp": "PDK: unit cost",
+                "notes": null,
+                "pernode": "never",
+                "node": {
+                    "default": {
+                        "default": {
+                            "value": null,
+                            "signature": null
+                        }
+                    }
+                },
+                "unit": "USD"
+            },
+            "d0": {
+                "type": "float",
+                "scope": "global",
+                "require": null,
+                "lock": false,
+                "switch": [
+                    "-pdk_d0 'pdkname <float>'"
+                ],
+                "shorthelp": "PDK: process defect density",
+                "notes": null,
+                "pernode": "never",
+                "node": {
+                    "default": {
+                        "default": {
+                            "value": null,
+                            "signature": null
+                        }
+                    }
+                }
+            },
+            "hscribe": {
+                "type": "float",
+                "scope": "global",
+                "require": null,
+                "lock": false,
+                "switch": [
+                    "-pdk_hscribe 'pdkname <float>'"
+                ],
+                "shorthelp": "PDK: horizontal scribe line width",
+                "notes": null,
+                "pernode": "never",
+                "node": {
+                    "default": {
+                        "default": {
+                            "value": null,
+                            "signature": null
+                        }
+                    },
+                    "global": {
+                        "global": {
+                            "value": 0.1,
+                            "signature": null
+                        }
+                    }
+                },
+                "unit": "mm"
+            },
+            "vscribe": {
+                "type": "float",
+                "scope": "global",
+                "require": null,
+                "lock": false,
+                "switch": [
+                    "-pdk_vscribe 'pdkname <float>'"
+                ],
+                "shorthelp": "PDK: vertical scribe line width",
+                "notes": null,
+                "pernode": "never",
+                "node": {
+                    "default": {
+                        "default": {
+                            "value": null,
+                            "signature": null
+                        }
+                    },
+                    "global": {
+                        "global": {
+                            "value": 0.1,
+                            "signature": null
+                        }
+                    }
+                },
+                "unit": "mm"
+            },
+            "edgemargin": {
+                "type": "float",
+                "scope": "global",
+                "require": null,
+                "lock": false,
+                "switch": [
+                    "-pdk_edgemargin 'pdkname <float>'"
+                ],
+                "shorthelp": "PDK: wafer edge keep-out margin",
+                "notes": null,
+                "pernode": "never",
+                "node": {
+                    "default": {
+                        "default": {
+                            "value": null,
+                            "signature": null
+                        }
+                    },
+                    "global": {
+                        "global": {
+                            "value": 2.0,
+                            "signature": null
+                        }
+                    }
+                },
+                "unit": "mm"
+            },
+            "density": {
+                "type": "float",
+                "scope": "global",
+                "require": null,
+                "lock": false,
+                "switch": [
+                    "-pdk_density 'pdkname <float>'"
+                ],
+                "shorthelp": "PDK: transistor density",
+                "notes": null,
+                "pernode": "never",
+                "node": {
+                    "default": {
+                        "default": {
+                            "value": null,
+                            "signature": null
+                        }
+                    }
+                }
+            },
+            "pexmodel": {
+                "openroad": {
+                    "5M2TL": {
+                        "typical": {
+                            "type": "[file]",
+                            "scope": "global",
+                            "require": null,
+                            "lock": false,
+                            "switch": [
+                                "-pdk_pexmodel 'pdkname tool stackup corner <file>'"
+                            ],
+                            "shorthelp": "PDK: parasitic TCAD models",
+                            "notes": null,
+                            "pernode": "never",
+                            "node": {
+                                "default": {
+                                    "default": {
+                                        "value": [],
+                                        "signature": [],
+                                        "date": [],
+                                        "author": [],
+                                        "filehash": [],
+                                        "package": []
+                                    }
+                                },
+                                "global": {
+                                    "global": {
+                                        "value": [
+                                            "lambdapdk/ihp130/base/pex/openroad/typical.tcl"
+                                        ],
+                                        "signature": [],
+                                        "date": [],
+                                        "author": [],
+                                        "filehash": [],
+                                        "package": [
+                                            "lambdapdk"
+                                        ]
+                                    }
+                                }
+                            },
+                            "hashalgo": "sha256",
+                            "copy": false
+                        }
+                    }
+                }
+            },
+            "layermap": {
+                "klayout": {
+                    "def": {
+                        "klayout": {
+                            "5M2TL": {
+                                "type": "[file]",
+                                "scope": "global",
+                                "require": null,
+                                "lock": false,
+                                "switch": [
+                                    "-pdk_layermap 'pdkname tool src dst stackup <file>'"
+                                ],
+                                "shorthelp": "PDK: layer map file",
+                                "notes": null,
+                                "pernode": "never",
+                                "node": {
+                                    "default": {
+                                        "default": {
+                                            "value": [],
+                                            "signature": [],
+                                            "date": [],
+                                            "author": [],
+                                            "filehash": [],
+                                            "package": []
+                                        }
+                                    },
+                                    "global": {
+                                        "global": {
+                                            "value": [
+                                                "ihp-sg13g2/libs.tech/klayout/tech/sg13g2.lyt"
+                                            ],
+                                            "signature": [],
+                                            "date": [],
+                                            "author": [],
+                                            "filehash": [],
+                                            "package": [
+                                                "lambdapdk"
+                                            ]
+                                        }
+                                    }
+                                },
+                                "hashalgo": "sha256",
+                                "copy": false
+                            }
+                        }
+                    }
+                }
+            },
+            "display": {
+                "klayout": {
+                    "5M2TL": {
+                        "type": "[file]",
+                        "scope": "global",
+                        "require": null,
+                        "lock": false,
+                        "switch": [
+                            "-pdk_display 'pdkname tool stackup <file>'"
+                        ],
+                        "shorthelp": "PDK: display file",
+                        "notes": null,
+                        "pernode": "never",
+                        "node": {
+                            "default": {
+                                "default": {
+                                    "value": [],
+                                    "signature": [],
+                                    "date": [],
+                                    "author": [],
+                                    "filehash": [],
+                                    "package": []
+                                }
+                            },
+                            "global": {
+                                "global": {
+                                    "value": [
+                                        "ihp-sg13g2/libs.tech/klayout/tech/sg13g2.lyp"
+                                    ],
+                                    "signature": [],
+                                    "date": [],
+                                    "author": [],
+                                    "filehash": [],
+                                    "package": [
+                                        "lambdapdk"
+                                    ]
+                                }
+                            }
+                        },
+                        "hashalgo": "sha256",
+                        "copy": false
+                    }
+                }
+            },
+            "aprtech": {
+                "openroad": {
+                    "5M2TL": {
+                        "CoreSite": {
+                            "lef": {
+                                "type": "[file]",
+                                "scope": "global",
+                                "require": null,
+                                "lock": false,
+                                "switch": [
+                                    "-pdk_aprtech 'pdkname tool stackup libarch filetype <file>'"
+                                ],
+                                "shorthelp": "PDK: APR technology files",
+                                "notes": null,
+                                "pernode": "never",
+                                "node": {
+                                    "default": {
+                                        "default": {
+                                            "value": [],
+                                            "signature": [],
+                                            "date": [],
+                                            "author": [],
+                                            "filehash": [],
+                                            "package": []
+                                        }
+                                    },
+                                    "global": {
+                                        "global": {
+                                            "value": [
+                                                "ihp-sg13g2/libs.ref/sg13g2_stdcell/lef/sg13g2_tech.lef"
+                                            ],
+                                            "signature": [],
+                                            "date": [],
+                                            "author": [],
+                                            "filehash": [],
+                                            "package": [
+                                                "lambdapdk"
+                                            ]
+                                        }
+                                    }
+                                },
+                                "hashalgo": "sha256",
+                                "copy": false
+                            }
+                        }
+                    }
+                },
+                "klayout": {
+                    "5M2TL": {
+                        "CoreSite": {
+                            "lef": {
+                                "type": "[file]",
+                                "scope": "global",
+                                "require": null,
+                                "lock": false,
+                                "switch": [
+                                    "-pdk_aprtech 'pdkname tool stackup libarch filetype <file>'"
+                                ],
+                                "shorthelp": "PDK: APR technology files",
+                                "notes": null,
+                                "pernode": "never",
+                                "node": {
+                                    "default": {
+                                        "default": {
+                                            "value": [],
+                                            "signature": [],
+                                            "date": [],
+                                            "author": [],
+                                            "filehash": [],
+                                            "package": []
+                                        }
+                                    },
+                                    "global": {
+                                        "global": {
+                                            "value": [
+                                                "ihp-sg13g2/libs.ref/sg13g2_stdcell/lef/sg13g2_tech.lef"
+                                            ],
+                                            "signature": [],
+                                            "date": [],
+                                            "author": [],
+                                            "filehash": [],
+                                            "package": [
+                                                "lambdapdk"
+                                            ]
+                                        }
+                                    }
+                                },
+                                "hashalgo": "sha256",
+                                "copy": false
+                            }
+                        }
+                    }
+                },
+                "magic": {
+                    "5M2TL": {
+                        "CoreSite": {
+                            "lef": {
+                                "type": "[file]",
+                                "scope": "global",
+                                "require": null,
+                                "lock": false,
+                                "switch": [
+                                    "-pdk_aprtech 'pdkname tool stackup libarch filetype <file>'"
+                                ],
+                                "shorthelp": "PDK: APR technology files",
+                                "notes": null,
+                                "pernode": "never",
+                                "node": {
+                                    "default": {
+                                        "default": {
+                                            "value": [],
+                                            "signature": [],
+                                            "date": [],
+                                            "author": [],
+                                            "filehash": [],
+                                            "package": []
+                                        }
+                                    },
+                                    "global": {
+                                        "global": {
+                                            "value": [
+                                                "ihp-sg13g2/libs.ref/sg13g2_stdcell/lef/sg13g2_tech.lef"
+                                            ],
+                                            "signature": [],
+                                            "date": [],
+                                            "author": [],
+                                            "filehash": [],
+                                            "package": [
+                                                "lambdapdk"
+                                            ]
+                                        }
+                                    }
+                                },
+                                "hashalgo": "sha256",
+                                "copy": false
+                            }
+                        }
+                    }
+                }
+            },
+            "var": {
+                "openroad": {
+                    "Metal1_adjustment": {
+                        "5M2TL": {
+                            "type": "[str]",
+                            "scope": "global",
+                            "require": null,
+                            "lock": false,
+                            "switch": [
+                                "-pdk_var 'pdkname tool stackup key <str>'"
+                            ],
+                            "shorthelp": "PDK: special variable",
+                            "notes": null,
+                            "pernode": "never",
+                            "node": {
+                                "default": {
+                                    "default": {
+                                        "value": [],
+                                        "signature": []
+                                    }
+                                },
+                                "global": {
+                                    "global": {
+                                        "value": [
+                                            "0.05"
+                                        ],
+                                        "signature": []
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "Metal2_adjustment": {
+                        "5M2TL": {
+                            "type": "[str]",
+                            "scope": "global",
+                            "require": null,
+                            "lock": false,
+                            "switch": [
+                                "-pdk_var 'pdkname tool stackup key <str>'"
+                            ],
+                            "shorthelp": "PDK: special variable",
+                            "notes": null,
+                            "pernode": "never",
+                            "node": {
+                                "default": {
+                                    "default": {
+                                        "value": [],
+                                        "signature": []
+                                    }
+                                },
+                                "global": {
+                                    "global": {
+                                        "value": [
+                                            "0.05"
+                                        ],
+                                        "signature": []
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "Metal3_adjustment": {
+                        "5M2TL": {
+                            "type": "[str]",
+                            "scope": "global",
+                            "require": null,
+                            "lock": false,
+                            "switch": [
+                                "-pdk_var 'pdkname tool stackup key <str>'"
+                            ],
+                            "shorthelp": "PDK: special variable",
+                            "notes": null,
+                            "pernode": "never",
+                            "node": {
+                                "default": {
+                                    "default": {
+                                        "value": [],
+                                        "signature": []
+                                    }
+                                },
+                                "global": {
+                                    "global": {
+                                        "value": [
+                                            "0.05"
+                                        ],
+                                        "signature": []
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "Metal4_adjustment": {
+                        "5M2TL": {
+                            "type": "[str]",
+                            "scope": "global",
+                            "require": null,
+                            "lock": false,
+                            "switch": [
+                                "-pdk_var 'pdkname tool stackup key <str>'"
+                            ],
+                            "shorthelp": "PDK: special variable",
+                            "notes": null,
+                            "pernode": "never",
+                            "node": {
+                                "default": {
+                                    "default": {
+                                        "value": [],
+                                        "signature": []
+                                    }
+                                },
+                                "global": {
+                                    "global": {
+                                        "value": [
+                                            "0.05"
+                                        ],
+                                        "signature": []
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "Metal5_adjustment": {
+                        "5M2TL": {
+                            "type": "[str]",
+                            "scope": "global",
+                            "require": null,
+                            "lock": false,
+                            "switch": [
+                                "-pdk_var 'pdkname tool stackup key <str>'"
+                            ],
+                            "shorthelp": "PDK: special variable",
+                            "notes": null,
+                            "pernode": "never",
+                            "node": {
+                                "default": {
+                                    "default": {
+                                        "value": [],
+                                        "signature": []
+                                    }
+                                },
+                                "global": {
+                                    "global": {
+                                        "value": [
+                                            "0.05"
+                                        ],
+                                        "signature": []
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "TopMetal1_adjustment": {
+                        "5M2TL": {
+                            "type": "[str]",
+                            "scope": "global",
+                            "require": null,
+                            "lock": false,
+                            "switch": [
+                                "-pdk_var 'pdkname tool stackup key <str>'"
+                            ],
+                            "shorthelp": "PDK: special variable",
+                            "notes": null,
+                            "pernode": "never",
+                            "node": {
+                                "default": {
+                                    "default": {
+                                        "value": [],
+                                        "signature": []
+                                    }
+                                },
+                                "global": {
+                                    "global": {
+                                        "value": [
+                                            "0.05"
+                                        ],
+                                        "signature": []
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "TopMetal2_adjustment": {
+                        "5M2TL": {
+                            "type": "[str]",
+                            "scope": "global",
+                            "require": null,
+                            "lock": false,
+                            "switch": [
+                                "-pdk_var 'pdkname tool stackup key <str>'"
+                            ],
+                            "shorthelp": "PDK: special variable",
+                            "notes": null,
+                            "pernode": "never",
+                            "node": {
+                                "default": {
+                                    "default": {
+                                        "value": [],
+                                        "signature": []
+                                    }
+                                },
+                                "global": {
+                                    "global": {
+                                        "value": [
+                                            "0.05"
+                                        ],
+                                        "signature": []
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "rclayer_signal": {
+                        "5M2TL": {
+                            "type": "[str]",
+                            "scope": "global",
+                            "require": null,
+                            "lock": false,
+                            "switch": [
+                                "-pdk_var 'pdkname tool stackup key <str>'"
+                            ],
+                            "shorthelp": "PDK: special variable",
+                            "notes": null,
+                            "pernode": "never",
+                            "node": {
+                                "default": {
+                                    "default": {
+                                        "value": [],
+                                        "signature": []
+                                    }
+                                },
+                                "global": {
+                                    "global": {
+                                        "value": [
+                                            "Metal2"
+                                        ],
+                                        "signature": []
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "rclayer_clock": {
+                        "5M2TL": {
+                            "type": "[str]",
+                            "scope": "global",
+                            "require": null,
+                            "lock": false,
+                            "switch": [
+                                "-pdk_var 'pdkname tool stackup key <str>'"
+                            ],
+                            "shorthelp": "PDK: special variable",
+                            "notes": null,
+                            "pernode": "never",
+                            "node": {
+                                "default": {
+                                    "default": {
+                                        "value": [],
+                                        "signature": []
+                                    }
+                                },
+                                "global": {
+                                    "global": {
+                                        "value": [
+                                            "Metal5"
+                                        ],
+                                        "signature": []
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "pin_layer_vertical": {
+                        "5M2TL": {
+                            "type": "[str]",
+                            "scope": "global",
+                            "require": null,
+                            "lock": false,
+                            "switch": [
+                                "-pdk_var 'pdkname tool stackup key <str>'"
+                            ],
+                            "shorthelp": "PDK: special variable",
+                            "notes": null,
+                            "pernode": "never",
+                            "node": {
+                                "default": {
+                                    "default": {
+                                        "value": [],
+                                        "signature": []
+                                    }
+                                },
+                                "global": {
+                                    "global": {
+                                        "value": [
+                                            "Metal3"
+                                        ],
+                                        "signature": []
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "pin_layer_horizontal": {
+                        "5M2TL": {
+                            "type": "[str]",
+                            "scope": "global",
+                            "require": null,
+                            "lock": false,
+                            "switch": [
+                                "-pdk_var 'pdkname tool stackup key <str>'"
+                            ],
+                            "shorthelp": "PDK: special variable",
+                            "notes": null,
+                            "pernode": "never",
+                            "node": {
+                                "default": {
+                                    "default": {
+                                        "value": [],
+                                        "signature": []
+                                    }
+                                },
+                                "global": {
+                                    "global": {
+                                        "value": [
+                                            "Metal2"
+                                        ],
+                                        "signature": []
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "doc": {
+                "homepage": {
+                    "type": "[file]",
+                    "scope": "global",
+                    "require": null,
+                    "lock": false,
+                    "switch": [
+                        "-pdk_doc_homepage 'pdkname <file>'"
+                    ],
+                    "shorthelp": "PDK: documentation homepage",
+                    "notes": null,
+                    "pernode": "never",
+                    "node": {
+                        "default": {
+                            "default": {
+                                "value": [],
+                                "signature": [],
+                                "date": [],
+                                "author": [],
+                                "filehash": [],
+                                "package": []
+                            }
+                        }
+                    },
+                    "hashalgo": "sha256",
+                    "copy": false
+                },
+                "datasheet": {
+                    "type": "[file]",
+                    "scope": "global",
+                    "require": null,
+                    "lock": false,
+                    "switch": [
+                        "-pdk_doc_datasheet 'pdkname <file>'"
+                    ],
+                    "shorthelp": "PDK: datasheet",
+                    "notes": null,
+                    "pernode": "never",
+                    "node": {
+                        "default": {
+                            "default": {
+                                "value": [],
+                                "signature": [],
+                                "date": [],
+                                "author": [],
+                                "filehash": [],
+                                "package": []
+                            }
+                        }
+                    },
+                    "hashalgo": "sha256",
+                    "copy": false
+                },
+                "reference": {
+                    "type": "[file]",
+                    "scope": "global",
+                    "require": null,
+                    "lock": false,
+                    "switch": [
+                        "-pdk_doc_reference 'pdkname <file>'"
+                    ],
+                    "shorthelp": "PDK: reference",
+                    "notes": null,
+                    "pernode": "never",
+                    "node": {
+                        "default": {
+                            "default": {
+                                "value": [],
+                                "signature": [],
+                                "date": [],
+                                "author": [],
+                                "filehash": [],
+                                "package": []
+                            }
+                        }
+                    },
+                    "hashalgo": "sha256",
+                    "copy": false
+                },
+                "userguide": {
+                    "type": "[file]",
+                    "scope": "global",
+                    "require": null,
+                    "lock": false,
+                    "switch": [
+                        "-pdk_doc_userguide 'pdkname <file>'"
+                    ],
+                    "shorthelp": "PDK: userguide",
+                    "notes": null,
+                    "pernode": "never",
+                    "node": {
+                        "default": {
+                            "default": {
+                                "value": [],
+                                "signature": [],
+                                "date": [],
+                                "author": [],
+                                "filehash": [],
+                                "package": []
+                            }
+                        }
+                    },
+                    "hashalgo": "sha256",
+                    "copy": false
+                },
+                "install": {
+                    "type": "[file]",
+                    "scope": "global",
+                    "require": null,
+                    "lock": false,
+                    "switch": [
+                        "-pdk_doc_install 'pdkname <file>'"
+                    ],
+                    "shorthelp": "PDK: install",
+                    "notes": null,
+                    "pernode": "never",
+                    "node": {
+                        "default": {
+                            "default": {
+                                "value": [],
+                                "signature": [],
+                                "date": [],
+                                "author": [],
+                                "filehash": [],
+                                "package": []
+                            }
+                        }
+                    },
+                    "hashalgo": "sha256",
+                    "copy": false
+                },
+                "quickstart": {
+                    "type": "[file]",
+                    "scope": "global",
+                    "require": null,
+                    "lock": false,
+                    "switch": [
+                        "-pdk_doc_quickstart 'pdkname <file>'"
+                    ],
+                    "shorthelp": "PDK: quickstart",
+                    "notes": null,
+                    "pernode": "never",
+                    "node": {
+                        "default": {
+                            "default": {
+                                "value": [],
+                                "signature": [],
+                                "date": [],
+                                "author": [],
+                                "filehash": [],
+                                "package": []
+                            }
+                        }
+                    },
+                    "hashalgo": "sha256",
+                    "copy": false
+                },
+                "releasenotes": {
+                    "type": "[file]",
+                    "scope": "global",
+                    "require": null,
+                    "lock": false,
+                    "switch": [
+                        "-pdk_doc_releasenotes 'pdkname <file>'"
+                    ],
+                    "shorthelp": "PDK: releasenotes",
+                    "notes": null,
+                    "pernode": "never",
+                    "node": {
+                        "default": {
+                            "default": {
+                                "value": [],
+                                "signature": [],
+                                "date": [],
+                                "author": [],
+                                "filehash": [],
+                                "package": []
+                            }
+                        }
+                    },
+                    "hashalgo": "sha256",
+                    "copy": false
+                },
+                "tutorial": {
+                    "type": "[file]",
+                    "scope": "global",
+                    "require": null,
+                    "lock": false,
+                    "switch": [
+                        "-pdk_doc_tutorial 'pdkname <file>'"
+                    ],
+                    "shorthelp": "PDK: tutorial",
+                    "notes": null,
+                    "pernode": "never",
+                    "node": {
+                        "default": {
+                            "default": {
+                                "value": [],
+                                "signature": [],
+                                "date": [],
+                                "author": [],
+                                "filehash": [],
+                                "package": []
+                            }
+                        }
+                    },
+                    "hashalgo": "sha256",
+                    "copy": false
+                }
+            }
+        }
+    },
+    "metric": {
+        "errors": {
+            "type": "int",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-metric_errors 'step index <int>'"
+            ],
+            "shorthelp": "Metric: total errors",
+            "notes": null,
+            "pernode": "required",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "warnings": {
+            "type": "int",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-metric_warnings 'step index <int>'"
+            ],
+            "shorthelp": "Metric: total warnings",
+            "notes": null,
+            "pernode": "required",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "drvs": {
+            "type": "int",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-metric_drvs 'step index <int>'"
+            ],
+            "shorthelp": "Metric: total drvs",
+            "notes": null,
+            "pernode": "required",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "unconstrained": {
+            "type": "int",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-metric_unconstrained 'step index <int>'"
+            ],
+            "shorthelp": "Metric: total unconstrained",
+            "notes": null,
+            "pernode": "required",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "coverage": {
+            "type": "float",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-metric_coverage 'step index <float>'"
+            ],
+            "shorthelp": "Metric: coverage",
+            "notes": null,
+            "pernode": "required",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            },
+            "unit": "%"
+        },
+        "security": {
+            "type": "float",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-metric_security 'step index <float>'"
+            ],
+            "shorthelp": "Metric: security",
+            "notes": null,
+            "pernode": "required",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            },
+            "unit": "%"
+        },
+        "luts": {
+            "type": "int",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-metric_luts 'step index <int>'"
+            ],
+            "shorthelp": "Metric: FPGA LUTs used",
+            "notes": null,
+            "pernode": "required",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "dsps": {
+            "type": "int",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-metric_dsps 'step index <int>'"
+            ],
+            "shorthelp": "Metric: FPGA DSP slices used",
+            "notes": null,
+            "pernode": "required",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "brams": {
+            "type": "int",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-metric_brams 'step index <int>'"
+            ],
+            "shorthelp": "Metric: FPGA BRAM tiles used",
+            "notes": null,
+            "pernode": "required",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "cellarea": {
+            "type": "float",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-metric_cellarea 'step index <float>'"
+            ],
+            "shorthelp": "Metric: cellarea",
+            "notes": null,
+            "pernode": "required",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            },
+            "unit": "um^2"
+        },
+        "totalarea": {
+            "type": "float",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-metric_totalarea 'step index <float>'"
+            ],
+            "shorthelp": "Metric: totalarea",
+            "notes": null,
+            "pernode": "required",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            },
+            "unit": "um^2"
+        },
+        "utilization": {
+            "type": "float",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-metric_utilization step index <float>"
+            ],
+            "shorthelp": "Metric: area utilization",
+            "notes": null,
+            "pernode": "required",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            },
+            "unit": "%"
+        },
+        "logicdepth": {
+            "type": "int",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-metric_logicdepth step index <int>"
+            ],
+            "shorthelp": "Metric: logic depth",
+            "notes": null,
+            "pernode": "required",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "peakpower": {
+            "type": "float",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-metric_peakpower 'step index <float>'"
+            ],
+            "shorthelp": "Metric: peakpower",
+            "notes": null,
+            "pernode": "required",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            },
+            "unit": "mw"
+        },
+        "averagepower": {
+            "type": "float",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-metric_averagepower 'step index <float>'"
+            ],
+            "shorthelp": "Metric: averagepower",
+            "notes": null,
+            "pernode": "required",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            },
+            "unit": "mw"
+        },
+        "dozepower": {
+            "type": "float",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-metric_dozepower 'step index <float>'"
+            ],
+            "shorthelp": "Metric: dozepower",
+            "notes": null,
+            "pernode": "required",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            },
+            "unit": "mw"
+        },
+        "idlepower": {
+            "type": "float",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-metric_idlepower 'step index <float>'"
+            ],
+            "shorthelp": "Metric: idlepower",
+            "notes": null,
+            "pernode": "required",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            },
+            "unit": "mw"
+        },
+        "leakagepower": {
+            "type": "float",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-metric_leakagepower 'step index <float>'"
+            ],
+            "shorthelp": "Metric: leakagepower",
+            "notes": null,
+            "pernode": "required",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            },
+            "unit": "mw"
+        },
+        "sleeppower": {
+            "type": "float",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-metric_sleeppower 'step index <float>'"
+            ],
+            "shorthelp": "Metric: sleeppower",
+            "notes": null,
+            "pernode": "required",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            },
+            "unit": "mw"
+        },
+        "irdrop": {
+            "type": "float",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-metric_irdrop 'step index <float>'"
+            ],
+            "shorthelp": "Metric: peak IR drop",
+            "notes": null,
+            "pernode": "required",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            },
+            "unit": "mv"
+        },
+        "holdpaths": {
+            "type": "int",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-metric_holdpaths 'step index <int>'"
+            ],
+            "shorthelp": "Metric: holdpaths",
+            "notes": null,
+            "pernode": "required",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "setuppaths": {
+            "type": "int",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-metric_setuppaths 'step index <int>'"
+            ],
+            "shorthelp": "Metric: setuppaths",
+            "notes": null,
+            "pernode": "required",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "holdslack": {
+            "type": "float",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-metric_holdslack 'step index <float>'"
+            ],
+            "shorthelp": "Metric: holdslack",
+            "notes": null,
+            "pernode": "required",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            },
+            "unit": "ns"
+        },
+        "holdwns": {
+            "type": "float",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-metric_holdwns 'step index <float>'"
+            ],
+            "shorthelp": "Metric: holdwns",
+            "notes": null,
+            "pernode": "required",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            },
+            "unit": "ns"
+        },
+        "holdtns": {
+            "type": "float",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-metric_holdtns 'step index <float>'"
+            ],
+            "shorthelp": "Metric: holdtns",
+            "notes": null,
+            "pernode": "required",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            },
+            "unit": "ns"
+        },
+        "setupslack": {
+            "type": "float",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-metric_setupslack 'step index <float>'"
+            ],
+            "shorthelp": "Metric: setupslack",
+            "notes": null,
+            "pernode": "required",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            },
+            "unit": "ns"
+        },
+        "setupwns": {
+            "type": "float",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-metric_setupwns 'step index <float>'"
+            ],
+            "shorthelp": "Metric: setupwns",
+            "notes": null,
+            "pernode": "required",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            },
+            "unit": "ns"
+        },
+        "setuptns": {
+            "type": "float",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-metric_setuptns 'step index <float>'"
+            ],
+            "shorthelp": "Metric: setuptns",
+            "notes": null,
+            "pernode": "required",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            },
+            "unit": "ns"
+        },
+        "fmax": {
+            "type": "float",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-metric_fmax 'step index <float>'"
+            ],
+            "shorthelp": "Metric: fmax",
+            "notes": null,
+            "pernode": "required",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            },
+            "unit": "Hz"
+        },
+        "macros": {
+            "type": "int",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-metric_macros 'step index <int>'"
+            ],
+            "shorthelp": "Metric: macros",
+            "notes": null,
+            "pernode": "required",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "cells": {
+            "type": "int",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-metric_cells 'step index <int>'"
+            ],
+            "shorthelp": "Metric: cells",
+            "notes": null,
+            "pernode": "required",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "registers": {
+            "type": "int",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-metric_registers 'step index <int>'"
+            ],
+            "shorthelp": "Metric: registers",
+            "notes": null,
+            "pernode": "required",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "buffers": {
+            "type": "int",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-metric_buffers 'step index <int>'"
+            ],
+            "shorthelp": "Metric: buffers",
+            "notes": null,
+            "pernode": "required",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "transistors": {
+            "type": "int",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-metric_transistors 'step index <int>'"
+            ],
+            "shorthelp": "Metric: transistors",
+            "notes": null,
+            "pernode": "required",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "pins": {
+            "type": "int",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-metric_pins 'step index <int>'"
+            ],
+            "shorthelp": "Metric: pins",
+            "notes": null,
+            "pernode": "required",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "nets": {
+            "type": "int",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-metric_nets 'step index <int>'"
+            ],
+            "shorthelp": "Metric: nets",
+            "notes": null,
+            "pernode": "required",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "vias": {
+            "type": "int",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-metric_vias 'step index <int>'"
+            ],
+            "shorthelp": "Metric: vias",
+            "notes": null,
+            "pernode": "required",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "wirelength": {
+            "type": "float",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-metric_wirelength 'step index <float>'"
+            ],
+            "shorthelp": "Metric: wirelength",
+            "notes": null,
+            "pernode": "required",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            },
+            "unit": "um"
+        },
+        "overflow": {
+            "type": "int",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-metric_overflow 'step index <int>'"
+            ],
+            "shorthelp": "Metric: overflow",
+            "notes": null,
+            "pernode": "required",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "memory": {
+            "type": "float",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-metric_memory 'step index <float>'"
+            ],
+            "shorthelp": "Metric: memory",
+            "notes": null,
+            "pernode": "required",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            },
+            "unit": "B"
+        },
+        "exetime": {
+            "type": "float",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-metric_exetime 'step index <float>'"
+            ],
+            "shorthelp": "Metric: exetime",
+            "notes": null,
+            "pernode": "required",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            },
+            "unit": "s"
+        },
+        "tasktime": {
+            "type": "float",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-metric_tasktime 'step index <float>'"
+            ],
+            "shorthelp": "Metric: tasktime",
+            "notes": null,
+            "pernode": "required",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            },
+            "unit": "s"
+        },
+        "totaltime": {
+            "type": "float",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-metric_totaltime 'step index <float>'"
+            ],
+            "shorthelp": "Metric: totaltime",
+            "notes": null,
+            "pernode": "required",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            },
+            "unit": "s"
+        }
+    },
+    "record": {
+        "userid": {
+            "type": "str",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-record_userid 'step index <str>'"
+            ],
+            "shorthelp": "Record: userid",
+            "notes": null,
+            "pernode": "required",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "publickey": {
+            "type": "str",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-record_publickey 'step index <str>'"
+            ],
+            "shorthelp": "Record: public key",
+            "notes": null,
+            "pernode": "required",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "machine": {
+            "type": "str",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-record_machine 'step index <str>'"
+            ],
+            "shorthelp": "Record: machine name",
+            "notes": null,
+            "pernode": "required",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "macaddr": {
+            "type": "str",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-record_macaddr 'step index <str>'"
+            ],
+            "shorthelp": "Record: MAC address",
+            "notes": null,
+            "pernode": "required",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "ipaddr": {
+            "type": "str",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-record_ipaddr 'step index <str>'"
+            ],
+            "shorthelp": "Record: IP address",
+            "notes": null,
+            "pernode": "required",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "platform": {
+            "type": "str",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-record_platform 'step index <str>'"
+            ],
+            "shorthelp": "Record: platform name",
+            "notes": null,
+            "pernode": "required",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "distro": {
+            "type": "str",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-record_distro 'step index <str>'"
+            ],
+            "shorthelp": "Record: distro name",
+            "notes": null,
+            "pernode": "required",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "arch": {
+            "type": "str",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-record_arch 'step index <str>'"
+            ],
+            "shorthelp": "Record: hardware architecture",
+            "notes": null,
+            "pernode": "required",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "starttime": {
+            "type": "str",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-record_starttime 'step index <str>'"
+            ],
+            "shorthelp": "Record: start time",
+            "notes": null,
+            "pernode": "required",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "endtime": {
+            "type": "str",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-record_endtime 'step index <str>'"
+            ],
+            "shorthelp": "Record: end time",
+            "notes": null,
+            "pernode": "required",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "region": {
+            "type": "str",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-record_region 'step index <str>'"
+            ],
+            "shorthelp": "Record: cloud region",
+            "notes": null,
+            "pernode": "required",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "scversion": {
+            "type": "str",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-record_scversion 'step index <str>'"
+            ],
+            "shorthelp": "Record: software version",
+            "notes": null,
+            "pernode": "required",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "toolversion": {
+            "type": "str",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-record_toolversion 'step index <str>'"
+            ],
+            "shorthelp": "Record: tool version",
+            "notes": null,
+            "pernode": "required",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "toolpath": {
+            "type": "str",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-record_toolpath 'step index <str>'"
+            ],
+            "shorthelp": "Record: tool path",
+            "notes": null,
+            "pernode": "required",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "toolargs": {
+            "type": "str",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-record_toolargs 'step index <str>'"
+            ],
+            "shorthelp": "Record: tool CLI arguments",
+            "notes": null,
+            "pernode": "required",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "osversion": {
+            "type": "str",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-record_osversion 'step index <str>'"
+            ],
+            "shorthelp": "Record: O/S version",
+            "notes": null,
+            "pernode": "required",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "kernelversion": {
+            "type": "str",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-record_kernelversion 'step index <str>'"
+            ],
+            "shorthelp": "Record: O/S kernel version",
+            "notes": null,
+            "pernode": "required",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "remoteid": {
+            "type": "str",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-record_remoteid 'step index <str>'"
+            ],
+            "shorthelp": "Record: remote job ID",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            }
+        }
+    },
+    "datasheet": {
+        "partnumber": {
+            "type": "str",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-datasheet_partnumber '<str>'"
+            ],
+            "shorthelp": "Datasheet: part number",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "type": {
+            "type": "enum",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-datasheet_type '<str>'"
+            ],
+            "shorthelp": "Datasheet: part type",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            },
+            "enum": [
+                "digital",
+                "analog",
+                "ams",
+                "passive",
+                "soc",
+                "fpga",
+                "adc",
+                "dac",
+                "pmic",
+                "buck",
+                "boost",
+                "ldo",
+                "sram",
+                "dram",
+                "flash",
+                "rom",
+                "interface",
+                "clock",
+                "amplifier",
+                "filter",
+                "mixer",
+                "modulator",
+                "lna"
+            ]
+        },
+        "doc": {
+            "type": "[file]",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-datasheet_doc '<file>'"
+            ],
+            "shorthelp": "Datasheet: part documentation",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": [],
+                        "signature": [],
+                        "date": [],
+                        "author": [],
+                        "filehash": [],
+                        "package": []
+                    }
+                }
+            },
+            "hashalgo": "sha256",
+            "copy": false
+        },
+        "abstraction": {
+            "type": "[enum]",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-datasheet_abstraction '<str>'"
+            ],
+            "shorthelp": "Datasheet: abstraction level",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": [],
+                        "signature": []
+                    }
+                }
+            },
+            "enum": [
+                "model",
+                "schematic",
+                "layout",
+                "hardware"
+            ]
+        },
+        "series": {
+            "type": "str",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-datasheet_series '<str>'"
+            ],
+            "shorthelp": "Datasheet: device series",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "manufacturer": {
+            "type": "str",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-datasheet_manufacturer '<str>'"
+            ],
+            "shorthelp": "Datasheet: part manufacturer",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "description": {
+            "type": "str",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-datasheet_description '<str>'"
+            ],
+            "shorthelp": "Datasheet: description",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "features": {
+            "type": "[str]",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-datasheet_features '<str>'"
+            ],
+            "shorthelp": "Datasheet: part features",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": [],
+                        "signature": []
+                    }
+                }
+            }
+        },
+        "grade": {
+            "type": "enum",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-datasheet_grade '<str>'"
+            ],
+            "shorthelp": "Datasheet: part manufacturing grade",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            },
+            "enum": [
+                "consumer",
+                "industrial",
+                "medical",
+                "automotive",
+                "military",
+                "space"
+            ]
+        },
+        "qual": {
+            "type": "[str]",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-datasheet_qual '<str>'"
+            ],
+            "shorthelp": "Datasheet: qualification",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": [],
+                        "signature": []
+                    }
+                }
+            }
+        },
+        "trl": {
+            "type": "int",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-datasheet_trl '<int>'"
+            ],
+            "shorthelp": "Datasheet: technology readiness level",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "status": {
+            "type": "enum",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-datasheet_status '<str>'"
+            ],
+            "shorthelp": "Datasheet: product status",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            },
+            "enum": [
+                "preview",
+                "active",
+                "deprecated",
+                "last time buy",
+                "obsolete"
+            ]
+        },
+        "fmax": {
+            "type": "float",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-datasheet_fmax '<float>'"
+            ],
+            "shorthelp": "Datasheet: device maximum frequency",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            },
+            "unit": "MHz"
+        },
+        "ops": {
+            "type": "float",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-datasheet_ops '<float>'"
+            ],
+            "shorthelp": "Datasheet: total device operations per second",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "iobw": {
+            "type": "float",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-datasheet_iobw '<float>'"
+            ],
+            "shorthelp": "Datasheet: total I/O bandwidth",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            },
+            "unit": "bps"
+        },
+        "iocount": {
+            "type": "int",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-datasheet_iocount '<int>'"
+            ],
+            "shorthelp": "Datasheet: total number of I/Os",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "ram": {
+            "type": "float",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-datasheet_ram '<float>'"
+            ],
+            "shorthelp": "Datasheet: total device RAM",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            },
+            "unit": "bits"
+        },
+        "peakpower": {
+            "type": "float",
+            "scope": "job",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-datasheet_peakpower '<float>'"
+            ],
+            "shorthelp": "Datasheet: peak power",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            },
+            "unit": "W"
+        },
+        "limit": {
+            "tstorage": {
+                "type": "(float,float)",
+                "scope": "job",
+                "require": null,
+                "lock": false,
+                "switch": [
+                    "-datasheet_limit_tstorage '<(float,float)>'"
+                ],
+                "shorthelp": "Datasheet: limit storage temperature limits",
+                "notes": null,
+                "pernode": "never",
+                "node": {
+                    "default": {
+                        "default": {
+                            "value": null,
+                            "signature": null
+                        }
+                    }
+                },
+                "unit": "C"
+            },
+            "tsolder": {
+                "type": "(float,float)",
+                "scope": "job",
+                "require": null,
+                "lock": false,
+                "switch": [
+                    "-datasheet_limit_tsolder '<(float,float)>'"
+                ],
+                "shorthelp": "Datasheet: limit solder temperature limits",
+                "notes": null,
+                "pernode": "never",
+                "node": {
+                    "default": {
+                        "default": {
+                            "value": null,
+                            "signature": null
+                        }
+                    }
+                },
+                "unit": "C"
+            },
+            "tj": {
+                "type": "(float,float)",
+                "scope": "job",
+                "require": null,
+                "lock": false,
+                "switch": [
+                    "-datasheet_limit_tj '<(float,float)>'"
+                ],
+                "shorthelp": "Datasheet: limit junction temperature limits",
+                "notes": null,
+                "pernode": "never",
+                "node": {
+                    "default": {
+                        "default": {
+                            "value": null,
+                            "signature": null
+                        }
+                    }
+                },
+                "unit": "C"
+            },
+            "ta": {
+                "type": "(float,float)",
+                "scope": "job",
+                "require": null,
+                "lock": false,
+                "switch": [
+                    "-datasheet_limit_ta '<(float,float)>'"
+                ],
+                "shorthelp": "Datasheet: limit ambient temperature limits",
+                "notes": null,
+                "pernode": "never",
+                "node": {
+                    "default": {
+                        "default": {
+                            "value": null,
+                            "signature": null
+                        }
+                    }
+                },
+                "unit": "C"
+            },
+            "tid": {
+                "type": "(float,float)",
+                "scope": "job",
+                "require": null,
+                "lock": false,
+                "switch": [
+                    "-datasheet_limit_tid '<(float,float)>'"
+                ],
+                "shorthelp": "Datasheet: limit total ionizing dose threshold",
+                "notes": null,
+                "pernode": "never",
+                "node": {
+                    "default": {
+                        "default": {
+                            "value": null,
+                            "signature": null
+                        }
+                    }
+                },
+                "unit": "rad"
+            },
+            "sel": {
+                "type": "(float,float)",
+                "scope": "job",
+                "require": null,
+                "lock": false,
+                "switch": [
+                    "-datasheet_limit_sel '<(float,float)>'"
+                ],
+                "shorthelp": "Datasheet: limit single event latchup threshold",
+                "notes": null,
+                "pernode": "never",
+                "node": {
+                    "default": {
+                        "default": {
+                            "value": null,
+                            "signature": null
+                        }
+                    }
+                },
+                "unit": "MeV-cm2/mg"
+            },
+            "seb": {
+                "type": "(float,float)",
+                "scope": "job",
+                "require": null,
+                "lock": false,
+                "switch": [
+                    "-datasheet_limit_seb '<(float,float)>'"
+                ],
+                "shorthelp": "Datasheet: limit single event burnout threshold",
+                "notes": null,
+                "pernode": "never",
+                "node": {
+                    "default": {
+                        "default": {
+                            "value": null,
+                            "signature": null
+                        }
+                    }
+                },
+                "unit": "MeV-cm2/mg"
+            },
+            "segr": {
+                "type": "(float,float)",
+                "scope": "job",
+                "require": null,
+                "lock": false,
+                "switch": [
+                    "-datasheet_limit_segr '<(float,float)>'"
+                ],
+                "shorthelp": "Datasheet: limit single event gate rupture threshold",
+                "notes": null,
+                "pernode": "never",
+                "node": {
+                    "default": {
+                        "default": {
+                            "value": null,
+                            "signature": null
+                        }
+                    }
+                },
+                "unit": "MeV-cm2/mg"
+            },
+            "set": {
+                "type": "(float,float)",
+                "scope": "job",
+                "require": null,
+                "lock": false,
+                "switch": [
+                    "-datasheet_limit_set '<(float,float)>'"
+                ],
+                "shorthelp": "Datasheet: limit single event transient threshold",
+                "notes": null,
+                "pernode": "never",
+                "node": {
+                    "default": {
+                        "default": {
+                            "value": null,
+                            "signature": null
+                        }
+                    }
+                },
+                "unit": "MeV-cm2/mg"
+            },
+            "seu": {
+                "type": "(float,float)",
+                "scope": "job",
+                "require": null,
+                "lock": false,
+                "switch": [
+                    "-datasheet_limit_seu '<(float,float)>'"
+                ],
+                "shorthelp": "Datasheet: limit single event upset threshold",
+                "notes": null,
+                "pernode": "never",
+                "node": {
+                    "default": {
+                        "default": {
+                            "value": null,
+                            "signature": null
+                        }
+                    }
+                },
+                "unit": "MeV-cm2/mg"
+            },
+            "vhbm": {
+                "type": "(float,float)",
+                "scope": "job",
+                "require": null,
+                "lock": false,
+                "switch": [
+                    "-datasheet_limit_vhbm '<(float,float)>'"
+                ],
+                "shorthelp": "Datasheet: limit ESD human body model voltage level",
+                "notes": null,
+                "pernode": "never",
+                "node": {
+                    "default": {
+                        "default": {
+                            "value": null,
+                            "signature": null
+                        }
+                    }
+                },
+                "unit": "V"
+            },
+            "vcdm": {
+                "type": "(float,float)",
+                "scope": "job",
+                "require": null,
+                "lock": false,
+                "switch": [
+                    "-datasheet_limit_vcdm '<(float,float)>'"
+                ],
+                "shorthelp": "Datasheet: limit ESD charge device model voltage level",
+                "notes": null,
+                "pernode": "never",
+                "node": {
+                    "default": {
+                        "default": {
+                            "value": null,
+                            "signature": null
+                        }
+                    }
+                },
+                "unit": "V"
+            },
+            "vmm": {
+                "type": "(float,float)",
+                "scope": "job",
+                "require": null,
+                "lock": false,
+                "switch": [
+                    "-datasheet_limit_vmm '<(float,float)>'"
+                ],
+                "shorthelp": "Datasheet: limit ESD machine model voltage level",
+                "notes": null,
+                "pernode": "never",
+                "node": {
+                    "default": {
+                        "default": {
+                            "value": null,
+                            "signature": null
+                        }
+                    }
+                },
+                "unit": "V"
+            }
+        },
+        "thermal": {
+            "rja": {
+                "type": "float",
+                "scope": "job",
+                "require": null,
+                "lock": false,
+                "switch": [
+                    "-datasheet_thermal_rja '<float>'"
+                ],
+                "shorthelp": "Datasheet: thermal junction to ambient resistance",
+                "notes": null,
+                "pernode": "never",
+                "node": {
+                    "default": {
+                        "default": {
+                            "value": null,
+                            "signature": null
+                        }
+                    }
+                },
+                "unit": "C/W"
+            },
+            "rjct": {
+                "type": "float",
+                "scope": "job",
+                "require": null,
+                "lock": false,
+                "switch": [
+                    "-datasheet_thermal_rjct '<float>'"
+                ],
+                "shorthelp": "Datasheet: thermal junction to case (top) resistance",
+                "notes": null,
+                "pernode": "never",
+                "node": {
+                    "default": {
+                        "default": {
+                            "value": null,
+                            "signature": null
+                        }
+                    }
+                },
+                "unit": "C/W"
+            },
+            "rjcb": {
+                "type": "float",
+                "scope": "job",
+                "require": null,
+                "lock": false,
+                "switch": [
+                    "-datasheet_thermal_rjcb '<float>'"
+                ],
+                "shorthelp": "Datasheet: thermal junction to case (bottom) resistance",
+                "notes": null,
+                "pernode": "never",
+                "node": {
+                    "default": {
+                        "default": {
+                            "value": null,
+                            "signature": null
+                        }
+                    }
+                },
+                "unit": "C/W"
+            },
+            "rjb": {
+                "type": "float",
+                "scope": "job",
+                "require": null,
+                "lock": false,
+                "switch": [
+                    "-datasheet_thermal_rjb '<float>'"
+                ],
+                "shorthelp": "Datasheet: thermal junction to board resistance",
+                "notes": null,
+                "pernode": "never",
+                "node": {
+                    "default": {
+                        "default": {
+                            "value": null,
+                            "signature": null
+                        }
+                    }
+                },
+                "unit": "C/W"
+            },
+            "tjt": {
+                "type": "float",
+                "scope": "job",
+                "require": null,
+                "lock": false,
+                "switch": [
+                    "-datasheet_thermal_tjt '<float>'"
+                ],
+                "shorthelp": "Datasheet: thermal junction to top model",
+                "notes": null,
+                "pernode": "never",
+                "node": {
+                    "default": {
+                        "default": {
+                            "value": null,
+                            "signature": null
+                        }
+                    }
+                },
+                "unit": "C/W"
+            },
+            "tjb": {
+                "type": "float",
+                "scope": "job",
+                "require": null,
+                "lock": false,
+                "switch": [
+                    "-datasheet_thermal_tjb '<float>'"
+                ],
+                "shorthelp": "Datasheet: thermal junction to bottom model",
+                "notes": null,
+                "pernode": "never",
+                "node": {
+                    "default": {
+                        "default": {
+                            "value": null,
+                            "signature": null
+                        }
+                    }
+                },
+                "unit": "C/W"
+            }
+        },
+        "package": {
+            "name": {
+                "type": "str",
+                "scope": "job",
+                "require": null,
+                "lock": false,
+                "switch": [
+                    "-datasheet_package_name '<str>'"
+                ],
+                "shorthelp": "Datasheet: package name",
+                "notes": null,
+                "pernode": "never",
+                "node": {
+                    "default": {
+                        "default": {
+                            "value": null,
+                            "signature": null
+                        }
+                    }
+                }
+            },
+            "drawing": {
+                "type": "[file]",
+                "scope": "job",
+                "require": null,
+                "lock": false,
+                "switch": [
+                    "-datasheet_package_drawing '<file>'"
+                ],
+                "shorthelp": "Datasheet: package drawing",
+                "notes": null,
+                "pernode": "never",
+                "node": {
+                    "default": {
+                        "default": {
+                            "value": [],
+                            "signature": [],
+                            "date": [],
+                            "author": [],
+                            "filehash": [],
+                            "package": []
+                        }
+                    }
+                },
+                "hashalgo": "sha256",
+                "copy": false
+            },
+            "pincount": {
+                "type": "int",
+                "scope": "job",
+                "require": null,
+                "lock": false,
+                "switch": [
+                    "-datasheet_package_pincount '<int>'"
+                ],
+                "shorthelp": "Datasheet: package pincount",
+                "notes": null,
+                "pernode": "never",
+                "node": {
+                    "default": {
+                        "default": {
+                            "value": null,
+                            "signature": null
+                        }
+                    }
+                }
+            },
+            "length": {
+                "type": "(float,float,float)",
+                "scope": "job",
+                "require": null,
+                "lock": false,
+                "switch": [
+                    "-datasheet_package_length '<(float,float,float)>'"
+                ],
+                "shorthelp": "Datasheet: package length",
+                "notes": null,
+                "pernode": "never",
+                "node": {
+                    "default": {
+                        "default": {
+                            "value": null,
+                            "signature": null
+                        }
+                    }
+                },
+                "unit": "mm"
+            },
+            "width": {
+                "type": "(float,float,float)",
+                "scope": "job",
+                "require": null,
+                "lock": false,
+                "switch": [
+                    "-datasheet_package_width '<(float,float,float)>'"
+                ],
+                "shorthelp": "Datasheet: package width",
+                "notes": null,
+                "pernode": "never",
+                "node": {
+                    "default": {
+                        "default": {
+                            "value": null,
+                            "signature": null
+                        }
+                    }
+                },
+                "unit": "mm"
+            },
+            "thickness": {
+                "type": "(float,float,float)",
+                "scope": "job",
+                "require": null,
+                "lock": false,
+                "switch": [
+                    "-datasheet_package_thickness '<(float,float,float)>'"
+                ],
+                "shorthelp": "Datasheet: package thickness",
+                "notes": null,
+                "pernode": "never",
+                "node": {
+                    "default": {
+                        "default": {
+                            "value": null,
+                            "signature": null
+                        }
+                    }
+                },
+                "unit": "mm"
+            },
+            "pinpitch": {
+                "type": "(float,float,float)",
+                "scope": "job",
+                "require": null,
+                "lock": false,
+                "switch": [
+                    "-datasheet_package_pinpitch '<(float,float,float)>'"
+                ],
+                "shorthelp": "Datasheet: package pitch",
+                "notes": null,
+                "pernode": "never",
+                "node": {
+                    "default": {
+                        "default": {
+                            "value": null,
+                            "signature": null
+                        }
+                    }
+                },
+                "unit": "mm"
+            }
+        }
+    },
+    "package": {
+        "version": {
+            "type": "str",
+            "scope": "global",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-package_version <str>"
+            ],
+            "shorthelp": "Package: version",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "description": {
+            "type": "str",
+            "scope": "global",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-package_description <str>"
+            ],
+            "shorthelp": "Package: description",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "keyword": {
+            "type": "str",
+            "scope": "global",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-package_keyword <str>"
+            ],
+            "shorthelp": "Package: keyword",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": null,
+                        "signature": null
+                    }
+                }
+            }
+        },
+        "doc": {
+            "homepage": {
+                "type": "str",
+                "scope": "global",
+                "require": null,
+                "lock": false,
+                "switch": [
+                    "-package_doc_homepage <str>"
+                ],
+                "shorthelp": "Package: documentation homepage",
+                "notes": null,
+                "pernode": "never",
+                "node": {
+                    "default": {
+                        "default": {
+                            "value": null,
+                            "signature": null
+                        }
+                    }
+                }
+            },
+            "datasheet": {
+                "type": "[file]",
+                "scope": "global",
+                "require": null,
+                "lock": false,
+                "switch": [
+                    "-package_doc_datasheet <file>"
+                ],
+                "shorthelp": "Package: datasheet document",
+                "notes": null,
+                "pernode": "never",
+                "node": {
+                    "default": {
+                        "default": {
+                            "value": [],
+                            "signature": [],
+                            "date": [],
+                            "author": [],
+                            "filehash": [],
+                            "package": []
+                        }
+                    }
+                },
+                "hashalgo": "sha256",
+                "copy": false
+            },
+            "reference": {
+                "type": "[file]",
+                "scope": "global",
+                "require": null,
+                "lock": false,
+                "switch": [
+                    "-package_doc_reference <file>"
+                ],
+                "shorthelp": "Package: reference document",
+                "notes": null,
+                "pernode": "never",
+                "node": {
+                    "default": {
+                        "default": {
+                            "value": [],
+                            "signature": [],
+                            "date": [],
+                            "author": [],
+                            "filehash": [],
+                            "package": []
+                        }
+                    }
+                },
+                "hashalgo": "sha256",
+                "copy": false
+            },
+            "userguide": {
+                "type": "[file]",
+                "scope": "global",
+                "require": null,
+                "lock": false,
+                "switch": [
+                    "-package_doc_userguide <file>"
+                ],
+                "shorthelp": "Package: userguide document",
+                "notes": null,
+                "pernode": "never",
+                "node": {
+                    "default": {
+                        "default": {
+                            "value": [],
+                            "signature": [],
+                            "date": [],
+                            "author": [],
+                            "filehash": [],
+                            "package": []
+                        }
+                    }
+                },
+                "hashalgo": "sha256",
+                "copy": false
+            },
+            "quickstart": {
+                "type": "[file]",
+                "scope": "global",
+                "require": null,
+                "lock": false,
+                "switch": [
+                    "-package_doc_quickstart <file>"
+                ],
+                "shorthelp": "Package: quickstart document",
+                "notes": null,
+                "pernode": "never",
+                "node": {
+                    "default": {
+                        "default": {
+                            "value": [],
+                            "signature": [],
+                            "date": [],
+                            "author": [],
+                            "filehash": [],
+                            "package": []
+                        }
+                    }
+                },
+                "hashalgo": "sha256",
+                "copy": false
+            },
+            "releasenotes": {
+                "type": "[file]",
+                "scope": "global",
+                "require": null,
+                "lock": false,
+                "switch": [
+                    "-package_doc_releasenotes <file>"
+                ],
+                "shorthelp": "Package: releasenotes document",
+                "notes": null,
+                "pernode": "never",
+                "node": {
+                    "default": {
+                        "default": {
+                            "value": [],
+                            "signature": [],
+                            "date": [],
+                            "author": [],
+                            "filehash": [],
+                            "package": []
+                        }
+                    }
+                },
+                "hashalgo": "sha256",
+                "copy": false
+            },
+            "testplan": {
+                "type": "[file]",
+                "scope": "global",
+                "require": null,
+                "lock": false,
+                "switch": [
+                    "-package_doc_testplan <file>"
+                ],
+                "shorthelp": "Package: testplan document",
+                "notes": null,
+                "pernode": "never",
+                "node": {
+                    "default": {
+                        "default": {
+                            "value": [],
+                            "signature": [],
+                            "date": [],
+                            "author": [],
+                            "filehash": [],
+                            "package": []
+                        }
+                    }
+                },
+                "hashalgo": "sha256",
+                "copy": false
+            },
+            "signoff": {
+                "type": "[file]",
+                "scope": "global",
+                "require": null,
+                "lock": false,
+                "switch": [
+                    "-package_doc_signoff <file>"
+                ],
+                "shorthelp": "Package: signoff document",
+                "notes": null,
+                "pernode": "never",
+                "node": {
+                    "default": {
+                        "default": {
+                            "value": [],
+                            "signature": [],
+                            "date": [],
+                            "author": [],
+                            "filehash": [],
+                            "package": []
+                        }
+                    }
+                },
+                "hashalgo": "sha256",
+                "copy": false
+            },
+            "tutorial": {
+                "type": "[file]",
+                "scope": "global",
+                "require": null,
+                "lock": false,
+                "switch": [
+                    "-package_doc_tutorial <file>"
+                ],
+                "shorthelp": "Package: tutorial document",
+                "notes": null,
+                "pernode": "never",
+                "node": {
+                    "default": {
+                        "default": {
+                            "value": [],
+                            "signature": [],
+                            "date": [],
+                            "author": [],
+                            "filehash": [],
+                            "package": []
+                        }
+                    }
+                },
+                "hashalgo": "sha256",
+                "copy": false
+            }
+        },
+        "license": {
+            "type": "[str]",
+            "scope": "global",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-package_license <str>"
+            ],
+            "shorthelp": "Package: license identifiers",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": [],
+                        "signature": []
+                    }
+                }
+            }
+        },
+        "licensefile": {
+            "type": "[file]",
+            "scope": "global",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-package_licensefile <file>"
+            ],
+            "shorthelp": "Package: license files",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": [],
+                        "signature": [],
+                        "date": [],
+                        "author": [],
+                        "filehash": [],
+                        "package": []
+                    }
+                }
+            },
+            "hashalgo": "sha256",
+            "copy": false
+        },
+        "organization": {
+            "type": "[str]",
+            "scope": "global",
+            "require": null,
+            "lock": false,
+            "switch": [
+                "-package_organization <str>"
+            ],
+            "shorthelp": "Package: sponsoring organization",
+            "notes": null,
+            "pernode": "never",
+            "node": {
+                "default": {
+                    "default": {
+                        "value": [],
+                        "signature": []
+                    }
+                }
+            }
+        },
+        "source": {
+            "siliconcompiler": {
+                "path": {
+                    "type": "str",
+                    "scope": "global",
+                    "require": null,
+                    "lock": false,
+                    "switch": [
+                        "-package_source_path 'source <str>'"
+                    ],
+                    "shorthelp": "Package data source path",
+                    "notes": null,
+                    "pernode": "never",
+                    "node": {
+                        "default": {
+                            "default": {
+                                "value": null,
+                                "signature": null
+                            }
+                        },
+                        "global": {
+                            "global": {
+                                "value": "python://siliconcompiler",
+                                "signature": null
+                            }
+                        }
+                    }
+                },
+                "ref": {
+                    "type": "str",
+                    "scope": "global",
+                    "require": null,
+                    "lock": false,
+                    "switch": [
+                        "-package_source_ref 'source <str>'"
+                    ],
+                    "shorthelp": "Package data source reference",
+                    "notes": null,
+                    "pernode": "never",
+                    "node": {
+                        "default": {
+                            "default": {
+                                "value": null,
+                                "signature": null
+                            }
+                        }
+                    }
+                }
+            },
+            "ihp130": {
+                "path": {
+                    "type": "str",
+                    "scope": "global",
+                    "require": null,
+                    "lock": false,
+                    "switch": [
+                        "-package_source_path 'source <str>'"
+                    ],
+                    "shorthelp": "Package data source path",
+                    "notes": null,
+                    "pernode": "never",
+                    "node": {
+                        "default": {
+                            "default": {
+                                "value": null,
+                                "signature": null
+                            }
+                        },
+                        "global": {
+                            "global": {
+                                "value": "git+https://github.com/IHP-GmbH/IHP-Open-PDK",
+                                "signature": null
+                            }
+                        }
+                    }
+                },
+                "ref": {
+                    "type": "str",
+                    "scope": "global",
+                    "require": null,
+                    "lock": false,
+                    "switch": [
+                        "-package_source_ref 'source <str>'"
+                    ],
+                    "shorthelp": "Package data source reference",
+                    "notes": null,
+                    "pernode": "never",
+                    "node": {
+                        "default": {
+                            "default": {
+                                "value": null,
+                                "signature": null
+                            }
+                        },
+                        "global": {
+                            "global": {
+                                "value": "dceb7e6bd1a877182c3ba32c2e238be08368fa3f",
+                                "signature": null
+                            }
+                        }
+                    }
+                }
+            },
+            "lambdapdk": {
+                "path": {
+                    "type": "str",
+                    "scope": "global",
+                    "require": null,
+                    "lock": false,
+                    "switch": [
+                        "-package_source_path 'source <str>'"
+                    ],
+                    "shorthelp": "Package data source path",
+                    "notes": null,
+                    "pernode": "never",
+                    "node": {
+                        "default": {
+                            "default": {
+                                "value": null,
+                                "signature": null
+                            }
+                        },
+                        "global": {
+                            "global": {
+                                "value": "/home/pgadfort/lambdapdk",
+                                "signature": null
+                            }
+                        }
+                    }
+                },
+                "ref": {
+                    "type": "str",
+                    "scope": "global",
+                    "require": null,
+                    "lock": false,
+                    "switch": [
+                        "-package_source_ref 'source <str>'"
+                    ],
+                    "shorthelp": "Package data source reference",
+                    "notes": null,
+                    "pernode": "never",
+                    "node": {
+                        "default": {
+                            "default": {
+                                "value": null,
+                                "signature": null
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

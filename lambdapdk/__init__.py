@@ -21,10 +21,10 @@ def get_pdks():
     '''
 
     from siliconcompiler import Chip
-    from lambdapdk import asap7, freepdk45, sky130, gf180
+    from lambdapdk import asap7, freepdk45, sky130, gf180, ihp130
 
     all_pdks = []
-    for pdk_mod in [asap7, freepdk45, sky130, gf180]:
+    for pdk_mod in [asap7, freepdk45, sky130, gf180, ihp130]:
         pdks = pdk_mod.setup(Chip('<pdk>'))
         if not isinstance(pdks, (list, tuple)):
             pdks = [pdks]
@@ -44,13 +44,15 @@ def get_libs():
     from lambdapdk.freepdk45.libs import nangate45, fakeram45
     from lambdapdk.sky130.libs import sky130sc, sky130io, sky130sram
     from lambdapdk.gf180.libs import gf180mcu, gf180io, gf180sram
+    from lambdapdk.ihp130.libs import sg13g2_stdcell, sg13g2_sram
 
     all_libs = []
     for lib_mod in [
             asap7sc7p5t, fakeram7,
             nangate45, fakeram45,
             sky130sc, sky130io, sky130sram,
-            gf180mcu, gf180io, gf180sram]:
+            gf180mcu, gf180io, gf180sram,
+            sg13g2_stdcell, sg13g2_sram]:
         libs = lib_mod.setup(Chip('<lib>'))
         if not isinstance(libs, (list, tuple)):
             libs = [libs]
