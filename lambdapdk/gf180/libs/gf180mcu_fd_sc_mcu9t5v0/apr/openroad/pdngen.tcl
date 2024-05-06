@@ -22,6 +22,5 @@ add_pdn_stripe -grid {block} -layer {Metal4} -width {4.480} -pitch $metal4_pitch
 add_pdn_stripe -grid {block} -layer {Metal5} -width {4.480} -pitch $metal5_pitch \
     -offset [expr {$metal5_pitch / 2}]
 add_pdn_connect -grid {block} -layers {Metal1 Metal4} -max_columns {5} \
-    -ongrid {Metal2 Metal3 Metal4} \
-    -split_cuts {Metal3 0.128}
+    -ongrid {Metal2 Metal3 Metal4}
 add_pdn_connect -grid {block} -layers {Metal4 Metal5}
