@@ -95,8 +95,8 @@ def setup(chip):
         lib.set('option', 'var', 'openroad_place_density', '0.4')
         lib.set('option', 'var', 'openroad_pad_global_place', '1')
         lib.set('option', 'var', 'openroad_pad_detail_place', '0')
-        lib.set('option', 'var', 'openroad_macro_place_halo', ['10', '10'])
-        lib.set('option', 'var', 'openroad_macro_place_channel', ['20.16', '20.16'])
+        lib.set('option', 'var', 'openroad_macro_place_halo', ['15', '15'])
+        lib.set('option', 'var', 'openroad_macro_place_channel', ['30.16', '30.16'])
 
         # Yosys techmap
         lib.add('option', 'file', 'yosys_techmap', libdir + '/techmap/yosys/cells_latch.v')
