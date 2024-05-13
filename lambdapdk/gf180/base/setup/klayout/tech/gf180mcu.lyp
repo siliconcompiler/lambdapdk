@@ -390,8 +390,8 @@ limitations under the License.
   <source>Contact 33/0@1</source>
  </properties>
  <properties>
-  <frame-color>#eddd07</frame-color>
-  <fill-color>#eddd07</fill-color>
+  <frame-color>#0000ff</frame-color>
+  <fill-color>#0000ff</fill-color>
   <frame-brightness>0</frame-brightness>
   <fill-brightness>0</fill-brightness>
   <dither-pattern>I9</dither-pattern>
@@ -424,8 +424,8 @@ limitations under the License.
   <source>Via1 35/0@1</source>
  </properties>
  <properties>
-  <frame-color>#ccf338</frame-color>
-  <fill-color>#ccf338</fill-color>
+  <frame-color>#ff00ff</frame-color>
+  <fill-color>#ff00ff</fill-color>
   <frame-brightness>0</frame-brightness>
   <fill-brightness>0</fill-brightness>
   <dither-pattern>I9</dither-pattern>
