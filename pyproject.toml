@@ -30,8 +30,8 @@ dev = [
     "flake8 == 7.0.0",
     "pytest == 8.2.0",
     "pytest-timeout == 2.3.1",
-    "tclint == 0.2.4",
-    "lambdalib == 0.2.2"
+    "tclint == 0.2.5",
+    "lambdalib == 0.2.3"
 ]
 
 [tool.tclint]
