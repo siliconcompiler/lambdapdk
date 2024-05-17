@@ -87,8 +87,8 @@ def _setup_lib(chip, libname, suffix):
 
     # Defaults for OpenROAD tool variables
     lib.set('option', 'var', 'openroad_place_density', '0.60')
-    lib.set('option', 'var', 'openroad_pad_global_place', '2')
-    lib.set('option', 'var', 'openroad_pad_detail_place', '1')
+    lib.set('option', 'var', 'openroad_pad_global_place', '0')
+    lib.set('option', 'var', 'openroad_pad_detail_place', '0')
     lib.set('option', 'var', 'openroad_macro_place_halo', ['10', '10'])
     lib.set('option', 'var', 'openroad_macro_place_channel', ['12', '12'])
 

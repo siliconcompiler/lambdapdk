@@ -76,7 +76,7 @@ def setup(chip):
     lib.add('option', 'file', 'yosys_addermap', libdir + '/techmap/yosys/cells_adders.v')
 
     # Defaults for OpenROAD tool variables
-    lib.set('option', 'var', 'openroad_place_density', '0.35')
+    lib.set('option', 'var', 'openroad_place_density', '0.50')
     lib.set('option', 'var', 'openroad_pad_global_place', '0')
     lib.set('option', 'var', 'openroad_pad_detail_place', '0')
     lib.set('option', 'var', 'openroad_macro_place_halo', ['22.4', '15.12'])

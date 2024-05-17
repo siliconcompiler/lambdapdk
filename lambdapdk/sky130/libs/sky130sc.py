@@ -140,8 +140,8 @@ def setup(chip):
         lib.add('asic', 'cells', 'tie', f'sky130_fd_sc_{libtype}__conb_1')
 
         # Defaults for OpenROAD tool variables
-        lib.set('option', 'var', 'openroad_place_density', '0.6')
-        lib.set('option', 'var', 'openroad_pad_global_place', '1')
+        lib.set('option', 'var', 'openroad_place_density', '0.60')
+        lib.set('option', 'var', 'openroad_pad_global_place', '0')
         lib.set('option', 'var', 'openroad_pad_detail_place', '0')
         lib.set('option', 'var', 'openroad_macro_place_halo', ['40', '40'])
         lib.set('option', 'var', 'openroad_macro_place_channel', ['80', '80'])

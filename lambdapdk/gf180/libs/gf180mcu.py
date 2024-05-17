@@ -92,8 +92,8 @@ def setup(chip):
                                          f'gf180mcu_fd_sc_mcu{libtype}5v0__tiel'])
 
         # Defaults for OpenROAD tool variables
-        lib.set('option', 'var', 'openroad_place_density', '0.4')
-        lib.set('option', 'var', 'openroad_pad_global_place', '1')
+        lib.set('option', 'var', 'openroad_place_density', '0.50')
+        lib.set('option', 'var', 'openroad_pad_global_place', '0')
         lib.set('option', 'var', 'openroad_pad_detail_place', '0')
         lib.set('option', 'var', 'openroad_macro_place_halo', ['15', '15'])
         lib.set('option', 'var', 'openroad_macro_place_channel', ['30.16', '30.16'])
