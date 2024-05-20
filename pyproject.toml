@@ -28,7 +28,7 @@ timeout = "60"
 # Dev dependencies.
 dev = [
     "flake8 == 7.0.0",
-    "pytest == 8.2.0",
+    "pytest == 8.2.1",
     "pytest-timeout == 2.3.1",
     "tclint == 0.2.5",
     "lambdalib == 0.2.3"
