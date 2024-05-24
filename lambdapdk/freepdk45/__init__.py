@@ -17,9 +17,7 @@ def setup(chip):
     predictive technology models and rule scaling.  This information may be
     freely used, modified, and distributed under the open-source Apache
     License (see the file APACHE-LICENSE-2.0.txt in the root install
-    directory for the complete text). This technology is intended to work
-    with the 45nm BSIM4 Predictive Technology Model from Arizona State
-    University (https://ptm.asu.edu/).  See the HSPICE Models
+    directory for the complete text).   See the HSPICE Models
     section of this file for details about these models.
 
     More information:
