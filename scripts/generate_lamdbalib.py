@@ -55,10 +55,25 @@ if __name__ == "__main__":
         target = info["target"]
 
         for lib in info['libs']:
-            p = multiprocessing.Process(target=lambdalib.generate,
-                                        args=(target.__name__,
-                                              lib,
-                                              f"{pdk_root}/lambdapdk/{pdk}/libs/{lib}/lambda"))
+            p = multiprocessing.Process(
+                target=lambdalib.generate,
+                args=(target.__name__,
+                      lib,
+                      f"{pdk_root}/lambdapdk/{pdk}/libs/{lib}/lambda/stdlib"))
+            procs.append(p)
+            p.start()
+    for proc in procs:
+        proc.join()
+
+    procs = []
+    for pdk, info in libs.items():
+        target = info["target"]
+
+        for lib in info['libs']:
+            p = multiprocessing.Process(
+                target=lambdalib.copy,
+                args=(f"{pdk_root}/lambdapdk/{pdk}/libs/{lib}/lambda/auxlib",
+                      'auxlib'))
             procs.append(p)
             p.start()
     for proc in procs:
