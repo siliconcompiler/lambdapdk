@@ -120,11 +120,15 @@ def _setup_lib(chip, libname, suffix):
     lib.set('option', 'file', 'openroad_global_connect',
             libdir + '/apr/openroad/global_connect.tcl')
 
-    lambda_lib = siliconcompiler.Library(chip, f'lambdalib_{libname}', package='lambdapdk')
-    register_data_source(lambda_lib)
-    lambda_lib.add('option', 'ydir', libdir + '/lambda')
+    libs = [lib]
+    for libtype in ('stdlib', 'auxlib'):
+        lambda_lib = siliconcompiler.Library(chip, f'lambdalib_{libtype}_{libname}',
+                                             package='lambdapdk')
+        register_data_source(lambda_lib)
+        lambda_lib.add('option', 'ydir', libdir + f'/lambda/{libtype}')
+        libs.append(lambda_lib)
 
-    return [lib, lambda_lib]
+    return libs
 
 
 def setup(chip):

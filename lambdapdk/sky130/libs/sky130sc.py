@@ -180,12 +180,14 @@ def setup(chip):
             lib.set('option', 'var', f'{tool}_tielow_cell', f"sky130_fd_sc_{libtype}__conb_1")
             lib.set('option', 'var', f'{tool}_tielow_port', "LO")
 
-        lambda_lib = siliconcompiler.Library(chip, f'lambdalib_{libname}', package='lambdapdk')
-        register_data_source(lambda_lib)
-        lambda_lib.add('option', 'ydir', libdir + '/lambda')
-
         libs.append(lib)
-        libs.append(lambda_lib)
+
+        for libtype in ('stdlib', 'auxlib'):
+            lambda_lib = siliconcompiler.Library(chip, f'lambdalib_{libtype}_{libname}',
+                                                 package='lambdapdk')
+            register_data_source(lambda_lib)
+            lambda_lib.add('option', 'ydir', libdir + f'/lambda/{libtype}')
+            libs.append(lambda_lib)
 
     return libs
 
