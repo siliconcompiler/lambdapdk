@@ -67,9 +67,6 @@ def setup(chip):
     # APR Setup
     # TODO: remove libtype
     for tool in ('openroad', 'klayout', 'magic'):
-        # Add unithd for backwards compatibility
-        pdk.set('pdk', process, 'aprtech', tool, stackup, 'unithd', 'lef',
-                pdkdir + '/apr/sky130_fd_sc_hd.tlef')
         for libtype in ('hd', 'hdll'):
             pdk.set('pdk', process, 'aprtech', tool, stackup, libtype, 'lef',
                     pdkdir + f'/apr/sky130_fd_sc_{libtype}.tlef')
