@@ -70,13 +70,76 @@ def stdlib():
 
 
 def auxlib():
+    always_copy = [
+        'la_clkmux2',
+        'la_clkmux4',
+    ]
+    generate_libs = {
+        "freepdk45": {
+            "nangate45": {
+                "implemented": [
+                    'la_antenna',
+                    'la_clkicgand',
+                    'la_clkicgor',
+                    'la_pwrbuf',
+                    'la_tbuf',
+                    'la_dsync',
+                    'la_rsync'
+                ],
+                "missing": [
+                    'la_decap',
+                    'la_footer',
+                    'la_header',
+                    'la_ibuf',
+                    'la_idiff',
+                    'la_keeper',
+                    'la_obuf',
+                    'la_odiff'
+                ]
+            }
+        }
+    }
+
     procs = []
     for pdk, info in libs.items():
         for lib in info['libs']:
+            exclude = []
+            exclude.extend(generate_libs[pdk][lib]["implemented"])
+            exclude.extend(generate_libs[pdk][lib]["missing"])
+
             p = multiprocessing.Process(
                 target=lambdalib.copy,
-                args=(f"{pdk_root}/lambdapdk/{pdk}/libs/{lib}/lambda/auxlib",
-                      'auxlib'))
+                args=(f"{pdk_root}/lambdapdk/{pdk}/libs/{lib}/lambda/auxlib",),
+                kwargs={
+                    "la_lib": 'auxlib',
+                    "exclude": exclude
+                })
+            procs.append(p)
+            p.start()
+    for proc in procs:
+        proc.join()
+
+    procs = []
+    for pdk, info in libs.items():
+        target = info["target"]
+
+        if pdk != 'freepdk45':
+            continue
+
+        for lib in info['libs']:
+            exclude = [*always_copy]
+            exclude.extend(generate_libs[pdk][lib]["implemented"])
+            exclude.extend(generate_libs[pdk][lib]["missing"])
+
+            p = multiprocessing.Process(
+                target=lambdalib.generate,
+                args=(target.__name__,
+                      lib,
+                      f"{pdk_root}/lambdapdk/{pdk}/libs/{lib}/lambda/auxlib"),
+                kwargs={
+                    "la_lib": 'auxlib',
+                    "exclude": exclude
+                })
             procs.append(p)
             p.start()
     for proc in procs:
