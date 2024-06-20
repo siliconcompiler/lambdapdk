@@ -24,7 +24,8 @@ libs = {
     "sky130": {
         "target": skywater130_demo,
         "libs": [
-            "sky130hd"
+            "sky130hd",
+            "sky130hdll"
         ]
     },
     "gf180": {
