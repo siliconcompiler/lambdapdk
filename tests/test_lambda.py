@@ -9,10 +9,27 @@ from lambdapdk.sky130.libs import sky130sc, sky130io, sky130sram
 
 
 @pytest.mark.parametrize('module,path', [
-    (asap7sc7p5t, 'lambdapdk/asap7/libs/{lib_name}/lambda'),
-    (nangate45, 'lambdapdk/freepdk45/libs/{lib_name}/lambda'),
-    (sky130sc, 'lambdapdk/sky130/libs/{lib_name}/lambda'),
-    (gf180mcu, 'lambdapdk/gf180/libs/{lib_name}/lambda')
+    (asap7sc7p5t, 'lambdapdk/asap7/libs/{lib_name}/lambda/auxlib'),
+    (nangate45, 'lambdapdk/freepdk45/libs/{lib_name}/lambda/auxlib'),
+    (sky130sc, 'lambdapdk/sky130/libs/{lib_name}/lambda/auxlib'),
+    (gf180mcu, 'lambdapdk/gf180/libs/{lib_name}/lambda/auxlib')
+    ])
+def test_la_auxlib(module, path):
+    libs = module.setup(Chip('<lib>'))
+    if not isinstance(libs, list):
+        libs = [libs]
+    for lib in libs:
+        lib_name = lib.design
+        if "lambdalib" in lib_name:
+            continue
+        assert lambdalib.check(path.format(lib_name=lib_name), 'auxlib')
+
+
+@pytest.mark.parametrize('module,path', [
+    (asap7sc7p5t, 'lambdapdk/asap7/libs/{lib_name}/lambda/stdlib'),
+    (nangate45, 'lambdapdk/freepdk45/libs/{lib_name}/lambda/stdlib'),
+    (sky130sc, 'lambdapdk/sky130/libs/{lib_name}/lambda/stdlib'),
+    (gf180mcu, 'lambdapdk/gf180/libs/{lib_name}/lambda/stdlib')
     ])
 def test_la_stdlib(module, path):
     libs = module.setup(Chip('<lib>'))

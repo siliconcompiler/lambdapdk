@@ -7,6 +7,7 @@
 import os
 import lambdalib
 import multiprocessing
+import argparse
 
 from lambdalib.utils import write_la_spram
 
@@ -17,53 +18,285 @@ from siliconcompiler.targets import (
     gf180_demo
 )
 
-if __name__ == "__main__":
-    pdk_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+pdk_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-    libs = {
+libs = {
+    "sky130": {
+        "target": skywater130_demo,
+        "libs": [
+            "sky130hd",
+            "sky130hdll"
+        ]
+    },
+    "gf180": {
+        "target": gf180_demo,
+        "libs": [
+            "gf180mcu_fd_sc_mcu7t5v0",
+            "gf180mcu_fd_sc_mcu9t5v0"
+        ]
+    },
+    "freepdk45": {
+        "target": freepdk45_demo,
+        "libs": [
+            "nangate45"
+        ]
+    },
+    "asap7": {
+        "target": asap7_demo,
+        "libs": [
+            "asap7sc7p5t_rvt",
+            "asap7sc7p5t_lvt",
+            "asap7sc7p5t_slvt"
+        ]
+    },
+}
+
+
+def stdlib():
+    procs = []
+    for pdk, info in libs.items():
+        target = info["target"]
+
+        for lib in info['libs']:
+            p = multiprocessing.Process(
+                target=lambdalib.generate,
+                args=(target.__name__,
+                      lib,
+                      f"{pdk_root}/lambdapdk/{pdk}/libs/{lib}/lambda/stdlib"))
+            procs.append(p)
+            p.start()
+    for proc in procs:
+        proc.join()
+
+
+def auxlib():
+    always_copy = [
+        'la_clkmux2',
+        'la_clkmux4',
+    ]
+    generate_libs = {
         "sky130": {
-            "target": skywater130_demo,
-            "libs": [
-                "sky130hd"
-            ]
+            "sky130hd": {
+                "implemented": [
+                    'la_antenna',
+                    'la_clkicgand',
+                    'la_clkicgor',
+                    'la_pwrbuf',
+                    'la_tbuf',
+                    'la_dsync',
+                    'la_rsync',
+                    'la_decap'
+                ],
+                "missing": [
+                    'la_footer',
+                    'la_header',
+                    'la_ibuf',
+                    'la_idiff',
+                    'la_keeper',
+                    'la_obuf',
+                    'la_odiff'
+                ]
+            },
+            "sky130hdll": {
+                "implemented": [
+                    'la_antenna',
+                    'la_clkicgand',
+                    'la_clkicgor',
+                    'la_pwrbuf',
+                    'la_tbuf',
+                    'la_dsync',
+                    'la_rsync',
+                    'la_decap'
+                ],
+                "missing": [
+                    'la_footer',
+                    'la_header',
+                    'la_ibuf',
+                    'la_idiff',
+                    'la_keeper',
+                    'la_obuf',
+                    'la_odiff'
+                ]
+            }
         },
         "gf180": {
-            "target": gf180_demo,
-            "libs": [
-                "gf180mcu_fd_sc_mcu7t5v0",
-                "gf180mcu_fd_sc_mcu9t5v0"
-            ]
+            "gf180mcu_fd_sc_mcu7t5v0": {
+                "implemented": [
+                    'la_antenna',
+                    'la_clkicgand',
+                    'la_clkicgor',
+                    'la_pwrbuf',
+                    'la_tbuf',
+                    'la_dsync',
+                    'la_rsync'
+                ],
+                "missing": [
+                    'la_decap',
+                    'la_footer',
+                    'la_header',
+                    'la_ibuf',
+                    'la_idiff',
+                    'la_keeper',
+                    'la_obuf',
+                    'la_odiff'
+                ]
+            },
+            "gf180mcu_fd_sc_mcu9t5v0": {
+                "implemented": [
+                    'la_antenna',
+                    'la_clkicgand',
+                    'la_clkicgor',
+                    'la_pwrbuf',
+                    'la_tbuf',
+                    'la_dsync',
+                    'la_rsync'
+                ],
+                "missing": [
+                    'la_decap',
+                    'la_footer',
+                    'la_header',
+                    'la_ibuf',
+                    'la_idiff',
+                    'la_keeper',
+                    'la_obuf',
+                    'la_odiff'
+                ]
+            }
         },
         "freepdk45": {
-            "target": freepdk45_demo,
-            "libs": [
-                "nangate45"
-            ]
+            "nangate45": {
+                "implemented": [
+                    'la_antenna',
+                    'la_clkicgand',
+                    'la_clkicgor',
+                    'la_pwrbuf',
+                    'la_tbuf',
+                    'la_dsync',
+                    'la_rsync'
+                ],
+                "missing": [
+                    'la_decap',
+                    'la_footer',
+                    'la_header',
+                    'la_ibuf',
+                    'la_idiff',
+                    'la_keeper',
+                    'la_obuf',
+                    'la_odiff'
+                ]
+            }
         },
         "asap7": {
-            "target": asap7_demo,
-            "libs": [
-                "asap7sc7p5t_rvt",
-                "asap7sc7p5t_lvt",
-                "asap7sc7p5t_slvt"
-            ]
-        },
+            "asap7sc7p5t_rvt": {
+                "implemented": [
+                    'la_clkicgand',
+                    'la_clkicgor',
+                    'la_pwrbuf',
+                    'la_dsync',
+                    'la_rsync',
+                    'la_decap'
+                ],
+                "missing": [
+                    'la_antenna',
+                    'la_footer',
+                    'la_header',
+                    'la_ibuf',
+                    'la_idiff',
+                    'la_keeper',
+                    'la_obuf',
+                    'la_odiff',
+                    'la_tbuf'
+                ]
+            },
+            "asap7sc7p5t_lvt": {
+                "implemented": [
+                    'la_clkicgand',
+                    'la_clkicgor',
+                    'la_pwrbuf',
+                    'la_dsync',
+                    'la_rsync',
+                    'la_decap'
+                ],
+                "missing": [
+                    'la_antenna',
+                    'la_footer',
+                    'la_header',
+                    'la_ibuf',
+                    'la_idiff',
+                    'la_keeper',
+                    'la_obuf',
+                    'la_odiff',
+                    'la_tbuf'
+                ]
+            },
+            "asap7sc7p5t_slvt": {
+                "implemented": [
+                    'la_clkicgand',
+                    'la_clkicgor',
+                    'la_pwrbuf',
+                    'la_dsync',
+                    'la_rsync',
+                    'la_decap'
+                ],
+                "missing": [
+                    'la_antenna',
+                    'la_footer',
+                    'la_header',
+                    'la_ibuf',
+                    'la_idiff',
+                    'la_keeper',
+                    'la_obuf',
+                    'la_odiff',
+                    'la_tbuf'
+                ]
+            },
+        }
     }
+
+    procs = []
+    for pdk, info in libs.items():
+        for lib in info['libs']:
+            exclude = []
+            exclude.extend(generate_libs[pdk][lib]["implemented"])
+            exclude.extend(generate_libs[pdk][lib]["missing"])
+
+            p = multiprocessing.Process(
+                target=lambdalib.copy,
+                args=(f"{pdk_root}/lambdapdk/{pdk}/libs/{lib}/lambda/auxlib",),
+                kwargs={
+                    "la_lib": 'auxlib',
+                    "exclude": exclude
+                })
+            procs.append(p)
+            p.start()
+    for proc in procs:
+        proc.join()
 
     procs = []
     for pdk, info in libs.items():
         target = info["target"]
 
         for lib in info['libs']:
-            p = multiprocessing.Process(target=lambdalib.generate,
-                                        args=(target.__name__,
-                                              lib,
-                                              f"{pdk_root}/lambdapdk/{pdk}/libs/{lib}/lambda"))
+            exclude = [*always_copy]
+            exclude.extend(generate_libs[pdk][lib]["implemented"])
+            exclude.extend(generate_libs[pdk][lib]["missing"])
+
+            p = multiprocessing.Process(
+                target=lambdalib.generate,
+                args=(target.__name__,
+                      lib,
+                      f"{pdk_root}/lambdapdk/{pdk}/libs/{lib}/lambda/auxlib"),
+                kwargs={
+                    "la_lib": 'auxlib',
+                    "exclude": exclude
+                })
             procs.append(p)
             p.start()
     for proc in procs:
         proc.join()
 
+
+def ramlib():
     asap7_spram_port_map = [
         ("clk", "clk"),
         ("addr_in", "mem_addr"),
@@ -195,6 +428,8 @@ if __name__ == "__main__":
             with open(f"{pdk_root}/lambdapdk/{pdk}/libs/{lib}/lambda/{ram}.v", "w") as f:
                 write_la_spram(f, info[ram])
 
+
+def iolib():
     iolib = {
         "sky130": {
             "name": "sky130io",
@@ -226,3 +461,25 @@ if __name__ == "__main__":
         lambdalib.copy(f"{pdk_root}/lambdapdk/{pdk}/libs/{lib}/lambda",
                        la_lib='iolib',
                        exclude=info['implementations'])
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--stdlib', action='store_true')
+    parser.add_argument('--auxlib', action='store_true')
+    parser.add_argument('--ramlib', action='store_true')
+    parser.add_argument('--iolib', action='store_true')
+
+    args = parser.parse_args()
+
+    if args.stdlib:
+        stdlib()
+
+    if args.auxlib:
+        auxlib()
+
+    if args.ramlib:
+        ramlib()
+
+    if args.iolib:
+        iolib()
