@@ -14,10 +14,12 @@ module la_pwrbuf #(
     output z
     );
 
-`ifdef SIM
-   assign z = ((vdd === 1'b1) && (vss === 1'b0)) ? a : 1'bX;
-`else
-   assign z = a;
-`endif
+// `ifdef SIM
+//    assign z = ((vdd === 1'b1) && (vss === 1'b0)) ? a : 1'bX;
+// `else
+//    assign z = a;
+// `endif
+
+gf180mcu_fd_sc_mcu7t5v0__buf_1 u0(.I(a), .Z(z), .VSS(vss), .VDD(vdd));
 
 endmodule

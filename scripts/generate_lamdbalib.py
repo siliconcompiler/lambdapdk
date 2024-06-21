@@ -84,7 +84,8 @@ def auxlib():
                     'la_pwrbuf',
                     'la_tbuf',
                     'la_dsync',
-                    'la_rsync'
+                    'la_rsync',
+                    'la_decap'
                 ],
                 "missing": [
                     'la_footer',
@@ -104,9 +105,54 @@ def auxlib():
                     'la_pwrbuf',
                     'la_tbuf',
                     'la_dsync',
+                    'la_rsync',
+                    'la_decap'
+                ],
+                "missing": [
+                    'la_footer',
+                    'la_header',
+                    'la_ibuf',
+                    'la_idiff',
+                    'la_keeper',
+                    'la_obuf',
+                    'la_odiff'
+                ]
+            }
+        },
+        "gf180": {
+            "gf180mcu_fd_sc_mcu7t5v0": {
+                "implemented": [
+                    'la_antenna',
+                    'la_clkicgand',
+                    'la_clkicgor',
+                    'la_pwrbuf',
+                    'la_tbuf',
+                    'la_dsync',
                     'la_rsync'
                 ],
                 "missing": [
+                    'la_decap',
+                    'la_footer',
+                    'la_header',
+                    'la_ibuf',
+                    'la_idiff',
+                    'la_keeper',
+                    'la_obuf',
+                    'la_odiff'
+                ]
+            },
+            "gf180mcu_fd_sc_mcu9t5v0": {
+                "implemented": [
+                    'la_antenna',
+                    'la_clkicgand',
+                    'la_clkicgor',
+                    'la_pwrbuf',
+                    'la_tbuf',
+                    'la_dsync',
+                    'la_rsync'
+                ],
+                "missing": [
+                    'la_decap',
                     'la_footer',
                     'la_header',
                     'la_ibuf',

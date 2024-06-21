@@ -13,10 +13,12 @@ module la_clkicgand #(
     output eclk  // enabled clock output
 );
 
-    reg en_stable;
+    // reg en_stable;
 
-    always @(clk or en or te) if (~clk) en_stable <= en | te;
+    // always @(clk or en or te) if (~clk) en_stable <= en | te;
 
-    assign eclk = clk & en_stable;
+    // assign eclk = clk & en_stable;
+
+gf180mcu_fd_sc_mcu9t5v0__icgtp_1 u0(.CLK(clk), .E(en), .TE(te), .Q(eclk));
 
 endmodule

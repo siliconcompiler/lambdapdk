@@ -12,6 +12,8 @@ module la_tbuf #(
     output z
 );
 
-    assign z = oe ? a : 1'bz;
+    // assign z = oe ? a : 1'bz;
+
+gf180mcu_fd_sc_mcu9t5v0__bufz_1 u0(.I(a), .EN(oe), .Z(z));
 
 endmodule
