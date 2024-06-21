@@ -1,5 +1,6 @@
 import pytest
 from siliconcompiler import Chip
+import os
 
 from lambdapdk import asap7, freepdk45, sky130, gf180
 from lambdapdk.asap7.libs import asap7sc7p5t, fakeram7
@@ -25,3 +26,12 @@ def test_lib_paths(lib):
     chip = Chip('<lib>')
     chip.use(lib)
     assert chip.check_filepaths()
+
+
+def test_symbolic_links():
+    lambda_root = os.path.dirname(os.path.abspath(os.path.dirname(__file__)))
+    for root, dirs, files in os.walk(lambda_root):
+        for d in dirs:
+            assert not os.path.islink(os.path.join(root, d))
+        for f in files:
+            assert not os.path.islink(os.path.join(root, f))
