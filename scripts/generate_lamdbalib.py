@@ -185,6 +185,71 @@ def auxlib():
                     'la_odiff'
                 ]
             }
+        },
+        "asap7": {
+            "asap7sc7p5t_rvt": {
+                "implemented": [
+                    'la_clkicgand',
+                    'la_clkicgor',
+                    'la_pwrbuf',
+                    'la_dsync',
+                    'la_rsync',
+                    'la_decap'
+                ],
+                "missing": [
+                    'la_antenna',
+                    'la_footer',
+                    'la_header',
+                    'la_ibuf',
+                    'la_idiff',
+                    'la_keeper',
+                    'la_obuf',
+                    'la_odiff',
+                    'la_tbuf'
+                ]
+            },
+            "asap7sc7p5t_lvt": {
+                "implemented": [
+                    'la_clkicgand',
+                    'la_clkicgor',
+                    'la_pwrbuf',
+                    'la_dsync',
+                    'la_rsync',
+                    'la_decap'
+                ],
+                "missing": [
+                    'la_antenna',
+                    'la_footer',
+                    'la_header',
+                    'la_ibuf',
+                    'la_idiff',
+                    'la_keeper',
+                    'la_obuf',
+                    'la_odiff',
+                    'la_tbuf'
+                ]
+            },
+            "asap7sc7p5t_slvt": {
+                "implemented": [
+                    'la_clkicgand',
+                    'la_clkicgor',
+                    'la_pwrbuf',
+                    'la_dsync',
+                    'la_rsync',
+                    'la_decap'
+                ],
+                "missing": [
+                    'la_antenna',
+                    'la_footer',
+                    'la_header',
+                    'la_ibuf',
+                    'la_idiff',
+                    'la_keeper',
+                    'la_obuf',
+                    'la_odiff',
+                    'la_tbuf'
+                ]
+            },
         }
     }
 

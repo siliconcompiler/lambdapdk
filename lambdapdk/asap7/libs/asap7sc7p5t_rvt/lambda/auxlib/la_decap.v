@@ -11,4 +11,6 @@ module la_decap #(
     output vdd
 );
 
+DECAPx10_ASAP7_75t_R u0(.VSS(vss), .VDD(vdd));
+
 endmodule
