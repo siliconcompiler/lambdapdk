@@ -75,6 +75,48 @@ def auxlib():
         'la_clkmux4',
     ]
     generate_libs = {
+        "sky130": {
+            "sky130hd": {
+                "implemented": [
+                    'la_antenna',
+                    'la_clkicgand',
+                    'la_clkicgor',
+                    'la_pwrbuf',
+                    'la_tbuf',
+                    'la_dsync',
+                    'la_rsync'
+                ],
+                "missing": [
+                    'la_footer',
+                    'la_header',
+                    'la_ibuf',
+                    'la_idiff',
+                    'la_keeper',
+                    'la_obuf',
+                    'la_odiff'
+                ]
+            },
+            "sky130hdll": {
+                "implemented": [
+                    'la_antenna',
+                    'la_clkicgand',
+                    'la_clkicgor',
+                    'la_pwrbuf',
+                    'la_tbuf',
+                    'la_dsync',
+                    'la_rsync'
+                ],
+                "missing": [
+                    'la_footer',
+                    'la_header',
+                    'la_ibuf',
+                    'la_idiff',
+                    'la_keeper',
+                    'la_obuf',
+                    'la_odiff'
+                ]
+            }
+        },
         "freepdk45": {
             "nangate45": {
                 "implemented": [

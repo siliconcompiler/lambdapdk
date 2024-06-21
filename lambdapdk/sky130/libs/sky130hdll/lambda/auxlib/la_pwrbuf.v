@@ -14,10 +14,12 @@ module la_pwrbuf #(
     output z
     );
 
-`ifdef SIM
-   assign z = ((vdd === 1'b1) && (vss === 1'b0)) ? a : 1'bX;
-`else
-   assign z = a;
-`endif
+// `ifdef SIM
+//    assign z = ((vdd === 1'b1) && (vss === 1'b0)) ? a : 1'bX;
+// `else
+//    assign z = a;
+// `endif
+
+sky130_fd_sc_hdll__buf_1 u0(.A(a), .X(z), .VGND(vss), .VPWR(vdd));
 
 endmodule

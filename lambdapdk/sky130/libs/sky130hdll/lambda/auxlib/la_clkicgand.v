@@ -13,10 +13,12 @@ module la_clkicgand #(
     output eclk  // enabled clock output
 );
 
-    reg en_stable;
+    // reg en_stable;
 
-    always @(clk or en or te) if (~clk) en_stable <= en | te;
+    // always @(clk or en or te) if (~clk) en_stable <= en | te;
 
-    assign eclk = clk & en_stable;
+    // assign eclk = clk & en_stable;
+
+sky130_fd_sc_hdll__sdlclkp_1 u0(.CLK(clk), .SCE(te), .GATE(en), .GCLK(eclk));
 
 endmodule

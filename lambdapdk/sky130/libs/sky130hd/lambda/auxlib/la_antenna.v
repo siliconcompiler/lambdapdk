@@ -11,4 +11,6 @@ module la_antenna #(
     output z
 );
 
+sky130_fd_sc_hd__diode_2 u0(.DIODE(z), .VGND(vss));
+
 endmodule
