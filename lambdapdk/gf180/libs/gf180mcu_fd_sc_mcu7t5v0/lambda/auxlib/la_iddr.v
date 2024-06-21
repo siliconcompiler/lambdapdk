@@ -29,8 +29,6 @@
 
 module la_iddr(clk, in, outrise, outfall);
   wire _0_;
-  wire _1_;
-  wire _2_;
   input clk;
   wire clk;
   input in;
@@ -40,25 +38,23 @@ module la_iddr(clk, in, outrise, outfall);
   wire outfall;
   output outrise;
   wire outrise;
-  INV_X2 _3_ (
-    .A(clk),
+  gf180mcu_fd_sc_mcu7t5v0__clkinv_2 _1_ (
+    .I(clk),
     .ZN(_0_)
   );
-  DLL_X1 _4_ (
+  gf180mcu_fd_sc_mcu7t5v0__latq_1 _2_ (
     .D(inrise),
-    .GN(clk),
+    .E(_0_),
     .Q(outrise)
   );
-  DFF_X1 _5_ (
-    .CK(clk),
+  gf180mcu_fd_sc_mcu7t5v0__dffq_2 _3_ (
+    .CLK(clk),
     .D(in),
-    .Q(inrise),
-    .QN(_2_)
+    .Q(inrise)
   );
-  DFF_X1 _6_ (
-    .CK(_0_),
+  gf180mcu_fd_sc_mcu7t5v0__dffnq_2 _4_ (
+    .CLKN(clk),
     .D(in),
-    .Q(outfall),
-    .QN(_1_)
+    .Q(outfall)
   );
 endmodule

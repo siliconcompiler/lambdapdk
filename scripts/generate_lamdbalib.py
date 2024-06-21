@@ -276,9 +276,6 @@ def auxlib():
     for pdk, info in libs.items():
         target = info["target"]
 
-        if pdk != 'freepdk45':
-            continue
-
         for lib in info['libs']:
             exclude = [*always_copy]
             exclude.extend(generate_libs[pdk][lib]["implemented"])

@@ -26,13 +26,13 @@ module la_isolo(iso, in, out);
   wire iso;
   output out;
   wire out;
-  INV_X2 _1_ (
-    .A(in),
+  gf180mcu_fd_sc_mcu9t5v0__clkinv_2 _1_ (
+    .I(iso),
     .ZN(_0_)
   );
-  NOR2_X2 _2_ (
-    .A1(_0_),
-    .A2(iso),
-    .ZN(out)
+  gf180mcu_fd_sc_mcu9t5v0__and2_2 _2_ (
+    .A1(in),
+    .A2(_0_),
+    .Z(out)
   );
 endmodule

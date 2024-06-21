@@ -25,9 +25,9 @@ module la_isohi(iso, in, out);
   wire iso;
   output out;
   wire out;
-  OR2_X4 _0_ (
+  gf180mcu_fd_sc_mcu7t5v0__or2_4 _0_ (
     .A1(in),
     .A2(iso),
-    .ZN(out)
+    .Z(out)
   );
 endmodule
