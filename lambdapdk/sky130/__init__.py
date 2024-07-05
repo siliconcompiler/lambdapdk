@@ -61,8 +61,7 @@ def setup(chip):
     pdk.set('pdk', process, 'stackup', stackup)
     pdk.set('pdk', process, 'wafersize', wafersize)
     pdk.set('pdk', process, 'edgemargin', edgemargin)
-    pdk.set('pdk', process, 'hscribe', hscribe)
-    pdk.set('pdk', process, 'vscribe', vscribe)
+    pdk.set('pdk', process, 'scribe', (hscribe, vscribe))
 
     # APR Setup
     # TODO: remove libtype
