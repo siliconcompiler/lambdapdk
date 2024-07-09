@@ -62,12 +62,10 @@ def setup(chip):
         for size in (1, 2, 3, 4, 8, 12, 16, 20):
             lib.add('asic', 'cells', 'clkbuf', f'gf180mcu_fd_sc_mcu{libtype}5v0__clkbuf_{size}')
 
-        # hold / delay cells
+        # hold cells
         for variant in ('a', 'b', 'c', 'd'):
             for size in (1, 2, 4):
                 lib.add('asic', 'cells', 'hold',
-                        f'gf180mcu_fd_sc_mcu{libtype}5v0__dly{variant}_{size}')
-                lib.add('asic', 'cells', 'delay',
                         f'gf180mcu_fd_sc_mcu{libtype}5v0__dly{variant}_{size}')
 
         # Decoupling
