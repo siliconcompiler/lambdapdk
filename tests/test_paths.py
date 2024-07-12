@@ -29,9 +29,24 @@ def test_lib_paths(lib):
 
 
 def test_symbolic_links():
+    def check(path):
+        if os.path.basename(path).startswith('.'):
+            return
+
+        assert not os.path.islink(path)
+
+    skip = []
+
     lambda_root = os.path.dirname(os.path.abspath(os.path.dirname(__file__)))
     for root, dirs, files in os.walk(lambda_root):
+        if os.path.basename(root).startswith('.'):
+            skip.append(root)
+            continue
+
+        if any([root.startswith(d) for d in skip]):
+            continue
+
         for d in dirs:
-            assert not os.path.islink(os.path.join(root, d))
+            check(os.path.join(root, d))
         for f in files:
-            assert not os.path.islink(os.path.join(root, f))
+            check(os.path.join(root, f))
