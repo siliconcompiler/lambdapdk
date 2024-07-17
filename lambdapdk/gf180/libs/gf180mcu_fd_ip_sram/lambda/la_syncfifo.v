@@ -9,7 +9,8 @@
  *
  ****************************************************************************/
 
-module la_syncfifo #(
+module la_syncfifo
+  #(
     parameter DW    = 32,        // Memory width
     parameter DEPTH = 4,         // FIFO depth
     parameter NS    = 1,         // Number of power supplies
@@ -17,22 +18,24 @@ module la_syncfifo #(
     parameter CTRLW = 1,         // width of asic ctrl interface
     parameter TESTW = 1,         // width of asic test interface
     parameter TYPE  = "DEFAULT"  // Pass through variable for hard macro
-) (  // common clock, reset, power, ctrl
-    input              clk,
-    input              nreset,
-    input              vss,        // ground signal
-    input  [   NS-1:0] vdd,        // supplies
-    input              chaosmode,  // randomly assert fifo full when set
-    input  [CTRLW-1:0] ctrl,       // pass through ASIC control interface
-    input  [TESTW-1:0] test,       // pass through ASIC test interface
-    // write input
-    input              wr_en,      // write fifo
-    input  [   DW-1:0] wr_din,     // data to write
-    output             wr_full,    // fifo full
-    // read output
-    input              rd_en,      // read fifo
-    output [   DW-1:0] rd_dout,    // output data
-    output             rd_empty    // fifo is empty
+    )
+   (// basic interface
+    input             clk,
+    input             nreset,//async reset
+    input             clear, //clear fifo statemachine (sync)
+    input             vss, // ground signal
+    input [NS-1:0]    vdd, // supplies
+    input             chaosmode, // randomly assert fifo full when set
+    input [CTRLW-1:0] ctrl, // pass through ASIC control interface
+    input [TESTW-1:0] test, // pass through ASIC test interface
+    // write port
+    input             wr_en, // write fifo
+    input [DW-1:0]    wr_din, // data to write
+    output            wr_full, // fifo full
+    // read port
+    input             rd_en, // read fifo
+    output [DW-1:0]   rd_dout, // output data
+    output            rd_empty    // fifo is empty
 );
 
     // local params
@@ -54,7 +57,10 @@ module la_syncfifo #(
     //############################
 
     // support any fifo depth
-    assign wr_full = (chaosfull & chaosmode) | {~wr_addr[AW], wr_addr[AW-1:0]} == rd_addr[AW:0];
+    assign wr_full = (chaosfull & chaosmode) |
+                     {~wr_addr[AW], wr_addr[AW-1:0]} == rd_addr[AW:0];
+
+
 
     assign rd_empty = wr_addr[AW:0] == rd_addr[AW:0];
 
@@ -78,7 +84,12 @@ module la_syncfifo #(
         if (~nreset) begin
             wr_addr[AW:0] <= 'd0;
             rd_addr[AW:0] <= 'b0;
-        end else if (fifo_write & fifo_read) begin
+        end
+        else if(clear) begin
+           wr_addr[AW:0]    <= 'd0;
+           rd_addr[AW:0]    <= 'b0;
+        end
+        else if (fifo_write & fifo_read) begin
             wr_addr[AW:0] <= wr_addr_nxt[AW:0];
             rd_addr[AW:0] <= rd_addr_nxt[AW:0];
         end else if (fifo_write) begin
