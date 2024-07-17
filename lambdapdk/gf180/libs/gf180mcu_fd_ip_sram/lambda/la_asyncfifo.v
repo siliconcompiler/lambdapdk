@@ -50,8 +50,7 @@ module la_asyncfifo #(
 );
 
     // local params
-    // The last part is to support DEPTH of 1
-    localparam AW = $clog2(DEPTH) + {31'h0, (DEPTH == 1)};
+    localparam AW = (DEPTH == 1) ? 1 : $clog2(DEPTH);
 
     // local wires
     reg  [AW:0] wr_grayptr;
