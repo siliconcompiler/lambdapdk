@@ -15,7 +15,7 @@
  *
  ****************************************************************************/
 module la_ioinput #(
-    parameter TYPE  = "DEFAULT",  // cell type
+    parameter PROP  = "DEFAULT",  // cell type
     parameter SIDE  = "NO",       // "NO", "SO", "EA", "WE"
     parameter CFGW  = 16,         // width of core config bus
     parameter RINGW = 8           // width of io ring

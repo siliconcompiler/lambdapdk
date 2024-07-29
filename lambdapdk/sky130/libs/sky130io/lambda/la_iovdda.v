@@ -8,7 +8,7 @@
  *
  ****************************************************************************/
 module la_iovdda #(
-    parameter TYPE  = "DEFAULT",  // cell type
+    parameter PROP  = "DEFAULT",  // cell type
     parameter SIDE  = "NO",       // "NO", "SO", "EA", "WE"
     parameter RINGW = 8           // width of io ring
 ) (
