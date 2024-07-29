@@ -17,7 +17,7 @@ module la_syncfifo
     parameter CHAOS = 1,         // generates random full logic when set
     parameter CTRLW = 1,         // width of asic ctrl interface
     parameter TESTW = 1,         // width of asic test interface
-    parameter TYPE  = "DEFAULT"  // Pass through variable for hard macro
+    parameter PROP  = "DEFAULT"  // Pass through variable for hard macro
     )
    (// basic interface
     input             clk,

@@ -7,7 +7,7 @@
  *
  * This is a wrapper for selecting from a set of hardened memory macros.
  *
- * A synthesizable reference model is used when the TYPE is DEFAULT. The
+ * A synthesizable reference model is used when the PROP is DEFAULT. The
  * synthesizable model does not implement the cfg and test interface and should
  * only be used for basic testing and for synthesizing for FPGA devices.
  * Advanced ASIC development should rely on complete functional models
@@ -15,7 +15,7 @@
  *
  * Technologoy specific implementations of "la_spram" would generally include
  * one ore more hardcoded instantiations of ram modules with a generate
- * statement relying on the "TYPE" to select between the list of modules
+ * statement relying on the "PROP" to select between the list of modules
  * at build time.
  *
  ****************************************************************************/
@@ -23,7 +23,7 @@
 module la_spram
   #(parameter DW     = 32,          // Memory width
     parameter AW     = 10,          // Address width (derived)
-    parameter TYPE   = "DEFAULT",   // Pass through variable for hard macro
+    parameter PROP   = "DEFAULT",   // Pass through variable for hard macro
     parameter CTRLW  = 128,         // Width of asic ctrl interface
     parameter TESTW  = 128          // Width of asic test interface
     )
@@ -45,28 +45,28 @@ module la_spram
     );
 
     // Determine which memory to select
-    localparam MEM_TYPE = (TYPE != "DEFAULT") ? TYPE :
+    localparam MEM_PROP = (PROP != "DEFAULT") ? PROP :
       (AW >= 9) ? (DW >= 64) ? "fakeram45_512x64" : "fakeram45_512x32" :
       (AW == 8) ? (DW >= 64) ? "fakeram45_256x64" : "fakeram45_256x32" :
       (AW == 7) ? "fakeram45_128x32" :
       "fakeram45_64x32";
 
     localparam MEM_WIDTH = 
-      (MEM_TYPE == "fakeram45_128x32") ? 32 :
-      (MEM_TYPE == "fakeram45_256x32") ? 32 :
-      (MEM_TYPE == "fakeram45_256x64") ? 64 :
-      (MEM_TYPE == "fakeram45_512x32") ? 32 :
-      (MEM_TYPE == "fakeram45_512x64") ? 64 :
-      (MEM_TYPE == "fakeram45_64x32") ? 32 :
+      (MEM_PROP == "fakeram45_128x32") ? 32 :
+      (MEM_PROP == "fakeram45_256x32") ? 32 :
+      (MEM_PROP == "fakeram45_256x64") ? 64 :
+      (MEM_PROP == "fakeram45_512x32") ? 32 :
+      (MEM_PROP == "fakeram45_512x64") ? 64 :
+      (MEM_PROP == "fakeram45_64x32") ? 32 :
       0;
  
     localparam MEM_DEPTH = 
-      (MEM_TYPE == "fakeram45_128x32") ? 7 :
-      (MEM_TYPE == "fakeram45_256x32") ? 8 :
-      (MEM_TYPE == "fakeram45_256x64") ? 8 :
-      (MEM_TYPE == "fakeram45_512x32") ? 9 :
-      (MEM_TYPE == "fakeram45_512x64") ? 9 :
-      (MEM_TYPE == "fakeram45_64x32") ? 6 :
+      (MEM_PROP == "fakeram45_128x32") ? 7 :
+      (MEM_PROP == "fakeram45_256x32") ? 8 :
+      (MEM_PROP == "fakeram45_256x64") ? 8 :
+      (MEM_PROP == "fakeram45_512x32") ? 9 :
+      (MEM_PROP == "fakeram45_512x64") ? 9 :
+      (MEM_PROP == "fakeram45_64x32") ? 6 :
       0;
 
     // Create memories
@@ -118,7 +118,7 @@ module la_spram
           assign ce_in = ce && selected;
           assign we_in = we && selected;
           
-          if (MEM_TYPE == "fakeram45_512x32")
+          if (MEM_PROP == "fakeram45_512x32") begin: ifakeram45_512x32
             fakeram45_512x32 memory (
               .addr_in(mem_addr),
               .ce_in(ce_in),
@@ -128,7 +128,8 @@ module la_spram
               .wd_in(mem_din),
               .we_in(we_in)
             );
-          else if (MEM_TYPE == "fakeram45_512x64")
+          end
+          if (MEM_PROP == "fakeram45_512x64") begin: ifakeram45_512x64
             fakeram45_512x64 memory (
               .addr_in(mem_addr),
               .ce_in(ce_in),
@@ -138,7 +139,8 @@ module la_spram
               .wd_in(mem_din),
               .we_in(we_in)
             );
-          else if (MEM_TYPE == "fakeram45_256x64")
+          end
+          if (MEM_PROP == "fakeram45_256x64") begin: ifakeram45_256x64
             fakeram45_256x64 memory (
               .addr_in(mem_addr),
               .ce_in(ce_in),
@@ -148,7 +150,8 @@ module la_spram
               .wd_in(mem_din),
               .we_in(we_in)
             );
-          else if (MEM_TYPE == "fakeram45_256x32")
+          end
+          if (MEM_PROP == "fakeram45_256x32") begin: ifakeram45_256x32
             fakeram45_256x32 memory (
               .addr_in(mem_addr),
               .ce_in(ce_in),
@@ -158,7 +161,8 @@ module la_spram
               .wd_in(mem_din),
               .we_in(we_in)
             );
-          else if (MEM_TYPE == "fakeram45_128x32")
+          end
+          if (MEM_PROP == "fakeram45_128x32") begin: ifakeram45_128x32
             fakeram45_128x32 memory (
               .addr_in(mem_addr),
               .ce_in(ce_in),
@@ -168,7 +172,8 @@ module la_spram
               .wd_in(mem_din),
               .we_in(we_in)
             );
-          else if (MEM_TYPE == "fakeram45_64x32")
+          end
+          if (MEM_PROP == "fakeram45_64x32") begin: ifakeram45_64x32
             fakeram45_64x32 memory (
               .addr_in(mem_addr),
               .ce_in(ce_in),
@@ -178,6 +183,7 @@ module la_spram
               .wd_in(mem_din),
               .we_in(we_in)
             );
+          end
         end
       end
     endgenerate

@@ -7,7 +7,7 @@
  *
  * This is a wrapper for selecting from a set of hardened memory macros.
  *
- * A synthesizable reference model is used when the TYPE is DEFAULT. The
+ * A synthesizable reference model is used when the PROP is DEFAULT. The
  * synthesizable model does not implement the cfg and test interface and should
  * only be used for basic testing and for synthesizing for FPGA devices.
  * Advanced ASIC development should rely on complete functional models
@@ -15,7 +15,7 @@
  *
  * Technologoy specific implementations of "la_dpram" would generally include
  * one ore more hardcoded instantiations of RAM modules with a generate
- * statement relying on the "TYPE" to select between the list of modules
+ * statement relying on the "PROP" to select between the list of modules
  * at build time.
  *
  ****************************************************************************/
@@ -23,7 +23,7 @@
 module la_dpram #(
     parameter DW    = 32,         // Memory width
     parameter AW    = 10,         // address width (derived)
-    parameter TYPE  = "DEFAULT",  // pass through variable for hard macro
+    parameter PROP  = "DEFAULT",  // pass through variable for hard macro
     parameter CTRLW = 128,        // width of asic ctrl interface
     parameter TESTW = 128         // width of asic test interface
 ) (  // Write port

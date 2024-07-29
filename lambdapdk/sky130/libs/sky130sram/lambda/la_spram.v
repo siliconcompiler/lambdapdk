@@ -7,7 +7,7 @@
  *
  * This is a wrapper for selecting from a set of hardened memory macros.
  *
- * A synthesizable reference model is used when the TYPE is DEFAULT. The
+ * A synthesizable reference model is used when the PROP is DEFAULT. The
  * synthesizable model does not implement the cfg and test interface and should
  * only be used for basic testing and for synthesizing for FPGA devices.
  * Advanced ASIC development should rely on complete functional models
@@ -15,7 +15,7 @@
  *
  * Technologoy specific implementations of "la_spram" would generally include
  * one ore more hardcoded instantiations of ram modules with a generate
- * statement relying on the "TYPE" to select between the list of modules
+ * statement relying on the "PROP" to select between the list of modules
  * at build time.
  *
  ****************************************************************************/
@@ -23,7 +23,7 @@
 module la_spram
   #(parameter DW     = 32,          // Memory width
     parameter AW     = 10,          // Address width (derived)
-    parameter TYPE   = "DEFAULT",   // Pass through variable for hard macro
+    parameter PROP   = "DEFAULT",   // Pass through variable for hard macro
     parameter CTRLW  = 128,         // Width of asic ctrl interface
     parameter TESTW  = 128          // Width of asic test interface
     )
@@ -45,15 +45,15 @@ module la_spram
     );
 
     // Determine which memory to select
-    localparam MEM_TYPE = (TYPE != "DEFAULT") ? TYPE :
+    localparam MEM_PROP = (PROP != "DEFAULT") ? PROP :
       "sky130_sram_1rw1r_64x256_8";
 
     localparam MEM_WIDTH = 
-      (MEM_TYPE == "sky130_sram_1rw1r_64x256_8") ? 64 :
+      (MEM_PROP == "sky130_sram_1rw1r_64x256_8") ? 64 :
       0;
  
     localparam MEM_DEPTH = 
-      (MEM_TYPE == "sky130_sram_1rw1r_64x256_8") ? 8 :
+      (MEM_PROP == "sky130_sram_1rw1r_64x256_8") ? 8 :
       0;
 
     // Create memories
@@ -105,7 +105,7 @@ module la_spram
           assign ce_in = ce && selected;
           assign we_in = we && selected;
           
-          if (MEM_TYPE == "sky130_sram_1rw1r_64x256_8")
+          if (MEM_PROP == "sky130_sram_1rw1r_64x256_8") begin: isky130_sram_1rw1r_64x256_8
             sky130_sram_1rw1r_64x256_8 memory (
               .addr0(mem_addr),
               .addr1(mem_addr),
@@ -119,6 +119,7 @@ module la_spram
               .web0(ce_in && we_in),
               .wmask0({mem_wmask[24], mem_wmask[16], mem_wmask[8], mem_wmask[0]})
             );
+          end
         end
       end
     endgenerate
