@@ -15,27 +15,33 @@ module la_ioanalog #(
     parameter SIDE  = "NO",       // "NO", "SO", "EA", "WE"
     parameter RINGW = 8           // width of io ring
 ) (  // io pad signals
-    inout             pad,     // bidirectional pad signal
-    inout             vdd,     // core supply
-    inout             vss,     // core ground
-    inout             vddio,   // io supply
-    inout             vssio,   // io ground
-    inout [RINGW-1:0] ioring,  // generic io-ring interface
+    inout             pad,    // bidirectional pad signal
+    inout             vdd,    // core supply
+    inout             vss,    // core ground
+    inout             vddio,  // io supply
+    inout             vssio,  // io ground
+    inout [RINGW-1:0] ioring, // generic ioring
     // core interface
-    inout [      2:0] aio      // analog core signal
+    inout [2:0]       aio     // analog core signals
 );
 
+    sky130_ef_io__analog_pad i0 (
+        .VDDIO(vddio),
+        .VCCD(vdd),
+        .VSSD(vss),
+        .VSSIO(vssio),
+        .VDDIO_Q(ioring[0]),
+        .VSWITCH(ioring[1]),
+        .VCCHIB(ioring[2]),
+        .VSSIO_Q(ioring[3]),
+        .AMUXBUS_A(ioring[4]),
+        .AMUXBUS_B(ioring[5]),
+        .VDDA(ioring[6]),
+        .VSSA(ioring[7]),
 
-`ifdef VERILATOR
-    // TODO!: input only for verilator bases simulation
-    assign aio[0] = pad;
-    assign aio[1] = pad;
-    assign aio[2] = pad;
+        .P_PAD(pad),
+        .P_CORE(aio[0])
+    );
 
-`else
-    tran t0 (pad, aio[0]);
-    tran t1 (pad, aio[1]);
-    tran t2 (pad, aio[2]);
-`endif
 
 endmodule

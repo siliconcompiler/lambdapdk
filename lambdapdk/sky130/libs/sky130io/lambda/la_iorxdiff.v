@@ -30,4 +30,30 @@ module la_iorxdiff
     input [CFGW-1:0]  cfg     // generic config interface
     );
 
+    la_iobidir #(.PROP(PROP), .SIDE(SIDE), .CFGW(CFGW), .RINGW(RINGW)) ip (
+        .pad(padp),
+        .vdd(vdd),
+        .vss(vss),
+        .vddio(vddio),
+        .vssio(vssio),
+        .z(zp),
+        .ie(ie),
+        .oe(1'b0),
+        .ioring(ioring),
+        .cfg(cfg)
+    );
+
+    la_iobidir #(.PROP(PROP), .SIDE(SIDE), .CFGW(CFGW), .RINGW(RINGW)) in (
+        .pad(padn),
+        .vdd(vdd),
+        .vss(vss),
+        .vddio(vddio),
+        .vssio(vssio),
+        .z(zn),
+        .ie(ie),
+        .oe(1'b0),
+        .ioring(ioring),
+        .cfg(cfg)
+    );
+
 endmodule
