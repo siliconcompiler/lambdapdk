@@ -52,6 +52,10 @@ def setup(chip):
                                             'gf180mcu_fd_io__fill5',
                                             'gf180mcu_fd_io__fill10',
                                             'gf180mcu_fd_io__fillnc'])
+
+        lib.set('output', 'blackbox', 'verilog',
+                os.path.join(libdir, 'blackbox', f'{stackup_start}.v'))
+
         libs.append(lib)
 
     lambda_lib = siliconcompiler.Library(chip, 'lambdalib_gf180mcu_fd_io', package='lambdapdk')

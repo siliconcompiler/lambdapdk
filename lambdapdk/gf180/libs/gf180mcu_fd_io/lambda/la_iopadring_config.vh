@@ -6,4 +6,4 @@
 // Width of ring bus with power, ground, vref signals usually
 // connected by abutment in the padring.
 
-`define LA_PADRING_RINGW 3
+`define LA_PADRING_RINGW 0

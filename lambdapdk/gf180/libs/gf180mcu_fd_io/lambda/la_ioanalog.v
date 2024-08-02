@@ -16,7 +16,7 @@ module la_ioanalog
     );
 
    gf180mcu_fd_io__asig_5p0
-     ioanalog (.ASIG5V(pad),
+     ioanalog (.ASIG5V(aio[0]),
 	    .DVDD(vddio),
 	    .DVSS(vssio),
 	    .VDD(vdd),

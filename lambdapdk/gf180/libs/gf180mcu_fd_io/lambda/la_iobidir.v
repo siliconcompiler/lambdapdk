@@ -12,17 +12,12 @@ module la_iobidir
     inout 	 vddio, // io supply
     inout 	 vssio, // io ground
     // core facing signals
-    input 	 a, // input from core
-    output 	 z, // output to core
-    input 	 ie, // input enable, 1 = active
-    input 	 oe, // output enable, 1 = active
-    input 	 pe, // weak pull enable, 1 = active
-    input 	 ps,// pull select, 1 = pull-up, 0 = pull-down
-    input 	 sr, // slewrate enable 1 = fast, 0 = slow
-    input [2:0]  ds, // drive strength, 3'b0 = weakest
-    input 	 st, // schmitt trigger, 1 = enable
-    inout [RINGW-1:0]  ioring, // generic io-ring interface
-    input [CFGW-1:0] cfg // generic config interface
+    input             a,      // input from core
+    output            z,      // output to core
+    input             ie,     // input enable, 1 = active
+    input             oe,     // output enable, 1 = active
+    inout [RINGW-1:0] ioring, // generic io ring
+    input [CFGW-1:0]  cfg     // generic config interface
     );
 
    //TODO: implement cell type (with and without drive)
@@ -39,12 +34,12 @@ module la_iobidir
 	    .Y(z),
 	    .IE(ie),
 	    .OE(oe),
-	    .CS(st),
-	    .PDRV0(ds[0]),
-	    .PDRV1(ds[1]),
-	    .PD(ioring[0]),
-	    .PU(ioring[1]),
- 	    .SL(ioring[2]),
+	    .CS(cfg[2]),
+	    .PDRV0(cfg[0]),
+	    .PDRV1(cfg[1]),
+	    .PD(cfg[3]),
+	    .PU(cfg[4]),
+ 	    .SL(cfg[5]),
 	    .DVDD(vddio),
 	    .DVSS(vssio),
 	    .VDD(vdd),
