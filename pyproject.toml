@@ -31,7 +31,8 @@ dev = [
     "pytest == 8.3.2",
     "pytest-timeout == 2.3.1",
     "tclint == 0.3.2",
-    "lambdalib == 0.2.7"
+    "lambdalib == 0.2.7",
+    "sc-leflib == 0.3.0"
 ]
 
 [tool.tclint]

@@ -33,9 +33,6 @@ module la_ioanalog #(
     assign aio[2] = pad;
 
 `else
-    tran t0 (pad, aio[0]);
-    tran t1 (pad, aio[1]);
-    tran t2 (pad, aio[2]);
 `endif
 
 endmodule
