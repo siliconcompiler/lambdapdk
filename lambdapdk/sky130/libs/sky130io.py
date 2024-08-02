@@ -35,8 +35,8 @@ def setup(chip):
                                         'sky130_ef_io__com_bus_slice_10um',
                                         'sky130_ef_io__com_bus_slice_20um'])
 
-    lib.set('output', 'blackbox', 'verilog', os.path.join(libdir, 'bb', 'sky130_ef_io.v'))
-    lib.add('output', 'blackbox', 'verilog', os.path.join(libdir, 'bb', 'sky130_fd_io.v'))
+    lib.set('output', 'blackbox', 'verilog', os.path.join(libdir, 'blackbox', 'sky130_ef_io.v'))
+    lib.add('output', 'blackbox', 'verilog', os.path.join(libdir, 'blackbox', 'sky130_fd_io.v'))
 
     lambda_lib = siliconcompiler.Library(chip, f'lambdalib_{libname}', package='lambdapdk')
     register_data_source(lambda_lib)
