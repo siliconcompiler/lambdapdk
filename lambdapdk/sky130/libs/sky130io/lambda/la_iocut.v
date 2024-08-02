@@ -19,4 +19,6 @@ module la_iocut
     inout [RINGW-1:0] ioringr // left ioring
     );
 
+  // TODO: figure out this cut
+
 endmodule
