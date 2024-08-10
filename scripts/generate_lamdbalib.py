@@ -433,13 +433,20 @@ def iolib():
     iolib = {
         "sky130": {
             "name": "sky130io",
-            "implementations": ["la_iobidir",
+            "implementations": ["la_ioanalog",
+                                "la_iobidir",
+                                "la_ioclamp",
                                 "la_iocorner",
                                 "la_iocut",
+                                "la_ioinput",
                                 "la_iopoc",
+                                "la_iorxdiff",
+                                "la_iotxdiff",
                                 "la_iovdd",
+                                "la_iovdda",
                                 "la_iovddio",
                                 "la_iovss",
+                                "la_iovssa",
                                 "la_iovssio"]
         },
         "gf180": {
