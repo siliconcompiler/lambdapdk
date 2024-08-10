@@ -19,7 +19,7 @@ jobs:
       - name: Lint with Flake8
         run: |
           pip install --upgrade pip
-          pip install .[dev]
+          pip install .[test]
           flake8 --statistics .
 
   lint_tcl:
@@ -31,7 +31,7 @@ jobs:
       - name: Lint with tclint
         run: |
           pip install --upgrade pip
-          pip install .[dev]
+          pip install .[test]
           tclint .
         
   check_paths:
@@ -43,5 +43,5 @@ jobs:
       - name: Run tests
         run: |
           pip install --upgrade pip
-          pip install -e .[dev]
+          pip install -e .[test]
           pytest
