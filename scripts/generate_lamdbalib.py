@@ -448,10 +448,15 @@ def iolib():
                                 "la_iobidir",
                                 "la_iocorner",
                                 "la_iocut",
+                                "la_ioinput",
                                 "la_iopoc",
+                                "la_iorxdiff",
+                                "la_iotxdiff",
                                 "la_iovdd",
+                                "la_iovdda",
                                 "la_iovddio",
                                 "la_iovss",
+                                "la_iovssa",
                                 "la_iovssio"]
         },
     }
