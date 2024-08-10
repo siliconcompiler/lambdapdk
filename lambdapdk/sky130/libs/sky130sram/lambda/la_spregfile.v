@@ -14,7 +14,7 @@
  * supplied on a per macro basis.
  *
  * Technologoy specific implementations of "la_spregfile" would generally
- * include one ore more hardcoded instantiations of RF modules with a generate
+ * include one or more hardcoded instantiations of RF modules with a generate
  * statement relying on the "PROP" to select between the list of modules
  * at build time.
  *
@@ -43,25 +43,25 @@ module la_spregfile #(
     input  [TESTW-1:0] test    // pass through ASIC test interface
 );
 
-    la_spram #(
-        .DW(DW),
-        .AW(AW),
-        .PROP(PROP),
-        .CTRLW(CTRLW),
-        .TESTW(TESTW)
-    ) memory (
-        .clk(clk),
-        .ce(ce),
-        .we(we),
-        .wmask(wmask),
-        .addr(addr),
-        .din(din),
-        .dout(dout),
-        .vss(vss),
-        .vdd(vdd),
-        .vddio(vddio),
-        .ctrl(ctrl),
-        .test(test)
-    );
+  la_spram #(
+      .DW(DW),
+      .AW(AW),
+      .PROP(PROP),
+      .CTRLW(CTRLW),
+      .TESTW(TESTW)
+  ) memory (
+      .clk(clk),
+      .ce(ce),
+      .we(we),
+      .wmask(wmask),
+      .addr(addr),
+      .din(din),
+      .dout(dout),
+      .vss(vss),
+      .vdd(vdd),
+      .vddio(vddio),
+      .ctrl(ctrl),
+      .test(test)
+  );
 
 endmodule

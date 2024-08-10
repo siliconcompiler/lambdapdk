@@ -11,6 +11,9 @@ module la_decap #(
     output vdd
 );
 
-sky130_fd_sc_hd__decap_12 u0(.VGND(vss), .VPWR(vdd));
+  sky130_fd_sc_hd__decap_12 u0 (
+      .VGND(vss),
+      .VPWR(vdd)
+  );
 
 endmodule

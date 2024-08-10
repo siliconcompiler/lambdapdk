@@ -11,6 +11,9 @@ module la_antenna #(
     output z
 );
 
-gf180mcu_fd_sc_mcu9t5v0__antenna u0(.I(z), .VSS(vss));
+  gf180mcu_fd_sc_mcu9t5v0__antenna u0 (
+      .I  (z),
+      .VSS(vss)
+  );
 
 endmodule

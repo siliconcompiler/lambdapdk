@@ -5,15 +5,19 @@
 //#############################################################################
 
 module la_pwrbuf #(
-                   parameter PROP = "DEFAULT"
-                   )
-   (
+    parameter PROP = "DEFAULT"
+) (
     input  vdd,
     input  vss,
     input  a,
     output z
-    );
+);
 
-   BUF_X1 u0(.A(a), .Z(z), .VSS(vss), .VDD(vdd));
+  BUF_X1 u0 (
+      .A  (a),
+      .Z  (z),
+      .VSS(vss),
+      .VDD(vdd)
+  );
 
 endmodule

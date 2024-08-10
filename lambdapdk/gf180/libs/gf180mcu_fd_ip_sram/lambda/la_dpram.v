@@ -14,7 +14,7 @@
  * supplied on a per macro basis.
  *
  * Technologoy specific implementations of "la_dpram" would generally include
- * one ore more hardcoded instantiations of RAM modules with a generate
+ * one or more hardcoded instantiations of RAM modules with a generate
  * statement relying on the "PROP" to select between the list of modules
  * at build time.
  *
@@ -47,16 +47,16 @@ module la_dpram #(
     input [TESTW-1:0] test  // pass through ASIC test interface
 );
 
-    // Generic RTL RAM
-    reg     [DW-1:0] ram[(2**AW)-1:0];
-    integer          i;
+  // Generic RTL RAM
+  reg     [DW-1:0] ram[(2**AW)-1:0];
+  integer          i;
 
-    // Write port
-    always @(posedge wr_clk)
-        for (i = 0; i < DW; i = i + 1)
-            if (wr_ce & wr_we & wr_wmask[i]) ram[wr_addr[AW-1:0]][i] <= wr_din[i];
+  // Write port
+  always @(posedge wr_clk)
+    for (i = 0; i < DW; i = i + 1)
+      if (wr_ce & wr_we & wr_wmask[i]) ram[wr_addr[AW-1:0]][i] <= wr_din[i];
 
-    // Read Port
-    always @(posedge rd_clk) if (rd_ce) rd_dout[DW-1:0] <= ram[rd_addr[AW-1:0]];
+  // Read Port
+  always @(posedge rd_clk) if (rd_ce) rd_dout[DW-1:0] <= ram[rd_addr[AW-1:0]];
 
 endmodule

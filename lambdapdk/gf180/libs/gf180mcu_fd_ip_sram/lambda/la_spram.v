@@ -14,108 +14,106 @@
  * supplied on a per macro basis.
  *
  * Technologoy specific implementations of "la_spram" would generally include
- * one ore more hardcoded instantiations of ram modules with a generate
+ * one or more hardcoded instantiations of ram modules with a generate
  * statement relying on the "PROP" to select between the list of modules
  * at build time.
  *
  ****************************************************************************/
 
-module la_spram
-  #(parameter DW     = 32,          // Memory width
-    parameter AW     = 10,          // Address width (derived)
-    parameter PROP   = "DEFAULT",   // Pass through variable for hard macro
-    parameter CTRLW  = 128,         // Width of asic ctrl interface
-    parameter TESTW  = 128          // Width of asic test interface
-    )
-   (// Memory interface
-    input clk, // write clock
-    input ce, // chip enable
-    input we, // write enable
-    input [DW-1:0] wmask, //per bit write mask
-    input [AW-1:0] addr, //write address
-    input [DW-1:0] din, //write data
-    output [DW-1:0] dout, //read output data
+module la_spram #(
+    parameter DW    = 32,         // Memory width
+    parameter AW    = 10,         // Address width (derived)
+    parameter PROP  = "DEFAULT",  // Pass through variable for hard macro
+    parameter CTRLW = 128,        // Width of asic ctrl interface
+    parameter TESTW = 128         // Width of asic test interface
+) (  // Memory interface
+    input clk,  // write clock
+    input ce,  // chip enable
+    input we,  // write enable
+    input [DW-1:0] wmask,  //per bit write mask
+    input [AW-1:0] addr,  //write address
+    input [DW-1:0] din,  //write data
+    output [DW-1:0] dout,  //read output data
     // Power signals
-    input vss, // ground signal
-    input vdd, // memory core array power
-    input vddio, // periphery/io power
+    input vss,  // ground signal
+    input vdd,  // memory core array power
+    input vddio,  // periphery/io power
     // Generic interfaces
-    input [CTRLW-1:0] ctrl, // pass through ASIC control interface
-    input [TESTW-1:0] test // pass through ASIC test interface
-    );
+    input [CTRLW-1:0] ctrl,  // pass through ASIC control interface
+    input [TESTW-1:0] test  // pass through ASIC test interface
+);
 
-    // Determine which memory to select
-    localparam MEM_PROP = (PROP != "DEFAULT") ? PROP :
+  // Determine which memory to select
+  localparam MEM_PROP = (PROP != "DEFAULT") ? PROP :
       (AW >= 9) ? "gf180mcu_fd_ip_sram__sram512x8m8wm1" :
       (AW == 8) ? "gf180mcu_fd_ip_sram__sram256x8m8wm1" :
       (AW == 7) ? "gf180mcu_fd_ip_sram__sram128x8m8wm1" :
       "gf180mcu_fd_ip_sram__sram64x8m8wm1";
 
-    localparam MEM_WIDTH = 
+  localparam MEM_WIDTH = 
       (MEM_PROP == "gf180mcu_fd_ip_sram__sram128x8m8wm1") ? 8 :
       (MEM_PROP == "gf180mcu_fd_ip_sram__sram256x8m8wm1") ? 8 :
       (MEM_PROP == "gf180mcu_fd_ip_sram__sram512x8m8wm1") ? 8 :
       (MEM_PROP == "gf180mcu_fd_ip_sram__sram64x8m8wm1") ? 8 :
       0;
- 
-    localparam MEM_DEPTH = 
+
+  localparam MEM_DEPTH = 
       (MEM_PROP == "gf180mcu_fd_ip_sram__sram128x8m8wm1") ? 7 :
       (MEM_PROP == "gf180mcu_fd_ip_sram__sram256x8m8wm1") ? 8 :
       (MEM_PROP == "gf180mcu_fd_ip_sram__sram512x8m8wm1") ? 9 :
       (MEM_PROP == "gf180mcu_fd_ip_sram__sram64x8m8wm1") ? 6 :
       0;
 
-    // Create memories
-    localparam MEM_ADDRS = 2**(AW - MEM_DEPTH) < 1 ? 1 : 2**(AW - MEM_DEPTH);
+  // Create memories
+  localparam MEM_ADDRS = 2 ** (AW - MEM_DEPTH) < 1 ? 1 : 2 ** (AW - MEM_DEPTH);
 
-    
 
-    generate
-      genvar o;
-      for (o = 0; o < DW; o = o + 1) begin: OUTPUTS
-        wire [MEM_ADDRS-1:0] mem_outputs;
-        assign dout[o] = |mem_outputs;
+
+  generate
+    genvar o;
+    for (o = 0; o < DW; o = o + 1) begin : OUTPUTS
+      wire [MEM_ADDRS-1:0] mem_outputs;
+      assign dout[o] = |mem_outputs;
+    end
+
+    genvar a;
+    for (a = 0; a < MEM_ADDRS; a = a + 1) begin : ADDR
+      wire selected;
+      wire [MEM_DEPTH-1:0] mem_addr;
+
+      if (MEM_ADDRS == 1) begin : FITS
+        assign selected = 1'b1;
+        assign mem_addr = addr;
+      end else begin : NOFITS
+        assign selected = addr[AW-1:MEM_DEPTH] == a;
+        assign mem_addr = addr[MEM_DEPTH-1:0];
       end
 
-      genvar a;
-      for (a = 0; a < MEM_ADDRS; a = a + 1) begin: ADDR
-        wire selected;
-        wire [MEM_DEPTH-1:0] mem_addr;
+      genvar n;
+      for (n = 0; n < DW; n = n + MEM_WIDTH) begin : WORD
+        wire [MEM_WIDTH-1:0] mem_din;
+        wire [MEM_WIDTH-1:0] mem_dout;
+        wire [MEM_WIDTH-1:0] mem_wmask;
 
-        if (MEM_ADDRS == 1) begin: FITS
-          assign selected = 1'b1;
-          assign mem_addr = addr;
-        end else begin: NOFITS
-          assign selected = addr[AW-1:MEM_DEPTH] == a;
-          assign mem_addr = addr[MEM_DEPTH-1:0];
+        genvar i;
+        for (i = 0; i < MEM_WIDTH; i = i + 1) begin : WORD_SELECT
+          if (n + i < DW) begin : ACTIVE
+            assign mem_din[i] = din[n+i];
+            assign mem_wmask[i] = wmask[n+i];
+            assign OUTPUTS[n+i].mem_outputs[a] = selected ? mem_dout[i] : 1'b0;
+          end else begin : INACTIVE
+            assign mem_din[i]   = 1'b0;
+            assign mem_wmask[i] = 1'b0;
+          end
         end
 
-        genvar n;
-        for (n = 0; n < DW; n = n + MEM_WIDTH) begin: WORD
-          wire [MEM_WIDTH-1:0] mem_din;
-          wire [MEM_WIDTH-1:0] mem_dout;
-          wire [MEM_WIDTH-1:0] mem_wmask;
+        wire ce_in;
+        wire we_in;
+        assign ce_in = ce && selected;
+        assign we_in = we && selected;
 
-          genvar i;
-          for (i = 0; i < MEM_WIDTH; i = i + 1) begin: WORD_SELECT
-            if (n + i < DW) begin: ACTIVE
-              assign mem_din[i] = din[n + i];
-              assign mem_wmask[i] = wmask[n + i];
-              assign OUTPUTS[n + i].mem_outputs[a] = selected ? mem_dout[i] : 1'b0;
-            end
-            else begin: INACTIVE
-              assign mem_din[i] = 1'b0;
-              assign mem_wmask[i] = 1'b0;
-            end
-          end
-
-          wire ce_in;
-          wire we_in;
-          assign ce_in = ce && selected;
-          assign we_in = we && selected;
-          
-          if (MEM_PROP == "gf180mcu_fd_ip_sram__sram512x8m8wm1") begin: igf180mcu_fd_ip_sram__sram512x8m8wm1
-            gf180mcu_fd_ip_sram__sram512x8m8wm1 memory (
+        if (MEM_PROP == "gf180mcu_fd_ip_sram__sram512x8m8wm1") begin: igf180mcu_fd_ip_sram__sram512x8m8wm1
+          gf180mcu_fd_ip_sram__sram512x8m8wm1 memory (
               .A(mem_addr),
               .CEN(~ce_in),
               .CLK(clk),
@@ -123,10 +121,10 @@ module la_spram
               .GWEN(~we_in),
               .Q(mem_dout),
               .WEN(~mem_wmask)
-            );
-          end
-          if (MEM_PROP == "gf180mcu_fd_ip_sram__sram256x8m8wm1") begin: igf180mcu_fd_ip_sram__sram256x8m8wm1
-            gf180mcu_fd_ip_sram__sram256x8m8wm1 memory (
+          );
+        end
+        if (MEM_PROP == "gf180mcu_fd_ip_sram__sram256x8m8wm1") begin: igf180mcu_fd_ip_sram__sram256x8m8wm1
+          gf180mcu_fd_ip_sram__sram256x8m8wm1 memory (
               .A(mem_addr),
               .CEN(~ce_in),
               .CLK(clk),
@@ -134,10 +132,10 @@ module la_spram
               .GWEN(~we_in),
               .Q(mem_dout),
               .WEN(~mem_wmask)
-            );
-          end
-          if (MEM_PROP == "gf180mcu_fd_ip_sram__sram128x8m8wm1") begin: igf180mcu_fd_ip_sram__sram128x8m8wm1
-            gf180mcu_fd_ip_sram__sram128x8m8wm1 memory (
+          );
+        end
+        if (MEM_PROP == "gf180mcu_fd_ip_sram__sram128x8m8wm1") begin: igf180mcu_fd_ip_sram__sram128x8m8wm1
+          gf180mcu_fd_ip_sram__sram128x8m8wm1 memory (
               .A(mem_addr),
               .CEN(~ce_in),
               .CLK(clk),
@@ -145,10 +143,10 @@ module la_spram
               .GWEN(~we_in),
               .Q(mem_dout),
               .WEN(~mem_wmask)
-            );
-          end
-          if (MEM_PROP == "gf180mcu_fd_ip_sram__sram64x8m8wm1") begin: igf180mcu_fd_ip_sram__sram64x8m8wm1
-            gf180mcu_fd_ip_sram__sram64x8m8wm1 memory (
+          );
+        end
+        if (MEM_PROP == "gf180mcu_fd_ip_sram__sram64x8m8wm1") begin: igf180mcu_fd_ip_sram__sram64x8m8wm1
+          gf180mcu_fd_ip_sram__sram64x8m8wm1 memory (
               .A(mem_addr),
               .CEN(~ce_in),
               .CLK(clk),
@@ -156,9 +154,9 @@ module la_spram
               .GWEN(~we_in),
               .Q(mem_dout),
               .WEN(~mem_wmask)
-            );
-          end
+          );
         end
       end
-    endgenerate
+    end
+  endgenerate
 endmodule
