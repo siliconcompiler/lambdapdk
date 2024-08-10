@@ -11,6 +11,7 @@ a.out
 __pycache__/
 *.egg-info/
 dist/
+.venv/
 
 # sc files
 build/

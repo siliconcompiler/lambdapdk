@@ -66,7 +66,7 @@ def __format_verilog(path, verible_bin):
         subprocess.run([verible_bin, '--inplace', f])
 
 
-def stdlib():
+def stdlib(verible_bin):
     procs = []
     for pdk, info in libs.items():
         target = info["target"]
@@ -81,6 +81,10 @@ def stdlib():
             p.start()
     for proc in procs:
         proc.join()
+
+    for pdk, info in libs.items():
+        for lib in info['libs']:
+            __format_verilog(f"{pdk_root}/lambdapdk/{pdk}/libs/{lib}/lambda/stdlib", verible_bin)
 
 
 def auxlib(verible_bin):
