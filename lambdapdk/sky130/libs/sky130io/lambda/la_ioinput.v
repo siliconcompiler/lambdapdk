@@ -32,17 +32,22 @@ module la_ioinput #(
     input  [ CFGW-1:0] cfg      // generic config interface
 );
 
-    la_iobidir #(.PROP(PROP), .SIDE(SIDE), .CFGW(CFGW), .RINGW(RINGW)) i0 (
-        .pad(pad),
-        .vdd(vdd),
-        .vss(vss),
-        .vddio(vddio),
-        .vssio(vssio),
-        .z(z),
-        .ie(ie),
-        .oe(1'b0),
-        .ioring(ioring),
-        .cfg(cfg)
-    );
+  la_iobidir #(
+      .PROP (PROP),
+      .SIDE (SIDE),
+      .CFGW (CFGW),
+      .RINGW(RINGW)
+  ) i0 (
+      .pad(pad),
+      .vdd(vdd),
+      .vss(vss),
+      .vddio(vddio),
+      .vssio(vssio),
+      .z(z),
+      .ie(ie),
+      .oe(1'b0),
+      .ioring(ioring),
+      .cfg(cfg)
+  );
 
 endmodule

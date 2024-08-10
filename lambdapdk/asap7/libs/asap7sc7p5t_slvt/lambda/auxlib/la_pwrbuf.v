@@ -5,15 +5,19 @@
 //#############################################################################
 
 module la_pwrbuf #(
-                   parameter PROP = "DEFAULT"
-                   )
-   (
+    parameter PROP = "DEFAULT"
+) (
     input  vdd,
     input  vss,
     input  a,
     output z
-    );
+);
 
-BUFx2_ASAP7_75t_SL u0(.A(a), .Y(z), .VSS(vss), .VDD(vdd));
+  BUFx2_ASAP7_75t_SL u0 (
+      .A  (a),
+      .Y  (z),
+      .VSS(vss),
+      .VDD(vdd)
+  );
 
 endmodule

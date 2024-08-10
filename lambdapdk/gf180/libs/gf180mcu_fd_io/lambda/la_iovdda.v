@@ -19,9 +19,10 @@ module la_iovdda #(
     inout [RINGW-1:0] ioring  // generic io-ring interface
 );
 
-   gf180mcu_fd_io__dvdd
-     iovdd (.DVDD(vddio),
-	    .DVSS(vssio),
-	    .VSS(vss));
+  gf180mcu_fd_io__dvdd iovdd (
+      .DVDD(vddio),
+      .DVSS(vssio),
+      .VSS (vss)
+  );
 
 endmodule

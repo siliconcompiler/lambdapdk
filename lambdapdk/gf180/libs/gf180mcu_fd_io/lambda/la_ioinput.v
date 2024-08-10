@@ -32,15 +32,15 @@ module la_ioinput #(
     input  [ CFGW-1:0] cfg      // generic config interface
 );
 
-    gf180mcu_fd_io__in_s i0 (
-        .PAD(pad),
-	    .Y(z),
-	    .PD(cfg[3]),
-	    .PU(cfg[4]),
-	    .DVDD(vddio),
-	    .DVSS(vssio),
-	    .VDD(vdd),
-	    .VSS(vss));
-    );
+  gf180mcu_fd_io__in_s i0 (
+      .PAD(pad),
+      .Y(z),
+      .PD(cfg[3]),
+      .PU(cfg[4]),
+      .DVDD(vddio),
+      .DVSS(vssio),
+      .VDD(vdd),
+      .VSS(vss)
+  );
 
 endmodule

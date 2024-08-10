@@ -12,8 +12,12 @@ module la_tbuf #(
     output z
 );
 
-    // assign z = oe ? a : 1'bz;
+  // assign z = oe ? a : 1'bz;
 
-    TBUF_X1 u0(.A(a), .EN(oe), .Z(z));
+  TBUF_X1 u0 (
+      .A (a),
+      .EN(oe),
+      .Z (z)
+  );
 
 endmodule

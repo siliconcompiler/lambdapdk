@@ -5,21 +5,25 @@
 //#############################################################################
 
 module la_pwrbuf #(
-                   parameter PROP = "DEFAULT"
-                   )
-   (
+    parameter PROP = "DEFAULT"
+) (
     input  vdd,
     input  vss,
     input  a,
     output z
-    );
+);
 
-// `ifdef SIM
-//    assign z = ((vdd === 1'b1) && (vss === 1'b0)) ? a : 1'bX;
-// `else
-//    assign z = a;
-// `endif
+  // `ifdef SIM
+  //    assign z = ((vdd === 1'b1) && (vss === 1'b0)) ? a : 1'bX;
+  // `else
+  //    assign z = a;
+  // `endif
 
-gf180mcu_fd_sc_mcu9t5v0__buf_1 u0(.I(a), .Z(z), .VSS(vss), .VDD(vdd));
+  gf180mcu_fd_sc_mcu9t5v0__buf_1 u0 (
+      .I  (a),
+      .Z  (z),
+      .VSS(vss),
+      .VDD(vdd)
+  );
 
 endmodule

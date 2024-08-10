@@ -11,6 +11,9 @@ module la_antenna #(
     output z
 );
 
-    ANTENNA_X1 u0(.A(z), .VSS(vss));
+  ANTENNA_X1 u0 (
+      .A  (z),
+      .VSS(vss)
+  );
 
 endmodule
