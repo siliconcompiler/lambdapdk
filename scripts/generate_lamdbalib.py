@@ -8,6 +8,8 @@ import os
 import lambdalib
 import multiprocessing
 import argparse
+import subprocess
+import glob
 
 from lambdalib.utils import write_la_spram
 
@@ -52,6 +54,18 @@ libs = {
 }
 
 
+def __format_verilog(path, verible_bin):
+    if os.path.isfile(path):
+        paths = [os.path.abspath(path)]
+    elif os.path.isdir(path):
+        paths = glob.glob(os.path.join(path, '*.v'))
+        paths.extend(glob.glob(os.path.join(path, '*.vh')))
+
+    for f in paths:
+        print(f"Formatting: {f}")
+        subprocess.run([verible_bin, '--inplace', f])
+
+
 def stdlib():
     procs = []
     for pdk, info in libs.items():
@@ -69,7 +83,7 @@ def stdlib():
         proc.join()
 
 
-def auxlib():
+def auxlib(verible_bin):
     always_copy = [
         'la_clkmux2',
         'la_clkmux4',
@@ -295,8 +309,12 @@ def auxlib():
     for proc in procs:
         proc.join()
 
+    for pdk, info in libs.items():
+        for lib in info['libs']:
+            __format_verilog(f"{pdk_root}/lambdapdk/{pdk}/libs/{lib}/lambda/auxlib", verible_bin)
 
-def ramlib():
+
+def ramlib(verible_bin):
     asap7_spram_port_map = [
         ("clk", "clk"),
         ("addr_in", "mem_addr"),
@@ -428,8 +446,10 @@ def ramlib():
             with open(f"{pdk_root}/lambdapdk/{pdk}/libs/{lib}/lambda/{ram}.v", "w") as f:
                 write_la_spram(f, info[ram])
 
+        __format_verilog(f"{pdk_root}/lambdapdk/{pdk}/libs/{lib}/lambda", verible_bin)
 
-def iolib():
+
+def iolib(verible_bin):
     iolib = {
         "sky130": {
             "name": "sky130io",
@@ -473,6 +493,7 @@ def iolib():
         lambdalib.copy(f"{pdk_root}/lambdapdk/{pdk}/libs/{lib}/lambda",
                        la_lib='iolib',
                        exclude=info['implementations'])
+        __format_verilog(f"{pdk_root}/lambdapdk/{pdk}/libs/{lib}/lambda", verible_bin)
 
 
 if __name__ == "__main__":
@@ -481,17 +502,21 @@ if __name__ == "__main__":
     parser.add_argument('--auxlib', action='store_true')
     parser.add_argument('--ramlib', action='store_true')
     parser.add_argument('--iolib', action='store_true')
+    parser.add_argument('--verible_bin',
+                        metavar='<verible>',
+                        required=True,
+                        help='path to verible-verilog-format')
 
     args = parser.parse_args()
 
     if args.stdlib:
-        stdlib()
+        stdlib(args.verible_bin)
 
     if args.auxlib:
-        auxlib()
+        auxlib(args.verible_bin)
 
     if args.ramlib:
-        ramlib()
+        ramlib(args.verible_bin)
 
     if args.iolib:
-        iolib()
+        iolib(args.verible_bin)
