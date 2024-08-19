@@ -23,6 +23,8 @@ def setup():
     lambda_lib = siliconcompiler.Library('lambdalib_iolib_asap7', package='lambdapdk')
     register_data_source(lambda_lib)
     lambda_lib.add('option', 'ydir', os.path.join(libdir, 'lambda'))
+    lambda_lib.use(lib)
+    lambda_lib.set('asic', 'macrolib', lib.design)
 
     return [lib, lambda_lib]
 

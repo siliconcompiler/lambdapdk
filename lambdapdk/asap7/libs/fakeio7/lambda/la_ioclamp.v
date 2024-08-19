@@ -13,7 +13,7 @@ module la_ioclamp #(
     parameter SIDE  = "NO",       // "NO", "SO", "EA", "WE"
     parameter RINGW = 8           // width of io ring
 ) (  // io pad signals
-    input             vddclamp,
+    input             pad,
     inout             vdd,       // core supply
     inout             vss,       // core ground
     inout             vddio,     // io supply
@@ -26,7 +26,7 @@ module la_ioclamp #(
       FAKEIO7_VDDCLAMP_V i0 (
           .DVDD(vddio),
           .DVSS(vssio),
-          .VDDCLAMP(vddclamp),
+          .VDDCLAMP(pad),
           .VDD(vdd),
           .VSS(vss),
           .RING(ioring)
@@ -35,7 +35,7 @@ module la_ioclamp #(
       FAKEIO7_VDDCLAMP_H i0 (
           .DVDD(vddio),
           .DVSS(vssio),
-          .VDDCLAMP(vddclamp),
+          .VDDCLAMP(pad),
           .VDD(vdd),
           .VSS(vss),
           .RING(ioring)
