@@ -45,6 +45,9 @@ def setup(chip):
     lambda_lib = Library(chip, 'lambdalib_gf180sram', package='lambdapdk')
     register_data_source(lambda_lib)
     lambda_lib.add('option', 'ydir', 'lambdapdk/gf180/libs/gf180mcu_fd_ip_sram/lambda')
+    for lib in libs:
+        lambda_lib.use(lib)
+        lambda_lib.add('asic', 'macrolib', lib.design)
 
     libs.append(lambda_lib)
 

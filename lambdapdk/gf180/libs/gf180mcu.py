@@ -133,12 +133,22 @@ def setup(chip):
 
         libs.append(lib)
 
-        for libtype in ('stdlib', 'auxlib'):
-            lambda_lib = siliconcompiler.Library(chip, f'lambdalib_{libtype}_{libname}',
+        std_lambda_lib = siliconcompiler.Library(chip, f'lambdalib_stdlib_{libname}',
                                                  package='lambdapdk')
-            register_data_source(lambda_lib)
-            lambda_lib.add('option', 'ydir', libdir + f'/lambda/{libtype}')
-            libs.append(lambda_lib)
+        register_data_source(std_lambda_lib)
+        std_lambda_lib.add('option', 'ydir', libdir + '/lambda/stdlib')
+        std_lambda_lib.use(lib)
+        std_lambda_lib.set('asic', 'logiclib', lib.design)
+        libs.append(std_lambda_lib)
+        aux_lambda_lib = siliconcompiler.Library(chip, f'lambdalib_auxlib_{libname}',
+                                                 package='lambdapdk')
+        register_data_source(aux_lambda_lib)
+        aux_lambda_lib.add('option', 'ydir', libdir + '/lambda/auxlib')
+        aux_lambda_lib.use(std_lambda_lib)
+        aux_lambda_lib.use(lib)
+        aux_lambda_lib.set('asic', 'logiclib', lib.design)
+        aux_lambda_lib.set('option', 'library', std_lambda_lib.design)
+        libs.append(aux_lambda_lib)
 
     return libs
 

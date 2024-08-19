@@ -61,6 +61,8 @@ def setup(chip):
     lambda_lib = siliconcompiler.Library(chip, 'lambdalib_gf180mcu_fd_io', package='lambdapdk')
     register_data_source(lambda_lib)
     lambda_lib.add('option', 'ydir', 'lambdapdk/gf180/libs/gf180mcu_fd_io/lambda')
+    lambda_lib.use(lib)
+    lambda_lib.set('asic', 'macrolib', lib.design)
 
     return [*libs, lambda_lib]
 

@@ -41,6 +41,8 @@ def setup(chip):
     lambda_lib = siliconcompiler.Library(chip, f'lambdalib_{libname}', package='lambdapdk')
     register_data_source(lambda_lib)
     lambda_lib.add('option', 'ydir', 'lambdapdk/sky130/libs/sky130io/lambda')
+    lambda_lib.use(lib)
+    lambda_lib.set('asic', 'macrolib', lib.design)
 
     return [lib, lambda_lib]
 
