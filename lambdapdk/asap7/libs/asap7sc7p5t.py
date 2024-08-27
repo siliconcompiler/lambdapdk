@@ -4,7 +4,7 @@ from lambdapdk import register_data_source
 
 
 def _setup_lib(chip, libname, suffix):
-    lib = siliconcompiler.Library(chip, libname, package='lambdapdk')
+    lib = siliconcompiler.Library(libname, package='lambdapdk')
     register_data_source(lib)
 
     process = 'asap7'
@@ -121,14 +121,14 @@ def _setup_lib(chip, libname, suffix):
             libdir + '/apr/openroad/global_connect.tcl')
 
     libs = [lib]
-    std_lambda_lib = siliconcompiler.Library(chip, f'lambdalib_stdlib_{libname}',
+    std_lambda_lib = siliconcompiler.Library(f'lambdalib_stdlib_{libname}',
                                              package='lambdapdk')
     register_data_source(std_lambda_lib)
     std_lambda_lib.add('option', 'ydir', libdir + '/lambda/stdlib')
     std_lambda_lib.use(lib)
     std_lambda_lib.set('asic', 'logiclib', lib.design)
     libs.append(std_lambda_lib)
-    aux_lambda_lib = siliconcompiler.Library(chip, f'lambdalib_auxlib_{libname}',
+    aux_lambda_lib = siliconcompiler.Library(f'lambdalib_auxlib_{libname}',
                                              package='lambdapdk')
     register_data_source(aux_lambda_lib)
     aux_lambda_lib.add('option', 'ydir', libdir + '/lambda/auxlib')
@@ -141,7 +141,7 @@ def _setup_lib(chip, libname, suffix):
     return libs
 
 
-def setup(chip):
+def setup():
     '''
     ASAP 7 7.5-track standard cell library.
     '''

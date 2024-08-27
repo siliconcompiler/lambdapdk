@@ -2,13 +2,13 @@ from siliconcompiler import Library
 from lambdapdk import register_data_source
 
 
-def setup(chip):
+def setup():
     libs = []
     stackup = '10M'
 
     for config in ('64x32', '128x32', '256x32', '256x64', '512x32', '512x64'):
         mem_name = f'fakeram7_{config}'
-        lib = Library(chip, mem_name, package='lambdapdk')
+        lib = Library(mem_name, package='lambdapdk')
         register_data_source(lib)
         path_base = 'lambdapdk/asap7/libs/fakeram7'
         lib.add('output', stackup, 'lef', f'{path_base}/lef/{mem_name}.lef')
@@ -22,7 +22,7 @@ def setup(chip):
 
         libs.append(lib)
 
-    lambda_lib = Library(chip, 'lambdalib_fakeram7', package='lambdapdk')
+    lambda_lib = Library('lambdalib_fakeram7', package='lambdapdk')
     register_data_source(lambda_lib)
     lambda_lib.add('option', 'ydir', 'lambdapdk/asap7/libs/fakeram7/lambda')
     for lib in libs:

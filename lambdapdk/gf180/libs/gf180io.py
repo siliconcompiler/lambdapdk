@@ -3,7 +3,7 @@ import siliconcompiler
 from lambdapdk import register_data_source
 
 
-def setup(chip):
+def setup():
     '''
     GloabalFoundries 180 I/O library.
     '''
@@ -11,7 +11,7 @@ def setup(chip):
 
     libs = []
     for substack in ("3LM", "4LM", "5LM"):
-        lib = siliconcompiler.Library(chip, f'gf180mcu_fd_io_{substack}', package='lambdapdk')
+        lib = siliconcompiler.Library(f'gf180mcu_fd_io_{substack}', package='lambdapdk')
         register_data_source(lib)
 
         # pdk
@@ -58,7 +58,7 @@ def setup(chip):
 
         libs.append(lib)
 
-    lambda_lib = siliconcompiler.Library(chip, 'lambdalib_gf180mcu_fd_io', package='lambdapdk')
+    lambda_lib = siliconcompiler.Library('lambdalib_gf180mcu_fd_io', package='lambdapdk')
     register_data_source(lambda_lib)
     lambda_lib.add('option', 'ydir', 'lambdapdk/gf180/libs/gf180mcu_fd_io/lambda')
     lambda_lib.use(lib)

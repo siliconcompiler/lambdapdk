@@ -7,7 +7,7 @@ from lambdapdk import register_data_source
 ####################################################
 # PDK Setup
 ####################################################
-def setup(chip):
+def setup():
     '''
     The freepdk45 PDK is a virtual PDK derived from the work done at
     NCSU (NCSU_TechLib_FreePDK45.)  It supplies techfiles, display
@@ -43,7 +43,7 @@ def setup(chip):
 
     pdkdir = os.path.join('lambdapdk', 'freepdk45', 'base')
 
-    pdk = siliconcompiler.PDK(chip, process, package='lambdapdk')
+    pdk = siliconcompiler.PDK(process, package='lambdapdk')
     register_data_source(pdk)
 
     # process name
