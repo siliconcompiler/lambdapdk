@@ -2,12 +2,12 @@ from siliconcompiler import Chip, Library
 from lambdapdk import register_data_source
 
 
-def setup(chip):
+def setup():
     libs = []
 
     for config in ('64x8', '128x8', '256x8', '512x8'):
         mem_name = f'gf180mcu_fd_ip_sram__sram{config}m8wm1'
-        lib = Library(chip, mem_name, package='lambdapdk')
+        lib = Library(mem_name, package='lambdapdk')
         register_data_source(lib)
 
         path_base = 'lambdapdk/gf180/libs/gf180mcu_fd_ip_sram'
@@ -42,7 +42,7 @@ def setup(chip):
 
         libs.append(lib)
 
-    lambda_lib = Library(chip, 'lambdalib_gf180sram', package='lambdapdk')
+    lambda_lib = Library('lambdalib_gf180sram', package='lambdapdk')
     register_data_source(lambda_lib)
     lambda_lib.add('option', 'ydir', 'lambdapdk/gf180/libs/gf180mcu_fd_ip_sram/lambda')
     for lib in libs:

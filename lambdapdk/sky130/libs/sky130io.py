@@ -3,7 +3,7 @@ import siliconcompiler
 from lambdapdk import register_data_source
 
 
-def setup(chip):
+def setup():
     '''
     Skywater130 I/O library.
     '''
@@ -11,7 +11,7 @@ def setup(chip):
     libname = 'sky130io'
     stackup = '5M1LI'
 
-    lib = siliconcompiler.Library(chip, libname, package='lambdapdk')
+    lib = siliconcompiler.Library(libname, package='lambdapdk')
     register_data_source(lib)
 
     libdir = os.path.join('lambdapdk', 'sky130', 'libs', libname)
@@ -38,7 +38,7 @@ def setup(chip):
     lib.set('output', 'blackbox', 'verilog', os.path.join(libdir, 'blackbox', 'sky130_ef_io.v'))
     lib.add('output', 'blackbox', 'verilog', os.path.join(libdir, 'blackbox', 'sky130_fd_io.v'))
 
-    lambda_lib = siliconcompiler.Library(chip, f'lambdalib_{libname}', package='lambdapdk')
+    lambda_lib = siliconcompiler.Library(f'lambdalib_{libname}', package='lambdapdk')
     register_data_source(lambda_lib)
     lambda_lib.add('option', 'ydir', 'lambdapdk/sky130/libs/sky130io/lambda')
     lambda_lib.use(lib)

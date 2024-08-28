@@ -7,7 +7,7 @@ from lambdapdk import register_data_source
 ####################################################
 # PDK Setup
 ####################################################
-def setup(chip):
+def setup():
     '''
     The 'skywater130' Open Source PDK is a collaboration between Google and
     SkyWater Technology Foundry to provide a fully open source Process
@@ -51,7 +51,7 @@ def setup(chip):
 
     pdkdir = os.path.join('lambdapdk', 'sky130', 'base')
 
-    pdk = siliconcompiler.PDK(chip, process, package='lambdapdk')
+    pdk = siliconcompiler.PDK(process, package='lambdapdk')
     register_data_source(pdk)
 
     # process name
@@ -93,7 +93,7 @@ def setup(chip):
         'met2': 0.3,
         'met3': 0.3,
         'met4': 0.3,
-        'met5': 0.3,
+        'met5': 0.3
     }
     for layer, adj in openroad_layer_adjustments.items():
         pdk.set('pdk', process, 'var', 'openroad', f'{layer}_adjustment', stackup, str(adj))

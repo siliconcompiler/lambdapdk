@@ -6,7 +6,7 @@ from lambdapdk import register_data_source
 ####################################################
 # PDK Setup
 ####################################################
-def setup(chip):
+def setup():
     '''
     The 'gf180' Open Source PDK is a collaboration between Google and
     Global Foundries to provide a fully open source Process
@@ -40,7 +40,7 @@ def setup(chip):
 
     pdkdir = "lambdapdk/gf180/base/"
 
-    pdk = siliconcompiler.PDK(chip, process, package='lambdapdk')
+    pdk = siliconcompiler.PDK(process, package='lambdapdk')
     register_data_source(pdk)
 
     # process name

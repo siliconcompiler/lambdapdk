@@ -6,7 +6,7 @@ from lambdapdk import register_data_source
 ####################################################
 # PDK Setup
 ####################################################
-def setup(chip):
+def setup():
     '''
     The asap7 PDK was developed at ASU in collaboration with ARM Research.
     With funding from the DARPA IDEA program, the PDK was released
@@ -52,7 +52,7 @@ def setup(chip):
     libtype = '7p5t'
     pdkdir = os.path.join('lambdapdk', 'asap7', 'base')
 
-    pdk = siliconcompiler.PDK(chip, process, package='lambdapdk')
+    pdk = siliconcompiler.PDK(process, package='lambdapdk')
     register_data_source(pdk)
 
     # process name

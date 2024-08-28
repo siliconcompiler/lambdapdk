@@ -2,13 +2,13 @@ from siliconcompiler import Chip, Library
 from lambdapdk import register_data_source
 
 
-def setup(chip):
+def setup():
     libs = []
     stackup = '5M1LI'
 
     for config in ('64x256',):
         mem_name = f'sky130_sram_1rw1r_{config}_8'
-        lib = Library(chip, mem_name, package='lambdapdk')
+        lib = Library(mem_name, package='lambdapdk')
         register_data_source(lib)
         path_base = 'lambdapdk/sky130/libs/sky130sram'
         lib.add('output', stackup, 'lef', f'{path_base}/{mem_name}/lef/{mem_name}.lef.gz')
@@ -24,7 +24,7 @@ def setup(chip):
 
         libs.append(lib)
 
-    lambda_lib = Library(chip, 'lambdalib_sky130sram', package='lambdapdk')
+    lambda_lib = Library('lambdalib_sky130sram', package='lambdapdk')
     register_data_source(lambda_lib)
     lambda_lib.add('option', 'ydir', 'lambdapdk/sky130/libs/sky130sram/lambda')
     for lib in libs:
