@@ -3,7 +3,7 @@ import siliconcompiler
 from lambdapdk import register_data_source
 
 
-def _setup_lib(chip, libname, suffix):
+def _setup_lib(libname, suffix):
     lib = siliconcompiler.Library(libname, package='lambdapdk')
     register_data_source(lib)
 
@@ -153,7 +153,7 @@ def setup():
 
     libs = []
     for libname, suffix in all_libs.items():
-        libs.extend(_setup_lib(chip, libname, suffix))
+        libs.extend(_setup_lib(libname, suffix))
 
     return libs
 

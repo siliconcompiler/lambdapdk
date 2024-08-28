@@ -15,7 +15,7 @@ from lambdapdk.sky130.libs import sky130sc, sky130io, sky130sram
     (gf180mcu, 'lambdapdk/gf180/libs/{lib_name}/lambda/auxlib')
     ])
 def test_la_auxlib(module, path):
-    libs = module.setup(Chip('<lib>'))
+    libs = module.setup()
     if not isinstance(libs, list):
         libs = [libs]
     for lib in libs:
@@ -32,7 +32,7 @@ def test_la_auxlib(module, path):
     (gf180mcu, 'lambdapdk/gf180/libs/{lib_name}/lambda/stdlib')
     ])
 def test_la_stdlib(module, path):
-    libs = module.setup(Chip('<lib>'))
+    libs = module.setup()
     if not isinstance(libs, list):
         libs = [libs]
     for lib in libs:
