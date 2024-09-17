@@ -40,6 +40,9 @@ exclude = [
     'build',
     'scripts/build',
     'dist',
+    '.venv/',
+    # templates
+    'pex/',
     # scripts from other repos
     'lambdapdk/asap7/base/apr/example_innovus.tcl',
     'lambdapdk/sky130/base/setup/netgen/lvs_setup.tcl',
