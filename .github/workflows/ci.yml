@@ -32,8 +32,9 @@ jobs:
         run: |
           pip install --upgrade pip
           pip install .[test]
-          tclint .
-        
+          tclfmt --check .
+          tclint --no-check-style .
+
   check_paths:
     name: Run CI
     runs-on: ubuntu-latest
