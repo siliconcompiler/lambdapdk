@@ -6,13 +6,15 @@ from lambdapdk.asap7.libs import asap7sc7p5t, fakeram7
 from lambdapdk.freepdk45.libs import nangate45, fakeram45
 from lambdapdk.gf180.libs import gf180mcu, gf180io, gf180sram
 from lambdapdk.sky130.libs import sky130sc, sky130io, sky130sram
+from lambdapdk.ihp130.libs import sg13g2_stdcell, sg13g2_sram
 
 
 @pytest.mark.parametrize('module,path', [
     (asap7sc7p5t, 'lambdapdk/asap7/libs/{lib_name}/lambda/auxlib'),
     (nangate45, 'lambdapdk/freepdk45/libs/{lib_name}/lambda/auxlib'),
     (sky130sc, 'lambdapdk/sky130/libs/{lib_name}/lambda/auxlib'),
-    (gf180mcu, 'lambdapdk/gf180/libs/{lib_name}/lambda/auxlib')
+    (gf180mcu, 'lambdapdk/gf180/libs/{lib_name}/lambda/auxlib'),
+    (sg13g2_stdcell, 'lambdapdk/ihp130/libs/{lib_name}/lambda/auxlib')
     ])
 def test_la_auxlib(module, path):
     libs = module.setup()
@@ -29,7 +31,8 @@ def test_la_auxlib(module, path):
     (asap7sc7p5t, 'lambdapdk/asap7/libs/{lib_name}/lambda/stdlib'),
     (nangate45, 'lambdapdk/freepdk45/libs/{lib_name}/lambda/stdlib'),
     (sky130sc, 'lambdapdk/sky130/libs/{lib_name}/lambda/stdlib'),
-    (gf180mcu, 'lambdapdk/gf180/libs/{lib_name}/lambda/stdlib')
+    (gf180mcu, 'lambdapdk/gf180/libs/{lib_name}/lambda/stdlib'),
+    (sg13g2_stdcell, 'lambdapdk/ihp130/libs/{lib_name}/lambda/stdlib')
     ])
 def test_la_stdlib(module, path):
     libs = module.setup()
@@ -47,6 +50,7 @@ def test_la_stdlib(module, path):
     'lambdapdk/freepdk45/libs/fakeram45/lambda',
     'lambdapdk/sky130/libs/sky130sram/lambda',
     'lambdapdk/gf180/libs/gf180mcu_fd_ip_sram/lambda',
+    'lambdapdk/ihp130/libs/sg13g2_sram/lambda',
     ])
 def test_la_ramlib(path):
     assert lambdalib.check(path, 'ramlib')
@@ -65,7 +69,8 @@ def test_la_iolib(path):
     asap7sc7p5t, fakeram7,
     nangate45, fakeram45,
     gf180mcu, gf180io, gf180sram,
-    sky130sc, sky130io, sky130sram
+    sky130sc, sky130io, sky130sram,
+    sg13g2_stdcell, sg13g2_sram
 ])
 def test_lambdalib_is_present(module):
     chip = Chip('<lib>')
