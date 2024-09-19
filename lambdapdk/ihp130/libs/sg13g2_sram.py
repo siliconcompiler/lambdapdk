@@ -34,6 +34,9 @@ def setup():
     lambda_lib = Library('lambdalib_sg13g2_sram', package='lambdapdk')
     register_data_source(lambda_lib)
     lambda_lib.add('option', 'ydir', 'lambdapdk/ihp130/libs/sg13g2_sram/lambda')
+    for lib in libs:
+        lambda_lib.use(lib)
+        lambda_lib.add('asic', 'macrolib', lib.design)
 
     libs.append(lambda_lib)
 
