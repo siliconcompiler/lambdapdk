@@ -55,6 +55,7 @@ def test_la_ramlib(path):
 @pytest.mark.parametrize('path', [
     'lambdapdk/sky130/libs/sky130io/lambda',
     'lambdapdk/gf180/libs/gf180mcu_fd_io/lambda',
+    'lambdapdk/asap7/libs/fakeio7/lambda',
     ])
 def test_la_iolib(path):
     assert lambdalib.check(path, 'iolib')

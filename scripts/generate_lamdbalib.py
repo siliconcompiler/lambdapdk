@@ -490,6 +490,24 @@ def iolib(verible_bin):
                                 "la_iovssa",
                                 "la_iovssio"]
         },
+        "asap7": {
+            "name": "fakeio7",
+            "implementations": ["la_ioanalog",
+                                "la_iobidir",
+                                "la_ioclamp",
+                                "la_ioinput",
+                                "la_iocorner",
+                                "la_iocut",
+                                "la_iopoc",
+                                "la_iovdd",
+                                "la_iovss",
+                                "la_iovddio",
+                                "la_iovssio",
+                                "la_iovdda",
+                                "la_iovssa",
+                                "la_iorxdiff",
+                                "la_iotxdiff"]
+        },
     }
 
     for pdk, info in iolib.items():
