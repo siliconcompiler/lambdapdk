@@ -38,35 +38,25 @@ module la_csa42 (
     carry,
     cout
 );
-  (* force_downto = 32'b00000000000000000000000000000001 *)
-  (* src = "/home/pgadfort/.sc/cache/lambdapdk-v0.1.33/lambdapdk/gf180/libs/gf180mcu_fd_sc_mcu7t5v0/techmap/yosys/cells_adders.v:6.25-6.26" *)
+  (* force_downto = 32'b00000000000000000000000000000001 *) (* src = "/generated" *)
   wire _00_;
-  (* force_downto = 32'b00000000000000000000000000000001 *)
-      (* src = "/home/pgadfort/.sc/cache/lambdapdk-v0.1.33/lambdapdk/gf180/libs/gf180mcu_fd_sc_mcu7t5v0/techmap/yosys/cells_adders.v:6.28-6.29" *)
+  (* force_downto = 32'b00000000000000000000000000000001 *) (* src = "/generated" *)
   wire _01_;
-  (* force_downto = 32'b00000000000000000000000000000001 *)
-      (* src = "/home/pgadfort/.sc/cache/lambdapdk-v0.1.33/lambdapdk/gf180/libs/gf180mcu_fd_sc_mcu7t5v0/techmap/yosys/cells_adders.v:6.31-6.32" *)
+  (* force_downto = 32'b00000000000000000000000000000001 *) (* src = "/generated" *)
   wire _02_;
-  (* force_downto = 32'b00000000000000000000000000000001 *)
-      (* src = "/home/pgadfort/.sc/cache/lambdapdk-v0.1.33/lambdapdk/gf180/libs/gf180mcu_fd_sc_mcu7t5v0/techmap/yosys/cells_adders.v:8.26-8.27" *)
+  (* force_downto = 32'b00000000000000000000000000000001 *) (* src = "/generated" *)
   wire _03_;
-  (* force_downto = 32'b00000000000000000000000000000001 *)
-      (* src = "/home/pgadfort/.sc/cache/lambdapdk-v0.1.33/lambdapdk/gf180/libs/gf180mcu_fd_sc_mcu7t5v0/techmap/yosys/cells_adders.v:8.29-8.30" *)
+  (* force_downto = 32'b00000000000000000000000000000001 *) (* src = "/generated" *)
   wire _04_;
-  (* force_downto = 32'b00000000000000000000000000000001 *)
-      (* src = "/home/pgadfort/.sc/cache/lambdapdk-v0.1.33/lambdapdk/gf180/libs/gf180mcu_fd_sc_mcu7t5v0/techmap/yosys/cells_adders.v:6.25-6.26" *)
+  (* force_downto = 32'b00000000000000000000000000000001 *) (* src = "/generated" *)
   wire _05_;
-  (* force_downto = 32'b00000000000000000000000000000001 *)
-      (* src = "/home/pgadfort/.sc/cache/lambdapdk-v0.1.33/lambdapdk/gf180/libs/gf180mcu_fd_sc_mcu7t5v0/techmap/yosys/cells_adders.v:6.28-6.29" *)
+  (* force_downto = 32'b00000000000000000000000000000001 *) (* src = "/generated" *)
   wire _06_;
-  (* force_downto = 32'b00000000000000000000000000000001 *)
-      (* src = "/home/pgadfort/.sc/cache/lambdapdk-v0.1.33/lambdapdk/gf180/libs/gf180mcu_fd_sc_mcu7t5v0/techmap/yosys/cells_adders.v:6.31-6.32" *)
+  (* force_downto = 32'b00000000000000000000000000000001 *) (* src = "/generated" *)
   wire _07_;
-  (* force_downto = 32'b00000000000000000000000000000001 *)
-      (* src = "/home/pgadfort/.sc/cache/lambdapdk-v0.1.33/lambdapdk/gf180/libs/gf180mcu_fd_sc_mcu7t5v0/techmap/yosys/cells_adders.v:8.26-8.27" *)
+  (* force_downto = 32'b00000000000000000000000000000001 *) (* src = "/generated" *)
   wire _08_;
-  (* force_downto = 32'b00000000000000000000000000000001 *)
-      (* src = "/home/pgadfort/.sc/cache/lambdapdk-v0.1.33/lambdapdk/gf180/libs/gf180mcu_fd_sc_mcu7t5v0/techmap/yosys/cells_adders.v:8.29-8.30" *)
+  (* force_downto = 32'b00000000000000000000000000000001 *) (* src = "/generated" *)
   wire _09_;
   (* src = "inputs/la_csa42.v:13.12-13.13" *)
   input a;
@@ -128,8 +118,7 @@ module la_csa42 (
       .I (_08_),
       .ZN(carry)
   );
-  (* module_not_derived = 32'b00000000000000000000000000000001 *)
-      (* src = "/home/pgadfort/.sc/cache/lambdapdk-v0.1.33/lambdapdk/gf180/libs/gf180mcu_fd_sc_mcu7t5v0/techmap/yosys/cells_adders.v:42.41-44.12" *)
+  (* module_not_derived = 32'b00000000000000000000000000000001 *) (* src = "/generated" *)
   gf180mcu_fd_sc_mcu7t5v0__addf_1 _19_ (
       .A (_00_),
       .B (_01_),
@@ -137,8 +126,7 @@ module la_csa42 (
       .CO(_03_),
       .S (_04_)
   );
-  (* module_not_derived = 32'b00000000000000000000000000000001 *)
-      (* src = "/home/pgadfort/.sc/cache/lambdapdk-v0.1.33/lambdapdk/gf180/libs/gf180mcu_fd_sc_mcu7t5v0/techmap/yosys/cells_adders.v:42.41-44.12" *)
+  (* module_not_derived = 32'b00000000000000000000000000000001 *) (* src = "/generated" *)
   gf180mcu_fd_sc_mcu7t5v0__addf_1 _20_ (
       .A (_05_),
       .B (_06_),

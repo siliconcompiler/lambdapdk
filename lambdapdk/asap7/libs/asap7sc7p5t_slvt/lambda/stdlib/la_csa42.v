@@ -38,23 +38,17 @@ module la_csa42 (
     carry,
     cout
 );
-  (* force_downto = 32'b00000000000000000000000000000001 *)
-  (* src = "/home/pgadfort/.sc/cache/lambdapdk-v0.1.33/lambdapdk/asap7/libs/asap7sc7p5t_slvt/techmap/yosys/cells_adders.v:6.25-6.26" *)
+  (* force_downto = 32'b00000000000000000000000000000001 *) (* src = "/generated" *)
   wire _00_;
-  (* force_downto = 32'b00000000000000000000000000000001 *)
-      (* src = "/home/pgadfort/.sc/cache/lambdapdk-v0.1.33/lambdapdk/asap7/libs/asap7sc7p5t_slvt/techmap/yosys/cells_adders.v:6.28-6.29" *)
+  (* force_downto = 32'b00000000000000000000000000000001 *) (* src = "/generated" *)
   wire _01_;
-  (* force_downto = 32'b00000000000000000000000000000001 *)
-      (* src = "/home/pgadfort/.sc/cache/lambdapdk-v0.1.33/lambdapdk/asap7/libs/asap7sc7p5t_slvt/techmap/yosys/cells_adders.v:6.31-6.32" *)
+  (* force_downto = 32'b00000000000000000000000000000001 *) (* src = "/generated" *)
   wire _02_;
-  (* force_downto = 32'b00000000000000000000000000000001 *)
-      (* src = "/home/pgadfort/.sc/cache/lambdapdk-v0.1.33/lambdapdk/asap7/libs/asap7sc7p5t_slvt/techmap/yosys/cells_adders.v:6.25-6.26" *)
+  (* force_downto = 32'b00000000000000000000000000000001 *) (* src = "/generated" *)
   wire _03_;
-  (* force_downto = 32'b00000000000000000000000000000001 *)
-      (* src = "/home/pgadfort/.sc/cache/lambdapdk-v0.1.33/lambdapdk/asap7/libs/asap7sc7p5t_slvt/techmap/yosys/cells_adders.v:6.28-6.29" *)
+  (* force_downto = 32'b00000000000000000000000000000001 *) (* src = "/generated" *)
   wire _04_;
-  (* force_downto = 32'b00000000000000000000000000000001 *)
-      (* src = "/home/pgadfort/.sc/cache/lambdapdk-v0.1.33/lambdapdk/asap7/libs/asap7sc7p5t_slvt/techmap/yosys/cells_adders.v:6.31-6.32" *)
+  (* force_downto = 32'b00000000000000000000000000000001 *) (* src = "/generated" *)
   wire _05_;
   (* src = "inputs/la_csa42.v:13.12-13.13" *)
   input a;
@@ -100,8 +94,7 @@ module la_csa42 (
       .A(c),
       .Y(_02_)
   );
-  (* module_not_derived = 32'b00000000000000000000000000000001 *)
-      (* src = "/home/pgadfort/.sc/cache/lambdapdk-v0.1.33/lambdapdk/asap7/libs/asap7sc7p5t_slvt/techmap/yosys/cells_adders.v:44.27-46.12" *)
+  (* module_not_derived = 32'b00000000000000000000000000000001 *) (* src = "/generated" *)
   FAx1_ASAP7_75t_SL _11_ (
       .A  (_00_),
       .B  (_01_),
@@ -109,8 +102,7 @@ module la_csa42 (
       .CON(cout),
       .SN (_05_)
   );
-  (* module_not_derived = 32'b00000000000000000000000000000001 *)
-      (* src = "/home/pgadfort/.sc/cache/lambdapdk-v0.1.33/lambdapdk/asap7/libs/asap7sc7p5t_slvt/techmap/yosys/cells_adders.v:44.27-46.12" *)
+  (* module_not_derived = 32'b00000000000000000000000000000001 *) (* src = "/generated" *)
   FAx1_ASAP7_75t_SL _12_ (
       .A  (_03_),
       .B  (_04_),

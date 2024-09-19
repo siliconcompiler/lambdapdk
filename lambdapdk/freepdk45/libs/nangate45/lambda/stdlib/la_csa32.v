@@ -45,8 +45,7 @@ module la_csa32 (
   (* src = "inputs/la_csa32.v:16.12-16.15" *)
   output sum;
   wire sum;
-  (* module_not_derived = 32'b00000000000000000000000000000001 *)
-      (* src = "/home/pgadfort/.sc/cache/lambdapdk-v0.1.33/lambdapdk/freepdk45/libs/nangate45/techmap/yosys/cells_adders.v:42.15-44.12" *)
+  (* module_not_derived = 32'b00000000000000000000000000000001 *) (* src = "/generated" *)
   FA_X1 _0_ (
       .A (a),
       .B (b),
