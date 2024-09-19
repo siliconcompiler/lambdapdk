@@ -12,15 +12,15 @@
 //     output out     // synchronized data
 // );
 // 
-//   localparam STAGES = 2;
+//     localparam STAGES = 2;
 // 
-//   reg [STAGES-1:0] shiftreg;
+//     reg [STAGES-1:0] shiftreg;
 // 
-//   always @(posedge clk or negedge nreset)
-//     if (!nreset) shiftreg[STAGES-1:0] <= 'b0;
-//     else shiftreg[STAGES-1:0] <= {shiftreg[STAGES-2:0], in};
+//     always @(posedge clk or negedge nreset)
+//         if (!nreset) shiftreg[STAGES-1:0] <= 'b0;
+//         else shiftreg[STAGES-1:0] <= {shiftreg[STAGES-2:0], in};
 // 
-//   assign out = shiftreg[STAGES-1];
+//     assign out = shiftreg[STAGES-1];
 // 
 // endmodule
 
@@ -28,7 +28,7 @@
 
 (* dynports =  1  *)
 (* top =  1  *)
-(* src = "inputs/la_drsync.v:9.1-28.10" *)
+(* src = "generated" *)
 module la_drsync (
     clk,
     in,
@@ -38,19 +38,19 @@ module la_drsync (
   wire _0_;
   wire _1_;
   wire _2_;
-  (* src = "inputs/la_drsync.v:12.12-12.15" *)
+  (* src = "generated" *)
   input clk;
   wire clk;
-  (* src = "inputs/la_drsync.v:13.12-13.14" *)
+  (* src = "generated" *)
   input in;
   wire in;
-  (* src = "inputs/la_drsync.v:14.12-14.18" *)
+  (* src = "generated" *)
   input nreset;
   wire nreset;
-  (* src = "inputs/la_drsync.v:15.12-15.15" *)
+  (* src = "generated" *)
   output out;
   wire out;
-  (* src = "inputs/la_drsync.v:20.20-20.28" *)
+  (* src = "generated" *)
   wire \shiftreg[0] ;
   INVx2_ASAP7_75t_R _3_ (
       .A(_0_),
@@ -60,7 +60,7 @@ module la_drsync (
       .A(_1_),
       .Y(\shiftreg[0] )
   );
-  (* src = "inputs/la_drsync.v:22.3-24.61" *)
+  (* src = "generated" *)
   DFFASRHQNx1_ASAP7_75t_R _5_ (
       .CLK(clk),
       .D(in),
@@ -68,7 +68,7 @@ module la_drsync (
       .RESETN(_2_),
       .SETN(nreset)
   );
-  (* src = "inputs/la_drsync.v:22.3-24.61" *)
+  (* src = "generated" *)
   DFFASRHQNx1_ASAP7_75t_R _6_ (
       .CLK(clk),
       .D(\shiftreg[0] ),
