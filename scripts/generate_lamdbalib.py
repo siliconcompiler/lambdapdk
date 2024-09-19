@@ -10,6 +10,7 @@ import multiprocessing
 import argparse
 import subprocess
 import glob
+import re
 
 from lambdalib.utils import write_la_spram
 
@@ -70,6 +71,10 @@ def __format_verilog(path, verible_bin):
 
     for f in paths:
         print(f"Formatting: {f}")
+        with open(f) as fd:
+            content = fd.read()
+        with open(f, 'w') as fd:
+            fd.write(re.sub(r"(\(\*\ssrc\s?=\s?\").*(\".*)", r"\1generated\2", content))
         subprocess.run([verible_bin, '--inplace', f])
 
 
