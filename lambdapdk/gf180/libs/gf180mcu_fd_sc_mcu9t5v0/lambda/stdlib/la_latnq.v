@@ -12,7 +12,7 @@
 //     output reg q
 // );
 // 
-//   always @(clk or d) if (~clk) q <= d;
+//     always @(clk or d) if (~clk) q <= d;
 // 
 // endmodule
 
@@ -25,7 +25,7 @@ module la_latnq (
     clk,
     q
 );
-  (* src = "inputs/la_latnq.v:18.3-18.39|/home/pgadfort/lambdapdk/lambdapdk/gf180/libs/gf180mcu_fd_sc_mcu9t5v0/techmap/yosys/cells_latch.v:12.12-12.14" *)
+  (* src = "inputs/la_latnq.v:18.5-18.41|/home/pgadfort/.sc/cache/lambdapdk-v0.1.33/lambdapdk/gf180/libs/gf180mcu_fd_sc_mcu9t5v0/techmap/yosys/cells_latch.v:12.12-12.14" *)
   wire _0_;
   (* src = "inputs/la_latnq.v:14.16-14.19" *)
   input clk;
@@ -41,7 +41,7 @@ module la_latnq (
       .ZN(_0_)
   );
   (* module_not_derived = 32'b00000000000000000000000000000001 *)
-      (* src = "inputs/la_latnq.v:18.3-18.39|/home/pgadfort/lambdapdk/lambdapdk/gf180/libs/gf180mcu_fd_sc_mcu9t5v0/techmap/yosys/cells_latch.v:10.37-14.10" *)
+      (* src = "inputs/la_latnq.v:18.5-18.41|/home/pgadfort/.sc/cache/lambdapdk-v0.1.33/lambdapdk/gf180/libs/gf180mcu_fd_sc_mcu9t5v0/techmap/yosys/cells_latch.v:10.37-14.10" *)
   gf180mcu_fd_sc_mcu9t5v0__latq_1 _2_ (
       .D(d),
       .E(_0_),

@@ -16,9 +16,9 @@
 //     output reg qn
 // );
 // 
-//   always @(posedge clk or negedge nreset)
-//     if (!nreset) qn <= 1'b1;
-//     else qn <= se ? ~si : ~d;
+//     always @(posedge clk or negedge nreset)
+//         if (!nreset) qn <= 1'b1;
+//         else qn <= se ? ~si : ~d;
 // 
 // endmodule
 
@@ -34,7 +34,7 @@ module la_sdffrqn (
     nreset,
     qn
 );
-  (* src = "inputs/la_sdffrqn.v:22.3-24.30" *)
+  (* src = "inputs/la_sdffrqn.v:22.5-24.34" *)
   wire _0_;
   wire _1_;
   (* src = "inputs/la_sdffrqn.v:17.16-17.19" *)
@@ -65,7 +65,7 @@ module la_sdffrqn (
       .I (_1_),
       .ZN(_0_)
   );
-  (* src = "inputs/la_sdffrqn.v:22.3-24.30" *)
+  (* src = "inputs/la_sdffrqn.v:22.5-24.34" *)
   gf180mcu_fd_sc_mcu9t5v0__dffsnq_2 _4_ (
       .CLK(clk),
       .D(_0_),

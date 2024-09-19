@@ -12,7 +12,7 @@
 //     output reg q
 // );
 // 
-//   always @(clk or d) if (~clk) q <= d;
+//     always @(clk or d) if (~clk) q <= d;
 // 
 // endmodule
 
@@ -35,7 +35,7 @@ module la_latnq (
   output q;
   wire q;
   (* module_not_derived = 32'b00000000000000000000000000000001 *)
-      (* src = "inputs/la_latnq.v:18.3-18.39|/home/pgadfort/lambdapdk/lambdapdk/asap7/libs/asap7sc7p5t_lvt/techmap/yosys/cells_latch.v:10.23-14.10" *)
+      (* src = "inputs/la_latnq.v:18.5-18.41|/home/pgadfort/.sc/cache/lambdapdk-v0.1.33/lambdapdk/asap7/libs/asap7sc7p5t_lvt/techmap/yosys/cells_latch.v:10.23-14.10" *)
   DLLx1_ASAP7_75t_L _0_ (
       .CLK(clk),
       .D  (d),

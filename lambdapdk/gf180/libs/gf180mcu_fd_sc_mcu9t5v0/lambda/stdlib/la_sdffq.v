@@ -15,7 +15,7 @@
 //     output reg q
 // );
 // 
-//   always @(posedge clk) q <= se ? si : d;
+//     always @(posedge clk) q <= se ? si : d;
 // 
 // endmodule
 
@@ -30,7 +30,7 @@ module la_sdffq (
     clk,
     q
 );
-  (* src = "inputs/la_sdffq.v:21.3-21.42" *)
+  (* src = "inputs/la_sdffq.v:21.5-21.44" *)
   wire _0_;
   (* src = "inputs/la_sdffq.v:17.16-17.19" *)
   input clk;
@@ -53,7 +53,7 @@ module la_sdffq (
       .S (se),
       .Z (_0_)
   );
-  (* src = "inputs/la_sdffq.v:21.3-21.42" *)
+  (* src = "inputs/la_sdffq.v:21.5-21.44" *)
   gf180mcu_fd_sc_mcu9t5v0__dffq_2 _2_ (
       .CLK(clk),
       .D  (_0_),

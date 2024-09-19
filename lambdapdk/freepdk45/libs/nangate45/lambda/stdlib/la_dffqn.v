@@ -12,7 +12,7 @@
 //     output reg qn
 // );
 // 
-//   always @(posedge clk) qn <= ~d;
+//     always @(posedge clk) qn <= ~d;
 // 
 // endmodule
 
@@ -25,7 +25,7 @@ module la_dffqn (
     clk,
     qn
 );
-  (* src = "inputs/la_dffqn.v:18.3-18.34" *)
+  (* src = "inputs/la_dffqn.v:18.5-18.36" *)
   wire _0_;
   (* unused_bits = "0" *)
   wire _1_;
@@ -42,7 +42,7 @@ module la_dffqn (
       .A (d),
       .ZN(_0_)
   );
-  (* src = "inputs/la_dffqn.v:18.3-18.34" *)
+  (* src = "inputs/la_dffqn.v:18.5-18.36" *)
   DFF_X1 _3_ (
       .CK(clk),
       .D (_0_),

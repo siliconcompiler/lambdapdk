@@ -16,9 +16,9 @@
 //     output reg qn
 // );
 // 
-//   always @(posedge clk or negedge nreset)
-//     if (!nreset) qn <= 1'b1;
-//     else qn <= se ? ~si : ~d;
+//     always @(posedge clk or negedge nreset)
+//         if (!nreset) qn <= 1'b1;
+//         else qn <= se ? ~si : ~d;
 // 
 // endmodule
 
@@ -34,7 +34,7 @@ module la_sdffrqn (
     nreset,
     qn
 );
-  (* src = "inputs/la_sdffrqn.v:22.3-24.30" *)
+  (* src = "inputs/la_sdffrqn.v:22.5-24.34" *)
   wire _0_;
   wire _1_;
   (* unused_bits = "0" *)
@@ -67,7 +67,7 @@ module la_sdffrqn (
       .A (_1_),
       .ZN(_0_)
   );
-  (* src = "inputs/la_sdffrqn.v:22.3-24.30" *)
+  (* src = "inputs/la_sdffrqn.v:22.5-24.34" *)
   DFFS_X1 _5_ (
       .CK(clk),
       .D (_0_),

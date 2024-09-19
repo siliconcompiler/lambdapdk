@@ -16,9 +16,9 @@
 //     output reg q
 // );
 // 
-//   always @(posedge clk or negedge nset)
-//     if (!nset) q <= 1'b1;
-//     else q <= se ? si : d;
+//     always @(posedge clk or negedge nset)
+//         if (!nset) q <= 1'b1;
+//         else q <= se ? si : d;
 // 
 // endmodule
 
@@ -34,7 +34,7 @@ module la_sdffsq (
     nset,
     q
 );
-  (* src = "inputs/la_sdffsq.v:22.3-24.27" *)
+  (* src = "inputs/la_sdffsq.v:22.5-24.31" *)
   wire _0_;
   (* src = "inputs/la_sdffsq.v:17.16-17.19" *)
   input clk;
@@ -60,7 +60,7 @@ module la_sdffsq (
       .S (se),
       .X (_0_)
   );
-  (* src = "inputs/la_sdffsq.v:22.3-24.27" *)
+  (* src = "inputs/la_sdffsq.v:22.5-24.31" *)
   sky130_fd_sc_hdll__dfstp_1 _2_ (
       .CLK(clk),
       .D(_0_),

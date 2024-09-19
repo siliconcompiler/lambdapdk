@@ -15,7 +15,7 @@
 //     output reg q
 // );
 // 
-//   always @(posedge clk) q <= se ? si : d;
+//     always @(posedge clk) q <= se ? si : d;
 // 
 // endmodule
 
@@ -30,7 +30,7 @@ module la_sdffq (
     clk,
     q
 );
-  (* src = "inputs/la_sdffq.v:21.3-21.42" *)
+  (* src = "inputs/la_sdffq.v:21.5-21.44" *)
   wire _0_;
   (* src = "inputs/la_sdffq.v:17.16-17.19" *)
   input clk;
@@ -53,7 +53,7 @@ module la_sdffq (
       .S (se),
       .X (_0_)
   );
-  (* src = "inputs/la_sdffq.v:21.3-21.42" *)
+  (* src = "inputs/la_sdffq.v:21.5-21.44" *)
   sky130_fd_sc_hd__dfxtp_1 _2_ (
       .CLK(clk),
       .D  (_0_),

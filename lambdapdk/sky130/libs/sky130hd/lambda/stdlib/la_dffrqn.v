@@ -14,9 +14,9 @@
 //     output reg qn
 // );
 // 
-//   always @(posedge clk or negedge nreset)
-//     if (!nreset) qn <= 1'b1;
-//     else qn <= ~d;
+//     always @(posedge clk or negedge nreset)
+//         if (!nreset) qn <= 1'b1;
+//         else qn <= ~d;
 // 
 // endmodule
 
@@ -30,7 +30,7 @@ module la_dffrqn (
     nreset,
     qn
 );
-  (* src = "inputs/la_dffrqn.v:20.3-22.19" *)
+  (* src = "inputs/la_dffrqn.v:20.5-22.23" *)
   wire _0_;
   (* src = "inputs/la_dffrqn.v:15.16-15.19" *)
   input clk;
@@ -48,7 +48,7 @@ module la_dffrqn (
       .A(d),
       .Y(_0_)
   );
-  (* src = "inputs/la_dffrqn.v:20.3-22.19" *)
+  (* src = "inputs/la_dffrqn.v:20.5-22.23" *)
   sky130_fd_sc_hd__dfstp_2 _2_ (
       .CLK(clk),
       .D(_0_),

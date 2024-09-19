@@ -14,9 +14,9 @@
 //     output reg qn
 // );
 // 
-//   always @(posedge clk or negedge nset)
-//     if (!nset) qn <= 1'b0;
-//     else qn <= ~d;
+//     always @(posedge clk or negedge nset)
+//         if (!nset) qn <= 1'b0;
+//         else qn <= ~d;
 // 
 // endmodule
 
@@ -30,7 +30,7 @@ module la_dffsqn (
     nset,
     qn
 );
-  (* src = "inputs/la_dffsqn.v:20.3-22.19" *)
+  (* src = "inputs/la_dffsqn.v:20.5-22.23" *)
   wire _0_;
   wire _1_;
   wire _2_;
@@ -54,7 +54,7 @@ module la_dffsqn (
       .A(_1_),
       .Y(qn)
   );
-  (* src = "inputs/la_dffsqn.v:20.3-22.19" *)
+  (* src = "inputs/la_dffsqn.v:20.5-22.23" *)
   DFFASRHQNx1_ASAP7_75t_SL _5_ (
       .CLK(clk),
       .D(_0_),

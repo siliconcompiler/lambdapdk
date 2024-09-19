@@ -13,7 +13,7 @@
 //     output z
 // );
 // 
-//   assign z = (d0 & ~s) | (d1 & s);
+//     assign z = (d0 & ~s) | (d1 & s);
 // 
 // endmodule
 

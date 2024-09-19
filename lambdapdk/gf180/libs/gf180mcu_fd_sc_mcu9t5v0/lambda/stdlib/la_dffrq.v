@@ -14,9 +14,9 @@
 //     output reg q
 // );
 // 
-//   always @(posedge clk or negedge nreset)
-//     if (!nreset) q <= 1'b0;
-//     else q <= d;
+//     always @(posedge clk or negedge nreset)
+//         if (!nreset) q <= 1'b0;
+//         else q <= d;
 // 
 // endmodule
 
@@ -42,7 +42,7 @@ module la_dffrq (
   (* src = "inputs/la_dffrq.v:17.16-17.17" *)
   output q;
   wire q;
-  (* src = "inputs/la_dffrq.v:20.3-22.17" *)
+  (* src = "inputs/la_dffrq.v:20.5-22.21" *)
   gf180mcu_fd_sc_mcu9t5v0__dffrnq_2 _0_ (
       .CLK(clk),
       .D  (d),

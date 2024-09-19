@@ -14,9 +14,9 @@
 //     output reg q
 // );
 // 
-//   always @(posedge clk or negedge nset)
-//     if (!nset) q <= 1'b1;
-//     else q <= d;
+//     always @(posedge clk or negedge nset)
+//         if (!nset) q <= 1'b1;
+//         else q <= d;
 // 
 // endmodule
 
@@ -42,7 +42,7 @@ module la_dffsq (
   (* src = "inputs/la_dffsq.v:17.16-17.17" *)
   output q;
   wire q;
-  (* src = "inputs/la_dffsq.v:20.3-22.17" *)
+  (* src = "inputs/la_dffsq.v:20.5-22.21" *)
   gf180mcu_fd_sc_mcu9t5v0__dffsnq_2 _0_ (
       .CLK(clk),
       .D(d),

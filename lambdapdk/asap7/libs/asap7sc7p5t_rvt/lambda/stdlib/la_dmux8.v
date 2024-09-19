@@ -26,7 +26,7 @@
 //     output out
 // );
 // 
-//   assign out = (sel0 & in0) |
+//     assign out = (sel0 & in0) |
 //         (sel1 & in1) |
 //         (sel2 & in2) |
 //         (sel3 & in3) |

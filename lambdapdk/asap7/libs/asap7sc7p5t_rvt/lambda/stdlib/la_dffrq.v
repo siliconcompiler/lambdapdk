@@ -14,9 +14,9 @@
 //     output reg q
 // );
 // 
-//   always @(posedge clk or negedge nreset)
-//     if (!nreset) q <= 1'b0;
-//     else q <= d;
+//     always @(posedge clk or negedge nreset)
+//         if (!nreset) q <= 1'b0;
+//         else q <= d;
 // 
 // endmodule
 
@@ -48,7 +48,7 @@ module la_dffrq (
       .A(_0_),
       .Y(q)
   );
-  (* src = "inputs/la_dffrq.v:20.3-22.17" *)
+  (* src = "inputs/la_dffrq.v:20.5-22.21" *)
   DFFASRHQNx1_ASAP7_75t_R _3_ (
       .CLK(clk),
       .D(d),

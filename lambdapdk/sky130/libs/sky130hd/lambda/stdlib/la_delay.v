@@ -11,7 +11,7 @@
 //     output z
 // );
 // 
-//   assign z = a;
+//     assign z = a;
 // 
 // endmodule
 

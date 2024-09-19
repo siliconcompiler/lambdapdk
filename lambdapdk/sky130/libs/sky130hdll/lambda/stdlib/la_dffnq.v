@@ -12,7 +12,7 @@
 //     output reg q
 // );
 // 
-//   always @(negedge clk) q <= d;
+//     always @(negedge clk) q <= d;
 // 
 // endmodule
 
@@ -40,7 +40,7 @@ module la_dffnq (
       .A(clk),
       .Y(_0_)
   );
-  (* src = "inputs/la_dffnq.v:18.3-18.32" *)
+  (* src = "inputs/la_dffnq.v:18.5-18.34" *)
   sky130_fd_sc_hdll__dfrtp_1 _3_ (
       .CLK(_0_),
       .D(d),

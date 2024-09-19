@@ -14,7 +14,7 @@
 //     output out
 // );
 // 
-//   assign out = (sel0 & in0) | (sel1 & in1);
+//     assign out = (sel0 & in0) | (sel1 & in1);
 // 
 // endmodule
 

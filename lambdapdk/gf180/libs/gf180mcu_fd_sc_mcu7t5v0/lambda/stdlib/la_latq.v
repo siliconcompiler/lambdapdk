@@ -12,7 +12,7 @@
 //     output reg q
 // );
 // 
-//   always @(clk or d) if (clk) q <= d;
+//     always @(clk or d) if (clk) q <= d;
 // 
 // endmodule
 
@@ -35,7 +35,7 @@ module la_latq (
   output q;
   wire q;
   (* module_not_derived = 32'b00000000000000000000000000000001 *)
-      (* src = "inputs/la_latq.v:18.3-18.38|/home/pgadfort/lambdapdk/lambdapdk/gf180/libs/gf180mcu_fd_sc_mcu7t5v0/techmap/yosys/cells_latch.v:2.37-6.10" *)
+      (* src = "inputs/la_latq.v:18.5-18.40|/home/pgadfort/.sc/cache/lambdapdk-v0.1.33/lambdapdk/gf180/libs/gf180mcu_fd_sc_mcu7t5v0/techmap/yosys/cells_latch.v:2.37-6.10" *)
   gf180mcu_fd_sc_mcu7t5v0__latq_1 _0_ (
       .D(d),
       .E(clk),

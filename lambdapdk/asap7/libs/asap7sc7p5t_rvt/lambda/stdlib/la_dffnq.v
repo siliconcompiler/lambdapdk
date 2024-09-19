@@ -12,7 +12,7 @@
 //     output reg q
 // );
 // 
-//   always @(negedge clk) q <= d;
+//     always @(negedge clk) q <= d;
 // 
 // endmodule
 
@@ -39,7 +39,7 @@ module la_dffnq (
       .A(_0_),
       .Y(q)
   );
-  (* src = "inputs/la_dffnq.v:18.3-18.32" *)
+  (* src = "inputs/la_dffnq.v:18.5-18.34" *)
   DFFLQNx1_ASAP7_75t_R _2_ (
       .CLK(clk),
       .D  (d),

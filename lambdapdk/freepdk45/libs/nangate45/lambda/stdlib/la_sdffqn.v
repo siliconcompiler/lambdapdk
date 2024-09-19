@@ -15,7 +15,7 @@
 //     output reg qn
 // );
 // 
-//   always @(posedge clk) qn <= se ? ~si : ~d;
+//     always @(posedge clk) qn <= se ? ~si : ~d;
 // 
 // endmodule
 
@@ -30,7 +30,7 @@ module la_sdffqn (
     clk,
     qn
 );
-  (* src = "inputs/la_sdffqn.v:21.3-21.45" *)
+  (* src = "inputs/la_sdffqn.v:21.5-21.47" *)
   wire _0_;
   wire _1_;
   (* unused_bits = "0" *)
@@ -60,7 +60,7 @@ module la_sdffqn (
       .A (_1_),
       .ZN(_0_)
   );
-  (* src = "inputs/la_sdffqn.v:21.3-21.45" *)
+  (* src = "inputs/la_sdffqn.v:21.5-21.47" *)
   DFF_X1 _5_ (
       .CK(clk),
       .D (_0_),

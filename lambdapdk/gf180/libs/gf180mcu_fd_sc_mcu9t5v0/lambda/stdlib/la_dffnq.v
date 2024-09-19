@@ -12,7 +12,7 @@
 //     output reg q
 // );
 // 
-//   always @(negedge clk) q <= d;
+//     always @(negedge clk) q <= d;
 // 
 // endmodule
 
@@ -34,7 +34,7 @@ module la_dffnq (
   (* src = "inputs/la_dffnq.v:15.16-15.17" *)
   output q;
   wire q;
-  (* src = "inputs/la_dffnq.v:18.3-18.32" *)
+  (* src = "inputs/la_dffnq.v:18.5-18.34" *)
   gf180mcu_fd_sc_mcu9t5v0__dffnq_2 _0_ (
       .CLKN(clk),
       .D(d),

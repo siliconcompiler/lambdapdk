@@ -15,7 +15,7 @@
 //     output reg q
 // );
 // 
-//   always @(posedge clk) q <= se ? si : d;
+//     always @(posedge clk) q <= se ? si : d;
 // 
 // endmodule
 
@@ -30,7 +30,7 @@ module la_sdffq (
     clk,
     q
 );
-  (* src = "inputs/la_sdffq.v:21.3-21.42" *)
+  (* src = "inputs/la_sdffq.v:21.5-21.44" *)
   wire _0_;
   wire _1_;
   wire _2_;
@@ -69,7 +69,7 @@ module la_sdffq (
       .A(_1_),
       .Y(q)
   );
-  (* src = "inputs/la_sdffq.v:21.3-21.42" *)
+  (* src = "inputs/la_sdffq.v:21.5-21.44" *)
   DFFHQNx1_ASAP7_75t_L _8_ (
       .CLK(clk),
       .D  (_0_),

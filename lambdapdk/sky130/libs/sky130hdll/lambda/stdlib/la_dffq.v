@@ -12,7 +12,7 @@
 //     output reg q
 // );
 // 
-//   always @(posedge clk) q <= d;
+//     always @(posedge clk) q <= d;
 // 
 // endmodule
 
@@ -35,7 +35,7 @@ module la_dffq (
   (* src = "inputs/la_dffq.v:15.16-15.17" *)
   output q;
   wire q;
-  (* src = "inputs/la_dffq.v:18.3-18.32" *)
+  (* src = "inputs/la_dffq.v:18.5-18.34" *)
   sky130_fd_sc_hdll__dfrtp_1 _1_ (
       .CLK(clk),
       .D(d),

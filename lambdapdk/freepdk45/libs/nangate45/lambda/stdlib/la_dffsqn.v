@@ -14,9 +14,9 @@
 //     output reg qn
 // );
 // 
-//   always @(posedge clk or negedge nset)
-//     if (!nset) qn <= 1'b0;
-//     else qn <= ~d;
+//     always @(posedge clk or negedge nset)
+//         if (!nset) qn <= 1'b0;
+//         else qn <= ~d;
 // 
 // endmodule
 
@@ -30,7 +30,7 @@ module la_dffsqn (
     nset,
     qn
 );
-  (* src = "inputs/la_dffsqn.v:20.3-22.19" *)
+  (* src = "inputs/la_dffsqn.v:20.5-22.23" *)
   wire _0_;
   (* unused_bits = "0" *)
   wire _1_;
@@ -50,7 +50,7 @@ module la_dffsqn (
       .A (d),
       .ZN(_0_)
   );
-  (* src = "inputs/la_dffsqn.v:20.3-22.19" *)
+  (* src = "inputs/la_dffsqn.v:20.5-22.23" *)
   DFFR_X1 _3_ (
       .CK(clk),
       .D (_0_),

@@ -14,8 +14,8 @@
 //     output carry
 // );
 // 
-//   assign sum   = a ^ b ^ c;
-//   assign carry = (a & b) | (b & c) | (c & a);
+//     assign sum   = a ^ b ^ c;
+//     assign carry = (a & b) | (b & c) | (c & a);
 // 
 // endmodule
 
@@ -30,9 +30,9 @@ module la_csa32 (
     sum,
     carry
 );
-  (* src = "/home/pgadfort/lambdapdk/lambdapdk/asap7/libs/asap7sc7p5t_slvt/techmap/yosys/cells_adders.v:10.22-10.24" *)
+  (* src = "/home/pgadfort/.sc/cache/lambdapdk-v0.1.33/lambdapdk/asap7/libs/asap7sc7p5t_slvt/techmap/yosys/cells_adders.v:10.22-10.24" *)
   wire _0_;
-  (* src = "/home/pgadfort/lambdapdk/lambdapdk/asap7/libs/asap7sc7p5t_slvt/techmap/yosys/cells_adders.v:10.26-10.28" *)
+  (* src = "/home/pgadfort/.sc/cache/lambdapdk-v0.1.33/lambdapdk/asap7/libs/asap7sc7p5t_slvt/techmap/yosys/cells_adders.v:10.26-10.28" *)
   wire _1_;
   (* src = "inputs/la_csa32.v:13.12-13.13" *)
   input a;
@@ -58,7 +58,7 @@ module la_csa32 (
       .Y(sum)
   );
   (* module_not_derived = 32'b00000000000000000000000000000001 *)
-      (* src = "/home/pgadfort/lambdapdk/lambdapdk/asap7/libs/asap7sc7p5t_slvt/techmap/yosys/cells_adders.v:44.27-46.12" *)
+      (* src = "/home/pgadfort/.sc/cache/lambdapdk-v0.1.33/lambdapdk/asap7/libs/asap7sc7p5t_slvt/techmap/yosys/cells_adders.v:44.27-46.12" *)
   FAx1_ASAP7_75t_SL _4_ (
       .A  (a),
       .B  (b),

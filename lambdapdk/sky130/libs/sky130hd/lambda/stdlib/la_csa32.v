@@ -14,8 +14,8 @@
 //     output carry
 // );
 // 
-//   assign sum   = a ^ b ^ c;
-//   assign carry = (a & b) | (b & c) | (c & a);
+//     assign sum   = a ^ b ^ c;
+//     assign carry = (a & b) | (b & c) | (c & a);
 // 
 // endmodule
 
@@ -46,7 +46,7 @@ module la_csa32 (
   output sum;
   wire sum;
   (* module_not_derived = 32'b00000000000000000000000000000001 *)
-      (* src = "/home/pgadfort/lambdapdk/lambdapdk/sky130/libs/sky130hd/techmap/yosys/cells_adders.v:42.31-44.12" *)
+      (* src = "/home/pgadfort/.sc/cache/lambdapdk-v0.1.33/lambdapdk/sky130/libs/sky130hd/techmap/yosys/cells_adders.v:42.31-44.12" *)
   sky130_fd_sc_hd__fa_1 _0_ (
       .A(a),
       .B(b),

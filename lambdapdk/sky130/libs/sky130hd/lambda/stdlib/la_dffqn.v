@@ -12,7 +12,7 @@
 //     output reg qn
 // );
 // 
-//   always @(posedge clk) qn <= ~d;
+//     always @(posedge clk) qn <= ~d;
 // 
 // endmodule
 
@@ -25,7 +25,7 @@ module la_dffqn (
     clk,
     qn
 );
-  (* src = "inputs/la_dffqn.v:18.3-18.34" *)
+  (* src = "inputs/la_dffqn.v:18.5-18.36" *)
   wire _0_;
   (* src = "inputs/la_dffqn.v:14.11-14.14" *)
   input clk;
@@ -40,7 +40,7 @@ module la_dffqn (
       .A(d),
       .Y(_0_)
   );
-  (* src = "inputs/la_dffqn.v:18.3-18.34" *)
+  (* src = "inputs/la_dffqn.v:18.5-18.36" *)
   sky130_fd_sc_hd__dfxtp_1 _2_ (
       .CLK(clk),
       .D  (_0_),

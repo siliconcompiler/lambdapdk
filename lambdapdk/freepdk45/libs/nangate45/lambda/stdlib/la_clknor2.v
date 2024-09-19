@@ -12,7 +12,7 @@
 //     output z
 // );
 // 
-//   assign z = ~(a | b);
+//     assign z = ~(a | b);
 // 
 // endmodule
 

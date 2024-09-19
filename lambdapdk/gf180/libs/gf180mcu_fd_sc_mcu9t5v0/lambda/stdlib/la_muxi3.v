@@ -15,7 +15,7 @@
 //     output z
 // );
 // 
-//   assign z = ~((d0 & ~s0 & ~s1) | (d1 & s0 & ~s1) | (d2 & s1));
+//     assign z = ~((d0 & ~s0 & ~s1) | (d1 & s0 & ~s1) | (d2 & s1));
 // 
 // endmodule
 

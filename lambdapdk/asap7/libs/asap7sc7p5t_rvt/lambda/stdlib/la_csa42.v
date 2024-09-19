@@ -17,10 +17,10 @@
 //     output cout
 // );
 // 
-//   assign cout   = (a & b) | (b & c) | (a & c);
-//   assign sumint = a ^ b ^ c;
-//   assign sum    = cin ^ d ^ sumint;
-//   assign carry  = (cin & d) | (cin & sumint) | (d & sumint);
+//     assign cout   = (a & b) | (b & c) | (a & c);
+//     assign sumint = a ^ b ^ c;
+//     assign sum    = cin ^ d ^ sumint;
+//     assign carry  = (cin & d) | (cin & sumint) | (d & sumint);
 // 
 // endmodule
 
@@ -39,22 +39,22 @@ module la_csa42 (
     cout
 );
   (* force_downto = 32'b00000000000000000000000000000001 *)
-  (* src = "/home/pgadfort/lambdapdk/lambdapdk/asap7/libs/asap7sc7p5t_rvt/techmap/yosys/cells_adders.v:6.25-6.26" *)
+  (* src = "/home/pgadfort/.sc/cache/lambdapdk-v0.1.33/lambdapdk/asap7/libs/asap7sc7p5t_rvt/techmap/yosys/cells_adders.v:6.25-6.26" *)
   wire _00_;
   (* force_downto = 32'b00000000000000000000000000000001 *)
-      (* src = "/home/pgadfort/lambdapdk/lambdapdk/asap7/libs/asap7sc7p5t_rvt/techmap/yosys/cells_adders.v:6.28-6.29" *)
+      (* src = "/home/pgadfort/.sc/cache/lambdapdk-v0.1.33/lambdapdk/asap7/libs/asap7sc7p5t_rvt/techmap/yosys/cells_adders.v:6.28-6.29" *)
   wire _01_;
   (* force_downto = 32'b00000000000000000000000000000001 *)
-      (* src = "/home/pgadfort/lambdapdk/lambdapdk/asap7/libs/asap7sc7p5t_rvt/techmap/yosys/cells_adders.v:6.31-6.32" *)
+      (* src = "/home/pgadfort/.sc/cache/lambdapdk-v0.1.33/lambdapdk/asap7/libs/asap7sc7p5t_rvt/techmap/yosys/cells_adders.v:6.31-6.32" *)
   wire _02_;
   (* force_downto = 32'b00000000000000000000000000000001 *)
-      (* src = "/home/pgadfort/lambdapdk/lambdapdk/asap7/libs/asap7sc7p5t_rvt/techmap/yosys/cells_adders.v:6.25-6.26" *)
+      (* src = "/home/pgadfort/.sc/cache/lambdapdk-v0.1.33/lambdapdk/asap7/libs/asap7sc7p5t_rvt/techmap/yosys/cells_adders.v:6.25-6.26" *)
   wire _03_;
   (* force_downto = 32'b00000000000000000000000000000001 *)
-      (* src = "/home/pgadfort/lambdapdk/lambdapdk/asap7/libs/asap7sc7p5t_rvt/techmap/yosys/cells_adders.v:6.28-6.29" *)
+      (* src = "/home/pgadfort/.sc/cache/lambdapdk-v0.1.33/lambdapdk/asap7/libs/asap7sc7p5t_rvt/techmap/yosys/cells_adders.v:6.28-6.29" *)
   wire _04_;
   (* force_downto = 32'b00000000000000000000000000000001 *)
-      (* src = "/home/pgadfort/lambdapdk/lambdapdk/asap7/libs/asap7sc7p5t_rvt/techmap/yosys/cells_adders.v:6.31-6.32" *)
+      (* src = "/home/pgadfort/.sc/cache/lambdapdk-v0.1.33/lambdapdk/asap7/libs/asap7sc7p5t_rvt/techmap/yosys/cells_adders.v:6.31-6.32" *)
   wire _05_;
   (* src = "inputs/la_csa42.v:13.12-13.13" *)
   input a;
@@ -101,7 +101,7 @@ module la_csa42 (
       .Y(_02_)
   );
   (* module_not_derived = 32'b00000000000000000000000000000001 *)
-      (* src = "/home/pgadfort/lambdapdk/lambdapdk/asap7/libs/asap7sc7p5t_rvt/techmap/yosys/cells_adders.v:44.26-46.12" *)
+      (* src = "/home/pgadfort/.sc/cache/lambdapdk-v0.1.33/lambdapdk/asap7/libs/asap7sc7p5t_rvt/techmap/yosys/cells_adders.v:44.26-46.12" *)
   FAx1_ASAP7_75t_R _11_ (
       .A  (_00_),
       .B  (_01_),
@@ -110,7 +110,7 @@ module la_csa42 (
       .SN (_05_)
   );
   (* module_not_derived = 32'b00000000000000000000000000000001 *)
-      (* src = "/home/pgadfort/lambdapdk/lambdapdk/asap7/libs/asap7sc7p5t_rvt/techmap/yosys/cells_adders.v:44.26-46.12" *)
+      (* src = "/home/pgadfort/.sc/cache/lambdapdk-v0.1.33/lambdapdk/asap7/libs/asap7sc7p5t_rvt/techmap/yosys/cells_adders.v:44.26-46.12" *)
   FAx1_ASAP7_75t_R _12_ (
       .A  (_03_),
       .B  (_04_),
