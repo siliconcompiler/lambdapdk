@@ -89,12 +89,12 @@ def setup():
 
         # Openroad global routing grid derating
         openroad_layer_adjustments = {
-                'Metal1': 0.0,
-                'Metal2': 0.0,
-                'Metal3': 0.0,
-                'Metal4': 0.0,
-                'Metal5': 0.0,
-                'Metal6': 0.0,
+                'Metal1': 0.25,
+                'Metal2': 0.25,
+                'Metal3': 0.25,
+                'Metal4': 0.25,
+                'Metal5': 0.25,
+                'Metal6': 0.25,
                 'MetalTop': 1.0
         }
         for layer, adj in openroad_layer_adjustments.items():
