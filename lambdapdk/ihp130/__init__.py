@@ -24,14 +24,14 @@ def setup():
     IHP Open Source PDK project goal is to provide a fully open source Process Design Kit and
     related data, which can be used to create manufacturable designs at IHP's facility.
 
-    SG13G2 is a high performance BiCMOS technology with a 0.13 μm CMOS process.
+    SG13G2 is a high performance BiCMOS technology with a 0.13 um CMOS process.
     It contains bipolar devices based on SiGe:C npn-HBT's with up to 350 GHz transition frequency
     (fT) and 450 GHz oscillation frequency (fmax).
     This process provides 2 gate oxides:
     A thin gate oxide for the 1.2 V digital logic and a thick oxide for a 3.3 V supply voltage.
     For both modules NMOS, PMOS and isolated NMOS transistors are offered.
     Further passive components like poly silicon resistors and MIM capacitors are available.
-    The backend option offers 5 thin metal layers, two thick metal layers (2 and 3 μm thick) and
+    The backend option offers 5 thin metal layers, two thick metal layers (2 and 3 um thick) and
     a MIM layer.
 
     Sources:
