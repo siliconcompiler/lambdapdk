@@ -89,11 +89,11 @@ def setup():
     # Openroad global routing grid derating
     openroad_layer_adjustments = {
         'li1': 1.0,
-        'met1': 0.3,
-        'met2': 0.3,
-        'met3': 0.3,
-        'met4': 0.3,
-        'met5': 0.3
+        'met1': 0.40,
+        'met2': 0.40,
+        'met3': 0.30,
+        'met4': 0.30,
+        'met5': 0.30
     }
     for layer, adj in openroad_layer_adjustments.items():
         pdk.set('pdk', process, 'var', 'openroad', f'{layer}_adjustment', stackup, str(adj))
