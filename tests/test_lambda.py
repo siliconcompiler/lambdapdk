@@ -1,4 +1,5 @@
 import pytest
+import os
 from siliconcompiler import Chip
 import lambdalib
 
@@ -16,7 +17,7 @@ from lambdapdk.ihp130.libs import sg13g2_stdcell, sg13g2_sram
     (gf180mcu, 'lambdapdk/gf180/libs/{lib_name}/lambda/auxlib'),
     (sg13g2_stdcell, 'lambdapdk/ihp130/libs/{lib_name}/lambda/auxlib')
     ])
-def test_la_auxlib(module, path):
+def test_la_auxlib(module, path, rootdir):
     libs = module.setup()
     if not isinstance(libs, list):
         libs = [libs]
@@ -24,7 +25,8 @@ def test_la_auxlib(module, path):
         lib_name = lib.design
         if "lambdalib" in lib_name:
             continue
-        assert lambdalib.check(path.format(lib_name=lib_name), 'auxlib')
+        assert lambdalib.check(
+            os.path.join(rootdir, path.format(lib_name=lib_name)), 'auxlib')
 
 
 @pytest.mark.parametrize('module,path', [
@@ -34,7 +36,7 @@ def test_la_auxlib(module, path):
     (gf180mcu, 'lambdapdk/gf180/libs/{lib_name}/lambda/stdlib'),
     (sg13g2_stdcell, 'lambdapdk/ihp130/libs/{lib_name}/lambda/stdlib')
     ])
-def test_la_stdlib(module, path):
+def test_la_stdlib(module, path, rootdir):
     libs = module.setup()
     if not isinstance(libs, list):
         libs = [libs]
@@ -42,7 +44,8 @@ def test_la_stdlib(module, path):
         lib_name = lib.design
         if "lambdalib" in lib_name:
             continue
-        assert lambdalib.check(path.format(lib_name=lib_name), 'stdlib')
+        assert lambdalib.check(
+            os.path.join(rootdir, path.format(lib_name=lib_name)), 'stdlib')
 
 
 @pytest.mark.parametrize('path', [
@@ -52,8 +55,9 @@ def test_la_stdlib(module, path):
     'lambdapdk/gf180/libs/gf180mcu_fd_ip_sram/lambda',
     'lambdapdk/ihp130/libs/sg13g2_sram/lambda',
     ])
-def test_la_ramlib(path):
-    assert lambdalib.check(path, 'ramlib')
+def test_la_ramlib(path, rootdir):
+    assert lambdalib.check(
+        os.path.join(rootdir, path), 'ramlib')
 
 
 @pytest.mark.parametrize('path', [
@@ -61,8 +65,9 @@ def test_la_ramlib(path):
     'lambdapdk/gf180/libs/gf180mcu_fd_io/lambda',
     'lambdapdk/asap7/libs/fakeio7/lambda',
     ])
-def test_la_iolib(path):
-    assert lambdalib.check(path, 'iolib')
+def test_la_iolib(path, rootdir):
+    assert lambdalib.check(
+        os.path.join(rootdir, path), 'iolib')
 
 
 @pytest.mark.parametrize('module', [
