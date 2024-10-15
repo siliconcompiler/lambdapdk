@@ -103,6 +103,6 @@ def setup():
 
 #########################
 if __name__ == "__main__":
-    pdk = setup(siliconcompiler.Chip('<pdk>'))
+    pdk = setup()
     register_data_source(pdk)
     pdk.check_filepaths()
