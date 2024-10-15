@@ -155,7 +155,7 @@ def setup():
 
 #########################
 if __name__ == "__main__":
-    libs = setup(siliconcompiler.Chip('<lib>'))
+    libs = setup()
     for lib in libs:
         lib.write_manifest(f'{lib.top()}.json')
         lib.check_filepaths()

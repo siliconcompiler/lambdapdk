@@ -102,13 +102,7 @@ def setup():
             if layer == pdk.get('pdk', process, 'maxlayer', stackup):
                 break
 
-        if max_layer == 2:
-            pdk.set('pdk', process, 'var', 'openroad', 'rclayer_signal', stackup, 'Metal2')
-            pdk.set('pdk', process, 'var', 'openroad', 'rclayer_clock', stackup, 'Metal2')
-
-            pdk.set('pdk', process, 'var', 'openroad', 'pin_layer_vertical', stackup, 'Metal2')
-            pdk.set('pdk', process, 'var', 'openroad', 'pin_layer_horizontal', stackup, 'Metal1')
-        elif max_layer == 3:
+        if max_layer == 3:
             pdk.set('pdk', process, 'var', 'openroad', 'rclayer_signal', stackup, 'Metal2')
             pdk.set('pdk', process, 'var', 'openroad', 'rclayer_clock', stackup, 'Metal2')
 
@@ -137,6 +131,47 @@ def setup():
             pdk.set('pdk', process, 'pexmodel', 'openroad-openrcx', stackup, corner,
                     pdkdir + '/pex/openroad/' + base_name + '.rules')
 
+        # DRC
+        metal_level, _, metal_top = stackup.split('_')
+        drcs = {
+            "drc": pdkdir + '/setup/klayout/drc/gf180mcu.drc',
+            "drc_feol": pdkdir + '/setup/klayout/drc/gf180mcu.drc',
+            "drc_beol": pdkdir + '/setup/klayout/drc/gf180mcu.drc',
+            "antenna": pdkdir + '/setup/klayout/drc/gf180mcu_antenna.drc',
+            "density": pdkdir + '/setup/klayout/drc/gf180mcu_density.drc'
+        }
+        for drc, runset in drcs.items():
+            pdk.set('pdk', process, 'drc', 'runset', 'klayout', stackup, drc, runset)
+
+            key = f'drc_params:{drc}'
+            pdk.add('pdk', process, 'var', 'klayout', stackup, key, 'input=<input>')
+            pdk.add('pdk', process, 'var', 'klayout', stackup, key, 'topcell=<topcell>')
+            pdk.add('pdk', process, 'var', 'klayout', stackup, key, 'report=<report>')
+            pdk.add('pdk', process, 'var', 'klayout', stackup, key, 'thr=<threads>')
+            pdk.add('pdk', process, 'var', 'klayout', stackup, key, 'run_mode=flat')
+            pdk.add('pdk', process, 'var', 'klayout', stackup, key, 'offgrid=true')
+
+            if drc in ('drc', 'drc_feol', 'drc_beol'):
+                feol = 'true'
+                beol = 'true'
+                if drc == 'drc_feol':
+                    beol = 'false'
+                if drc == 'drc_beol':
+                    feol = 'false'
+                pdk.add('pdk', process, 'var', 'klayout', stackup, key,
+                        f'feol={feol}')
+                pdk.add('pdk', process, 'var', 'klayout', stackup, key,
+                        f'beol={beol}')
+
+            pdk.add('pdk', process, 'var', 'klayout', stackup, key,
+                    f'metal_top={metal_top}')
+            pdk.add('pdk', process, 'var', 'klayout', stackup, key,
+                    f'metal_level={metal_level}')
+            if max_layer == 3:
+                pdk.add('pdk', process, 'var', 'klayout', stackup, key, 'mim_option=A')
+            elif max_layer == 4 or max_layer == 5:
+                pdk.add('pdk', process, 'var', 'klayout', stackup, key, 'mim_option=B')
+
         pdk.add('pdk', process, 'var', 'klayout', 'hide_layers', stackup, 'Dualgate')
         pdk.add('pdk', process, 'var', 'klayout', 'hide_layers', stackup, 'V5_XTOR')
         pdk.add('pdk', process, 'var', 'klayout', 'hide_layers', stackup, 'PR_bndry')
@@ -146,6 +181,6 @@ def setup():
 
 #########################
 if __name__ == "__main__":
-    pdk = setup(siliconcompiler.Chip('<pdk>'))
+    pdk = setup()
     pdk.write_manifest(f'{pdk.top()}.json')
     pdk.check_filepaths()
