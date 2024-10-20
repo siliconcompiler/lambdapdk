@@ -1,0 +1,20 @@
+# Interposer
+
+{% for line in desc.splitlines() %}{{ line.strip() }}
+{% endfor %}
+
+## Stackups{% for stackup in stackups %}
+### {{ stackup["name"] }}
+```
+{{ 'metal name'.center(30) }} |  width  | spacing
+------------------------------ | ------- | -------{% for metal, width, spacing in stackup["metalstack"] %}
+{{ metal.center(30) }} | {{ width.center(7) }} | {{ spacing.center(7) }}
+------------------------------ | ------- | -------{% endfor %}
+```
+{% endfor %}
+
+## License
+```
+{% for line in license.splitlines() %}{{ line }}
+{% endfor %}
+```

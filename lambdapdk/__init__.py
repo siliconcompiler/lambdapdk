@@ -1,10 +1,9 @@
-import siliconcompiler.package as sc_package
-
-
 __version__ = "0.1.35"
 
 
 def register_data_source(chip):
+    import siliconcompiler.package as sc_package
+
     sc_package.register_python_data_source(
         chip,
         "lambdapdk",
@@ -20,10 +19,10 @@ def get_pdks():
     Returns a list of pdk names in lambdapdk
     '''
 
-    from lambdapdk import asap7, freepdk45, sky130, gf180, ihp130
+    from lambdapdk import asap7, freepdk45, sky130, gf180, ihp130, interposer
 
     all_pdks = []
-    for pdk_mod in [asap7, freepdk45, sky130, gf180, ihp130]:
+    for pdk_mod in [asap7, freepdk45, sky130, gf180, ihp130, interposer]:
         pdks = pdk_mod.setup()
         if not isinstance(pdks, (list, tuple)):
             pdks = [pdks]

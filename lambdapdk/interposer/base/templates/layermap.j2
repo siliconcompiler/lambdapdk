@@ -1,0 +1,7 @@
+{% for line in license.splitlines() %}# {{ line }}
+{% endfor %}
+{% if comment %}{% for line in comment.splitlines() %}# {{ line }}
+{% endfor %}{% endif %}#==============   ==============   ================   ==============
+#EDI Layer Name   EDI Layer Type   GDS Layer Number   GDS Layer Type
+#==============   ==============   ================   =============={% for layer, type, gds_number, gds_type in layers %}
+{{ layer.ljust(15) }}   {{ type.ljust(14) }}   {{ gds_number.rjust(16) }}   {{ gds_type.rjust(14) }}{% endfor %}

@@ -2,7 +2,7 @@ import pytest
 from siliconcompiler import Chip
 import os
 
-from lambdapdk import asap7, freepdk45, sky130, gf180, ihp130
+from lambdapdk import asap7, freepdk45, sky130, gf180, ihp130, interposer
 from lambdapdk.asap7.libs import asap7sc7p5t, fakeram7, fakeio7
 from lambdapdk.freepdk45.libs import nangate45, fakeram45
 from lambdapdk.sky130.libs import sky130sc, sky130io, sky130sram
@@ -11,7 +11,8 @@ from lambdapdk.ihp130.libs import sg13g2_stdcell
 
 
 @pytest.mark.parametrize('pdk', [
-    asap7, freepdk45, sky130, gf180, ihp130])
+    asap7, freepdk45, sky130, gf180, ihp130,
+    interposer])
 def test_pdk_paths(pdk):
     chip = Chip('<pdk>')
     chip.use(pdk)
