@@ -1,0 +1,76 @@
+{% for line in license.splitlines() %}# {{ line }}
+{% endfor %}
+{% if comment %}{% for line in comment.splitlines() %}# {{ line }}
+{% endfor %}{% endif %}#================================================
+#---------- Interposer DRC RULE DECK ------------
+#================================================
+# Required inputs:
+#  input - input gds/oas
+#  topcell - topcell
+#  report - path to report file
+#  threads - number of threads to use
+
+print("Layout: %s\n" % [$input])
+source($input, $topcell)
+
+print("DRC report: %s\n" % [$report])
+report("DRC Report", $report)
+
+# Requires threads to be defined
+print("Number of threads to use %s\n" % [$threads])
+threads($threads)
+
+# Run in flat mode
+flat
+
+#================================================
+#------------- LAYERS DEFINITIONS ---------------
+#================================================
+
+outline = polygons(0, 0){% for layer in layers %}
+{{ layer["name"] }} = {% for number, type in layer["gds"] %}polygons({{ number }}, {{ type }}){% if not loop.last %} + {% endif %}{% endfor %}{% endfor %}
+
+{% for layer in layers %}#================================================
+#--------------- {{ layer["name"] }} RULES -------------------
+#================================================
+
+on_grid = {{ layer["name"] }}.ongrid({{ grid }}.nm)
+on_grid.output("{{ layer["name"] }}.ongrid", "{{ layer["name"] }} On Grid : {{ grid }}nm")
+on_grid.forget
+
+in_outline = {{ layer["name"] }}.not_inside(outline.sized(-1000.nm))
+in_outline.output("{{ layer["name"] }}.outline", "{{ layer["name"] }} Inside Outline : 1000nm")
+in_outline.forget
+{% if layer["type"] == "ROUTING" %}
+min_width = {{ layer["name"] }}.drc(width(euclidian) < {{ layer["width"]["min"] }}.nm)
+min_width.output("{{ layer["name"] }}.min_width", "{{ layer["name"] }} Min. Width : {{ layer["width"]["min"] }}nm")
+min_width.forget{% else %}
+via_shape = {{ layer["name"] }}.drc(width(euclidian) != {{ layer["width"]["min"] }}.nm)
+via_shape.output("{{ layer["name"] }}.via_shape", "{{ layer["name"] }} Shape : {{ layer["width"]["min"] }}nm x {{ layer["width"]["min"] }}nm")
+via_shape.forget{% endif %}
+
+min_space = {{ layer["name"] }}.drc(space(euclidian) < {{ layer["spacing"]["min"] }}.nm)
+min_space.output("{{ layer["name"] }}.min_space", "{{ layer["name"] }} Min. Width : {{ layer["spacing"]["min"] }}nm")
+min_space.forget
+{% if "max" in layer["width"] %}
+max_width = {{ layer["name"] }}.drc(width(euclidian) > {{ layer["width"]["max"] }}.nm)
+max_width.output("{{ layer["name"] }}.max_width", "{{ layer["name"] }} Max. Width : {{ layer["width"]["max"] }}nm")
+max_width.forget
+{% endif %}{% if layer["type"] == "CUT" %}
+in_{{ layer["enclosure"]["bottom"][0] }} = {{ layer["name"] }}.not_inside({{ layer["enclosure"]["bottom"][0] }})
+in_{{ layer["enclosure"]["bottom"][0] }}.output("{{ layer["name"] }}.in_{{ layer["enclosure"]["bottom"][0] }}", "{{ layer["name"] }} must overlap {{ layer["enclosure"]["bottom"][0] }}")
+in_{{ layer["enclosure"]["bottom"][0] }}.forget
+
+enc_{{ layer["enclosure"]["bottom"][0] }} = {{ layer["name"] }}.enclosed({{ layer["enclosure"]["bottom"][0] }}, {{ layer["enclosure"]["bottom"][1] }}.nm).polygons()
+enc_{{ layer["enclosure"]["bottom"][0] }}.output("{{ layer["name"] }}.in_{{ layer["enclosure"]["bottom"][0] }}", "{{ layer["name"] }} {{ layer["enclosure"]["bottom"][0] }} enclosure: {{ layer["enclosure"]["bottom"][1] }}nm")
+enc_{{ layer["enclosure"]["bottom"][0] }}.forget
+
+in_{{ layer["enclosure"]["top"][0] }} = {{ layer["name"] }}.not_inside({{ layer["enclosure"]["top"][0] }})
+in_{{ layer["enclosure"]["top"][0] }}.output("{{ layer["name"] }}.in_{{ layer["enclosure"]["top"][0] }}", "{{ layer["name"] }} must overlap {{ layer["enclosure"]["top"][0] }}")
+in_{{ layer["enclosure"]["top"][0] }}.forget
+
+enc_{{ layer["enclosure"]["top"][0] }} = {{ layer["name"] }}.enclosed({{ layer["enclosure"]["top"][0] }}, {{ layer["enclosure"]["top"][1] }}.nm).polygons()
+enc_{{ layer["enclosure"]["top"][0] }}.output("{{ layer["name"] }}.in_{{ layer["enclosure"]["top"][0] }}", "{{ layer["name"] }} {{ layer["enclosure"]["top"][0] }} enclosure: {{ layer["enclosure"]["top"][1] }}nm")
+enc_{{ layer["enclosure"]["top"][0] }}.forget
+{% endif %}
+{% endfor %}

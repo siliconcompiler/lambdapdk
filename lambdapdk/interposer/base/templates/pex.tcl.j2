@@ -1,0 +1,12 @@
+{% for line in license.splitlines() %}# {{ line }}
+{% endfor %}
+# Metals{% for layer, resistance, capacitance in metals %}
+set_layer_rc {{ '{{' }} corner {{ '}}' }} \
+    -layer {{ layer }} \
+    -capacitance {{ capacitance }} \
+    -resistance {{ resistance }}{% endfor %}
+
+# Vias{% for layer, resistance in vias %}
+set_layer_rc {{ '{{' }} corner {{ '}}' }} \
+    -via {{ layer }} \
+    -resistance {{ resistance }}{% endfor %}

@@ -20,10 +20,10 @@ def get_pdks():
     Returns a list of pdk names in lambdapdk
     '''
 
-    from lambdapdk import asap7, freepdk45, sky130, gf180, ihp130
+    from lambdapdk import asap7, freepdk45, sky130, gf180, ihp130, interposer
 
     all_pdks = []
-    for pdk_mod in [asap7, freepdk45, sky130, gf180, ihp130]:
+    for pdk_mod in [asap7, freepdk45, sky130, gf180, ihp130, interposer]:
         pdks = pdk_mod.setup()
         if not isinstance(pdks, (list, tuple)):
             pdks = [pdks]
