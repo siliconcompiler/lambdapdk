@@ -1,4 +1,4 @@
-{% for line in license.splitlines() %}# {{ line }}
+{% for line in license.splitlines() %}#{% if line %} {{ line }}{% endif %}
 {% endfor %}
 # Metals{% for layer, resistance, capacitance in metals %}
 set_layer_rc {{ '{{' }} corner {{ '}}' }} \

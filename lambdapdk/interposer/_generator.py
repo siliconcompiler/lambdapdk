@@ -389,8 +389,10 @@ def build_lef(tech, path):
 
         cut_egde = layer["width"]["min"]
         cut = (-cut_egde / 2, -cut_egde / 2, cut_egde / 2, cut_egde / 2)
-        bot = (cut[0] - layer["enclosure"]['bottom'], cut[1] - layer["enclosure"]['bottom'], cut[2] + layer["enclosure"]['bottom'], cut[3] + layer["enclosure"]['bottom'])
-        top = (cut[0] - layer["enclosure"]['top'], cut[1] - layer["enclosure"]['top'], cut[2] + layer["enclosure"]['top'], cut[3] + layer["enclosure"]['top'])
+        bot = (cut[0] - layer["enclosure"]['bottom'], cut[1] - layer["enclosure"]['bottom'],
+               cut[2] + layer["enclosure"]['bottom'], cut[3] + layer["enclosure"]['bottom'])
+        top = (cut[0] - layer["enclosure"]['top'], cut[1] - layer["enclosure"]['top'],
+               cut[2] + layer["enclosure"]['top'], cut[3] + layer["enclosure"]['top'])
 
         vias.append({
             "name": name,

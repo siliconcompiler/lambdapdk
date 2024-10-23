@@ -1,0 +1,109 @@
+{
+  "layers": {
+    "metal1": {
+      "space_to_outline": 2.0,
+      "non-opc": {
+        "width": [
+          5.0,
+          3.85,
+          2.7,
+          1.55,
+          0.4
+        ],
+        "height": [
+          5.0,
+          3.85,
+          2.7,
+          1.55,
+          0.4
+        ],
+        "space_to_fill": 0.4,
+        "space_to_non_fill": 2.0
+      }
+    },
+    "metal2": {
+      "space_to_outline": 2.0,
+      "non-opc": {
+        "width": [
+          5.0,
+          3.85,
+          2.7,
+          1.55,
+          0.4
+        ],
+        "height": [
+          5.0,
+          3.85,
+          2.7,
+          1.55,
+          0.4
+        ],
+        "space_to_fill": 0.4,
+        "space_to_non_fill": 2.0
+      }
+    },
+    "metal3": {
+      "space_to_outline": 2.0,
+      "non-opc": {
+        "width": [
+          5.0,
+          3.85,
+          2.7,
+          1.55,
+          0.4
+        ],
+        "height": [
+          5.0,
+          3.85,
+          2.7,
+          1.55,
+          0.4
+        ],
+        "space_to_fill": 0.4,
+        "space_to_non_fill": 2.0
+      }
+    },
+    "metal4": {
+      "space_to_outline": 2.0,
+      "non-opc": {
+        "width": [
+          5.0,
+          3.85,
+          2.7,
+          1.55,
+          0.4
+        ],
+        "height": [
+          5.0,
+          3.85,
+          2.7,
+          1.55,
+          0.4
+        ],
+        "space_to_fill": 0.4,
+        "space_to_non_fill": 2.0
+      }
+    },
+    "topmetal": {
+      "space_to_outline": 2.0,
+      "non-opc": {
+        "width": [
+          5.0,
+          3.85,
+          2.7,
+          1.55,
+          0.4
+        ],
+        "height": [
+          5.0,
+          3.85,
+          2.7,
+          1.55,
+          0.4
+        ],
+        "space_to_fill": 0.4,
+        "space_to_non_fill": 2.0
+      }
+    }
+  }
+}

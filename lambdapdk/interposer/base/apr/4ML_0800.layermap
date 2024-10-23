@@ -1,0 +1,73 @@
+# Copyright 2024 ZeroASIC Corp
+# 
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+# 
+#      https://www.apache.org/licenses/LICENSE-2.0
+# 
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+#==============   ==============   ================   ==============
+#EDI Layer Name   EDI Layer Type   GDS Layer Number   GDS Layer Type
+#==============   ==============   ================   ==============
+metal1            NET                             1                0
+metal1            SPNET                           1                0
+metal1            PIN                             1               10
+metal1            LEFPIN                          1               10
+metal1            FILL                            1               30
+NAME              metal1/PIN                      1               20
+NAME              metal1/SPNET                    1               20
+NAME              metal1/TEXT                     1               20
+via1              NET                             2                0
+via1              SPNET                           2                0
+via1              PIN                             2               10
+via1              LEFPIN                          2               10
+via1              FILL                            2               30
+NAME              via1/PIN                        2               20
+NAME              via1/SPNET                      2               20
+NAME              via1/TEXT                       2               20
+metal2            NET                             3                0
+metal2            SPNET                           3                0
+metal2            PIN                             3               10
+metal2            LEFPIN                          3               10
+metal2            FILL                            3               30
+NAME              metal2/PIN                      3               20
+NAME              metal2/SPNET                    3               20
+NAME              metal2/TEXT                     3               20
+via2              NET                             4                0
+via2              SPNET                           4                0
+via2              PIN                             4               10
+via2              LEFPIN                          4               10
+via2              FILL                            4               30
+NAME              via2/PIN                        4               20
+NAME              via2/SPNET                      4               20
+NAME              via2/TEXT                       4               20
+metal3            NET                             5                0
+metal3            SPNET                           5                0
+metal3            PIN                             5               10
+metal3            LEFPIN                          5               10
+metal3            FILL                            5               30
+NAME              metal3/PIN                      5               20
+NAME              metal3/SPNET                    5               20
+NAME              metal3/TEXT                     5               20
+via3              NET                             6                0
+via3              SPNET                           6                0
+via3              PIN                             6               10
+via3              LEFPIN                          6               10
+via3              FILL                            6               30
+NAME              via3/PIN                        6               20
+NAME              via3/SPNET                      6               20
+NAME              via3/TEXT                       6               20
+topmetal          NET                             7                0
+topmetal          SPNET                           7                0
+topmetal          PIN                             7               10
+topmetal          LEFPIN                          7               10
+topmetal          FILL                            7               30
+NAME              topmetal/PIN                    7               20
+NAME              topmetal/SPNET                  7               20
+NAME              topmetal/TEXT                   7               20
