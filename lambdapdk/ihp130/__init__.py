@@ -4,7 +4,7 @@ import siliconcompiler
 from lambdapdk import register_data_source
 
 
-pdk_rev = '89c8038db331ccfdf6be488dfc4670cb62ba3c42'
+pdk_rev = '035037f6312851414e4bb5daa5a9d18975c768b3'
 
 
 def register_ihp130_data_source(chip):
@@ -118,6 +118,19 @@ def setup():
         pdk.set('pdk', process, 'pexmodel', 'openroad-openrcx', stackup, corner,
                 lpdkdir + '/pex/openroad/' + corner + '.rules', package='lambdapdk')
 
+    # DRC
+    drcs = {
+        "maximal": 'ihp-sg13g2/libs.tech/klayout/tech/drc/sg13g2_maximal.lydrc',
+        "minimal": 'ihp-sg13g2/libs.tech/klayout/tech/drc/sg13g2_minimal.lydrc'
+    }
+    for drc, runset in drcs.items():
+        pdk.set('pdk', process, 'drc', 'runset', 'klayout', stackup, drc, runset)
+
+        key = f'drc_params:{drc}'
+        pdk.add('pdk', process, 'var', 'klayout', stackup, key, 'in_gds=<input>')
+        pdk.add('pdk', process, 'var', 'klayout', stackup, key, 'cell=<topcell>')
+        pdk.add('pdk', process, 'var', 'klayout', stackup, key, 'report_file=<report>')
+
     # Documentation
     pdk.set('pdk', process, 'doc', 'overview',
             'ihp-sg13g2/libs.doc/doc/SG13G2_os_process_spec.pdf')
@@ -131,3 +144,4 @@ def setup():
 if __name__ == "__main__":
     pdk = setup()
     pdk.write_manifest(f'{pdk.top()}.json')
+    pdk.check_filepaths()
