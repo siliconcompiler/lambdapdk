@@ -62,8 +62,8 @@ def _setup_lib(libname, suffix):
 
     # decap
     lib.add('asic', 'cells', 'decap', [f"DECAPx1_ASAP7_75t_{suffix}",
-                                       f"DECAPx1_ASAP7_75t_{suffix}",
-                                       f"DECAPx3_ASAP7_75t_{suffix}",
+                                       f"DECAPx2_ASAP7_75t_{suffix}",
+                                       f"DECAPx4_ASAP7_75t_{suffix}",
                                        f"DECAPx6_ASAP7_75t_{suffix}",
                                        f"DECAPx10_ASAP7_75t_{suffix}"])
 
