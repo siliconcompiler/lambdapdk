@@ -70,7 +70,9 @@ def setup():
 
     # filler
     lib.add('asic', 'cells', 'filler', ["sg13g2_fill_1",
-                                        "sg13g2_fill_2"])
+                                        "sg13g2_fill_2",
+                                        "sg13g2_fill_4",
+                                        "sg13g2_fill_8"])
 
     # decap
     lib.add('asic', 'cells', 'decap', ["sg13g2_decap_4",
@@ -97,6 +99,7 @@ def setup():
     lib.set('option', 'var', 'openroad_pad_detail_place', '0')
     lib.set('option', 'var', 'openroad_macro_place_halo', ['40', '40'])
     lib.set('option', 'var', 'openroad_macro_place_channel', ['80', '80'])
+    lib.set('option', 'var', 'openroad_dpl_use_decap_fillers', False)
 
     lib.set('option', 'file', 'openroad_tapcells', libdir + '/apr/openroad/tapcell.tcl',
             package='lambdapdk')
