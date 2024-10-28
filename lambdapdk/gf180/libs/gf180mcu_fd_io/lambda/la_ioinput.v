@@ -28,19 +28,35 @@ module la_ioinput #(
     // core facing signals
     output             z,       // output to core
     input              ie,      // input enable, 1 = active
+    input              pe,      // pull enable, 1 = enable
+    input              ps,      // pull select, 1 = pullup, 0 = pulldown
     inout  [RINGW-1:0] ioring,  // generic io-ring interface
     input  [ CFGW-1:0] cfg      // generic config interface
 );
 
-  gf180mcu_fd_io__in_s i0 (
-      .PAD(pad),
-      .Y(z),
-      .PD(cfg[3]),
-      .PU(cfg[4]),
-      .DVDD(vddio),
-      .DVSS(vssio),
-      .VDD(vdd),
-      .VSS(vss)
-  );
+  if (PROP=="FIXED") begin
+    gf180mcu_fd_io__in_s i0 (
+        .PAD(pad),
+        .Y(z),
+        .PD(1'b1),
+        .PU(1'b0),
+        .DVDD(vddio),
+        .DVSS(vssio),
+        .VDD(vdd),
+        .VSS(vss)
+    );
+  end
+  else begin
+    gf180mcu_fd_io__in_s i0 (
+        .PAD(pad),
+        .Y(z),
+        .PD(pe & ~ps),
+        .PU(pe & ps),
+        .DVDD(vddio),
+        .DVSS(vssio),
+        .VDD(vdd),
+        .VSS(vss)
+    );
+  end
 
 endmodule

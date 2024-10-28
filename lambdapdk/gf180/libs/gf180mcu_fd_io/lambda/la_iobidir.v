@@ -14,6 +14,8 @@ module la_iobidir #(
     output             z,       // output to core
     input              ie,      // input enable, 1 = active
     input              oe,      // output enable, 1 = active
+    input              pe,      // pull enable, 1 = enable
+    input              ps,      // pull select, 1 = pullup, 0 = pulldown
     inout  [RINGW-1:0] ioring,  // generic io ring
     input  [ CFGW-1:0] cfg      // generic config interface
 );
@@ -35,8 +37,8 @@ module la_iobidir #(
       .CS(cfg[2]),
       .PDRV0(cfg[0]),
       .PDRV1(cfg[1]),
-      .PD(cfg[3]),
-      .PU(cfg[4]),
+      .PD(ps & ~ps),
+      .PU(ps & ps),
       .SL(cfg[5]),
       .DVDD(vddio),
       .DVSS(vssio),
