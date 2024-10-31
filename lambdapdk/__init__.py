@@ -43,6 +43,7 @@ def get_libs():
     from lambdapdk.sky130.libs import sky130sc, sky130io, sky130sram
     from lambdapdk.gf180.libs import gf180mcu, gf180io, gf180sram
     from lambdapdk.ihp130.libs import sg13g2_stdcell, sg13g2_sram
+    from lambdapdk.interposer.libs import bumps as interposer_bumps
 
     all_libs = []
     for lib_mod in [
@@ -50,7 +51,8 @@ def get_libs():
             nangate45, fakeram45,
             sky130sc, sky130io, sky130sram,
             gf180mcu, gf180io, gf180sram,
-            sg13g2_stdcell, sg13g2_sram]:
+            sg13g2_stdcell, sg13g2_sram,
+            interposer_bumps]:
         libs = lib_mod.setup()
         if not isinstance(libs, (list, tuple)):
             libs = [libs]

@@ -3,6 +3,12 @@ import siliconcompiler
 from lambdapdk import register_data_source
 
 
+stackups = []
+for m in ("3ML", "4ML", "5ML"):
+    for w in ("0400", "0800", "2000", "0400_2000"):
+        stackups.append(f'{m}_{w}')
+
+
 ####################################################
 # PDK Setup
 ####################################################
@@ -31,11 +37,6 @@ def setup():
 
     pdk = siliconcompiler.PDK(process, package='lambdapdk')
     register_data_source(pdk)
-
-    stackups = []
-    for m in ("3ML", "4ML", "5ML"):
-        for w in ("0400", "0800", "2000", "0400_2000"):
-            stackups.append(f'{m}_{w}')
 
     # process name
     pdk.set('pdk', process, 'foundry', foundry)

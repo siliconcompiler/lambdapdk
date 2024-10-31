@@ -114,6 +114,7 @@ def build_tech(layer_count, name=None, width=None):
         metal_name = f"metal{layeridx}"
         if layeridx == layer_count:
             metal_name = "topmetal"
+            gds_layer = 100
 
         layers.append(
             make_metal_layer(

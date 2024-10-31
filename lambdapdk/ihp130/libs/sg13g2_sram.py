@@ -15,7 +15,7 @@ def setup():
         path_base = 'ihp-sg13g2/libs.ref/sg13g2_sram'
         lib.add('output', stackup, 'lef', f'{path_base}/lef/{mem_name}.lef')
         lib.add('output', stackup, 'gds', f'{path_base}/gds/{mem_name}.gds')
-        lib.add('output', stackup, 'cdl', f'{path_base}/spice/{mem_name}.cdl')
+        lib.add('output', stackup, 'cdl', f'{path_base}/cdl/{mem_name}.cdl')
 
         lib.add('output', 'typ', 'nldm', f'{path_base}/lib/{mem_name}_typ_1p20V_25C.lib')
         lib.add('output', 'slow', 'nldm', f'{path_base}/lib/{mem_name}_slow_1p08V_125C.lib')

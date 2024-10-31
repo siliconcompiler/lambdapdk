@@ -43,7 +43,7 @@ metal1 = polygons(1, 0) + polygons(1, 10) + polygons(1, 30)
 via1 = polygons(2, 0) + polygons(2, 10) + polygons(2, 30)
 metal2 = polygons(3, 0) + polygons(3, 10) + polygons(3, 30)
 via2 = polygons(4, 0) + polygons(4, 10) + polygons(4, 30)
-topmetal = polygons(5, 0) + polygons(5, 10) + polygons(5, 30)
+topmetal = polygons(100, 0) + polygons(100, 10) + polygons(100, 30)
 
 #================================================
 #--------------- metal1 RULES -------------------

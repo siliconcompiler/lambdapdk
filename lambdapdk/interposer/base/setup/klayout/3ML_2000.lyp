@@ -302,7 +302,7 @@ limitations under the License.
     <xfill>false</xfill>
     <animation>0</animation>
     <name>topmetal</name>
-    <source>topmetal 5/0@1</source>
+    <source>topmetal 100/0@1</source>
   </properties>
   <properties>
     <frame-color>#ff9d9d</frame-color>
@@ -319,7 +319,7 @@ limitations under the License.
     <xfill>false</xfill>
     <animation>0</animation>
     <name>topmetal.pin</name>
-    <source>topmetal.pin 5/10@1</source>
+    <source>topmetal.pin 100/10@1</source>
   </properties>
   <properties>
     <frame-color>#ff80a8</frame-color>
@@ -336,7 +336,7 @@ limitations under the License.
     <xfill>false</xfill>
     <animation>0</animation>
     <name>topmetal.text</name>
-    <source>topmetal.text 5/20@1</source>
+    <source>topmetal.text 100/20@1</source>
   </properties>
   <properties>
     <frame-color>#c080ff</frame-color>
@@ -353,6 +353,6 @@ limitations under the License.
     <xfill>false</xfill>
     <animation>0</animation>
     <name>topmetal.fill</name>
-    <source>topmetal.fill 5/30@1</source>
+    <source>topmetal.fill 100/30@1</source>
   </properties>
 </layer-properties>
