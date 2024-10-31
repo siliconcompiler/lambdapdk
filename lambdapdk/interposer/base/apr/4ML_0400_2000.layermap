@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Based on https://github.com/siliconcompiler/lambdapdk/blob/4a29f3af6b8babae92bc55ee2c8996f37ff99a6a/lambdapdk/gf180/base/apr/gf180mcu_5LM_1TM_9K_7t_edi2gds.layermap
 #==============   ==============   ================   ==============
 #EDI Layer Name   EDI Layer Type   GDS Layer Number   GDS Layer Type
 #==============   ==============   ================   ==============
