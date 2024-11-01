@@ -1,0 +1,129 @@
+{
+  "layers": {
+    "metal1": {
+      "name": "metal1",
+      "layer": 1,
+      "datatype": 0,
+      "space_to_outline": 4.0,
+      "non-opc": {
+        "datatype": 30,
+        "width": [
+          5.0,
+          3.95,
+          2.9,
+          1.85,
+          0.8
+        ],
+        "height": [
+          5.0,
+          3.95,
+          2.9,
+          1.85,
+          0.8
+        ],
+        "space_to_fill": 0.8,
+        "space_to_non_fill": 4.0
+      }
+    },
+    "metal2": {
+      "name": "metal2",
+      "layer": 3,
+      "datatype": 0,
+      "space_to_outline": 4.0,
+      "non-opc": {
+        "datatype": 30,
+        "width": [
+          5.0,
+          3.95,
+          2.9,
+          1.85,
+          0.8
+        ],
+        "height": [
+          5.0,
+          3.95,
+          2.9,
+          1.85,
+          0.8
+        ],
+        "space_to_fill": 0.8,
+        "space_to_non_fill": 4.0
+      }
+    },
+    "metal3": {
+      "name": "metal3",
+      "layer": 5,
+      "datatype": 0,
+      "space_to_outline": 4.0,
+      "non-opc": {
+        "datatype": 30,
+        "width": [
+          5.0,
+          3.95,
+          2.9,
+          1.85,
+          0.8
+        ],
+        "height": [
+          5.0,
+          3.95,
+          2.9,
+          1.85,
+          0.8
+        ],
+        "space_to_fill": 0.8,
+        "space_to_non_fill": 4.0
+      }
+    },
+    "metal4": {
+      "name": "metal4",
+      "layer": 7,
+      "datatype": 0,
+      "space_to_outline": 4.0,
+      "non-opc": {
+        "datatype": 30,
+        "width": [
+          5.0,
+          3.95,
+          2.9,
+          1.85,
+          0.8
+        ],
+        "height": [
+          5.0,
+          3.95,
+          2.9,
+          1.85,
+          0.8
+        ],
+        "space_to_fill": 0.8,
+        "space_to_non_fill": 4.0
+      }
+    },
+    "topmetal": {
+      "name": "topmetal",
+      "layer": 100,
+      "datatype": 0,
+      "space_to_outline": 4.0,
+      "non-opc": {
+        "datatype": 30,
+        "width": [
+          8.0,
+          6.2,
+          4.4,
+          2.6,
+          0.8
+        ],
+        "height": [
+          8.0,
+          6.2,
+          4.4,
+          2.6,
+          0.8
+        ],
+        "space_to_fill": 0.8,
+        "space_to_non_fill": 4.0
+      }
+    }
+  }
+}

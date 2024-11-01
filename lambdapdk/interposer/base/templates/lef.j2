@@ -1,0 +1,34 @@
+{% for line in license.splitlines() %}# {{ line }}
+{% endfor %}
+VERSION 5.7 ;
+BUSBITCHARS "[]" ;
+DIVIDERCHAR "/" ;
+
+UNITS
+  DATABASE MICRONS 2000 ;
+END UNITS
+
+MANUFACTURINGGRID {{ grid }} ;
+{% for layer in layers %}
+LAYER {{ layer["name"] }}
+  TYPE {{ layer["type"] }} ;{% if layer["type"] == "ROUTING" %}
+  DIRECTION {{ layer["direction"] }} ;
+  PITCH {{ layer["width"]["min"] + layer["spacing"]["min"] }} ;
+  SPACING {{ layer["spacing"]["min"] }} ;
+  WIDTH {{ layer["width"]["min"] }} ;{% if "max" in layer["width"] %}
+  MAXWIDTH {{ layer["width"]["max"] }} ;{% endif %}{% else %}
+  SPACING {{ layer["spacing"]["min"] }} ;
+  WIDTH {{ layer["width"]["min"] }} ;{% endif %}
+END {{ layer["name"] }}
+{% endfor %}{% for via in vias %}
+VIA {{ via["name"] }} DEFAULT{% for layer, shape in via["layers"] %}
+  LAYER {{ layer }} ;
+    RECT {{ shape[0] }} {{ shape[1] }} {{ shape[2] }} {{ shape[3] }} ;{% endfor %}
+END {{ via["name"] }}
+{% endfor %}
+
+SITE dummy_site
+  SYMMETRY X Y ;
+  CLASS core ;
+  SIZE 1.0 BY 1.0 ;
+END dummy_site

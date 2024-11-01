@@ -1,0 +1,375 @@
+<?xml version="1.0" ?>
+<layer-properties>
+  <!--
+Copyright 2024 ZeroASIC Corp
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+     https://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+  <properties>
+    <frame-color>#ffc280</frame-color>
+    <frame-brightness>0</frame-brightness>
+    <fill-color>#ffc280</fill-color>
+    <fill-brightness>0</fill-brightness>
+    <dither-pattern>I5</dither-pattern>
+    <line-style/>
+    <value>true</value>
+    <visible>true</visible>
+    <transparent>false</transparent>
+    <width>1</width>
+    <marked>false</marked>
+    <xfill>false</xfill>
+    <animation>0</animation>
+    <name>outline</name>
+    <source>outline 0/0@1</source>
+  </properties>
+  <properties>
+    <frame-color>#ff9d9d</frame-color>
+    <frame-brightness>0</frame-brightness>
+    <fill-color>#ff9d9d</fill-color>
+    <fill-brightness>0</fill-brightness>
+    <dither-pattern>I9</dither-pattern>
+    <line-style/>
+    <value>true</value>
+    <visible>true</visible>
+    <transparent>false</transparent>
+    <width>1</width>
+    <marked>false</marked>
+    <xfill>false</xfill>
+    <animation>0</animation>
+    <name>metal1</name>
+    <source>metal1 1/0@1</source>
+  </properties>
+  <properties>
+    <frame-color>#ff80a8</frame-color>
+    <frame-brightness>0</frame-brightness>
+    <fill-color>#ff80a8</fill-color>
+    <fill-brightness>0</fill-brightness>
+    <dither-pattern>I5</dither-pattern>
+    <line-style/>
+    <value>true</value>
+    <visible>true</visible>
+    <transparent>false</transparent>
+    <width>1</width>
+    <marked>false</marked>
+    <xfill>false</xfill>
+    <animation>0</animation>
+    <name>metal1.pin</name>
+    <source>metal1.pin 1/10@1</source>
+  </properties>
+  <properties>
+    <frame-color>#c080ff</frame-color>
+    <frame-brightness>0</frame-brightness>
+    <fill-color>#c080ff</fill-color>
+    <fill-brightness>0</fill-brightness>
+    <dither-pattern>I9</dither-pattern>
+    <line-style/>
+    <value>true</value>
+    <visible>true</visible>
+    <transparent>false</transparent>
+    <width>1</width>
+    <marked>false</marked>
+    <xfill>false</xfill>
+    <animation>0</animation>
+    <name>metal1.text</name>
+    <source>metal1.text 1/20@1</source>
+  </properties>
+  <properties>
+    <frame-color>#9580ff</frame-color>
+    <frame-brightness>0</frame-brightness>
+    <fill-color>#9580ff</fill-color>
+    <fill-brightness>0</fill-brightness>
+    <dither-pattern>I5</dither-pattern>
+    <line-style/>
+    <value>true</value>
+    <visible>true</visible>
+    <transparent>false</transparent>
+    <width>1</width>
+    <marked>false</marked>
+    <xfill>false</xfill>
+    <animation>0</animation>
+    <name>metal1.fill</name>
+    <source>metal1.fill 1/30@1</source>
+  </properties>
+  <properties>
+    <frame-color>#8086ff</frame-color>
+    <frame-brightness>0</frame-brightness>
+    <fill-color>#8086ff</fill-color>
+    <fill-brightness>0</fill-brightness>
+    <dither-pattern>I9</dither-pattern>
+    <line-style/>
+    <value>true</value>
+    <visible>true</visible>
+    <transparent>false</transparent>
+    <width>1</width>
+    <marked>false</marked>
+    <xfill>false</xfill>
+    <animation>0</animation>
+    <name>via1</name>
+    <source>via1 2/0@1</source>
+  </properties>
+  <properties>
+    <frame-color>#80a8ff</frame-color>
+    <frame-brightness>0</frame-brightness>
+    <fill-color>#80a8ff</fill-color>
+    <fill-brightness>0</fill-brightness>
+    <dither-pattern>I5</dither-pattern>
+    <line-style/>
+    <value>true</value>
+    <visible>true</visible>
+    <transparent>false</transparent>
+    <width>1</width>
+    <marked>false</marked>
+    <xfill>false</xfill>
+    <animation>0</animation>
+    <name>via1.pin</name>
+    <source>via1.pin 2/10@1</source>
+  </properties>
+  <properties>
+    <frame-color>#ff0000</frame-color>
+    <frame-brightness>0</frame-brightness>
+    <fill-color>#ff0000</fill-color>
+    <fill-brightness>0</fill-brightness>
+    <dither-pattern>I9</dither-pattern>
+    <line-style/>
+    <value>true</value>
+    <visible>true</visible>
+    <transparent>false</transparent>
+    <width>1</width>
+    <marked>false</marked>
+    <xfill>false</xfill>
+    <animation>0</animation>
+    <name>via1.text</name>
+    <source>via1.text 2/20@1</source>
+  </properties>
+  <properties>
+    <frame-color>#ff0080</frame-color>
+    <frame-brightness>0</frame-brightness>
+    <fill-color>#ff0080</fill-color>
+    <fill-brightness>0</fill-brightness>
+    <dither-pattern>I5</dither-pattern>
+    <line-style/>
+    <value>true</value>
+    <visible>true</visible>
+    <transparent>false</transparent>
+    <width>1</width>
+    <marked>false</marked>
+    <xfill>false</xfill>
+    <animation>0</animation>
+    <name>via1.fill</name>
+    <source>via1.fill 2/30@1</source>
+  </properties>
+  <properties>
+    <frame-color>#ff00ff</frame-color>
+    <frame-brightness>0</frame-brightness>
+    <fill-color>#ff00ff</fill-color>
+    <fill-brightness>0</fill-brightness>
+    <dither-pattern>I9</dither-pattern>
+    <line-style/>
+    <value>true</value>
+    <visible>true</visible>
+    <transparent>false</transparent>
+    <width>1</width>
+    <marked>false</marked>
+    <xfill>false</xfill>
+    <animation>0</animation>
+    <name>metal2</name>
+    <source>metal2 3/0@1</source>
+  </properties>
+  <properties>
+    <frame-color>#8000ff</frame-color>
+    <frame-brightness>0</frame-brightness>
+    <fill-color>#8000ff</fill-color>
+    <fill-brightness>0</fill-brightness>
+    <dither-pattern>I5</dither-pattern>
+    <line-style/>
+    <value>true</value>
+    <visible>true</visible>
+    <transparent>false</transparent>
+    <width>1</width>
+    <marked>false</marked>
+    <xfill>false</xfill>
+    <animation>0</animation>
+    <name>metal2.pin</name>
+    <source>metal2.pin 3/10@1</source>
+  </properties>
+  <properties>
+    <frame-color>#91ff00</frame-color>
+    <frame-brightness>0</frame-brightness>
+    <fill-color>#91ff00</fill-color>
+    <fill-brightness>0</fill-brightness>
+    <dither-pattern>I9</dither-pattern>
+    <line-style/>
+    <value>true</value>
+    <visible>true</visible>
+    <transparent>false</transparent>
+    <width>1</width>
+    <marked>false</marked>
+    <xfill>false</xfill>
+    <animation>0</animation>
+    <name>metal2.text</name>
+    <source>metal2.text 3/20@1</source>
+  </properties>
+  <properties>
+    <frame-color>#008000</frame-color>
+    <frame-brightness>0</frame-brightness>
+    <fill-color>#008000</fill-color>
+    <fill-brightness>0</fill-brightness>
+    <dither-pattern>I5</dither-pattern>
+    <line-style/>
+    <value>true</value>
+    <visible>true</visible>
+    <transparent>false</transparent>
+    <width>1</width>
+    <marked>false</marked>
+    <xfill>false</xfill>
+    <animation>0</animation>
+    <name>metal2.fill</name>
+    <source>metal2.fill 3/30@1</source>
+  </properties>
+  <properties>
+    <frame-color>#508000</frame-color>
+    <frame-brightness>0</frame-brightness>
+    <fill-color>#508000</fill-color>
+    <fill-brightness>0</fill-brightness>
+    <dither-pattern>I9</dither-pattern>
+    <line-style/>
+    <value>true</value>
+    <visible>true</visible>
+    <transparent>false</transparent>
+    <width>1</width>
+    <marked>false</marked>
+    <xfill>false</xfill>
+    <animation>0</animation>
+    <name>via2</name>
+    <source>via2 4/0@1</source>
+  </properties>
+  <properties>
+    <frame-color>#808000</frame-color>
+    <frame-brightness>0</frame-brightness>
+    <fill-color>#808000</fill-color>
+    <fill-brightness>0</fill-brightness>
+    <dither-pattern>I5</dither-pattern>
+    <line-style/>
+    <value>true</value>
+    <visible>true</visible>
+    <transparent>false</transparent>
+    <width>1</width>
+    <marked>false</marked>
+    <xfill>false</xfill>
+    <animation>0</animation>
+    <name>via2.pin</name>
+    <source>via2.pin 4/10@1</source>
+  </properties>
+  <properties>
+    <frame-color>#805000</frame-color>
+    <frame-brightness>0</frame-brightness>
+    <fill-color>#805000</fill-color>
+    <fill-brightness>0</fill-brightness>
+    <dither-pattern>I9</dither-pattern>
+    <line-style/>
+    <value>true</value>
+    <visible>true</visible>
+    <transparent>false</transparent>
+    <width>1</width>
+    <marked>false</marked>
+    <xfill>false</xfill>
+    <animation>0</animation>
+    <name>via2.text</name>
+    <source>via2.text 4/20@1</source>
+  </properties>
+  <properties>
+    <frame-color>#ffc280</frame-color>
+    <frame-brightness>0</frame-brightness>
+    <fill-color>#ffc280</fill-color>
+    <fill-brightness>0</fill-brightness>
+    <dither-pattern>I5</dither-pattern>
+    <line-style/>
+    <value>true</value>
+    <visible>true</visible>
+    <transparent>false</transparent>
+    <width>1</width>
+    <marked>false</marked>
+    <xfill>false</xfill>
+    <animation>0</animation>
+    <name>via2.fill</name>
+    <source>via2.fill 4/30@1</source>
+  </properties>
+  <properties>
+    <frame-color>#ff9d9d</frame-color>
+    <frame-brightness>0</frame-brightness>
+    <fill-color>#ff9d9d</fill-color>
+    <fill-brightness>0</fill-brightness>
+    <dither-pattern>I9</dither-pattern>
+    <line-style/>
+    <value>true</value>
+    <visible>true</visible>
+    <transparent>false</transparent>
+    <width>1</width>
+    <marked>false</marked>
+    <xfill>false</xfill>
+    <animation>0</animation>
+    <name>topmetal</name>
+    <source>topmetal 100/0@1</source>
+  </properties>
+  <properties>
+    <frame-color>#ff80a8</frame-color>
+    <frame-brightness>0</frame-brightness>
+    <fill-color>#ff80a8</fill-color>
+    <fill-brightness>0</fill-brightness>
+    <dither-pattern>I5</dither-pattern>
+    <line-style/>
+    <value>true</value>
+    <visible>true</visible>
+    <transparent>false</transparent>
+    <width>1</width>
+    <marked>false</marked>
+    <xfill>false</xfill>
+    <animation>0</animation>
+    <name>topmetal.pin</name>
+    <source>topmetal.pin 100/10@1</source>
+  </properties>
+  <properties>
+    <frame-color>#c080ff</frame-color>
+    <frame-brightness>0</frame-brightness>
+    <fill-color>#c080ff</fill-color>
+    <fill-brightness>0</fill-brightness>
+    <dither-pattern>I9</dither-pattern>
+    <line-style/>
+    <value>true</value>
+    <visible>true</visible>
+    <transparent>false</transparent>
+    <width>1</width>
+    <marked>false</marked>
+    <xfill>false</xfill>
+    <animation>0</animation>
+    <name>topmetal.text</name>
+    <source>topmetal.text 100/20@1</source>
+  </properties>
+  <properties>
+    <frame-color>#9580ff</frame-color>
+    <frame-brightness>0</frame-brightness>
+    <fill-color>#9580ff</fill-color>
+    <fill-brightness>0</fill-brightness>
+    <dither-pattern>I5</dither-pattern>
+    <line-style/>
+    <value>true</value>
+    <visible>true</visible>
+    <transparent>false</transparent>
+    <width>1</width>
+    <marked>false</marked>
+    <xfill>false</xfill>
+    <animation>0</animation>
+    <name>topmetal.fill</name>
+    <source>topmetal.fill 100/30@1</source>
+  </properties>
+</layer-properties>

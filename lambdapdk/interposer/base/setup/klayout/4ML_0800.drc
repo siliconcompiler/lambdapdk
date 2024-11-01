@@ -1,0 +1,250 @@
+# Copyright 2024 ZeroASIC Corp
+# 
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+# 
+#      https://www.apache.org/licenses/LICENSE-2.0
+# 
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+#================================================
+#---------- Interposer DRC RULE DECK ------------
+#================================================
+# Required inputs:
+#  input - input gds/oas
+#  topcell - topcell
+#  report - path to report file
+#  threads - number of threads to use
+
+print("Layout: %s\n" % [$input])
+source($input, $topcell)
+
+print("DRC report: %s\n" % [$report])
+report("DRC Report", $report)
+
+# Requires threads to be defined
+print("Number of threads to use %s\n" % [$threads])
+threads($threads)
+
+# Run in flat mode
+flat
+
+#================================================
+#------------- LAYERS DEFINITIONS ---------------
+#================================================
+
+outline = polygons(0, 0)
+metal1 = polygons(1, 0) + polygons(1, 10) + polygons(1, 30)
+via1 = polygons(2, 0) + polygons(2, 10) + polygons(2, 30)
+metal2 = polygons(3, 0) + polygons(3, 10) + polygons(3, 30)
+via2 = polygons(4, 0) + polygons(4, 10) + polygons(4, 30)
+metal3 = polygons(5, 0) + polygons(5, 10) + polygons(5, 30)
+via3 = polygons(6, 0) + polygons(6, 10) + polygons(6, 30)
+topmetal = polygons(100, 0) + polygons(100, 10) + polygons(100, 30)
+
+#================================================
+#--------------- metal1 RULES -------------------
+#================================================
+
+on_grid = metal1.ongrid(5.nm)
+on_grid.output("metal1.ongrid", "metal1 On Grid : 5nm")
+on_grid.forget
+
+in_outline = metal1.not_inside(outline.sized(-1000.nm))
+in_outline.output("metal1.outline", "metal1 Inside Outline : 1000nm")
+in_outline.forget
+
+min_width = metal1.drc(width(euclidian) < 800.nm)
+min_width.output("metal1.min_width", "metal1 Min. Width : 800nm")
+min_width.forget
+
+min_space = metal1.drc(space(euclidian) < 800.nm)
+min_space.output("metal1.min_space", "metal1 Min. Width : 800nm")
+min_space.forget
+
+max_width = metal1.drc(width(euclidian) > 5000.nm)
+max_width.output("metal1.max_width", "metal1 Max. Width : 5000nm")
+max_width.forget
+
+#================================================
+#--------------- via1 RULES -------------------
+#================================================
+
+on_grid = via1.ongrid(5.nm)
+on_grid.output("via1.ongrid", "via1 On Grid : 5nm")
+on_grid.forget
+
+in_outline = via1.not_inside(outline.sized(-1000.nm))
+in_outline.output("via1.outline", "via1 Inside Outline : 1000nm")
+in_outline.forget
+
+via_shape = via1.drc(width(euclidian) != 400.nm)
+via_shape.output("via1.via_shape", "via1 Shape : 400nm x 400nm")
+via_shape.forget
+
+min_space = via1.drc(space(euclidian) < 400.nm)
+min_space.output("via1.min_space", "via1 Min. Width : 400nm")
+min_space.forget
+
+in_metal1 = via1.not_inside(metal1)
+in_metal1.output("via1.in_metal1", "via1 must overlap metal1")
+in_metal1.forget
+
+enc_metal1 = via1.enclosed(metal1, 400.nm).polygons()
+enc_metal1.output("via1.in_metal1", "via1 metal1 enclosure: 400nm")
+enc_metal1.forget
+
+in_metal2 = via1.not_inside(metal2)
+in_metal2.output("via1.in_metal2", "via1 must overlap metal2")
+in_metal2.forget
+
+enc_metal2 = via1.enclosed(metal2, 400.nm).polygons()
+enc_metal2.output("via1.in_metal2", "via1 metal2 enclosure: 400nm")
+enc_metal2.forget
+
+#================================================
+#--------------- metal2 RULES -------------------
+#================================================
+
+on_grid = metal2.ongrid(5.nm)
+on_grid.output("metal2.ongrid", "metal2 On Grid : 5nm")
+on_grid.forget
+
+in_outline = metal2.not_inside(outline.sized(-1000.nm))
+in_outline.output("metal2.outline", "metal2 Inside Outline : 1000nm")
+in_outline.forget
+
+min_width = metal2.drc(width(euclidian) < 800.nm)
+min_width.output("metal2.min_width", "metal2 Min. Width : 800nm")
+min_width.forget
+
+min_space = metal2.drc(space(euclidian) < 800.nm)
+min_space.output("metal2.min_space", "metal2 Min. Width : 800nm")
+min_space.forget
+
+max_width = metal2.drc(width(euclidian) > 5000.nm)
+max_width.output("metal2.max_width", "metal2 Max. Width : 5000nm")
+max_width.forget
+
+#================================================
+#--------------- via2 RULES -------------------
+#================================================
+
+on_grid = via2.ongrid(5.nm)
+on_grid.output("via2.ongrid", "via2 On Grid : 5nm")
+on_grid.forget
+
+in_outline = via2.not_inside(outline.sized(-1000.nm))
+in_outline.output("via2.outline", "via2 Inside Outline : 1000nm")
+in_outline.forget
+
+via_shape = via2.drc(width(euclidian) != 400.nm)
+via_shape.output("via2.via_shape", "via2 Shape : 400nm x 400nm")
+via_shape.forget
+
+min_space = via2.drc(space(euclidian) < 400.nm)
+min_space.output("via2.min_space", "via2 Min. Width : 400nm")
+min_space.forget
+
+in_metal2 = via2.not_inside(metal2)
+in_metal2.output("via2.in_metal2", "via2 must overlap metal2")
+in_metal2.forget
+
+enc_metal2 = via2.enclosed(metal2, 400.nm).polygons()
+enc_metal2.output("via2.in_metal2", "via2 metal2 enclosure: 400nm")
+enc_metal2.forget
+
+in_metal3 = via2.not_inside(metal3)
+in_metal3.output("via2.in_metal3", "via2 must overlap metal3")
+in_metal3.forget
+
+enc_metal3 = via2.enclosed(metal3, 400.nm).polygons()
+enc_metal3.output("via2.in_metal3", "via2 metal3 enclosure: 400nm")
+enc_metal3.forget
+
+#================================================
+#--------------- metal3 RULES -------------------
+#================================================
+
+on_grid = metal3.ongrid(5.nm)
+on_grid.output("metal3.ongrid", "metal3 On Grid : 5nm")
+on_grid.forget
+
+in_outline = metal3.not_inside(outline.sized(-1000.nm))
+in_outline.output("metal3.outline", "metal3 Inside Outline : 1000nm")
+in_outline.forget
+
+min_width = metal3.drc(width(euclidian) < 800.nm)
+min_width.output("metal3.min_width", "metal3 Min. Width : 800nm")
+min_width.forget
+
+min_space = metal3.drc(space(euclidian) < 800.nm)
+min_space.output("metal3.min_space", "metal3 Min. Width : 800nm")
+min_space.forget
+
+max_width = metal3.drc(width(euclidian) > 5000.nm)
+max_width.output("metal3.max_width", "metal3 Max. Width : 5000nm")
+max_width.forget
+
+#================================================
+#--------------- via3 RULES -------------------
+#================================================
+
+on_grid = via3.ongrid(5.nm)
+on_grid.output("via3.ongrid", "via3 On Grid : 5nm")
+on_grid.forget
+
+in_outline = via3.not_inside(outline.sized(-1000.nm))
+in_outline.output("via3.outline", "via3 Inside Outline : 1000nm")
+in_outline.forget
+
+via_shape = via3.drc(width(euclidian) != 400.nm)
+via_shape.output("via3.via_shape", "via3 Shape : 400nm x 400nm")
+via_shape.forget
+
+min_space = via3.drc(space(euclidian) < 400.nm)
+min_space.output("via3.min_space", "via3 Min. Width : 400nm")
+min_space.forget
+
+in_metal3 = via3.not_inside(metal3)
+in_metal3.output("via3.in_metal3", "via3 must overlap metal3")
+in_metal3.forget
+
+enc_metal3 = via3.enclosed(metal3, 400.nm).polygons()
+enc_metal3.output("via3.in_metal3", "via3 metal3 enclosure: 400nm")
+enc_metal3.forget
+
+in_topmetal = via3.not_inside(topmetal)
+in_topmetal.output("via3.in_topmetal", "via3 must overlap topmetal")
+in_topmetal.forget
+
+enc_topmetal = via3.enclosed(topmetal, 400.nm).polygons()
+enc_topmetal.output("via3.in_topmetal", "via3 topmetal enclosure: 400nm")
+enc_topmetal.forget
+
+#================================================
+#--------------- topmetal RULES -------------------
+#================================================
+
+on_grid = topmetal.ongrid(5.nm)
+on_grid.output("topmetal.ongrid", "topmetal On Grid : 5nm")
+on_grid.forget
+
+in_outline = topmetal.not_inside(outline.sized(-1000.nm))
+in_outline.output("topmetal.outline", "topmetal Inside Outline : 1000nm")
+in_outline.forget
+
+min_width = topmetal.drc(width(euclidian) < 800.nm)
+min_width.output("topmetal.min_width", "topmetal Min. Width : 800nm")
+min_width.forget
+
+min_space = topmetal.drc(space(euclidian) < 800.nm)
+min_space.output("topmetal.min_space", "topmetal Min. Width : 800nm")
+min_space.forget
+
+
