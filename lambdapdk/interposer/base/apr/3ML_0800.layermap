@@ -56,3 +56,4 @@ topmetal          FILL                          100               30
 NAME              topmetal/PIN                  100               20
 NAME              topmetal/SPNET                100               20
 NAME              topmetal/TEXT                 100               20
+DIEAREA           ALL                             0                0

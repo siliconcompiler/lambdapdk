@@ -57,8 +57,14 @@ def setup():
         pdk.set('pdk', process, 'maxlayer', stackup, 'topmetal')
 
         # DRC Runsets
-        pdk.set('pdk', process, 'drc', 'runset', 'magic', stackup, 'drc',
+        pdk.set('pdk', process, 'drc', 'runset', 'klayout', stackup, 'drc',
                 pdkdir + f'/setup/klayout/{stackup}.drc')
+
+        key = 'drc_params:drc'
+        pdk.add('pdk', process, 'var', 'klayout', stackup, key, 'input=<input>')
+        pdk.add('pdk', process, 'var', 'klayout', stackup, key, 'topcell=<topcell>')
+        pdk.add('pdk', process, 'var', 'klayout', stackup, key, 'report=<report>')
+        pdk.add('pdk', process, 'var', 'klayout', stackup, key, 'threads=<threads>')
 
         # Layer map and display file
         pdk.set('pdk', process, 'layermap', 'klayout', 'def', 'gds', stackup,

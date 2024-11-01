@@ -112,9 +112,11 @@ def build_tech(layer_count, name=None, width=None):
         layeridx = n + 1
 
         metal_name = f"metal{layeridx}"
+        max_width = 5.0
         if layeridx == layer_count:
             metal_name = "topmetal"
             gds_layer = 100
+            max_width = None
 
         layers.append(
             make_metal_layer(
@@ -134,12 +136,12 @@ def build_tech(layer_count, name=None, width=None):
                         "TEXT": 20
                     }
                 },
-                "HORIZONTAL" if layeridx % 2 == 1 else "VERITCAL",
+                "HORIZONTAL" if layeridx % 2 == 1 else "VERTICAL",
                 min_width=width[n],
                 min_spacing=width[n],
                 resistance_per_um=1.5000e-03,
                 capacitance_per_um=1.0000E-01,
-                max_width=5.0
+                max_width=max_width
             ))
 
         if layeridx != layer_count:
@@ -175,7 +177,8 @@ def build_tech(layer_count, name=None, width=None):
     tech = {
         "name": name,
         "grid": 0.005,
-        "layers": layers
+        "layers": layers,
+        "outline": (0, 0)
     }
 
     return tech
@@ -202,6 +205,13 @@ def build_layermap(tech, path):
                 str(gds_number),
                 str(gds_type)
             ))
+
+    layermap.append((
+        "DIEAREA",
+        "ALL",
+        str(tech["outline"][0]),
+        str(tech["outline"][1])
+    ))
 
     os.makedirs(path, exist_ok=True)
     with open(f'{path}/{tech["name"]}.layermap', 'w') as f:
@@ -294,7 +304,8 @@ def build_klayout_drc(tech, path):
             jinja2_env.get_template('drc.j2').render(
                 license=LICENSE,
                 grid=int(tech["grid"] * 1000),
-                layers=layers
+                layers=layers,
+                outline={"number": tech["outline"][0], "type": tech["outline"][1]}
             )
         )
         f.write('\n')
@@ -358,6 +369,8 @@ def build_klayout_layer_properties(tech, path):
         return prop
 
     props = ET.Element("layer-properties")
+    props.append(make_layer("outline", (tech["outline"][0], tech["outline"][1])))
+    layeridx += 1
     for layer in tech["layers"]:
         gds_types = sorted(set([*layer["gds"]["types"].values(), *layer["gds"]["name"].values()]))
         for gds_type in gds_types:
@@ -436,8 +449,12 @@ def build_openroad_fill(tech, path):
             shapes.append(width)
 
         fill["layers"][layer["name"]] = {
+            "name": layer["name"],
+            "layer": layer["gds"]["number"],
+            "datatype": layer["gds"]["types"]["NET"],
             "space_to_outline": max_spacing,
             "non-opc": {
+                "datatype": layer["gds"]["types"]["FILL"],
                 "width": shapes,
                 "height": shapes,
                 "space_to_fill": layer["spacing"]["min"],

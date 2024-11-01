@@ -39,7 +39,7 @@ END via1
 
 LAYER metal2
   TYPE ROUTING ;
-  DIRECTION VERITCAL ;
+  DIRECTION VERTICAL ;
   PITCH 4.0 ;
   SPACING 2.0 ;
   WIDTH 2.0 ;
@@ -69,7 +69,7 @@ END via3
 
 LAYER metal4
   TYPE ROUTING ;
-  DIRECTION VERITCAL ;
+  DIRECTION VERTICAL ;
   PITCH 4.0 ;
   SPACING 2.0 ;
   WIDTH 2.0 ;
@@ -88,7 +88,6 @@ LAYER topmetal
   PITCH 4.0 ;
   SPACING 2.0 ;
   WIDTH 2.0 ;
-  MAXWIDTH 5.0 ;
 END topmetal
 
 VIA VIA1_1 DEFAULT
@@ -126,3 +125,10 @@ VIA VIA4_1 DEFAULT
   LAYER topmetal ;
     RECT -1.500 -1.500 1.500 1.500 ;
 END VIA4_1
+
+
+SITE dummy_site
+  SYMMETRY X Y ;
+  CLASS core ;
+  SIZE 1.0 BY 1.0 ;
+END dummy_site

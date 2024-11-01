@@ -26,3 +26,9 @@ VIA {{ via["name"] }} DEFAULT{% for layer, shape in via["layers"] %}
     RECT {{ shape[0] }} {{ shape[1] }} {{ shape[2] }} {{ shape[3] }} ;{% endfor %}
 END {{ via["name"] }}
 {% endfor %}
+
+SITE dummy_site
+  SYMMETRY X Y ;
+  CLASS core ;
+  SIZE 1.0 BY 1.0 ;
+END dummy_site

@@ -185,8 +185,4 @@ min_space = topmetal.drc(space(euclidian) < 2000.nm)
 min_space.output("topmetal.min_space", "topmetal Min. Width : 2000nm")
 min_space.forget
 
-max_width = topmetal.drc(width(euclidian) > 5000.nm)
-max_width.output("topmetal.max_width", "topmetal Max. Width : 5000nm")
-max_width.forget
-
 

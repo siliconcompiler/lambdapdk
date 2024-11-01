@@ -27,7 +27,7 @@ flat
 #------------- LAYERS DEFINITIONS ---------------
 #================================================
 
-outline = polygons(0, 0){% for layer in layers %}
+outline = polygons({{ outline["number"] }}, {{ outline["type"] }}){% for layer in layers %}
 {{ layer["name"] }} = {% for number, type in layer["gds"] %}polygons({{ number }}, {{ type }}){% if not loop.last %} + {% endif %}{% endfor %}{% endfor %}
 
 {% for layer in layers %}#================================================
