@@ -47,16 +47,31 @@ module la_dpram #(
     input [TESTW-1:0] test  // pass through ASIC test interface
 );
 
-  // Generic RTL RAM
-  reg     [DW-1:0] ram[(2**AW)-1:0];
-  integer          i;
+  la_dpram_impl #(
+      .DW   (DW),
+      .AW   (AW),
+      .PROP (PROP),
+      .CTRLW(CTRLW),
+      .TESTW(TESTW)
+  ) ram (
+      .wr_clk  (wr_clk),
+      .wr_ce   (wr_ce),
+      .wr_we   (wr_we),
+      .wr_wmask(wr_wmask),
+      .wr_addr (wr_addr),
+      .wr_din  (wr_din),
 
-  // Write port
-  always @(posedge wr_clk)
-    for (i = 0; i < DW; i = i + 1)
-      if (wr_ce & wr_we & wr_wmask[i]) ram[wr_addr[AW-1:0]][i] <= wr_din[i];
+      .rd_clk (rd_clk),
+      .rd_ce  (rd_ce),
+      .rd_addr(rd_addr),
+      .rd_dout(rd_dout),
 
-  // Read Port
-  always @(posedge rd_clk) if (rd_ce) rd_dout[DW-1:0] <= ram[rd_addr[AW-1:0]];
+      .vss  (vss),
+      .vdd  (vdd),
+      .vddio(vddio),
+
+      .ctrl(ctrl),
+      .test(test)
+  );
 
 endmodule
