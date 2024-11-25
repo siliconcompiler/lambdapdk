@@ -39,7 +39,7 @@ jobs:
           pip install --upgrade pip
           pip install .[test]
           tclfmt --check .
-          tclint --no-check-style .
+          tclint .
 
   check_paths:
     name: Run CI
