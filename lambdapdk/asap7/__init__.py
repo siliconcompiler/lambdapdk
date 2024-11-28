@@ -111,6 +111,10 @@ def setup():
     pdk.set('pdk', process, 'pexmodel', 'openroad-openrcx', stackup, 'typical',
             pdkdir + '/pex/openroad/typical.rules')
 
+    # Relaxed routing rules
+    pdk.set('pdk', process, 'file', 'openroad', 'relax_routing_rules', stackup,
+            pdkdir + '/apr/openroad_relaxed_rules.tcl')
+
     # Hide the DIEAREA layer 235/*.
     pdk.add('pdk', process, 'var', 'klayout', 'hide_layers', stackup, '235/0')
     pdk.add('pdk', process, 'var', 'klayout', 'hide_layers', stackup, '235/5')
