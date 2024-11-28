@@ -1,4 +1,5 @@
-utl::warn FLW 1 "Relaxed technology routing rules loaded for ASAP7, this should only be used for trial routing"
+utl::warn FLW 1 "Relaxed technology routing rules loaded for ASAP7,\
+    this should only be used for trial routing"
 
 utl::info FLW 1 "Removing right way on grid only rules"
 [[ord::get_db_tech] findLayer M1] setRightWayOnGridOnly 0
