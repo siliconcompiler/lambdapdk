@@ -4,7 +4,7 @@ import siliconcompiler
 from lambdapdk import register_data_source
 
 
-pdk_rev = '035037f6312851414e4bb5daa5a9d18975c768b3'
+pdk_rev = 'dcd6f8229f74ee4d70a4889771aa8f51f0d5d433'
 
 
 def register_ihp130_data_source(chip):

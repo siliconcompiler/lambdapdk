@@ -98,7 +98,6 @@ def setup():
     lib.set('option', 'var', 'openroad_pad_detail_place', '0')
     lib.set('option', 'var', 'openroad_macro_place_halo', ['40', '40'])
     lib.set('option', 'var', 'openroad_macro_place_channel', ['80', '80'])
-    lib.set('option', 'var', 'openroad_dpl_use_decap_fillers', False)
 
     lib.set('option', 'file', 'openroad_tapcells', libdir + '/apr/openroad/tapcell.tcl',
             package='lambdapdk')
