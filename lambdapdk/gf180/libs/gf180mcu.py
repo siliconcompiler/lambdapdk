@@ -89,6 +89,30 @@ def setup():
         lib.add('asic', 'cells', 'tie', [f'gf180mcu_fd_sc_mcu{libtype}5v0__tieh',
                                          f'gf180mcu_fd_sc_mcu{libtype}5v0__tiel'])
 
+        # clkbuf cells
+        lib.add('asic', 'cells', 'clkbuf', [f'gf180mcu_fd_sc_mcu{libtype}5v0__clkbuf_1',
+                                            f'gf180mcu_fd_sc_mcu{libtype}5v0__clkbuf_2',
+                                            f'gf180mcu_fd_sc_mcu{libtype}5v0__clkbuf_3',
+                                            f'gf180mcu_fd_sc_mcu{libtype}5v0__clkbuf_4',
+                                            f'gf180mcu_fd_sc_mcu{libtype}5v0__clkbuf_8',
+                                            f'gf180mcu_fd_sc_mcu{libtype}5v0__clkbuf_12'
+                                            f'gf180mcu_fd_sc_mcu{libtype}5v0__clkbuf_16',
+                                            f'gf180mcu_fd_sc_mcu{libtype}5v0__clkbuf_20'])
+
+        # hold cells
+        lib.add('asic', 'cells', 'hold', [f'gf180mcu_fd_sc_mcu{libtype}5v0__dlya_1',
+                                          f'gf180mcu_fd_sc_mcu{libtype}5v0__dlya_2',
+                                          f'gf180mcu_fd_sc_mcu{libtype}5v0__dlya_4',
+                                          f'gf180mcu_fd_sc_mcu{libtype}5v0__dlyb_1',
+                                          f'gf180mcu_fd_sc_mcu{libtype}5v0__dlyb_2',
+                                          f'gf180mcu_fd_sc_mcu{libtype}5v0__dlyb_4',
+                                          f'gf180mcu_fd_sc_mcu{libtype}5v0__dlyc_1',
+                                          f'gf180mcu_fd_sc_mcu{libtype}5v0__dlyc_2',
+                                          f'gf180mcu_fd_sc_mcu{libtype}5v0__dlyc_4',
+                                          f'gf180mcu_fd_sc_mcu{libtype}5v0__dlyd_1',
+                                          f'gf180mcu_fd_sc_mcu{libtype}5v0__dlyd_2',
+                                          f'gf180mcu_fd_sc_mcu{libtype}5v0__dlyd_4'])
+
         # Defaults for OpenROAD tool variables
         lib.set('option', 'var', 'openroad_place_density', '0.50')
         lib.set('option', 'var', 'openroad_pad_global_place', '0')

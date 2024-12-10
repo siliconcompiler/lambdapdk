@@ -110,13 +110,9 @@ def setup():
                                             f'sky130_fd_sc_{libtype}__clkbuf_16'])
 
         # hold cells
-        lib.add('asic', 'cells', 'hold', [f'sky130_fd_sc_{libtype}__buf_1',
-                                          f'sky130_fd_sc_{libtype}__buf_2',
-                                          f'sky130_fd_sc_{libtype}__buf_4',
-                                          f'sky130_fd_sc_{libtype}__buf_6',
-                                          f'sky130_fd_sc_{libtype}__buf_8',
-                                          f'sky130_fd_sc_{libtype}__buf_12',
-                                          f'sky130_fd_sc_{libtype}__buf_16'])
+        lib.add('asic', 'cells', 'hold', [f'sky130_fd_sc_{libtype}__dlygate4sd1_1',
+                                          f'sky130_fd_sc_{libtype}__dlygate4sd2_1',
+                                          f'sky130_fd_sc_{libtype}__dlygate4sd3_1'])
 
         # filler
         lib.add('asic', 'cells', 'filler', [f'sky130_fd_sc_{libtype}__fill_1',

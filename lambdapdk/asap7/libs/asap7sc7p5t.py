@@ -46,15 +46,9 @@ def _setup_lib(libname, suffix):
     # site name
     lib.set('asic', 'site', libtype, 'asap7sc7p5t')
 
-    # clock buffers
-    lib.add('asic', 'cells', 'clkbuf', f"BUFx2_ASAP7_75t_{suffix}")
-
     # tie cells
     lib.add('asic', 'cells', 'tie', [f"TIEHIx1_ASAP7_75t_{suffix}",
                                      f"TIELOx1_ASAP7_75t_{suffix}"])
-
-    # hold cells
-    lib.add('asic', 'cells', 'hold', f"BUFx2_ASAP7_75t_{suffix}")
 
     # filler
     lib.add('asic', 'cells', 'filler', [f"FILLER_ASAP7_75t_{suffix}",
