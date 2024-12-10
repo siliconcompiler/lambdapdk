@@ -104,15 +104,20 @@ def setup():
         lib.add('asic', 'cells', 'clkbuf', [f'sky130_fd_sc_{libtype}__clkbuf_1',
                                             f'sky130_fd_sc_{libtype}__clkbuf_2',
                                             f'sky130_fd_sc_{libtype}__clkbuf_4',
-                                            f'sky130_fd_sc_{libtype}__clkbuf_6',
                                             f'sky130_fd_sc_{libtype}__clkbuf_8',
-                                            f'sky130_fd_sc_{libtype}__clkbuf_12',
                                             f'sky130_fd_sc_{libtype}__clkbuf_16'])
+        if libtype == "hdll":
+            lib.add('asic', 'cells', 'clkbuf', [f'sky130_fd_sc_{libtype}__clkbuf_6',
+                                                f'sky130_fd_sc_{libtype}__clkbuf_12'])
 
         # hold cells
         lib.add('asic', 'cells', 'hold', [f'sky130_fd_sc_{libtype}__dlygate4sd1_1',
                                           f'sky130_fd_sc_{libtype}__dlygate4sd2_1',
                                           f'sky130_fd_sc_{libtype}__dlygate4sd3_1'])
+        if libtype == "hd":
+            lib.add('asic', 'cells', 'hold', [f'sky130_fd_sc_{libtype}__dlymetal6s2s_1',
+                                              f'sky130_fd_sc_{libtype}__dlymetal6s4s_1',
+                                              f'sky130_fd_sc_{libtype}__dlymetal6s6s_1'])
 
         # filler
         lib.add('asic', 'cells', 'filler', [f'sky130_fd_sc_{libtype}__fill_1',
