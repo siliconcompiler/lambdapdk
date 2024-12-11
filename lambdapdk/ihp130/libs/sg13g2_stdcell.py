@@ -92,6 +92,9 @@ def setup():
     lib.add('option', 'file', 'yosys_techmap',
             libdir + '/techmap/yosys/cells_latch.v',
             package='lambdapdk')
+    lib.add('option', 'file', 'yosys_tbufmap',
+            libdir + '/techmap/yosys/cells_tristatebuf.v',
+            package='lambdapdk')
 
     # Defaults for OpenROAD tool variables
     lib.set('option', 'var', 'openroad_place_density', '0.65')

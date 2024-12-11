@@ -150,6 +150,7 @@ def setup():
         # Yosys techmap
         # TODO: separate this out properly for the different libraries
         lib.add('option', 'file', 'yosys_techmap', libdir + '/techmap/yosys/cells_latch.v')
+        lib.add('option', 'file', 'yosys_tbufmap', libdir + '/techmap/yosys/cells_tristatebuf.v')
         if libtype == "hd":
             lib.add('option', 'file', 'yosys_addermap', libdir + '/techmap/yosys/cells_adders.v')
 
