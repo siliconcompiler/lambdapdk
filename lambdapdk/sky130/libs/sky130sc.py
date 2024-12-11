@@ -161,8 +161,6 @@ def setup():
         lib.set('option', 'file', 'openroad_tapcells',
                 libdir + '/apr/openroad/tapcell.tcl')
 
-        lib.set('option', 'var', 'openroad_cts_clock_buffer', f"sky130_fd_sc_{libtype}__clkbuf_4")
-
         lib.set('option', 'var', 'yosys_abc_clock_multiplier', "1000")  # convert from ns -> ps
 
         cap_table = {
