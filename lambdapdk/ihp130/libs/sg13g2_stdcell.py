@@ -56,10 +56,6 @@ def setup():
     lib.add('output', 'rtl', 'verilog',
             'ihp-sg13g2/libs.ref/sg13g2_stdcell/verilog/sg13g2_stdcell.v')
 
-    # clock buffers - remove once openroad driver supports it
-    lib.add('asic', 'cells', 'clkbuf', ["sg13g2_buf_2",
-                                        "sg13g2_buf_4"])
-
     # tie cells
     lib.add('asic', 'cells', 'tie', ["LOGIC1_X1",
                                      "LOGIC0_X1"])

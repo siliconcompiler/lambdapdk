@@ -46,9 +46,6 @@ def _setup_lib(libname, suffix):
     # site name
     lib.set('asic', 'site', libtype, 'asap7sc7p5t')
 
-    # clock buffers - remove once openroad driver supports it
-    lib.add('asic', 'cells', 'clkbuf', f"BUFx4_ASAP7_75t_{suffix}")
-
     # tie cells
     lib.add('asic', 'cells', 'tie', [f"TIEHIx1_ASAP7_75t_{suffix}",
                                      f"TIELOx1_ASAP7_75t_{suffix}"])
