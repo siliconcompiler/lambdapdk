@@ -46,15 +46,12 @@ def _setup_lib(libname, suffix):
     # site name
     lib.set('asic', 'site', libtype, 'asap7sc7p5t')
 
-    # clock buffers
-    lib.add('asic', 'cells', 'clkbuf', f"BUFx2_ASAP7_75t_{suffix}")
+    # clock buffers - remove once openroad driver supports it
+    lib.add('asic', 'cells', 'clkbuf', f"BUFx4_ASAP7_75t_{suffix}")
 
     # tie cells
     lib.add('asic', 'cells', 'tie', [f"TIEHIx1_ASAP7_75t_{suffix}",
                                      f"TIELOx1_ASAP7_75t_{suffix}"])
-
-    # hold cells
-    lib.add('asic', 'cells', 'hold', f"BUFx2_ASAP7_75t_{suffix}")
 
     # filler
     lib.add('asic', 'cells', 'filler', [f"FILLER_ASAP7_75t_{suffix}",
@@ -92,7 +89,6 @@ def _setup_lib(libname, suffix):
     lib.set('option', 'var', 'openroad_macro_place_halo', ['10', '10'])
     lib.set('option', 'var', 'openroad_macro_place_channel', ['12', '12'])
 
-    lib.set('option', 'var', 'openroad_cts_clock_buffer', f"BUFx4_ASAP7_75t_{suffix}")
     lib.set('option', 'var', 'openroad_cts_distance_between_buffers', "60")
 
     lib.set('option', 'var', 'yosys_abc_clock_multiplier', "1")  # convert from ps -> ps

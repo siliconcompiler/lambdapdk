@@ -56,7 +56,7 @@ def setup():
     lib.add('output', 'rtl', 'verilog',
             'ihp-sg13g2/libs.ref/sg13g2_stdcell/verilog/sg13g2_stdcell.v')
 
-    # clock buffers
+    # clock buffers - remove once openroad driver supports it
     lib.add('asic', 'cells', 'clkbuf', ["sg13g2_buf_2",
                                         "sg13g2_buf_4"])
 
@@ -65,8 +65,9 @@ def setup():
                                      "LOGIC0_X1"])
 
     # hold cells
-    lib.add('asic', 'cells', 'hold', ["sg13g2_buf_1",
-                                      "sg13g2_buf_4"])
+    lib.add('asic', 'cells', 'hold', ["sg13g2_dlygate4sd1_1",
+                                      "sg13g2_dlygate4sd2_1",
+                                      "sg13g2_dlygate4sd3_1"])
 
     # filler
     lib.add('asic', 'cells', 'filler', ["sg13g2_fill_1",
@@ -81,9 +82,8 @@ def setup():
     # antenna
     lib.add('asic', 'cells', 'antenna', ["sg13g2_antennanp"])
 
-    # Stupid small cells
-    lib.add('asic', 'cells', 'dontuse', ["sg13g2_antennanp",
-                                         "sg13g2_lgcp_1",
+    # Dont use
+    lib.add('asic', 'cells', 'dontuse', ["sg13g2_lgcp_1",
                                          "sg13g2_sighold",
                                          "sg13g2_slgcp_1",
                                          "sg13g2_dfrbp_2"])

@@ -45,14 +45,13 @@ def setup():
     lib.add('output', stackup, 'cdl', libdir + '/cdl/NangateOpenCellLibrary.cdl')
 
     # clock buffers
-    lib.add('asic', 'cells', 'clkbuf', "BUF_X4")
+    lib.set('asic', 'cells', 'clkbuf', ["CLKBUF_X1",
+                                        "CLKBUF_X2",
+                                        "CLKBUF_X3"])
 
     # tie cells
     lib.add('asic', 'cells', 'tie', ["LOGIC1_X1",
                                      "LOGIC0_X1"])
-
-    # hold cells
-    lib.add('asic', 'cells', 'hold', "BUF_X1")
 
     # filler
     lib.add('asic', 'cells', 'filler', ["FILLCELL_X1",

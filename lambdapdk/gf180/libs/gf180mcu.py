@@ -108,8 +108,6 @@ def setup():
         lib.set('option', 'file', 'openroad_tapcells',
                 libdir + '/apr/openroad/tapcell.tcl')
 
-        lib.set('option', 'var', 'openroad_cts_clock_buffer',
-                f"gf180mcu_fd_sc_mcu{libtype}5v0__clkbuf_8")
         lib.set('option', 'var', 'openroad_cts_distance_between_buffers', "100")
 
         lib.set('option', 'var', 'yosys_abc_clock_multiplier', "1000")  # convert from ns -> ps
