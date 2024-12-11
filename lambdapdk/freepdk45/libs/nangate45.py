@@ -73,6 +73,7 @@ def setup():
     # Techmap
     lib.add('option', 'file', 'yosys_techmap', libdir + '/techmap/yosys/cells_latch.v')
     lib.add('option', 'file', 'yosys_addermap', libdir + '/techmap/yosys/cells_adders.v')
+    lib.add('option', 'file', 'yosys_tbufmap', libdir + '/techmap/yosys/cells_tristatebuf.v')
 
     # Defaults for OpenROAD tool variables
     lib.set('option', 'var', 'openroad_place_density', '0.50')

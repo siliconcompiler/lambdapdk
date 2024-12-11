@@ -99,6 +99,7 @@ def setup():
         # Yosys techmap
         lib.add('option', 'file', 'yosys_techmap', libdir + '/techmap/yosys/cells_latch.v')
         lib.add('option', 'file', 'yosys_addermap', libdir + '/techmap/yosys/cells_adders.v')
+        lib.add('option', 'file', 'yosys_tbufmap', libdir + '/techmap/yosys/cells_tristatebuf.v')
 
         # Openroad specific files
         lib.set('option', 'file', 'openroad_pdngen',
