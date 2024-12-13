@@ -94,11 +94,11 @@ def _setup_lib(libname, suffix):
     lib.set('option', 'var', 'yosys_abc_clock_multiplier', "1")  # convert from ps -> ps
 
     cap_table = {  # BUFx2_ASAP7_75t_
-        'R': 0.506500,
-        'L': 0.519810,
-        'SL': 0.533411
+        'R': "2.308fF",
+        'L': "2.383fF",
+        'SL': "2.464fF"
     }
-    lib.set('option', 'var', 'yosys_abc_constraint_load', f"{4 * cap_table[suffix]}fF")
+    lib.set('option', 'var', 'yosys_abc_constraint_load', cap_table[suffix])
     lib.set('option', 'var', 'yosys_driver_cell', f"BUFx2_ASAP7_75t_{suffix}")
     lib.set('option', 'var', 'yosys_buffer_cell', f"BUFx2_ASAP7_75t_{suffix}")
     lib.set('option', 'var', 'yosys_buffer_input', "A")
