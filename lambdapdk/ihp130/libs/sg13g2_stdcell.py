@@ -113,7 +113,7 @@ def setup():
             package='lambdapdk')
 
     lib.set('option', 'var', 'yosys_abc_clock_multiplier', "1000")  # convert from ns -> ps
-    lib.set('option', 'var', 'yosys_abc_constraint_load', "6.0fF")  # BUF_X1 = 0.974659 x 4
+    lib.set('option', 'var', 'yosys_abc_constraint_load', "0.017pF")
     lib.set('option', 'var', 'yosys_driver_cell', "sg13g2_buf_4")
     lib.set('option', 'var', 'yosys_buffer_cell', "sg13g2_buf_4")
     lib.set('option', 'var', 'yosys_buffer_input', "A")
