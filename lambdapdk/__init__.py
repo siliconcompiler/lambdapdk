@@ -1,7 +1,7 @@
 import siliconcompiler.package as sc_package
 
 
-__version__ = "0.1.40"
+__version__ = "0.1.41"
 
 
 def register_data_source(chip):
@@ -15,27 +15,9 @@ def register_data_source(chip):
     )
 
 
-def get_pdks():
+def setup_libs():
     '''
-    Returns a list of pdk names in lambdapdk
-    '''
-
-    from lambdapdk import asap7, freepdk45, sky130, gf180, ihp130, interposer
-
-    all_pdks = []
-    for pdk_mod in [asap7, freepdk45, sky130, gf180, ihp130, interposer]:
-        pdks = pdk_mod.setup()
-        if not isinstance(pdks, (list, tuple)):
-            pdks = [pdks]
-        for pdk in pdks:
-            all_pdks.append(pdk.design)
-
-    return set(all_pdks)
-
-
-def get_libs():
-    '''
-    Returns a list of libraries names in lambdapdk
+    Returns a list of libraries in lambdapdk
     '''
 
     from lambdapdk.asap7.libs import asap7sc7p5t, fakeram7, fakeio7
@@ -57,6 +39,59 @@ def get_libs():
         if not isinstance(libs, (list, tuple)):
             libs = [libs]
         for lib in libs:
-            all_libs.append(lib.design)
+            all_libs.append(lib)
+
+    return all_libs
+
+
+def setup_pdks():
+    '''
+    Returns a list of pdks in lambdapdk
+    '''
+
+    from lambdapdk import asap7, freepdk45, sky130, gf180, ihp130, interposer
+
+    all_pdks = []
+    for pdk_mod in [asap7, freepdk45, sky130, gf180, ihp130, interposer]:
+        pdks = pdk_mod.setup()
+        if not isinstance(pdks, (list, tuple)):
+            pdks = [pdks]
+        for pdk in pdks:
+            all_pdks.append(pdk)
+
+    return all_pdks
+
+
+def setup():
+    '''
+    Returns a list of all pdks and libraries in lambdapdk
+    '''
+
+    return [
+        *setup_pdks(),
+        *setup_libs()
+    ]
+
+
+def get_pdks():
+    '''
+    Returns a list of pdk names in lambdapdk
+    '''
+
+    all_pdks = []
+    for pdk in setup_pdks():
+        all_pdks.append(pdk.design)
+
+    return set(all_pdks)
+
+
+def get_libs():
+    '''
+    Returns a list of libraries names in lambdapdk
+    '''
+
+    all_libs = []
+    for lib in setup_libs():
+        all_libs.append(lib.design)
 
     return set(all_libs)
