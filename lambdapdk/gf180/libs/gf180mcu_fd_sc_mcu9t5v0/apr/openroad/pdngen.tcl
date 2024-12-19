@@ -17,10 +17,20 @@ if {$metal5_pitch > 89.6} {
     set metal5_pitch 89.6
 }
 
-add_pdn_stripe -grid {block} -layer {Metal4} -width {4.480} -pitch $metal4_pitch \
-    -offset [expr {$metal4_pitch / 4}]
-add_pdn_stripe -grid {block} -layer {Metal5} -width {4.480} -pitch $metal5_pitch \
-    -offset [expr {$metal5_pitch / 4}]
+proc snap_grid {value} {
+    set grid [[ord::get_db_tech] getManufacturingGrid]
+    set dbus [[ord::get_db_tech] getDbUnitsPerMicron]
+
+    set val_dbus [ord::microns_to_dbu $value]
+    set val_snapped [expr {$grid * round($val_dbus / $grid)}]
+
+    return [ord::dbu_to_microns $val_snapped]
+}
+
+add_pdn_stripe -grid {grid} -layer {Metal4} -width {1.600} -pitch [snap_grid $metal4_pitch] \
+    -offset [snap_grid [expr {$metal4_pitch / 4}]]
+add_pdn_stripe -grid {grid} -layer {Metal5} -width {1.600} -pitch [snap_grid $metal5_pitch] \
+    -offset [snap_grid [expr {$metal5_pitch / 4}]]
 add_pdn_connect -grid {block} -layers {Metal1 Metal4} -max_columns {5} \
     -ongrid {Metal2 Metal3 Metal4}
 add_pdn_connect -grid {block} -layers {Metal4 Metal5}
