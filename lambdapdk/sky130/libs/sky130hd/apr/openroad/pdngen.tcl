@@ -16,7 +16,7 @@ if {$met5_pitch > 27.200} {
     set met5_pitch 27.200
 }
 
-proc snap_grid { value } {
+proc snap_grid {value} {
     set grid [[ord::get_db_tech] getManufacturingGrid]
     set dbus [[ord::get_db_tech] getDbUnitsPerMicron]
 

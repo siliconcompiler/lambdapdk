@@ -16,7 +16,7 @@ if {$top1_pitch > 75.6} {
     set top1_pitch 75.6
 }
 
-proc snap_grid { value } {
+proc snap_grid {value} {
     set grid [[ord::get_db_tech] getManufacturingGrid]
     set dbus [[ord::get_db_tech] getDbUnitsPerMicron]
 
