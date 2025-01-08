@@ -57,8 +57,8 @@ def setup():
             'ihp-sg13g2/libs.ref/sg13g2_stdcell/verilog/sg13g2_stdcell.v')
 
     # tie cells
-    lib.add('asic', 'cells', 'tie', ["LOGIC1_X1",
-                                     "LOGIC0_X1"])
+    lib.add('asic', 'cells', 'tie', ["sg13g2_tiehi",
+                                     "sg13g2_tielo"])
 
     # hold cells
     lib.add('asic', 'cells', 'hold', ["sg13g2_dlygate4sd1_1",
