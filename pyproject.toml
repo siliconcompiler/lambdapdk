@@ -20,6 +20,11 @@ dynamic = ['version']
 [tool.setuptools.dynamic]
 version = {attr = "lambdapdk.__version__"}
 
+[project.entry-points."siliconcompiler.docs"]
+linkcode = "lambdapdk:get_docs_codeurl"
+libs = "lambdapdk:get_docs_libraries"
+pdks = "lambdapdk:get_docs_pdks"
+
 [tool.pytest.ini_options]
 testpaths = "tests"
 timeout = "180"
