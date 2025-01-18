@@ -13,6 +13,7 @@ module la_ioclamp #(
     parameter SIDE  = "NO",       // "NO", "SO", "EA", "WE"
     parameter RINGW = 8           // width of io ring
 ) (  // io pad signals
+    inout             pad,
     inout             vdd,    // core supply
     inout             vss,    // core ground
     inout             vddio,  // io supply
