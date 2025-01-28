@@ -130,6 +130,9 @@ def setup():
                     f"gf180mcu_fd_sc_mcu{libtype}5v0__tiel")
             lib.set('option', 'var', f'{tool}_tielow_port', "ZN")
 
+        # Bambu setup
+        lib.set('option', 'var', 'bambu_clock_multiplier', "1")  # convert from ns -> ns
+
         libs.append(lib)
 
         std_lambda_lib = siliconcompiler.Library(f'lambdalib_stdlib_{libname}',
