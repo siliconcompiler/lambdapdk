@@ -180,6 +180,9 @@ def setup():
             lib.set('option', 'var', f'{tool}_tielow_cell', f"sky130_fd_sc_{libtype}__conb_1")
             lib.set('option', 'var', f'{tool}_tielow_port', "LO")
 
+        # Bambu setup
+        lib.set('option', 'var', 'bambu_clock_multiplier', "1")  # convert from ns -> ns
+
         libs.append(lib)
 
         std_lambda_lib = siliconcompiler.Library(f'lambdalib_stdlib_{libname}',

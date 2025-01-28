@@ -99,6 +99,10 @@ def setup():
         lib.set('option', 'var', f'{tool}_tielow_cell', "LOGIC0_X1")
         lib.set('option', 'var', f'{tool}_tielow_port', "Z")
 
+    # Bambu setup
+    lib.set('option', 'var', 'bambu_device', 'nangate45')
+    lib.set('option', 'var', 'bambu_clock_multiplier', 1)  # convert from ns -> ns
+
     libs = [lib]
     std_lambda_lib = siliconcompiler.Library(f'lambdalib_stdlib_{libname}',
                                              package='lambdapdk')

@@ -120,6 +120,9 @@ def setup():
         lib.set('option', 'var', f'{tool}_tielow_cell', "sg13g2_tielo")
         lib.set('option', 'var', f'{tool}_tielow_port', "L_LO")
 
+    # Bambu setup
+    lib.set('option', 'var', 'bambu_clock_multiplier', "1")  # convert from ns -> ns
+
     libs = [lib]
     for libtype in ('stdlib', 'auxlib'):
         lambda_lib = siliconcompiler.Library(f'lambdalib_{libtype}_{libname}',

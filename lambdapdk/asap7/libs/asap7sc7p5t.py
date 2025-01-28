@@ -113,6 +113,10 @@ def _setup_lib(libname, suffix):
     lib.set('option', 'file', 'openroad_global_connect',
             libdir + '/apr/openroad/global_connect.tcl')
 
+    # Bambu setup
+    lib.set('option', 'var', 'bambu_device', 'asap7-WC')
+    lib.set('option', 'var', 'bambu_clock_multiplier', "0.001")  # convert from ps -> ns
+
     libs = [lib]
     std_lambda_lib = siliconcompiler.Library(f'lambdalib_stdlib_{libname}',
                                              package='lambdapdk')
