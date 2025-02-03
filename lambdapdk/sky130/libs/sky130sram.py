@@ -20,7 +20,10 @@ def setup():
                     f'{path_base}/{mem_name}/nldm/{mem_name}_TT_1p8V_25C.lib')
             lib.add('output', corner, 'spice', f'{path_base}/{mem_name}/spice/{mem_name}.sp')
 
-        lib.set('option', 'file', 'openroad_pdngen', f'{path_base}/pdngen.tcl')
+        lib.set('option', 'file', 'openroad_pdngen',
+                f'{path_base}/apr/openroad/pdngen.tcl')
+        lib.set('option', 'file', 'openroad_global_connect',
+                f'{path_base}/apr/openroad/global_connect.tcl')
 
         libs.append(lib)
 

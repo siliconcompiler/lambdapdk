@@ -16,7 +16,10 @@ def setup():
         for corner in ('slow', 'fast', 'typical'):
             lib.add('output', corner, 'nldm', f'{path_base}/nldm/{mem_name}.lib')
 
-        lib.set('option', 'file', 'openroad_pdngen', f'{path_base}/pdngen.tcl')
+        lib.set('option', 'file', 'openroad_pdngen',
+                f'{path_base}/apr/openroad/pdngen.tcl')
+        lib.set('option', 'file', 'openroad_global_connect',
+                f'{path_base}/apr/openroad/global_connect.tcl')
 
         lib.set('option', 'var', 'klayout_allow_missing_cell', mem_name)
 
