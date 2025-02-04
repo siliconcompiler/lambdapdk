@@ -26,7 +26,10 @@ def setup():
                 f'{path_base}/verilog/RM_IHPSG13_1P_core_behavioral_bm_bist.v')
 
         lib.set('option', 'file', 'openroad_pdngen',
-                'lambdapdk/ihp130/libs/sg13g2_sram/pdngen.tcl',
+                'lambdapdk/ihp130/libs/sg13g2_sram/apr/openroad/pdngen.tcl',
+                package='lambdapdk')
+        lib.set('option', 'file', 'openroad_global_connect',
+                'lambdapdk/ihp130/libs/sg13g2_sram/apr/openroad/global_connect.tcl',
                 package='lambdapdk')
 
         libs.append(lib)

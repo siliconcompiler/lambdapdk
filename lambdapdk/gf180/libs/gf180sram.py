@@ -38,7 +38,10 @@ def setup():
             lib.add('output', corner, 'spice',
                     f'{path_base}/spice/{mem_name}.spice')
 
-        lib.set('option', 'file', 'openroad_pdngen', f'{path_base}/pdngen.tcl')
+        lib.set('option', 'file', 'openroad_pdngen',
+                f'{path_base}/apr/openroad/pdngen.tcl')
+        lib.set('option', 'file', 'openroad_global_connect',
+                f'{path_base}/apr/openroad/global_connect.tcl')
 
         libs.append(lib)
 
