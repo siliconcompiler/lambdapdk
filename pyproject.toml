@@ -32,7 +32,7 @@ timeout = "180"
 [project.optional-dependencies]
 # Test dependencies.
 test = [
-    "flake8 == 7.1.1",
+    "flake8 == 7.1.2",
     "pytest == 8.3.4",
     "pytest-timeout == 2.3.1",
     "tclint == 0.5.0",
