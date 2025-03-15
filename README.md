@@ -9,9 +9,9 @@ Supported PDKs:
 
 * [ASAP7](lambdapdk/asap7/README.md)
 * [FreePDK45](lambdapdk/freepdk45/base/README.md)
+* [IHP 130](https://github.com/IHP-GmbH/IHP-Open-PDK)
 * [Skywater130](lambdapdk/sky130/README.md)
 * [Global Foundries 180](lambdapdk/gf180/README.md)
-* [IHP 180](https://github.com/IHP-GmbH/IHP-Open-PDK)
 * [interposer](lambdapdk/interposer/README.md)
 
 # License
