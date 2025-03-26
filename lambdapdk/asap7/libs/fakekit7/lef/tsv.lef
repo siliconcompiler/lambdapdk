@@ -1,0 +1,58 @@
+# Sizes from: https://www.semiconductors.org/wp-content/uploads/2018/09/Interconnect.pdf
+VERSION 5.8 ;
+BUSBITCHARS "[]" ;
+DIVIDERCHAR "/" ;
+
+MACRO TSV_SMALL
+  CLASS BLOCK ;
+  SYMMETRY X Y R90 ;
+  SIZE 2.000 BY 2.000 ;
+  PIN IO
+    DIRECTION INOUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER M1 ;
+      RECT 0.500 0.500 1.500 1.500 ;
+    END
+  END IO
+  OBS
+    LAYER M1 ;
+    RECT  0.000 0.000 2.000 2.000 ;
+  END
+END TSV_SMALL
+
+MACRO TSV_MEDIUM
+  CLASS BLOCK ;
+  SYMMETRY X Y R90 ;
+  SIZE 5.000 BY 5.000 ;
+  PIN IO
+    DIRECTION INOUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER M1 ;
+      RECT 1.000 1.000 4.000 4.000 ;
+    END
+  END IO
+  OBS
+    LAYER M1 ;
+    RECT  0.000 0.000 5.000 5.000 ;
+  END
+END TSV_MEDIUM
+
+MACRO TSV_LARGE
+  CLASS BLOCK ;
+  SYMMETRY X Y R90 ;
+  SIZE 10.000 BY 10.000 ;
+  PIN IO
+    DIRECTION INOUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER M1 ;
+      RECT 2.000 2.000 8.000 8.000 ;
+    END
+  END IO
+  OBS
+    LAYER M1 ;
+    RECT  0.000 0.000 10.000 10.000 ;
+  END
+END TSV_LARGE

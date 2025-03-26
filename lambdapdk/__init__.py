@@ -21,7 +21,7 @@ def setup_libs():
     Returns a list of libraries in lambdapdk
     '''
 
-    from lambdapdk.asap7.libs import asap7sc7p5t, fakeram7, fakeio7
+    from lambdapdk.asap7.libs import asap7sc7p5t, fakeram7, fakeio7, fakekit7
     from lambdapdk.freepdk45.libs import nangate45, fakeram45
     from lambdapdk.sky130.libs import sky130sc, sky130io, sky130sram
     from lambdapdk.gf180.libs import gf180mcu, gf180io, gf180sram
@@ -30,7 +30,7 @@ def setup_libs():
 
     all_libs = []
     for lib_mod in [
-            asap7sc7p5t, fakeram7, fakeio7,
+            asap7sc7p5t, fakeram7, fakeio7, fakekit7,
             nangate45, fakeram45,
             sky130sc, sky130io, sky130sram,
             gf180mcu, gf180io, gf180sram,
@@ -134,7 +134,7 @@ def get_docs_pdks():
 
 
 def get_docs_libraries():
-    from lambdapdk.asap7.libs import asap7sc7p5t, fakeram7, fakeio7
+    from lambdapdk.asap7.libs import asap7sc7p5t, fakeram7, fakeio7, fakekit7
     from lambdapdk.freepdk45.libs import nangate45, fakeram45
     from lambdapdk.sky130.libs import sky130sc, sky130io, sky130sram
     from lambdapdk.gf180.libs import gf180mcu, gf180io, gf180sram
@@ -145,6 +145,7 @@ def get_docs_libraries():
         (asap7sc7p5t, "asap7sc7p5t"),
         (fakeram7, "fakeram7"),
         (fakeio7, "fakeio7"),
+        (fakekit7, "fakekit7"),
         (nangate45, "nangate45"),
         (fakeram45, "fakeram45"),
         (sky130sc, "sky130sc"),
