@@ -2,7 +2,7 @@ library(fakeram7_64x32) {
     technology (cmos);
     delay_model : table_lookup;
     revision : 1.0;
-    date : "2023-11-10 02:15:00Z";
+    date : "2025-04-10 19:43:35Z";
     comment : "SRAM";
     time_unit : "1ns";
     voltage_unit : "1V";
@@ -112,7 +112,7 @@ cell(fakeram7_64x32) {
         }
     }
 
-    bus(rd_out)   {
+    bus(rd_out) {
         bus_type : fakeram7_64x32_DATA;
         direction : output;
         max_capacitance : 0.500;
@@ -149,7 +149,7 @@ cell(fakeram7_64x32) {
             }
         }
     }
-    pin(we_in){
+    pin(we_in) {
         direction : input;
         capacitance : 0.005;
         timing() {
@@ -203,7 +203,7 @@ cell(fakeram7_64x32) {
             }
         }
     }
-    pin(ce_in){
+    pin(ce_in) {
         direction : input;
         capacitance : 0.005;
         timing() {
@@ -257,7 +257,7 @@ cell(fakeram7_64x32) {
             }
         }
     }
-    bus(addr_in)   {
+    bus(addr_in) {
         bus_type : fakeram7_64x32_ADDRESS;
         direction : input;
         capacitance : 0.005;
@@ -312,7 +312,7 @@ cell(fakeram7_64x32) {
             }
         }
     }
-    bus(wd_in)   {
+    bus(wd_in) {
         bus_type : fakeram7_64x32_DATA;
         memory_write() {
             address : addr_in;
@@ -383,7 +383,7 @@ cell(fakeram7_64x32) {
             }
         }
     }
-    bus(w_mask_in)   {
+    bus(w_mask_in) {
         bus_type : fakeram7_64x32_DATA;
         memory_write() {
             address : addr_in;

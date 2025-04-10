@@ -11,7 +11,7 @@ pushd $work_dir
 
 git clone https://github.com/gadfort/FakeRAM2.0.git
 pushd FakeRAM2.0
-git checkout e67a7828726174e58c982965100470a9da4c6311
+git checkout c0ed59820551c1587472162691e3b81220b35009
 
 python3 run.py $src_path/fakeram7.cfg
 
