@@ -67,6 +67,7 @@ module fakeram7_128x32
       $setuphold (posedge clk, ce_in,     0, 0, notifier);
       $setuphold (posedge clk, addr_in,   0, 0, notifier);
       $setuphold (posedge clk, wd_in,     0, 0, notifier);
+      $setuphold (posedge clk, w_mask_in, 0, 0, notifier);
    endspecify
 
 endmodule
