@@ -522,12 +522,16 @@ def ramlib(verible_bin):
 
     for pdk, info in srams.items():
         lib = info['name']
+        if "minsize" in info:
+            minsize = info["minsize"]
+        else:
+            minsize = 0
         lambdalib.copy(f"{pdk_root}/lambdapdk/{pdk}/libs/{lib}/lambda",
                        la_lib='ramlib',
                        exclude=info['implementations'])
         for ram in info['implementations']:
             with open(f"{pdk_root}/lambdapdk/{pdk}/libs/{lib}/lambda/{ram}.v", "w") as f:
-                write_la_ram(f, info[ram], la_type=ram)
+                write_la_ram(f, info[ram], la_type=ram, minsize=minsize)
 
         __format_verilog(f"{pdk_root}/lambdapdk/{pdk}/libs/{lib}/lambda", verible_bin)
 
