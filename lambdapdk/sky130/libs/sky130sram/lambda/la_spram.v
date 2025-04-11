@@ -1,5 +1,5 @@
 /*****************************************************************************
- * Function: Single Port ram
+ * Function: Single Port Memory (la_spram)
  * Copyright: Lambda Project Authors. All rights Reserved.
  * License:  MIT (see LICENSE file in Lambda repository)
  *
@@ -14,7 +14,7 @@
  * supplied on a per macro basis.
  *
  * Technologoy specific implementations of "la_spram" would generally include
- * one or more hardcoded instantiations of ram modules with a generate
+ * one or more hardcoded instantiations of la_spram modules with a generate
  * statement relying on the "PROP" to select between the list of modules
  * at build time.
  *
@@ -43,10 +43,11 @@ module la_spram #(
     input [TESTW-1:0] test  // pass through ASIC test interface
 );
 
+  // Total number of bits
+  localparam TOTAL_BITS = (2 ** AW) * DW;
+
   // Determine which memory to select
-  localparam MEM_PROP = (PROP != "DEFAULT") ? PROP :
-      (AW >= 8) ? "sky130_sram_1rw1r_64x256_8" :
-      "sky130_sram_1rw1r_64x256_8";
+  localparam MEM_PROP = (PROP != "DEFAULT") ? PROP : "sky130_sram_1rw1r_64x256_8";
 
   localparam MEM_WIDTH = (MEM_PROP == "sky130_sram_1rw1r_64x256_8") ? 64 : 0;
 

@@ -27,24 +27,24 @@ module la_dpram #(
     parameter CTRLW = 128,        // width of asic ctrl interface
     parameter TESTW = 128         // width of asic test interface
 ) (  // Write port
-    input wr_clk,  // write clock
-    input wr_ce,  // write chip-enable
-    input wr_we,  // write enable
-    input [DW-1:0] wr_wmask,  // write mask
-    input [AW-1:0] wr_addr,  // write address
-    input [DW-1:0] wr_din,  //write data in
+    input              wr_clk,    // write clock
+    input              wr_ce,     // write chip-enable
+    input              wr_we,     // write enable
+    input  [   DW-1:0] wr_wmask,  // write mask
+    input  [   AW-1:0] wr_addr,   // write address
+    input  [   DW-1:0] wr_din,    //write data in
     // Read port
-    input rd_clk,  // read clock
-    input rd_ce,  // read chip-enable
-    input [AW-1:0] rd_addr,  // read address
-    output reg [DW-1:0] rd_dout,  //read data out
+    input              rd_clk,    // read clock
+    input              rd_ce,     // read chip-enable
+    input  [   AW-1:0] rd_addr,   // read address
+    output [   DW-1:0] rd_dout,   //read data out
     // Power signal
-    input vss,  // ground signal
-    input vdd,  // memory core array power
-    input vddio,  // periphery/io power
+    input              vss,       // ground signal
+    input              vdd,       // memory core array power
+    input              vddio,     // periphery/io power
     // Generic interfaces
-    input [CTRLW-1:0] ctrl,  // pass through ASIC control interface
-    input [TESTW-1:0] test  // pass through ASIC test interface
+    input  [CTRLW-1:0] ctrl,      // pass through ASIC control interface
+    input  [TESTW-1:0] test       // pass through ASIC test interface
 );
 
   la_dpram_impl #(
@@ -53,7 +53,7 @@ module la_dpram #(
       .PROP (PROP),
       .CTRLW(CTRLW),
       .TESTW(TESTW)
-  ) ram (
+  ) memory (
       .wr_clk  (wr_clk),
       .wr_ce   (wr_ce),
       .wr_we   (wr_we),
