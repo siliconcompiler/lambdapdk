@@ -12,7 +12,7 @@ import subprocess
 import glob
 import re
 
-from lambdalib.utils import write_la_spram
+from lambdalib.utils import write_la_ram
 
 from siliconcompiler.targets import (
     skywater130_demo,
@@ -527,7 +527,7 @@ def ramlib(verible_bin):
                        exclude=info['implementations'])
         for ram in info['implementations']:
             with open(f"{pdk_root}/lambdapdk/{pdk}/libs/{lib}/lambda/{ram}.v", "w") as f:
-                write_la_spram(f, info[ram])
+                write_la_ram(f, info[ram], la_type=ram)
 
         __format_verilog(f"{pdk_root}/lambdapdk/{pdk}/libs/{lib}/lambda", verible_bin)
 
