@@ -11,7 +11,7 @@ MACRO fakeram7_256x64
   PROPERTY depth 256 ;
   PROPERTY banks 2 ;
   FOREIGN fakeram7_256x64 0 0 ;
-  SYMMETRY X Y R90 ;
+  SYMMETRY X Y ;
   SIZE 16.720 BY 42.000 ;
   CLASS BLOCK ;
   PIN w_mask_in[0]

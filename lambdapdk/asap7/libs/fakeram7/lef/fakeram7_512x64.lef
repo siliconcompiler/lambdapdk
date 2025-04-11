@@ -11,7 +11,7 @@ MACRO fakeram7_512x64
   PROPERTY depth 512 ;
   PROPERTY banks 4 ;
   FOREIGN fakeram7_512x64 0 0 ;
-  SYMMETRY X Y R90 ;
+  SYMMETRY X Y ;
   SIZE 33.250 BY 42.000 ;
   CLASS BLOCK ;
   PIN w_mask_in[0]
