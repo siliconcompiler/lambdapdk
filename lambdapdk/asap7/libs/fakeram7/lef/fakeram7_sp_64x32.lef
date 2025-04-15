@@ -6,11 +6,11 @@ PROPERTYDEFINITIONS
   MACRO depth INTEGER ;
   MACRO banks INTEGER ;
 END PROPERTYDEFINITIONS
-MACRO fakeram7_64x32
+MACRO fakeram7_sp_64x32
   PROPERTY width 32 ;
   PROPERTY depth 64 ;
   PROPERTY banks 2 ;
-  FOREIGN fakeram7_64x32 0 0 ;
+  FOREIGN fakeram7_sp_64x32 0 0 ;
   SYMMETRY X Y ;
   SIZE 8.360 BY 11.200 ;
   CLASS BLOCK ;
@@ -1012,6 +1012,6 @@ MACRO fakeram7_64x32
     LAYER M4 ;
     RECT 0 0 8.360 11.200 ;
   END
-END fakeram7_64x32
+END fakeram7_sp_64x32
 
 END LIBRARY

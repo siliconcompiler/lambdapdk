@@ -48,27 +48,27 @@ module la_spram #(
 
   // Determine which memory to select
   localparam MEM_PROP = (PROP != "DEFAULT") ? PROP :
-      (AW >= 9) ? (DW >= 64) ? "fakeram7_512x64" : "fakeram7_512x32" :
-      (AW >= 8) ? (DW >= 64) ? "fakeram7_256x64" : "fakeram7_256x32" :
-      (AW >= 7) ? "fakeram7_128x32" :
-      "fakeram7_64x32";
+      (AW >= 9) ? (DW >= 64) ? "fakeram7_sp_512x64" : "fakeram7_sp_512x32" :
+      (AW >= 8) ? (DW >= 64) ? "fakeram7_sp_256x64" : "fakeram7_sp_256x32" :
+      (AW >= 7) ? "fakeram7_sp_128x32" :
+      "fakeram7_sp_64x32";
 
   localparam MEM_WIDTH = 
-      (MEM_PROP == "fakeram7_128x32") ? 32 :
-      (MEM_PROP == "fakeram7_256x32") ? 32 :
-      (MEM_PROP == "fakeram7_256x64") ? 64 :
-      (MEM_PROP == "fakeram7_512x32") ? 32 :
-      (MEM_PROP == "fakeram7_512x64") ? 64 :
-      (MEM_PROP == "fakeram7_64x32") ? 32 :
+      (MEM_PROP == "fakeram7_sp_128x32") ? 32 :
+      (MEM_PROP == "fakeram7_sp_256x32") ? 32 :
+      (MEM_PROP == "fakeram7_sp_256x64") ? 64 :
+      (MEM_PROP == "fakeram7_sp_512x32") ? 32 :
+      (MEM_PROP == "fakeram7_sp_512x64") ? 64 :
+      (MEM_PROP == "fakeram7_sp_64x32") ? 32 :
       0;
 
   localparam MEM_DEPTH = 
-      (MEM_PROP == "fakeram7_128x32") ? 7 :
-      (MEM_PROP == "fakeram7_256x32") ? 8 :
-      (MEM_PROP == "fakeram7_256x64") ? 8 :
-      (MEM_PROP == "fakeram7_512x32") ? 9 :
-      (MEM_PROP == "fakeram7_512x64") ? 9 :
-      (MEM_PROP == "fakeram7_64x32") ? 6 :
+      (MEM_PROP == "fakeram7_sp_128x32") ? 7 :
+      (MEM_PROP == "fakeram7_sp_256x32") ? 8 :
+      (MEM_PROP == "fakeram7_sp_256x64") ? 8 :
+      (MEM_PROP == "fakeram7_sp_512x32") ? 9 :
+      (MEM_PROP == "fakeram7_sp_512x64") ? 9 :
+      (MEM_PROP == "fakeram7_sp_64x32") ? 6 :
       0;
 
   generate
@@ -142,8 +142,8 @@ module la_spram #(
           assign ce_in = ce && selected;
           assign we_in = we && selected;
 
-          if (MEM_PROP == "fakeram7_512x32") begin : ifakeram7_512x32
-            fakeram7_512x32 memory (
+          if (MEM_PROP == "fakeram7_sp_512x32") begin : ifakeram7_sp_512x32
+            fakeram7_sp_512x32 memory (
                 .addr_in(mem_addr),
                 .ce_in(ce_in),
                 .clk(clk),
@@ -153,8 +153,8 @@ module la_spram #(
                 .we_in(we_in)
             );
           end
-          if (MEM_PROP == "fakeram7_512x64") begin : ifakeram7_512x64
-            fakeram7_512x64 memory (
+          if (MEM_PROP == "fakeram7_sp_512x64") begin : ifakeram7_sp_512x64
+            fakeram7_sp_512x64 memory (
                 .addr_in(mem_addr),
                 .ce_in(ce_in),
                 .clk(clk),
@@ -164,8 +164,8 @@ module la_spram #(
                 .we_in(we_in)
             );
           end
-          if (MEM_PROP == "fakeram7_256x64") begin : ifakeram7_256x64
-            fakeram7_256x64 memory (
+          if (MEM_PROP == "fakeram7_sp_256x64") begin : ifakeram7_sp_256x64
+            fakeram7_sp_256x64 memory (
                 .addr_in(mem_addr),
                 .ce_in(ce_in),
                 .clk(clk),
@@ -175,8 +175,8 @@ module la_spram #(
                 .we_in(we_in)
             );
           end
-          if (MEM_PROP == "fakeram7_256x32") begin : ifakeram7_256x32
-            fakeram7_256x32 memory (
+          if (MEM_PROP == "fakeram7_sp_256x32") begin : ifakeram7_sp_256x32
+            fakeram7_sp_256x32 memory (
                 .addr_in(mem_addr),
                 .ce_in(ce_in),
                 .clk(clk),
@@ -186,8 +186,8 @@ module la_spram #(
                 .we_in(we_in)
             );
           end
-          if (MEM_PROP == "fakeram7_128x32") begin : ifakeram7_128x32
-            fakeram7_128x32 memory (
+          if (MEM_PROP == "fakeram7_sp_128x32") begin : ifakeram7_sp_128x32
+            fakeram7_sp_128x32 memory (
                 .addr_in(mem_addr),
                 .ce_in(ce_in),
                 .clk(clk),
@@ -197,8 +197,8 @@ module la_spram #(
                 .we_in(we_in)
             );
           end
-          if (MEM_PROP == "fakeram7_64x32") begin : ifakeram7_64x32
-            fakeram7_64x32 memory (
+          if (MEM_PROP == "fakeram7_sp_64x32") begin : ifakeram7_sp_64x32
+            fakeram7_sp_64x32 memory (
                 .addr_in(mem_addr),
                 .ce_in(ce_in),
                 .clk(clk),
