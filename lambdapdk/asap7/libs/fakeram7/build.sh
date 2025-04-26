@@ -13,7 +13,7 @@ mkdir -p $src_path/lef $src_path/nldm $src_path/verilog
 
 git clone https://github.com/gadfort/FakeRAM2.0.git
 pushd FakeRAM2.0
-git checkout 454d4dc3b34ddedf9c1edd1da7c29ab14703989e
+git checkout cb17ef7a2af3328c445ed60bcb39a034dec9e261
 
 python3 run.py $src_path/fakeram7.cfg --output_dir $work_dir/results
 

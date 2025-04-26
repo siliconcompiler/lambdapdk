@@ -1,4 +1,4 @@
-library(fakeram7_sp_64x32) {
+library(fakeram7_sp_4096x32) {
     technology (cmos);
     delay_model : table_lookup;
     revision : 1.0;
@@ -46,32 +46,32 @@ library(fakeram7_sp_64x32) {
     output_threshold_pct_rise : 50.000;
 
 
-    lu_table_template(fakeram7_sp_64x32_mem_out_delay_template) {
+    lu_table_template(fakeram7_sp_4096x32_mem_out_delay_template) {
         variable_1 : input_net_transition;
         variable_2 : total_output_net_capacitance;
             index_1 ("1000, 1001");
             index_2 ("1000, 1001");
     }
-    lu_table_template(fakeram7_sp_64x32_mem_out_slew_template) {
+    lu_table_template(fakeram7_sp_4096x32_mem_out_slew_template) {
         variable_1 : total_output_net_capacitance;
             index_1 ("1000, 1001");
     }
-    lu_table_template(fakeram7_sp_64x32_constraint_template) {
+    lu_table_template(fakeram7_sp_4096x32_constraint_template) {
         variable_1 : related_pin_transition;
         variable_2 : constrained_pin_transition;
             index_1 ("1000, 1001");
             index_2 ("1000, 1001");
     }
-    power_lut_template(fakeram7_sp_64x32_energy_template_clkslew) {
+    power_lut_template(fakeram7_sp_4096x32_energy_template_clkslew) {
         variable_1 : input_transition_time;
             index_1 ("1000, 1001");
     }
-    power_lut_template(fakeram7_sp_64x32_energy_template_sigslew) {
+    power_lut_template(fakeram7_sp_4096x32_energy_template_sigslew) {
         variable_1 : input_transition_time;
             index_1 ("1000, 1001");
     }
     library_features(report_delay_calculation);
-    type (fakeram7_sp_64x32_DATA) {
+    type (fakeram7_sp_4096x32_DATA) {
         base_type : array ;
         data_type : bit ;
         bit_width : 32;
@@ -79,20 +79,20 @@ library(fakeram7_sp_64x32) {
         bit_to : 0 ;
         downto : true ;
     }
-    type (fakeram7_sp_64x32_ADDRESS) {
+    type (fakeram7_sp_4096x32_ADDRESS) {
         base_type : array ;
         data_type : bit ;
-        bit_width : 6;
-        bit_from : 5;
+        bit_width : 12;
+        bit_from : 11;
         bit_to : 0 ;
         downto : true ;
     }
-cell(fakeram7_sp_64x32) {
-    area : 85.996;
+cell(fakeram7_sp_4096x32) {
+    area : 5503.766;
     interface_timing : true;
     memory() {
         type : ram;
-        address_width : 6;
+        address_width : 12;
         word_width : 32;
     }
     pin(clk)   {
@@ -101,11 +101,11 @@ cell(fakeram7_sp_64x32) {
         clock : true;
         min_period           : 0.157 ;
         internal_power(){
-            rise_power(fakeram7_sp_64x32_energy_template_clkslew) {
+            rise_power(fakeram7_sp_4096x32_energy_template_clkslew) {
                 index_1 ("0.009, 0.227");
                 values ("1.345, 1.345")
             }
-            fall_power(fakeram7_sp_64x32_energy_template_clkslew) {
+            fall_power(fakeram7_sp_4096x32_energy_template_clkslew) {
                 index_1 ("0.009, 0.227");
                 values ("1.345, 1.345")
             }
@@ -113,7 +113,7 @@ cell(fakeram7_sp_64x32) {
     }
 
     bus(rd_out) {
-        bus_type : fakeram7_sp_64x32_DATA;
+        bus_type : fakeram7_sp_4096x32_DATA;
         direction : output;
         max_capacitance : 0.500;
         memory_read() {
@@ -123,7 +123,7 @@ cell(fakeram7_sp_64x32) {
             related_pin : "clk" ;
             timing_type : rising_edge;
             timing_sense : non_unate;
-            cell_rise(fakeram7_sp_64x32_mem_out_delay_template) {
+            cell_rise(fakeram7_sp_4096x32_mem_out_delay_template) {
                 index_1 ("0.009, 0.227");
                 index_2 ("0.005, 0.500");
                 values ( \
@@ -131,7 +131,7 @@ cell(fakeram7_sp_64x32) {
                   "0.218, 0.218" \
                 )
             }
-            cell_fall(fakeram7_sp_64x32_mem_out_delay_template) {
+            cell_fall(fakeram7_sp_4096x32_mem_out_delay_template) {
                 index_1 ("0.009, 0.227");
                 index_2 ("0.005, 0.500");
                 values ( \
@@ -139,11 +139,11 @@ cell(fakeram7_sp_64x32) {
                   "0.218, 0.218" \
                 )
             }
-            rise_transition(fakeram7_sp_64x32_mem_out_slew_template) {
+            rise_transition(fakeram7_sp_4096x32_mem_out_slew_template) {
                 index_1 ("0.005, 0.500");
                 values ("0.009, 0.227")
             }
-            fall_transition(fakeram7_sp_64x32_mem_out_slew_template) {
+            fall_transition(fakeram7_sp_4096x32_mem_out_slew_template) {
                 index_1 ("0.005, 0.500");
                 values ("0.009, 0.227")
             }
@@ -155,7 +155,7 @@ cell(fakeram7_sp_64x32) {
         timing() {
             related_pin : clk;
             timing_type : setup_rising ;
-            rise_constraint(fakeram7_sp_64x32_constraint_template) {
+            rise_constraint(fakeram7_sp_4096x32_constraint_template) {
                 index_1 ("0.009, 0.227");
                 index_2 ("0.009, 0.227");
                 values ( \
@@ -163,7 +163,7 @@ cell(fakeram7_sp_64x32) {
                   "0.050, 0.050" \
                 )
             }
-            fall_constraint(fakeram7_sp_64x32_constraint_template) {
+            fall_constraint(fakeram7_sp_4096x32_constraint_template) {
                 index_1 ("0.009, 0.227");
                 index_2 ("0.009, 0.227");
                 values ( \
@@ -175,7 +175,7 @@ cell(fakeram7_sp_64x32) {
         timing() {
             related_pin : clk;
             timing_type : hold_rising ;
-            rise_constraint(fakeram7_sp_64x32_constraint_template) {
+            rise_constraint(fakeram7_sp_4096x32_constraint_template) {
                 index_1 ("0.009, 0.227");
                 index_2 ("0.009, 0.227");
                 values ( \
@@ -183,7 +183,7 @@ cell(fakeram7_sp_64x32) {
                   "0.050, 0.050" \
                 )
             }
-            fall_constraint(fakeram7_sp_64x32_constraint_template) {
+            fall_constraint(fakeram7_sp_4096x32_constraint_template) {
                 index_1 ("0.009, 0.227");
                 index_2 ("0.009, 0.227");
                 values ( \
@@ -193,11 +193,11 @@ cell(fakeram7_sp_64x32) {
             }
         }
         internal_power(){
-            rise_power(fakeram7_sp_64x32_energy_template_sigslew) {
+            rise_power(fakeram7_sp_4096x32_energy_template_sigslew) {
                 index_1 ("0.009, 0.227");
                 values ("0.013, 0.013")
             }
-            fall_power(fakeram7_sp_64x32_energy_template_sigslew) {
+            fall_power(fakeram7_sp_4096x32_energy_template_sigslew) {
                 index_1 ("0.009, 0.227");
                 values ("0.013, 0.013")
             }
@@ -209,7 +209,7 @@ cell(fakeram7_sp_64x32) {
         timing() {
             related_pin : clk;
             timing_type : setup_rising ;
-            rise_constraint(fakeram7_sp_64x32_constraint_template) {
+            rise_constraint(fakeram7_sp_4096x32_constraint_template) {
                 index_1 ("0.009, 0.227");
                 index_2 ("0.009, 0.227");
                 values ( \
@@ -217,7 +217,7 @@ cell(fakeram7_sp_64x32) {
                   "0.050, 0.050" \
                 )
             }
-            fall_constraint(fakeram7_sp_64x32_constraint_template) {
+            fall_constraint(fakeram7_sp_4096x32_constraint_template) {
                 index_1 ("0.009, 0.227");
                 index_2 ("0.009, 0.227");
                 values ( \
@@ -229,7 +229,7 @@ cell(fakeram7_sp_64x32) {
         timing() {
             related_pin : clk;
             timing_type : hold_rising ;
-            rise_constraint(fakeram7_sp_64x32_constraint_template) {
+            rise_constraint(fakeram7_sp_4096x32_constraint_template) {
                 index_1 ("0.009, 0.227");
                 index_2 ("0.009, 0.227");
                 values ( \
@@ -237,7 +237,7 @@ cell(fakeram7_sp_64x32) {
                   "0.050, 0.050" \
                 )
             }
-            fall_constraint(fakeram7_sp_64x32_constraint_template) {
+            fall_constraint(fakeram7_sp_4096x32_constraint_template) {
                 index_1 ("0.009, 0.227");
                 index_2 ("0.009, 0.227");
                 values ( \
@@ -247,24 +247,24 @@ cell(fakeram7_sp_64x32) {
             }
         }
         internal_power(){
-            rise_power(fakeram7_sp_64x32_energy_template_sigslew) {
+            rise_power(fakeram7_sp_4096x32_energy_template_sigslew) {
                 index_1 ("0.009, 0.227");
                 values ("0.013, 0.013")
             }
-            fall_power(fakeram7_sp_64x32_energy_template_sigslew) {
+            fall_power(fakeram7_sp_4096x32_energy_template_sigslew) {
                 index_1 ("0.009, 0.227");
                 values ("0.013, 0.013")
             }
         }
     }
     bus(addr_in) {
-        bus_type : fakeram7_sp_64x32_ADDRESS;
+        bus_type : fakeram7_sp_4096x32_ADDRESS;
         direction : input;
         capacitance : 0.005;
         timing() {
             related_pin : clk;
             timing_type : setup_rising ;
-            rise_constraint(fakeram7_sp_64x32_constraint_template) {
+            rise_constraint(fakeram7_sp_4096x32_constraint_template) {
                 index_1 ("0.009, 0.227");
                 index_2 ("0.009, 0.227");
                 values ( \
@@ -272,7 +272,7 @@ cell(fakeram7_sp_64x32) {
                   "0.050, 0.050" \
                 )
             }
-            fall_constraint(fakeram7_sp_64x32_constraint_template) {
+            fall_constraint(fakeram7_sp_4096x32_constraint_template) {
                 index_1 ("0.009, 0.227");
                 index_2 ("0.009, 0.227");
                 values ( \
@@ -284,7 +284,7 @@ cell(fakeram7_sp_64x32) {
         timing() {
             related_pin : clk;
             timing_type : hold_rising ;
-            rise_constraint(fakeram7_sp_64x32_constraint_template) {
+            rise_constraint(fakeram7_sp_4096x32_constraint_template) {
                 index_1 ("0.009, 0.227");
                 index_2 ("0.009, 0.227");
                 values ( \
@@ -292,7 +292,7 @@ cell(fakeram7_sp_64x32) {
                   "0.050, 0.050" \
                 )
             }
-            fall_constraint(fakeram7_sp_64x32_constraint_template) {
+            fall_constraint(fakeram7_sp_4096x32_constraint_template) {
                 index_1 ("0.009, 0.227");
                 index_2 ("0.009, 0.227");
                 values ( \
@@ -302,18 +302,18 @@ cell(fakeram7_sp_64x32) {
             }
         }
         internal_power(){
-            rise_power(fakeram7_sp_64x32_energy_template_sigslew) {
+            rise_power(fakeram7_sp_4096x32_energy_template_sigslew) {
                 index_1 ("0.009, 0.227");
                 values ("0.013, 0.013")
             }
-            fall_power(fakeram7_sp_64x32_energy_template_sigslew) {
+            fall_power(fakeram7_sp_4096x32_energy_template_sigslew) {
                 index_1 ("0.009, 0.227");
                 values ("0.013, 0.013")
             }
         }
     }
     bus(wd_in) {
-        bus_type : fakeram7_sp_64x32_DATA;
+        bus_type : fakeram7_sp_4096x32_DATA;
         memory_write() {
             address : addr_in;
             clocked_on : "clk";
@@ -323,7 +323,7 @@ cell(fakeram7_sp_64x32) {
         timing() {
             related_pin     : clk;
             timing_type     : setup_rising ;
-            rise_constraint(fakeram7_sp_64x32_constraint_template) {
+            rise_constraint(fakeram7_sp_4096x32_constraint_template) {
                 index_1 ("0.009, 0.227");
                 index_2 ("0.009, 0.227");
                 values ( \
@@ -331,7 +331,7 @@ cell(fakeram7_sp_64x32) {
                   "0.050, 0.050" \
                 )
             }
-            fall_constraint(fakeram7_sp_64x32_constraint_template) {
+            fall_constraint(fakeram7_sp_4096x32_constraint_template) {
                 index_1 ("0.009, 0.227");
                 index_2 ("0.009, 0.227");
                 values ( \
@@ -343,7 +343,7 @@ cell(fakeram7_sp_64x32) {
         timing() {
             related_pin     : clk;
             timing_type     : hold_rising ;
-            rise_constraint(fakeram7_sp_64x32_constraint_template) {
+            rise_constraint(fakeram7_sp_4096x32_constraint_template) {
                 index_1 ("0.009, 0.227");
                 index_2 ("0.009, 0.227");
                 values ( \
@@ -351,7 +351,7 @@ cell(fakeram7_sp_64x32) {
                   "0.050, 0.050" \
                 )
             }
-            fall_constraint(fakeram7_sp_64x32_constraint_template) {
+            fall_constraint(fakeram7_sp_4096x32_constraint_template) {
                 index_1 ("0.009, 0.227");
                 index_2 ("0.009, 0.227");
                 values ( \
@@ -362,29 +362,29 @@ cell(fakeram7_sp_64x32) {
         }
         internal_power(){
             when : "(! (we_in) )";
-            rise_power(fakeram7_sp_64x32_energy_template_sigslew) {
+            rise_power(fakeram7_sp_4096x32_energy_template_sigslew) {
                 index_1 ("0.009, 0.227");
                 values ("0.013, 0.013")
             }
-            fall_power(fakeram7_sp_64x32_energy_template_sigslew) {
+            fall_power(fakeram7_sp_4096x32_energy_template_sigslew) {
                 index_1 ("0.009, 0.227");
                 values ("0.013, 0.013")
             }
         }
         internal_power(){
             when : "(we_in)";
-            rise_power(fakeram7_sp_64x32_energy_template_sigslew) {
+            rise_power(fakeram7_sp_4096x32_energy_template_sigslew) {
                 index_1 ("0.009, 0.227");
                 values ("0.013, 0.013")
             }
-            fall_power(fakeram7_sp_64x32_energy_template_sigslew) {
+            fall_power(fakeram7_sp_4096x32_energy_template_sigslew) {
                 index_1 ("0.009, 0.227");
                 values ("0.013, 0.013")
             }
         }
     }
     bus(w_mask_in) {
-        bus_type : fakeram7_sp_64x32_DATA;
+        bus_type : fakeram7_sp_4096x32_DATA;
         memory_write() {
             address : addr_in;
             clocked_on : "clk";
@@ -394,7 +394,7 @@ cell(fakeram7_sp_64x32) {
         timing() {
             related_pin     : clk;
             timing_type     : setup_rising ;
-            rise_constraint(fakeram7_sp_64x32_constraint_template) {
+            rise_constraint(fakeram7_sp_4096x32_constraint_template) {
                 index_1 ("0.009, 0.227");
                 index_2 ("0.009, 0.227");
                 values ( \
@@ -402,7 +402,7 @@ cell(fakeram7_sp_64x32) {
                   "0.050, 0.050" \
                 )
             }
-            fall_constraint(fakeram7_sp_64x32_constraint_template) {
+            fall_constraint(fakeram7_sp_4096x32_constraint_template) {
                 index_1 ("0.009, 0.227");
                 index_2 ("0.009, 0.227");
                 values ( \
@@ -414,7 +414,7 @@ cell(fakeram7_sp_64x32) {
         timing() {
             related_pin     : clk;
             timing_type     : hold_rising ;
-            rise_constraint(fakeram7_sp_64x32_constraint_template) {
+            rise_constraint(fakeram7_sp_4096x32_constraint_template) {
                 index_1 ("0.009, 0.227");
                 index_2 ("0.009, 0.227");
                 values ( \
@@ -422,7 +422,7 @@ cell(fakeram7_sp_64x32) {
                   "0.050, 0.050" \
                 )
             }
-            fall_constraint(fakeram7_sp_64x32_constraint_template) {
+            fall_constraint(fakeram7_sp_4096x32_constraint_template) {
                 index_1 ("0.009, 0.227");
                 index_2 ("0.009, 0.227");
                 values ( \
@@ -433,22 +433,22 @@ cell(fakeram7_sp_64x32) {
         }
         internal_power(){
             when : "(! (we_in) )";
-            rise_power(fakeram7_sp_64x32_energy_template_sigslew) {
+            rise_power(fakeram7_sp_4096x32_energy_template_sigslew) {
                 index_1 ("0.009, 0.227");
                 values ("0.013, 0.013")
             }
-            fall_power(fakeram7_sp_64x32_energy_template_sigslew) {
+            fall_power(fakeram7_sp_4096x32_energy_template_sigslew) {
                 index_1 ("0.009, 0.227");
                 values ("0.013, 0.013")
             }
         }
         internal_power(){
             when : "(we_in)";
-            rise_power(fakeram7_sp_64x32_energy_template_sigslew) {
+            rise_power(fakeram7_sp_4096x32_energy_template_sigslew) {
                 index_1 ("0.009, 0.227");
                 values ("0.013, 0.013")
             }
-            fall_power(fakeram7_sp_64x32_energy_template_sigslew) {
+            fall_power(fakeram7_sp_4096x32_energy_template_sigslew) {
                 index_1 ("0.009, 0.227");
                 values ("0.013, 0.013")
             }

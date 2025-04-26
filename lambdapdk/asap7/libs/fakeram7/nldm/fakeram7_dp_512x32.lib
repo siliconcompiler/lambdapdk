@@ -2,7 +2,7 @@ library(fakeram7_dp_512x32) {
     technology (cmos);
     delay_model : table_lookup;
     revision : 1.0;
-    date : "2025-04-15 18:49:44Z";
+    date : "2025-04-26 15:44:05Z";
     comment : "SRAM";
     time_unit : "1ns";
     voltage_unit : "1V";
@@ -117,7 +117,7 @@ cell(fakeram7_dp_512x32) {
         direction : output;
         max_capacitance : 0.500;
         memory_read() {
-            address : addr_in;
+            address : addr_in_A;
         }
         timing() {
             related_pin : "clk" ;
@@ -154,7 +154,7 @@ cell(fakeram7_dp_512x32) {
         direction : output;
         max_capacitance : 0.500;
         memory_read() {
-            address : addr_in;
+            address : addr_in_B;
         }
         timing() {
             related_pin : "clk" ;
@@ -461,7 +461,7 @@ cell(fakeram7_dp_512x32) {
     bus(wd_in_A) {
         bus_type : fakeram7_dp_512x32_DATA;
         memory_write() {
-            address : addr_in;
+            address : addr_in_A;
             clocked_on : "clk";
         }
         direction : input;
@@ -532,7 +532,7 @@ cell(fakeram7_dp_512x32) {
     bus(wd_in_B) {
         bus_type : fakeram7_dp_512x32_DATA;
         memory_write() {
-            address : addr_in;
+            address : addr_in_B;
             clocked_on : "clk";
         }
         direction : input;
@@ -603,7 +603,7 @@ cell(fakeram7_dp_512x32) {
     bus(w_mask_in_A) {
         bus_type : fakeram7_dp_512x32_DATA;
         memory_write() {
-            address : addr_in;
+            address : addr_in_A;
             clocked_on : "clk";
         }
         direction : input;
@@ -674,7 +674,7 @@ cell(fakeram7_dp_512x32) {
     bus(w_mask_in_B) {
         bus_type : fakeram7_dp_512x32_DATA;
         memory_write() {
-            address : addr_in;
+            address : addr_in_B;
             clocked_on : "clk";
         }
         direction : input;
