@@ -34,9 +34,9 @@ timeout = "180"
 test = [
     "flake8 == 7.2.0",
     "pytest == 8.3.5",
-    "pytest-timeout == 2.3.1",
+    "pytest-timeout == 2.4.0",
     "tclint == 0.5.4",
-    "lambdalib == 0.3.3",
+    "lambdalib == 0.3.4",
     "sc-leflib == 0.4.0",
     "Jinja2 == 3.1.6"
 ]
