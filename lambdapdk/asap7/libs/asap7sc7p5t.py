@@ -83,8 +83,8 @@ def _setup_lib(libname, suffix):
     lib.set('option', 'var', 'openroad_place_density', '0.60')
     lib.set('option', 'var', 'openroad_pad_global_place', '0')
     lib.set('option', 'var', 'openroad_pad_detail_place', '0')
-    lib.set('option', 'var', 'openroad_macro_place_halo', ['10', '10'])
-    lib.set('option', 'var', 'openroad_macro_place_channel', ['12', '12'])
+    lib.set('option', 'var', 'openroad_macro_place_halo', ['5', '5'])
+    lib.set('option', 'var', 'openroad_macro_place_channel', ['6', '6'])
 
     lib.set('option', 'var', 'openroad_cts_distance_between_buffers', "60")
 
