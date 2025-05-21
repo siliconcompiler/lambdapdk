@@ -6,13 +6,13 @@ PROPERTYDEFINITIONS
   MACRO depth INTEGER ;
   MACRO banks INTEGER ;
 END PROPERTYDEFINITIONS
-MACRO fakeram7_sp_8196x64
+MACRO fakeram7_sp_8192x64
   PROPERTY width 64 ;
-  PROPERTY depth 8196 ;
+  PROPERTY depth 8192 ;
   PROPERTY banks 8 ;
-  FOREIGN fakeram7_sp_8196x64 0 0 ;
+  FOREIGN fakeram7_sp_8192x64 0 0 ;
   SYMMETRY X Y ;
-  SIZE 66.500 BY 333.200 ;
+  SIZE 66.500 BY 331.800 ;
   CLASS BLOCK ;
   PIN w_mask_in[0]
     DIRECTION INPUT ;
@@ -596,7 +596,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 101.904 0.024 101.928 ;
+      RECT 0.000 101.952 0.024 101.976 ;
     END
   END rd_out[0]
   PIN rd_out[1]
@@ -605,7 +605,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 103.488 0.024 103.512 ;
+      RECT 0.000 103.536 0.024 103.560 ;
     END
   END rd_out[1]
   PIN rd_out[2]
@@ -614,7 +614,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 105.072 0.024 105.096 ;
+      RECT 0.000 105.120 0.024 105.144 ;
     END
   END rd_out[2]
   PIN rd_out[3]
@@ -623,7 +623,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 106.656 0.024 106.680 ;
+      RECT 0.000 106.704 0.024 106.728 ;
     END
   END rd_out[3]
   PIN rd_out[4]
@@ -632,7 +632,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 108.240 0.024 108.264 ;
+      RECT 0.000 108.288 0.024 108.312 ;
     END
   END rd_out[4]
   PIN rd_out[5]
@@ -641,7 +641,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 109.824 0.024 109.848 ;
+      RECT 0.000 109.872 0.024 109.896 ;
     END
   END rd_out[5]
   PIN rd_out[6]
@@ -650,7 +650,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 111.408 0.024 111.432 ;
+      RECT 0.000 111.456 0.024 111.480 ;
     END
   END rd_out[6]
   PIN rd_out[7]
@@ -659,7 +659,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 112.992 0.024 113.016 ;
+      RECT 0.000 113.040 0.024 113.064 ;
     END
   END rd_out[7]
   PIN rd_out[8]
@@ -668,7 +668,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 114.576 0.024 114.600 ;
+      RECT 0.000 114.624 0.024 114.648 ;
     END
   END rd_out[8]
   PIN rd_out[9]
@@ -677,7 +677,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 116.160 0.024 116.184 ;
+      RECT 0.000 116.208 0.024 116.232 ;
     END
   END rd_out[9]
   PIN rd_out[10]
@@ -686,7 +686,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 117.744 0.024 117.768 ;
+      RECT 0.000 117.792 0.024 117.816 ;
     END
   END rd_out[10]
   PIN rd_out[11]
@@ -695,7 +695,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 119.328 0.024 119.352 ;
+      RECT 0.000 119.376 0.024 119.400 ;
     END
   END rd_out[11]
   PIN rd_out[12]
@@ -704,7 +704,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 120.912 0.024 120.936 ;
+      RECT 0.000 120.960 0.024 120.984 ;
     END
   END rd_out[12]
   PIN rd_out[13]
@@ -713,7 +713,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 122.496 0.024 122.520 ;
+      RECT 0.000 122.544 0.024 122.568 ;
     END
   END rd_out[13]
   PIN rd_out[14]
@@ -722,7 +722,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 124.080 0.024 124.104 ;
+      RECT 0.000 124.128 0.024 124.152 ;
     END
   END rd_out[14]
   PIN rd_out[15]
@@ -731,7 +731,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 125.664 0.024 125.688 ;
+      RECT 0.000 125.712 0.024 125.736 ;
     END
   END rd_out[15]
   PIN rd_out[16]
@@ -740,7 +740,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 127.248 0.024 127.272 ;
+      RECT 0.000 127.296 0.024 127.320 ;
     END
   END rd_out[16]
   PIN rd_out[17]
@@ -749,7 +749,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 128.832 0.024 128.856 ;
+      RECT 0.000 128.880 0.024 128.904 ;
     END
   END rd_out[17]
   PIN rd_out[18]
@@ -758,7 +758,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 130.416 0.024 130.440 ;
+      RECT 0.000 130.464 0.024 130.488 ;
     END
   END rd_out[18]
   PIN rd_out[19]
@@ -767,7 +767,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 132.000 0.024 132.024 ;
+      RECT 0.000 132.048 0.024 132.072 ;
     END
   END rd_out[19]
   PIN rd_out[20]
@@ -776,7 +776,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 133.584 0.024 133.608 ;
+      RECT 0.000 133.632 0.024 133.656 ;
     END
   END rd_out[20]
   PIN rd_out[21]
@@ -785,7 +785,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 135.168 0.024 135.192 ;
+      RECT 0.000 135.216 0.024 135.240 ;
     END
   END rd_out[21]
   PIN rd_out[22]
@@ -794,7 +794,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 136.752 0.024 136.776 ;
+      RECT 0.000 136.800 0.024 136.824 ;
     END
   END rd_out[22]
   PIN rd_out[23]
@@ -803,7 +803,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 138.336 0.024 138.360 ;
+      RECT 0.000 138.384 0.024 138.408 ;
     END
   END rd_out[23]
   PIN rd_out[24]
@@ -812,7 +812,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 139.920 0.024 139.944 ;
+      RECT 0.000 139.968 0.024 139.992 ;
     END
   END rd_out[24]
   PIN rd_out[25]
@@ -821,7 +821,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 141.504 0.024 141.528 ;
+      RECT 0.000 141.552 0.024 141.576 ;
     END
   END rd_out[25]
   PIN rd_out[26]
@@ -830,7 +830,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 143.088 0.024 143.112 ;
+      RECT 0.000 143.136 0.024 143.160 ;
     END
   END rd_out[26]
   PIN rd_out[27]
@@ -839,7 +839,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 144.672 0.024 144.696 ;
+      RECT 0.000 144.720 0.024 144.744 ;
     END
   END rd_out[27]
   PIN rd_out[28]
@@ -848,7 +848,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 146.256 0.024 146.280 ;
+      RECT 0.000 146.304 0.024 146.328 ;
     END
   END rd_out[28]
   PIN rd_out[29]
@@ -857,7 +857,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 147.840 0.024 147.864 ;
+      RECT 0.000 147.888 0.024 147.912 ;
     END
   END rd_out[29]
   PIN rd_out[30]
@@ -866,7 +866,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 149.424 0.024 149.448 ;
+      RECT 0.000 149.472 0.024 149.496 ;
     END
   END rd_out[30]
   PIN rd_out[31]
@@ -875,7 +875,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 151.008 0.024 151.032 ;
+      RECT 0.000 151.056 0.024 151.080 ;
     END
   END rd_out[31]
   PIN rd_out[32]
@@ -884,7 +884,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 152.592 0.024 152.616 ;
+      RECT 0.000 152.640 0.024 152.664 ;
     END
   END rd_out[32]
   PIN rd_out[33]
@@ -893,7 +893,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 154.176 0.024 154.200 ;
+      RECT 0.000 154.224 0.024 154.248 ;
     END
   END rd_out[33]
   PIN rd_out[34]
@@ -902,7 +902,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 155.760 0.024 155.784 ;
+      RECT 0.000 155.808 0.024 155.832 ;
     END
   END rd_out[34]
   PIN rd_out[35]
@@ -911,7 +911,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 157.344 0.024 157.368 ;
+      RECT 0.000 157.392 0.024 157.416 ;
     END
   END rd_out[35]
   PIN rd_out[36]
@@ -920,7 +920,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 158.928 0.024 158.952 ;
+      RECT 0.000 158.976 0.024 159.000 ;
     END
   END rd_out[36]
   PIN rd_out[37]
@@ -929,7 +929,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 160.512 0.024 160.536 ;
+      RECT 0.000 160.560 0.024 160.584 ;
     END
   END rd_out[37]
   PIN rd_out[38]
@@ -938,7 +938,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 162.096 0.024 162.120 ;
+      RECT 0.000 162.144 0.024 162.168 ;
     END
   END rd_out[38]
   PIN rd_out[39]
@@ -947,7 +947,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 163.680 0.024 163.704 ;
+      RECT 0.000 163.728 0.024 163.752 ;
     END
   END rd_out[39]
   PIN rd_out[40]
@@ -956,7 +956,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 165.264 0.024 165.288 ;
+      RECT 0.000 165.312 0.024 165.336 ;
     END
   END rd_out[40]
   PIN rd_out[41]
@@ -965,7 +965,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 166.848 0.024 166.872 ;
+      RECT 0.000 166.896 0.024 166.920 ;
     END
   END rd_out[41]
   PIN rd_out[42]
@@ -974,7 +974,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 168.432 0.024 168.456 ;
+      RECT 0.000 168.480 0.024 168.504 ;
     END
   END rd_out[42]
   PIN rd_out[43]
@@ -983,7 +983,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 170.016 0.024 170.040 ;
+      RECT 0.000 170.064 0.024 170.088 ;
     END
   END rd_out[43]
   PIN rd_out[44]
@@ -992,7 +992,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 171.600 0.024 171.624 ;
+      RECT 0.000 171.648 0.024 171.672 ;
     END
   END rd_out[44]
   PIN rd_out[45]
@@ -1001,7 +1001,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 173.184 0.024 173.208 ;
+      RECT 0.000 173.232 0.024 173.256 ;
     END
   END rd_out[45]
   PIN rd_out[46]
@@ -1010,7 +1010,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 174.768 0.024 174.792 ;
+      RECT 0.000 174.816 0.024 174.840 ;
     END
   END rd_out[46]
   PIN rd_out[47]
@@ -1019,7 +1019,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 176.352 0.024 176.376 ;
+      RECT 0.000 176.400 0.024 176.424 ;
     END
   END rd_out[47]
   PIN rd_out[48]
@@ -1028,7 +1028,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 177.936 0.024 177.960 ;
+      RECT 0.000 177.984 0.024 178.008 ;
     END
   END rd_out[48]
   PIN rd_out[49]
@@ -1037,7 +1037,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 179.520 0.024 179.544 ;
+      RECT 0.000 179.568 0.024 179.592 ;
     END
   END rd_out[49]
   PIN rd_out[50]
@@ -1046,7 +1046,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 181.104 0.024 181.128 ;
+      RECT 0.000 181.152 0.024 181.176 ;
     END
   END rd_out[50]
   PIN rd_out[51]
@@ -1055,7 +1055,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 182.688 0.024 182.712 ;
+      RECT 0.000 182.736 0.024 182.760 ;
     END
   END rd_out[51]
   PIN rd_out[52]
@@ -1064,7 +1064,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 184.272 0.024 184.296 ;
+      RECT 0.000 184.320 0.024 184.344 ;
     END
   END rd_out[52]
   PIN rd_out[53]
@@ -1073,7 +1073,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 185.856 0.024 185.880 ;
+      RECT 0.000 185.904 0.024 185.928 ;
     END
   END rd_out[53]
   PIN rd_out[54]
@@ -1082,7 +1082,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 187.440 0.024 187.464 ;
+      RECT 0.000 187.488 0.024 187.512 ;
     END
   END rd_out[54]
   PIN rd_out[55]
@@ -1091,7 +1091,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 189.024 0.024 189.048 ;
+      RECT 0.000 189.072 0.024 189.096 ;
     END
   END rd_out[55]
   PIN rd_out[56]
@@ -1100,7 +1100,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 190.608 0.024 190.632 ;
+      RECT 0.000 190.656 0.024 190.680 ;
     END
   END rd_out[56]
   PIN rd_out[57]
@@ -1109,7 +1109,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 192.192 0.024 192.216 ;
+      RECT 0.000 192.240 0.024 192.264 ;
     END
   END rd_out[57]
   PIN rd_out[58]
@@ -1118,7 +1118,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 193.776 0.024 193.800 ;
+      RECT 0.000 193.824 0.024 193.848 ;
     END
   END rd_out[58]
   PIN rd_out[59]
@@ -1127,7 +1127,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 195.360 0.024 195.384 ;
+      RECT 0.000 195.408 0.024 195.432 ;
     END
   END rd_out[59]
   PIN rd_out[60]
@@ -1136,7 +1136,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 196.944 0.024 196.968 ;
+      RECT 0.000 196.992 0.024 197.016 ;
     END
   END rd_out[60]
   PIN rd_out[61]
@@ -1145,7 +1145,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 198.528 0.024 198.552 ;
+      RECT 0.000 198.576 0.024 198.600 ;
     END
   END rd_out[61]
   PIN rd_out[62]
@@ -1154,7 +1154,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 200.112 0.024 200.136 ;
+      RECT 0.000 200.160 0.024 200.184 ;
     END
   END rd_out[62]
   PIN rd_out[63]
@@ -1163,7 +1163,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 201.696 0.024 201.720 ;
+      RECT 0.000 201.744 0.024 201.768 ;
     END
   END rd_out[63]
   PIN wd_in[0]
@@ -1172,7 +1172,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 203.760 0.024 203.784 ;
+      RECT 0.000 203.856 0.024 203.880 ;
     END
   END wd_in[0]
   PIN wd_in[1]
@@ -1181,7 +1181,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 205.344 0.024 205.368 ;
+      RECT 0.000 205.440 0.024 205.464 ;
     END
   END wd_in[1]
   PIN wd_in[2]
@@ -1190,7 +1190,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 206.928 0.024 206.952 ;
+      RECT 0.000 207.024 0.024 207.048 ;
     END
   END wd_in[2]
   PIN wd_in[3]
@@ -1199,7 +1199,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 208.512 0.024 208.536 ;
+      RECT 0.000 208.608 0.024 208.632 ;
     END
   END wd_in[3]
   PIN wd_in[4]
@@ -1208,7 +1208,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 210.096 0.024 210.120 ;
+      RECT 0.000 210.192 0.024 210.216 ;
     END
   END wd_in[4]
   PIN wd_in[5]
@@ -1217,7 +1217,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 211.680 0.024 211.704 ;
+      RECT 0.000 211.776 0.024 211.800 ;
     END
   END wd_in[5]
   PIN wd_in[6]
@@ -1226,7 +1226,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 213.264 0.024 213.288 ;
+      RECT 0.000 213.360 0.024 213.384 ;
     END
   END wd_in[6]
   PIN wd_in[7]
@@ -1235,7 +1235,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 214.848 0.024 214.872 ;
+      RECT 0.000 214.944 0.024 214.968 ;
     END
   END wd_in[7]
   PIN wd_in[8]
@@ -1244,7 +1244,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 216.432 0.024 216.456 ;
+      RECT 0.000 216.528 0.024 216.552 ;
     END
   END wd_in[8]
   PIN wd_in[9]
@@ -1253,7 +1253,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 218.016 0.024 218.040 ;
+      RECT 0.000 218.112 0.024 218.136 ;
     END
   END wd_in[9]
   PIN wd_in[10]
@@ -1262,7 +1262,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 219.600 0.024 219.624 ;
+      RECT 0.000 219.696 0.024 219.720 ;
     END
   END wd_in[10]
   PIN wd_in[11]
@@ -1271,7 +1271,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 221.184 0.024 221.208 ;
+      RECT 0.000 221.280 0.024 221.304 ;
     END
   END wd_in[11]
   PIN wd_in[12]
@@ -1280,7 +1280,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 222.768 0.024 222.792 ;
+      RECT 0.000 222.864 0.024 222.888 ;
     END
   END wd_in[12]
   PIN wd_in[13]
@@ -1289,7 +1289,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 224.352 0.024 224.376 ;
+      RECT 0.000 224.448 0.024 224.472 ;
     END
   END wd_in[13]
   PIN wd_in[14]
@@ -1298,7 +1298,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 225.936 0.024 225.960 ;
+      RECT 0.000 226.032 0.024 226.056 ;
     END
   END wd_in[14]
   PIN wd_in[15]
@@ -1307,7 +1307,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 227.520 0.024 227.544 ;
+      RECT 0.000 227.616 0.024 227.640 ;
     END
   END wd_in[15]
   PIN wd_in[16]
@@ -1316,7 +1316,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 229.104 0.024 229.128 ;
+      RECT 0.000 229.200 0.024 229.224 ;
     END
   END wd_in[16]
   PIN wd_in[17]
@@ -1325,7 +1325,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 230.688 0.024 230.712 ;
+      RECT 0.000 230.784 0.024 230.808 ;
     END
   END wd_in[17]
   PIN wd_in[18]
@@ -1334,7 +1334,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 232.272 0.024 232.296 ;
+      RECT 0.000 232.368 0.024 232.392 ;
     END
   END wd_in[18]
   PIN wd_in[19]
@@ -1343,7 +1343,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 233.856 0.024 233.880 ;
+      RECT 0.000 233.952 0.024 233.976 ;
     END
   END wd_in[19]
   PIN wd_in[20]
@@ -1352,7 +1352,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 235.440 0.024 235.464 ;
+      RECT 0.000 235.536 0.024 235.560 ;
     END
   END wd_in[20]
   PIN wd_in[21]
@@ -1361,7 +1361,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 237.024 0.024 237.048 ;
+      RECT 0.000 237.120 0.024 237.144 ;
     END
   END wd_in[21]
   PIN wd_in[22]
@@ -1370,7 +1370,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 238.608 0.024 238.632 ;
+      RECT 0.000 238.704 0.024 238.728 ;
     END
   END wd_in[22]
   PIN wd_in[23]
@@ -1379,7 +1379,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 240.192 0.024 240.216 ;
+      RECT 0.000 240.288 0.024 240.312 ;
     END
   END wd_in[23]
   PIN wd_in[24]
@@ -1388,7 +1388,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 241.776 0.024 241.800 ;
+      RECT 0.000 241.872 0.024 241.896 ;
     END
   END wd_in[24]
   PIN wd_in[25]
@@ -1397,7 +1397,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 243.360 0.024 243.384 ;
+      RECT 0.000 243.456 0.024 243.480 ;
     END
   END wd_in[25]
   PIN wd_in[26]
@@ -1406,7 +1406,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 244.944 0.024 244.968 ;
+      RECT 0.000 245.040 0.024 245.064 ;
     END
   END wd_in[26]
   PIN wd_in[27]
@@ -1415,7 +1415,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 246.528 0.024 246.552 ;
+      RECT 0.000 246.624 0.024 246.648 ;
     END
   END wd_in[27]
   PIN wd_in[28]
@@ -1424,7 +1424,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 248.112 0.024 248.136 ;
+      RECT 0.000 248.208 0.024 248.232 ;
     END
   END wd_in[28]
   PIN wd_in[29]
@@ -1433,7 +1433,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 249.696 0.024 249.720 ;
+      RECT 0.000 249.792 0.024 249.816 ;
     END
   END wd_in[29]
   PIN wd_in[30]
@@ -1442,7 +1442,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 251.280 0.024 251.304 ;
+      RECT 0.000 251.376 0.024 251.400 ;
     END
   END wd_in[30]
   PIN wd_in[31]
@@ -1451,7 +1451,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 252.864 0.024 252.888 ;
+      RECT 0.000 252.960 0.024 252.984 ;
     END
   END wd_in[31]
   PIN wd_in[32]
@@ -1460,7 +1460,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 254.448 0.024 254.472 ;
+      RECT 0.000 254.544 0.024 254.568 ;
     END
   END wd_in[32]
   PIN wd_in[33]
@@ -1469,7 +1469,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 256.032 0.024 256.056 ;
+      RECT 0.000 256.128 0.024 256.152 ;
     END
   END wd_in[33]
   PIN wd_in[34]
@@ -1478,7 +1478,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 257.616 0.024 257.640 ;
+      RECT 0.000 257.712 0.024 257.736 ;
     END
   END wd_in[34]
   PIN wd_in[35]
@@ -1487,7 +1487,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 259.200 0.024 259.224 ;
+      RECT 0.000 259.296 0.024 259.320 ;
     END
   END wd_in[35]
   PIN wd_in[36]
@@ -1496,7 +1496,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 260.784 0.024 260.808 ;
+      RECT 0.000 260.880 0.024 260.904 ;
     END
   END wd_in[36]
   PIN wd_in[37]
@@ -1505,7 +1505,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 262.368 0.024 262.392 ;
+      RECT 0.000 262.464 0.024 262.488 ;
     END
   END wd_in[37]
   PIN wd_in[38]
@@ -1514,7 +1514,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 263.952 0.024 263.976 ;
+      RECT 0.000 264.048 0.024 264.072 ;
     END
   END wd_in[38]
   PIN wd_in[39]
@@ -1523,7 +1523,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 265.536 0.024 265.560 ;
+      RECT 0.000 265.632 0.024 265.656 ;
     END
   END wd_in[39]
   PIN wd_in[40]
@@ -1532,7 +1532,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 267.120 0.024 267.144 ;
+      RECT 0.000 267.216 0.024 267.240 ;
     END
   END wd_in[40]
   PIN wd_in[41]
@@ -1541,7 +1541,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 268.704 0.024 268.728 ;
+      RECT 0.000 268.800 0.024 268.824 ;
     END
   END wd_in[41]
   PIN wd_in[42]
@@ -1550,7 +1550,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 270.288 0.024 270.312 ;
+      RECT 0.000 270.384 0.024 270.408 ;
     END
   END wd_in[42]
   PIN wd_in[43]
@@ -1559,7 +1559,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 271.872 0.024 271.896 ;
+      RECT 0.000 271.968 0.024 271.992 ;
     END
   END wd_in[43]
   PIN wd_in[44]
@@ -1568,7 +1568,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 273.456 0.024 273.480 ;
+      RECT 0.000 273.552 0.024 273.576 ;
     END
   END wd_in[44]
   PIN wd_in[45]
@@ -1577,7 +1577,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 275.040 0.024 275.064 ;
+      RECT 0.000 275.136 0.024 275.160 ;
     END
   END wd_in[45]
   PIN wd_in[46]
@@ -1586,7 +1586,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 276.624 0.024 276.648 ;
+      RECT 0.000 276.720 0.024 276.744 ;
     END
   END wd_in[46]
   PIN wd_in[47]
@@ -1595,7 +1595,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 278.208 0.024 278.232 ;
+      RECT 0.000 278.304 0.024 278.328 ;
     END
   END wd_in[47]
   PIN wd_in[48]
@@ -1604,7 +1604,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 279.792 0.024 279.816 ;
+      RECT 0.000 279.888 0.024 279.912 ;
     END
   END wd_in[48]
   PIN wd_in[49]
@@ -1613,7 +1613,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 281.376 0.024 281.400 ;
+      RECT 0.000 281.472 0.024 281.496 ;
     END
   END wd_in[49]
   PIN wd_in[50]
@@ -1622,7 +1622,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 282.960 0.024 282.984 ;
+      RECT 0.000 283.056 0.024 283.080 ;
     END
   END wd_in[50]
   PIN wd_in[51]
@@ -1631,7 +1631,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 284.544 0.024 284.568 ;
+      RECT 0.000 284.640 0.024 284.664 ;
     END
   END wd_in[51]
   PIN wd_in[52]
@@ -1640,7 +1640,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 286.128 0.024 286.152 ;
+      RECT 0.000 286.224 0.024 286.248 ;
     END
   END wd_in[52]
   PIN wd_in[53]
@@ -1649,7 +1649,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 287.712 0.024 287.736 ;
+      RECT 0.000 287.808 0.024 287.832 ;
     END
   END wd_in[53]
   PIN wd_in[54]
@@ -1658,7 +1658,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 289.296 0.024 289.320 ;
+      RECT 0.000 289.392 0.024 289.416 ;
     END
   END wd_in[54]
   PIN wd_in[55]
@@ -1667,7 +1667,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 290.880 0.024 290.904 ;
+      RECT 0.000 290.976 0.024 291.000 ;
     END
   END wd_in[55]
   PIN wd_in[56]
@@ -1676,7 +1676,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 292.464 0.024 292.488 ;
+      RECT 0.000 292.560 0.024 292.584 ;
     END
   END wd_in[56]
   PIN wd_in[57]
@@ -1685,7 +1685,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 294.048 0.024 294.072 ;
+      RECT 0.000 294.144 0.024 294.168 ;
     END
   END wd_in[57]
   PIN wd_in[58]
@@ -1694,7 +1694,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 295.632 0.024 295.656 ;
+      RECT 0.000 295.728 0.024 295.752 ;
     END
   END wd_in[58]
   PIN wd_in[59]
@@ -1703,7 +1703,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 297.216 0.024 297.240 ;
+      RECT 0.000 297.312 0.024 297.336 ;
     END
   END wd_in[59]
   PIN wd_in[60]
@@ -1712,7 +1712,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 298.800 0.024 298.824 ;
+      RECT 0.000 298.896 0.024 298.920 ;
     END
   END wd_in[60]
   PIN wd_in[61]
@@ -1721,7 +1721,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 300.384 0.024 300.408 ;
+      RECT 0.000 300.480 0.024 300.504 ;
     END
   END wd_in[61]
   PIN wd_in[62]
@@ -1730,7 +1730,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 301.968 0.024 301.992 ;
+      RECT 0.000 302.064 0.024 302.088 ;
     END
   END wd_in[62]
   PIN wd_in[63]
@@ -1739,7 +1739,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 303.552 0.024 303.576 ;
+      RECT 0.000 303.648 0.024 303.672 ;
     END
   END wd_in[63]
   PIN addr_in[0]
@@ -1748,7 +1748,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 305.616 0.024 305.640 ;
+      RECT 0.000 305.760 0.024 305.784 ;
     END
   END addr_in[0]
   PIN addr_in[1]
@@ -1757,7 +1757,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 307.200 0.024 307.224 ;
+      RECT 0.000 307.344 0.024 307.368 ;
     END
   END addr_in[1]
   PIN addr_in[2]
@@ -1766,7 +1766,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 308.784 0.024 308.808 ;
+      RECT 0.000 308.928 0.024 308.952 ;
     END
   END addr_in[2]
   PIN addr_in[3]
@@ -1775,7 +1775,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 310.368 0.024 310.392 ;
+      RECT 0.000 310.512 0.024 310.536 ;
     END
   END addr_in[3]
   PIN addr_in[4]
@@ -1784,7 +1784,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 311.952 0.024 311.976 ;
+      RECT 0.000 312.096 0.024 312.120 ;
     END
   END addr_in[4]
   PIN addr_in[5]
@@ -1793,7 +1793,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 313.536 0.024 313.560 ;
+      RECT 0.000 313.680 0.024 313.704 ;
     END
   END addr_in[5]
   PIN addr_in[6]
@@ -1802,7 +1802,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 315.120 0.024 315.144 ;
+      RECT 0.000 315.264 0.024 315.288 ;
     END
   END addr_in[6]
   PIN addr_in[7]
@@ -1811,7 +1811,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 316.704 0.024 316.728 ;
+      RECT 0.000 316.848 0.024 316.872 ;
     END
   END addr_in[7]
   PIN addr_in[8]
@@ -1820,7 +1820,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 318.288 0.024 318.312 ;
+      RECT 0.000 318.432 0.024 318.456 ;
     END
   END addr_in[8]
   PIN addr_in[9]
@@ -1829,7 +1829,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 319.872 0.024 319.896 ;
+      RECT 0.000 320.016 0.024 320.040 ;
     END
   END addr_in[9]
   PIN addr_in[10]
@@ -1838,7 +1838,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 321.456 0.024 321.480 ;
+      RECT 0.000 321.600 0.024 321.624 ;
     END
   END addr_in[10]
   PIN addr_in[11]
@@ -1847,7 +1847,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 323.040 0.024 323.064 ;
+      RECT 0.000 323.184 0.024 323.208 ;
     END
   END addr_in[11]
   PIN addr_in[12]
@@ -1856,25 +1856,16 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 324.624 0.024 324.648 ;
+      RECT 0.000 324.768 0.024 324.792 ;
     END
   END addr_in[12]
-  PIN addr_in[13]
-    DIRECTION INPUT ;
-    USE SIGNAL ;
-    SHAPE ABUTMENT ;
-    PORT
-      LAYER M4 ;
-      RECT 0.000 326.208 0.024 326.232 ;
-    END
-  END addr_in[13]
   PIN we_in
     DIRECTION INPUT ;
     USE SIGNAL ;
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 328.272 0.024 328.296 ;
+      RECT 0.000 326.880 0.024 326.904 ;
     END
   END we_in
   PIN ce_in
@@ -1883,7 +1874,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 329.856 0.024 329.880 ;
+      RECT 0.000 328.464 0.024 328.488 ;
     END
   END ce_in
   PIN clk
@@ -1892,7 +1883,7 @@ MACRO fakeram7_sp_8196x64
     SHAPE ABUTMENT ;
     PORT
       LAYER M4 ;
-      RECT 0.000 331.440 0.024 331.464 ;
+      RECT 0.000 330.048 0.024 330.072 ;
     END
   END clk
   PIN VSS
@@ -2332,8 +2323,6 @@ MACRO fakeram7_sp_8196x64
       RECT 0.048 329.472 66.452 329.568 ;
       RECT 0.048 330.240 66.452 330.336 ;
       RECT 0.048 331.008 66.452 331.104 ;
-      RECT 0.048 331.776 66.452 331.872 ;
-      RECT 0.048 332.544 66.452 332.640 ;
     END
   END VSS
   PIN VDD
@@ -2773,20 +2762,18 @@ MACRO fakeram7_sp_8196x64
       RECT 0.048 329.856 66.452 329.952 ;
       RECT 0.048 330.624 66.452 330.720 ;
       RECT 0.048 331.392 66.452 331.488 ;
-      RECT 0.048 332.160 66.452 332.256 ;
-      RECT 0.048 332.928 66.452 333.024 ;
     END
   END VDD
   OBS
     LAYER M1 ;
-    RECT 0 0 66.500 333.200 ;
+    RECT 0 0 66.500 331.800 ;
     LAYER M2 ;
-    RECT 0 0 66.500 333.200 ;
+    RECT 0 0 66.500 331.800 ;
     LAYER M3 ;
-    RECT 0 0 66.500 333.200 ;
+    RECT 0 0 66.500 331.800 ;
     LAYER M4 ;
-    RECT 0 0 66.500 333.200 ;
+    RECT 0 0 66.500 331.800 ;
   END
-END fakeram7_sp_8196x64
+END fakeram7_sp_8192x64
 
 END LIBRARY

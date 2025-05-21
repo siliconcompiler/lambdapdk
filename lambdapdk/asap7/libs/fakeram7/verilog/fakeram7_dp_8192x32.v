@@ -1,4 +1,4 @@
-module fakeram7_dp_8196x64
+module fakeram7_dp_8192x32
 (
    rd_out_A,
    rd_out_B,
@@ -13,9 +13,9 @@ module fakeram7_dp_8196x64
    clk,
    ce_in
 );
-   parameter BITS = 64;
-   parameter WORD_DEPTH = 8196;
-   parameter ADDR_WIDTH = 14;
+   parameter BITS = 32;
+   parameter WORD_DEPTH = 8192;
+   parameter ADDR_WIDTH = 13;
    parameter corrupt_mem_on_X_p = 1;
 
    output reg [BITS-1:0]    rd_out_A;
@@ -47,7 +47,7 @@ module fakeram7_dp_8196x64
             // WEN or ADDR is unknown, so corrupt entire array (using unsynthesizeable for loop)
             for (j = 0; j < WORD_DEPTH; j = j + 1)
                mem[j] <= 'x;
-            $display("warning: ce_in=1, we_in_A is %b, addr_in_A = %x in fakeram7_dp_8196x64", we_in_A, addr_in_A);
+            $display("warning: ce_in=1, we_in_A is %b, addr_in_A = %x in fakeram7_dp_8192x32", we_in_A, addr_in_A);
          end
          else if (we_in)
          begin
@@ -61,7 +61,7 @@ module fakeram7_dp_8196x64
             // WEN or ADDR is unknown, so corrupt entire array (using unsynthesizeable for loop)
             for (j = 0; j < WORD_DEPTH; j = j + 1)
                mem[j] <= 'x;
-            $display("warning: ce_in=1, we_in_B is %b, addr_in_B = %x in fakeram7_dp_8196x64", we_in_B, addr_in_B);
+            $display("warning: ce_in=1, we_in_B is %b, addr_in_B = %x in fakeram7_dp_8192x32", we_in_B, addr_in_B);
          end
          else if (we_in)
          begin
