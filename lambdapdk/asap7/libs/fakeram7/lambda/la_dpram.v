@@ -53,7 +53,7 @@ module la_dpram #(
 
   // Determine which memory to select
   localparam MEM_PROP = (PROP != "DEFAULT") ? PROP :
-      (AW >= 13) ? (DW >= 64) ? "fakeram7_dp_8196x64" : "fakeram7_dp_8196x32" :
+      (AW >= 13) ? (DW >= 64) ? "fakeram7_dp_8192x64" : "fakeram7_dp_8192x32" :
       (AW >= 12) ? (DW >= 64) ? "fakeram7_dp_4096x64" : "fakeram7_dp_4096x32" :
       (AW >= 11) ? (DW >= 64) ? "fakeram7_dp_2048x64" : "fakeram7_dp_2048x32" :
       (AW >= 10) ? (DW >= 64) ? "fakeram7_dp_1024x64" : "fakeram7_dp_1024x32" :
@@ -74,8 +74,8 @@ module la_dpram #(
       (MEM_PROP == "fakeram7_dp_512x128") ? 128 :
       (MEM_PROP == "fakeram7_dp_512x32") ? 32 :
       (MEM_PROP == "fakeram7_dp_512x64") ? 64 :
-      (MEM_PROP == "fakeram7_dp_8196x32") ? 32 :
-      (MEM_PROP == "fakeram7_dp_8196x64") ? 64 :
+      (MEM_PROP == "fakeram7_dp_8192x32") ? 32 :
+      (MEM_PROP == "fakeram7_dp_8192x64") ? 64 :
       0;
 
   localparam MEM_DEPTH = 
@@ -91,8 +91,8 @@ module la_dpram #(
       (MEM_PROP == "fakeram7_dp_512x128") ? 9 :
       (MEM_PROP == "fakeram7_dp_512x32") ? 9 :
       (MEM_PROP == "fakeram7_dp_512x64") ? 9 :
-      (MEM_PROP == "fakeram7_dp_8196x32") ? 13 :
-      (MEM_PROP == "fakeram7_dp_8196x64") ? 13 :
+      (MEM_PROP == "fakeram7_dp_8192x32") ? 13 :
+      (MEM_PROP == "fakeram7_dp_8192x64") ? 13 :
       0;
 
   generate
@@ -366,8 +366,8 @@ module la_dpram #(
                 .we_in_B(1'b0)
             );
           end
-          if (MEM_PROP == "fakeram7_dp_8196x32") begin : ifakeram7_dp_8196x32
-            fakeram7_dp_8196x32 memory (
+          if (MEM_PROP == "fakeram7_dp_8192x32") begin : ifakeram7_dp_8192x32
+            fakeram7_dp_8192x32 memory (
                 .addr_in_A(wr_mem_addr),
                 .addr_in_B(rd_mem_addr),
                 .ce_in(wr_ce_in | rd_ce_in),
@@ -382,8 +382,8 @@ module la_dpram #(
                 .we_in_B(1'b0)
             );
           end
-          if (MEM_PROP == "fakeram7_dp_8196x64") begin : ifakeram7_dp_8196x64
-            fakeram7_dp_8196x64 memory (
+          if (MEM_PROP == "fakeram7_dp_8192x64") begin : ifakeram7_dp_8192x64
+            fakeram7_dp_8192x64 memory (
                 .addr_in_A(wr_mem_addr),
                 .addr_in_B(rd_mem_addr),
                 .ce_in(wr_ce_in | rd_ce_in),

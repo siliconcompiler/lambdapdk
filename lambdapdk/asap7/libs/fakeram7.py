@@ -6,7 +6,12 @@ def setup():
     libs = []
     stackup = '10M'
 
-    for config in ('64x32', '128x32', '256x32', '256x64', '512x32', '512x64'):
+    for config in ('64x32', '128x32', '256x32', '256x64',
+                   '512x32', '512x64', '512x128',
+                   '1024x32', '1024x64',
+                   '2048x32', '2048x64',
+                   '4096x32', '4096x64',
+                   '8192x32', '8192x64'):
         for ramtype in ('dp', 'sp'):
             mem_name = f'fakeram7_{ramtype}_{config}'
             lib = Library(mem_name, package='lambdapdk')

@@ -473,10 +473,10 @@ def ramlib(verible_bin):
                 "fakeram7_sp_4096x64": {
                     "DW": 64, "AW": 12, "port_map": asap7_spram_port_map_sp
                 },
-                "fakeram7_sp_8196x32": {
+                "fakeram7_sp_8192x32": {
                     "DW": 32, "AW": 13, "port_map": asap7_spram_port_map_sp
                 },
-                "fakeram7_sp_8196x64": {
+                "fakeram7_sp_8192x64": {
                     "DW": 64, "AW": 13, "port_map": asap7_spram_port_map_sp
                 }
             },
@@ -517,10 +517,10 @@ def ramlib(verible_bin):
                 "fakeram7_dp_4096x64": {
                     "DW": 64, "AW": 12, "port_map": asap7_spram_port_map_dp
                 },
-                "fakeram7_dp_8196x32": {
+                "fakeram7_dp_8192x32": {
                     "DW": 32, "AW": 13, "port_map": asap7_spram_port_map_dp
                 },
-                "fakeram7_dp_8196x64": {
+                "fakeram7_dp_8192x64": {
                     "DW": 64, "AW": 13, "port_map": asap7_spram_port_map_dp
                 }
             }
