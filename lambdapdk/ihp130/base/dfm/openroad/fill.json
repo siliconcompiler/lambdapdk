@@ -7,10 +7,10 @@
             "space_to_outline": 0,
             "non-opc": {
                 "datatype":             22,
-                "width":                [2.0],
-                "height":               [5.0],
-                "space_to_fill":        1.2,
-                "space_to_non_fill":    1.0
+                "width":                [5.0, 4.0, 3.0, 2.0, 1.0],
+                "height":               [5.0, 4.0, 3.0, 2.0, 1.0],
+                "space_to_fill":        0.5,
+                "space_to_non_fill":    0.5
             }
         },
 
@@ -21,10 +21,10 @@
             "space_to_outline": 0,
             "non-opc": {
                 "datatype":             22,
-                "width":                [5.0],
-                "height":               [2.0],
-                "space_to_fill":        1.2,
-                "space_to_non_fill":    1.0
+                "width":                [5.0, 4.0, 3.0, 2.0, 1.0],
+                "height":               [5.0, 4.0, 3.0, 2.0, 1.0],
+                "space_to_fill":        0.5,
+                "space_to_non_fill":    0.5
             }
         },
         
@@ -35,10 +35,10 @@
             "space_to_outline": 0,
             "non-opc": {
                 "datatype":             22,
-                "width":                [2.0],
-                "height":               [5.0],
-                "space_to_fill":        1.2,
-                "space_to_non_fill":    1.0
+                "width":                [5.0, 4.0, 3.0, 2.0, 1.0],
+                "height":               [5.0, 4.0, 3.0, 2.0, 1.0],
+                "space_to_fill":        0.5,
+                "space_to_non_fill":    0.5
             }
         },
         
@@ -49,10 +49,10 @@
             "space_to_outline": 0,
             "non-opc": {
                 "datatype":             22,
-                "width":                [5.0],
-                "height":               [2.0],
-                "space_to_fill":        1.2,
-                "space_to_non_fill":    1.0
+                "width":                [5.0, 4.0, 3.0, 2.0, 1.0],
+                "height":               [5.0, 4.0, 3.0, 2.0, 1.0],
+                "space_to_fill":        0.5,
+                "space_to_non_fill":    0.5
             }
         },
 
@@ -63,10 +63,10 @@
             "space_to_outline": 0,
             "non-opc": {
                 "datatype":             22,
-                "width":                [2.0],
-                "height":               [5.0],
-                "space_to_fill":        1.2,
-                "space_to_non_fill":    1.0
+                "width":                [5.0, 4.0, 3.0, 2.0, 1.0],
+                "height":               [5.0, 4.0, 3.0, 2.0, 1.0],
+                "space_to_fill":        0.5,
+                "space_to_non_fill":    0.5
             }
         },
 
@@ -77,10 +77,10 @@
             "space_to_outline": 0,
             "non-opc": {
                 "datatype":             22,
-                "width":                [10.0],
-                "height":               [ 5.0],
+                "width":                [10.0, 9.0, 8.0, 7.0, 6.0, 5.0],
+                "height":               [10.0, 9.0, 8.0, 7.0, 6.0, 5.0],
                 "space_to_fill":        3.0,
-                "space_to_non_fill":    4.9
+                "space_to_non_fill":    3.0
             }
         },
         
@@ -91,10 +91,10 @@
             "space_to_outline": 0,
             "non-opc": {
                 "datatype":             22,
-                "width":                [ 5.0],
-                "height":               [10.0],
+                "width":                [10.0, 9.0, 8.0, 7.0, 6.0, 5.0],
+                "height":               [10.0, 9.0, 8.0, 7.0, 6.0, 5.0],
                 "space_to_fill":        3.0,
-                "space_to_non_fill":    4.9
+                "space_to_non_fill":    3.0
             }
         }
     },
