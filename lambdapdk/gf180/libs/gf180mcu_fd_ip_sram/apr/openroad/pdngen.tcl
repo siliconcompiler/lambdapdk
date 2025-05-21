@@ -1,5 +1,5 @@
 ####################################
-# grid for: fakeram45_rotated
+# grid for: gf180mcu_fd_ip_sram
 ####################################
 define_pdn_grid -name {gf180mcu_fd_ip_sram} -voltage_domains {CORE} -macro \
     -orient {R0 R180 MX MY} \
