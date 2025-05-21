@@ -2,7 +2,7 @@ library(fakeram7_dp_4096x64) {
     technology (cmos);
     delay_model : table_lookup;
     revision : 1.0;
-    date : "2025-05-20 00:27:02Z";
+    date : "2025-05-20 00:31:47Z";
     comment : "SRAM";
     time_unit : "1ns";
     voltage_unit : "1V";
@@ -507,7 +507,7 @@ cell(fakeram7_dp_4096x64) {
             }
         }
         internal_power(){
-            when : "(! (we_in) )";
+            when : "(! (we_in_A) )";
             rise_power(fakeram7_dp_4096x64_energy_template_sigslew) {
                 index_1 ("0.009, 0.227");
                 values ("0.013, 0.013")
@@ -518,7 +518,7 @@ cell(fakeram7_dp_4096x64) {
             }
         }
         internal_power(){
-            when : "(we_in)";
+            when : "(we_in_A)";
             rise_power(fakeram7_dp_4096x64_energy_template_sigslew) {
                 index_1 ("0.009, 0.227");
                 values ("0.013, 0.013")
@@ -578,7 +578,7 @@ cell(fakeram7_dp_4096x64) {
             }
         }
         internal_power(){
-            when : "(! (we_in) )";
+            when : "(! (we_in_B) )";
             rise_power(fakeram7_dp_4096x64_energy_template_sigslew) {
                 index_1 ("0.009, 0.227");
                 values ("0.013, 0.013")
@@ -589,7 +589,7 @@ cell(fakeram7_dp_4096x64) {
             }
         }
         internal_power(){
-            when : "(we_in)";
+            when : "(we_in_B)";
             rise_power(fakeram7_dp_4096x64_energy_template_sigslew) {
                 index_1 ("0.009, 0.227");
                 values ("0.013, 0.013")
@@ -649,7 +649,7 @@ cell(fakeram7_dp_4096x64) {
             }
         }
         internal_power(){
-            when : "(! (we_in) )";
+            when : "(! (we_in_A) )";
             rise_power(fakeram7_dp_4096x64_energy_template_sigslew) {
                 index_1 ("0.009, 0.227");
                 values ("0.013, 0.013")
@@ -660,7 +660,7 @@ cell(fakeram7_dp_4096x64) {
             }
         }
         internal_power(){
-            when : "(we_in)";
+            when : "(we_in_A)";
             rise_power(fakeram7_dp_4096x64_energy_template_sigslew) {
                 index_1 ("0.009, 0.227");
                 values ("0.013, 0.013")
@@ -720,7 +720,7 @@ cell(fakeram7_dp_4096x64) {
             }
         }
         internal_power(){
-            when : "(! (we_in) )";
+            when : "(! (we_in_B) )";
             rise_power(fakeram7_dp_4096x64_energy_template_sigslew) {
                 index_1 ("0.009, 0.227");
                 values ("0.013, 0.013")
@@ -731,7 +731,7 @@ cell(fakeram7_dp_4096x64) {
             }
         }
         internal_power(){
-            when : "(we_in)";
+            when : "(we_in_B)";
             rise_power(fakeram7_dp_4096x64_energy_template_sigslew) {
                 index_1 ("0.009, 0.227");
                 values ("0.013, 0.013")
