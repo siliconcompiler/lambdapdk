@@ -8,7 +8,7 @@ def setup():
     '''
     IHP 130 IO Cells
     '''
-    libdir = "lambdapdk/ihp130/libs/sg13g2/"
+    libdir = "lambdapdk/ihp130/libs/sg13g2_io"
 
     lib = siliconcompiler.Library('sg13g2_io', package='ihp130')
     register_ihp130_data_source(lib)
@@ -40,7 +40,7 @@ def setup():
                                         'sg13g2_Filler10000'])
 
     lib.set('output', 'blackbox', 'verilog',
-            os.path.join(libdir, 'blackbox', 'sg130g2_io.v'))
+            os.path.join(libdir, 'blackbox', 'sg13g2_io.v'), package='lambdapdk')
 
     lambda_lib = siliconcompiler.Library('lambdalib_sg13g2_io', package='lambdapdk')
     register_data_source(lambda_lib)
