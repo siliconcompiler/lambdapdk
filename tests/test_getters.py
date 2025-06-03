@@ -7,7 +7,7 @@ from lambdapdk.asap7.libs import asap7sc7p5t, fakeram7, fakeio7, fakekit7
 from lambdapdk.freepdk45.libs import nangate45, fakeram45
 from lambdapdk.sky130.libs import sky130sc, sky130io, sky130sram
 from lambdapdk.gf180.libs import gf180mcu, gf180io, gf180sram
-from lambdapdk.ihp130.libs import sg13g2_stdcell, sg13g2_sram
+from lambdapdk.ihp130.libs import sg13g2_stdcell, sg13g2_sram, sg13g2_io
 from lambdapdk.interposer.libs import bumps as interposer_bumps
 
 
@@ -16,7 +16,7 @@ all_libs = [
     nangate45, fakeram45,  # freepdk45
     sky130sc, sky130io, sky130sram,  # sky130
     gf180mcu, gf180io, gf180sram,  # gf180
-    sg13g2_stdcell, sg13g2_sram,  # ihp130
+    sg13g2_stdcell, sg13g2_sram, sg13g2_io,  # ihp130
     interposer_bumps  # interposer
 ]
 

@@ -2,7 +2,7 @@ import os.path
 import siliconcompiler.package as sc_package
 
 
-__version__ = "0.1.52"
+__version__ = "0.1.53"
 
 
 def register_data_source(chip):
@@ -25,7 +25,7 @@ def setup_libs():
     from lambdapdk.freepdk45.libs import nangate45, fakeram45
     from lambdapdk.sky130.libs import sky130sc, sky130io, sky130sram
     from lambdapdk.gf180.libs import gf180mcu, gf180io, gf180sram
-    from lambdapdk.ihp130.libs import sg13g2_stdcell, sg13g2_sram
+    from lambdapdk.ihp130.libs import sg13g2_stdcell, sg13g2_sram, sg13g2_io
     from lambdapdk.interposer.libs import bumps as interposer_bumps
 
     all_libs = []
@@ -34,7 +34,7 @@ def setup_libs():
             nangate45, fakeram45,
             sky130sc, sky130io, sky130sram,
             gf180mcu, gf180io, gf180sram,
-            sg13g2_stdcell, sg13g2_sram,
+            sg13g2_stdcell, sg13g2_sram, sg13g2_io,
             interposer_bumps]:
         libs = lib_mod.setup()
         if not isinstance(libs, (list, tuple)):
@@ -138,7 +138,7 @@ def get_docs_libraries():
     from lambdapdk.freepdk45.libs import nangate45, fakeram45
     from lambdapdk.sky130.libs import sky130sc, sky130io, sky130sram
     from lambdapdk.gf180.libs import gf180mcu, gf180io, gf180sram
-    from lambdapdk.ihp130.libs import sg13g2_stdcell, sg13g2_sram
+    from lambdapdk.ihp130.libs import sg13g2_stdcell, sg13g2_sram, sg13g2_io
     from lambdapdk.interposer.libs import bumps as interposer_bumps
 
     return [
@@ -156,5 +156,6 @@ def get_docs_libraries():
         (gf180sram, "gf180sram"),
         (sg13g2_stdcell, "sg13g2_stdcell"),
         (sg13g2_sram, "sg13g2_sram"),
+        (sg13g2_io, "sg13g2_io"),
         (interposer_bumps, "interposer_bumps")
     ]

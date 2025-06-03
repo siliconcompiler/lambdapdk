@@ -7,7 +7,7 @@ from lambdapdk.asap7.libs import asap7sc7p5t, fakeram7
 from lambdapdk.freepdk45.libs import nangate45, fakeram45
 from lambdapdk.gf180.libs import gf180mcu, gf180io, gf180sram
 from lambdapdk.sky130.libs import sky130sc, sky130io, sky130sram
-from lambdapdk.ihp130.libs import sg13g2_stdcell, sg13g2_sram
+from lambdapdk.ihp130.libs import sg13g2_stdcell, sg13g2_sram, sg13g2_io
 
 
 @pytest.mark.parametrize('module,path', [
@@ -64,6 +64,7 @@ def test_la_ramlib(path, rootdir):
     'lambdapdk/sky130/libs/sky130io/lambda',
     'lambdapdk/gf180/libs/gf180mcu_fd_io/lambda',
     'lambdapdk/asap7/libs/fakeio7/lambda',
+    'lambdapdk/ihp130/libs/sg13g2_io/lambda',
     ])
 def test_la_iolib(path, rootdir):
     assert lambdalib.check(
@@ -75,7 +76,7 @@ def test_la_iolib(path, rootdir):
     nangate45, fakeram45,
     gf180mcu, gf180io, gf180sram,
     sky130sc, sky130io, sky130sram,
-    sg13g2_stdcell, sg13g2_sram
+    sg13g2_stdcell, sg13g2_sram, sg13g2_io
 ])
 def test_lambdalib_is_present(module):
     chip = Chip('<lib>')

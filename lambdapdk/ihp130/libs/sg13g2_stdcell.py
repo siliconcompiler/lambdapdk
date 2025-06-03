@@ -6,7 +6,7 @@ from lambdapdk.ihp130 import register_ihp130_data_source
 
 def setup():
     '''
-    Nangate open standard cell library for FreePDK45.
+    Standrad cell library for IHP130
     '''
     libname = 'sg13g2_stdcell'
     process = 'ihp130'
