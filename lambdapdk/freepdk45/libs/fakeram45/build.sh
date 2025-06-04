@@ -9,19 +9,17 @@ work_dir=`mktemp -d`
 
 pushd $work_dir
 
-git clone https://github.com/gadfort/bsg_fakeram.git
-pushd bsg_fakeram
-git checkout nangate45
-
-make tools
-
-make run CONFIG=$src_path/fakeram45.cfg
-
 mkdir -p $src_path/lef $src_path/nldm $src_path/verilog
 
-cp results/*/*.lef $src_path/lef
-cp results/*/*.lib $src_path/nldm
-cp results/*/*.v $src_path/verilog
+git clone https://github.com/gadfort/FakeRAM2.0.git
+pushd FakeRAM2.0
+git checkout 82877a8eaf9c09d9034e90bb49521603adfda358
+
+python3 run.py $src_path/fakeram45.cfg --output_dir $work_dir/results
+
+cp $work_dir/results/*/*.lef $src_path/lef
+cp $work_dir/results/*/*.lib $src_path/nldm
+cp $work_dir/results/*/*.v $src_path/verilog
 
 popd
 popd
