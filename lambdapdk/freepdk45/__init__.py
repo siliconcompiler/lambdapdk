@@ -62,7 +62,7 @@ def setup():
                 pdkdir + '/apr/freepdk45.tech.lef')
 
     pdk.set('pdk', process, 'minlayer', stackup, 'metal2')
-    pdk.set('pdk', process, 'maxlayer', stackup, 'metal10')
+    pdk.set('pdk', process, 'maxlayer', stackup, 'metal7')
 
     # Klayout setup file
     pdk.set('pdk', process, 'layermap', 'klayout', 'def', 'klayout', stackup,
