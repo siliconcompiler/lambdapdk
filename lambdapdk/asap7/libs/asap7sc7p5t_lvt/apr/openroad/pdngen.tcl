@@ -28,8 +28,8 @@ proc snap_grid {value} {
     return [ord::dbu_to_microns $val_snapped]
 }
 
-add_pdn_stripe -grid {stdcells} -layer {M7} -width {0.288} -pitch [snap_grid $metal4_pitch] \
-    -offset [snap_grid [expr {$metal4_pitch / 4}]] -snap_to_grid
+add_pdn_stripe -grid {stdcells} -layer {M7} -width {0.288} -pitch [snap_grid $M7_pitch] \
+    -offset [snap_grid [expr {$M7_pitch / 4}]] -snap_to_grid
 
 add_pdn_connect -grid {stdcells} -layers {M1 M2}
 add_pdn_connect -grid {stdcells} -layers {M2 M5}
