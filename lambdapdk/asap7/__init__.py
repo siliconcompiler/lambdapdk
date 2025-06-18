@@ -85,15 +85,15 @@ def setup():
 
     # Openroad global routing grid derating
     openroad_layer_adjustments = {
-        'M1': 1.0,
-        'M2': 0.8,
-        'M3': 0.7,
-        'M4': 0.4,
-        'M5': 0.4,
-        'M6': 0.4,
-        'M7': 0.4,
-        'M8': 0.4,
-        'M9': 0.4,
+        'M1': 0.25,
+        'M2': 0.25,
+        'M3': 0.25,
+        'M4': 0.25,
+        'M5': 0.25,
+        'M6': 0.25,
+        'M7': 0.25,
+        'M8': 0.25,
+        'M9': 0.25,
         'Pad': 1.0
     }
     for layer, adj in openroad_layer_adjustments.items():
