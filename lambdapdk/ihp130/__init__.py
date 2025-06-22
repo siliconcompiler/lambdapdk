@@ -118,6 +118,10 @@ def setup():
         pdk.set('pdk', process, 'pexmodel', 'openroad-openrcx', stackup, corner,
                 lpdkdir + '/pex/openroad/' + corner + '.rules', package='lambdapdk')
 
+    # Fill
+    pdk.set('pdk', process, 'aprtech', 'openroad', stackup, '9t', 'fill',
+            lpdkdir + '/dfm/openroad/fill.json', package='lambdapdk')
+
     # DRC
     drcs = {
         "maximal": 'ihp-sg13g2/libs.tech/klayout/tech/drc/sg13g2_maximal.lydrc',
