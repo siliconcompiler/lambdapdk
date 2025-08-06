@@ -3,7 +3,6 @@ import siliconcompiler.package as sc_package
 
 from siliconcompiler.package import PythonPathResolver
 
-from siliconcompiler import PDKSchema
 from siliconcompiler.tools.klayout import KLayoutPDK
 from siliconcompiler.tools.openroad import OpenROADPDK
 
@@ -26,7 +25,16 @@ class _LambdaPath:
             python_module_path_append="..")
 
 
-class LambdaPDK(KLayoutPDK, OpenROADPDK, PDKSchema, _LambdaPath):
+class LambdaPDK(KLayoutPDK, OpenROADPDK, _LambdaPath):
+    def __init__(self):
+        super().__init__()
+
+
+class LambdaLibrary(YosysStdCellLibrary,
+                    OpenROADStdCellLibrary,
+                    KLayoutLibrary,
+                    BambuStdCellLibrary,
+                    _LambdaPath):
     def __init__(self):
         super().__init__()
 
