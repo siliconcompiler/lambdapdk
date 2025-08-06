@@ -1,7 +1,78 @@
 
 import os
 import siliconcompiler
+
+from pathlib import Path
+
 from lambdapdk import register_data_source
+from lambdapdk import LambdaPDK
+
+
+class Sky130PDK(LambdaPDK):
+    def __init__(self):
+        super().__init__()
+        self.set_name("skywater130")
+
+        self.set_foundry("skywater")
+        self.set_version("v0_0_2")
+        self.set_stackup("5M1LI")
+        self.set_node(130)
+
+        pdk_path = Path("lambdapdk", "sky130", "base")
+
+        with self.active_dataroot("lambdapdk"):
+            # APR Setup
+            with self.active_fileset("views.lef"):
+                self.add_file(pdk_path / "apr" / "sky130_fd_sc.tlef")
+                for tool in ('openroad', 'klayout', 'magic'):
+                    self.add_aprtechfileset(tool)
+
+            # DRC Runset
+            with self.active_fileset("magic.drc"):
+                self.add_file(pdk_path / "setup" / "magic" / "sky130A.tech")
+                self.add_runsetfileset("drc", "magic", "basic")
+
+            # LVS Runset
+            with self.active_fileset("magic.drc"):
+                self.add_file(pdk_path / "setup" / "netgen" / "lvs_setup.tech")
+                self.add_runsetfileset("lvs", "netgen", "basic")
+
+        self.set_aprroutinglayers(min="met1", max="met5")
+
+        # Klayout setup
+        with self.active_fileset("lambdapdk"):
+            with self.active_fileset("klayout.techmap"):
+                self.add_file(pdk_path / "setup" / "klayout" / "skywater130.lyt", filetype="layermap")
+                self.add_file(pdk_path / "setup" / "klayout" / "sky130A.lyp", filetype="display")
+                self.add_layermapfileset("klayout", "def", "klayout")
+                self.add_displayfileset("klayout")
+        # Hide the 81/4 'areaid.standardc' layer by default; it puts opaque purple over most core areas.
+        self.add_klayout_hidelayers('areaid.standardc')
+
+        # OpenROAD setup
+        self.set_openroad_rclayers(signal="metal3", clock="metal5")
+
+        # OpenROAD global routing grid derating
+        for layer, derate in [
+                ('li1', 1.0),
+                ('met1', 0.40),
+                ('met2', 0.40),
+                ('met3', 0.30),
+                ('met4', 0.30),
+                ('met5', 0.30)]:
+            self.set_openroad_globalroutingderating(layer, derate)
+
+        self.add_openroad_pinlayers(vertical="met2", horizontal="met3")
+
+        # OpenROAD PEX
+        with self.active_dataroot("lambdapdk"):
+            for corner in ["minimum", "typical", "maximum"]:
+                with self.active_fileset(f"openroad.pex.{corner}"):
+                    self.add_file(pdk_path / "pex" / "openroad" / f"{corner}.tcl", filetype="tcl")
+                    self.add_file(pdk_path / "pex" / "openroad" / f"{corner}.rules", filetype="openrcx")
+
+                    self.add_pexmodelfileset("openroad", corner)
+                    self.add_pexmodelfileset("openroad-openrcx", corner)
 
 
 ####################################################

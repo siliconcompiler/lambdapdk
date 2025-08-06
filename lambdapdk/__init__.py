@@ -1,8 +1,34 @@
 import os.path
 import siliconcompiler.package as sc_package
 
+from siliconcompiler.package import PythonPathResolver
+
+from siliconcompiler import PDKSchema
+from siliconcompiler.tools.klayout import KLayoutPDK
+from siliconcompiler.tools.openroad import OpenROADPDK
+
+from siliconcompiler.tools.yosys import YosysStdCellLibrary
+from siliconcompiler.tools.openroad import OpenROADStdCellLibrary
+from siliconcompiler.tools.bambu import BambuStdCellLibrary
+from siliconcompiler.tools.klayout import KLayoutLibrary
 
 __version__ = "0.1.56"
+
+
+class _LambdaPath:
+    def __init__(self):
+        PythonPathResolver.set_dataroot(
+            self,
+            "lambdapdk",
+            "lambdapdk",
+            "https://github.com/siliconcompiler/lambdapdk/archive/refs/tags/",
+            alternative_ref=f"v{__version__}",
+            python_module_path_append="..")
+
+
+class LambdaPDK(KLayoutPDK, OpenROADPDK, PDKSchema, _LambdaPath):
+    def __init__(self):
+        super().__init__()
 
 
 def register_data_source(chip):
