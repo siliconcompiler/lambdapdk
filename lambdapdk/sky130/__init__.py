@@ -23,18 +23,18 @@ class Sky130PDK(LambdaPDK):
         with self.active_dataroot("lambdapdk"):
             # APR Setup
             with self.active_fileset("views.lef"):
-                self.add_file(pdk_path / "apr" / "sky130_fd_sc.tlef")
+                self.add_file(pdk_path / "apr" / "sky130_fd_sc.tlef", filetype="lef")
                 for tool in ('openroad', 'klayout', 'magic'):
                     self.add_aprtechfileset(tool)
 
             # DRC Runset
             with self.active_fileset("magic.drc"):
-                self.add_file(pdk_path / "setup" / "magic" / "sky130A.tech")
+                self.add_file(pdk_path / "setup" / "magic" / "sky130A.tech", filetype="tech")
                 self.add_runsetfileset("drc", "magic", "basic")
 
             # LVS Runset
-            with self.active_fileset("magic.drc"):
-                self.add_file(pdk_path / "setup" / "netgen" / "lvs_setup.tech")
+            with self.active_fileset("netgen.lvs"):
+                self.add_file(pdk_path / "setup" / "netgen" / "lvs_setup.tcl", filetype="tcl")
                 self.add_runsetfileset("lvs", "netgen", "basic")
 
         self.set_aprroutinglayers(min="met1", max="met5")

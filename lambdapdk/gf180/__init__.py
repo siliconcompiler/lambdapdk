@@ -34,6 +34,7 @@ class _GF180PDK(LambdaPDK):
                 with self.active_fileset("layermap"):
                     self.add_file(pdk_path / "apr" / f"gf180mcu_{stackup}_9t_edi2gds.layermap",
                                   filetype="layermap")
+                    self.add_layermapfileset("klayout", "def", "gds")
 
             with self.active_fileset("models.spice"):
                 self.add_file(pdk_path / "spice" / "xyce" / "design.xyce", filetype="xyce")
@@ -44,8 +45,6 @@ class _GF180PDK(LambdaPDK):
         self.set_aprroutinglayers(min="Metal1", max=f"Metal{max_layer}")
 
         # Klayout setup
-        self.add_layermapfileset("klayout", "def", "gds", "layermap")
-
         with self.active_fileset("lambdapdk"), self.active_fileset("klayout.techmap"):
             self.add_file(pdk_path / "setup" / "klayout" / "tech" / "gf180mcu.lyt",
                           filetype="layermap")

@@ -1,4 +1,5 @@
 import os.path
+from siliconcompiler.pathschema import PathSchema
 import siliconcompiler.package as sc_package
 
 from siliconcompiler.package import PythonPathResolver
@@ -14,8 +15,9 @@ from siliconcompiler.tools.klayout import KLayoutLibrary
 __version__ = "0.1.56"
 
 
-class _LambdaPath:
+class _LambdaPath(PathSchema):
     def __init__(self):
+        super().__init__()
         PythonPathResolver.set_dataroot(
             self,
             "lambdapdk",

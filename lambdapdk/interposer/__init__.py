@@ -34,7 +34,7 @@ class _Interposer(LambdaPDK):
         with self.active_dataroot("lambdapdk"):
             # Klayout setup file
             with self.active_fileset("klayout.techmap"):
-                self.add_file(pdk_path / "setup" / "klayout" / "asap7.lyp", filetype="display")
+                self.add_file(pdk_path / "setup" / "klayout" / f"{stackup}.lyp", filetype="display")
                 self.add_displayfileset("klayout")
             self.add_layermapfileset("klayout", "def", "gds", fileset="layermap")
 
@@ -61,8 +61,8 @@ class _Interposer(LambdaPDK):
         with self.active_dataroot("lambdapdk"):
             with self.active_fileset("openroad.fill"):
                 self.add_file(pdk_path / "dfm" / "openroad" / f"{stackup}.fill.json",
-                              filetype="json")
-                self.add_aprtechfileset("openroad", "fill")
+                              filetype="fill")
+                self.add_aprtechfileset("openroad")
 
             # PEX
             for corner in ["minimum", "typical", "maximum"]:

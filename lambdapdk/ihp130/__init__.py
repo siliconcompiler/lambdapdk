@@ -27,8 +27,8 @@ class IHP130PDK(LambdaPDK):
 
         # Docs
         with self.active_dataroot("ihp130"):
-            self.add_doc("overview", "ihp-sg13g2/libs.doc/doc/SG13G2_os_process_spec.pdf")
-            self.add_doc("drc_rules", "ihp-sg13g2/libs.doc/doc/SG13G2_os_layout_rules.pdf")
+            self.add_doc("quickstart", "ihp-sg13g2/libs.doc/doc/SG13G2_os_process_spec.pdf")
+            self.add_doc("signoff", "ihp-sg13g2/libs.doc/doc/SG13G2_os_layout_rules.pdf")
 
         with self.active_dataroot("ihp130"):
             # APR Setup
@@ -82,14 +82,15 @@ class IHP130PDK(LambdaPDK):
             "maximal": 'ihp-sg13g2/libs.tech/klayout/tech/drc/sg13g2_maximal.lydrc',
             "minimal": 'ihp-sg13g2/libs.tech/klayout/tech/drc/sg13g2_minimal.lydrc'
         }
-        for drc, runset in drcs.items():
-            with self.active_fileset(f"klayout.drc.{drc}"):
-                self.add_file(runset, filetype="drc")
-                self.add_runsetfileset("drc", "klayout", drc)
+        with self.active_dataroot("ihp130"):
+            for drc, runset in drcs.items():
+                with self.active_fileset(f"klayout.drc.{drc}"):
+                    self.add_file(runset, filetype="drc")
+                    self.add_runsetfileset("drc", "klayout", drc)
 
-            self.add_klayout_drcparam(drc, "in_gds=<input>")
-            self.add_klayout_drcparam(drc, "cell=<topcell>")
-            self.add_klayout_drcparam(drc, "report_file=<report>")
+                self.add_klayout_drcparam(drc, "in_gds=<input>")
+                self.add_klayout_drcparam(drc, "cell=<topcell>")
+                self.add_klayout_drcparam(drc, "report_file=<report>")
 
 
 def register_ihp130_data_source(chip):

@@ -68,7 +68,7 @@ class ASAP7PDK(LambdaPDK):
 
             with self.active_fileset("openroad.routing"):
                 # Relaxed routing rules
-                self.add_file(pdk_path / "apr" / "openroad_relaxed_rules.tcl")
+                self.add_file(pdk_path / "apr" / "openroad_relaxed_rules.tcl", filetype="tcl")
 
             # PEX
             with self.active_fileset("openroad.pex"):
