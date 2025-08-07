@@ -49,13 +49,13 @@ class _Sky130_SCLibrary(LambdaLibrary):
 
             # clock buffers
             self.add_asic_celllist('clkbuf', [f'sky130_fd_sc_{libtype}__clkbuf_1',
-                                                f'sky130_fd_sc_{libtype}__clkbuf_2',
-                                                f'sky130_fd_sc_{libtype}__clkbuf_4',
-                                                f'sky130_fd_sc_{libtype}__clkbuf_8',
-                                                f'sky130_fd_sc_{libtype}__clkbuf_16'])
+                                              f'sky130_fd_sc_{libtype}__clkbuf_2',
+                                              f'sky130_fd_sc_{libtype}__clkbuf_4',
+                                              f'sky130_fd_sc_{libtype}__clkbuf_8',
+                                              f'sky130_fd_sc_{libtype}__clkbuf_16'])
             if libtype == "hdll":
                 self.add_asic_celllist('clkbuf', [f'sky130_fd_sc_{libtype}__clkbuf_6',
-                                                    f'sky130_fd_sc_{libtype}__clkbuf_12'])
+                                                  f'sky130_fd_sc_{libtype}__clkbuf_12'])
 
             # hold cells
             self.add_asic_celllist('hold', [f'sky130_fd_sc_{libtype}__dlygate4sd1_1',
@@ -68,9 +68,9 @@ class _Sky130_SCLibrary(LambdaLibrary):
 
             # filler
             self.add_asic_celllist('filler', [f'sky130_fd_sc_{libtype}__fill_1',
-                                                f'sky130_fd_sc_{libtype}__fill_2',
-                                                f'sky130_fd_sc_{libtype}__fill_4',
-                                                f'sky130_fd_sc_{libtype}__fill_8'])
+                                              f'sky130_fd_sc_{libtype}__fill_2',
+                                              f'sky130_fd_sc_{libtype}__fill_4',
+                                              f'sky130_fd_sc_{libtype}__fill_8'])
 
             # Tapcell
             self.add_asic_celllist('tap', f'sky130_fd_sc_{libtype}__tapvpwrvgnd_1')

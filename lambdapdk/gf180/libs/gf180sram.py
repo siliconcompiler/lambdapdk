@@ -3,7 +3,7 @@ from lambdapdk import register_data_source
 
 from pathlib import Path
 
-from lambdapdk import LambdaLibrary
+from lambdapdk import LambdaLibrary, _LambdaPath, LambalibTechLibrary
 from lambdapdk.gf180 import GF180_3LM_1TM_6K_7t, \
     GF180_3LM_1TM_6K_9t, \
     GF180_3LM_1TM_9K_7t, \
@@ -102,6 +102,25 @@ class GF180_SRAM_256x8(_GF180SRAMLibrary):
 class GF180_SRAM_512x8(_GF180SRAMLibrary):
     def __init__(self):
         super().__init__("512x8")
+
+
+class GF180Lambdalib_SinglePort(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_spram", [
+            GF180_SRAM_64x8,
+            GF180_SRAM_128x8,
+            GF180_SRAM_256x8,
+            GF180_SRAM_512x8])
+        self.set_name("gf180_la_spram")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_ip_sram")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_spram.v")
 
 
 def setup():

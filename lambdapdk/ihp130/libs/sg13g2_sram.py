@@ -4,7 +4,7 @@ from lambdapdk.ihp130 import register_ihp130_data_source
 
 from pathlib import Path
 
-from lambdapdk import LambdaLibrary
+from lambdapdk import LambdaLibrary, _LambdaPath, LambalibTechLibrary
 from lambdapdk.ihp130 import IHP130PDK, _IHP130Path
 
 
@@ -74,6 +74,27 @@ class IHP130_SRAM_512x64(_IHP130SRAMLibrary):
 class IHP130_SRAM_64x64(_IHP130SRAMLibrary):
     def __init__(self):
         super().__init__("64x64")
+
+
+class IHP130Lambdalib_SinglePort(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_spram", [
+            IHP130_SRAM_1024x64,
+            IHP130_SRAM_2048x64,
+            IHP130_SRAM_256x48,
+            IHP130_SRAM_256x64,
+            IHP130_SRAM_512x64,
+            IHP130_SRAM_64x64])
+        self.set_name("ihp130_la_spram")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "ihp130", "libs", "sg13g2_sram")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_spram.v")
 
 
 def setup():

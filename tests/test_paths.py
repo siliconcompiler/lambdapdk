@@ -106,17 +106,19 @@ from lambdapdk.gf180.libs.gf180mcu import GF180_MCU_7T_3LMLibrary, \
 from lambdapdk.gf180.libs.gf180sram import GF180_SRAM_64x8, \
     GF180_SRAM_128x8, \
     GF180_SRAM_256x8, \
-    GF180_SRAM_512x8
+    GF180_SRAM_512x8, \
+    GF180Lambdalib_SinglePort
 from lambdapdk.ihp130.libs.sg13g2_io import IHP130_IO_1p2, IHP130_IO_1p5
 from lambdapdk.ihp130.libs.sg13g2_sram import \
     IHP130_SRAM_1024x64, IHP130_SRAM_2048x64, \
     IHP130_SRAM_256x48, IHP130_SRAM_256x64, \
-    IHP130_SRAM_512x64, IHP130_SRAM_64x64
+    IHP130_SRAM_512x64, IHP130_SRAM_64x64, \
+    IHP130Lambdalib_SinglePort
 from lambdapdk.ihp130.libs.sg13g2_stdcell import IHP130StdCell_1p2, IHP130StdCell_1p5
 from lambdapdk.interposer.libs.bumps import BumpLibrary
 from lambdapdk.sky130.libs.sky130io import Sky130_IOLibrary
 from lambdapdk.sky130.libs.sky130sc import Sky130_SCHDLibrary, Sky130_SCHDLLLibrary
-from lambdapdk.sky130.libs.sky130sram import Sky130_SRAM_64x256
+from lambdapdk.sky130.libs.sky130sram import Sky130_SRAM_64x256, Sky130Lambdalib_SinglePort
 
 
 @pytest.mark.parametrize('pdk', [
@@ -265,14 +267,16 @@ def test_new_pdks(pdk):
     GF180_SRAM_128x8,
     GF180_SRAM_256x8,
     GF180_SRAM_512x8,
+    GF180Lambdalib_SinglePort,
     IHP130_IO_1p2, IHP130_IO_1p5,
     IHP130_SRAM_1024x64, IHP130_SRAM_2048x64,
     IHP130_SRAM_256x48, IHP130_SRAM_256x64,
     IHP130_SRAM_512x64, IHP130_SRAM_64x64,
+    IHP130Lambdalib_SinglePort,
     IHP130StdCell_1p2, IHP130StdCell_1p5,
     BumpLibrary,
     Sky130_IOLibrary,
     Sky130_SCHDLibrary, Sky130_SCHDLLLibrary,
-    Sky130_SRAM_64x256])
+    Sky130_SRAM_64x256, Sky130Lambdalib_SinglePort])
 def test_new_libs(lib):
     assert lib().check_filepaths()
