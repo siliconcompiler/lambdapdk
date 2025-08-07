@@ -4,6 +4,8 @@ import siliconcompiler.package as sc_package
 
 from siliconcompiler.package import PythonPathResolver
 
+from siliconcompiler import DesignSchema
+
 from siliconcompiler.tools.klayout import KLayoutPDK
 from siliconcompiler.tools.openroad import OpenROADPDK
 
@@ -39,6 +41,24 @@ class LambdaLibrary(YosysStdCellLibrary,
                     _LambdaPath):
     def __init__(self):
         super().__init__()
+
+
+class LambalibTechLibrary(DesignSchema):
+    def __init__(self, lambdalib, techlibs):
+        super().__init__()
+
+        self.__cell = lambdalib
+        self.__techlibs = techlibs
+
+    def alias(self, project):
+        if self.__cell not in project.getkeys("library"):
+            return
+
+        project.add_alias(self.__cell, "rtl", self, "rtl")
+
+        if self.__techlibs and project.__class__.__name__ == "ASICProject":
+            for lib in self.__techlibs:
+                project.add_asiclib(lib())
 
 
 def register_data_source(chip):

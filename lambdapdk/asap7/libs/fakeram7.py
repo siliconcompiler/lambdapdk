@@ -3,7 +3,7 @@ from lambdapdk import register_data_source
 
 from pathlib import Path
 
-from lambdapdk import LambdaLibrary, _LambdaPath
+from lambdapdk import LambdaLibrary, _LambdaPath, LambalibTechLibrary
 from lambdapdk.asap7 import ASAP7PDK
 
 
@@ -182,10 +182,25 @@ class FakeRAM7_sp_8192x64(_FakeRAM7Library):
         super().__init__("sp_8192x64")
 
 
-class FakeRAM7Lambdalib(DesignSchema, _LambdaPath):
+class FakeRAM7Lambdalib_SinglePort(LambalibTechLibrary, _LambdaPath):
     def __init__(self):
-        super().__init__()
-        self.set_name("fakeram7_lambdaramlib")
+        super().__init__("la_spram", [
+            FakeRAM7_sp_64x32,
+            FakeRAM7_sp_128x32,
+            FakeRAM7_sp_256x32,
+            FakeRAM7_sp_256x64,
+            FakeRAM7_sp_512x32,
+            FakeRAM7_sp_512x64,
+            FakeRAM7_sp_512x128,
+            FakeRAM7_sp_1024x32,
+            FakeRAM7_sp_1024x64,
+            FakeRAM7_sp_2048x32,
+            FakeRAM7_sp_2048x64,
+            FakeRAM7_sp_4096x32,
+            FakeRAM7_sp_4096x64,
+            FakeRAM7_sp_8192x32,
+            FakeRAM7_sp_8192x64])
+        self.set_name("fakeram7_la_spram")
 
         # version
         self.set_version("v1")
@@ -195,6 +210,36 @@ class FakeRAM7Lambdalib(DesignSchema, _LambdaPath):
         with self.active_dataroot("lambdapdk"):
             with self.active_fileset("rtl"):
                 self.add_file(lib_path / "lambda" / "la_spram.v")
+
+
+class FakeRAM7Lambdalib_DoublePort(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_dpram", [
+            FakeRAM7_dp_64x32,
+            FakeRAM7_dp_128x32,
+            FakeRAM7_dp_256x32,
+            FakeRAM7_dp_256x64,
+            FakeRAM7_dp_512x32,
+            FakeRAM7_dp_512x64,
+            FakeRAM7_dp_512x128,
+            FakeRAM7_dp_1024x32,
+            FakeRAM7_dp_1024x64,
+            FakeRAM7_dp_2048x32,
+            FakeRAM7_dp_2048x64,
+            FakeRAM7_dp_4096x32,
+            FakeRAM7_dp_4096x64,
+            FakeRAM7_dp_8192x32,
+            FakeRAM7_dp_8192x64])
+        self.set_name("fakeram7_la_dpram")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "asap7", "libs", "fakeram7")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_dpram.v")
 
 
 def setup():

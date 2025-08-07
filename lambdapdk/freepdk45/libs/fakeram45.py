@@ -1,9 +1,9 @@
-from siliconcompiler import Library, DesignSchema
+from siliconcompiler import Library
 from lambdapdk import register_data_source
 
 from pathlib import Path
 
-from lambdapdk import LambdaLibrary, _LambdaPath
+from lambdapdk import LambdaLibrary, _LambdaPath, LambalibTechLibrary
 from lambdapdk.freepdk45 import FreePDK45PDK
 
 
@@ -62,10 +62,16 @@ class FakeRAM45_512x64(_FakeRAM45Library):
         super().__init__("512x64")
 
 
-class FakeRAM45Lambdalib(DesignSchema, _LambdaPath):
+class FakeRAM45Lambdalib_SinglePort(LambalibTechLibrary, _LambdaPath):
     def __init__(self):
-        super().__init__()
-        self.set_name("fakeram45_lambdaramlib")
+        super().__init__("la_spram", [
+            FakeRAM45_64x32,
+            FakeRAM45_128x32,
+            FakeRAM45_256x32,
+            FakeRAM45_256x64,
+            FakeRAM45_512x32,
+            FakeRAM45_512x64])
+        self.set_name("fakeram45_la_spram")
 
         # version
         self.set_version("v1")

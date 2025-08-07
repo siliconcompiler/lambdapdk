@@ -82,7 +82,9 @@ from lambdapdk.asap7.libs.fakeram7 import \
     FakeRAM7_dp_8192x32, \
     FakeRAM7_sp_8192x32, \
     FakeRAM7_dp_8192x64, \
-    FakeRAM7_sp_8192x64
+    FakeRAM7_sp_8192x64, \
+    FakeRAM7Lambdalib_SinglePort, \
+    FakeRAM7Lambdalib_DoublePort
 from lambdapdk.freepdk45.libs.nangate45 import Nangate45
 from lambdapdk.freepdk45.libs.fakeram45 import \
     FakeRAM45_64x32, \
@@ -90,7 +92,8 @@ from lambdapdk.freepdk45.libs.fakeram45 import \
     FakeRAM45_256x32, \
     FakeRAM45_256x64, \
     FakeRAM45_512x32, \
-    FakeRAM45_512x64
+    FakeRAM45_512x64, \
+    FakeRAM45Lambdalib_SinglePort
 from lambdapdk.gf180.libs.gf180io import GF180_IO_3LM, GF180_IO_4LM, GF180_IO_5LM
 from lambdapdk.gf180.libs.gf180mcu import GF180_MCU_7T_3LMLibrary, \
     GF180_MCU_7T_4LMLibrary, \
@@ -239,6 +242,8 @@ def test_new_pdks(pdk):
     FakeRAM7_sp_8192x32,
     FakeRAM7_dp_8192x64,
     FakeRAM7_sp_8192x64,
+    FakeRAM7Lambdalib_SinglePort,
+    FakeRAM7Lambdalib_DoublePort,
     Nangate45,
     FakeRAM45_64x32,
     FakeRAM45_128x32,
@@ -246,6 +251,7 @@ def test_new_pdks(pdk):
     FakeRAM45_256x64,
     FakeRAM45_512x32,
     FakeRAM45_512x64,
+    FakeRAM45Lambdalib_SinglePort,
     GF180_IO_3LM, GF180_IO_4LM, GF180_IO_5LM,
     GF180_MCU_7T_3LMLibrary,
     GF180_MCU_7T_4LMLibrary,
