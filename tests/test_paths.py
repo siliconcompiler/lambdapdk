@@ -110,6 +110,10 @@ from lambdapdk.ihp130.libs.sg13g2_sram import \
     IHP130_SRAM_256x48, IHP130_SRAM_256x64, \
     IHP130_SRAM_512x64, IHP130_SRAM_64x64
 from lambdapdk.ihp130.libs.sg13g2_stdcell import IHP130StdCell_1p2, IHP130StdCell_1p5
+from lambdapdk.interposer.libs.bumps import BumpLibrary
+from lambdapdk.sky130.libs.sky130io import Sky130_IOLibrary
+from lambdapdk.sky130.libs.sky130sc import Sky130_SCHDLibrary, Sky130_SCHDLLLibrary
+from lambdapdk.sky130.libs.sky130sram import Sky130_SRAM_64x256
 
 
 @pytest.mark.parametrize('pdk', [
@@ -259,7 +263,10 @@ def test_new_pdks(pdk):
     IHP130_SRAM_1024x64, IHP130_SRAM_2048x64,
     IHP130_SRAM_256x48, IHP130_SRAM_256x64,
     IHP130_SRAM_512x64, IHP130_SRAM_64x64,
-    IHP130StdCell_1p2, IHP130StdCell_1p5
-                                 ])
+    IHP130StdCell_1p2, IHP130StdCell_1p5,
+    BumpLibrary,
+    Sky130_IOLibrary,
+    Sky130_SCHDLibrary, Sky130_SCHDLLLibrary,
+    Sky130_SRAM_64x256])
 def test_new_libs(lib):
     assert lib().check_filepaths()
