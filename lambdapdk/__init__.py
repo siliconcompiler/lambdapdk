@@ -50,14 +50,16 @@ class LambalibTechLibrary(DesignSchema):
         self.__cell = lambdalib
         self.__techlibs = techlibs
 
-    def alias(self, project):
-        if self.__cell not in project.getkeys("library"):
+    @classmethod
+    def alias(cls, project):
+        tech = cls()
+        if tech.__cell not in project.getkeys("library"):
             return
 
-        project.add_alias(self.__cell, "rtl", self, "rtl")
+        project.add_alias(tech.__cell, "rtl", tech, "rtl")
 
-        if self.__techlibs and project.__class__.__name__ == "ASICProject":
-            for lib in self.__techlibs:
+        if tech.__techlibs and project.__class__.__name__ == "ASICProject":
+            for lib in tech.__techlibs:
                 project.add_asiclib(lib())
 
 
