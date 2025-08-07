@@ -49,6 +49,62 @@ from lambdapdk.interposer import Interposer_3ML_0400, \
     Interposer_5ML_2000, \
     Interposer_5ML_0400_2000
 
+from lambdapdk.asap7.libs.asap7sc7p5t import ASAP7SC7p5RVT, ASAP7SC7p5SLVT, ASAP7SC7p5LVT
+from lambdapdk.asap7.libs.fakeio7 import FakeIO7Library
+from lambdapdk.asap7.libs.fakekit7 import FakeKit7Library
+from lambdapdk.asap7.libs.fakeram7 import \
+    FakeRAM7_dp_64x32, \
+    FakeRAM7_sp_64x32, \
+    FakeRAM7_dp_128x32, \
+    FakeRAM7_sp_128x32, \
+    FakeRAM7_dp_256x32, \
+    FakeRAM7_sp_256x32, \
+    FakeRAM7_dp_256x64, \
+    FakeRAM7_sp_256x64, \
+    FakeRAM7_dp_512x32, \
+    FakeRAM7_sp_512x32, \
+    FakeRAM7_dp_512x64, \
+    FakeRAM7_sp_512x64, \
+    FakeRAM7_dp_512x128, \
+    FakeRAM7_sp_512x128, \
+    FakeRAM7_dp_1024x32, \
+    FakeRAM7_sp_1024x32, \
+    FakeRAM7_dp_1024x64, \
+    FakeRAM7_sp_1024x64, \
+    FakeRAM7_dp_2048x32, \
+    FakeRAM7_sp_2048x32, \
+    FakeRAM7_dp_2048x64, \
+    FakeRAM7_sp_2048x64, \
+    FakeRAM7_dp_4096x32, \
+    FakeRAM7_sp_4096x32, \
+    FakeRAM7_dp_4096x64, \
+    FakeRAM7_sp_4096x64, \
+    FakeRAM7_dp_8192x32, \
+    FakeRAM7_sp_8192x32, \
+    FakeRAM7_dp_8192x64, \
+    FakeRAM7_sp_8192x64
+from lambdapdk.freepdk45.libs.nangate45 import Nangate45
+from lambdapdk.freepdk45.libs.fakeram45 import \
+    FakeRAM45_64x32, \
+    FakeRAM45_128x32, \
+    FakeRAM45_256x32, \
+    FakeRAM45_256x64, \
+    FakeRAM45_512x32, \
+    FakeRAM45_512x64
+from lambdapdk.gf180.libs.gf180io import GF180_IO_3LM, GF180_IO_4LM, GF180_IO_5LM
+from lambdapdk.gf180.libs.gf180mcu import GF180_MCU_7T_3LMLibrary, \
+    GF180_MCU_7T_4LMLibrary, \
+    GF180_MCU_7T_5LMLibrary, \
+    GF180_MCU_7T_6LMLibrary, \
+    GF180_MCU_9T_3LMLibrary, \
+    GF180_MCU_9T_4LMLibrary, \
+    GF180_MCU_9T_5LMLibrary, \
+    GF180_MCU_9T_6LMLibrary
+from lambdapdk.gf180.libs.gf180sram import GF180_SRAM_64x8, \
+    GF180_SRAM_128x8, \
+    GF180_SRAM_256x8, \
+    GF180_SRAM_512x8
+
 
 @pytest.mark.parametrize('pdk', [
     asap7, freepdk45, sky130, gf180, ihp130,
@@ -138,3 +194,61 @@ def test_symbolic_links():
     Interposer_5ML_0400_2000])
 def test_new_pdks(pdk):
     assert pdk().check_filepaths()
+
+
+@pytest.mark.parametrize("lib", [
+    ASAP7SC7p5RVT, ASAP7SC7p5SLVT, ASAP7SC7p5LVT,
+    FakeIO7Library, FakeKit7Library,
+    FakeRAM7_dp_64x32,
+    FakeRAM7_sp_64x32,
+    FakeRAM7_dp_128x32,
+    FakeRAM7_sp_128x32,
+    FakeRAM7_dp_256x32,
+    FakeRAM7_sp_256x32,
+    FakeRAM7_dp_256x64,
+    FakeRAM7_sp_256x64,
+    FakeRAM7_dp_512x32,
+    FakeRAM7_sp_512x32,
+    FakeRAM7_dp_512x64,
+    FakeRAM7_sp_512x64,
+    FakeRAM7_dp_512x128,
+    FakeRAM7_sp_512x128,
+    FakeRAM7_dp_1024x32,
+    FakeRAM7_sp_1024x32,
+    FakeRAM7_dp_1024x64,
+    FakeRAM7_sp_1024x64,
+    FakeRAM7_dp_2048x32,
+    FakeRAM7_sp_2048x32,
+    FakeRAM7_dp_2048x64,
+    FakeRAM7_sp_2048x64,
+    FakeRAM7_dp_4096x32,
+    FakeRAM7_sp_4096x32,
+    FakeRAM7_dp_4096x64,
+    FakeRAM7_sp_4096x64,
+    FakeRAM7_dp_8192x32,
+    FakeRAM7_sp_8192x32,
+    FakeRAM7_dp_8192x64,
+    FakeRAM7_sp_8192x64,
+    Nangate45,
+    FakeRAM45_64x32,
+    FakeRAM45_128x32,
+    FakeRAM45_256x32,
+    FakeRAM45_256x64,
+    FakeRAM45_512x32,
+    FakeRAM45_512x64,
+    GF180_IO_3LM, GF180_IO_4LM, GF180_IO_5LM,
+    GF180_MCU_7T_3LMLibrary,
+    GF180_MCU_7T_4LMLibrary,
+    GF180_MCU_7T_5LMLibrary,
+    GF180_MCU_7T_6LMLibrary,
+    GF180_MCU_9T_3LMLibrary,
+    GF180_MCU_9T_4LMLibrary,
+    GF180_MCU_9T_5LMLibrary,
+    GF180_MCU_9T_6LMLibrary,
+    GF180_SRAM_64x8,
+    GF180_SRAM_128x8,
+    GF180_SRAM_256x8,
+    GF180_SRAM_512x8
+                                 ])
+def test_new_libs(lib):
+    assert lib().check_filepaths()

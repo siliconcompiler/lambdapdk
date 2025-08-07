@@ -17,7 +17,7 @@ class _ASAP7SC7p5Base(LambdaLibrary):
         self.set_version("28")
 
         # PDK
-        self.set_asic_pdk(ASAP7PDK())
+        self.add_asic_pdk(ASAP7PDK())
 
         # site name
         self.add_asic_site('asap7sc7p5t')

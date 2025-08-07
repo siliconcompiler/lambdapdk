@@ -12,9 +12,9 @@ class _FakeRAM7Library(LambdaLibrary):
         super().__init__()
         self.set_name(f"fakeram7_{config}")
 
-        self.set_asic_pdk(ASAP7PDK())
+        self.add_asic_pdk(ASAP7PDK())
 
-        path_base = Path("lambdapdk" / "asap7" / "libs" / "fakeram7")
+        path_base = Path("lambdapdk", "asap7", "libs", "fakeram7")
 
         with self.active_dataroot("lambdapdk"):
             with self.active_fileset("models.physical"):

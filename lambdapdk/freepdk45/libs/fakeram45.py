@@ -12,9 +12,9 @@ class _FakeRAM45Library(LambdaLibrary):
         super().__init__()
         self.set_name(f"fakeram45_{config}")
 
-        self.set_asic_pdk(FreePDK45PDK())
+        self.add_asic_pdk(FreePDK45PDK())
 
-        path_base = Path("lambdapdk" / "freepdk45" / "libs" / "fakeram45")
+        path_base = Path("lambdapdk", "freepdk45", "libs", "fakeram45")
 
         with self.active_dataroot("lambdapdk"):
             with self.active_fileset("models.physical"):
