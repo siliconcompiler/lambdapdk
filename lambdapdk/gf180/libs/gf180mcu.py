@@ -146,7 +146,7 @@ class _GF180_MCULibrary(LambdaLibrary):
             }
             self.set_yosys_driver_cell(f"gf180mcu_fd_sc_mcu{libtype}5v0__buf_4")
             self.set_yosys_buffer_cell(f"gf180mcu_fd_sc_mcu{libtype}5v0__buf_4", "I", "Z")
-            self.set_yosys_tielow_cell(f"gf180mcu_fd_sc_mcu{libtype}5v0__tiel", "Z")
+            self.set_yosys_tielow_cell(f"gf180mcu_fd_sc_mcu{libtype}5v0__tiel", "ZN")
             self.set_yosys_tiehigh_cell(f"gf180mcu_fd_sc_mcu{libtype}5v0__tieh", "Z")
             self.set_yosys_abc(1000, cap_table[libtype])
             self.set_yosys_tristatebuffer_map(
@@ -157,7 +157,7 @@ class _GF180_MCULibrary(LambdaLibrary):
         # Setup for OpenROAD
         with self.active_dataroot("lambdapdk"):
             self.set_openroad_placement_density(0.50)
-            self.set_openroad_tielow_cell(f"gf180mcu_fd_sc_mcu{libtype}5v0__tiel", "Z")
+            self.set_openroad_tielow_cell(f"gf180mcu_fd_sc_mcu{libtype}5v0__tiel", "ZN")
             self.set_openroad_tiehigh_cell(f"gf180mcu_fd_sc_mcu{libtype}5v0__tieh", "Z")
             self.set_openroad_macro_placement_halo(15, 15)
             self.set_openroad_tapcells_file(lib_path / "apr" / "openroad" / "tapcell.tcl")
