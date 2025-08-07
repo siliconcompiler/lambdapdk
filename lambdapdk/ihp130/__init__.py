@@ -5,13 +5,19 @@ import siliconcompiler
 from pathlib import Path
 
 from lambdapdk import register_data_source
-from lambdapdk import LambdaPDK
+from lambdapdk import LambdaPDK, _LambdaPath
 
 
 pdk_rev = '0854e9bcd558b68c573149038b4c95706314e2f1'
 
 
-class IHP130PDK(LambdaPDK):
+class _IHP130Path(_LambdaPath):
+    def __init__(self):
+        super().__init__()
+        self.set_dataroot("ihp130", "git+https://github.com/IHP-GmbH/IHP-Open-PDK", pdk_rev)
+
+
+class IHP130PDK(LambdaPDK, _IHP130Path):
     def __init__(self):
         super().__init__()
         self.set_name("ihp130")

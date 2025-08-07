@@ -104,6 +104,12 @@ from lambdapdk.gf180.libs.gf180sram import GF180_SRAM_64x8, \
     GF180_SRAM_128x8, \
     GF180_SRAM_256x8, \
     GF180_SRAM_512x8
+from lambdapdk.ihp130.libs.sg13g2_io import IHP130_IO_1p2, IHP130_IO_1p5
+from lambdapdk.ihp130.libs.sg13g2_sram import \
+    IHP130_SRAM_1024x64, IHP130_SRAM_2048x64, \
+    IHP130_SRAM_256x48, IHP130_SRAM_256x64, \
+    IHP130_SRAM_512x64, IHP130_SRAM_64x64
+from lambdapdk.ihp130.libs.sg13g2_stdcell import IHP130StdCell_1p2, IHP130StdCell_1p5
 
 
 @pytest.mark.parametrize('pdk', [
@@ -248,7 +254,12 @@ def test_new_pdks(pdk):
     GF180_SRAM_64x8,
     GF180_SRAM_128x8,
     GF180_SRAM_256x8,
-    GF180_SRAM_512x8
+    GF180_SRAM_512x8,
+    IHP130_IO_1p2, IHP130_IO_1p5,
+    IHP130_SRAM_1024x64, IHP130_SRAM_2048x64,
+    IHP130_SRAM_256x48, IHP130_SRAM_256x64,
+    IHP130_SRAM_512x64, IHP130_SRAM_64x64,
+    IHP130StdCell_1p2, IHP130StdCell_1p5
                                  ])
 def test_new_libs(lib):
     assert lib().check_filepaths()

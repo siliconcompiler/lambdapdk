@@ -4,7 +4,6 @@ from lambdapdk import register_data_source
 from pathlib import Path
 
 from lambdapdk import LambdaLibrary
-from lambdapdk.freepdk45 import FreePDK45PDK
 from lambdapdk.gf180 import GF180_3LM_1TM_6K_7t, \
     GF180_3LM_1TM_6K_9t, \
     GF180_3LM_1TM_9K_7t, \
