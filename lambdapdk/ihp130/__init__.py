@@ -4,7 +4,7 @@ import siliconcompiler
 from lambdapdk import register_data_source
 
 
-pdk_rev = '68eebafcd9b2f5e92c69d37a8d3d90eb266550f5'
+pdk_rev = '0854e9bcd558b68c573149038b4c95706314e2f1'
 
 
 def register_ihp130_data_source(chip):
@@ -108,8 +108,8 @@ def setup():
     pdk.set('pdk', process, 'var', 'openroad', 'rclayer_signal', stackup, 'Metal2')
     pdk.set('pdk', process, 'var', 'openroad', 'rclayer_clock', stackup, 'Metal5')
 
-    pdk.set('pdk', process, 'var', 'openroad', 'pin_layer_vertical', stackup, 'Metal3')
-    pdk.set('pdk', process, 'var', 'openroad', 'pin_layer_horizontal', stackup, 'Metal2')
+    pdk.set('pdk', process, 'var', 'openroad', 'pin_layer_vertical', stackup, 'Metal2')
+    pdk.set('pdk', process, 'var', 'openroad', 'pin_layer_horizontal', stackup, 'Metal3')
 
     # PEX
     for corner in ["typical"]:
