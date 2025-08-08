@@ -108,8 +108,8 @@ def setup():
     pdk.set('pdk', process, 'var', 'openroad', 'rclayer_signal', stackup, 'Metal2')
     pdk.set('pdk', process, 'var', 'openroad', 'rclayer_clock', stackup, 'Metal5')
 
-    pdk.set('pdk', process, 'var', 'openroad', 'pin_layer_vertical', stackup, 'Metal3')
-    pdk.set('pdk', process, 'var', 'openroad', 'pin_layer_horizontal', stackup, 'Metal2')
+    pdk.set('pdk', process, 'var', 'openroad', 'pin_layer_vertical', stackup, 'Metal2')
+    pdk.set('pdk', process, 'var', 'openroad', 'pin_layer_horizontal', stackup, 'Metal3')
 
     # PEX
     for corner in ["typical"]:
