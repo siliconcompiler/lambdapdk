@@ -1,4 +1,3 @@
-from siliconcompiler import Library
 from lambdapdk import register_data_source
 
 from pathlib import Path

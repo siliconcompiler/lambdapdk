@@ -1,4 +1,4 @@
-from siliconcompiler import Library, DesignSchema
+from siliconcompiler import DesignSchema
 from lambdapdk import register_data_source
 
 from pathlib import Path

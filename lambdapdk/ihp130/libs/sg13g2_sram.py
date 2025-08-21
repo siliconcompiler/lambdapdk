@@ -1,4 +1,3 @@
-from siliconcompiler import Chip, Library
 from lambdapdk import register_data_source
 from lambdapdk.ihp130 import register_ihp130_data_source
 
@@ -138,9 +137,3 @@ def setup():
     libs.append(lambda_lib)
 
     return libs
-
-
-#########################
-if __name__ == "__main__":
-    for lib in setup(Chip('<lib>')):
-        lib.write_manifest(f'{lib.top()}.json')

@@ -40,7 +40,7 @@ class Sky130PDK(LambdaPDK):
         self.set_aprroutinglayers(min="met1", max="met5")
 
         # Klayout setup
-        with self.active_fileset("lambdapdk"):
+        with self.active_dataroot("lambdapdk"):
             with self.active_fileset("klayout.techmap"):
                 self.add_file(pdk_path / "setup" / "klayout" / "skywater130.lyt", filetype="layermap")
                 self.add_file(pdk_path / "setup" / "klayout" / "sky130A.lyp", filetype="display")
@@ -50,7 +50,7 @@ class Sky130PDK(LambdaPDK):
         self.add_klayout_hidelayers('areaid.standardc')
 
         # OpenROAD setup
-        self.set_openroad_rclayers(signal="metal3", clock="metal5")
+        self.set_openroad_rclayers(signal="met3", clock="met5")
 
         # OpenROAD global routing grid derating
         for layer, derate in [
