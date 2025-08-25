@@ -68,7 +68,7 @@ def setup():
     for tool in ('openroad', 'klayout', 'magic'):
         for libtype in ('hd', 'hdll'):
             pdk.set('pdk', process, 'aprtech', tool, stackup, libtype, 'lef',
-                    pdkdir + f'/apr/sky130_fd_sc_{libtype}.tlef')
+                    pdkdir + '/apr/sky130_fd_sc.tlef')
 
     pdk.set('pdk', process, 'minlayer', stackup, 'met1')
     pdk.set('pdk', process, 'maxlayer', stackup, 'met5')
