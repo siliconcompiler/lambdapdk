@@ -66,7 +66,7 @@ class _GF180PDK(LambdaPDK):
         self.set_aprroutinglayers(min="Metal1", max=f"Metal{max_layer}")
 
         # Klayout setup
-        with self.active_fileset("lambdapdk"), self.active_fileset("klayout.techmap"):
+        with self.active_dataroot("lambdapdk"), self.active_fileset("klayout.techmap"):
             self.add_file(pdk_path / "setup" / "klayout" / "tech" / "gf180mcu.lyt",
                           filetype="layermap")
             self.add_file(pdk_path / "setup" / "klayout" / "tech" / "gf180mcu.lyp",
@@ -84,7 +84,7 @@ class _GF180PDK(LambdaPDK):
             "density": pdk_path / "setup" / "klayout" / "drc" / "gf180mcu_density.drc"
         }
         for drc, runset in drcs.items():
-            with self.active_fileset(f"klayout.drc.{drc}"):
+            with self.active_dataroot("lambdapdk"), self.active_fileset(f"klayout.drc.{drc}"):
                 self.add_file(runset, filetype="drc")
                 self.add_runsetfileset("drc", "klayout", drc)
 
