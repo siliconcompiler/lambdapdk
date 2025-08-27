@@ -1,6 +1,7 @@
 from pathlib import Path
 
-from lambdapdk import LambdaLibrary, _LambdaPath, LambalibTechLibrary
+from lambdalib import LambalibTechLibrary
+from lambdapdk import LambdaLibrary, _LambdaPath
 from lambdapdk.freepdk45 import FreePDK45PDK
 
 

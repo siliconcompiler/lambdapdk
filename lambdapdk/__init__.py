@@ -3,8 +3,6 @@ from siliconcompiler.pathschema import PathSchema
 
 from siliconcompiler.package import PythonPathResolver
 
-from siliconcompiler import DesignSchema
-
 from siliconcompiler.tools.klayout import KLayoutPDK
 from siliconcompiler.tools.openroad import OpenROADPDK
 
@@ -13,7 +11,7 @@ from siliconcompiler.tools.openroad import OpenROADStdCellLibrary
 from siliconcompiler.tools.bambu import BambuStdCellLibrary
 from siliconcompiler.tools.klayout import KLayoutLibrary
 
-__version__ = "0.1.56"
+__version__ = "0.2.0-rc1"
 
 
 class _LambdaPath(PathSchema):
@@ -40,26 +38,6 @@ class LambdaLibrary(YosysStdCellLibrary,
                     _LambdaPath):
     def __init__(self):
         super().__init__()
-
-
-class LambalibTechLibrary(DesignSchema):
-    def __init__(self, lambdalib, techlibs):
-        super().__init__()
-
-        self.__cell = lambdalib
-        self.__techlibs = techlibs
-
-    @classmethod
-    def alias(cls, project):
-        tech = cls()
-        if tech.__cell not in project.getkeys("library"):
-            return
-
-        project.add_alias(tech.__cell, "rtl", tech, "rtl")
-
-        if tech.__techlibs and project.__class__.__name__ == "ASICProject":
-            for lib in tech.__techlibs:
-                project.add_asiclib(lib())
 
 
 def get_pdks():
