@@ -1,13 +1,9 @@
+from pathlib import Path
 
-import os
-import siliconcompiler
-from lambdapdk import register_data_source
+from lambdapdk import LambdaPDK
 
 
-####################################################
-# PDK Setup
-####################################################
-def setup():
+class FreePDK45PDK(LambdaPDK):
     '''
     The freepdk45 PDK is a virtual PDK derived from the work done at
     NCSU (NCSU_TechLib_FreePDK45.)  It supplies techfiles, display
@@ -24,85 +20,59 @@ def setup():
 
     * https://eda.ncsu.edu/freepdk/freepdk45/
     '''
+    def __init__(self):
+        super().__init__()
+        self.set_name("freepdk45")
 
-    ###############################################
-    # Process
-    ###############################################
+        pdk_path = Path("lambdapdk", "freepdk45", "base")
 
-    foundry = 'virtual'
-    process = 'freepdk45'
-    rev = 'r1p0'
-    stackup = '10M'
-    libtype = '10t'
-    node = 45
-    wafersize = 300
-    hscribe = 0.1
-    vscribe = 0.1
-    edgemargin = 2
-    d0 = 1.25
+        self.set_foundry("virtual")
+        self.set_version("r1p0")
+        self.set_node(45)
+        self.set_stackup("10M")
+        self.set_wafersize(300)
+        self.set_scribewidth(0.1, 0.1)
+        self.set_edgemargin(2)
+        self.set_defectdensity(1.25)
 
-    pdkdir = os.path.join('lambdapdk', 'freepdk45', 'base')
+        with self.active_dataroot("lambdapdk"):
+            # APR Setup
+            with self.active_fileset("views.lef"):
+                self.add_file(pdk_path / "apr" / "freepdk45.tech.lef")
+                for tool in ('openroad', 'klayout', 'magic'):
+                    self.add_aprtechfileset(tool)
 
-    pdk = siliconcompiler.PDK(process, package='lambdapdk')
-    register_data_source(pdk)
+            self.set_aprroutinglayers(min="metal2", max="metal7")
 
-    # process name
-    pdk.set('pdk', process, 'foundry', foundry)
-    pdk.set('pdk', process, 'node', node)
-    pdk.set('pdk', process, 'version', rev)
-    pdk.set('pdk', process, 'stackup', stackup)
-    pdk.set('pdk', process, 'wafersize', wafersize)
-    pdk.set('pdk', process, 'edgemargin', edgemargin)
-    pdk.set('pdk', process, 'scribe', (hscribe, vscribe))
-    pdk.set('pdk', process, 'd0', d0)
+            # Klayout setup file
+            with self.active_fileset("klayout.techmap"):
+                self.add_file(pdk_path / "setup" / "klayout" / "freepdk45.lyt", filetype="layermap")
+                self.add_file(pdk_path / "setup" / "klayout" / "freepdk45.lyp", filetype="display")
+                self.add_layermapfileset("klayout", "def", "klayout")
+                self.add_displayfileset("klayout")
 
-    # APR Setup
-    for tool in ('openroad', 'klayout', 'magic'):
-        pdk.set('pdk', process, 'aprtech', tool, stackup, libtype, 'lef',
-                pdkdir + '/apr/freepdk45.tech.lef')
+            self.set_openroad_rclayers(signal="metal3", clock="metal5")
 
-    pdk.set('pdk', process, 'minlayer', stackup, 'metal2')
-    pdk.set('pdk', process, 'maxlayer', stackup, 'metal7')
+            # Openroad global routing grid derating
+            for layer, derate in [
+                    ('metal1', 1.0),
+                    ('metal2', 0.5),
+                    ('metal3', 0.5),
+                    ('metal4', 0.25),
+                    ('metal5', 0.25),
+                    ('metal6', 0.25),
+                    ('metal7', 0.25),
+                    ('metal8', 0.25),
+                    ('metal9', 0.25),
+                    ('metal10', 0.25)]:
+                self.set_openroad_globalroutingderating(layer, derate)
 
-    # Klayout setup file
-    pdk.set('pdk', process, 'layermap', 'klayout', 'def', 'klayout', stackup,
-            pdkdir + '/setup/klayout/freepdk45.lyt')
+            self.add_openroad_pinlayers(vertical="metal6", horizontal="metal5")
 
-    pdk.set('pdk', process, 'display', 'klayout', stackup, pdkdir + '/setup/klayout/freepdk45.lyp')
+            # PEX
+            with self.active_fileset("openroad.pex"):
+                self.add_file(pdk_path / "pex" / "openroad" / "typical.tcl", filetype="tcl")
+                self.add_file(pdk_path / "pex" / "openroad" / "typical.rules", filetype="openrcx")
 
-    # Openroad global routing grid derating
-    openroad_layer_adjustments = {
-        'metal1': 1.0,
-        'metal2': 0.5,
-        'metal3': 0.5,
-        'metal4': 0.25,
-        'metal5': 0.25,
-        'metal6': 0.25,
-        'metal7': 0.25,
-        'metal8': 0.25,
-        'metal9': 0.25,
-        'metal10': 0.25
-    }
-    for layer, adj in openroad_layer_adjustments.items():
-        pdk.set('pdk', process, 'var', 'openroad', f'{layer}_adjustment', stackup, str(adj))
-
-    pdk.set('pdk', process, 'var', 'openroad', 'rclayer_signal', stackup, 'metal3')
-    pdk.set('pdk', process, 'var', 'openroad', 'rclayer_clock', stackup, 'metal5')
-
-    pdk.set('pdk', process, 'var', 'openroad', 'pin_layer_vertical', stackup, 'metal6')
-    pdk.set('pdk', process, 'var', 'openroad', 'pin_layer_horizontal', stackup, 'metal5')
-
-    # PEX
-    pdk.set('pdk', process, 'pexmodel', 'openroad', stackup, 'typical',
-            pdkdir + '/pex/openroad/typical.tcl')
-    pdk.set('pdk', process, 'pexmodel', 'openroad-openrcx', stackup, 'typical',
-            pdkdir + '/pex/openroad/typical.rules')
-
-    return pdk
-
-
-#########################
-if __name__ == "__main__":
-    pdk = setup()
-    register_data_source(pdk)
-    pdk.check_filepaths()
+                self.add_pexmodelfileset("openroad", "typical")
+                self.add_pexmodelfileset("openroad-openrcx", "typical")
