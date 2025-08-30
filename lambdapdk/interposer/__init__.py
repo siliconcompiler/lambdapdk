@@ -81,7 +81,7 @@ class _Interposer(LambdaPDK):
                 self.add_file(pdk_path / "setup" / "klayout" / f"{stackup}.drc", filetype="drc")
                 self.add_runsetfileset("drc", "klayout", "drc")
 
-            self.add_klayout_drcparam("drc", "in_gds=<input>")
+            self.add_klayout_drcparam("drc", "input=<input>")
             self.add_klayout_drcparam("drc", "topcell=<topcell>")
             self.add_klayout_drcparam("drc", "report=<report>")
             self.add_klayout_drcparam("drc", "threads=<threads>")
