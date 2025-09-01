@@ -19,8 +19,7 @@ class Sky130_IOLibrary(LambdaLibrary):
         with self.active_dataroot("lambdapdk"):
             with self.active_fileset("models.timing.nldm"):
                 self.add_file(path_base / "nldm" / "sky130_dummy_io.lib")
-                for corner_name in ['slow', 'typical', 'fast']:
-                    self.add_asic_libcornerfileset(corner_name, "nldm")
+                self.add_asic_libcornerfileset("generic", "nldm")
 
         with self.active_dataroot("lambdapdk"):
             with self.active_fileset("models.physical"):
