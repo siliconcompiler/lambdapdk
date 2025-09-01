@@ -21,7 +21,7 @@ class _FakeRAM7Library(LambdaLibrary):
 
                 with self.active_fileset("models.timing.nldm"):
                     self.add_file(path_base / "nldm" / f"{self.name}.lib")
-                    self.add_asic_libcornerfileset("typical", "nldm")
+                    self.add_asic_libcornerfileset("generic", "nldm")
 
             self.add_openroad_power_grid_file(path_base / "apr" / "openroad" / "pdngen.tcl")
             self.add_openroad_global_connect_file(

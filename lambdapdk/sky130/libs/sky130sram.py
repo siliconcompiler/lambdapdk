@@ -17,8 +17,7 @@ class Sky130_SRAM_64x256(LambdaLibrary):
         with self.active_dataroot("lambdapdk"):
             with self.active_fileset("models.timing.nldm"):
                 self.add_file(path_base / self.name / "nldm" / f"{self.name}_TT_1p8V_25C.lib")
-                for corner_name in ['slow', 'typical', 'fast']:
-                    self.add_asic_libcornerfileset(corner_name, "nldm")
+                self.add_asic_libcornerfileset("generic", "nldm")
 
         with self.active_dataroot("lambdapdk"):
             with self.active_fileset("models.physical"):
