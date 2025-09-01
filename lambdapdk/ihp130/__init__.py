@@ -72,7 +72,7 @@ class IHP130PDK(LambdaPDK, _IHP130Path):
 
         # OpenROAD setup
         self.set_openroad_rclayers(signal="Metal2", clock="Metal5")
-        self.add_openroad_pinlayers(vertical="Metal3", horizontal="Metal2")
+        self.add_openroad_pinlayers(vertical="Metal2", horizontal="Metal3")
 
         # Openroad global routing grid derating
         openroad_layer_adjustments = {
