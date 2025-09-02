@@ -117,7 +117,6 @@ class _GF180PDK(LambdaPDK):
         self.add_klayout_hidelayers('PR_bndry')
 
         # OpenROAD setup
-
         if max_layer == 3:
             self.set_openroad_rclayers(signal="Metal2", clock="Metal2")
             self.add_openroad_pinlayers(vertical="Metal2", horizontal="Metal3")
@@ -158,8 +157,8 @@ class _GF180PDK(LambdaPDK):
                     self.add_file(pdk_path / "pex" / "openroad" / f"{base_name}.rules",
                                   filetype="openrcx")
 
-                    self.add_pexmodelfileset("openroad", "typical")
-                    self.add_pexmodelfileset("openroad-openrcx", "typical")
+                    self.add_pexmodelfileset("openroad", corner)
+                    self.add_pexmodelfileset("openroad-openrcx", corner)
 
 
 class GF180_3LM_1TM_6K_7t(_GF180PDK):
