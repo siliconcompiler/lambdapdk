@@ -38,6 +38,8 @@ class Sky130_SRAM_64x256(LambdaLibrary):
             self.add_openroad_global_connect_file(
                 path_base / "apr" / "openroad" / "global_connect.tcl")
 
+        self.set_yosys_skip_abc_liberty(True)
+
 
 class Sky130Lambdalib_SinglePort(LambalibTechLibrary, _LambdaPath):
     def __init__(self):
