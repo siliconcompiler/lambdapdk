@@ -31,6 +31,5 @@ add_pdn_stripe -grid {grid} -layer {Metal4} -width {1.600} -pitch [snap_grid $me
     -offset [snap_grid [expr {$metal4_pitch / 4}]]
 add_pdn_stripe -grid {grid} -layer {Metal5} -width {1.600} -pitch [snap_grid $metal5_pitch] \
     -offset [snap_grid [expr {$metal5_pitch / 4}]]
-add_pdn_connect -grid {grid} -layers {Metal1 Metal4} -max_columns {5} \
-    -ongrid {Metal2 Metal3 Metal4}
+add_pdn_connect -grid {grid} -layers {Metal1 Metal4}
 add_pdn_connect -grid {grid} -layers {Metal4 Metal5}
