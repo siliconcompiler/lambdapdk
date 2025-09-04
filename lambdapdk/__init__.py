@@ -140,7 +140,22 @@ def get_libs():
     '''
 
     from lambdapdk.asap7.libs.asap7sc7p5t import ASAP7SC7p5RVT, ASAP7SC7p5SLVT, ASAP7SC7p5LVT
-    from lambdapdk.asap7.libs.fakeio7 import FakeIO7Library
+    from lambdapdk.asap7.libs.fakeio7 import FakeIO7Library, \
+        FakeIO7Lambdalib_la_iovdd, \
+        FakeIO7Lambdalib_la_iopoc, \
+        FakeIO7Lambdalib_la_iocorner, \
+        FakeIO7Lambdalib_la_iotxdiff, \
+        FakeIO7Lambdalib_la_ioanalog, \
+        FakeIO7Lambdalib_la_ioinput, \
+        FakeIO7Lambdalib_la_iocut, \
+        FakeIO7Lambdalib_la_iovss, \
+        FakeIO7Lambdalib_la_iovddio, \
+        FakeIO7Lambdalib_la_iovssio, \
+        FakeIO7Lambdalib_la_iovdda, \
+        FakeIO7Lambdalib_la_iovssa, \
+        FakeIO7Lambdalib_la_ioclamp, \
+        FakeIO7Lambdalib_la_iorxdiff, \
+        FakeIO7Lambdalib_la_iobidir
     from lambdapdk.asap7.libs.fakekit7 import FakeKit7Library
     from lambdapdk.asap7.libs.fakeram7 import \
         FakeRAM7_dp_64x32, \
@@ -184,7 +199,46 @@ def get_libs():
         FakeRAM45_512x32, \
         FakeRAM45_512x64, \
         FakeRAM45Lambdalib_SinglePort
-    from lambdapdk.gf180.libs.gf180io import GF180_IO_3LM, GF180_IO_4LM, GF180_IO_5LM
+    from lambdapdk.gf180.libs.gf180io import GF180_IO_3LM, GF180_IO_4LM, GF180_IO_5LM, \
+        GF180Lambdalib_la_iovdd_3LM, \
+        GF180Lambdalib_la_iocorner_3LM, \
+        GF180Lambdalib_la_iotxdiff_3LM, \
+        GF180Lambdalib_la_ioanalog_3LM, \
+        GF180Lambdalib_la_ioinput_3LM, \
+        GF180Lambdalib_la_iocut_3LM, \
+        GF180Lambdalib_la_iovss_3LM, \
+        GF180Lambdalib_la_iovddio_3LM, \
+        GF180Lambdalib_la_iovssio_3LM, \
+        GF180Lambdalib_la_iovdda_3LM, \
+        GF180Lambdalib_la_iovssa_3LM, \
+        GF180Lambdalib_la_iorxdiff_3LM, \
+        GF180Lambdalib_la_iobidir_3LM, \
+        GF180Lambdalib_la_iovdd_4LM, \
+        GF180Lambdalib_la_iocorner_4LM, \
+        GF180Lambdalib_la_iotxdiff_4LM, \
+        GF180Lambdalib_la_ioanalog_4LM, \
+        GF180Lambdalib_la_ioinput_4LM, \
+        GF180Lambdalib_la_iocut_4LM, \
+        GF180Lambdalib_la_iovss_4LM, \
+        GF180Lambdalib_la_iovddio_4LM, \
+        GF180Lambdalib_la_iovssio_4LM, \
+        GF180Lambdalib_la_iovdda_4LM, \
+        GF180Lambdalib_la_iovssa_4LM, \
+        GF180Lambdalib_la_iorxdiff_4LM, \
+        GF180Lambdalib_la_iobidir_4LM, \
+        GF180Lambdalib_la_iovdd_5LM, \
+        GF180Lambdalib_la_iocorner_5LM, \
+        GF180Lambdalib_la_iotxdiff_5LM, \
+        GF180Lambdalib_la_ioanalog_5LM, \
+        GF180Lambdalib_la_ioinput_5LM, \
+        GF180Lambdalib_la_iocut_5LM, \
+        GF180Lambdalib_la_iovss_5LM, \
+        GF180Lambdalib_la_iovddio_5LM, \
+        GF180Lambdalib_la_iovssio_5LM, \
+        GF180Lambdalib_la_iovdda_5LM, \
+        GF180Lambdalib_la_iovssa_5LM, \
+        GF180Lambdalib_la_iorxdiff_5LM, \
+        GF180Lambdalib_la_iobidir_5LM
     from lambdapdk.gf180.libs.gf180mcu import GF180_MCU_7T_3LMLibrary, \
         GF180_MCU_7T_4LMLibrary, \
         GF180_MCU_7T_5LMLibrary, \
@@ -198,7 +252,31 @@ def get_libs():
         GF180_SRAM_256x8, \
         GF180_SRAM_512x8, \
         GF180Lambdalib_SinglePort
-    from lambdapdk.ihp130.libs.sg13g2_io import IHP130_IO_1p2, IHP130_IO_1p5
+    from lambdapdk.ihp130.libs.sg13g2_io import IHP130_IO_1p2, IHP130_IO_1p5, \
+        IHP130Lambdalib_la_iovdd_1p2, \
+        IHP130Lambdalib_la_iocorner_1p2, \
+        IHP130Lambdalib_la_iotxdiff_1p2, \
+        IHP130Lambdalib_la_ioanalog_1p2, \
+        IHP130Lambdalib_la_ioinput_1p2, \
+        IHP130Lambdalib_la_iovss_1p2, \
+        IHP130Lambdalib_la_iovddio_1p2, \
+        IHP130Lambdalib_la_iovssio_1p2, \
+        IHP130Lambdalib_la_iovdda_1p2, \
+        IHP130Lambdalib_la_iovssa_1p2, \
+        IHP130Lambdalib_la_iorxdiff_1p2, \
+        IHP130Lambdalib_la_iobidir_1p2, \
+        IHP130Lambdalib_la_iovdd_1p5, \
+        IHP130Lambdalib_la_iocorner_1p5, \
+        IHP130Lambdalib_la_iotxdiff_1p5, \
+        IHP130Lambdalib_la_ioanalog_1p5, \
+        IHP130Lambdalib_la_ioinput_1p5, \
+        IHP130Lambdalib_la_iovss_1p5, \
+        IHP130Lambdalib_la_iovddio_1p5, \
+        IHP130Lambdalib_la_iovssio_1p5, \
+        IHP130Lambdalib_la_iovdda_1p5, \
+        IHP130Lambdalib_la_iovssa_1p5, \
+        IHP130Lambdalib_la_iorxdiff_1p5, \
+        IHP130Lambdalib_la_iobidir_1p5
     from lambdapdk.ihp130.libs.sg13g2_sram import \
         IHP130_SRAM_1024x64, IHP130_SRAM_2048x64, \
         IHP130_SRAM_256x48, IHP130_SRAM_256x64, \
@@ -206,7 +284,20 @@ def get_libs():
         IHP130Lambdalib_SinglePort
     from lambdapdk.ihp130.libs.sg13g2_stdcell import IHP130StdCell_1p2, IHP130StdCell_1p5
     from lambdapdk.interposer.libs.bumps import BumpLibrary
-    from lambdapdk.sky130.libs.sky130io import Sky130_IOLibrary
+    from lambdapdk.sky130.libs.sky130io import Sky130_IOLibrary, \
+        Sky130Lambdalib_la_ioanalog, \
+        Sky130Lambdalib_la_iobidir, \
+        Sky130Lambdalib_la_ioclamp, \
+        Sky130Lambdalib_la_iocorner, \
+        Sky130Lambdalib_la_ioinput, \
+        Sky130Lambdalib_la_iorxdiff, \
+        Sky130Lambdalib_la_iotxdiff, \
+        Sky130Lambdalib_la_iovdd, \
+        Sky130Lambdalib_la_iovdda, \
+        Sky130Lambdalib_la_iovddio, \
+        Sky130Lambdalib_la_iovss, \
+        Sky130Lambdalib_la_iovssa, \
+        Sky130Lambdalib_la_iovssio
     from lambdapdk.sky130.libs.sky130sc import Sky130_SCHDLibrary, Sky130_SCHDLLLibrary
     from lambdapdk.sky130.libs.sky130sram import Sky130_SRAM_64x256, Sky130Lambdalib_SinglePort
 
@@ -276,7 +367,98 @@ def get_libs():
         BumpLibrary(),
         Sky130_IOLibrary(),
         Sky130_SCHDLibrary(), Sky130_SCHDLLLibrary(),
-        Sky130_SRAM_64x256(), Sky130Lambdalib_SinglePort()
+        Sky130_SRAM_64x256(), Sky130Lambdalib_SinglePort(),
+        Sky130Lambdalib_la_ioanalog(),
+        Sky130Lambdalib_la_iobidir(),
+        Sky130Lambdalib_la_ioclamp(),
+        Sky130Lambdalib_la_iocorner(),
+        Sky130Lambdalib_la_ioinput(),
+        Sky130Lambdalib_la_iorxdiff(),
+        Sky130Lambdalib_la_iotxdiff(),
+        Sky130Lambdalib_la_iovdd(),
+        Sky130Lambdalib_la_iovdda(),
+        Sky130Lambdalib_la_iovddio(),
+        Sky130Lambdalib_la_iovss(),
+        Sky130Lambdalib_la_iovssa(),
+        Sky130Lambdalib_la_iovssio(),
+        IHP130Lambdalib_la_iovdd_1p2(),
+        IHP130Lambdalib_la_iocorner_1p2(),
+        IHP130Lambdalib_la_iotxdiff_1p2(),
+        IHP130Lambdalib_la_ioanalog_1p2(),
+        IHP130Lambdalib_la_ioinput_1p2(),
+        IHP130Lambdalib_la_iovss_1p2(),
+        IHP130Lambdalib_la_iovddio_1p2(),
+        IHP130Lambdalib_la_iovssio_1p2(),
+        IHP130Lambdalib_la_iovdda_1p2(),
+        IHP130Lambdalib_la_iovssa_1p2(),
+        IHP130Lambdalib_la_iorxdiff_1p2(),
+        IHP130Lambdalib_la_iobidir_1p2(),
+        IHP130Lambdalib_la_iovdd_1p5(),
+        IHP130Lambdalib_la_iocorner_1p5(),
+        IHP130Lambdalib_la_iotxdiff_1p5(),
+        IHP130Lambdalib_la_ioanalog_1p5(),
+        IHP130Lambdalib_la_ioinput_1p5(),
+        IHP130Lambdalib_la_iovss_1p5(),
+        IHP130Lambdalib_la_iovddio_1p5(),
+        IHP130Lambdalib_la_iovssio_1p5(),
+        IHP130Lambdalib_la_iovdda_1p5(),
+        IHP130Lambdalib_la_iovssa_1p5(),
+        IHP130Lambdalib_la_iorxdiff_1p5(),
+        IHP130Lambdalib_la_iobidir_1p5(),
+        GF180Lambdalib_la_iovdd_3LM(),
+        GF180Lambdalib_la_iocorner_3LM(),
+        GF180Lambdalib_la_iotxdiff_3LM(),
+        GF180Lambdalib_la_ioanalog_3LM(),
+        GF180Lambdalib_la_ioinput_3LM(),
+        GF180Lambdalib_la_iocut_3LM(),
+        GF180Lambdalib_la_iovss_3LM(),
+        GF180Lambdalib_la_iovddio_3LM(),
+        GF180Lambdalib_la_iovssio_3LM(),
+        GF180Lambdalib_la_iovdda_3LM(),
+        GF180Lambdalib_la_iovssa_3LM(),
+        GF180Lambdalib_la_iorxdiff_3LM(),
+        GF180Lambdalib_la_iobidir_3LM(),
+        GF180Lambdalib_la_iovdd_4LM(),
+        GF180Lambdalib_la_iocorner_4LM(),
+        GF180Lambdalib_la_iotxdiff_4LM(),
+        GF180Lambdalib_la_ioanalog_4LM(),
+        GF180Lambdalib_la_ioinput_4LM(),
+        GF180Lambdalib_la_iocut_4LM(),
+        GF180Lambdalib_la_iovss_4LM(),
+        GF180Lambdalib_la_iovddio_4LM(),
+        GF180Lambdalib_la_iovssio_4LM(),
+        GF180Lambdalib_la_iovdda_4LM(),
+        GF180Lambdalib_la_iovssa_4LM(),
+        GF180Lambdalib_la_iorxdiff_4LM(),
+        GF180Lambdalib_la_iobidir_4LM(),
+        GF180Lambdalib_la_iovdd_5LM(),
+        GF180Lambdalib_la_iocorner_5LM(),
+        GF180Lambdalib_la_iotxdiff_5LM(),
+        GF180Lambdalib_la_ioanalog_5LM(),
+        GF180Lambdalib_la_ioinput_5LM(),
+        GF180Lambdalib_la_iocut_5LM(),
+        GF180Lambdalib_la_iovss_5LM(),
+        GF180Lambdalib_la_iovddio_5LM(),
+        GF180Lambdalib_la_iovssio_5LM(),
+        GF180Lambdalib_la_iovdda_5LM(),
+        GF180Lambdalib_la_iovssa_5LM(),
+        GF180Lambdalib_la_iorxdiff_5LM(),
+        GF180Lambdalib_la_iobidir_5LM(),
+        FakeIO7Lambdalib_la_iovdd(),
+        FakeIO7Lambdalib_la_iopoc(),
+        FakeIO7Lambdalib_la_iocorner(),
+        FakeIO7Lambdalib_la_iotxdiff(),
+        FakeIO7Lambdalib_la_ioanalog(),
+        FakeIO7Lambdalib_la_ioinput(),
+        FakeIO7Lambdalib_la_iocut(),
+        FakeIO7Lambdalib_la_iovss(),
+        FakeIO7Lambdalib_la_iovddio(),
+        FakeIO7Lambdalib_la_iovssio(),
+        FakeIO7Lambdalib_la_iovdda(),
+        FakeIO7Lambdalib_la_iovssa(),
+        FakeIO7Lambdalib_la_ioclamp(),
+        FakeIO7Lambdalib_la_iorxdiff(),
+        FakeIO7Lambdalib_la_iobidir()
     ])
 
 

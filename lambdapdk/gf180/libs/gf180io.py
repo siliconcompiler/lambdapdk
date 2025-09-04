@@ -1,6 +1,8 @@
 from pathlib import Path
 
-from lambdapdk import LambdaLibrary
+from siliconcompiler import ASICProject
+from lambdalib import LambalibTechLibrary
+from lambdapdk import LambdaLibrary, _LambdaPath
 from lambdapdk.gf180 import GF180_3LM_1TM_6K_7t, \
     GF180_3LM_1TM_6K_9t, \
     GF180_3LM_1TM_9K_7t, \
@@ -106,3 +108,642 @@ class GF180_IO_4LM(_GF180IOLibrary):
 class GF180_IO_5LM(_GF180IOLibrary):
     def __init__(self):
         super().__init__("5LM")
+
+
+class GF180Lambdalib_la_iovdd_3LM(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_iovdd", [GF180_IO_3LM])
+        self.set_name("gf180_la_iovdd")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_iovdd.v")
+
+
+class GF180Lambdalib_la_iocorner_3LM(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_iocorner", [GF180_IO_3LM])
+        self.set_name("gf180_la_iocorner")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_iocorner.v")
+
+
+class GF180Lambdalib_la_iotxdiff_3LM(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_iotxdiff", [GF180_IO_3LM])
+        self.set_name("gf180_la_iotxdiff")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_iotxdiff.v")
+
+
+class GF180Lambdalib_la_ioanalog_3LM(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_ioanalog", [GF180_IO_3LM])
+        self.set_name("gf180_la_ioanalog")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_ioanalog.v")
+
+
+class GF180Lambdalib_la_ioinput_3LM(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_ioinput", [GF180_IO_3LM])
+        self.set_name("gf180_la_ioinput")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_ioinput.v")
+
+
+class GF180Lambdalib_la_iocut_3LM(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_iocut", [GF180_IO_3LM])
+        self.set_name("gf180_la_iocut")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_iocut.v")
+
+
+class GF180Lambdalib_la_iovss_3LM(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_iovss", [GF180_IO_3LM])
+        self.set_name("gf180_la_iovss")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_iovss.v")
+
+
+class GF180Lambdalib_la_iovddio_3LM(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_iovddio", [GF180_IO_3LM])
+        self.set_name("gf180_la_iovddio")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_iovddio.v")
+
+
+class GF180Lambdalib_la_iovssio_3LM(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_iovssio", [GF180_IO_3LM])
+        self.set_name("gf180_la_iovssio")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_iovssio.v")
+
+
+class GF180Lambdalib_la_iovdda_3LM(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_iovdda", [GF180_IO_3LM])
+        self.set_name("gf180_la_iovdda")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_iovdda.v")
+
+
+class GF180Lambdalib_la_iovssa_3LM(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_iovssa", [GF180_IO_3LM])
+        self.set_name("gf180_la_iovssa")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_iovssa.v")
+
+
+class GF180Lambdalib_la_iorxdiff_3LM(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_iorxdiff", [GF180_IO_3LM])
+        self.set_name("gf180_la_iorxdiff")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_iorxdiff.v")
+
+
+class GF180Lambdalib_la_iobidir_3LM(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_iobidir", [GF180_IO_3LM])
+        self.set_name("gf180_la_iobidir")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_iobidir.v")
+
+
+class GF180Lambdalib_IO_3LM(LambalibTechLibrary):
+    @classmethod
+    def alias(cls, project: ASICProject):
+        GF180Lambdalib_la_iovdd_3LM.alias(project)
+        GF180Lambdalib_la_iocorner_3LM.alias(project)
+        GF180Lambdalib_la_iotxdiff_3LM.alias(project)
+        GF180Lambdalib_la_ioanalog_3LM.alias(project)
+        GF180Lambdalib_la_ioinput_3LM.alias(project)
+        GF180Lambdalib_la_iocut_3LM.alias(project)
+        GF180Lambdalib_la_iovss_3LM.alias(project)
+        GF180Lambdalib_la_iovddio_3LM.alias(project)
+        GF180Lambdalib_la_iovssio_3LM.alias(project)
+        GF180Lambdalib_la_iovdda_3LM.alias(project)
+        GF180Lambdalib_la_iovssa_3LM.alias(project)
+        GF180Lambdalib_la_iorxdiff_3LM.alias(project)
+        GF180Lambdalib_la_iobidir_3LM.alias(project)
+
+
+class GF180Lambdalib_la_iovdd_4LM(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_iovdd", [GF180_IO_4LM])
+        self.set_name("gf180_la_iovdd")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_iovdd.v")
+
+
+class GF180Lambdalib_la_iocorner_4LM(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_iocorner", [GF180_IO_4LM])
+        self.set_name("gf180_la_iocorner")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_iocorner.v")
+
+
+class GF180Lambdalib_la_iotxdiff_4LM(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_iotxdiff", [GF180_IO_4LM])
+        self.set_name("gf180_la_iotxdiff")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_iotxdiff.v")
+
+
+class GF180Lambdalib_la_ioanalog_4LM(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_ioanalog", [GF180_IO_4LM])
+        self.set_name("gf180_la_ioanalog")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_ioanalog.v")
+
+
+class GF180Lambdalib_la_ioinput_4LM(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_ioinput", [GF180_IO_4LM])
+        self.set_name("gf180_la_ioinput")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_ioinput.v")
+
+
+class GF180Lambdalib_la_iocut_4LM(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_iocut", [GF180_IO_4LM])
+        self.set_name("gf180_la_iocut")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_iocut.v")
+
+
+class GF180Lambdalib_la_iovss_4LM(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_iovss", [GF180_IO_4LM])
+        self.set_name("gf180_la_iovss")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_iovss.v")
+
+
+class GF180Lambdalib_la_iovddio_4LM(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_iovddio", [GF180_IO_4LM])
+        self.set_name("gf180_la_iovddio")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_iovddio.v")
+
+
+class GF180Lambdalib_la_iovssio_4LM(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_iovssio", [GF180_IO_4LM])
+        self.set_name("gf180_la_iovssio")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_iovssio.v")
+
+
+class GF180Lambdalib_la_iovdda_4LM(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_iovdda", [GF180_IO_4LM])
+        self.set_name("gf180_la_iovdda")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_iovdda.v")
+
+
+class GF180Lambdalib_la_iovssa_4LM(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_iovssa", [GF180_IO_4LM])
+        self.set_name("gf180_la_iovssa")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_iovssa.v")
+
+
+class GF180Lambdalib_la_iorxdiff_4LM(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_iorxdiff", [GF180_IO_4LM])
+        self.set_name("gf180_la_iorxdiff")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_iorxdiff.v")
+
+
+class GF180Lambdalib_la_iobidir_4LM(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_iobidir", [GF180_IO_4LM])
+        self.set_name("gf180_la_iobidir")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_iobidir.v")
+
+
+class GF180Lambdalib_IO_4LM(LambalibTechLibrary):
+    @classmethod
+    def alias(cls, project: ASICProject):
+        GF180Lambdalib_la_iovdd_4LM.alias(project)
+        GF180Lambdalib_la_iocorner_4LM.alias(project)
+        GF180Lambdalib_la_iotxdiff_4LM.alias(project)
+        GF180Lambdalib_la_ioanalog_4LM.alias(project)
+        GF180Lambdalib_la_ioinput_4LM.alias(project)
+        GF180Lambdalib_la_iocut_4LM.alias(project)
+        GF180Lambdalib_la_iovss_4LM.alias(project)
+        GF180Lambdalib_la_iovddio_4LM.alias(project)
+        GF180Lambdalib_la_iovssio_4LM.alias(project)
+        GF180Lambdalib_la_iovdda_4LM.alias(project)
+        GF180Lambdalib_la_iovssa_4LM.alias(project)
+        GF180Lambdalib_la_iorxdiff_4LM.alias(project)
+        GF180Lambdalib_la_iobidir_4LM.alias(project)
+
+
+class GF180Lambdalib_la_iovdd_5LM(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_iovdd", [GF180_IO_5LM])
+        self.set_name("gf180_la_iovdd")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_iovdd.v")
+
+
+class GF180Lambdalib_la_iocorner_5LM(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_iocorner", [GF180_IO_5LM])
+        self.set_name("gf180_la_iocorner")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_iocorner.v")
+
+
+class GF180Lambdalib_la_iotxdiff_5LM(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_iotxdiff", [GF180_IO_5LM])
+        self.set_name("gf180_la_iotxdiff")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_iotxdiff.v")
+
+
+class GF180Lambdalib_la_ioanalog_5LM(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_ioanalog", [GF180_IO_5LM])
+        self.set_name("gf180_la_ioanalog")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_ioanalog.v")
+
+
+class GF180Lambdalib_la_ioinput_5LM(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_ioinput", [GF180_IO_5LM])
+        self.set_name("gf180_la_ioinput")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_ioinput.v")
+
+
+class GF180Lambdalib_la_iocut_5LM(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_iocut", [GF180_IO_5LM])
+        self.set_name("gf180_la_iocut")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_iocut.v")
+
+
+class GF180Lambdalib_la_iovss_5LM(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_iovss", [GF180_IO_5LM])
+        self.set_name("gf180_la_iovss")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_iovss.v")
+
+
+class GF180Lambdalib_la_iovddio_5LM(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_iovddio", [GF180_IO_5LM])
+        self.set_name("gf180_la_iovddio")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_iovddio.v")
+
+
+class GF180Lambdalib_la_iovssio_5LM(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_iovssio", [GF180_IO_5LM])
+        self.set_name("gf180_la_iovssio")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_iovssio.v")
+
+
+class GF180Lambdalib_la_iovdda_5LM(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_iovdda", [GF180_IO_5LM])
+        self.set_name("gf180_la_iovdda")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_iovdda.v")
+
+
+class GF180Lambdalib_la_iovssa_5LM(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_iovssa", [GF180_IO_5LM])
+        self.set_name("gf180_la_iovssa")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_iovssa.v")
+
+
+class GF180Lambdalib_la_iorxdiff_5LM(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_iorxdiff", [GF180_IO_5LM])
+        self.set_name("gf180_la_iorxdiff")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_iorxdiff.v")
+
+
+class GF180Lambdalib_la_iobidir_5LM(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_iobidir", [GF180_IO_5LM])
+        self.set_name("gf180_la_iobidir")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_iobidir.v")
+
+
+class GF180Lambdalib_IO_5LM(LambalibTechLibrary):
+    @classmethod
+    def alias(cls, project: ASICProject):
+        GF180Lambdalib_la_iovdd_5LM.alias(project)
+        GF180Lambdalib_la_iocorner_5LM.alias(project)
+        GF180Lambdalib_la_iotxdiff_5LM.alias(project)
+        GF180Lambdalib_la_ioanalog_5LM.alias(project)
+        GF180Lambdalib_la_ioinput_5LM.alias(project)
+        GF180Lambdalib_la_iocut_5LM.alias(project)
+        GF180Lambdalib_la_iovss_5LM.alias(project)
+        GF180Lambdalib_la_iovddio_5LM.alias(project)
+        GF180Lambdalib_la_iovssio_5LM.alias(project)
+        GF180Lambdalib_la_iovdda_5LM.alias(project)
+        GF180Lambdalib_la_iovssa_5LM.alias(project)
+        GF180Lambdalib_la_iorxdiff_5LM.alias(project)
+        GF180Lambdalib_la_iobidir_5LM.alias(project)

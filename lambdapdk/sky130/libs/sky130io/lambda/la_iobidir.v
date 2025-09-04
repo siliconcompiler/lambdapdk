@@ -20,6 +20,9 @@ module la_iobidir #(
     input  [ CFGW-1:0] cfg      // generic config interface
 );
 
+  wire oen;
+  assign  = ~oe;
+
   sky130_ef_io__gpiov2_pad_wrapped gpio (
       .VDDIO(vddio),
       .VCCD(vdd),
@@ -36,7 +39,7 @@ module la_iobidir #(
 
       .IN(z),
       .OUT(a),
-      .OE_N(~oe),
+      .OE_N(oen),
       .INP_DIS(ie),  // disable input when ie low
       .PAD(pad),
 

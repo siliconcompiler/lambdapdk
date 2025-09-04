@@ -1,6 +1,5 @@
 import pytest
 import os
-from siliconcompiler import Chip
 import lambdalib
 
 from lambdapdk.asap7.libs import asap7sc7p5t, fakeram7

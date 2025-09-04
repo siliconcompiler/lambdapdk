@@ -1,6 +1,8 @@
 from pathlib import Path
 
-from lambdapdk import LambdaLibrary
+from siliconcompiler import ASICProject
+from lambdalib import LambalibTechLibrary
+from lambdapdk import LambdaLibrary, _LambdaPath
 from lambdapdk.ihp130 import IHP130PDK, _IHP130Path
 
 
@@ -68,3 +70,397 @@ class IHP130_IO_1p2(_IHP130_IOLibrary):
 class IHP130_IO_1p5(_IHP130_IOLibrary):
     def __init__(self):
         super().__init__("1p5")
+
+
+class IHP130Lambdalib_la_iovdd_1p2(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_iovdd", [IHP130_IO_1p2])
+        self.set_name("ihp130_la_iovdd")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "ihp130", "libs", "sg13g2_io")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_iovdd.v")
+
+
+class IHP130Lambdalib_la_iocorner_1p2(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_iocorner", [IHP130_IO_1p2])
+        self.set_name("ihp130_la_iocorner")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "ihp130", "libs", "sg13g2_io")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_iocorner.v")
+
+
+class IHP130Lambdalib_la_iotxdiff_1p2(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_iotxdiff", [IHP130_IO_1p2])
+        self.set_name("ihp130_la_iotxdiff")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "ihp130", "libs", "sg13g2_io")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_iotxdiff.v")
+
+
+class IHP130Lambdalib_la_ioanalog_1p2(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_ioanalog", [IHP130_IO_1p2])
+        self.set_name("ihp130_la_ioanalog")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "ihp130", "libs", "sg13g2_io")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_ioanalog.v")
+
+
+class IHP130Lambdalib_la_ioinput_1p2(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_ioinput", [IHP130_IO_1p2])
+        self.set_name("ihp130_la_ioinput")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "ihp130", "libs", "sg13g2_io")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_ioinput.v")
+
+
+class IHP130Lambdalib_la_iovss_1p2(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_iovss", [IHP130_IO_1p2])
+        self.set_name("ihp130_la_iovss")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "ihp130", "libs", "sg13g2_io")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_iovss.v")
+
+
+class IHP130Lambdalib_la_iovddio_1p2(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_iovddio", [IHP130_IO_1p2])
+        self.set_name("ihp130_la_iovddio")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "ihp130", "libs", "sg13g2_io")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_iovddio.v")
+
+
+class IHP130Lambdalib_la_iovssio_1p2(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_iovssio", [IHP130_IO_1p2])
+        self.set_name("ihp130_la_iovssio")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "ihp130", "libs", "sg13g2_io")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_iovssio.v")
+
+
+class IHP130Lambdalib_la_iovdda_1p2(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_iovdda", [IHP130_IO_1p2])
+        self.set_name("ihp130_la_iovdda")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "ihp130", "libs", "sg13g2_io")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_iovdda.v")
+
+
+class IHP130Lambdalib_la_iovssa_1p2(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_iovssa", [IHP130_IO_1p2])
+        self.set_name("ihp130_la_iovssa")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "ihp130", "libs", "sg13g2_io")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_iovssa.v")
+
+
+class IHP130Lambdalib_la_iorxdiff_1p2(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_iorxdiff", [IHP130_IO_1p2])
+        self.set_name("ihp130_la_iorxdiff")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "ihp130", "libs", "sg13g2_io")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_iorxdiff.v")
+
+
+class IHP130Lambdalib_la_iobidir_1p2(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_iobidir", [IHP130_IO_1p2])
+        self.set_name("ihp130_la_iobidir")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "ihp130", "libs", "sg13g2_io")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_iobidir.v")
+
+
+class IHP130LambdaLib_IO_1p2(LambalibTechLibrary):
+    @classmethod
+    def alias(cls, project: ASICProject):
+        IHP130Lambdalib_la_iovdd_1p2.alias(project)
+        IHP130Lambdalib_la_iocorner_1p2.alias(project)
+        IHP130Lambdalib_la_iotxdiff_1p2.alias(project)
+        IHP130Lambdalib_la_ioanalog_1p2.alias(project)
+        IHP130Lambdalib_la_ioinput_1p2.alias(project)
+        IHP130Lambdalib_la_iovss_1p2.alias(project)
+        IHP130Lambdalib_la_iovddio_1p2.alias(project)
+        IHP130Lambdalib_la_iovssio_1p2.alias(project)
+        IHP130Lambdalib_la_iovdda_1p2.alias(project)
+        IHP130Lambdalib_la_iovssa_1p2.alias(project)
+        IHP130Lambdalib_la_iorxdiff_1p2.alias(project)
+        IHP130Lambdalib_la_iobidir_1p2.alias(project)
+
+
+class IHP130Lambdalib_la_iovdd_1p5(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_iovdd", [IHP130_IO_1p5])
+        self.set_name("ihp130_la_iovdd")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "ihp130", "libs", "sg13g2_io")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_iovdd.v")
+
+
+class IHP130Lambdalib_la_iocorner_1p5(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_iocorner", [IHP130_IO_1p5])
+        self.set_name("ihp130_la_iocorner")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "ihp130", "libs", "sg13g2_io")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_iocorner.v")
+
+
+class IHP130Lambdalib_la_iotxdiff_1p5(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_iotxdiff", [IHP130_IO_1p5])
+        self.set_name("ihp130_la_iotxdiff")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "ihp130", "libs", "sg13g2_io")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_iotxdiff.v")
+
+
+class IHP130Lambdalib_la_ioanalog_1p5(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_ioanalog", [IHP130_IO_1p5])
+        self.set_name("ihp130_la_ioanalog")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "ihp130", "libs", "sg13g2_io")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_ioanalog.v")
+
+
+class IHP130Lambdalib_la_ioinput_1p5(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_ioinput", [IHP130_IO_1p5])
+        self.set_name("ihp130_la_ioinput")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "ihp130", "libs", "sg13g2_io")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_ioinput.v")
+
+
+class IHP130Lambdalib_la_iovss_1p5(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_iovss", [IHP130_IO_1p5])
+        self.set_name("ihp130_la_iovss")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "ihp130", "libs", "sg13g2_io")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_iovss.v")
+
+
+class IHP130Lambdalib_la_iovddio_1p5(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_iovddio", [IHP130_IO_1p5])
+        self.set_name("ihp130_la_iovddio")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "ihp130", "libs", "sg13g2_io")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_iovddio.v")
+
+
+class IHP130Lambdalib_la_iovssio_1p5(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_iovssio", [IHP130_IO_1p5])
+        self.set_name("ihp130_la_iovssio")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "ihp130", "libs", "sg13g2_io")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_iovssio.v")
+
+
+class IHP130Lambdalib_la_iovdda_1p5(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_iovdda", [IHP130_IO_1p5])
+        self.set_name("ihp130_la_iovdda")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "ihp130", "libs", "sg13g2_io")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_iovdda.v")
+
+
+class IHP130Lambdalib_la_iovssa_1p5(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_iovssa", [IHP130_IO_1p5])
+        self.set_name("ihp130_la_iovssa")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "ihp130", "libs", "sg13g2_io")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_iovssa.v")
+
+
+class IHP130Lambdalib_la_iorxdiff_1p5(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_iorxdiff", [IHP130_IO_1p5])
+        self.set_name("ihp130_la_iorxdiff")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "ihp130", "libs", "sg13g2_io")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_iorxdiff.v")
+
+
+class IHP130Lambdalib_la_iobidir_1p5(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_iobidir", [IHP130_IO_1p5])
+        self.set_name("ihp130_la_iobidir")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "ihp130", "libs", "sg13g2_io")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_iobidir.v")
+
+
+class IHP130LambdaLib_IO_1p5(LambalibTechLibrary):
+    @classmethod
+    def alias(cls, project: ASICProject):
+        IHP130Lambdalib_la_iovdd_1p5.alias(project)
+        IHP130Lambdalib_la_iocorner_1p5.alias(project)
+        IHP130Lambdalib_la_iotxdiff_1p5.alias(project)
+        IHP130Lambdalib_la_ioanalog_1p5.alias(project)
+        IHP130Lambdalib_la_ioinput_1p5.alias(project)
+        IHP130Lambdalib_la_iovss_1p5.alias(project)
+        IHP130Lambdalib_la_iovddio_1p5.alias(project)
+        IHP130Lambdalib_la_iovssio_1p5.alias(project)
+        IHP130Lambdalib_la_iovdda_1p5.alias(project)
+        IHP130Lambdalib_la_iovssa_1p5.alias(project)
+        IHP130Lambdalib_la_iorxdiff_1p5.alias(project)
+        IHP130Lambdalib_la_iobidir_1p5.alias(project)

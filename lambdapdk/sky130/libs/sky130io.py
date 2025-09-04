@@ -1,6 +1,8 @@
 from pathlib import Path
 
-from lambdapdk import LambdaLibrary
+from siliconcompiler import ASICProject
+from lambdalib import LambalibTechLibrary
+from lambdapdk import LambdaLibrary, _LambdaPath
 from lambdapdk.sky130 import Sky130PDK
 
 
@@ -47,3 +49,216 @@ class Sky130_IOLibrary(LambdaLibrary):
                 self.add_file(path_base / "blackbox" / "sky130_ef_io.v")
                 self.add_file(path_base / "blackbox" / "sky130_fd_io.v")
             self.add_yosys_blackbox_fileset("models.blackbox")
+
+
+class Sky130Lambdalib_la_ioanalog(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_ioanalog", [Sky130_IOLibrary])
+        self.set_name("sky130_la_ioanalog")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "sky130", "libs", "sky130io")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_ioanalog.v")
+
+
+class Sky130Lambdalib_la_iobidir(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_iobidir", [Sky130_IOLibrary])
+        self.set_name("sky130_la_iobidir")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "sky130", "libs", "sky130io")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_iobidir.v")
+
+
+class Sky130Lambdalib_la_ioclamp(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_ioclamp", [Sky130_IOLibrary])
+        self.set_name("sky130_la_ioclamp")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "sky130", "libs", "sky130io")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_ioclamp.v")
+
+
+class Sky130Lambdalib_la_iocorner(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_iocorner", [Sky130_IOLibrary])
+        self.set_name("sky130_la_iocorner")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "sky130", "libs", "sky130io")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_iocorner.v")
+
+
+class Sky130Lambdalib_la_ioinput(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_ioinput", [Sky130_IOLibrary])
+        self.set_name("sky130_la_ioinput")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "sky130", "libs", "sky130io")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_ioinput.v")
+
+
+class Sky130Lambdalib_la_iorxdiff(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_iorxdiff", [Sky130_IOLibrary])
+        self.set_name("sky130_la_iorxdiff")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "sky130", "libs", "sky130io")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_iorxdiff.v")
+
+
+class Sky130Lambdalib_la_iotxdiff(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_iotxdiff", [Sky130_IOLibrary])
+        self.set_name("sky130_la_iotxdiff")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "sky130", "libs", "sky130io")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_iotxdiff.v")
+
+
+class Sky130Lambdalib_la_iovdd(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_iovdd", [Sky130_IOLibrary])
+        self.set_name("sky130_la_iovdd")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "sky130", "libs", "sky130io")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_iovdd.v")
+
+
+class Sky130Lambdalib_la_iovdda(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_iovdda", [Sky130_IOLibrary])
+        self.set_name("sky130_la_iovdda")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "sky130", "libs", "sky130io")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_iovdda.v")
+
+
+class Sky130Lambdalib_la_iovddio(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_iovddio", [Sky130_IOLibrary])
+        self.set_name("sky130_la_iovddio")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "sky130", "libs", "sky130io")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_iovddio.v")
+
+
+class Sky130Lambdalib_la_iovss(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_iovss", [Sky130_IOLibrary])
+        self.set_name("sky130_la_iovss")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "sky130", "libs", "sky130io")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_iovss.v")
+
+
+class Sky130Lambdalib_la_iovssa(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_iovssa", [Sky130_IOLibrary])
+        self.set_name("sky130_la_iovssa")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "sky130", "libs", "sky130io")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_iovssa.v")
+
+
+class Sky130Lambdalib_la_iovssio(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_iovssio", [Sky130_IOLibrary])
+        self.set_name("sky130_la_iovssio")
+
+        # version
+        self.set_version("v1")
+
+        lib_path = Path("lambdapdk", "sky130", "libs", "sky130io")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_iovssio.v")
+
+
+class Sky130LambdaLib_IO(LambalibTechLibrary):
+    @classmethod
+    def alias(cls, project: ASICProject):
+        Sky130Lambdalib_la_ioanalog.alias(project)
+        Sky130Lambdalib_la_iobidir.alias(project)
+        Sky130Lambdalib_la_ioclamp.alias(project)
+        Sky130Lambdalib_la_iocorner.alias(project)
+        Sky130Lambdalib_la_ioinput.alias(project)
+        Sky130Lambdalib_la_iorxdiff.alias(project)
+        Sky130Lambdalib_la_iotxdiff.alias(project)
+        Sky130Lambdalib_la_iovdd.alias(project)
+        Sky130Lambdalib_la_iovdda.alias(project)
+        Sky130Lambdalib_la_iovddio.alias(project)
+        Sky130Lambdalib_la_iovss.alias(project)
+        Sky130Lambdalib_la_iovssa.alias(project)
+        Sky130Lambdalib_la_iovssio.alias(project)
