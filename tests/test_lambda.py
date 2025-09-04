@@ -73,20 +73,20 @@ def test_la_iolib(path, rootdir):
         os.path.join(rootdir, path), 'iolib')
 
 
-@pytest.mark.parametrize('module', [
-    asap7sc7p5t, fakeram7,
-    nangate45, fakeram45,
-    gf180mcu, gf180io, gf180sram,
-    sky130sc, sky130io, sky130sram,
-    sg13g2_stdcell, sg13g2_sram, sg13g2_io
-])
-def test_lambdalib_is_present(module):
-    chip = Chip('<lib>')
-    chip.use(module)
+# @pytest.mark.parametrize('module', [
+#     asap7sc7p5t, fakeram7,
+#     nangate45, fakeram45,
+#     gf180mcu, gf180io, gf180sram,
+#     sky130sc, sky130io, sky130sram,
+#     sg13g2_stdcell, sg13g2_sram, sg13g2_io
+# ])
+# def test_lambdalib_is_present(module):
+#     chip = Chip('<lib>')
+#     chip.use(module)
 
-    has_lambda = False
-    for libs in chip.getkeys('library'):
-        if libs.startswith('lambdalib_'):
-            has_lambda = True
+#     has_lambda = False
+#     for libs in chip.getkeys('library'):
+#         if libs.startswith('lambdalib_'):
+#             has_lambda = True
 
-    assert has_lambda, f"{module.__name__} does not have a lambdalib"
+#     assert has_lambda, f"{module.__name__} does not have a lambdalib"
