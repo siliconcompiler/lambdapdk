@@ -75,7 +75,7 @@ class IHP130_IO_1p5(_IHP130_IOLibrary):
 class IHP130Lambdalib_la_iovdd_1p2(LambalibTechLibrary, _LambdaPath):
     def __init__(self):
         super().__init__("la_iovdd", [IHP130_IO_1p2])
-        self.set_name("ihp130_la_iovdd")
+        self.set_name("ihp130_1p2_la_iovdd")
 
         # version
         self.set_version("v1")
@@ -90,7 +90,7 @@ class IHP130Lambdalib_la_iovdd_1p2(LambalibTechLibrary, _LambdaPath):
 class IHP130Lambdalib_la_iocorner_1p2(LambalibTechLibrary, _LambdaPath):
     def __init__(self):
         super().__init__("la_iocorner", [IHP130_IO_1p2])
-        self.set_name("ihp130_la_iocorner")
+        self.set_name("ihp130_1p2_la_iocorner")
 
         # version
         self.set_version("v1")
@@ -105,7 +105,7 @@ class IHP130Lambdalib_la_iocorner_1p2(LambalibTechLibrary, _LambdaPath):
 class IHP130Lambdalib_la_iotxdiff_1p2(LambalibTechLibrary, _LambdaPath):
     def __init__(self):
         super().__init__("la_iotxdiff", [IHP130_IO_1p2])
-        self.set_name("ihp130_la_iotxdiff")
+        self.set_name("ihp130_1p2_la_iotxdiff")
 
         # version
         self.set_version("v1")
@@ -120,7 +120,7 @@ class IHP130Lambdalib_la_iotxdiff_1p2(LambalibTechLibrary, _LambdaPath):
 class IHP130Lambdalib_la_ioanalog_1p2(LambalibTechLibrary, _LambdaPath):
     def __init__(self):
         super().__init__("la_ioanalog", [IHP130_IO_1p2])
-        self.set_name("ihp130_la_ioanalog")
+        self.set_name("ihp130_1p2_la_ioanalog")
 
         # version
         self.set_version("v1")
@@ -135,7 +135,7 @@ class IHP130Lambdalib_la_ioanalog_1p2(LambalibTechLibrary, _LambdaPath):
 class IHP130Lambdalib_la_ioinput_1p2(LambalibTechLibrary, _LambdaPath):
     def __init__(self):
         super().__init__("la_ioinput", [IHP130_IO_1p2])
-        self.set_name("ihp130_la_ioinput")
+        self.set_name("ihp130_1p2_la_ioinput")
 
         # version
         self.set_version("v1")
@@ -150,7 +150,7 @@ class IHP130Lambdalib_la_ioinput_1p2(LambalibTechLibrary, _LambdaPath):
 class IHP130Lambdalib_la_iovss_1p2(LambalibTechLibrary, _LambdaPath):
     def __init__(self):
         super().__init__("la_iovss", [IHP130_IO_1p2])
-        self.set_name("ihp130_la_iovss")
+        self.set_name("ihp130_1p2_la_iovss")
 
         # version
         self.set_version("v1")
@@ -165,7 +165,7 @@ class IHP130Lambdalib_la_iovss_1p2(LambalibTechLibrary, _LambdaPath):
 class IHP130Lambdalib_la_iovddio_1p2(LambalibTechLibrary, _LambdaPath):
     def __init__(self):
         super().__init__("la_iovddio", [IHP130_IO_1p2])
-        self.set_name("ihp130_la_iovddio")
+        self.set_name("ihp130_1p2_la_iovddio")
 
         # version
         self.set_version("v1")
@@ -180,7 +180,7 @@ class IHP130Lambdalib_la_iovddio_1p2(LambalibTechLibrary, _LambdaPath):
 class IHP130Lambdalib_la_iovssio_1p2(LambalibTechLibrary, _LambdaPath):
     def __init__(self):
         super().__init__("la_iovssio", [IHP130_IO_1p2])
-        self.set_name("ihp130_la_iovssio")
+        self.set_name("ihp130_1p2_la_iovssio")
 
         # version
         self.set_version("v1")
@@ -195,7 +195,7 @@ class IHP130Lambdalib_la_iovssio_1p2(LambalibTechLibrary, _LambdaPath):
 class IHP130Lambdalib_la_iovdda_1p2(LambalibTechLibrary, _LambdaPath):
     def __init__(self):
         super().__init__("la_iovdda", [IHP130_IO_1p2])
-        self.set_name("ihp130_la_iovdda")
+        self.set_name("ihp130_1p2_la_iovdda")
 
         # version
         self.set_version("v1")
@@ -210,7 +210,7 @@ class IHP130Lambdalib_la_iovdda_1p2(LambalibTechLibrary, _LambdaPath):
 class IHP130Lambdalib_la_iovssa_1p2(LambalibTechLibrary, _LambdaPath):
     def __init__(self):
         super().__init__("la_iovssa", [IHP130_IO_1p2])
-        self.set_name("ihp130_la_iovssa")
+        self.set_name("ihp130_1p2_la_iovssa")
 
         # version
         self.set_version("v1")
@@ -225,7 +225,7 @@ class IHP130Lambdalib_la_iovssa_1p2(LambalibTechLibrary, _LambdaPath):
 class IHP130Lambdalib_la_iorxdiff_1p2(LambalibTechLibrary, _LambdaPath):
     def __init__(self):
         super().__init__("la_iorxdiff", [IHP130_IO_1p2])
-        self.set_name("ihp130_la_iorxdiff")
+        self.set_name("ihp130_1p2_la_iorxdiff")
 
         # version
         self.set_version("v1")
@@ -240,7 +240,7 @@ class IHP130Lambdalib_la_iorxdiff_1p2(LambalibTechLibrary, _LambdaPath):
 class IHP130Lambdalib_la_iobidir_1p2(LambalibTechLibrary, _LambdaPath):
     def __init__(self):
         super().__init__("la_iobidir", [IHP130_IO_1p2])
-        self.set_name("ihp130_la_iobidir")
+        self.set_name("ihp130_1p2_la_iobidir")
 
         # version
         self.set_version("v1")
@@ -272,7 +272,7 @@ class IHP130LambdaLib_IO_1p2(LambalibTechLibrary):
 class IHP130Lambdalib_la_iovdd_1p5(LambalibTechLibrary, _LambdaPath):
     def __init__(self):
         super().__init__("la_iovdd", [IHP130_IO_1p5])
-        self.set_name("ihp130_la_iovdd")
+        self.set_name("ihp130_1p5_la_iovdd")
 
         # version
         self.set_version("v1")
@@ -287,7 +287,7 @@ class IHP130Lambdalib_la_iovdd_1p5(LambalibTechLibrary, _LambdaPath):
 class IHP130Lambdalib_la_iocorner_1p5(LambalibTechLibrary, _LambdaPath):
     def __init__(self):
         super().__init__("la_iocorner", [IHP130_IO_1p5])
-        self.set_name("ihp130_la_iocorner")
+        self.set_name("ihp130_1p5_la_iocorner")
 
         # version
         self.set_version("v1")
@@ -302,7 +302,7 @@ class IHP130Lambdalib_la_iocorner_1p5(LambalibTechLibrary, _LambdaPath):
 class IHP130Lambdalib_la_iotxdiff_1p5(LambalibTechLibrary, _LambdaPath):
     def __init__(self):
         super().__init__("la_iotxdiff", [IHP130_IO_1p5])
-        self.set_name("ihp130_la_iotxdiff")
+        self.set_name("ihp130_1p5_la_iotxdiff")
 
         # version
         self.set_version("v1")
@@ -317,7 +317,7 @@ class IHP130Lambdalib_la_iotxdiff_1p5(LambalibTechLibrary, _LambdaPath):
 class IHP130Lambdalib_la_ioanalog_1p5(LambalibTechLibrary, _LambdaPath):
     def __init__(self):
         super().__init__("la_ioanalog", [IHP130_IO_1p5])
-        self.set_name("ihp130_la_ioanalog")
+        self.set_name("ihp130_1p5_la_ioanalog")
 
         # version
         self.set_version("v1")
@@ -332,7 +332,7 @@ class IHP130Lambdalib_la_ioanalog_1p5(LambalibTechLibrary, _LambdaPath):
 class IHP130Lambdalib_la_ioinput_1p5(LambalibTechLibrary, _LambdaPath):
     def __init__(self):
         super().__init__("la_ioinput", [IHP130_IO_1p5])
-        self.set_name("ihp130_la_ioinput")
+        self.set_name("ihp130_1p5_la_ioinput")
 
         # version
         self.set_version("v1")
@@ -347,7 +347,7 @@ class IHP130Lambdalib_la_ioinput_1p5(LambalibTechLibrary, _LambdaPath):
 class IHP130Lambdalib_la_iovss_1p5(LambalibTechLibrary, _LambdaPath):
     def __init__(self):
         super().__init__("la_iovss", [IHP130_IO_1p5])
-        self.set_name("ihp130_la_iovss")
+        self.set_name("ihp130_1p5_la_iovss")
 
         # version
         self.set_version("v1")
@@ -362,7 +362,7 @@ class IHP130Lambdalib_la_iovss_1p5(LambalibTechLibrary, _LambdaPath):
 class IHP130Lambdalib_la_iovddio_1p5(LambalibTechLibrary, _LambdaPath):
     def __init__(self):
         super().__init__("la_iovddio", [IHP130_IO_1p5])
-        self.set_name("ihp130_la_iovddio")
+        self.set_name("ihp130_1p5_la_iovddio")
 
         # version
         self.set_version("v1")
@@ -377,7 +377,7 @@ class IHP130Lambdalib_la_iovddio_1p5(LambalibTechLibrary, _LambdaPath):
 class IHP130Lambdalib_la_iovssio_1p5(LambalibTechLibrary, _LambdaPath):
     def __init__(self):
         super().__init__("la_iovssio", [IHP130_IO_1p5])
-        self.set_name("ihp130_la_iovssio")
+        self.set_name("ihp130_1p5_la_iovssio")
 
         # version
         self.set_version("v1")
@@ -392,7 +392,7 @@ class IHP130Lambdalib_la_iovssio_1p5(LambalibTechLibrary, _LambdaPath):
 class IHP130Lambdalib_la_iovdda_1p5(LambalibTechLibrary, _LambdaPath):
     def __init__(self):
         super().__init__("la_iovdda", [IHP130_IO_1p5])
-        self.set_name("ihp130_la_iovdda")
+        self.set_name("ihp130_1p5_la_iovdda")
 
         # version
         self.set_version("v1")
@@ -407,7 +407,7 @@ class IHP130Lambdalib_la_iovdda_1p5(LambalibTechLibrary, _LambdaPath):
 class IHP130Lambdalib_la_iovssa_1p5(LambalibTechLibrary, _LambdaPath):
     def __init__(self):
         super().__init__("la_iovssa", [IHP130_IO_1p5])
-        self.set_name("ihp130_la_iovssa")
+        self.set_name("ihp130_1p5_la_iovssa")
 
         # version
         self.set_version("v1")
@@ -422,7 +422,7 @@ class IHP130Lambdalib_la_iovssa_1p5(LambalibTechLibrary, _LambdaPath):
 class IHP130Lambdalib_la_iorxdiff_1p5(LambalibTechLibrary, _LambdaPath):
     def __init__(self):
         super().__init__("la_iorxdiff", [IHP130_IO_1p5])
-        self.set_name("ihp130_la_iorxdiff")
+        self.set_name("ihp130_1p5_la_iorxdiff")
 
         # version
         self.set_version("v1")
@@ -437,7 +437,7 @@ class IHP130Lambdalib_la_iorxdiff_1p5(LambalibTechLibrary, _LambdaPath):
 class IHP130Lambdalib_la_iobidir_1p5(LambalibTechLibrary, _LambdaPath):
     def __init__(self):
         super().__init__("la_iobidir", [IHP130_IO_1p5])
-        self.set_name("ihp130_la_iobidir")
+        self.set_name("ihp130_1p5_la_iobidir")
 
         # version
         self.set_version("v1")
