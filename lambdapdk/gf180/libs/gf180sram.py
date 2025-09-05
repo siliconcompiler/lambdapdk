@@ -77,9 +77,11 @@ class _GF180SRAMLibrary(LambdaLibrary):
             with self.active_fileset("models.spice"):
                 self.add_file(path_base / "spice" / f"{self.name}.spice")
 
-            self.add_openroad_power_grid_file(path_base / "apr" / "openroad" / "pdngen.tcl")
-            self.add_openroad_global_connect_file(
-                path_base / "apr" / "openroad" / "global_connect.tcl")
+            with self.active_fileset("openroad.powergrid"):
+                self.add_file(path_base / "apr" / "openroad" / "pdngen.tcl")
+                self.add_openroad_powergridfileset()
+            with self.active_fileset("openroad.globalconnect"):
+                self.add_file(path_base / "apr" / "openroad" / "global_connect.tcl")
 
 
 class GF180_SRAM_64x8(_GF180SRAMLibrary):

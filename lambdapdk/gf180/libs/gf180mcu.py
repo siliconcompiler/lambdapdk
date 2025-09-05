@@ -156,14 +156,18 @@ class _GF180_MCULibrary(LambdaLibrary):
 
         # Setup for OpenROAD
         with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("openroad.powergrid"):
+                self.add_file(lib_path / "apr" / "openroad" / "pdngen.tcl")
+                self.add_openroad_powergridfileset()
+            with self.active_fileset("openroad.globalconnect"):
+                self.add_file(lib_path / "apr" / "openroad" / "global_connect.tcl")
+                self.add_openroad_globalconnectfileset()
+
             self.set_openroad_placement_density(0.50)
             self.set_openroad_tielow_cell(f"gf180mcu_fd_sc_mcu{libtype}5v0__tiel", "ZN")
             self.set_openroad_tiehigh_cell(f"gf180mcu_fd_sc_mcu{libtype}5v0__tieh", "Z")
             self.set_openroad_macro_placement_halo(15, 15)
             self.set_openroad_tapcells_file(lib_path / "apr" / "openroad" / "tapcell.tcl")
-            self.add_openroad_global_connect_file(
-                lib_path / "apr" / "openroad" / "global_connect.tcl")
-            self.add_openroad_power_grid_file(lib_path / "apr" / "openroad" / "pdngen.tcl")
 
         # Setup for bambu
         self.set_bambu_clock_multiplier(1)

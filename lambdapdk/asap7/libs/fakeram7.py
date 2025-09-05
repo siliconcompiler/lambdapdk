@@ -23,9 +23,12 @@ class _FakeRAM7Library(LambdaLibrary):
                     self.add_file(path_base / "nldm" / f"{self.name}.lib")
                     self.add_asic_libcornerfileset("generic", "nldm")
 
-            self.add_openroad_power_grid_file(path_base / "apr" / "openroad" / "pdngen.tcl")
-            self.add_openroad_global_connect_file(
-                path_base / "apr" / "openroad" / "global_connect.tcl")
+            with self.active_fileset("openroad.powergrid"):
+                self.add_file(path_base / "apr" / "openroad" / "pdngen.tcl")
+                self.add_openroad_powergridfileset()
+            with self.active_fileset("openroad.globalconnect"):
+                self.add_file(path_base / "apr" / "openroad" / "global_connect.tcl")
+                self.add_openroad_globalconnectfileset()
 
             self.add_klayout_allowmissingcell(self.name)
 
