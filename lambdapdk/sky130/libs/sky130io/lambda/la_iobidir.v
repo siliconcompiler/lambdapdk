@@ -21,7 +21,7 @@ module la_iobidir #(
 );
 
   wire oen;
-  assign  = ~oe;
+  assign eon = ~oe;
 
   sky130_ef_io__gpiov2_pad_wrapped gpio (
       .VDDIO(vddio),
