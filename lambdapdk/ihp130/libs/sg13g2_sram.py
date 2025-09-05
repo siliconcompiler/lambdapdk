@@ -38,9 +38,12 @@ class _IHP130SRAMLibrary(LambdaLibrary, _IHP130Path):
                               "RM_IHPSG13_1P_core_behavioral_bm_bist.v")
 
         with self.active_dataroot("lambdapdk"):
-            self.add_openroad_power_grid_file(path_base / "apr" / "openroad" / "pdngen.tcl")
-            self.add_openroad_global_connect_file(
-                path_base / "apr" / "openroad" / "global_connect.tcl")
+            with self.active_fileset("openroad.powergrid"):
+                self.add_file(path_base / "apr" / "openroad" / "pdngen.tcl")
+                self.add_openroad_powergridfileset()
+            with self.active_fileset("openroad.globalconnect"):
+                self.add_file(path_base / "apr" / "openroad" / "global_connect.tcl")
+                self.add_openroad_globalconnectfileset()
 
 
 class IHP130_SRAM_1024x64(_IHP130SRAMLibrary):

@@ -34,9 +34,12 @@ class Sky130_SRAM_64x256(LambdaLibrary):
                 self.add_file(path_base / self.name / "spice" / f"{self.name}.sp")
 
         with self.active_dataroot("lambdapdk"):
-            self.add_openroad_power_grid_file(path_base / "apr" / "openroad" / "pdngen.tcl")
-            self.add_openroad_global_connect_file(
-                path_base / "apr" / "openroad" / "global_connect.tcl")
+            with self.active_fileset("openroad.powergrid"):
+                self.add_file(path_base / "apr" / "openroad" / "pdngen.tcl")
+                self.add_openroad_powergridfileset()
+            with self.active_fileset("openroad.globalconnect"):
+                self.add_file(path_base / "apr" / "openroad" / "global_connect.tcl")
+                self.add_openroad_globalconnectfileset()
 
 
 class Sky130Lambdalib_SinglePort(LambalibTechLibrary, _LambdaPath):

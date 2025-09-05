@@ -93,15 +93,19 @@ class _ASAP7SC7p5Base(LambdaLibrary):
 
         # Setup for openroad
         with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("openroad.powergrid"):
+                self.add_file(lib_path / "apr" / "openroad" / "pdngen.tcl")
+                self.add_openroad_powergridfileset()
+            with self.active_fileset("openroad.globalconnect"):
+                self.add_file(lib_path / "apr" / "openroad" / "global_connect.tcl")
+                self.add_openroad_globalconnectfileset()
+
             self.set_openroad_placement_density(0.60)
             self.set_openroad_tielow_cell(f"TIELOx1_ASAP7_75t_{suffix}", "L")
             self.set_openroad_tiehigh_cell(f"TIEHIx1_ASAP7_75t_{suffix}", "H")
             self.set_openroad_macro_placement_halo(5, 5)
             self.set_openroad_tracks_file(lib_path / "apr" / "openroad" / "tracks.tcl")
             self.set_openroad_tapcells_file(lib_path / "apr" / "openroad" / "tapcells.tcl")
-            self.add_openroad_global_connect_file(lib_path / "apr" / "openroad" /
-                                                  "global_connect.tcl")
-            self.add_openroad_power_grid_file(lib_path / "apr" / "openroad" / "pdngen.tcl")
 
         # Setup for bambu
         self.set_bambu_device_name("asap7-WC")
