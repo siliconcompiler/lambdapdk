@@ -1,5 +1,5 @@
 import os.path
-from siliconcompiler.pathschema import PathSchema
+from siliconcompiler.schema_support.pathschema import PathSchema
 
 from siliconcompiler.package import PythonPathResolver
 
