@@ -1,5 +1,5 @@
 import os.path
-from siliconcompiler.pathschema import PathSchema
+from siliconcompiler.schema_support.pathschema import PathSchema
 
 from siliconcompiler.package import PythonPathResolver
 
@@ -11,7 +11,7 @@ from siliconcompiler.tools.openroad import OpenROADStdCellLibrary
 from siliconcompiler.tools.bambu import BambuStdCellLibrary
 from siliconcompiler.tools.klayout import KLayoutLibrary
 
-__version__ = "0.2.0-rc5"
+__version__ = "0.2.0-rc6"
 
 
 class _LambdaPath(PathSchema):
