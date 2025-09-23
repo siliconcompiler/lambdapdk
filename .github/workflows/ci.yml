@@ -55,6 +55,10 @@ jobs:
           pip install --upgrade pip
           pip install -e .[test]
 
+          # Temporary
+          pip uninstall -y siliconcompiler
+          pip install siliconcompiler@git+https://github.com/siliconcompiler/siliconcompiler@main
+
           # change running directory
           mkdir testrun
           cd testrun
