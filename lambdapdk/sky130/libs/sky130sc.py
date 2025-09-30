@@ -12,7 +12,7 @@ class _Sky130_SCLibrary(LambdaLibrary):
         super().__init__()
         self.set_name(f"sky130{libtype}")
 
-        self.set_version("v0_0_2")
+        self.package.set_version("v0_0_2")
 
         self.add_asic_pdk(Sky130PDK())
 

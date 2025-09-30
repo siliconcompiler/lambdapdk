@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from siliconcompiler import ASICProject
+from siliconcompiler import ASIC
 from lambdalib import LambalibTechLibrary
 from lambdapdk import LambdaLibrary, _LambdaPath
 from lambdapdk.ihp130 import IHP130PDK, _IHP130Path
@@ -78,7 +78,7 @@ class IHP130Lambdalib_la_iovdd_1p2(LambalibTechLibrary, _LambdaPath):
         self.set_name("ihp130_1p2_la_iovdd")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "ihp130", "libs", "sg13g2_io")
 
@@ -93,7 +93,7 @@ class IHP130Lambdalib_la_iocorner_1p2(LambalibTechLibrary, _LambdaPath):
         self.set_name("ihp130_1p2_la_iocorner")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "ihp130", "libs", "sg13g2_io")
 
@@ -108,7 +108,7 @@ class IHP130Lambdalib_la_iotxdiff_1p2(LambalibTechLibrary, _LambdaPath):
         self.set_name("ihp130_1p2_la_iotxdiff")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "ihp130", "libs", "sg13g2_io")
 
@@ -123,7 +123,7 @@ class IHP130Lambdalib_la_ioanalog_1p2(LambalibTechLibrary, _LambdaPath):
         self.set_name("ihp130_1p2_la_ioanalog")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "ihp130", "libs", "sg13g2_io")
 
@@ -138,7 +138,7 @@ class IHP130Lambdalib_la_ioinput_1p2(LambalibTechLibrary, _LambdaPath):
         self.set_name("ihp130_1p2_la_ioinput")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "ihp130", "libs", "sg13g2_io")
 
@@ -153,7 +153,7 @@ class IHP130Lambdalib_la_iovss_1p2(LambalibTechLibrary, _LambdaPath):
         self.set_name("ihp130_1p2_la_iovss")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "ihp130", "libs", "sg13g2_io")
 
@@ -168,7 +168,7 @@ class IHP130Lambdalib_la_iovddio_1p2(LambalibTechLibrary, _LambdaPath):
         self.set_name("ihp130_1p2_la_iovddio")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "ihp130", "libs", "sg13g2_io")
 
@@ -183,7 +183,7 @@ class IHP130Lambdalib_la_iovssio_1p2(LambalibTechLibrary, _LambdaPath):
         self.set_name("ihp130_1p2_la_iovssio")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "ihp130", "libs", "sg13g2_io")
 
@@ -198,7 +198,7 @@ class IHP130Lambdalib_la_iovdda_1p2(LambalibTechLibrary, _LambdaPath):
         self.set_name("ihp130_1p2_la_iovdda")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "ihp130", "libs", "sg13g2_io")
 
@@ -213,7 +213,7 @@ class IHP130Lambdalib_la_iovssa_1p2(LambalibTechLibrary, _LambdaPath):
         self.set_name("ihp130_1p2_la_iovssa")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "ihp130", "libs", "sg13g2_io")
 
@@ -228,7 +228,7 @@ class IHP130Lambdalib_la_iorxdiff_1p2(LambalibTechLibrary, _LambdaPath):
         self.set_name("ihp130_1p2_la_iorxdiff")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "ihp130", "libs", "sg13g2_io")
 
@@ -243,7 +243,7 @@ class IHP130Lambdalib_la_iobidir_1p2(LambalibTechLibrary, _LambdaPath):
         self.set_name("ihp130_1p2_la_iobidir")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "ihp130", "libs", "sg13g2_io")
 
@@ -254,7 +254,7 @@ class IHP130Lambdalib_la_iobidir_1p2(LambalibTechLibrary, _LambdaPath):
 
 class IHP130LambdaLib_IO_1p2(LambalibTechLibrary):
     @classmethod
-    def alias(cls, project: ASICProject):
+    def alias(cls, project: ASIC):
         IHP130Lambdalib_la_iovdd_1p2.alias(project)
         IHP130Lambdalib_la_iocorner_1p2.alias(project)
         IHP130Lambdalib_la_iotxdiff_1p2.alias(project)
@@ -275,7 +275,7 @@ class IHP130Lambdalib_la_iovdd_1p5(LambalibTechLibrary, _LambdaPath):
         self.set_name("ihp130_1p5_la_iovdd")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "ihp130", "libs", "sg13g2_io")
 
@@ -290,7 +290,7 @@ class IHP130Lambdalib_la_iocorner_1p5(LambalibTechLibrary, _LambdaPath):
         self.set_name("ihp130_1p5_la_iocorner")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "ihp130", "libs", "sg13g2_io")
 
@@ -305,7 +305,7 @@ class IHP130Lambdalib_la_iotxdiff_1p5(LambalibTechLibrary, _LambdaPath):
         self.set_name("ihp130_1p5_la_iotxdiff")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "ihp130", "libs", "sg13g2_io")
 
@@ -320,7 +320,7 @@ class IHP130Lambdalib_la_ioanalog_1p5(LambalibTechLibrary, _LambdaPath):
         self.set_name("ihp130_1p5_la_ioanalog")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "ihp130", "libs", "sg13g2_io")
 
@@ -335,7 +335,7 @@ class IHP130Lambdalib_la_ioinput_1p5(LambalibTechLibrary, _LambdaPath):
         self.set_name("ihp130_1p5_la_ioinput")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "ihp130", "libs", "sg13g2_io")
 
@@ -350,7 +350,7 @@ class IHP130Lambdalib_la_iovss_1p5(LambalibTechLibrary, _LambdaPath):
         self.set_name("ihp130_1p5_la_iovss")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "ihp130", "libs", "sg13g2_io")
 
@@ -365,7 +365,7 @@ class IHP130Lambdalib_la_iovddio_1p5(LambalibTechLibrary, _LambdaPath):
         self.set_name("ihp130_1p5_la_iovddio")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "ihp130", "libs", "sg13g2_io")
 
@@ -380,7 +380,7 @@ class IHP130Lambdalib_la_iovssio_1p5(LambalibTechLibrary, _LambdaPath):
         self.set_name("ihp130_1p5_la_iovssio")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "ihp130", "libs", "sg13g2_io")
 
@@ -395,7 +395,7 @@ class IHP130Lambdalib_la_iovdda_1p5(LambalibTechLibrary, _LambdaPath):
         self.set_name("ihp130_1p5_la_iovdda")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "ihp130", "libs", "sg13g2_io")
 
@@ -410,7 +410,7 @@ class IHP130Lambdalib_la_iovssa_1p5(LambalibTechLibrary, _LambdaPath):
         self.set_name("ihp130_1p5_la_iovssa")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "ihp130", "libs", "sg13g2_io")
 
@@ -425,7 +425,7 @@ class IHP130Lambdalib_la_iorxdiff_1p5(LambalibTechLibrary, _LambdaPath):
         self.set_name("ihp130_1p5_la_iorxdiff")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "ihp130", "libs", "sg13g2_io")
 
@@ -440,7 +440,7 @@ class IHP130Lambdalib_la_iobidir_1p5(LambalibTechLibrary, _LambdaPath):
         self.set_name("ihp130_1p5_la_iobidir")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "ihp130", "libs", "sg13g2_io")
 
@@ -451,7 +451,7 @@ class IHP130Lambdalib_la_iobidir_1p5(LambalibTechLibrary, _LambdaPath):
 
 class IHP130LambdaLib_IO_1p5(LambalibTechLibrary):
     @classmethod
-    def alias(cls, project: ASICProject):
+    def alias(cls, project: ASIC):
         IHP130Lambdalib_la_iovdd_1p5.alias(project)
         IHP130Lambdalib_la_iocorner_1p5.alias(project)
         IHP130Lambdalib_la_iotxdiff_1p5.alias(project)

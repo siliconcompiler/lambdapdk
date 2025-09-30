@@ -38,7 +38,7 @@ class IHP130PDK(LambdaPDK, _IHP130Path):
         self.set_name("ihp130")
 
         self.set_foundry("Leibniz-Institut für innovative Mikroelektronik")
-        self.set_version(pdk_rev)
+        self.package.set_version(pdk_rev)
         self.set_node(130)
         self.set_stackup("5M2TL")
 
@@ -46,8 +46,8 @@ class IHP130PDK(LambdaPDK, _IHP130Path):
 
         # Docs
         with self.active_dataroot("ihp130"):
-            self.add_doc("quickstart", "ihp-sg13g2/libs.doc/doc/SG13G2_os_process_spec.pdf")
-            self.add_doc("signoff", "ihp-sg13g2/libs.doc/doc/SG13G2_os_layout_rules.pdf")
+            self.package.add_doc("quickstart", "ihp-sg13g2/libs.doc/doc/SG13G2_os_process_spec.pdf")
+            self.package.add_doc("signoff", "ihp-sg13g2/libs.doc/doc/SG13G2_os_layout_rules.pdf")
 
         with self.active_dataroot("ihp130"):
             # APR Setup

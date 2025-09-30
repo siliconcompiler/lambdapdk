@@ -49,7 +49,7 @@ class Sky130Lambdalib_SinglePort(LambalibTechLibrary, _LambdaPath):
         self.set_name("sky130_la_spram")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "sky130", "libs", "sky130sram")
 

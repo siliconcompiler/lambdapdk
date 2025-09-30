@@ -47,7 +47,7 @@ class ASAP7PDK(LambdaPDK):
         pdk_path = Path("lambdapdk", "asap7", "base")
 
         self.set_foundry("virtual")
-        self.set_version("r1p7")
+        self.package.set_version("r1p7")
         self.set_node(7)
         self.set_stackup("10M")
         self.set_wafersize(300)

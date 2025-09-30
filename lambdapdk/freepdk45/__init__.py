@@ -27,7 +27,7 @@ class FreePDK45PDK(LambdaPDK):
         pdk_path = Path("lambdapdk", "freepdk45", "base")
 
         self.set_foundry("virtual")
-        self.set_version("r1p0")
+        self.package.set_version("r1p0")
         self.set_node(45)
         self.set_stackup("10M")
         self.set_wafersize(300)

@@ -13,7 +13,7 @@ class _ASAP7SC7p5Base(LambdaLibrary):
         self.set_name(f"asap7sc7p5t_{vt}")
 
         # version
-        self.set_version("28")
+        self.package.set_version("28")
 
         # PDK
         self.add_asic_pdk(ASAP7PDK())

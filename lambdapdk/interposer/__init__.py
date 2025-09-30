@@ -16,7 +16,7 @@ class _Interposer(LambdaPDK):
         self.set_name(f"interposer_{stackup}")
 
         self.set_foundry("virtual")
-        self.set_version("v0.0.1")
+        self.package.set_version("v0.0.1")
         self.set_stackup(stackup)
 
         pdk_path = Path("lambdapdk", "interposer", "base")
