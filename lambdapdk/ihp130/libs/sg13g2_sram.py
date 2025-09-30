@@ -88,7 +88,7 @@ class IHP130Lambdalib_SinglePort(LambalibTechLibrary, _LambdaPath):
         self.set_name("ihp130_la_spram")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "ihp130", "libs", "sg13g2_sram")
 

@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from siliconcompiler import ASICProject
+from siliconcompiler import ASIC
 from lambdalib import LambalibTechLibrary
 from lambdapdk import LambdaLibrary, _LambdaPath
 from lambdapdk.sky130 import Sky130PDK
@@ -57,7 +57,7 @@ class Sky130Lambdalib_la_ioanalog(LambalibTechLibrary, _LambdaPath):
         self.set_name("sky130_la_ioanalog")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "sky130", "libs", "sky130io")
 
@@ -72,7 +72,7 @@ class Sky130Lambdalib_la_iobidir(LambalibTechLibrary, _LambdaPath):
         self.set_name("sky130_la_iobidir")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "sky130", "libs", "sky130io")
 
@@ -87,7 +87,7 @@ class Sky130Lambdalib_la_ioclamp(LambalibTechLibrary, _LambdaPath):
         self.set_name("sky130_la_ioclamp")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "sky130", "libs", "sky130io")
 
@@ -102,7 +102,7 @@ class Sky130Lambdalib_la_iocorner(LambalibTechLibrary, _LambdaPath):
         self.set_name("sky130_la_iocorner")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "sky130", "libs", "sky130io")
 
@@ -117,7 +117,7 @@ class Sky130Lambdalib_la_ioinput(LambalibTechLibrary, _LambdaPath):
         self.set_name("sky130_la_ioinput")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "sky130", "libs", "sky130io")
 
@@ -132,7 +132,7 @@ class Sky130Lambdalib_la_iorxdiff(LambalibTechLibrary, _LambdaPath):
         self.set_name("sky130_la_iorxdiff")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "sky130", "libs", "sky130io")
 
@@ -147,7 +147,7 @@ class Sky130Lambdalib_la_iotxdiff(LambalibTechLibrary, _LambdaPath):
         self.set_name("sky130_la_iotxdiff")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "sky130", "libs", "sky130io")
 
@@ -162,7 +162,7 @@ class Sky130Lambdalib_la_iovdd(LambalibTechLibrary, _LambdaPath):
         self.set_name("sky130_la_iovdd")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "sky130", "libs", "sky130io")
 
@@ -177,7 +177,7 @@ class Sky130Lambdalib_la_iovdda(LambalibTechLibrary, _LambdaPath):
         self.set_name("sky130_la_iovdda")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "sky130", "libs", "sky130io")
 
@@ -192,7 +192,7 @@ class Sky130Lambdalib_la_iovddio(LambalibTechLibrary, _LambdaPath):
         self.set_name("sky130_la_iovddio")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "sky130", "libs", "sky130io")
 
@@ -207,7 +207,7 @@ class Sky130Lambdalib_la_iovss(LambalibTechLibrary, _LambdaPath):
         self.set_name("sky130_la_iovss")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "sky130", "libs", "sky130io")
 
@@ -222,7 +222,7 @@ class Sky130Lambdalib_la_iovssa(LambalibTechLibrary, _LambdaPath):
         self.set_name("sky130_la_iovssa")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "sky130", "libs", "sky130io")
 
@@ -237,7 +237,7 @@ class Sky130Lambdalib_la_iovssio(LambalibTechLibrary, _LambdaPath):
         self.set_name("sky130_la_iovssio")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "sky130", "libs", "sky130io")
 
@@ -248,7 +248,7 @@ class Sky130Lambdalib_la_iovssio(LambalibTechLibrary, _LambdaPath):
 
 class Sky130LambdaLib_IO(LambalibTechLibrary):
     @classmethod
-    def alias(cls, project: ASICProject):
+    def alias(cls, project: ASIC):
         Sky130Lambdalib_la_ioanalog.alias(project)
         Sky130Lambdalib_la_iobidir.alias(project)
         Sky130Lambdalib_la_ioclamp.alias(project)

@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from siliconcompiler import ASICProject
+from siliconcompiler import ASIC
 from lambdalib import LambalibTechLibrary
 from lambdapdk import LambdaLibrary, _LambdaPath
 from lambdapdk.asap7 import ASAP7PDK
@@ -34,7 +34,7 @@ class FakeIO7Lambdalib_la_iovdd(LambalibTechLibrary, _LambdaPath):
         self.set_name("fakeio7_la_iovdd")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "asap7", "libs", "fakeio7")
 
@@ -49,7 +49,7 @@ class FakeIO7Lambdalib_la_iopoc(LambalibTechLibrary, _LambdaPath):
         self.set_name("fakeio7_la_iopoc")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "asap7", "libs", "fakeio7")
 
@@ -64,7 +64,7 @@ class FakeIO7Lambdalib_la_iocorner(LambalibTechLibrary, _LambdaPath):
         self.set_name("fakeio7_la_iocorner")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "asap7", "libs", "fakeio7")
 
@@ -79,7 +79,7 @@ class FakeIO7Lambdalib_la_iotxdiff(LambalibTechLibrary, _LambdaPath):
         self.set_name("fakeio7_la_iotxdiff")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "asap7", "libs", "fakeio7")
 
@@ -94,7 +94,7 @@ class FakeIO7Lambdalib_la_ioanalog(LambalibTechLibrary, _LambdaPath):
         self.set_name("fakeio7_la_ioanalog")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "asap7", "libs", "fakeio7")
 
@@ -109,7 +109,7 @@ class FakeIO7Lambdalib_la_ioinput(LambalibTechLibrary, _LambdaPath):
         self.set_name("fakeio7_la_ioinput")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "asap7", "libs", "fakeio7")
 
@@ -124,7 +124,7 @@ class FakeIO7Lambdalib_la_iocut(LambalibTechLibrary, _LambdaPath):
         self.set_name("fakeio7_la_iocut")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "asap7", "libs", "fakeio7")
 
@@ -139,7 +139,7 @@ class FakeIO7Lambdalib_la_iovss(LambalibTechLibrary, _LambdaPath):
         self.set_name("fakeio7_la_iovss")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "asap7", "libs", "fakeio7")
 
@@ -154,7 +154,7 @@ class FakeIO7Lambdalib_la_iovddio(LambalibTechLibrary, _LambdaPath):
         self.set_name("fakeio7_la_iovddio")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "asap7", "libs", "fakeio7")
 
@@ -169,7 +169,7 @@ class FakeIO7Lambdalib_la_iovssio(LambalibTechLibrary, _LambdaPath):
         self.set_name("fakeio7_la_iovssio")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "asap7", "libs", "fakeio7")
 
@@ -184,7 +184,7 @@ class FakeIO7Lambdalib_la_iovdda(LambalibTechLibrary, _LambdaPath):
         self.set_name("fakeio7_la_iovdda")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "asap7", "libs", "fakeio7")
 
@@ -199,7 +199,7 @@ class FakeIO7Lambdalib_la_iovssa(LambalibTechLibrary, _LambdaPath):
         self.set_name("fakeio7_la_iovssa")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "asap7", "libs", "fakeio7")
 
@@ -214,7 +214,7 @@ class FakeIO7Lambdalib_la_ioclamp(LambalibTechLibrary, _LambdaPath):
         self.set_name("fakeio7_la_ioclamp")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "asap7", "libs", "fakeio7")
 
@@ -229,7 +229,7 @@ class FakeIO7Lambdalib_la_iorxdiff(LambalibTechLibrary, _LambdaPath):
         self.set_name("fakeio7_la_iorxdiff")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "asap7", "libs", "fakeio7")
 
@@ -244,7 +244,7 @@ class FakeIO7Lambdalib_la_iobidir(LambalibTechLibrary, _LambdaPath):
         self.set_name("fakeio7_la_iobidir")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "asap7", "libs", "fakeio7")
 
@@ -255,7 +255,7 @@ class FakeIO7Lambdalib_la_iobidir(LambalibTechLibrary, _LambdaPath):
 
 class FakeIO7Lambdalib_IO(LambalibTechLibrary):
     @classmethod
-    def alias(cls, project: ASICProject):
+    def alias(cls, project: ASIC):
         FakeIO7Lambdalib_la_iovdd.alias(project)
         FakeIO7Lambdalib_la_iopoc.alias(project)
         FakeIO7Lambdalib_la_iocorner.alias(project)

@@ -75,7 +75,7 @@ class FakeRAM45Lambdalib_SinglePort(LambalibTechLibrary, _LambdaPath):
         self.set_name("fakeram45_la_spram")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "freepdk45", "libs", "fakeram45")
 

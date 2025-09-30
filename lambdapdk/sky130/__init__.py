@@ -37,7 +37,7 @@ class Sky130PDK(LambdaPDK):
         self.set_name("skywater130")
 
         self.set_foundry("skywater")
-        self.set_version("v0_0_2")
+        self.package.set_version("v0_0_2")
         self.set_stackup("5M1LI")
         self.set_node(130)
 

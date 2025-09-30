@@ -114,7 +114,7 @@ class GF180Lambdalib_SinglePort(LambalibTechLibrary, _LambdaPath):
         self.set_name("gf180_la_spram")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_ip_sram")
 

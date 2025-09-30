@@ -14,7 +14,7 @@ class Nangate45(LambdaLibrary):
         self.set_name("nangate45")
 
         # version
-        self.set_version("r1p0")
+        self.package.set_version("r1p0")
 
         self.add_asic_pdk(FreePDK45PDK())
 

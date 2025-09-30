@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from siliconcompiler import ASICProject
+from siliconcompiler import ASIC
 from lambdalib import LambalibTechLibrary
 from lambdapdk import LambdaLibrary, _LambdaPath
 from lambdapdk.gf180 import GF180_3LM_1TM_6K_7t, \
@@ -116,7 +116,7 @@ class GF180Lambdalib_la_iovdd_3LM(LambalibTechLibrary, _LambdaPath):
         self.set_name("gf180_3LM_la_iovdd")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
 
@@ -131,7 +131,7 @@ class GF180Lambdalib_la_iocorner_3LM(LambalibTechLibrary, _LambdaPath):
         self.set_name("gf180_3LM_la_iocorner")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
 
@@ -146,7 +146,7 @@ class GF180Lambdalib_la_iotxdiff_3LM(LambalibTechLibrary, _LambdaPath):
         self.set_name("gf180_3LM_la_iotxdiff")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
 
@@ -161,7 +161,7 @@ class GF180Lambdalib_la_ioanalog_3LM(LambalibTechLibrary, _LambdaPath):
         self.set_name("gf180_3LM_la_ioanalog")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
 
@@ -176,7 +176,7 @@ class GF180Lambdalib_la_ioinput_3LM(LambalibTechLibrary, _LambdaPath):
         self.set_name("gf180_3LM_la_ioinput")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
 
@@ -191,7 +191,7 @@ class GF180Lambdalib_la_iocut_3LM(LambalibTechLibrary, _LambdaPath):
         self.set_name("gf180_3LM_la_iocut")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
 
@@ -206,7 +206,7 @@ class GF180Lambdalib_la_iovss_3LM(LambalibTechLibrary, _LambdaPath):
         self.set_name("gf180_3LM_la_iovss")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
 
@@ -221,7 +221,7 @@ class GF180Lambdalib_la_iovddio_3LM(LambalibTechLibrary, _LambdaPath):
         self.set_name("gf180_3LM_la_iovddio")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
 
@@ -236,7 +236,7 @@ class GF180Lambdalib_la_iovssio_3LM(LambalibTechLibrary, _LambdaPath):
         self.set_name("gf180_3LM_la_iovssio")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
 
@@ -251,7 +251,7 @@ class GF180Lambdalib_la_iovdda_3LM(LambalibTechLibrary, _LambdaPath):
         self.set_name("gf180_3LM_la_iovdda")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
 
@@ -266,7 +266,7 @@ class GF180Lambdalib_la_iovssa_3LM(LambalibTechLibrary, _LambdaPath):
         self.set_name("gf180_3LM_la_iovssa")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
 
@@ -281,7 +281,7 @@ class GF180Lambdalib_la_iorxdiff_3LM(LambalibTechLibrary, _LambdaPath):
         self.set_name("gf180_3LM_la_iorxdiff")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
 
@@ -296,7 +296,7 @@ class GF180Lambdalib_la_iobidir_3LM(LambalibTechLibrary, _LambdaPath):
         self.set_name("gf180_3LM_la_iobidir")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
 
@@ -307,7 +307,7 @@ class GF180Lambdalib_la_iobidir_3LM(LambalibTechLibrary, _LambdaPath):
 
 class GF180Lambdalib_IO_3LM(LambalibTechLibrary):
     @classmethod
-    def alias(cls, project: ASICProject):
+    def alias(cls, project: ASIC):
         GF180Lambdalib_la_iovdd_3LM.alias(project)
         GF180Lambdalib_la_iocorner_3LM.alias(project)
         GF180Lambdalib_la_iotxdiff_3LM.alias(project)
@@ -329,7 +329,7 @@ class GF180Lambdalib_la_iovdd_4LM(LambalibTechLibrary, _LambdaPath):
         self.set_name("gf180_4LM_la_iovdd")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
 
@@ -344,7 +344,7 @@ class GF180Lambdalib_la_iocorner_4LM(LambalibTechLibrary, _LambdaPath):
         self.set_name("gf180_4LM_la_iocorner")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
 
@@ -359,7 +359,7 @@ class GF180Lambdalib_la_iotxdiff_4LM(LambalibTechLibrary, _LambdaPath):
         self.set_name("gf180_4LM_la_iotxdiff")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
 
@@ -374,7 +374,7 @@ class GF180Lambdalib_la_ioanalog_4LM(LambalibTechLibrary, _LambdaPath):
         self.set_name("gf180_4LM_la_ioanalog")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
 
@@ -389,7 +389,7 @@ class GF180Lambdalib_la_ioinput_4LM(LambalibTechLibrary, _LambdaPath):
         self.set_name("gf180_4LM_la_ioinput")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
 
@@ -404,7 +404,7 @@ class GF180Lambdalib_la_iocut_4LM(LambalibTechLibrary, _LambdaPath):
         self.set_name("gf180_4LM_la_iocut")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
 
@@ -419,7 +419,7 @@ class GF180Lambdalib_la_iovss_4LM(LambalibTechLibrary, _LambdaPath):
         self.set_name("gf180_4LM_la_iovss")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
 
@@ -434,7 +434,7 @@ class GF180Lambdalib_la_iovddio_4LM(LambalibTechLibrary, _LambdaPath):
         self.set_name("gf180_4LM_la_iovddio")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
 
@@ -449,7 +449,7 @@ class GF180Lambdalib_la_iovssio_4LM(LambalibTechLibrary, _LambdaPath):
         self.set_name("gf180_4LM_la_iovssio")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
 
@@ -464,7 +464,7 @@ class GF180Lambdalib_la_iovdda_4LM(LambalibTechLibrary, _LambdaPath):
         self.set_name("gf180_4LM_la_iovdda")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
 
@@ -479,7 +479,7 @@ class GF180Lambdalib_la_iovssa_4LM(LambalibTechLibrary, _LambdaPath):
         self.set_name("gf180_4LM_la_iovssa")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
 
@@ -494,7 +494,7 @@ class GF180Lambdalib_la_iorxdiff_4LM(LambalibTechLibrary, _LambdaPath):
         self.set_name("gf180_4LM_la_iorxdiff")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
 
@@ -509,7 +509,7 @@ class GF180Lambdalib_la_iobidir_4LM(LambalibTechLibrary, _LambdaPath):
         self.set_name("gf180_4LM_la_iobidir")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
 
@@ -520,7 +520,7 @@ class GF180Lambdalib_la_iobidir_4LM(LambalibTechLibrary, _LambdaPath):
 
 class GF180Lambdalib_IO_4LM(LambalibTechLibrary):
     @classmethod
-    def alias(cls, project: ASICProject):
+    def alias(cls, project: ASIC):
         GF180Lambdalib_la_iovdd_4LM.alias(project)
         GF180Lambdalib_la_iocorner_4LM.alias(project)
         GF180Lambdalib_la_iotxdiff_4LM.alias(project)
@@ -542,7 +542,7 @@ class GF180Lambdalib_la_iovdd_5LM(LambalibTechLibrary, _LambdaPath):
         self.set_name("gf180_5LM_la_iovdd")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
 
@@ -557,7 +557,7 @@ class GF180Lambdalib_la_iocorner_5LM(LambalibTechLibrary, _LambdaPath):
         self.set_name("gf180_5LM_la_iocorner")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
 
@@ -572,7 +572,7 @@ class GF180Lambdalib_la_iotxdiff_5LM(LambalibTechLibrary, _LambdaPath):
         self.set_name("gf180_5LM_la_iotxdiff")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
 
@@ -587,7 +587,7 @@ class GF180Lambdalib_la_ioanalog_5LM(LambalibTechLibrary, _LambdaPath):
         self.set_name("gf180_5LM_la_ioanalog")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
 
@@ -602,7 +602,7 @@ class GF180Lambdalib_la_ioinput_5LM(LambalibTechLibrary, _LambdaPath):
         self.set_name("gf180_5LM_la_ioinput")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
 
@@ -617,7 +617,7 @@ class GF180Lambdalib_la_iocut_5LM(LambalibTechLibrary, _LambdaPath):
         self.set_name("gf180_5LM_la_iocut")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
 
@@ -632,7 +632,7 @@ class GF180Lambdalib_la_iovss_5LM(LambalibTechLibrary, _LambdaPath):
         self.set_name("gf180_5LM_la_iovss")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
 
@@ -647,7 +647,7 @@ class GF180Lambdalib_la_iovddio_5LM(LambalibTechLibrary, _LambdaPath):
         self.set_name("gf180_5LM_la_iovddio")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
 
@@ -662,7 +662,7 @@ class GF180Lambdalib_la_iovssio_5LM(LambalibTechLibrary, _LambdaPath):
         self.set_name("gf180_5LM_la_iovssio")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
 
@@ -677,7 +677,7 @@ class GF180Lambdalib_la_iovdda_5LM(LambalibTechLibrary, _LambdaPath):
         self.set_name("gf180_5LM_la_iovdda")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
 
@@ -692,7 +692,7 @@ class GF180Lambdalib_la_iovssa_5LM(LambalibTechLibrary, _LambdaPath):
         self.set_name("gf180_5LM_la_iovssa")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
 
@@ -707,7 +707,7 @@ class GF180Lambdalib_la_iorxdiff_5LM(LambalibTechLibrary, _LambdaPath):
         self.set_name("gf180_5LM_la_iorxdiff")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
 
@@ -722,7 +722,7 @@ class GF180Lambdalib_la_iobidir_5LM(LambalibTechLibrary, _LambdaPath):
         self.set_name("gf180_5LM_la_iobidir")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
 
@@ -733,7 +733,7 @@ class GF180Lambdalib_la_iobidir_5LM(LambalibTechLibrary, _LambdaPath):
 
 class GF180Lambdalib_IO_5LM(LambalibTechLibrary):
     @classmethod
-    def alias(cls, project: ASICProject):
+    def alias(cls, project: ASIC):
         GF180Lambdalib_la_iovdd_5LM.alias(project)
         GF180Lambdalib_la_iocorner_5LM.alias(project)
         GF180Lambdalib_la_iotxdiff_5LM.alias(project)

@@ -204,7 +204,7 @@ class FakeRAM7Lambdalib_SinglePort(LambalibTechLibrary, _LambdaPath):
         self.set_name("fakeram7_la_spram")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "asap7", "libs", "fakeram7")
 
@@ -234,7 +234,7 @@ class FakeRAM7Lambdalib_DoublePort(LambalibTechLibrary, _LambdaPath):
         self.set_name("fakeram7_la_dpram")
 
         # version
-        self.set_version("v1")
+        self.package.set_version("v1")
 
         lib_path = Path("lambdapdk", "asap7", "libs", "fakeram7")
 
