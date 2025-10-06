@@ -35,9 +35,6 @@ class ASAP7PDK(LambdaPDK):
 
 
     Sources: https://github.com/The-OpenROAD-Project/asap7
-
-    .. warning::
-       Work in progress (not ready for use)
     '''
 
     def __init__(self):
