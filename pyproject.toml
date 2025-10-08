@@ -13,8 +13,8 @@ urls = {Homepage = "https://github.com/siliconcompiler/lambdapdk"}
 requires-python = ">= 3.8"
 license = {file = "LICENSE"}
 dependencies = [
-    "siliconcompiler >= 0.34.3",
-    "lambdalib == 0.4.0-rc3"
+    "siliconcompiler >= 0.35.0",
+    "lambdalib >= 0.4.0"
 ]
 dynamic = ['version']
 
