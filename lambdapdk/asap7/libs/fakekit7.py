@@ -19,4 +19,5 @@ class FakeKit7Library(LambdaLibrary):
         with self.active_dataroot("lambdapdk"):
             with self.active_fileset("models.physical"):
                 self.add_file(path_base / "lef" / "tsv.lef")
+                self.add_file(path_base / "lef" / "alignment.lef")
                 self.add_asic_aprfileset()
