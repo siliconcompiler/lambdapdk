@@ -3,7 +3,7 @@ from pathlib import Path
 from lambdapdk import LambdaPDK, _LambdaPath
 
 
-pdk_rev = '0854e9bcd558b68c573149038b4c95706314e2f1'
+pdk_rev = '62c1d640dc1c91f57bc1a8e4e08e537a7a105ae8'
 
 
 class _IHP130Path(_LambdaPath):
