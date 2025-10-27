@@ -33,6 +33,11 @@ class _FakeRAM7Library(LambdaLibrary):
             self.add_klayout_allowmissingcell(self.name)
 
 
+class FakeRAM7_tdp_64x32(_FakeRAM7Library):
+    def __init__(self):
+        super().__init__("tdp_64x32")
+
+
 class FakeRAM7_dp_64x32(_FakeRAM7Library):
     def __init__(self):
         super().__init__("dp_64x32")
@@ -41,6 +46,11 @@ class FakeRAM7_dp_64x32(_FakeRAM7Library):
 class FakeRAM7_sp_64x32(_FakeRAM7Library):
     def __init__(self):
         super().__init__("sp_64x32")
+
+
+class FakeRAM7_tdp_128x32(_FakeRAM7Library):
+    def __init__(self):
+        super().__init__("tdp_128x32")
 
 
 class FakeRAM7_dp_128x32(_FakeRAM7Library):
@@ -53,6 +63,11 @@ class FakeRAM7_sp_128x32(_FakeRAM7Library):
         super().__init__("sp_128x32")
 
 
+class FakeRAM7_tdp_256x32(_FakeRAM7Library):
+    def __init__(self):
+        super().__init__("tdp_256x32")
+
+
 class FakeRAM7_dp_256x32(_FakeRAM7Library):
     def __init__(self):
         super().__init__("dp_256x32")
@@ -61,6 +76,11 @@ class FakeRAM7_dp_256x32(_FakeRAM7Library):
 class FakeRAM7_sp_256x32(_FakeRAM7Library):
     def __init__(self):
         super().__init__("sp_256x32")
+
+
+class FakeRAM7_tdp_256x64(_FakeRAM7Library):
+    def __init__(self):
+        super().__init__("tdp_256x64")
 
 
 class FakeRAM7_dp_256x64(_FakeRAM7Library):
@@ -73,6 +93,11 @@ class FakeRAM7_sp_256x64(_FakeRAM7Library):
         super().__init__("sp_256x64")
 
 
+class FakeRAM7_tdp_512x32(_FakeRAM7Library):
+    def __init__(self):
+        super().__init__("tdp_512x32")
+
+
 class FakeRAM7_dp_512x32(_FakeRAM7Library):
     def __init__(self):
         super().__init__("dp_512x32")
@@ -81,6 +106,11 @@ class FakeRAM7_dp_512x32(_FakeRAM7Library):
 class FakeRAM7_sp_512x32(_FakeRAM7Library):
     def __init__(self):
         super().__init__("sp_512x32")
+
+
+class FakeRAM7_tdp_512x64(_FakeRAM7Library):
+    def __init__(self):
+        super().__init__("tdp_512x64")
 
 
 class FakeRAM7_dp_512x64(_FakeRAM7Library):
@@ -93,6 +123,11 @@ class FakeRAM7_sp_512x64(_FakeRAM7Library):
         super().__init__("sp_512x64")
 
 
+class FakeRAM7_tdp_512x128(_FakeRAM7Library):
+    def __init__(self):
+        super().__init__("tdp_512x128")
+
+
 class FakeRAM7_dp_512x128(_FakeRAM7Library):
     def __init__(self):
         super().__init__("dp_512x128")
@@ -101,6 +136,11 @@ class FakeRAM7_dp_512x128(_FakeRAM7Library):
 class FakeRAM7_sp_512x128(_FakeRAM7Library):
     def __init__(self):
         super().__init__("sp_512x128")
+
+
+class FakeRAM7_tdp_1024x32(_FakeRAM7Library):
+    def __init__(self):
+        super().__init__("tdp_1024x32")
 
 
 class FakeRAM7_dp_1024x32(_FakeRAM7Library):
@@ -113,6 +153,11 @@ class FakeRAM7_sp_1024x32(_FakeRAM7Library):
         super().__init__("sp_1024x32")
 
 
+class FakeRAM7_tdp_1024x64(_FakeRAM7Library):
+    def __init__(self):
+        super().__init__("tdp_1024x64")
+
+
 class FakeRAM7_dp_1024x64(_FakeRAM7Library):
     def __init__(self):
         super().__init__("dp_1024x64")
@@ -121,6 +166,11 @@ class FakeRAM7_dp_1024x64(_FakeRAM7Library):
 class FakeRAM7_sp_1024x64(_FakeRAM7Library):
     def __init__(self):
         super().__init__("sp_1024x64")
+
+
+class FakeRAM7_tdp_2048x32(_FakeRAM7Library):
+    def __init__(self):
+        super().__init__("tdp_2048x32")
 
 
 class FakeRAM7_dp_2048x32(_FakeRAM7Library):
@@ -133,6 +183,11 @@ class FakeRAM7_sp_2048x32(_FakeRAM7Library):
         super().__init__("sp_2048x32")
 
 
+class FakeRAM7_tdp_2048x64(_FakeRAM7Library):
+    def __init__(self):
+        super().__init__("tdp_2048x64")
+
+
 class FakeRAM7_dp_2048x64(_FakeRAM7Library):
     def __init__(self):
         super().__init__("dp_2048x64")
@@ -141,6 +196,11 @@ class FakeRAM7_dp_2048x64(_FakeRAM7Library):
 class FakeRAM7_sp_2048x64(_FakeRAM7Library):
     def __init__(self):
         super().__init__("sp_2048x64")
+
+
+class FakeRAM7_tdp_4096x32(_FakeRAM7Library):
+    def __init__(self):
+        super().__init__("tdp_4096x32")
 
 
 class FakeRAM7_dp_4096x32(_FakeRAM7Library):
@@ -153,6 +213,11 @@ class FakeRAM7_sp_4096x32(_FakeRAM7Library):
         super().__init__("sp_4096x32")
 
 
+class FakeRAM7_tdp_4096x64(_FakeRAM7Library):
+    def __init__(self):
+        super().__init__("tdp_4096x64")
+
+
 class FakeRAM7_dp_4096x64(_FakeRAM7Library):
     def __init__(self):
         super().__init__("dp_4096x64")
@@ -161,6 +226,11 @@ class FakeRAM7_dp_4096x64(_FakeRAM7Library):
 class FakeRAM7_sp_4096x64(_FakeRAM7Library):
     def __init__(self):
         super().__init__("sp_4096x64")
+
+
+class FakeRAM7_tdp_8192x32(_FakeRAM7Library):
+    def __init__(self):
+        super().__init__("tdp_8192x32")
 
 
 class FakeRAM7_dp_8192x32(_FakeRAM7Library):
@@ -173,9 +243,14 @@ class FakeRAM7_sp_8192x32(_FakeRAM7Library):
         super().__init__("sp_8192x32")
 
 
-class FakeRAM7_dp_8192x64(_FakeRAM7Library):
+class FakeRAM7_tdp_8192x64(_FakeRAM7Library):
     def __init__(self):
         super().__init__("dp_8192x64")
+
+
+class FakeRAM7_dp_8192x64(_FakeRAM7Library):
+    def __init__(self):
+        super().__init__("tdp_8192x64")
 
 
 class FakeRAM7_sp_8192x64(_FakeRAM7Library):
@@ -211,6 +286,7 @@ class FakeRAM7Lambdalib_SinglePort(LambalibTechLibrary, _LambdaPath):
         with self.active_dataroot("lambdapdk"):
             with self.active_fileset("rtl"):
                 self.add_file(lib_path / "lambda" / "la_spram.v")
+                self.add_file(lib_path / "lambda" / "la_spram_impl.v")
 
 
 class FakeRAM7Lambdalib_DoublePort(LambalibTechLibrary, _LambdaPath):
@@ -241,3 +317,35 @@ class FakeRAM7Lambdalib_DoublePort(LambalibTechLibrary, _LambdaPath):
         with self.active_dataroot("lambdapdk"):
             with self.active_fileset("rtl"):
                 self.add_file(lib_path / "lambda" / "la_dpram.v")
+                self.add_file(lib_path / "lambda" / "la_dpram_impl.v")
+
+
+class FakeRAM7Lambdalib_TrueDoublePort(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_tdpram", [
+            FakeRAM7_tdp_64x32,
+            FakeRAM7_tdp_128x32,
+            FakeRAM7_tdp_256x32,
+            FakeRAM7_tdp_256x64,
+            FakeRAM7_tdp_512x32,
+            FakeRAM7_tdp_512x64,
+            FakeRAM7_tdp_512x128,
+            FakeRAM7_tdp_1024x32,
+            FakeRAM7_tdp_1024x64,
+            FakeRAM7_tdp_2048x32,
+            FakeRAM7_tdp_2048x64,
+            FakeRAM7_tdp_4096x32,
+            FakeRAM7_tdp_4096x64,
+            FakeRAM7_tdp_8192x32,
+            FakeRAM7_tdp_8192x64])
+        self.set_name("fakeram7_la_tdpram")
+
+        # version
+        self.package.set_version("v1")
+
+        lib_path = Path("lambdapdk", "asap7", "libs", "fakeram7")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_tdpram.v")
+                self.add_file(lib_path / "lambda" / "la_tdpram_impl.v")
