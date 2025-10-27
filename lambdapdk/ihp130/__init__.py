@@ -9,7 +9,9 @@ pdk_rev = '62c1d640dc1c91f57bc1a8e4e08e537a7a105ae8'
 class _IHP130Path(_LambdaPath):
     def __init__(self):
         super().__init__()
-        self.set_dataroot("ihp130", "git+https://github.com/IHP-GmbH/IHP-Open-PDK", pdk_rev)
+        self.set_dataroot("ihp130",
+                          f"https://github.com/IHP-GmbH/IHP-Open-PDK/archive/{pdk_rev}.tar.gz",
+                          pdk_rev)
 
 
 class IHP130PDK(LambdaPDK, _IHP130Path):
