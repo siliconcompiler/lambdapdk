@@ -2,6 +2,7 @@ from pathlib import Path
 
 from lambdalib import LambalibTechLibrary
 from lambdapdk import LambdaLibrary, _LambdaPath
+from lambdalib.ramlib import Spram
 from lambdapdk.sky130 import Sky130PDK
 
 
@@ -56,4 +57,4 @@ class Sky130Lambdalib_SinglePort(LambalibTechLibrary, _LambdaPath):
         with self.active_dataroot("lambdapdk"):
             with self.active_fileset("rtl"):
                 self.add_file(lib_path / "lambda" / "la_spram.v")
-                self.add_file(lib_path / "lambda" / "la_spram_impl.v")
+                self.add_depfileset(Spram(), "rtl.impl")

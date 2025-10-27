@@ -2,6 +2,7 @@ from pathlib import Path
 
 from lambdalib import LambalibTechLibrary
 from lambdapdk import LambdaLibrary, _LambdaPath
+from lambdalib.ramlib import Spram, Dpram, Tdpram
 from lambdapdk.asap7 import ASAP7PDK
 
 
@@ -286,7 +287,7 @@ class FakeRAM7Lambdalib_SinglePort(LambalibTechLibrary, _LambdaPath):
         with self.active_dataroot("lambdapdk"):
             with self.active_fileset("rtl"):
                 self.add_file(lib_path / "lambda" / "la_spram.v")
-                self.add_file(lib_path / "lambda" / "la_spram_impl.v")
+                self.add_depfileset(Spram(), "rtl.impl")
 
 
 class FakeRAM7Lambdalib_DoublePort(LambalibTechLibrary, _LambdaPath):
@@ -317,7 +318,7 @@ class FakeRAM7Lambdalib_DoublePort(LambalibTechLibrary, _LambdaPath):
         with self.active_dataroot("lambdapdk"):
             with self.active_fileset("rtl"):
                 self.add_file(lib_path / "lambda" / "la_dpram.v")
-                self.add_file(lib_path / "lambda" / "la_dpram_impl.v")
+                self.add_depfileset(Dpram(), "rtl.impl")
 
 
 class FakeRAM7Lambdalib_TrueDoublePort(LambalibTechLibrary, _LambdaPath):
@@ -348,4 +349,4 @@ class FakeRAM7Lambdalib_TrueDoublePort(LambalibTechLibrary, _LambdaPath):
         with self.active_dataroot("lambdapdk"):
             with self.active_fileset("rtl"):
                 self.add_file(lib_path / "lambda" / "la_tdpram.v")
-                self.add_file(lib_path / "lambda" / "la_tdpram_impl.v")
+                self.add_depfileset(Tdpram(), "rtl.impl")
