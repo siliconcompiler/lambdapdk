@@ -121,3 +121,4 @@ class GF180Lambdalib_SinglePort(LambalibTechLibrary, _LambdaPath):
         with self.active_dataroot("lambdapdk"):
             with self.active_fileset("rtl"):
                 self.add_file(lib_path / "lambda" / "la_spram.v")
+                self.add_file(lib_path / "lambda" / "la_spram_impl.v")
