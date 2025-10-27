@@ -2,6 +2,7 @@ from pathlib import Path
 
 from lambdalib import LambalibTechLibrary
 from lambdapdk import LambdaLibrary, _LambdaPath
+from lambdalib.ramlib import Spram
 from lambdapdk.gf180 import GF180_3LM_1TM_6K_7t, \
     GF180_3LM_1TM_6K_9t, \
     GF180_3LM_1TM_9K_7t, \
@@ -121,4 +122,4 @@ class GF180Lambdalib_SinglePort(LambalibTechLibrary, _LambdaPath):
         with self.active_dataroot("lambdapdk"):
             with self.active_fileset("rtl"):
                 self.add_file(lib_path / "lambda" / "la_spram.v")
-                self.add_file(lib_path / "lambda" / "la_spram_impl.v")
+                self.add_depfileset(Spram(), "rtl.impl")
