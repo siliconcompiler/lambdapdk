@@ -158,35 +158,35 @@ def get_libs():
         FakeIO7Lambdalib_la_iobidir
     from lambdapdk.asap7.libs.fakekit7 import FakeKit7Library
     from lambdapdk.asap7.libs.fakeram7 import \
-        FakeRAM7_dp_64x32, \
+        FakeRAM7_dp_64x32, FakeRAM7_tdp_64x32, \
         FakeRAM7_sp_64x32, \
-        FakeRAM7_dp_128x32, \
+        FakeRAM7_dp_128x32, FakeRAM7_tdp_128x32, \
         FakeRAM7_sp_128x32, \
-        FakeRAM7_dp_256x32, \
+        FakeRAM7_dp_256x32, FakeRAM7_tdp_256x32, \
         FakeRAM7_sp_256x32, \
-        FakeRAM7_dp_256x64, \
+        FakeRAM7_dp_256x64, FakeRAM7_tdp_256x64, \
         FakeRAM7_sp_256x64, \
-        FakeRAM7_dp_512x32, \
+        FakeRAM7_dp_512x32, FakeRAM7_tdp_512x32, \
         FakeRAM7_sp_512x32, \
-        FakeRAM7_dp_512x64, \
+        FakeRAM7_dp_512x64, FakeRAM7_tdp_512x64, \
         FakeRAM7_sp_512x64, \
-        FakeRAM7_dp_512x128, \
+        FakeRAM7_dp_512x128, FakeRAM7_tdp_512x128, \
         FakeRAM7_sp_512x128, \
-        FakeRAM7_dp_1024x32, \
+        FakeRAM7_dp_1024x32, FakeRAM7_tdp_1024x32, \
         FakeRAM7_sp_1024x32, \
-        FakeRAM7_dp_1024x64, \
+        FakeRAM7_dp_1024x64, FakeRAM7_tdp_1024x64, \
         FakeRAM7_sp_1024x64, \
-        FakeRAM7_dp_2048x32, \
+        FakeRAM7_dp_2048x32, FakeRAM7_tdp_2048x32, \
         FakeRAM7_sp_2048x32, \
-        FakeRAM7_dp_2048x64, \
+        FakeRAM7_dp_2048x64, FakeRAM7_tdp_2048x64, \
         FakeRAM7_sp_2048x64, \
-        FakeRAM7_dp_4096x32, \
+        FakeRAM7_dp_4096x32, FakeRAM7_tdp_4096x32, \
         FakeRAM7_sp_4096x32, \
-        FakeRAM7_dp_4096x64, \
+        FakeRAM7_dp_4096x64, FakeRAM7_tdp_4096x64, \
         FakeRAM7_sp_4096x64, \
-        FakeRAM7_dp_8192x32, \
+        FakeRAM7_dp_8192x32, FakeRAM7_tdp_8192x32, \
         FakeRAM7_sp_8192x32, \
-        FakeRAM7_dp_8192x64, \
+        FakeRAM7_dp_8192x64, FakeRAM7_tdp_8192x64, \
         FakeRAM7_sp_8192x64, \
         FakeRAM7Lambdalib_SinglePort, \
         FakeRAM7Lambdalib_DoublePort
@@ -304,35 +304,35 @@ def get_libs():
     return set([
         ASAP7SC7p5RVT(), ASAP7SC7p5SLVT(), ASAP7SC7p5LVT(),
         FakeIO7Library(), FakeKit7Library(),
-        FakeRAM7_dp_64x32(),
+        FakeRAM7_dp_64x32(), FakeRAM7_tdp_64x32(),
         FakeRAM7_sp_64x32(),
-        FakeRAM7_dp_128x32(),
+        FakeRAM7_dp_128x32(), FakeRAM7_tdp_128x32(),
         FakeRAM7_sp_128x32(),
-        FakeRAM7_dp_256x32(),
+        FakeRAM7_dp_256x32(), FakeRAM7_tdp_256x32(),
         FakeRAM7_sp_256x32(),
-        FakeRAM7_dp_256x64(),
+        FakeRAM7_dp_256x64(), FakeRAM7_tdp_256x64(),
         FakeRAM7_sp_256x64(),
-        FakeRAM7_dp_512x32(),
+        FakeRAM7_dp_512x32(), FakeRAM7_tdp_512x32(),
         FakeRAM7_sp_512x32(),
-        FakeRAM7_dp_512x64(),
+        FakeRAM7_dp_512x64(), FakeRAM7_tdp_512x64(),
         FakeRAM7_sp_512x64(),
-        FakeRAM7_dp_512x128(),
+        FakeRAM7_dp_512x128(), FakeRAM7_tdp_512x128(),
         FakeRAM7_sp_512x128(),
-        FakeRAM7_dp_1024x32(),
+        FakeRAM7_dp_1024x32(), FakeRAM7_tdp_1024x32(),
         FakeRAM7_sp_1024x32(),
-        FakeRAM7_dp_1024x64(),
+        FakeRAM7_dp_1024x64(), FakeRAM7_tdp_1024x64(),
         FakeRAM7_sp_1024x64(),
-        FakeRAM7_dp_2048x32(),
+        FakeRAM7_dp_2048x32(), FakeRAM7_tdp_2048x32(),
         FakeRAM7_sp_2048x32(),
-        FakeRAM7_dp_2048x64(),
+        FakeRAM7_dp_2048x64(), FakeRAM7_tdp_2048x64(),
         FakeRAM7_sp_2048x64(),
-        FakeRAM7_dp_4096x32(),
+        FakeRAM7_dp_4096x32(), FakeRAM7_tdp_4096x32(),
         FakeRAM7_sp_4096x32(),
-        FakeRAM7_dp_4096x64(),
+        FakeRAM7_dp_4096x64(), FakeRAM7_tdp_4096x64(),
         FakeRAM7_sp_4096x64(),
-        FakeRAM7_dp_8192x32(),
+        FakeRAM7_dp_8192x32(), FakeRAM7_tdp_8192x32(),
         FakeRAM7_sp_8192x32(),
-        FakeRAM7_dp_8192x64(),
+        FakeRAM7_dp_8192x64(), FakeRAM7_tdp_8192x64(),
         FakeRAM7_sp_8192x64(),
         FakeRAM7Lambdalib_SinglePort(),
         FakeRAM7Lambdalib_DoublePort(),

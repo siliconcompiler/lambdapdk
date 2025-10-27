@@ -49,7 +49,7 @@ module fakeram7_dp_128x32
                mem[j] <= 'x;
             $display("warning: ce_in=1, we_in_A is %b, addr_in_A = %x in fakeram7_dp_128x32", we_in_A, addr_in_A);
          end
-         else if (we_in)
+         else if (we_in_A)
          begin
             mem[addr_in_A] <= (wd_in_A & w_mask_in_A) | (mem[addr_in_A] & ~w_mask_in_A);
          end
@@ -63,7 +63,7 @@ module fakeram7_dp_128x32
                mem[j] <= 'x;
             $display("warning: ce_in=1, we_in_B is %b, addr_in_B = %x in fakeram7_dp_128x32", we_in_B, addr_in_B);
          end
-         else if (we_in)
+         else if (we_in_B)
          begin
             mem[addr_in_B] <= (wd_in_B & w_mask_in_B) | (mem[addr_in_B] & ~w_mask_in_B);
          end
@@ -84,7 +84,6 @@ module fakeram7_dp_128x32
    specify
       // Delay from clk to rd_out
       (posedge clk *> rd_out_A) = (0, 0);
-   specify
       // Delay from clk to rd_out
       (posedge clk *> rd_out_B) = (0, 0);
 

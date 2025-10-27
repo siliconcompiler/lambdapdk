@@ -2,7 +2,7 @@ library(fakeram7_dp_512x64) {
     technology (cmos);
     delay_model : table_lookup;
     revision : 1.0;
-    date : "2025-06-03 12:59:10Z";
+    date : "2025-10-27 12:53:28Z";
     comment : "SRAM";
     time_unit : "1ns";
     voltage_unit : "1V";
@@ -88,7 +88,7 @@ library(fakeram7_dp_512x64) {
         downto : true ;
     }
 cell(fakeram7_dp_512x64) {
-    area : 1945.875;
+    area : 1971.060;
     interface_timing : true;
     memory() {
         type : ram;
@@ -120,7 +120,7 @@ cell(fakeram7_dp_512x64) {
             address : addr_in_A;
         }
         timing() {
-            related_pin : "clk" ;
+            related_pin : clk ;
             timing_type : rising_edge;
             timing_sense : non_unate;
             cell_rise(fakeram7_dp_512x64_mem_out_delay_template) {
@@ -157,7 +157,7 @@ cell(fakeram7_dp_512x64) {
             address : addr_in_B;
         }
         timing() {
-            related_pin : "clk" ;
+            related_pin : clk ;
             timing_type : rising_edge;
             timing_sense : non_unate;
             cell_rise(fakeram7_dp_512x64_mem_out_delay_template) {
@@ -190,7 +190,7 @@ cell(fakeram7_dp_512x64) {
         direction : input;
         capacitance : 0.005;
         timing() {
-            related_pin : clk;
+            related_pin : clk ;
             timing_type : setup_rising ;
             rise_constraint(fakeram7_dp_512x64_constraint_template) {
                 index_1 ("0.009, 0.227");
@@ -210,7 +210,7 @@ cell(fakeram7_dp_512x64) {
             }
         } 
         timing() {
-            related_pin : clk;
+            related_pin : clk ;
             timing_type : hold_rising ;
             rise_constraint(fakeram7_dp_512x64_constraint_template) {
                 index_1 ("0.009, 0.227");
@@ -244,7 +244,7 @@ cell(fakeram7_dp_512x64) {
         direction : input;
         capacitance : 0.005;
         timing() {
-            related_pin : clk;
+            related_pin : clk ;
             timing_type : setup_rising ;
             rise_constraint(fakeram7_dp_512x64_constraint_template) {
                 index_1 ("0.009, 0.227");
@@ -264,7 +264,7 @@ cell(fakeram7_dp_512x64) {
             }
         } 
         timing() {
-            related_pin : clk;
+            related_pin : clk ;
             timing_type : hold_rising ;
             rise_constraint(fakeram7_dp_512x64_constraint_template) {
                 index_1 ("0.009, 0.227");
@@ -353,7 +353,7 @@ cell(fakeram7_dp_512x64) {
         direction : input;
         capacitance : 0.005;
         timing() {
-            related_pin : clk;
+            related_pin : clk ;
             timing_type : setup_rising ;
             rise_constraint(fakeram7_dp_512x64_constraint_template) {
                 index_1 ("0.009, 0.227");
@@ -373,7 +373,7 @@ cell(fakeram7_dp_512x64) {
             }
         } 
         timing() {
-            related_pin : clk;
+            related_pin : clk ;
             timing_type : hold_rising ;
             rise_constraint(fakeram7_dp_512x64_constraint_template) {
                 index_1 ("0.009, 0.227");
@@ -408,7 +408,7 @@ cell(fakeram7_dp_512x64) {
         direction : input;
         capacitance : 0.005;
         timing() {
-            related_pin : clk;
+            related_pin : clk ;
             timing_type : setup_rising ;
             rise_constraint(fakeram7_dp_512x64_constraint_template) {
                 index_1 ("0.009, 0.227");
@@ -428,7 +428,7 @@ cell(fakeram7_dp_512x64) {
             }
         } 
         timing() {
-            related_pin : clk;
+            related_pin : clk ;
             timing_type : hold_rising ;
             rise_constraint(fakeram7_dp_512x64_constraint_template) {
                 index_1 ("0.009, 0.227");
@@ -467,7 +467,7 @@ cell(fakeram7_dp_512x64) {
         direction : input;
         capacitance : 0.005;
         timing() {
-            related_pin     : clk;
+            related_pin : clk ;
             timing_type     : setup_rising ;
             rise_constraint(fakeram7_dp_512x64_constraint_template) {
                 index_1 ("0.009, 0.227");
@@ -487,7 +487,7 @@ cell(fakeram7_dp_512x64) {
             }
         } 
         timing() {
-            related_pin     : clk;
+            related_pin : clk ;
             timing_type     : hold_rising ;
             rise_constraint(fakeram7_dp_512x64_constraint_template) {
                 index_1 ("0.009, 0.227");
@@ -538,7 +538,7 @@ cell(fakeram7_dp_512x64) {
         direction : input;
         capacitance : 0.005;
         timing() {
-            related_pin     : clk;
+            related_pin : clk ;
             timing_type     : setup_rising ;
             rise_constraint(fakeram7_dp_512x64_constraint_template) {
                 index_1 ("0.009, 0.227");
@@ -558,7 +558,7 @@ cell(fakeram7_dp_512x64) {
             }
         } 
         timing() {
-            related_pin     : clk;
+            related_pin : clk ;
             timing_type     : hold_rising ;
             rise_constraint(fakeram7_dp_512x64_constraint_template) {
                 index_1 ("0.009, 0.227");
@@ -609,7 +609,7 @@ cell(fakeram7_dp_512x64) {
         direction : input;
         capacitance : 0.005;
         timing() {
-            related_pin     : clk;
+            related_pin : clk ;
             timing_type     : setup_rising ;
             rise_constraint(fakeram7_dp_512x64_constraint_template) {
                 index_1 ("0.009, 0.227");
@@ -629,7 +629,7 @@ cell(fakeram7_dp_512x64) {
             }
         } 
         timing() {
-            related_pin     : clk;
+            related_pin : clk ;
             timing_type     : hold_rising ;
             rise_constraint(fakeram7_dp_512x64_constraint_template) {
                 index_1 ("0.009, 0.227");
@@ -680,7 +680,7 @@ cell(fakeram7_dp_512x64) {
         direction : input;
         capacitance : 0.005;
         timing() {
-            related_pin     : clk;
+            related_pin : clk ;
             timing_type     : setup_rising ;
             rise_constraint(fakeram7_dp_512x64_constraint_template) {
                 index_1 ("0.009, 0.227");
@@ -700,7 +700,7 @@ cell(fakeram7_dp_512x64) {
             }
         } 
         timing() {
-            related_pin     : clk;
+            related_pin : clk ;
             timing_type     : hold_rising ;
             rise_constraint(fakeram7_dp_512x64_constraint_template) {
                 index_1 ("0.009, 0.227");
