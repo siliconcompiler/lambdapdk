@@ -33,7 +33,7 @@ module la_tdpram #(
     input [DW-1:0]      wmask_a,  // write mask
     input [AW-1:0]      addr_a,   // write address
     input [DW-1:0]      din_a,    // write data in
-    output reg [DW-1:0] dout_a,   // read data out
+    output [DW-1:0]     dout_a,   // read data out
     // B port
     input               clk_b,    // write clock
     input               ce_b,     // write chip-enable
@@ -41,7 +41,7 @@ module la_tdpram #(
     input [DW-1:0]      wmask_b,  // write mask
     input [AW-1:0]      addr_b,   // write address
     input [DW-1:0]      din_b,    // write data in
-    output reg [DW-1:0] dout_b,   // read data out
+    output [DW-1:0]     dout_b,   // read data out
     // Power signals
     input vss,  // ground signal
     input vdd,  // memory core array power
