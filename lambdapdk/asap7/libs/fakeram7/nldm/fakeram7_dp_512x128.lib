@@ -2,7 +2,7 @@ library(fakeram7_dp_512x128) {
     technology (cmos);
     delay_model : table_lookup;
     revision : 1.0;
-    date : "2025-10-27 12:53:28Z";
+    date : "2025-10-31 14:41:09Z";
     comment : "SRAM";
     time_unit : "1ns";
     voltage_unit : "1V";
@@ -208,7 +208,7 @@ cell(fakeram7_dp_512x128) {
                   "0.050, 0.050" \
                 )
             }
-        } 
+        }
         timing() {
             related_pin : clk ;
             timing_type : hold_rising ;
@@ -262,7 +262,7 @@ cell(fakeram7_dp_512x128) {
                   "0.050, 0.050" \
                 )
             }
-        } 
+        }
         timing() {
             related_pin : clk ;
             timing_type : hold_rising ;
@@ -316,7 +316,7 @@ cell(fakeram7_dp_512x128) {
                   "0.050, 0.050" \
                 )
             }
-        } 
+        }
         timing() {
             related_pin : clk;
             timing_type : hold_rising ;
@@ -371,7 +371,7 @@ cell(fakeram7_dp_512x128) {
                   "0.050, 0.050" \
                 )
             }
-        } 
+        }
         timing() {
             related_pin : clk ;
             timing_type : hold_rising ;
@@ -426,7 +426,7 @@ cell(fakeram7_dp_512x128) {
                   "0.050, 0.050" \
                 )
             }
-        } 
+        }
         timing() {
             related_pin : clk ;
             timing_type : hold_rising ;
@@ -485,7 +485,7 @@ cell(fakeram7_dp_512x128) {
                   "0.050, 0.050" \
                 )
             }
-        } 
+        }
         timing() {
             related_pin : clk ;
             timing_type     : hold_rising ;
@@ -556,7 +556,7 @@ cell(fakeram7_dp_512x128) {
                   "0.050, 0.050" \
                 )
             }
-        } 
+        }
         timing() {
             related_pin : clk ;
             timing_type     : hold_rising ;
@@ -627,7 +627,7 @@ cell(fakeram7_dp_512x128) {
                   "0.050, 0.050" \
                 )
             }
-        } 
+        }
         timing() {
             related_pin : clk ;
             timing_type     : hold_rising ;
@@ -698,7 +698,7 @@ cell(fakeram7_dp_512x128) {
                   "0.050, 0.050" \
                 )
             }
-        } 
+        }
         timing() {
             related_pin : clk ;
             timing_type     : hold_rising ;

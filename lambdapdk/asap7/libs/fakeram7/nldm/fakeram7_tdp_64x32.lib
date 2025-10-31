@@ -2,7 +2,7 @@ library(fakeram7_tdp_64x32) {
     technology (cmos);
     delay_model : table_lookup;
     revision : 1.0;
-    date : "2025-10-27 12:53:28Z";
+    date : "2025-10-31 14:41:09Z";
     comment : "SRAM";
     time_unit : "1ns";
     voltage_unit : "1V";
@@ -225,7 +225,7 @@ cell(fakeram7_tdp_64x32) {
                   "0.050, 0.050" \
                 )
             }
-        } 
+        }
         timing() {
             related_pin : clk_A ;
             timing_type : hold_rising ;
@@ -279,9 +279,63 @@ cell(fakeram7_tdp_64x32) {
                   "0.050, 0.050" \
                 )
             }
-        } 
+        }
         timing() {
             related_pin : clk_B ;
+            timing_type : hold_rising ;
+            rise_constraint(fakeram7_tdp_64x32_constraint_template) {
+                index_1 ("0.009, 0.227");
+                index_2 ("0.009, 0.227");
+                values ( \
+                  "0.050, 0.050", \
+                  "0.050, 0.050" \
+                )
+            }
+            fall_constraint(fakeram7_tdp_64x32_constraint_template) {
+                index_1 ("0.009, 0.227");
+                index_2 ("0.009, 0.227");
+                values ( \
+                  "0.050, 0.050", \
+                  "0.050, 0.050" \
+                )
+            }
+        }
+        internal_power(){
+            rise_power(fakeram7_tdp_64x32_energy_template_sigslew) {
+                index_1 ("0.009, 0.227");
+                values ("0.013, 0.013")
+            }
+            fall_power(fakeram7_tdp_64x32_energy_template_sigslew) {
+                index_1 ("0.009, 0.227");
+                values ("0.013, 0.013")
+            }
+        }
+    }
+    pin(ce_in_A) {
+        direction : input;
+        capacitance : 0.005;
+        timing() {
+            related_pin : clk_A;
+            timing_type : setup_rising ;
+            rise_constraint(fakeram7_tdp_64x32_constraint_template) {
+                index_1 ("0.009, 0.227");
+                index_2 ("0.009, 0.227");
+                values ( \
+                  "0.050, 0.050", \
+                  "0.050, 0.050" \
+                )
+            }
+            fall_constraint(fakeram7_tdp_64x32_constraint_template) {
+                index_1 ("0.009, 0.227");
+                index_2 ("0.009, 0.227");
+                values ( \
+                  "0.050, 0.050", \
+                  "0.050, 0.050" \
+                )
+            }
+        }
+        timing() {
+            related_pin : clk_A;
             timing_type : hold_rising ;
             rise_constraint(fakeram7_tdp_64x32_constraint_template) {
                 index_1 ("0.009, 0.227");
@@ -333,7 +387,7 @@ cell(fakeram7_tdp_64x32) {
                   "0.050, 0.050" \
                 )
             }
-        } 
+        }
         timing() {
             related_pin : clk_B;
             timing_type : hold_rising ;
@@ -388,7 +442,7 @@ cell(fakeram7_tdp_64x32) {
                   "0.050, 0.050" \
                 )
             }
-        } 
+        }
         timing() {
             related_pin : clk_A ;
             timing_type : hold_rising ;
@@ -443,7 +497,7 @@ cell(fakeram7_tdp_64x32) {
                   "0.050, 0.050" \
                 )
             }
-        } 
+        }
         timing() {
             related_pin : clk_B ;
             timing_type : hold_rising ;
@@ -502,7 +556,7 @@ cell(fakeram7_tdp_64x32) {
                   "0.050, 0.050" \
                 )
             }
-        } 
+        }
         timing() {
             related_pin : clk_A ;
             timing_type     : hold_rising ;
@@ -573,7 +627,7 @@ cell(fakeram7_tdp_64x32) {
                   "0.050, 0.050" \
                 )
             }
-        } 
+        }
         timing() {
             related_pin : clk_B ;
             timing_type     : hold_rising ;
@@ -644,7 +698,7 @@ cell(fakeram7_tdp_64x32) {
                   "0.050, 0.050" \
                 )
             }
-        } 
+        }
         timing() {
             related_pin : clk_A ;
             timing_type     : hold_rising ;
@@ -715,7 +769,7 @@ cell(fakeram7_tdp_64x32) {
                   "0.050, 0.050" \
                 )
             }
-        } 
+        }
         timing() {
             related_pin : clk_B ;
             timing_type     : hold_rising ;
