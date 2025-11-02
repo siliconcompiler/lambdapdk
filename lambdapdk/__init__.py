@@ -83,6 +83,7 @@ def get_pdks():
         Interposer_5ML_0800, \
         Interposer_5ML_2000, \
         Interposer_5ML_0400_2000
+    from lambdapdk.icsprout55 import ICS55PDK
 
     return set([
         ASAP7PDK(),
@@ -122,7 +123,8 @@ def get_pdks():
         Interposer_5ML_0400(),
         Interposer_5ML_0800(),
         Interposer_5ML_2000(),
-        Interposer_5ML_0400_2000()
+        Interposer_5ML_0400_2000(),
+        ICS55PDK()
     ])
 
 
@@ -300,6 +302,8 @@ def get_libs():
         Sky130Lambdalib_la_iovssio
     from lambdapdk.sky130.libs.sky130sc import Sky130_SCHDLibrary, Sky130_SCHDLLLibrary
     from lambdapdk.sky130.libs.sky130sram import Sky130_SRAM_64x256, Sky130Lambdalib_SinglePort
+    from lambdapdk.icsprout55.libs.ics55_stdcell import ics55_LLSC_H7CH, ics55_LLSC_H7CL, \
+        ics55_LLSC_H7CR
 
     return set([
         ASAP7SC7p5RVT(), ASAP7SC7p5SLVT(), ASAP7SC7p5LVT(),
@@ -458,7 +462,8 @@ def get_libs():
         FakeIO7Lambdalib_la_iovssa(),
         FakeIO7Lambdalib_la_ioclamp(),
         FakeIO7Lambdalib_la_iorxdiff(),
-        FakeIO7Lambdalib_la_iobidir()
+        FakeIO7Lambdalib_la_iobidir(),
+        ics55_LLSC_H7CH(), ics55_LLSC_H7CL(), ics55_LLSC_H7CR()
     ])
 
 
