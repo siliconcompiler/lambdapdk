@@ -11,7 +11,7 @@ from siliconcompiler.tools.openroad import OpenROADStdCellLibrary
 from siliconcompiler.tools.bambu import BambuStdCellLibrary
 from siliconcompiler.tools.klayout import KLayoutLibrary
 
-__version__ = "0.2.3"
+__version__ = "0.2.4"
 
 
 class _LambdaPath(PathSchema):
