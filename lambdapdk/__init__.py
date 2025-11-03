@@ -11,7 +11,11 @@ from siliconcompiler.tools.openroad import OpenROADStdCellLibrary
 from siliconcompiler.tools.bambu import BambuStdCellLibrary
 from siliconcompiler.tools.klayout import KLayoutLibrary
 
-__version__ = "0.2.3"
+try:
+    from lambdapdk._version import __version__
+except ImportError:
+    # This only exists in installations
+    __version__ = None
 
 
 class _LambdaPath(PathSchema):
