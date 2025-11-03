@@ -35,8 +35,8 @@ module la_iobidir #(
       FAKEIO7_BIDIR_V i0 (  // pad
           .PAD(pad),
           // core signals
-          .Z(Z),
-          .A(A),
+          .Z(z),
+          .A(a),
           //supplies
           .DVDD(vddio),
           .DVSS(vssio),
@@ -58,8 +58,8 @@ module la_iobidir #(
       FAKEIO7_BIDIR_H i0 (  // pad
           .PAD(pad),
           // core signals
-          .Z(Z),
-          .A(A),
+          .Z(z),
+          .A(a),
           //supplies
           .DVDD(vddio),
           .DVSS(vssio),
