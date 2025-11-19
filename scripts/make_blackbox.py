@@ -12,18 +12,22 @@ def get_cells(path):
     for cell, info in lef['macros'].items():
         cells[cell] = {}
         multipins = {}
-        for pin in info['pins']:
+        multipins_dir = {}
+        for pin, pin_info in info.get('pins', {}).items():
             if "[" in pin:
+                direction = pin_info.get("direction", "inout").lower()
                 pin = pin[:pin.find("[")]
                 if pin not in multipins:
                     multipins[pin] = 0
                 multipins[pin] += 1
+                multipins_dir[pin] = direction
                 continue
 
-            cells[cell][pin] = "inout"
+            direction = pin_info.get("direction", "inout").lower()
+            cells[cell][pin] = direction
 
         for pin, width in multipins.items():
-            cells[cell][f"[{width-1}:0] {pin}"] = "inout"
+            cells[cell][f"[{width-1}:0] {pin}"] = multipins_dir[pin]
 
     return cells
 

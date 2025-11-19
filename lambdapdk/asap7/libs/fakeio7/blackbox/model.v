@@ -7,14 +7,14 @@ module FAKEIO7_BIDIR_V (
     inout DVSS,
     inout VDD,
     inout VSS,
-    inout IN_ENABLE,
-    inout OUT_ENABLE,
-    inout A,
-    inout Z,
-    inout PULLDOWN,
-    inout PULLUP,
-    inout DRIVE0,
-    inout DRIVE1,
+    input IN_ENABLE,
+    input OUT_ENABLE,
+    input A,
+    output Z,
+    input PULLDOWN,
+    input PULLUP,
+    input DRIVE0,
+    input DRIVE1,
     inout [1:0] RING
 );
 endmodule
@@ -25,7 +25,7 @@ module FAKEIO7_POC_V (
     inout DVSS,
     inout VDD,
     inout VSS,
-    inout MODE,
+    input MODE,
     inout [1:0] RING
 );
 endmodule
@@ -89,7 +89,7 @@ module FAKEIO7_ANALOG_V (
     inout VDD,
     inout VSS,
     inout [1:0] RING,
-    inout [2:0] AIO
+    input [2:0] AIO
 );
 endmodule
 
@@ -155,10 +155,10 @@ module FAKEIO7_DIFFTX_V (
     inout DVSS,
     inout VDD,
     inout VSS,
-    inout OUT_ENABLE,
-    inout A,
-    inout DRIVE0,
-    inout DRIVE1,
+    input OUT_ENABLE,
+    input A,
+    input DRIVE0,
+    input DRIVE1,
     inout [1:0] RING
 );
 endmodule
@@ -171,11 +171,11 @@ module FAKEIO7_DIFFRX_V (
     inout DVSS,
     inout VDD,
     inout VSS,
-    inout IN_ENABLE,
-    inout ZP,
-    inout ZN,
-    inout PULLDOWN,
-    inout PULLUP,
+    input IN_ENABLE,
+    output ZP,
+    output ZN,
+    input PULLDOWN,
+    input PULLUP,
     inout [1:0] RING
 );
 endmodule
@@ -191,13 +191,109 @@ module FAKEIO7_CORNER (
 endmodule
 
 (* blackbox *)
-module FAKEIO7_BUMP_SMALL (
+module FAKEIO7_BUMP_PROBE (
     inout PAD
 );
 endmodule
 
 (* blackbox *)
-module FAKEIO7_BUMP_LARGE (
+module FAKEIO7_BUMP_M8_5P0X5P0 (
+    inout PAD
+);
+endmodule
+
+(* blackbox *)
+module FAKEIO7_BUMP_M8_5P0X5P0_DUMMY (
+
+);
+endmodule
+
+(* blackbox *)
+module FAKEIO7_BUMP_M8_2P5X2P5 (
+    inout PAD
+);
+endmodule
+
+(* blackbox *)
+module FAKEIO7_BUMP_M8_2P5X2P5_DUMMY (
+
+);
+endmodule
+
+(* blackbox *)
+module FAKEIO7_BUMP_M8_1P0X1P0 (
+    inout PAD
+);
+endmodule
+
+(* blackbox *)
+module FAKEIO7_BUMP_M8_1P0X1P0_DUMMY (
+
+);
+endmodule
+
+(* blackbox *)
+module FAKEIO7_BUMP_5P0X5P0 (
+    inout PAD
+);
+endmodule
+
+(* blackbox *)
+module FAKEIO7_BUMP_5P0X5P0_DUMMY (
+
+);
+endmodule
+
+(* blackbox *)
+module FAKEIO7_BUMP_12P5 (
+    inout PAD
+);
+endmodule
+
+(* blackbox *)
+module FAKEIO7_BUMP_12P5_DUMMY (
+
+);
+endmodule
+
+(* blackbox *)
+module FAKEIO7_BUMP_15P0 (
+    inout PAD
+);
+endmodule
+
+(* blackbox *)
+module FAKEIO7_BUMP_15P0_DUMMY (
+
+);
+endmodule
+
+(* blackbox *)
+module FAKEIO7_BUMP_30P0 (
+    inout PAD
+);
+endmodule
+
+(* blackbox *)
+module FAKEIO7_BUMP_30P0_DUMMY (
+
+);
+endmodule
+
+(* blackbox *)
+module FAKEIO7_BUMP_50P0 (
+    inout PAD
+);
+endmodule
+
+(* blackbox *)
+module FAKEIO7_BUMP_50P0_DUMMY (
+
+);
+endmodule
+
+(* blackbox *)
+module FAKEIO7_PROBE (
     inout PAD
 );
 endmodule
@@ -209,14 +305,14 @@ module FAKEIO7_BIDIR_H (
     inout DVSS,
     inout VDD,
     inout VSS,
-    inout IN_ENABLE,
-    inout OUT_ENABLE,
-    inout A,
-    inout Z,
-    inout PULLDOWN,
-    inout PULLUP,
-    inout DRIVE0,
-    inout DRIVE1,
+    input IN_ENABLE,
+    input OUT_ENABLE,
+    input A,
+    output Z,
+    input PULLDOWN,
+    input PULLUP,
+    input DRIVE0,
+    input DRIVE1,
     inout [1:0] RING
 );
 endmodule
@@ -227,7 +323,7 @@ module FAKEIO7_POC_H (
     inout DVSS,
     inout VDD,
     inout VSS,
-    inout MODE,
+    input MODE,
     inout [1:0] RING
 );
 endmodule
@@ -280,7 +376,7 @@ module FAKEIO7_ANALOG_H (
     inout VDD,
     inout VSS,
     inout [1:0] RING,
-    inout [2:0] AIO
+    input [2:0] AIO
 );
 endmodule
 
@@ -346,10 +442,10 @@ module FAKEIO7_DIFFTX_H (
     inout DVSS,
     inout VDD,
     inout VSS,
-    inout OUT_ENABLE,
-    inout A,
-    inout DRIVE0,
-    inout DRIVE1,
+    input OUT_ENABLE,
+    input A,
+    input DRIVE0,
+    input DRIVE1,
     inout [1:0] RING
 );
 endmodule
@@ -362,11 +458,11 @@ module FAKEIO7_DIFFRX_H (
     inout DVSS,
     inout VDD,
     inout VSS,
-    inout IN_ENABLE,
-    inout ZP,
-    inout ZN,
-    inout PULLDOWN,
-    inout PULLUP,
+    input IN_ENABLE,
+    output ZP,
+    output ZN,
+    input PULLDOWN,
+    input PULLUP,
     inout [1:0] RING
 );
 endmodule
