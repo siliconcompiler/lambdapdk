@@ -1,9 +1,14 @@
+import argparse
+
+import os.path
+
 from pathlib import Path
 
 from lambdalib import LambalibTechLibrary
 from lambdapdk import LambdaLibrary, _LambdaPath
 from lambdalib.ramlib import Spram
 from lambdapdk.freepdk45 import FreePDK45PDK
+from lambdapdk.utils import format_verilog
 
 
 class _FakeRAM45Library(LambdaLibrary):
@@ -84,3 +89,52 @@ class FakeRAM45Lambdalib_SinglePort(LambalibTechLibrary, _LambdaPath):
             with self.active_fileset("rtl"):
                 self.add_file(lib_path / "lambda" / "la_spram.v")
                 self.add_depfileset(Spram(), "rtl.impl")
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--verible_bin',
+                        metavar='<verible>',
+                        required=True,
+                        help='path to verible-verilog-format')
+    args = parser.parse_args()
+
+    files = []
+
+    freepdk45_spram_port_map = [
+        ("clk", "clk"),
+        ("addr_in", "mem_addr"),
+        ("ce_in", "ce_in"),
+        ("rd_out", "mem_dout"),
+        ("we_in", "we_in"),
+        ("w_mask_in", "mem_wmask"),
+        ("wd_in", "mem_din")
+    ]
+
+    spram = Spram()
+    files.append(os.path.join(os.path.dirname(__file__), "fakeram45", "lambda", f"{spram.name}.v"))
+    spram.write_lambdalib(
+        files[-1],
+        {
+        "fakeram45_512x32": {
+            "DW": 32, "AW": 9, "port_map": freepdk45_spram_port_map
+        },
+        "fakeram45_512x64": {
+            "DW": 64, "AW": 9, "port_map": freepdk45_spram_port_map
+        },
+        "fakeram45_256x64": {
+            "DW": 64, "AW": 8, "port_map": freepdk45_spram_port_map
+        },
+        "fakeram45_256x32": {
+            "DW": 32, "AW": 8, "port_map": freepdk45_spram_port_map
+        },
+        "fakeram45_128x32": {
+            "DW": 32, "AW": 7, "port_map": freepdk45_spram_port_map
+        },
+        "fakeram45_64x32": {
+            "DW": 32, "AW": 6, "port_map": freepdk45_spram_port_map
+        }
+    })
+
+    for f in files:
+        format_verilog(f, args.verible_bin)

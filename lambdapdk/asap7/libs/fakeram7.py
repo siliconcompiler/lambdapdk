@@ -356,6 +356,7 @@ class FakeRAM7Lambdalib_TrueDoublePort(LambalibTechLibrary, _LambdaPath):
                 self.add_file(lib_path / "lambda" / "la_tdpram.v")
                 self.add_depfileset(Tdpram(), "rtl.impl")
 
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--verible_bin',
