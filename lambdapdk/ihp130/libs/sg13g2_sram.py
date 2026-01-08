@@ -1,12 +1,20 @@
+import argparse
+import math
+
+import os.path
+
 from pathlib import Path
+
+from typing import Dict, Tuple
 
 from lambdalib import LambalibTechLibrary
 from lambdapdk import LambdaLibrary, _LambdaPath
-from lambdalib.ramlib import Spram
+from lambdalib.ramlib import Spram, RAMTechLib
 from lambdapdk.ihp130 import IHP130PDK, _IHP130Path
+from lambdapdk.utils import format_verilog
 
 
-class _IHP130SRAMLibrary(LambdaLibrary, _IHP130Path):
+class _IHP130SRAMLibrary(LambdaLibrary, _IHP130Path, RAMTechLib):
     def __init__(self, config):
         super().__init__()
         self.set_name(f'RM_IHPSG13_1P_{config}_c2_bm_bist')
@@ -45,6 +53,65 @@ class _IHP130SRAMLibrary(LambdaLibrary, _IHP130Path):
             with self.active_fileset("openroad.globalconnect"):
                 self.add_file(path_base / "apr" / "openroad" / "global_connect.tcl")
                 self.add_openroad_globalconnectfileset()
+
+    def __ram_props(self) -> Tuple[int, int]:
+        """Returns the RAM properties (width, depth) based on the configuration."""
+        size = self.name.split('_')[3]
+        width = int(size.split('x')[1])
+        depth = int(size.split('x')[0])
+        return width, depth
+
+    def get_ram_width(self) -> int:
+        """Returns the width of the RAM cell.
+
+        Returns:
+            int: The width of the RAM cell.
+        """
+        width, _ = self.__ram_props()
+        return width
+
+    def get_ram_depth(self) -> int:
+        """Returns the depth of the RAM cell.
+
+        Returns:
+            int: The depth of the RAM cell.
+        """
+        _, depth = self.__ram_props()
+        return int(math.log2(depth))
+
+    def get_ram_ports(self) -> Dict[str, str]:
+        """Returns the port mapping for the RAM cell.
+
+        Returns:
+            Dict[str, str]: A dictionary mapping port names to their expressions.
+        """
+        return {
+            "A_CLK": "clk",
+            "A_MEN": "~ce_in",
+            "A_WEN": "~we_in",
+            "A_REN": "we_in",
+            "A_ADDR": "mem_addr",
+            "A_DIN": "mem_din",
+            "A_DLY": "1'b1",
+            "A_DOUT": "mem_dout",
+            "A_BM": "mem_wmask",
+            "A_BIST_CLK": "1'b0",
+            "A_BIST_EN": "1'b0",
+            "A_BIST_MEN": "1'b0",
+            "A_BIST_WEN": "1'b0",
+            "A_BIST_REN": "1'b0",
+            "A_BIST_ADDR": "'b0",
+            "A_BIST_DIN": "'b0",
+            "A_BIST_BM": "'b0"
+        }
+
+    def get_ram_libcell(self) -> str:
+        """Returns the name of the RAM library cell.
+
+        Returns:
+            str: The name of the RAM library cell.
+        """
+        return self.name
 
 
 class IHP130_SRAM_1024x64(_IHP130SRAMLibrary):
@@ -97,3 +164,23 @@ class IHP130Lambdalib_SinglePort(LambalibTechLibrary, _LambdaPath):
             with self.active_fileset("rtl"):
                 self.add_file(lib_path / "lambda" / "la_spram.v")
                 self.add_depfileset(Spram(), "rtl.impl")
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--verible_bin',
+                        metavar='<verible>',
+                        required=True,
+                        help='path to verible-verilog-format')
+    args = parser.parse_args()
+
+    files = []
+
+    spram = Spram()
+    files.append(os.path.join(os.path.dirname(__file__), "sg13g2_sram", "lambda", f"{spram.name}.v"))
+    spram.write_lambdalib(
+        files[-1],
+        IHP130Lambdalib_SinglePort().techlibs)
+
+    for f in files:
+        format_verilog(f, args.verible_bin)
