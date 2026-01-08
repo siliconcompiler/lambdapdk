@@ -1,5 +1,5 @@
 /*****************************************************************************
- * Function: Dual Port Memory (la_dpram)
+ * Function: Dual Port Memory (la_tdpram)
  * Copyright: Lambda Project Authors. All rights Reserved.
  * License:  MIT (see LICENSE file in Lambda repository)
  *
@@ -13,13 +13,14 @@
  * Advanced ASIC development should rely on complete functional models
  * supplied on a per macro basis.
  *
- * Technologoy specific implementations of "la_dpram" would generally include
- * one or more hardcoded instantiations of la_dpram modules with a generate
+ * Technologoy specific implementations of "la_tdpram" would generally include
+ * one or more hardcoded instantiations of la_tdpram modules with a generate
  * statement relying on the "PROP" to select between the list of modules
  * at build time.
  *
  ****************************************************************************/
 
+(* keep_hierarchy *)
 module la_tdpram #(
     parameter DW    = 32,         // Memory width
     parameter AW    = 10,         // Address width (derived)
@@ -27,28 +28,28 @@ module la_tdpram #(
     parameter CTRLW = 128,        // Width of asic ctrl interface
     parameter TESTW = 128         // Width of asic test interface
 ) (  // Memory interface
-    input               clk_a,    // write clock
-    input               ce_a,     // write chip-enable
-    input               we_a,     // write enable
-    input [DW-1:0]      wmask_a,  // write mask
-    input [AW-1:0]      addr_a,   // write address
-    input [DW-1:0]      din_a,    // write data in
-    output [DW-1:0]     dout_a,   // read data out
+    input              clk_a,    // write clock
+    input              ce_a,     // write chip-enable
+    input              we_a,     // write enable
+    input  [   DW-1:0] wmask_a,  // write mask
+    input  [   AW-1:0] addr_a,   // write address
+    input  [   DW-1:0] din_a,    // write data in
+    output [   DW-1:0] dout_a,   // read data out
     // B port
-    input               clk_b,    // write clock
-    input               ce_b,     // write chip-enable
-    input               we_b,     // write enable
-    input [DW-1:0]      wmask_b,  // write mask
-    input [AW-1:0]      addr_b,   // write address
-    input [DW-1:0]      din_b,    // write data in
-    output [DW-1:0]     dout_b,   // read data out
+    input              clk_b,    // write clock
+    input              ce_b,     // write chip-enable
+    input              we_b,     // write enable
+    input  [   DW-1:0] wmask_b,  // write mask
+    input  [   AW-1:0] addr_b,   // write address
+    input  [   DW-1:0] din_b,    // write data in
+    output [   DW-1:0] dout_b,   // read data out
     // Power signals
-    input vss,  // ground signal
-    input vdd,  // memory core array power
-    input vddio,  // periphery/io power
+    input              vss,      // ground signal
+    input              vdd,      // memory core array power
+    input              vddio,    // periphery/io power
     // Generic interfaces
-    input [CTRLW-1:0] ctrl,  // pass through ASIC control interface
-    input [TESTW-1:0] test  // pass through ASIC test interface
+    input  [CTRLW-1:0] ctrl,     // pass through ASIC control interface
+    input  [TESTW-1:0] test      // pass through ASIC test interface
 );
 
   // Total number of bits
@@ -200,8 +201,10 @@ module la_tdpram #(
             fakeram7_tdp_512x32 memory (
                 .addr_in_A(mem_addrA),
                 .addr_in_B(mem_addrB),
-                .ce_in_A(ce_in_A), .ce_in_B(ce_in_B),
-                .clk_A(clk_a), .clk_B(clk_b),
+                .ce_in_A(ce_in_A),
+                .ce_in_B(ce_in_B),
+                .clk_A(clk_a),
+                .clk_B(clk_b),
                 .rd_out_A(mem_doutA),
                 .rd_out_B(mem_doutB),
                 .w_mask_in_A(mem_wmaskA),
@@ -209,15 +212,17 @@ module la_tdpram #(
                 .wd_in_A(mem_dinA),
                 .wd_in_B(mem_dinB),
                 .we_in_A(we_in_A),
-                .we_in_B(we_in_B),
+                .we_in_B(we_in_B)
             );
           end
           if (MEM_PROP == "fakeram7_tdp_512x64") begin : ifakeram7_tdp_512x64
             fakeram7_tdp_512x64 memory (
                 .addr_in_A(mem_addrA),
                 .addr_in_B(mem_addrB),
-                .ce_in_A(ce_in_A), .ce_in_B(ce_in_B),
-                .clk_A(clk_a), .clk_B(clk_b),
+                .ce_in_A(ce_in_A),
+                .ce_in_B(ce_in_B),
+                .clk_A(clk_a),
+                .clk_B(clk_b),
                 .rd_out_A(mem_doutA),
                 .rd_out_B(mem_doutB),
                 .w_mask_in_A(mem_wmaskA),
@@ -225,15 +230,17 @@ module la_tdpram #(
                 .wd_in_A(mem_dinA),
                 .wd_in_B(mem_dinB),
                 .we_in_A(we_in_A),
-                .we_in_B(we_in_B),
+                .we_in_B(we_in_B)
             );
           end
           if (MEM_PROP == "fakeram7_tdp_512x128") begin : ifakeram7_tdp_512x128
             fakeram7_tdp_512x128 memory (
                 .addr_in_A(mem_addrA),
                 .addr_in_B(mem_addrB),
-                .ce_in_A(ce_in_A), .ce_in_B(ce_in_B),
-                .clk_A(clk_a), .clk_B(clk_b),
+                .ce_in_A(ce_in_A),
+                .ce_in_B(ce_in_B),
+                .clk_A(clk_a),
+                .clk_B(clk_b),
                 .rd_out_A(mem_doutA),
                 .rd_out_B(mem_doutB),
                 .w_mask_in_A(mem_wmaskA),
@@ -241,15 +248,17 @@ module la_tdpram #(
                 .wd_in_A(mem_dinA),
                 .wd_in_B(mem_dinB),
                 .we_in_A(we_in_A),
-                .we_in_B(we_in_B),
+                .we_in_B(we_in_B)
             );
           end
           if (MEM_PROP == "fakeram7_tdp_256x64") begin : ifakeram7_tdp_256x64
             fakeram7_tdp_256x64 memory (
                 .addr_in_A(mem_addrA),
                 .addr_in_B(mem_addrB),
-                .ce_in_A(ce_in_A), .ce_in_B(ce_in_B),
-                .clk_A(clk_a), .clk_B(clk_b),
+                .ce_in_A(ce_in_A),
+                .ce_in_B(ce_in_B),
+                .clk_A(clk_a),
+                .clk_B(clk_b),
                 .rd_out_A(mem_doutA),
                 .rd_out_B(mem_doutB),
                 .w_mask_in_A(mem_wmaskA),
@@ -257,15 +266,17 @@ module la_tdpram #(
                 .wd_in_A(mem_dinA),
                 .wd_in_B(mem_dinB),
                 .we_in_A(we_in_A),
-                .we_in_B(we_in_B),
+                .we_in_B(we_in_B)
             );
           end
           if (MEM_PROP == "fakeram7_tdp_256x32") begin : ifakeram7_tdp_256x32
             fakeram7_tdp_256x32 memory (
                 .addr_in_A(mem_addrA),
                 .addr_in_B(mem_addrB),
-                .ce_in_A(ce_in_A), .ce_in_B(ce_in_B),
-                .clk_A(clk_a), .clk_B(clk_b),
+                .ce_in_A(ce_in_A),
+                .ce_in_B(ce_in_B),
+                .clk_A(clk_a),
+                .clk_B(clk_b),
                 .rd_out_A(mem_doutA),
                 .rd_out_B(mem_doutB),
                 .w_mask_in_A(mem_wmaskA),
@@ -273,15 +284,17 @@ module la_tdpram #(
                 .wd_in_A(mem_dinA),
                 .wd_in_B(mem_dinB),
                 .we_in_A(we_in_A),
-                .we_in_B(we_in_B),
+                .we_in_B(we_in_B)
             );
           end
           if (MEM_PROP == "fakeram7_tdp_128x32") begin : ifakeram7_tdp_128x32
             fakeram7_tdp_128x32 memory (
                 .addr_in_A(mem_addrA),
                 .addr_in_B(mem_addrB),
-                .ce_in_A(ce_in_A), .ce_in_B(ce_in_B),
-                .clk_A(clk_a), .clk_B(clk_b),
+                .ce_in_A(ce_in_A),
+                .ce_in_B(ce_in_B),
+                .clk_A(clk_a),
+                .clk_B(clk_b),
                 .rd_out_A(mem_doutA),
                 .rd_out_B(mem_doutB),
                 .w_mask_in_A(mem_wmaskA),
@@ -289,15 +302,17 @@ module la_tdpram #(
                 .wd_in_A(mem_dinA),
                 .wd_in_B(mem_dinB),
                 .we_in_A(we_in_A),
-                .we_in_B(we_in_B),
+                .we_in_B(we_in_B)
             );
           end
           if (MEM_PROP == "fakeram7_tdp_1024x32") begin : ifakeram7_tdp_1024x32
             fakeram7_tdp_1024x32 memory (
                 .addr_in_A(mem_addrA),
                 .addr_in_B(mem_addrB),
-                .ce_in_A(ce_in_A), .ce_in_B(ce_in_B),
-                .clk_A(clk_a), .clk_B(clk_b),
+                .ce_in_A(ce_in_A),
+                .ce_in_B(ce_in_B),
+                .clk_A(clk_a),
+                .clk_B(clk_b),
                 .rd_out_A(mem_doutA),
                 .rd_out_B(mem_doutB),
                 .w_mask_in_A(mem_wmaskA),
@@ -305,15 +320,17 @@ module la_tdpram #(
                 .wd_in_A(mem_dinA),
                 .wd_in_B(mem_dinB),
                 .we_in_A(we_in_A),
-                .we_in_B(we_in_B),
+                .we_in_B(we_in_B)
             );
           end
           if (MEM_PROP == "fakeram7_tdp_1024x64") begin : ifakeram7_tdp_1024x64
             fakeram7_tdp_1024x64 memory (
                 .addr_in_A(mem_addrA),
                 .addr_in_B(mem_addrB),
-                .ce_in_A(ce_in_A), .ce_in_B(ce_in_B),
-                .clk_A(clk_a), .clk_B(clk_b),
+                .ce_in_A(ce_in_A),
+                .ce_in_B(ce_in_B),
+                .clk_A(clk_a),
+                .clk_B(clk_b),
                 .rd_out_A(mem_doutA),
                 .rd_out_B(mem_doutB),
                 .w_mask_in_A(mem_wmaskA),
@@ -321,15 +338,17 @@ module la_tdpram #(
                 .wd_in_A(mem_dinA),
                 .wd_in_B(mem_dinB),
                 .we_in_A(we_in_A),
-                .we_in_B(we_in_B),
+                .we_in_B(we_in_B)
             );
           end
           if (MEM_PROP == "fakeram7_tdp_2048x32") begin : ifakeram7_tdp_2048x32
             fakeram7_tdp_2048x32 memory (
                 .addr_in_A(mem_addrA),
                 .addr_in_B(mem_addrB),
-                .ce_in_A(ce_in_A), .ce_in_B(ce_in_B),
-                .clk_A(clk_a), .clk_B(clk_b),
+                .ce_in_A(ce_in_A),
+                .ce_in_B(ce_in_B),
+                .clk_A(clk_a),
+                .clk_B(clk_b),
                 .rd_out_A(mem_doutA),
                 .rd_out_B(mem_doutB),
                 .w_mask_in_A(mem_wmaskA),
@@ -337,15 +356,17 @@ module la_tdpram #(
                 .wd_in_A(mem_dinA),
                 .wd_in_B(mem_dinB),
                 .we_in_A(we_in_A),
-                .we_in_B(we_in_B),
+                .we_in_B(we_in_B)
             );
           end
           if (MEM_PROP == "fakeram7_tdp_2048x64") begin : ifakeram7_tdp_2048x64
             fakeram7_tdp_2048x64 memory (
                 .addr_in_A(mem_addrA),
                 .addr_in_B(mem_addrB),
-                .ce_in_A(ce_in_A), .ce_in_B(ce_in_B),
-                .clk_A(clk_a), .clk_B(clk_b),
+                .ce_in_A(ce_in_A),
+                .ce_in_B(ce_in_B),
+                .clk_A(clk_a),
+                .clk_B(clk_b),
                 .rd_out_A(mem_doutA),
                 .rd_out_B(mem_doutB),
                 .w_mask_in_A(mem_wmaskA),
@@ -353,15 +374,17 @@ module la_tdpram #(
                 .wd_in_A(mem_dinA),
                 .wd_in_B(mem_dinB),
                 .we_in_A(we_in_A),
-                .we_in_B(we_in_B),
+                .we_in_B(we_in_B)
             );
           end
           if (MEM_PROP == "fakeram7_tdp_4096x32") begin : ifakeram7_tdp_4096x32
             fakeram7_tdp_4096x32 memory (
                 .addr_in_A(mem_addrA),
                 .addr_in_B(mem_addrB),
-                .ce_in_A(ce_in_A), .ce_in_B(ce_in_B),
-                .clk_A(clk_a), .clk_B(clk_b),
+                .ce_in_A(ce_in_A),
+                .ce_in_B(ce_in_B),
+                .clk_A(clk_a),
+                .clk_B(clk_b),
                 .rd_out_A(mem_doutA),
                 .rd_out_B(mem_doutB),
                 .w_mask_in_A(mem_wmaskA),
@@ -369,15 +392,17 @@ module la_tdpram #(
                 .wd_in_A(mem_dinA),
                 .wd_in_B(mem_dinB),
                 .we_in_A(we_in_A),
-                .we_in_B(we_in_B),
+                .we_in_B(we_in_B)
             );
           end
           if (MEM_PROP == "fakeram7_tdp_4096x64") begin : ifakeram7_tdp_4096x64
             fakeram7_tdp_4096x64 memory (
                 .addr_in_A(mem_addrA),
                 .addr_in_B(mem_addrB),
-                .ce_in_A(ce_in_A), .ce_in_B(ce_in_B),
-                .clk_A(clk_a), .clk_B(clk_b),
+                .ce_in_A(ce_in_A),
+                .ce_in_B(ce_in_B),
+                .clk_A(clk_a),
+                .clk_B(clk_b),
                 .rd_out_A(mem_doutA),
                 .rd_out_B(mem_doutB),
                 .w_mask_in_A(mem_wmaskA),
@@ -385,15 +410,17 @@ module la_tdpram #(
                 .wd_in_A(mem_dinA),
                 .wd_in_B(mem_dinB),
                 .we_in_A(we_in_A),
-                .we_in_B(we_in_B),
+                .we_in_B(we_in_B)
             );
           end
           if (MEM_PROP == "fakeram7_tdp_8192x32") begin : ifakeram7_tdp_8192x32
             fakeram7_tdp_8192x32 memory (
                 .addr_in_A(mem_addrA),
                 .addr_in_B(mem_addrB),
-                .ce_in_A(ce_in_A), .ce_in_B(ce_in_B),
-                .clk_A(clk_a), .clk_B(clk_b),
+                .ce_in_A(ce_in_A),
+                .ce_in_B(ce_in_B),
+                .clk_A(clk_a),
+                .clk_B(clk_b),
                 .rd_out_A(mem_doutA),
                 .rd_out_B(mem_doutB),
                 .w_mask_in_A(mem_wmaskA),
@@ -401,15 +428,17 @@ module la_tdpram #(
                 .wd_in_A(mem_dinA),
                 .wd_in_B(mem_dinB),
                 .we_in_A(we_in_A),
-                .we_in_B(we_in_B),
+                .we_in_B(we_in_B)
             );
           end
           if (MEM_PROP == "fakeram7_tdp_8192x64") begin : ifakeram7_tdp_8192x64
             fakeram7_tdp_8192x64 memory (
                 .addr_in_A(mem_addrA),
                 .addr_in_B(mem_addrB),
-                .ce_in_A(ce_in_A), .ce_in_B(ce_in_B),
-                .clk_A(clk_a), .clk_B(clk_b),
+                .ce_in_A(ce_in_A),
+                .ce_in_B(ce_in_B),
+                .clk_A(clk_a),
+                .clk_B(clk_b),
                 .rd_out_A(mem_doutA),
                 .rd_out_B(mem_doutB),
                 .w_mask_in_A(mem_wmaskA),
@@ -417,7 +446,7 @@ module la_tdpram #(
                 .wd_in_A(mem_dinA),
                 .wd_in_B(mem_dinB),
                 .we_in_A(we_in_A),
-                .we_in_B(we_in_B),
+                .we_in_B(we_in_B)
             );
           end
         end
