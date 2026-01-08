@@ -1,12 +1,15 @@
 import argparse
+import math
 
 import os.path
 
 from pathlib import Path
 
+from typing import Dict, Tuple
+
 from lambdalib import LambalibTechLibrary
 from lambdapdk import LambdaLibrary, _LambdaPath
-from lambdalib.ramlib import Spram
+from lambdalib.ramlib import Spram, RAMTechLib
 from lambdapdk.gf180 import GF180_3LM_1TM_6K_7t, \
     GF180_3LM_1TM_6K_9t, \
     GF180_3LM_1TM_9K_7t, \
@@ -32,7 +35,7 @@ from lambdapdk.gf180 import GF180_3LM_1TM_6K_7t, \
 from lambdapdk.utils import format_verilog
 
 
-class _GF180SRAMLibrary(LambdaLibrary):
+class _GF180SRAMLibrary(LambdaLibrary, RAMTechLib):
     def __init__(self, config):
         super().__init__()
         self.set_name(f"gf180mcu_fd_ip_sram__sram{config}m8wm1")
@@ -89,6 +92,55 @@ class _GF180SRAMLibrary(LambdaLibrary):
             with self.active_fileset("openroad.globalconnect"):
                 self.add_file(path_base / "apr" / "openroad" / "global_connect.tcl")
 
+    def __ram_props(self) -> Tuple[int, int]:
+        """Returns the RAM properties (width, depth) based on the configuration."""
+        size = self.name.split('_')[-1][4:-5]
+        width = int(size.split('x')[1])
+        depth = int(size.split('x')[0])
+        return width, depth
+
+    def get_ram_width(self) -> int:
+        """Returns the width of the RAM cell.
+
+        Returns:
+            int: The width of the RAM cell.
+        """
+        width, _ = self.__ram_props()
+        return width
+
+    def get_ram_depth(self) -> int:
+        """Returns the depth of the RAM cell.
+
+        Returns:
+            int: The depth of the RAM cell.
+        """
+        _, depth = self.__ram_props()
+        return int(math.log2(depth))
+
+    def get_ram_ports(self) -> Dict[str, str]:
+        """Returns the port mapping for the RAM cell.
+
+        Returns:
+            Dict[str, str]: A dictionary mapping port names to their expressions.
+        """
+        return {
+            "CLK": "clk",
+            "CEN": "~ce_in",
+            "GWEN": "~we_in",
+            "WEN": "~mem_wmask",
+            "A": "mem_addr",
+            "D": "mem_din",
+            "Q": "mem_dout"
+        }
+
+    def get_ram_libcell(self) -> str:
+        """Returns the name of the RAM library cell.
+
+        Returns:
+            str: The name of the RAM library cell.
+        """
+        return self.name
+
 
 class GF180_SRAM_64x8(_GF180SRAMLibrary):
     def __init__(self):
@@ -140,34 +192,11 @@ if __name__ == "__main__":
 
     files = []
 
-    gf180_spram_port_map = [
-        ("CLK", "clk"),
-        ("CEN", "~ce_in"),
-        ("GWEN", "~we_in"),
-        ("WEN", "~mem_wmask"),
-        ("A", "mem_addr"),
-        ("D", "mem_din"),
-        ("Q", "mem_dout")
-    ]
-
     spram = Spram()
     files.append(os.path.join(os.path.dirname(__file__), "gf180mcu_fd_ip_sram", "lambda", f"{spram.name}.v"))
     spram.write_lambdalib(
         files[-1],
-        {
-        "gf180mcu_fd_ip_sram__sram512x8m8wm1": {
-            "DW": 8, "AW": 9, "port_map": gf180_spram_port_map
-        },
-        "gf180mcu_fd_ip_sram__sram256x8m8wm1": {
-            "DW": 8, "AW": 8, "port_map": gf180_spram_port_map
-        },
-        "gf180mcu_fd_ip_sram__sram128x8m8wm1": {
-            "DW": 8, "AW": 7, "port_map": gf180_spram_port_map
-        },
-        "gf180mcu_fd_ip_sram__sram64x8m8wm1": {
-            "DW": 8, "AW": 6, "port_map": gf180_spram_port_map
-        }
-    })
+        GF180Lambdalib_SinglePort().techlibs)
 
     for f in files:
         format_verilog(f, args.verible_bin)

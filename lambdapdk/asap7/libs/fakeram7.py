@@ -1,17 +1,20 @@
 import argparse
+import math
 
 import os.path
 
 from pathlib import Path
 
+from typing import Dict, Tuple
+
 from lambdalib import LambalibTechLibrary
 from lambdapdk import LambdaLibrary, _LambdaPath
-from lambdalib.ramlib import Spram, Dpram, Tdpram
+from lambdalib.ramlib import Spram, Dpram, Tdpram, RAMTechLib
 from lambdapdk.asap7 import ASAP7PDK
 from lambdapdk.utils import format_verilog
 
 
-class _FakeRAM7Library(LambdaLibrary):
+class _FakeRAM7Library(LambdaLibrary, RAMTechLib):
     def __init__(self, config):
         super().__init__()
         self.set_name(f"fakeram7_{config}")
@@ -38,6 +41,88 @@ class _FakeRAM7Library(LambdaLibrary):
 
             self.add_klayout_allowmissingcell(self.name)
 
+    def __ram_props(self) -> Tuple[str, int, int]:
+        """Returns the RAM properties (width, depth) based on the configuration."""
+        type, size = self.name.split('_')[-2:]
+        width = int(size.split('x')[1])
+        depth = int(size.split('x')[0])
+        return type, width, depth
+
+    def get_ram_width(self) -> int:
+        """Returns the width of the RAM cell.
+
+        Returns:
+            int: The width of the RAM cell.
+        """
+        _, width, _ = self.__ram_props()
+        return width
+
+    def get_ram_depth(self) -> int:
+        """Returns the depth of the RAM cell.
+
+        Returns:
+            int: The depth of the RAM cell.
+        """
+        _, _, depth = self.__ram_props()
+        return int(math.log2(depth))
+
+    def get_ram_ports(self) -> Dict[str, str]:
+        """Returns the port mapping for the RAM cell.
+
+        Returns:
+            Dict[str, str]: A dictionary mapping port names to their expressions.
+        """
+        type, _, _ = self.__ram_props()
+        if type == "sp":
+            return {
+                "clk": "clk",
+                "addr_in": "mem_addr",
+                "ce_in": "ce_in",
+                "rd_out": "mem_dout",
+                "we_in": "we_in",
+                "w_mask_in": "mem_wmask",
+                "wd_in": "mem_din"
+            }
+        if type == "dp":
+            return {
+                "clk": "wr_clk",
+                "addr_in_A": "wr_mem_addr",
+                "addr_in_B": "rd_mem_addr",
+                "ce_in": "wr_ce_in | rd_ce_in",
+                "rd_out_A": "",
+                "rd_out_B": "mem_dout",
+                "we_in_A": "we_in",
+                "we_in_B": "1'b0",
+                "w_mask_in_A": "mem_wmask",
+                "w_mask_in_B": "'b0",
+                "wd_in_A": "mem_din",
+                "wd_in_B": "'b0"
+            }
+        if type == "tdp":
+            return {
+                "clk_A": "clk_a",
+                "clk_B": "clk_b",
+                "addr_in_A": "mem_addrA",
+                "addr_in_B": "mem_addrB",
+                "ce_in_A": "ce_in_A",
+                "ce_in_B": "ce_in_B",
+                "rd_out_A": "mem_doutA",
+                "rd_out_B": "mem_doutB",
+                "we_in_A": "we_in_A",
+                "we_in_B": "we_in_B",
+                "w_mask_in_A": "mem_wmaskA",
+                "w_mask_in_B": "mem_wmaskB",
+                "wd_in_A": "mem_dinA",
+                "wd_in_B": "mem_dinB"
+            }
+
+    def get_ram_libcell(self) -> str:
+        """Returns the name of the RAM library cell.
+
+        Returns:
+            str: The name of the RAM library cell.
+        """
+        return self.name
 
 class FakeRAM7_tdp_64x32(_FakeRAM7Library):
     def __init__(self):
@@ -251,12 +336,12 @@ class FakeRAM7_sp_8192x32(_FakeRAM7Library):
 
 class FakeRAM7_tdp_8192x64(_FakeRAM7Library):
     def __init__(self):
-        super().__init__("dp_8192x64")
+        super().__init__("tdp_8192x64")
 
 
 class FakeRAM7_dp_8192x64(_FakeRAM7Library):
     def __init__(self):
-        super().__init__("tdp_8192x64")
+        super().__init__("dp_8192x64")
 
 
 class FakeRAM7_sp_8192x64(_FakeRAM7Library):
@@ -367,189 +452,21 @@ if __name__ == "__main__":
 
     files = []
 
-    asap7_spram_port_map_sp = [
-        ("clk", "clk"),
-        ("addr_in", "mem_addr"),
-        ("ce_in", "ce_in"),
-        ("rd_out", "mem_dout"),
-        ("we_in", "we_in"),
-        ("w_mask_in", "mem_wmask"),
-        ("wd_in", "mem_din")
-    ]
-    asap7_spram_port_map_dp = [
-        ("clk", "wr_clk"),
-        ("addr_in_A", "wr_mem_addr"),
-        ("addr_in_B", "rd_mem_addr"),
-        ("ce_in", "wr_ce_in | rd_ce_in"),
-        ("rd_out_A", ""),
-        ("rd_out_B", "mem_dout"),
-        ("we_in_A", "we_in"),
-        ("we_in_B", "1'b0"),
-        ("w_mask_in_A", "mem_wmask"),
-        ("w_mask_in_B", "'b0"),
-        ("wd_in_A", "mem_din"),
-        ("wd_in_B", "'b0")
-    ]
-    asap7_spram_port_map_tdp = [
-        ("clk_A", "clk_a"),
-        ("clk_B", "clk_b"),
-        ("addr_in_A", "mem_addrA"),
-        ("addr_in_B", "mem_addrB"),
-        ("ce_in_A", "ce_in_A"),
-        ("ce_in_B", "ce_in_B"),
-        ("rd_out_A", "mem_doutA"),
-        ("rd_out_B", "mem_doutB"),
-        ("we_in_A", "we_in_A"),
-        ("we_in_B", "we_in_B"),
-        ("w_mask_in_A", "mem_wmaskA"),
-        ("w_mask_in_B", "mem_wmaskB"),
-        ("wd_in_A", "mem_dinA"),
-        ("wd_in_B", "mem_dinB")
-    ]
     spram = Spram()
     files.append(os.path.join(os.path.dirname(__file__), "fakeram7", "lambda", f"{spram.name}.v"))
     spram.write_lambdalib(
         files[-1],
-        {
-            "fakeram7_sp_512x32": {
-                "DW": 32, "AW": 9, "port_map": asap7_spram_port_map_sp
-            },
-            "fakeram7_sp_512x64": {
-                "DW": 64, "AW": 9, "port_map": asap7_spram_port_map_sp
-            },
-            "fakeram7_sp_512x128": {
-                "DW": 128, "AW": 9, "port_map": asap7_spram_port_map_sp
-            },
-            "fakeram7_sp_256x64": {
-                "DW": 64, "AW": 8, "port_map": asap7_spram_port_map_sp
-            },
-            "fakeram7_sp_256x32": {
-                "DW": 32, "AW": 8, "port_map": asap7_spram_port_map_sp
-            },
-            "fakeram7_sp_128x32": {
-                "DW": 32, "AW": 7, "port_map": asap7_spram_port_map_sp
-            },
-            "fakeram7_sp_1024x32": {
-                "DW": 32, "AW": 10, "port_map": asap7_spram_port_map_sp
-            },
-            "fakeram7_sp_1024x64": {
-                "DW": 64, "AW": 10, "port_map": asap7_spram_port_map_sp
-            },
-            "fakeram7_sp_2048x32": {
-                "DW": 32, "AW": 11, "port_map": asap7_spram_port_map_sp
-            },
-            "fakeram7_sp_2048x64": {
-                "DW": 64, "AW": 11, "port_map": asap7_spram_port_map_sp
-            },
-            "fakeram7_sp_4096x32": {
-                "DW": 32, "AW": 12, "port_map": asap7_spram_port_map_sp
-            },
-            "fakeram7_sp_4096x64": {
-                "DW": 64, "AW": 12, "port_map": asap7_spram_port_map_sp
-            },
-            "fakeram7_sp_8192x32": {
-                "DW": 32, "AW": 13, "port_map": asap7_spram_port_map_sp
-            },
-            "fakeram7_sp_8192x64": {
-                "DW": 64, "AW": 13, "port_map": asap7_spram_port_map_sp
-            }
-        })
+        FakeRAM7Lambdalib_SinglePort().techlibs)
     dpram = Dpram()
     files.append(os.path.join(os.path.dirname(__file__), "fakeram7", "lambda", f"{dpram.name}.v"))
     dpram.write_lambdalib(
         files[-1],
-        {
-            "fakeram7_dp_512x32": {
-                "DW": 32, "AW": 9, "port_map": asap7_spram_port_map_dp
-            },
-            "fakeram7_dp_512x64": {
-                "DW": 64, "AW": 9, "port_map": asap7_spram_port_map_dp
-            },
-            "fakeram7_dp_512x128": {
-                "DW": 128, "AW": 9, "port_map": asap7_spram_port_map_dp
-            },
-            "fakeram7_dp_256x64": {
-                "DW": 64, "AW": 8, "port_map": asap7_spram_port_map_dp
-            },
-            "fakeram7_dp_256x32": {
-                "DW": 32, "AW": 8, "port_map": asap7_spram_port_map_dp
-            },
-            "fakeram7_dp_128x32": {
-                "DW": 32, "AW": 7, "port_map": asap7_spram_port_map_dp
-            },
-            "fakeram7_dp_1024x32": {
-                "DW": 32, "AW": 10, "port_map": asap7_spram_port_map_dp
-            },
-            "fakeram7_dp_1024x64": {
-                "DW": 64, "AW": 10, "port_map": asap7_spram_port_map_dp
-            },
-            "fakeram7_dp_2048x32": {
-                "DW": 32, "AW": 11, "port_map": asap7_spram_port_map_dp
-            },
-            "fakeram7_dp_2048x64": {
-                "DW": 64, "AW": 11, "port_map": asap7_spram_port_map_dp
-            },
-            "fakeram7_dp_4096x32": {
-                "DW": 32, "AW": 12, "port_map": asap7_spram_port_map_dp
-            },
-            "fakeram7_dp_4096x64": {
-                "DW": 64, "AW": 12, "port_map": asap7_spram_port_map_dp
-            },
-            "fakeram7_dp_8192x32": {
-                "DW": 32, "AW": 13, "port_map": asap7_spram_port_map_dp
-            },
-            "fakeram7_dp_8192x64": {
-                "DW": 64, "AW": 13, "port_map": asap7_spram_port_map_dp
-            }
-        })
+        FakeRAM7Lambdalib_DoublePort().techlibs)
     tdpram = Tdpram()
     files.append(os.path.join(os.path.dirname(__file__), "fakeram7", "lambda", f"{tdpram.name}.v"))
     tdpram.write_lambdalib(
         files[-1],
-        {
-            "fakeram7_tdp_512x32": {
-                "DW": 32, "AW": 9, "port_map": asap7_spram_port_map_tdp
-            },
-            "fakeram7_tdp_512x64": {
-                "DW": 64, "AW": 9, "port_map": asap7_spram_port_map_tdp
-            },
-            "fakeram7_tdp_512x128": {
-                "DW": 128, "AW": 9, "port_map": asap7_spram_port_map_tdp
-            },
-            "fakeram7_tdp_256x64": {
-                "DW": 64, "AW": 8, "port_map": asap7_spram_port_map_tdp
-            },
-            "fakeram7_tdp_256x32": {
-                "DW": 32, "AW": 8, "port_map": asap7_spram_port_map_tdp
-            },
-            "fakeram7_tdp_128x32": {
-                "DW": 32, "AW": 7, "port_map": asap7_spram_port_map_tdp
-            },
-            "fakeram7_tdp_1024x32": {
-                "DW": 32, "AW": 10, "port_map": asap7_spram_port_map_tdp
-            },
-            "fakeram7_tdp_1024x64": {
-                "DW": 64, "AW": 10, "port_map": asap7_spram_port_map_tdp
-            },
-            "fakeram7_tdp_2048x32": {
-                "DW": 32, "AW": 11, "port_map": asap7_spram_port_map_tdp
-            },
-            "fakeram7_tdp_2048x64": {
-                "DW": 64, "AW": 11, "port_map": asap7_spram_port_map_tdp
-            },
-            "fakeram7_tdp_4096x32": {
-                "DW": 32, "AW": 12, "port_map": asap7_spram_port_map_tdp
-            },
-            "fakeram7_tdp_4096x64": {
-                "DW": 64, "AW": 12, "port_map": asap7_spram_port_map_tdp
-            },
-            "fakeram7_tdp_8192x32": {
-                "DW": 32, "AW": 13, "port_map": asap7_spram_port_map_tdp
-            },
-            "fakeram7_tdp_8192x64": {
-                "DW": 64, "AW": 13, "port_map": asap7_spram_port_map_tdp
-            }
-        })
+        FakeRAM7Lambdalib_TrueDoublePort().techlibs)
 
     for f in files:
         format_verilog(f, args.verible_bin)

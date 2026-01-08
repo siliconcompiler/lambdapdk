@@ -99,8 +99,6 @@ module la_spram #(
       // Create memories
       localparam MEM_ADDRS = 2 ** (AW - MEM_DEPTH) < 1 ? 1 : 2 ** (AW - MEM_DEPTH);
 
-
-
       genvar o;
       for (o = 0; o < DW; o = o + 1) begin : OUTPUTS
         wire [MEM_ADDRS-1:0] mem_outputs;
@@ -143,30 +141,8 @@ module la_spram #(
           assign ce_in = ce && selected;
           assign we_in = we && selected;
 
-          if (MEM_PROP == "fakeram45_512x32") begin : ifakeram45_512x32
-            fakeram45_512x32 memory (
-                .addr_in(mem_addr),
-                .ce_in(ce_in),
-                .clk(clk),
-                .rd_out(mem_dout),
-                .w_mask_in(mem_wmask),
-                .wd_in(mem_din),
-                .we_in(we_in)
-            );
-          end
-          if (MEM_PROP == "fakeram45_512x64") begin : ifakeram45_512x64
-            fakeram45_512x64 memory (
-                .addr_in(mem_addr),
-                .ce_in(ce_in),
-                .clk(clk),
-                .rd_out(mem_dout),
-                .w_mask_in(mem_wmask),
-                .wd_in(mem_din),
-                .we_in(we_in)
-            );
-          end
-          if (MEM_PROP == "fakeram45_256x64") begin : ifakeram45_256x64
-            fakeram45_256x64 memory (
+          if (MEM_PROP == "fakeram45_128x32") begin : ifakeram45_128x32
+            fakeram45_128x32 memory (
                 .addr_in(mem_addr),
                 .ce_in(ce_in),
                 .clk(clk),
@@ -187,8 +163,30 @@ module la_spram #(
                 .we_in(we_in)
             );
           end
-          if (MEM_PROP == "fakeram45_128x32") begin : ifakeram45_128x32
-            fakeram45_128x32 memory (
+          if (MEM_PROP == "fakeram45_256x64") begin : ifakeram45_256x64
+            fakeram45_256x64 memory (
+                .addr_in(mem_addr),
+                .ce_in(ce_in),
+                .clk(clk),
+                .rd_out(mem_dout),
+                .w_mask_in(mem_wmask),
+                .wd_in(mem_din),
+                .we_in(we_in)
+            );
+          end
+          if (MEM_PROP == "fakeram45_512x32") begin : ifakeram45_512x32
+            fakeram45_512x32 memory (
+                .addr_in(mem_addr),
+                .ce_in(ce_in),
+                .clk(clk),
+                .rd_out(mem_dout),
+                .w_mask_in(mem_wmask),
+                .wd_in(mem_din),
+                .we_in(we_in)
+            );
+          end
+          if (MEM_PROP == "fakeram45_512x64") begin : ifakeram45_512x64
+            fakeram45_512x64 memory (
                 .addr_in(mem_addr),
                 .ce_in(ce_in),
                 .clk(clk),

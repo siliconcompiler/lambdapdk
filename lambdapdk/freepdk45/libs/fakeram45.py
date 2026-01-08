@@ -1,17 +1,20 @@
 import argparse
+import math
 
 import os.path
 
 from pathlib import Path
 
+from typing import Dict, Tuple
+
 from lambdalib import LambalibTechLibrary
 from lambdapdk import LambdaLibrary, _LambdaPath
-from lambdalib.ramlib import Spram
+from lambdalib.ramlib import Spram, RAMTechLib
 from lambdapdk.freepdk45 import FreePDK45PDK
 from lambdapdk.utils import format_verilog
 
 
-class _FakeRAM45Library(LambdaLibrary):
+class _FakeRAM45Library(LambdaLibrary, RAMTechLib):
     def __init__(self, config):
         super().__init__()
         self.set_name(f"fakeram45_{config}")
@@ -37,6 +40,55 @@ class _FakeRAM45Library(LambdaLibrary):
                 self.add_openroad_globalconnectfileset()
 
             self.add_klayout_allowmissingcell(self.name)
+
+    def __ram_props(self) -> Tuple[int, int]:
+        """Returns the RAM properties (width, depth) based on the configuration."""
+        size = self.name.split('_')[-1]
+        width = int(size.split('x')[1])
+        depth = int(size.split('x')[0])
+        return width, depth
+
+    def get_ram_width(self) -> int:
+        """Returns the width of the RAM cell.
+
+        Returns:
+            int: The width of the RAM cell.
+        """
+        width, _ = self.__ram_props()
+        return width
+
+    def get_ram_depth(self) -> int:
+        """Returns the depth of the RAM cell.
+
+        Returns:
+            int: The depth of the RAM cell.
+        """
+        _, depth = self.__ram_props()
+        return int(math.log2(depth))
+
+    def get_ram_ports(self) -> Dict[str, str]:
+        """Returns the port mapping for the RAM cell.
+
+        Returns:
+            Dict[str, str]: A dictionary mapping port names to their expressions.
+        """
+        return {
+            "clk": "clk",
+            "addr_in": "mem_addr",
+            "ce_in": "ce_in",
+            "rd_out": "mem_dout",
+            "we_in": "we_in",
+            "w_mask_in": "mem_wmask",
+            "wd_in": "mem_din"
+        }
+
+    def get_ram_libcell(self) -> str:
+        """Returns the name of the RAM library cell.
+
+        Returns:
+            str: The name of the RAM library cell.
+        """
+        return self.name
 
 
 class FakeRAM45_64x32(_FakeRAM45Library):
@@ -101,40 +153,11 @@ if __name__ == "__main__":
 
     files = []
 
-    freepdk45_spram_port_map = [
-        ("clk", "clk"),
-        ("addr_in", "mem_addr"),
-        ("ce_in", "ce_in"),
-        ("rd_out", "mem_dout"),
-        ("we_in", "we_in"),
-        ("w_mask_in", "mem_wmask"),
-        ("wd_in", "mem_din")
-    ]
-
     spram = Spram()
     files.append(os.path.join(os.path.dirname(__file__), "fakeram45", "lambda", f"{spram.name}.v"))
     spram.write_lambdalib(
         files[-1],
-        {
-        "fakeram45_512x32": {
-            "DW": 32, "AW": 9, "port_map": freepdk45_spram_port_map
-        },
-        "fakeram45_512x64": {
-            "DW": 64, "AW": 9, "port_map": freepdk45_spram_port_map
-        },
-        "fakeram45_256x64": {
-            "DW": 64, "AW": 8, "port_map": freepdk45_spram_port_map
-        },
-        "fakeram45_256x32": {
-            "DW": 32, "AW": 8, "port_map": freepdk45_spram_port_map
-        },
-        "fakeram45_128x32": {
-            "DW": 32, "AW": 7, "port_map": freepdk45_spram_port_map
-        },
-        "fakeram45_64x32": {
-            "DW": 32, "AW": 6, "port_map": freepdk45_spram_port_map
-        }
-    })
+        FakeRAM45Lambdalib_SinglePort().techlibs)
 
     for f in files:
         format_verilog(f, args.verible_bin)
