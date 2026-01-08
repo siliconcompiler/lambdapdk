@@ -1,3 +1,7 @@
+import argparse
+
+import os.path
+
 from pathlib import Path
 
 from lambdalib import LambalibTechLibrary
@@ -25,6 +29,7 @@ from lambdapdk.gf180 import GF180_3LM_1TM_6K_7t, \
     GF180_5LM_1TM_11K_9t, \
     GF180_6LM_1TM_9K_7t, \
     GF180_6LM_1TM_9K_9t
+from lambdapdk.utils import format_verilog
 
 
 class _GF180SRAMLibrary(LambdaLibrary):
@@ -123,3 +128,46 @@ class GF180Lambdalib_SinglePort(LambalibTechLibrary, _LambdaPath):
             with self.active_fileset("rtl"):
                 self.add_file(lib_path / "lambda" / "la_spram.v")
                 self.add_depfileset(Spram(), "rtl.impl")
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--verible_bin',
+                        metavar='<verible>',
+                        required=True,
+                        help='path to verible-verilog-format')
+    args = parser.parse_args()
+
+    files = []
+
+    gf180_spram_port_map = [
+        ("CLK", "clk"),
+        ("CEN", "~ce_in"),
+        ("GWEN", "~we_in"),
+        ("WEN", "~mem_wmask"),
+        ("A", "mem_addr"),
+        ("D", "mem_din"),
+        ("Q", "mem_dout")
+    ]
+
+    spram = Spram()
+    files.append(os.path.join(os.path.dirname(__file__), "gf180mcu_fd_ip_sram", "lambda", f"{spram.name}.v"))
+    spram.write_lambdalib(
+        files[-1],
+        {
+        "gf180mcu_fd_ip_sram__sram512x8m8wm1": {
+            "DW": 8, "AW": 9, "port_map": gf180_spram_port_map
+        },
+        "gf180mcu_fd_ip_sram__sram256x8m8wm1": {
+            "DW": 8, "AW": 8, "port_map": gf180_spram_port_map
+        },
+        "gf180mcu_fd_ip_sram__sram128x8m8wm1": {
+            "DW": 8, "AW": 7, "port_map": gf180_spram_port_map
+        },
+        "gf180mcu_fd_ip_sram__sram64x8m8wm1": {
+            "DW": 8, "AW": 6, "port_map": gf180_spram_port_map
+        }
+    })
+
+    for f in files:
+        format_verilog(f, args.verible_bin)

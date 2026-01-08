@@ -20,6 +20,7 @@
  *
  ****************************************************************************/
 
+(* keep_hierarchy *)
 module la_spram #(
     parameter DW    = 32,         // Memory width
     parameter AW    = 10,         // Address width (derived)
