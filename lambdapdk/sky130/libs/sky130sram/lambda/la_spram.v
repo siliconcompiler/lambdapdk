@@ -20,6 +20,7 @@
  *
  ****************************************************************************/
 
+(* keep_hierarchy *)
 module la_spram #(
     parameter DW    = 32,         // Memory width
     parameter AW    = 10,         // Address width (derived)
@@ -79,8 +80,6 @@ module la_spram #(
     if (MEM_PROP != "SOFT") begin : itech
       // Create memories
       localparam MEM_ADDRS = 2 ** (AW - MEM_DEPTH) < 1 ? 1 : 2 ** (AW - MEM_DEPTH);
-
-
 
       genvar o;
       for (o = 0; o < DW; o = o + 1) begin : OUTPUTS

@@ -20,6 +20,7 @@
  *
  ****************************************************************************/
 
+(* keep_hierarchy *)
 module la_spram #(
     parameter DW    = 32,         // Memory width
     parameter AW    = 10,         // Address width (derived)
@@ -94,8 +95,6 @@ module la_spram #(
       // Create memories
       localparam MEM_ADDRS = 2 ** (AW - MEM_DEPTH) < 1 ? 1 : 2 ** (AW - MEM_DEPTH);
 
-
-
       genvar o;
       for (o = 0; o < DW; o = o + 1) begin : OUTPUTS
         wire [MEM_ADDRS-1:0] mem_outputs;
@@ -138,8 +137,8 @@ module la_spram #(
           assign ce_in = ce && selected;
           assign we_in = we && selected;
 
-          if (MEM_PROP == "gf180mcu_fd_ip_sram__sram512x8m8wm1") begin: igf180mcu_fd_ip_sram__sram512x8m8wm1
-            gf180mcu_fd_ip_sram__sram512x8m8wm1 memory (
+          if (MEM_PROP == "gf180mcu_fd_ip_sram__sram128x8m8wm1") begin: igf180mcu_fd_ip_sram__sram128x8m8wm1
+            gf180mcu_fd_ip_sram__sram128x8m8wm1 memory (
                 .A(mem_addr),
                 .CEN(~ce_in),
                 .CLK(clk),
@@ -160,8 +159,8 @@ module la_spram #(
                 .WEN(~mem_wmask)
             );
           end
-          if (MEM_PROP == "gf180mcu_fd_ip_sram__sram128x8m8wm1") begin: igf180mcu_fd_ip_sram__sram128x8m8wm1
-            gf180mcu_fd_ip_sram__sram128x8m8wm1 memory (
+          if (MEM_PROP == "gf180mcu_fd_ip_sram__sram512x8m8wm1") begin: igf180mcu_fd_ip_sram__sram512x8m8wm1
+            gf180mcu_fd_ip_sram__sram512x8m8wm1 memory (
                 .A(mem_addr),
                 .CEN(~ce_in),
                 .CLK(clk),

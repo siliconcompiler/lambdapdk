@@ -20,6 +20,7 @@
  *
  ****************************************************************************/
 
+(* keep_hierarchy *)
 module la_dpram #(
     parameter DW    = 32,         // Memory width
     parameter AW    = 10,         // Address width (derived)
@@ -59,7 +60,8 @@ module la_dpram #(
       (AW >= 10) ? (DW >= 64) ? "fakeram7_dp_1024x64" : "fakeram7_dp_1024x32" :
       (AW >= 9) ? (DW >= 128) ? "fakeram7_dp_512x128" : (DW >= 64) ? "fakeram7_dp_512x64" : "fakeram7_dp_512x32" :
       (AW >= 8) ? (DW >= 64) ? "fakeram7_dp_256x64" : "fakeram7_dp_256x32" :
-      "fakeram7_dp_128x32";
+      (AW >= 7) ? "fakeram7_dp_128x32" :
+      "fakeram7_dp_64x32";
 
   localparam MEM_WIDTH = 
       (MEM_PROP == "fakeram7_dp_1024x32") ? 32 :
@@ -74,6 +76,7 @@ module la_dpram #(
       (MEM_PROP == "fakeram7_dp_512x128") ? 128 :
       (MEM_PROP == "fakeram7_dp_512x32") ? 32 :
       (MEM_PROP == "fakeram7_dp_512x64") ? 64 :
+      (MEM_PROP == "fakeram7_dp_64x32") ? 32 :
       (MEM_PROP == "fakeram7_dp_8192x32") ? 32 :
       (MEM_PROP == "fakeram7_dp_8192x64") ? 64 :
       0;
@@ -91,6 +94,7 @@ module la_dpram #(
       (MEM_PROP == "fakeram7_dp_512x128") ? 9 :
       (MEM_PROP == "fakeram7_dp_512x32") ? 9 :
       (MEM_PROP == "fakeram7_dp_512x64") ? 9 :
+      (MEM_PROP == "fakeram7_dp_64x32") ? 6 :
       (MEM_PROP == "fakeram7_dp_8192x32") ? 13 :
       (MEM_PROP == "fakeram7_dp_8192x64") ? 13 :
       0;
@@ -121,8 +125,6 @@ module la_dpram #(
     if (MEM_PROP != "SOFT") begin : itech
       // Create memories
       localparam MEM_ADDRS = 2 ** (AW - MEM_DEPTH) < 1 ? 1 : 2 ** (AW - MEM_DEPTH);
-
-
 
       genvar o;
       for (o = 0; o < DW; o = o + 1) begin : OUTPUTS
@@ -174,102 +176,6 @@ module la_dpram #(
           assign rd_ce_in = rd_ce && re_selected;
           assign we_in = wr_we && we_selected;
 
-          if (MEM_PROP == "fakeram7_dp_512x32") begin : ifakeram7_dp_512x32
-            fakeram7_dp_512x32 memory (
-                .addr_in_A(wr_mem_addr),
-                .addr_in_B(rd_mem_addr),
-                .ce_in(wr_ce_in | rd_ce_in),
-                .clk(wr_clk),
-                .rd_out_A(),
-                .rd_out_B(mem_dout),
-                .w_mask_in_A(mem_wmask),
-                .w_mask_in_B('b0),
-                .wd_in_A(mem_din),
-                .wd_in_B('b0),
-                .we_in_A(we_in),
-                .we_in_B(1'b0)
-            );
-          end
-          if (MEM_PROP == "fakeram7_dp_512x64") begin : ifakeram7_dp_512x64
-            fakeram7_dp_512x64 memory (
-                .addr_in_A(wr_mem_addr),
-                .addr_in_B(rd_mem_addr),
-                .ce_in(wr_ce_in | rd_ce_in),
-                .clk(wr_clk),
-                .rd_out_A(),
-                .rd_out_B(mem_dout),
-                .w_mask_in_A(mem_wmask),
-                .w_mask_in_B('b0),
-                .wd_in_A(mem_din),
-                .wd_in_B('b0),
-                .we_in_A(we_in),
-                .we_in_B(1'b0)
-            );
-          end
-          if (MEM_PROP == "fakeram7_dp_512x128") begin : ifakeram7_dp_512x128
-            fakeram7_dp_512x128 memory (
-                .addr_in_A(wr_mem_addr),
-                .addr_in_B(rd_mem_addr),
-                .ce_in(wr_ce_in | rd_ce_in),
-                .clk(wr_clk),
-                .rd_out_A(),
-                .rd_out_B(mem_dout),
-                .w_mask_in_A(mem_wmask),
-                .w_mask_in_B('b0),
-                .wd_in_A(mem_din),
-                .wd_in_B('b0),
-                .we_in_A(we_in),
-                .we_in_B(1'b0)
-            );
-          end
-          if (MEM_PROP == "fakeram7_dp_256x64") begin : ifakeram7_dp_256x64
-            fakeram7_dp_256x64 memory (
-                .addr_in_A(wr_mem_addr),
-                .addr_in_B(rd_mem_addr),
-                .ce_in(wr_ce_in | rd_ce_in),
-                .clk(wr_clk),
-                .rd_out_A(),
-                .rd_out_B(mem_dout),
-                .w_mask_in_A(mem_wmask),
-                .w_mask_in_B('b0),
-                .wd_in_A(mem_din),
-                .wd_in_B('b0),
-                .we_in_A(we_in),
-                .we_in_B(1'b0)
-            );
-          end
-          if (MEM_PROP == "fakeram7_dp_256x32") begin : ifakeram7_dp_256x32
-            fakeram7_dp_256x32 memory (
-                .addr_in_A(wr_mem_addr),
-                .addr_in_B(rd_mem_addr),
-                .ce_in(wr_ce_in | rd_ce_in),
-                .clk(wr_clk),
-                .rd_out_A(),
-                .rd_out_B(mem_dout),
-                .w_mask_in_A(mem_wmask),
-                .w_mask_in_B('b0),
-                .wd_in_A(mem_din),
-                .wd_in_B('b0),
-                .we_in_A(we_in),
-                .we_in_B(1'b0)
-            );
-          end
-          if (MEM_PROP == "fakeram7_dp_128x32") begin : ifakeram7_dp_128x32
-            fakeram7_dp_128x32 memory (
-                .addr_in_A(wr_mem_addr),
-                .addr_in_B(rd_mem_addr),
-                .ce_in(wr_ce_in | rd_ce_in),
-                .clk(wr_clk),
-                .rd_out_A(),
-                .rd_out_B(mem_dout),
-                .w_mask_in_A(mem_wmask),
-                .w_mask_in_B('b0),
-                .wd_in_A(mem_din),
-                .wd_in_B('b0),
-                .we_in_A(we_in),
-                .we_in_B(1'b0)
-            );
-          end
           if (MEM_PROP == "fakeram7_dp_1024x32") begin : ifakeram7_dp_1024x32
             fakeram7_dp_1024x32 memory (
                 .addr_in_A(wr_mem_addr),
@@ -288,6 +194,22 @@ module la_dpram #(
           end
           if (MEM_PROP == "fakeram7_dp_1024x64") begin : ifakeram7_dp_1024x64
             fakeram7_dp_1024x64 memory (
+                .addr_in_A(wr_mem_addr),
+                .addr_in_B(rd_mem_addr),
+                .ce_in(wr_ce_in | rd_ce_in),
+                .clk(wr_clk),
+                .rd_out_A(),
+                .rd_out_B(mem_dout),
+                .w_mask_in_A(mem_wmask),
+                .w_mask_in_B('b0),
+                .wd_in_A(mem_din),
+                .wd_in_B('b0),
+                .we_in_A(we_in),
+                .we_in_B(1'b0)
+            );
+          end
+          if (MEM_PROP == "fakeram7_dp_128x32") begin : ifakeram7_dp_128x32
+            fakeram7_dp_128x32 memory (
                 .addr_in_A(wr_mem_addr),
                 .addr_in_B(rd_mem_addr),
                 .ce_in(wr_ce_in | rd_ce_in),
@@ -334,6 +256,38 @@ module la_dpram #(
                 .we_in_B(1'b0)
             );
           end
+          if (MEM_PROP == "fakeram7_dp_256x32") begin : ifakeram7_dp_256x32
+            fakeram7_dp_256x32 memory (
+                .addr_in_A(wr_mem_addr),
+                .addr_in_B(rd_mem_addr),
+                .ce_in(wr_ce_in | rd_ce_in),
+                .clk(wr_clk),
+                .rd_out_A(),
+                .rd_out_B(mem_dout),
+                .w_mask_in_A(mem_wmask),
+                .w_mask_in_B('b0),
+                .wd_in_A(mem_din),
+                .wd_in_B('b0),
+                .we_in_A(we_in),
+                .we_in_B(1'b0)
+            );
+          end
+          if (MEM_PROP == "fakeram7_dp_256x64") begin : ifakeram7_dp_256x64
+            fakeram7_dp_256x64 memory (
+                .addr_in_A(wr_mem_addr),
+                .addr_in_B(rd_mem_addr),
+                .ce_in(wr_ce_in | rd_ce_in),
+                .clk(wr_clk),
+                .rd_out_A(),
+                .rd_out_B(mem_dout),
+                .w_mask_in_A(mem_wmask),
+                .w_mask_in_B('b0),
+                .wd_in_A(mem_din),
+                .wd_in_B('b0),
+                .we_in_A(we_in),
+                .we_in_B(1'b0)
+            );
+          end
           if (MEM_PROP == "fakeram7_dp_4096x32") begin : ifakeram7_dp_4096x32
             fakeram7_dp_4096x32 memory (
                 .addr_in_A(wr_mem_addr),
@@ -352,6 +306,70 @@ module la_dpram #(
           end
           if (MEM_PROP == "fakeram7_dp_4096x64") begin : ifakeram7_dp_4096x64
             fakeram7_dp_4096x64 memory (
+                .addr_in_A(wr_mem_addr),
+                .addr_in_B(rd_mem_addr),
+                .ce_in(wr_ce_in | rd_ce_in),
+                .clk(wr_clk),
+                .rd_out_A(),
+                .rd_out_B(mem_dout),
+                .w_mask_in_A(mem_wmask),
+                .w_mask_in_B('b0),
+                .wd_in_A(mem_din),
+                .wd_in_B('b0),
+                .we_in_A(we_in),
+                .we_in_B(1'b0)
+            );
+          end
+          if (MEM_PROP == "fakeram7_dp_512x128") begin : ifakeram7_dp_512x128
+            fakeram7_dp_512x128 memory (
+                .addr_in_A(wr_mem_addr),
+                .addr_in_B(rd_mem_addr),
+                .ce_in(wr_ce_in | rd_ce_in),
+                .clk(wr_clk),
+                .rd_out_A(),
+                .rd_out_B(mem_dout),
+                .w_mask_in_A(mem_wmask),
+                .w_mask_in_B('b0),
+                .wd_in_A(mem_din),
+                .wd_in_B('b0),
+                .we_in_A(we_in),
+                .we_in_B(1'b0)
+            );
+          end
+          if (MEM_PROP == "fakeram7_dp_512x32") begin : ifakeram7_dp_512x32
+            fakeram7_dp_512x32 memory (
+                .addr_in_A(wr_mem_addr),
+                .addr_in_B(rd_mem_addr),
+                .ce_in(wr_ce_in | rd_ce_in),
+                .clk(wr_clk),
+                .rd_out_A(),
+                .rd_out_B(mem_dout),
+                .w_mask_in_A(mem_wmask),
+                .w_mask_in_B('b0),
+                .wd_in_A(mem_din),
+                .wd_in_B('b0),
+                .we_in_A(we_in),
+                .we_in_B(1'b0)
+            );
+          end
+          if (MEM_PROP == "fakeram7_dp_512x64") begin : ifakeram7_dp_512x64
+            fakeram7_dp_512x64 memory (
+                .addr_in_A(wr_mem_addr),
+                .addr_in_B(rd_mem_addr),
+                .ce_in(wr_ce_in | rd_ce_in),
+                .clk(wr_clk),
+                .rd_out_A(),
+                .rd_out_B(mem_dout),
+                .w_mask_in_A(mem_wmask),
+                .w_mask_in_B('b0),
+                .wd_in_A(mem_din),
+                .wd_in_B('b0),
+                .we_in_A(we_in),
+                .we_in_B(1'b0)
+            );
+          end
+          if (MEM_PROP == "fakeram7_dp_64x32") begin : ifakeram7_dp_64x32
+            fakeram7_dp_64x32 memory (
                 .addr_in_A(wr_mem_addr),
                 .addr_in_B(rd_mem_addr),
                 .ce_in(wr_ce_in | rd_ce_in),
