@@ -177,7 +177,8 @@ if __name__ == "__main__":
     files = []
 
     spram = Spram()
-    files.append(os.path.join(os.path.dirname(__file__), "sg13g2_sram", "lambda", f"{spram.name}.v"))
+    files.append(os.path.join(os.path.dirname(__file__), "sg13g2_sram",
+                              "lambda", f"{spram.name}.v"))
     spram.write_lambdalib(
         files[-1],
         IHP130Lambdalib_SinglePort().techlibs)

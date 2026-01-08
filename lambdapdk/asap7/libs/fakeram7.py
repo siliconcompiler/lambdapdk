@@ -124,6 +124,7 @@ class _FakeRAM7Library(LambdaLibrary, RAMTechLib):
         """
         return self.name
 
+
 class FakeRAM7_tdp_64x32(_FakeRAM7Library):
     def __init__(self):
         super().__init__("tdp_64x32")
