@@ -100,8 +100,7 @@ class IHP130PDK(LambdaPDK, _IHP130Path):
 
         # DRC
         drcs = {
-            "maximal": 'ihp-sg13g2/libs.tech/klayout/tech/drc/sg13g2_maximal.lydrc',
-            "minimal": 'ihp-sg13g2/libs.tech/klayout/tech/drc/sg13g2_minimal.lydrc'
+            "drc": 'ihp-sg13g2/libs.tech/klayout/tech/drc/ihp-sg13g2.drc',
         }
         with self.active_dataroot("ihp130"):
             for drc, runset in drcs.items():
@@ -109,6 +108,6 @@ class IHP130PDK(LambdaPDK, _IHP130Path):
                     self.add_file(runset, filetype="drc")
                     self.add_runsetfileset("drc", "klayout", drc)
 
-                self.add_klayout_drcparam(drc, "in_gds=<input>")
-                self.add_klayout_drcparam(drc, "cell=<topcell>")
-                self.add_klayout_drcparam(drc, "report_file=<report>")
+                self.add_klayout_drcparam(drc, "input=<input>")
+                self.add_klayout_drcparam(drc, "topcell=<topcell>")
+                self.add_klayout_drcparam(drc, "report=<report>")
