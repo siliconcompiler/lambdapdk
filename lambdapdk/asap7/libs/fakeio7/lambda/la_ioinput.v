@@ -24,6 +24,7 @@ module la_ioinput #(
     input              ie,      // input enable, 1 = active
     input              pe,      // pull enable, 1 = enable
     input              ps,      // pull select, 1 = pullup, 0 = pulldown
+    input              schmitt, // schmitt cfg, 1 = active
     inout  [RINGW-1:0] ioring,  // generic ioring interface
     input  [ CFGW-1:0] cfg      // generic config interface
 );
@@ -45,6 +46,9 @@ module la_ioinput #(
         .oe(1'b0),
         .pe(pe),
         .ps(ps),
+        .schmitt(schmitt),
+        .fast(1'b0),
+        .ds('b0),
         .ioring(ioring),
         .cfg('b0)
     );
@@ -66,6 +70,9 @@ module la_ioinput #(
         .oe(1'b0),
         .pe(1'b0),
         .ps(1'b0),
+        .schmitt(schmitt),
+        .fast(1'b0),
+        .ds('b0),
         .ioring(ioring),
         .cfg(cfg)
     );
