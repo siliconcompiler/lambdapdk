@@ -16,6 +16,9 @@ module la_iobidir #(
     input              oe,      // output enable, 1 = active
     input              pe,      // pull enable, 1 = enable
     input              ps,      // pull select, 1 = pullup, 0 = pulldown
+    input              schmitt, // schmitt cfg, 1 = active
+    input              fast,    // 1 = fast slew rate
+    input  [1:0]       ds,      // drive strength, 0=weakest
     inout  [RINGW-1:0] ioring,  // generic io ring
     input  [ CFGW-1:0] cfg      // generic config interface
 );
@@ -51,7 +54,7 @@ module la_iobidir #(
       .ENABLE_VDDIO(cfg[5]),
       .IB_MODE_SEL(cfg[6]),  // use vddio based threshold
       .VTRIP_SEL(cfg[7]),  // use cmos threshold
-      .SLOW(cfg[8]),
+      .SLOW(~fast),
       .HLD_OVR(cfg[9]),  // don't care when hld_h_n = 1
       .ANALOG_EN(cfg[10]),  // disable analog functionality
       .ANALOG_SEL(cfg[11]),  // don't care

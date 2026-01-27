@@ -16,6 +16,9 @@ module la_iobidir #(
     input              oe,      // output enable, 1 = active
     input              pe,      // pull enable, 1 = enable
     input              ps,      // pull select, 1 = pullup, 0 = pulldown
+    input              schmitt, // schmitt cfg, 1 = active
+    input              fast,    // 1 = fast slew rate
+    input  [1:0]       ds,      // drive strength, 0=weakest
     inout  [RINGW-1:0] ioring,  // generic io ring
     input  [ CFGW-1:0] cfg      // generic config interface
 );
@@ -34,12 +37,12 @@ module la_iobidir #(
       .Y(z),
       .IE(ie),
       .OE(oe),
-      .CS(cfg[2]),
-      .PDRV0(cfg[0]),
-      .PDRV1(cfg[1]),
+      .CS(schmitt),
+      .PDRV0(ds[0]),
+      .PDRV1(ds[1]),
       .PD(ps & ~ps),
       .PU(ps & ps),
-      .SL(cfg[5]),
+      .SL(fast),
       .DVDD(vddio),
       .DVSS(vssio),
       .VDD(vdd),
