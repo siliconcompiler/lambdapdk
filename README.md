@@ -9,7 +9,7 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 
 
-Lambdapdk is a collection of open-source Process Design Kits (PDKs) that enable chip design across multiple technology nodes. Each PDK includes standard cell libraries, I/O libraries, and memory compilers with full integration into the [SiliconCompiler](https://github.com/siliconcompiler/siliconcompiler) build system.
+Lambdapdk is a collection of open-source Process Design Kits (PDKs) that enable chip design across multiple technology nodes. Each PDK includes standard cell libraries, I/O libraries, and memory compilers with full integration into the [SiliconCompiler](https://github.com/siliconcompiler/siliconcompiler) build system and [Lambdalib](https://github.com/siliconcompiler/lambdalib) Verilog hardware abstraction library.
 
 <!-- TODO: Add architecture diagram showing PDK relationship to design flow -->
 
