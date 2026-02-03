@@ -189,7 +189,10 @@ def get_libs():
         FakeRAM7_dp_8192x64, FakeRAM7_tdp_8192x64, \
         FakeRAM7_sp_8192x64, \
         FakeRAM7Lambdalib_SinglePort, \
-        FakeRAM7Lambdalib_DoublePort
+        FakeRAM7Lambdalib_DoublePort, \
+        FakeRAM7Lambdalib_TrueDoublePort
+    from lambdapdk.asap7.libs.fakepll7 import FakePLL7Library, \
+        FakePLL7Lambdalib_la_pll
     from lambdapdk.freepdk45.libs.nangate45 import Nangate45
     from lambdapdk.freepdk45.libs.fakeram45 import \
         FakeRAM45_64x32, \
@@ -336,6 +339,8 @@ def get_libs():
         FakeRAM7_sp_8192x64(),
         FakeRAM7Lambdalib_SinglePort(),
         FakeRAM7Lambdalib_DoublePort(),
+        FakeRAM7Lambdalib_TrueDoublePort(),
+        FakePLL7Library(), FakePLL7Lambdalib_la_pll(),
         Nangate45(),
         FakeRAM45_64x32(),
         FakeRAM45_128x32(),
