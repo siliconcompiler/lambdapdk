@@ -3,6 +3,7 @@
 //# Copyright: Lambda Project Authors. All rights Reserved.                   #
 //# License:   MIT (see LICENSE file in Lambda repository)                    #
 //#############################################################################
+(* keep_hierarchy *)
 module la_rsync #(
     parameter PROP   = "DEFAULT",
     parameter STAGES = 2,          // synchronizer depth

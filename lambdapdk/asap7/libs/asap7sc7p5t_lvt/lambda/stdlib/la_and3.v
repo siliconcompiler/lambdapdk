@@ -21,6 +21,7 @@
 
 (* top =  1  *)
 (* src = "generated" *)
+(* keep_hierarchy *)
 module la_and3 (
     a,
     b,

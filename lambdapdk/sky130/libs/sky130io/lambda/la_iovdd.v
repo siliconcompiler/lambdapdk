@@ -1,4 +1,5 @@
 
+(* keep_hierarchy *)
 module la_iovdd #(
     parameter PROP  = "DEFAULT",  // cell type
     parameter SIDE  = "NO",       // "NO", "SO", "EA", "WE"

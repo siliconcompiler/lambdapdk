@@ -23,6 +23,7 @@
 
 (* top =  1  *)
 (* src = "generated" *)
+(* keep_hierarchy *)
 module la_sdffqn (
     d,
     si,

@@ -20,6 +20,7 @@
 
 (* top =  1  *)
 (* src = "generated" *)
+(* keep_hierarchy *)
 module la_nand2 (
     a,
     b,

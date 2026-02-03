@@ -21,6 +21,7 @@
 
 (* top =  1  *)
 (* src = "generated" *)
+(* keep_hierarchy *)
 module la_xor3 (
     a,
     b,

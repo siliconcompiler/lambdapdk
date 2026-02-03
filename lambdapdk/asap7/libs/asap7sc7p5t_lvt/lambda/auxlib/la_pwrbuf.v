@@ -4,6 +4,7 @@
 //# License:  MIT (see LICENSE file in Lambda repository)                     #
 //#############################################################################
 
+(* keep_hierarchy *)
 module la_pwrbuf #(
     parameter PROP = "DEFAULT"
 ) (

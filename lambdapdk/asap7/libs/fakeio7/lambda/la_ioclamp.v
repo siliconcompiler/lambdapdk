@@ -8,6 +8,7 @@
  * ../README.md
  *
  ****************************************************************************/
+(* keep_hierarchy *)
 module la_ioclamp #(
     parameter PROP  = "DEFAULT",  // cell property
     parameter SIDE  = "NO",       // "NO", "SO", "EA", "WE"

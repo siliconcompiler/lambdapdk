@@ -28,6 +28,7 @@
 
 (* top =  1  *)
 (* src = "generated" *)
+(* keep_hierarchy *)
 module la_dmux5 (
     sel4,
     sel3,

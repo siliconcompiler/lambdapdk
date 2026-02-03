@@ -24,6 +24,7 @@
 
 (* top =  1  *)
 (* src = "generated" *)
+(* keep_hierarchy *)
 module la_mux4 (
     d0,
     d1,

@@ -19,6 +19,7 @@
 
 (* top =  1  *)
 (* src = "generated" *)
+(* keep_hierarchy *)
 module la_buf (
     a,
     z

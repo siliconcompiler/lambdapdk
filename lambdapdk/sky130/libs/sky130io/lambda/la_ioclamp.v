@@ -6,6 +6,7 @@
  * Docs:
  *
  ****************************************************************************/
+(* keep_hierarchy *)
 module la_ioclamp #(
     parameter PROP  = "DEFAULT",  // cell type
     parameter SIDE  = "NO",       // "NO", "SO", "EA", "WE"

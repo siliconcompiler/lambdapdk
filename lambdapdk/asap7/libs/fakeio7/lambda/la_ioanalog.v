@@ -12,6 +12,7 @@
  * aio[2] = big series resistance
  *
  ****************************************************************************/
+(* keep_hierarchy *)
 module la_ioanalog #(
     parameter PROP  = "DEFAULT",  // cell property
     parameter SIDE  = "NO",       // "NO", "SO", "EA", "WE"

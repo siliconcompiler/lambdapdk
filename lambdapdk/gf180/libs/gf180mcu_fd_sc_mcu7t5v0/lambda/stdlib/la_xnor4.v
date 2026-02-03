@@ -22,6 +22,7 @@
 
 (* top =  1  *)
 (* src = "generated" *)
+(* keep_hierarchy *)
 module la_xnor4 (
     a,
     b,
