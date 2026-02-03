@@ -22,6 +22,8 @@
  * DIVFB corresponds exactly to "M" (0 is an illegal value).
  *
  *******************************************************************************/
+
+(* keep_hierarchy *)
 module la_pll
   #(
     // defaults updated to match the fixed 'fakepll7' macro configuration
@@ -73,7 +75,8 @@ module la_pll
     input [CW-1:0]               ctrl,      // controls
     output [SW-1:0]              status     // status
     );
-// =========================================================================
+
+    // =========================================================================
     // 1. HARD MACRO "fakepll7" CONSTANTS
     // =========================================================================
     localparam FM_NIN      = 2;
@@ -114,44 +117,77 @@ module la_pll
     // Rule: If Wrapper < Macro, Pad with 0s. If Wrapper > Macro, Truncate.
 
     // clkin
-    assign w_clkin = (NIN < FM_NIN) ? { {(FM_NIN-NIN){1'b0}}, clkin } : clkin[FM_NIN-1:0];
+    if (NIN < FM_NIN)
+        assign w_clkin = { {(FM_NIN-NIN){1'b0}}, clkin };
+    else
+        assign w_clkin = clkin[FM_NIN-1:0];
 
     // clksel (Special case for calculated width)
     localparam W_CLKSEL_W = (NIN>1?$clog2(NIN):1);
-    assign w_clksel = (W_CLKSEL_W < FM_CLKSEL_BITS) ? { {(FM_CLKSEL_BITS-W_CLKSEL_W){1'b0}}, clksel } : clksel[FM_CLKSEL_BITS-1:0];
+    if (W_CLKSEL_W < FM_CLKSEL_BITS)
+        assign w_clksel = { {(FM_CLKSEL_BITS-W_CLKSEL_W){1'b0}}, clksel };
+    else
+        assign w_clksel = clksel[FM_CLKSEL_BITS-1:0];
 
     // clken
-    assign w_clken = (NOUT < FM_NOUT) ? { {(FM_NOUT-NOUT){1'b0}}, clken } : clken[FM_NOUT-1:0];
+    if (NOUT < FM_NOUT)
+        assign w_clken = { {(FM_NOUT-NOUT){1'b0}}, clken };
+    else
+        assign w_clken = clken[FM_NOUT-1:0];
 
     // divin
-    assign w_divin = (DIVINW < FM_DIVINW) ? { {(FM_DIVINW-DIVINW){1'b0}}, divin } : divin[FM_DIVINW-1:0];
+    if (DIVINW < FM_DIVINW)
+        assign w_divin = { {(FM_DIVINW-DIVINW){1'b0}}, divin };
+    else
+        assign w_divin = divin[FM_DIVINW-1:0];
 
     // divfb
-    assign w_divfb = (DIVFBW < FM_DIVFBW) ? { {(FM_DIVFBW-DIVFBW){1'b0}}, divfb } : divfb[FM_DIVFBW-1:0];
+    if (DIVFBW < FM_DIVFBW)
+        assign w_divfb = { {(FM_DIVFBW-DIVFBW){1'b0}}, divfb };
+    else
+        assign w_divfb = divfb[FM_DIVFBW-1:0];
 
     // divfrac
-    assign w_divfrac = (DIVFRACW < FM_DIVFRACW) ? { {(FM_DIVFRACW-DIVFRACW){1'b0}}, divfrac } : divfrac[FM_DIVFRACW-1:0];
+    if (DIVFRACW < FM_DIVFRACW)
+        assign w_divfrac = {{(FM_DIVFRACW-DIVFRACW){1'b0}}, divfrac};
+    else
+        assign w_divfrac = divfrac[FM_DIVFRACW-1:0];
 
     // divout (Flattened Bus)
     localparam P_DIVOUT_BITS = NOUT * DIVOUTW;
-    assign w_divout = (P_DIVOUT_BITS < FM_DIVOUT_BITS) ? { {(FM_DIVOUT_BITS-P_DIVOUT_BITS){1'b0}}, divout } : divout[FM_DIVOUT_BITS-1:0];
+    if (P_DIVOUT_BITS < FM_DIVOUT_BITS)
+        assign w_divout = { {(FM_DIVOUT_BITS-P_DIVOUT_BITS){1'b0}}, divout };
+    else
+        assign w_divout = divout[FM_DIVOUT_BITS-1:0];
 
     // phase (Flattened Bus)
     localparam P_PHASE_BITS = NOUT * PHASEW;
-    assign w_phase = (P_PHASE_BITS < FM_PHASE_BITS) ? { {(FM_PHASE_BITS-P_PHASE_BITS){1'b0}}, phase } : phase[FM_PHASE_BITS-1:0];
+    if (P_PHASE_BITS < FM_PHASE_BITS)
+        assign w_phase = { {(FM_PHASE_BITS-P_PHASE_BITS){1'b0}}, phase };
+    else
+        assign w_phase = phase[FM_PHASE_BITS-1:0];
 
     // ctrl
-    assign w_ctrl = (CW < FM_CW) ? { {(FM_CW-CW){1'b0}}, ctrl } : ctrl[FM_CW-1:0];
+    if (CW < FM_CW)
+        assign w_ctrl = { {(FM_CW-CW){1'b0}}, ctrl };
+    else
+        assign w_ctrl = ctrl[FM_CW-1:0];
 
     // --- Outputs: Logic to drive the Wrapper Ports ---
     // Rule: If Wrapper > Macro, drive MSBs to 0. If Wrapper < Macro, Truncate.
 
     // clkout
-    assign clkout = (NOUT > FM_NOUT) ? { {(NOUT-FM_NOUT){1'b0}}, w_clkout } : w_clkout[NOUT-1:0];
+    if (NOUT > FM_NOUT)
+        assign clkout = { {(NOUT-FM_NOUT){1'b0}}, w_clkout };
+    else
+        assign clkout = w_clkout[NOUT-1:0];
 
     // status
-    assign status = (SW > FM_SW) ? { {(SW-FM_SW){1'b0}}, w_status } : w_status[SW-1:0];
-  
+    if (SW > FM_SW)
+        assign status = { {(SW-FM_SW){1'b0}}, w_status };
+    else
+        assign status = w_status[SW-1:0];
+
     fakepll7 pll (
         // Supplies
         .VDDA       (vdda),
