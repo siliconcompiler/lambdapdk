@@ -29,6 +29,7 @@
 (* dynports =  1  *)
 (* top =  1  *)
 (* src = "generated" *)
+(* keep_hierarchy *)
 module la_drsync (
     clk,
     in,

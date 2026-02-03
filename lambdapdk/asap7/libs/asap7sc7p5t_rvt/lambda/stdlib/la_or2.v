@@ -20,6 +20,7 @@
 
 (* top =  1  *)
 (* src = "generated" *)
+(* keep_hierarchy *)
 module la_or2 (
     a,
     b,

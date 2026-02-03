@@ -1,3 +1,4 @@
+(* keep_hierarchy *)
 module la_iovssio #(
     parameter PROP  = "DEFAULT",  // cell type
     parameter SIDE  = "NO",       // "NO", "SO", "EA", "WE"

@@ -14,6 +14,7 @@
  * different IP cells for the placing cells vvertically or horizontally.
  *
  ****************************************************************************/
+(* keep_hierarchy *)
 module la_ioinput #(
     parameter PROP  = "DEFAULT",  // cell type
     parameter SIDE  = "NO",       // "NO", "SO", "EA", "WE"

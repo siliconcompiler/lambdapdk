@@ -23,6 +23,7 @@
 
 (* top =  1  *)
 (* src = "generated" *)
+(* keep_hierarchy *)
 module la_ao221 (
     a0,
     a1,

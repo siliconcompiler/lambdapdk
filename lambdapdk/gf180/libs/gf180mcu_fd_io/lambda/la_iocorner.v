@@ -1,3 +1,4 @@
+(* keep_hierarchy *)
 module la_iocorner #(
     parameter PROP  = "DEFAULT",  // cell type
     parameter SIDE  = "NO",       // "NO", "SO", "EA", "WE"

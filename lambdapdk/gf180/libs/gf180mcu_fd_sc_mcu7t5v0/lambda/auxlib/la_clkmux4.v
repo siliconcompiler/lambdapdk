@@ -4,6 +4,7 @@
 //# License:  MIT (see LICENSE file in Lambda repository)                     #
 //#############################################################################
 
+(* keep_hierarchy *)
 module la_clkmux4 #(
     parameter PROP = "DEFAULT"  // cell property
 ) (

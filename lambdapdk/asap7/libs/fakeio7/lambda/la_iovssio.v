@@ -8,6 +8,7 @@
  * ../README.md
  *
  ****************************************************************************/
+(* keep_hierarchy *)
 module la_iovssio #(
     parameter PROP  = "DEFAULT",  // cell property
     parameter SIDE  = "NO",       // "NO", "SO", "EA", "WE"

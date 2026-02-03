@@ -23,6 +23,7 @@
 
 (* top =  1  *)
 (* src = "generated" *)
+(* keep_hierarchy *)
 module la_mux3 (
     d0,
     d1,
