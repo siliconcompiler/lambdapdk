@@ -13,7 +13,7 @@
  * Advanced ASIC development should rely on complete functional models
  * supplied on a per macro basis.
  *
- * Technologoy specific implementations of "la_dpram" would generally include
+ * Technology specific implementations of "la_dpram" would generally include
  * one or more hardcoded instantiations of la_dpram modules with a generate
  * statement relying on the "PROP" to select between the list of modules
  * at build time.
@@ -108,13 +108,19 @@ module la_dpram #(
           .CTRLW(CTRLW),
           .TESTW(TESTW)
       ) memory (
-          .clk(clk),
-          .ce(ce),
-          .we(we),
-          .wmask(wmask),
-          .addr(addr),
-          .din(din),
-          .dout(dout),
+          // Write port
+          .wr_clk(wr_clk),
+          .wr_ce(wr_ce),
+          .wr_we(wr_we),
+          .wr_wmask(wr_wmask),
+          .wr_addr(wr_addr),
+          .wr_din(wr_din),
+          // Read port
+          .rd_clk(rd_clk),
+          .rd_ce(rd_ce),
+          .rd_addr(rd_addr),
+          .rd_dout(rd_dout),
+          // Power/control
           .vss(vss),
           .vdd(vdd),
           .vddio(vddio),
@@ -136,6 +142,7 @@ module la_dpram #(
       for (a = 0; a < MEM_ADDRS; a = a + 1) begin : ADDR
         wire we_selected;
         wire re_selected;
+        reg re_selected_reg;
         wire [MEM_DEPTH-1:0] wr_mem_addr;
         wire [MEM_DEPTH-1:0] rd_mem_addr;
 
@@ -151,6 +158,10 @@ module la_dpram #(
           assign rd_mem_addr = rd_addr[MEM_DEPTH-1:0];
         end
 
+        always @(posedge rd_clk) begin
+          re_selected_reg <= re_selected;
+        end
+
         genvar n;
         for (n = 0; n < DW; n = n + MEM_WIDTH) begin : WORD
           wire [MEM_WIDTH-1:0] mem_din;
@@ -162,7 +173,7 @@ module la_dpram #(
             if (n + i < DW) begin : ACTIVE
               assign mem_din[i] = wr_din[n+i];
               assign mem_wmask[i] = wr_wmask[n+i];
-              assign OUTPUTS[n+i].mem_outputs[a] = re_selected ? mem_dout[i] : 1'b0;
+              assign OUTPUTS[n+i].mem_outputs[a] = re_selected_reg ? mem_dout[i] : 1'b0;
             end else begin : INACTIVE
               assign mem_din[i]   = 1'b0;
               assign mem_wmask[i] = 1'b0;
