@@ -13,7 +13,7 @@
  * Advanced ASIC development should rely on complete functional models
  * supplied on a per macro basis.
  *
- * Technologoy specific implementations of "la_spram" would generally include
+ * Technology specific implementations of "la_spram" would generally include
  * one or more hardcoded instantiations of la_spram modules with a generate
  * statement relying on the "PROP" to select between the list of modules
  * at build time.
@@ -108,6 +108,7 @@ module la_spram #(
       genvar a;
       for (a = 0; a < MEM_ADDRS; a = a + 1) begin : ADDR
         wire selected;
+        reg selected_reg;
         wire [MEM_DEPTH-1:0] mem_addr;
 
         if (MEM_ADDRS == 1) begin : FITS
@@ -116,6 +117,10 @@ module la_spram #(
         end else begin : NOFITS
           assign selected = addr[AW-1:MEM_DEPTH] == a;
           assign mem_addr = addr[MEM_DEPTH-1:0];
+        end
+
+        always @(posedge clk) begin
+          selected_reg <= selected;
         end
 
         genvar n;
@@ -129,7 +134,7 @@ module la_spram #(
             if (n + i < DW) begin : ACTIVE
               assign mem_din[i] = din[n+i];
               assign mem_wmask[i] = wmask[n+i];
-              assign OUTPUTS[n+i].mem_outputs[a] = selected ? mem_dout[i] : 1'b0;
+              assign OUTPUTS[n+i].mem_outputs[a] = selected_reg ? mem_dout[i] : 1'b0;
             end else begin : INACTIVE
               assign mem_din[i]   = 1'b0;
               assign mem_wmask[i] = 1'b0;
