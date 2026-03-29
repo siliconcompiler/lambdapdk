@@ -82,6 +82,12 @@ class _FakeRAM45Library(LambdaLibrary, RAMTechLib):
             "wd_in": "mem_din"
         }
 
+    def get_ram_defaultctrl_width(self) -> int:
+        return 1
+
+    def get_ram_defaultctrl(self) -> str:
+        return "1'b0"
+
     def get_ram_libcell(self) -> str:
         """Returns the name of the RAM library cell.
 

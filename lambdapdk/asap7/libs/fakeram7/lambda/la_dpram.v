@@ -8,7 +8,7 @@
  * This is a wrapper for selecting from a set of hardened memory macros.
  *
  * A synthesizable reference model is used when the PROP is DEFAULT. The
- * synthesizable model does not implement the cfg and test interface and should
+ * synthesizable model does not implement the ctrl interface and should
  * only be used for basic testing and for synthesizing for FPGA devices.
  * Advanced ASIC development should rely on complete functional models
  * supplied on a per macro basis.
@@ -22,11 +22,11 @@
 
 (* keep_hierarchy *)
 module la_dpram #(
-    parameter DW    = 32,         // Memory width
-    parameter AW    = 10,         // Address width (derived)
-    parameter PROP  = "DEFAULT",  // Pass through variable for hard macro
-    parameter CTRLW = 128,        // Width of asic ctrl interface
-    parameter TESTW = 128         // Width of asic test interface
+    parameter DW      = 32,         // Memory width
+    parameter AW      = 10,         // Address width (derived)
+    parameter PROP    = "DEFAULT",  // Pass through variable for hard macro
+    parameter CTRLW   = 32,         // Width of ctrl interface
+    parameter STATUSW = 32          // Width of status interface
 ) (  // Memory interface
      // Write port
     input wr_clk,  // write clock
@@ -40,19 +40,17 @@ module la_dpram #(
     input rd_ce,  // read chip-enable
     input [AW-1:0] rd_addr,  // read address
     output [DW-1:0] rd_dout,  //read data out
-    // Power signals
-    input vss,  // ground signal
-    input vdd,  // memory core array power
-    input vddio,  // periphery/io power
-    // Generic interfaces
-    input [CTRLW-1:0] ctrl,  // pass through ASIC control interface
-    input [TESTW-1:0] test  // pass through ASIC test interface
+    // Technology interfaces
+    input selctrl,  // selects control interface
+    input [CTRLW-1:0] ctrl,  // pass through control interface
+    output [STATUSW-1:0] status  // pass through status interface
 );
 
   // Total number of bits
   localparam TOTAL_BITS = (2 ** AW) * DW;
 
   // Determine which memory to select
+  //verilator lint_off WIDTHEXPAND
   localparam MEM_PROP = (PROP != "DEFAULT") ? PROP :
       (AW >= 13) ? (DW >= 64) ? "fakeram7_dp_8192x64" : "fakeram7_dp_8192x32" :
       (AW >= 12) ? (DW >= 64) ? "fakeram7_dp_4096x64" : "fakeram7_dp_4096x32" :
@@ -62,6 +60,7 @@ module la_dpram #(
       (AW >= 8) ? (DW >= 64) ? "fakeram7_dp_256x64" : "fakeram7_dp_256x32" :
       (AW >= 7) ? "fakeram7_dp_128x32" :
       "fakeram7_dp_64x32";
+  //verilator lint_on WIDTHEXPAND
 
   localparam MEM_WIDTH = 
       (MEM_PROP == "fakeram7_dp_1024x32") ? 32 :
@@ -106,7 +105,7 @@ module la_dpram #(
           .AW(AW),
           .PROP(PROP),
           .CTRLW(CTRLW),
-          .TESTW(TESTW)
+          .STATUSW(STATUSW)
       ) memory (
           // Write port
           .wr_clk(wr_clk),
@@ -120,17 +119,16 @@ module la_dpram #(
           .rd_ce(rd_ce),
           .rd_addr(rd_addr),
           .rd_dout(rd_dout),
-          // Power/control
-          .vss(vss),
-          .vdd(vdd),
-          .vddio(vddio),
+          // Technology interfaces
+          .selctrl(selctrl),
           .ctrl(ctrl),
-          .test(test)
+          .status(status)
       );
     end
     if (MEM_PROP != "SOFT") begin : itech
       // Create memories
-      localparam MEM_ADDRS = 2 ** (AW - MEM_DEPTH) < 1 ? 1 : 2 ** (AW - MEM_DEPTH);
+      // When AW < MEM_DEPTH, force single-macro case (MEM_ADDRS = 1)
+      localparam MEM_ADDRS = (AW >= MEM_DEPTH) ? 2 ** (AW - MEM_DEPTH) : 1;
 
       genvar o;
       for (o = 0; o < DW; o = o + 1) begin : OUTPUTS
@@ -149,8 +147,28 @@ module la_dpram #(
         if (MEM_ADDRS == 1) begin : FITS
           assign we_selected = 1'b1;
           assign re_selected = 1'b1;
-          assign wr_mem_addr = wr_addr;
-          assign rd_mem_addr = rd_addr;
+          // Handle address width mismatch for write
+          if (AW > MEM_DEPTH) begin : ADDR_TRUNCATE_WR
+            assign wr_mem_addr = wr_addr[MEM_DEPTH-1:0];
+          end
+          if (AW == MEM_DEPTH) begin : ADDR_MATCH_WR
+            assign wr_mem_addr = wr_addr;
+          end
+          if (AW < MEM_DEPTH) begin : ADDR_EXTEND_WR
+            // Single-macro forced case: zero-extend address to macro width
+            assign wr_mem_addr = {{(MEM_DEPTH - AW) {1'b0}}, wr_addr};
+          end
+          // Handle address width mismatch for read
+          if (AW > MEM_DEPTH) begin : ADDR_TRUNCATE_RD
+            assign rd_mem_addr = rd_addr[MEM_DEPTH-1:0];
+          end
+          if (AW == MEM_DEPTH) begin : ADDR_MATCH_RD
+            assign rd_mem_addr = rd_addr;
+          end
+          if (AW < MEM_DEPTH) begin : ADDR_EXTEND_RD
+            // Single-macro forced case: zero-extend address to macro width
+            assign rd_mem_addr = {{(MEM_DEPTH - AW) {1'b0}}, rd_addr};
+          end
         end else begin : NOFITS
           assign we_selected = wr_addr[AW-1:MEM_DEPTH] == a;
           assign re_selected = rd_addr[AW-1:MEM_DEPTH] == a;
@@ -188,6 +206,8 @@ module la_dpram #(
           assign we_in = wr_we && we_selected;
 
           if (MEM_PROP == "fakeram7_dp_1024x32") begin : ifakeram7_dp_1024x32
+            wire [0:0] mem_ctrl;
+            assign mem_ctrl = selctrl ? ctrl[0:0] : 1'b0;
             fakeram7_dp_1024x32 memory (
                 .addr_in_A(wr_mem_addr),
                 .addr_in_B(rd_mem_addr),
@@ -204,6 +224,8 @@ module la_dpram #(
             );
           end
           if (MEM_PROP == "fakeram7_dp_1024x64") begin : ifakeram7_dp_1024x64
+            wire [0:0] mem_ctrl;
+            assign mem_ctrl = selctrl ? ctrl[0:0] : 1'b0;
             fakeram7_dp_1024x64 memory (
                 .addr_in_A(wr_mem_addr),
                 .addr_in_B(rd_mem_addr),
@@ -220,6 +242,8 @@ module la_dpram #(
             );
           end
           if (MEM_PROP == "fakeram7_dp_128x32") begin : ifakeram7_dp_128x32
+            wire [0:0] mem_ctrl;
+            assign mem_ctrl = selctrl ? ctrl[0:0] : 1'b0;
             fakeram7_dp_128x32 memory (
                 .addr_in_A(wr_mem_addr),
                 .addr_in_B(rd_mem_addr),
@@ -236,6 +260,8 @@ module la_dpram #(
             );
           end
           if (MEM_PROP == "fakeram7_dp_2048x32") begin : ifakeram7_dp_2048x32
+            wire [0:0] mem_ctrl;
+            assign mem_ctrl = selctrl ? ctrl[0:0] : 1'b0;
             fakeram7_dp_2048x32 memory (
                 .addr_in_A(wr_mem_addr),
                 .addr_in_B(rd_mem_addr),
@@ -252,6 +278,8 @@ module la_dpram #(
             );
           end
           if (MEM_PROP == "fakeram7_dp_2048x64") begin : ifakeram7_dp_2048x64
+            wire [0:0] mem_ctrl;
+            assign mem_ctrl = selctrl ? ctrl[0:0] : 1'b0;
             fakeram7_dp_2048x64 memory (
                 .addr_in_A(wr_mem_addr),
                 .addr_in_B(rd_mem_addr),
@@ -268,6 +296,8 @@ module la_dpram #(
             );
           end
           if (MEM_PROP == "fakeram7_dp_256x32") begin : ifakeram7_dp_256x32
+            wire [0:0] mem_ctrl;
+            assign mem_ctrl = selctrl ? ctrl[0:0] : 1'b0;
             fakeram7_dp_256x32 memory (
                 .addr_in_A(wr_mem_addr),
                 .addr_in_B(rd_mem_addr),
@@ -284,6 +314,8 @@ module la_dpram #(
             );
           end
           if (MEM_PROP == "fakeram7_dp_256x64") begin : ifakeram7_dp_256x64
+            wire [0:0] mem_ctrl;
+            assign mem_ctrl = selctrl ? ctrl[0:0] : 1'b0;
             fakeram7_dp_256x64 memory (
                 .addr_in_A(wr_mem_addr),
                 .addr_in_B(rd_mem_addr),
@@ -300,6 +332,8 @@ module la_dpram #(
             );
           end
           if (MEM_PROP == "fakeram7_dp_4096x32") begin : ifakeram7_dp_4096x32
+            wire [0:0] mem_ctrl;
+            assign mem_ctrl = selctrl ? ctrl[0:0] : 1'b0;
             fakeram7_dp_4096x32 memory (
                 .addr_in_A(wr_mem_addr),
                 .addr_in_B(rd_mem_addr),
@@ -316,6 +350,8 @@ module la_dpram #(
             );
           end
           if (MEM_PROP == "fakeram7_dp_4096x64") begin : ifakeram7_dp_4096x64
+            wire [0:0] mem_ctrl;
+            assign mem_ctrl = selctrl ? ctrl[0:0] : 1'b0;
             fakeram7_dp_4096x64 memory (
                 .addr_in_A(wr_mem_addr),
                 .addr_in_B(rd_mem_addr),
@@ -332,6 +368,8 @@ module la_dpram #(
             );
           end
           if (MEM_PROP == "fakeram7_dp_512x128") begin : ifakeram7_dp_512x128
+            wire [0:0] mem_ctrl;
+            assign mem_ctrl = selctrl ? ctrl[0:0] : 1'b0;
             fakeram7_dp_512x128 memory (
                 .addr_in_A(wr_mem_addr),
                 .addr_in_B(rd_mem_addr),
@@ -348,6 +386,8 @@ module la_dpram #(
             );
           end
           if (MEM_PROP == "fakeram7_dp_512x32") begin : ifakeram7_dp_512x32
+            wire [0:0] mem_ctrl;
+            assign mem_ctrl = selctrl ? ctrl[0:0] : 1'b0;
             fakeram7_dp_512x32 memory (
                 .addr_in_A(wr_mem_addr),
                 .addr_in_B(rd_mem_addr),
@@ -364,6 +404,8 @@ module la_dpram #(
             );
           end
           if (MEM_PROP == "fakeram7_dp_512x64") begin : ifakeram7_dp_512x64
+            wire [0:0] mem_ctrl;
+            assign mem_ctrl = selctrl ? ctrl[0:0] : 1'b0;
             fakeram7_dp_512x64 memory (
                 .addr_in_A(wr_mem_addr),
                 .addr_in_B(rd_mem_addr),
@@ -380,6 +422,8 @@ module la_dpram #(
             );
           end
           if (MEM_PROP == "fakeram7_dp_64x32") begin : ifakeram7_dp_64x32
+            wire [0:0] mem_ctrl;
+            assign mem_ctrl = selctrl ? ctrl[0:0] : 1'b0;
             fakeram7_dp_64x32 memory (
                 .addr_in_A(wr_mem_addr),
                 .addr_in_B(rd_mem_addr),
@@ -396,6 +440,8 @@ module la_dpram #(
             );
           end
           if (MEM_PROP == "fakeram7_dp_8192x32") begin : ifakeram7_dp_8192x32
+            wire [0:0] mem_ctrl;
+            assign mem_ctrl = selctrl ? ctrl[0:0] : 1'b0;
             fakeram7_dp_8192x32 memory (
                 .addr_in_A(wr_mem_addr),
                 .addr_in_B(rd_mem_addr),
@@ -412,6 +458,8 @@ module la_dpram #(
             );
           end
           if (MEM_PROP == "fakeram7_dp_8192x64") begin : ifakeram7_dp_8192x64
+            wire [0:0] mem_ctrl;
+            assign mem_ctrl = selctrl ? ctrl[0:0] : 1'b0;
             fakeram7_dp_8192x64 memory (
                 .addr_in_A(wr_mem_addr),
                 .addr_in_B(rd_mem_addr),
@@ -429,6 +477,9 @@ module la_dpram #(
           end
         end
       end
+      // Drive status to zero by default for tech-specific memories
+      assign status = {STATUSW{1'b0}};
     end
   endgenerate
+
 endmodule

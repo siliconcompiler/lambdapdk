@@ -8,7 +8,7 @@
  * This is a wrapper for selecting from a set of hardened memory macros.
  *
  * A synthesizable reference model is used when the PROP is DEFAULT. The
- * synthesizable model does not implement the cfg and test interface and should
+ * synthesizable model does not implement the ctrl interface and should
  * only be used for basic testing and for synthesizing for FPGA devices.
  * Advanced ASIC development should rely on complete functional models
  * supplied on a per macro basis.
@@ -22,11 +22,11 @@
 
 (* keep_hierarchy *)
 module la_spram #(
-    parameter DW    = 32,         // Memory width
-    parameter AW    = 10,         // Address width (derived)
-    parameter PROP  = "DEFAULT",  // Pass through variable for hard macro
-    parameter CTRLW = 128,        // Width of asic ctrl interface
-    parameter TESTW = 128         // Width of asic test interface
+    parameter DW      = 32,         // Memory width
+    parameter AW      = 10,         // Address width (derived)
+    parameter PROP    = "DEFAULT",  // Pass through variable for hard macro
+    parameter CTRLW   = 32,         // Width of ctrl interface
+    parameter STATUSW = 32          // Width of status interface
 ) (  // Memory interface
     input clk,  // write clock
     input ce,  // chip enable
@@ -35,19 +35,17 @@ module la_spram #(
     input [AW-1:0] addr,  //write address
     input [DW-1:0] din,  //write data
     output [DW-1:0] dout,  //read output data
-    // Power signals
-    input vss,  // ground signal
-    input vdd,  // memory core array power
-    input vddio,  // periphery/io power
-    // Generic interfaces
-    input [CTRLW-1:0] ctrl,  // pass through ASIC control interface
-    input [TESTW-1:0] test  // pass through ASIC test interface
+    // Technology interfaces
+    input selctrl,  // selects control interface
+    input [CTRLW-1:0] ctrl,  // pass through control interface
+    output [STATUSW-1:0] status  // pass through status interface
 );
 
   // Total number of bits
   localparam TOTAL_BITS = (2 ** AW) * DW;
 
   // Determine which memory to select
+  //verilator lint_off WIDTHEXPAND
   localparam MEM_PROP = (PROP != "DEFAULT") ? PROP :
       (AW >= 13) ? (DW >= 64) ? "fakeram7_sp_8192x64" : "fakeram7_sp_8192x32" :
       (AW >= 12) ? (DW >= 64) ? "fakeram7_sp_4096x64" : "fakeram7_sp_4096x32" :
@@ -57,6 +55,7 @@ module la_spram #(
       (AW >= 8) ? (DW >= 64) ? "fakeram7_sp_256x64" : "fakeram7_sp_256x32" :
       (AW >= 7) ? "fakeram7_sp_128x32" :
       "fakeram7_sp_64x32";
+  //verilator lint_on WIDTHEXPAND
 
   localparam MEM_WIDTH = 
       (MEM_PROP == "fakeram7_sp_1024x32") ? 32 :
@@ -101,7 +100,7 @@ module la_spram #(
           .AW(AW),
           .PROP(PROP),
           .CTRLW(CTRLW),
-          .TESTW(TESTW)
+          .STATUSW(STATUSW)
       ) memory (
           .clk(clk),
           .ce(ce),
@@ -110,16 +109,15 @@ module la_spram #(
           .addr(addr),
           .din(din),
           .dout(dout),
-          .vss(vss),
-          .vdd(vdd),
-          .vddio(vddio),
+          .selctrl(selctrl),
           .ctrl(ctrl),
-          .test(test)
+          .status(status)
       );
     end
     if (MEM_PROP != "SOFT") begin : itech
       // Create memories
-      localparam MEM_ADDRS = 2 ** (AW - MEM_DEPTH) < 1 ? 1 : 2 ** (AW - MEM_DEPTH);
+      // When AW < MEM_DEPTH, force single-macro case (MEM_ADDRS = 1)
+      localparam MEM_ADDRS = (AW >= MEM_DEPTH) ? 2 ** (AW - MEM_DEPTH) : 1;
 
       genvar o;
       for (o = 0; o < DW; o = o + 1) begin : OUTPUTS
@@ -135,10 +133,23 @@ module la_spram #(
 
         if (MEM_ADDRS == 1) begin : FITS
           assign selected = 1'b1;
-          assign mem_addr = addr;
         end else begin : NOFITS
           assign selected = addr[AW-1:MEM_DEPTH] == a;
+        end
+
+        // Handle address width mismatch between wrapper and macro
+        if (AW > MEM_DEPTH) begin : ADDR_ADAPT
+          // Truncate address to macro width
           assign mem_addr = addr[MEM_DEPTH-1:0];
+        end
+        if (AW == MEM_DEPTH) begin : ADDR_MATCH
+          // Address width matches
+          assign mem_addr = addr;
+        end
+        if (AW < MEM_DEPTH) begin : ADDR_EXTEND
+          // Single-macro forced case: zero-extend address to macro width
+          // Since AW < MEM_DEPTH, MEM_ADDRS is forced to 1, collapsing to single macro
+          assign mem_addr = {{(MEM_DEPTH - AW) {1'b0}}, addr};
         end
 
         always @(posedge clk) begin
@@ -169,6 +180,8 @@ module la_spram #(
           assign we_in = we && selected;
 
           if (MEM_PROP == "fakeram7_sp_1024x32") begin : ifakeram7_sp_1024x32
+            wire [0:0] mem_ctrl;
+            assign mem_ctrl = selctrl ? ctrl[0:0] : 1'b0;
             fakeram7_sp_1024x32 memory (
                 .addr_in(mem_addr),
                 .ce_in(ce_in),
@@ -180,6 +193,8 @@ module la_spram #(
             );
           end
           if (MEM_PROP == "fakeram7_sp_1024x64") begin : ifakeram7_sp_1024x64
+            wire [0:0] mem_ctrl;
+            assign mem_ctrl = selctrl ? ctrl[0:0] : 1'b0;
             fakeram7_sp_1024x64 memory (
                 .addr_in(mem_addr),
                 .ce_in(ce_in),
@@ -191,6 +206,8 @@ module la_spram #(
             );
           end
           if (MEM_PROP == "fakeram7_sp_128x32") begin : ifakeram7_sp_128x32
+            wire [0:0] mem_ctrl;
+            assign mem_ctrl = selctrl ? ctrl[0:0] : 1'b0;
             fakeram7_sp_128x32 memory (
                 .addr_in(mem_addr),
                 .ce_in(ce_in),
@@ -202,6 +219,8 @@ module la_spram #(
             );
           end
           if (MEM_PROP == "fakeram7_sp_2048x32") begin : ifakeram7_sp_2048x32
+            wire [0:0] mem_ctrl;
+            assign mem_ctrl = selctrl ? ctrl[0:0] : 1'b0;
             fakeram7_sp_2048x32 memory (
                 .addr_in(mem_addr),
                 .ce_in(ce_in),
@@ -213,6 +232,8 @@ module la_spram #(
             );
           end
           if (MEM_PROP == "fakeram7_sp_2048x64") begin : ifakeram7_sp_2048x64
+            wire [0:0] mem_ctrl;
+            assign mem_ctrl = selctrl ? ctrl[0:0] : 1'b0;
             fakeram7_sp_2048x64 memory (
                 .addr_in(mem_addr),
                 .ce_in(ce_in),
@@ -224,6 +245,8 @@ module la_spram #(
             );
           end
           if (MEM_PROP == "fakeram7_sp_256x32") begin : ifakeram7_sp_256x32
+            wire [0:0] mem_ctrl;
+            assign mem_ctrl = selctrl ? ctrl[0:0] : 1'b0;
             fakeram7_sp_256x32 memory (
                 .addr_in(mem_addr),
                 .ce_in(ce_in),
@@ -235,6 +258,8 @@ module la_spram #(
             );
           end
           if (MEM_PROP == "fakeram7_sp_256x64") begin : ifakeram7_sp_256x64
+            wire [0:0] mem_ctrl;
+            assign mem_ctrl = selctrl ? ctrl[0:0] : 1'b0;
             fakeram7_sp_256x64 memory (
                 .addr_in(mem_addr),
                 .ce_in(ce_in),
@@ -246,6 +271,8 @@ module la_spram #(
             );
           end
           if (MEM_PROP == "fakeram7_sp_4096x32") begin : ifakeram7_sp_4096x32
+            wire [0:0] mem_ctrl;
+            assign mem_ctrl = selctrl ? ctrl[0:0] : 1'b0;
             fakeram7_sp_4096x32 memory (
                 .addr_in(mem_addr),
                 .ce_in(ce_in),
@@ -257,6 +284,8 @@ module la_spram #(
             );
           end
           if (MEM_PROP == "fakeram7_sp_4096x64") begin : ifakeram7_sp_4096x64
+            wire [0:0] mem_ctrl;
+            assign mem_ctrl = selctrl ? ctrl[0:0] : 1'b0;
             fakeram7_sp_4096x64 memory (
                 .addr_in(mem_addr),
                 .ce_in(ce_in),
@@ -268,6 +297,8 @@ module la_spram #(
             );
           end
           if (MEM_PROP == "fakeram7_sp_512x128") begin : ifakeram7_sp_512x128
+            wire [0:0] mem_ctrl;
+            assign mem_ctrl = selctrl ? ctrl[0:0] : 1'b0;
             fakeram7_sp_512x128 memory (
                 .addr_in(mem_addr),
                 .ce_in(ce_in),
@@ -279,6 +310,8 @@ module la_spram #(
             );
           end
           if (MEM_PROP == "fakeram7_sp_512x32") begin : ifakeram7_sp_512x32
+            wire [0:0] mem_ctrl;
+            assign mem_ctrl = selctrl ? ctrl[0:0] : 1'b0;
             fakeram7_sp_512x32 memory (
                 .addr_in(mem_addr),
                 .ce_in(ce_in),
@@ -290,6 +323,8 @@ module la_spram #(
             );
           end
           if (MEM_PROP == "fakeram7_sp_512x64") begin : ifakeram7_sp_512x64
+            wire [0:0] mem_ctrl;
+            assign mem_ctrl = selctrl ? ctrl[0:0] : 1'b0;
             fakeram7_sp_512x64 memory (
                 .addr_in(mem_addr),
                 .ce_in(ce_in),
@@ -301,6 +336,8 @@ module la_spram #(
             );
           end
           if (MEM_PROP == "fakeram7_sp_64x32") begin : ifakeram7_sp_64x32
+            wire [0:0] mem_ctrl;
+            assign mem_ctrl = selctrl ? ctrl[0:0] : 1'b0;
             fakeram7_sp_64x32 memory (
                 .addr_in(mem_addr),
                 .ce_in(ce_in),
@@ -312,6 +349,8 @@ module la_spram #(
             );
           end
           if (MEM_PROP == "fakeram7_sp_8192x32") begin : ifakeram7_sp_8192x32
+            wire [0:0] mem_ctrl;
+            assign mem_ctrl = selctrl ? ctrl[0:0] : 1'b0;
             fakeram7_sp_8192x32 memory (
                 .addr_in(mem_addr),
                 .ce_in(ce_in),
@@ -323,6 +362,8 @@ module la_spram #(
             );
           end
           if (MEM_PROP == "fakeram7_sp_8192x64") begin : ifakeram7_sp_8192x64
+            wire [0:0] mem_ctrl;
+            assign mem_ctrl = selctrl ? ctrl[0:0] : 1'b0;
             fakeram7_sp_8192x64 memory (
                 .addr_in(mem_addr),
                 .ce_in(ce_in),
@@ -335,6 +376,9 @@ module la_spram #(
           end
         end
       end
+      // Drive status to zero by default for tech-specific memories
+      assign status = {STATUSW{1'b0}};
     end
   endgenerate
+
 endmodule

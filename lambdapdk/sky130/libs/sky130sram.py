@@ -95,6 +95,12 @@ class Sky130_SRAM_64x256(LambdaLibrary, RAMTechLib):
             "dout1": "mem_dout",
         }
 
+    def get_ram_defaultctrl_width(self) -> int:
+        return 1
+
+    def get_ram_defaultctrl(self) -> str:
+        return "1'b0"
+
     def get_ram_libcell(self) -> str:
         """Returns the name of the RAM library cell.
 
