@@ -449,6 +449,23 @@ class FakeRAM7Lambdalib_TrueDoublePort(LambalibTechLibrary, _LambdaPath):
                 self.add_depfileset(Tdpram(), "rtl.impl")
 
 
+class FakeRAM7Lambdalib_SinglePortRegfile(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_spregfile",
+            FakeRAM7Lambdalib_SinglePort().techlibs)
+        self.set_name("fakeram7_la_spregfile")
+
+        # version
+        self.package.set_version("v1")
+
+        lib_path = Path("lambdapdk", "asap7", "libs", "fakeram7")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_spregfile.v")
+                self.add_depfileset(Spram(), "rtl")
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--verible_bin',

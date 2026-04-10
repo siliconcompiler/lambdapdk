@@ -196,7 +196,8 @@ def get_libs():
         FakeRAM7_sp_8192x64, \
         FakeRAM7Lambdalib_SinglePort, \
         FakeRAM7Lambdalib_DoublePort, \
-        FakeRAM7Lambdalib_TrueDoublePort
+        FakeRAM7Lambdalib_TrueDoublePort, \
+        FakeRAM7Lambdalib_SinglePortRegfile
     from lambdapdk.asap7.libs.fakepll7 import FakePLL7Library, \
         FakePLL7Lambdalib_la_pll
     from lambdapdk.freepdk45.libs.nangate45 import Nangate45
@@ -207,7 +208,8 @@ def get_libs():
         FakeRAM45_256x64, \
         FakeRAM45_512x32, \
         FakeRAM45_512x64, \
-        FakeRAM45Lambdalib_SinglePort
+        FakeRAM45Lambdalib_SinglePort, \
+        FakeRAM45Lambdalib_SinglePortRegfile
     from lambdapdk.gf180.libs.gf180io import GF180_IO_3LM, GF180_IO_4LM, GF180_IO_5LM, \
         GF180Lambdalib_la_iovdd_3LM, \
         GF180Lambdalib_la_iocorner_3LM, \
@@ -260,7 +262,8 @@ def get_libs():
         GF180_SRAM_128x8, \
         GF180_SRAM_256x8, \
         GF180_SRAM_512x8, \
-        GF180Lambdalib_SinglePort
+        GF180Lambdalib_SinglePort, \
+        GF180Lambdalib_SinglePortRegfile
     from lambdapdk.ihp130.libs.sg13g2_io import IHP130_IO_1p2, IHP130_IO_1p5, \
         IHP130Lambdalib_la_iovdd_1p2, \
         IHP130Lambdalib_la_iocorner_1p2, \
@@ -290,7 +293,8 @@ def get_libs():
         IHP130_SRAM_1024x64, IHP130_SRAM_2048x64, \
         IHP130_SRAM_256x48, IHP130_SRAM_256x64, \
         IHP130_SRAM_512x64, IHP130_SRAM_64x64, \
-        IHP130Lambdalib_SinglePort
+        IHP130Lambdalib_SinglePort, \
+        IHP130Lambdalib_SinglePortRegfile
     from lambdapdk.ihp130.libs.sg13g2_stdcell import IHP130StdCell_1p2, IHP130StdCell_1p5
     from lambdapdk.interposer.libs.bumps import BumpLibrary
     from lambdapdk.sky130.libs.sky130io import Sky130_IOLibrary, \
@@ -308,7 +312,8 @@ def get_libs():
         Sky130Lambdalib_la_iovssa, \
         Sky130Lambdalib_la_iovssio
     from lambdapdk.sky130.libs.sky130sc import Sky130_SCHDLibrary, Sky130_SCHDLLLibrary
-    from lambdapdk.sky130.libs.sky130sram import Sky130_SRAM_64x256, Sky130Lambdalib_SinglePort
+    from lambdapdk.sky130.libs.sky130sram import Sky130_SRAM_64x256, \
+        Sky130Lambdalib_SinglePort, Sky130Lambdalib_SinglePortRegfile
 
     return set([
         ASAP7SC7p5RVT(), ASAP7SC7p5SLVT(), ASAP7SC7p5LVT(),
@@ -346,6 +351,7 @@ def get_libs():
         FakeRAM7Lambdalib_SinglePort(),
         FakeRAM7Lambdalib_DoublePort(),
         FakeRAM7Lambdalib_TrueDoublePort(),
+        FakeRAM7Lambdalib_SinglePortRegfile(),
         FakePLL7Library(), FakePLL7Lambdalib_la_pll(),
         Nangate45(),
         FakeRAM45_64x32(),
@@ -355,6 +361,7 @@ def get_libs():
         FakeRAM45_512x32(),
         FakeRAM45_512x64(),
         FakeRAM45Lambdalib_SinglePort(),
+        FakeRAM45Lambdalib_SinglePortRegfile(),
         GF180_IO_3LM(), GF180_IO_4LM(), GF180_IO_5LM(),
         GF180_MCU_7T_3LMLibrary(),
         GF180_MCU_7T_4LMLibrary(),
@@ -369,16 +376,18 @@ def get_libs():
         GF180_SRAM_256x8(),
         GF180_SRAM_512x8(),
         GF180Lambdalib_SinglePort(),
+        GF180Lambdalib_SinglePortRegfile(),
         IHP130_IO_1p2(), IHP130_IO_1p5(),
         IHP130_SRAM_1024x64(), IHP130_SRAM_2048x64(),
         IHP130_SRAM_256x48(), IHP130_SRAM_256x64(),
         IHP130_SRAM_512x64(), IHP130_SRAM_64x64(),
         IHP130Lambdalib_SinglePort(),
+        IHP130Lambdalib_SinglePortRegfile(),
         IHP130StdCell_1p2(), IHP130StdCell_1p5(),
         BumpLibrary(),
         Sky130_IOLibrary(),
         Sky130_SCHDLibrary(), Sky130_SCHDLLLibrary(),
-        Sky130_SRAM_64x256(), Sky130Lambdalib_SinglePort(),
+        Sky130_SRAM_64x256(), Sky130Lambdalib_SinglePort(), Sky130Lambdalib_SinglePortRegfile(),
         Sky130Lambdalib_la_ioanalog(),
         Sky130Lambdalib_la_iobidir(),
         Sky130Lambdalib_la_ioclamp(),
