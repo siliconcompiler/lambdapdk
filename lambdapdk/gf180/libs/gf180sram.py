@@ -188,6 +188,23 @@ class GF180Lambdalib_SinglePort(LambalibTechLibrary, _LambdaPath):
                 self.add_depfileset(Spram(), "rtl.impl")
 
 
+class GF180Lambdalib_SinglePortRegfile(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_spregfile",
+                         GF180Lambdalib_SinglePort().techlibs)
+        self.set_name("gf180_la_spregfile")
+
+        # version
+        self.package.set_version("v1")
+
+        lib_path = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_ip_sram")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_spregfile.v")
+                self.add_depfileset(Spram(), "rtl")
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--verible_bin',
