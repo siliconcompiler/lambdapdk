@@ -136,7 +136,7 @@ class Sky130Lambdalib_SinglePortRegfile(LambalibTechLibrary, _LambdaPath):
         # version
         self.package.set_version("v1")
 
-        lib_path = Path("lambdapdk", "ihp130", "libs", "sg13g2_sram")
+        lib_path = Path("lambdapdk", "sky130", "libs", "sky130sram")
 
         with self.active_dataroot("lambdapdk"):
             with self.active_fileset("rtl"):
