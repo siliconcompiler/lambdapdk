@@ -175,7 +175,7 @@ class IHP130Lambdalib_SinglePort(LambalibTechLibrary, _LambdaPath):
 class IHP130Lambdalib_SinglePortRegfile(LambalibTechLibrary, _LambdaPath):
     def __init__(self):
         super().__init__("la_spregfile",
-            IHP130Lambdalib_SinglePort().techlibs)
+                         IHP130Lambdalib_SinglePort().techlibs)
         self.set_name("ihp130_la_spregfile")
 
         # version

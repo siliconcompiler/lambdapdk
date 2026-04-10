@@ -452,7 +452,7 @@ class FakeRAM7Lambdalib_TrueDoublePort(LambalibTechLibrary, _LambdaPath):
 class FakeRAM7Lambdalib_SinglePortRegfile(LambalibTechLibrary, _LambdaPath):
     def __init__(self):
         super().__init__("la_spregfile",
-            FakeRAM7Lambdalib_SinglePort().techlibs)
+                         FakeRAM7Lambdalib_SinglePort().techlibs)
         self.set_name("fakeram7_la_spregfile")
 
         # version

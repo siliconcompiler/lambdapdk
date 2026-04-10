@@ -191,7 +191,7 @@ class GF180Lambdalib_SinglePort(LambalibTechLibrary, _LambdaPath):
 class GF180Lambdalib_SinglePortRegfile(LambalibTechLibrary, _LambdaPath):
     def __init__(self):
         super().__init__("la_spregfile",
-            GF180Lambdalib_SinglePort().techlibs)
+                         GF180Lambdalib_SinglePort().techlibs)
         self.set_name("gf180_la_spregfile")
 
         # version

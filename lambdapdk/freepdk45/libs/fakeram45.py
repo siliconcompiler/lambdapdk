@@ -152,7 +152,7 @@ class FakeRAM45Lambdalib_SinglePort(LambalibTechLibrary, _LambdaPath):
 class FakeRAM45Lambdalib_SinglePortRegfile(LambalibTechLibrary, _LambdaPath):
     def __init__(self):
         super().__init__("la_spregfile",
-            FakeRAM45Lambdalib_SinglePort().techlibs)
+                         FakeRAM45Lambdalib_SinglePort().techlibs)
         self.set_name("fakeram45_la_spregfile")
 
         # version

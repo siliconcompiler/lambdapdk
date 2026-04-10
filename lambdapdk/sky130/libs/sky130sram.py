@@ -130,7 +130,7 @@ class Sky130Lambdalib_SinglePort(LambalibTechLibrary, _LambdaPath):
 class Sky130Lambdalib_SinglePortRegfile(LambalibTechLibrary, _LambdaPath):
     def __init__(self):
         super().__init__("la_spregfile",
-            Sky130Lambdalib_SinglePort().techlibs)
+                         Sky130Lambdalib_SinglePort().techlibs)
         self.set_name("sky130_la_spregfile")
 
         # version
