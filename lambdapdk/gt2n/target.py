@@ -2,7 +2,8 @@
 from siliconcompiler import ASIC
 from siliconcompiler.flows import asicflow, synflow
 
-from lambdapdk.gt2n.libs.stdcells import GT2N6TLVT, GT2N6THVT, GT2N6TSVT, GT2N6TULVT, GT2N6TEVT
+from lambdapdk.gt2n.libs.stdcells import GT2N6TW31LVT, GT2N6TW31HVT, GT2N6TW31SVT, GT2N6TW31ULVT, \
+    GT2N6TW31ELVT
 
 
 ####################################################
@@ -34,9 +35,9 @@ def gt2n_demo(
     # 1. Load Standard Cell Library
     # Sets the primary standard cell library for the design. This library
     # contains the basic building blocks (gates, flip-flops) for synthesis.
-    main = GT2N6TSVT()
+    main = GT2N6TW31LVT()
     project.set_mainlib(main)
-    for lib in [main, GT2N6TLVT(), GT2N6THVT(), GT2N6TULVT(), GT2N6TEVT()]:
+    for lib in [main, GT2N6TW31HVT(), GT2N6TW31SVT(), GT2N6TW31ULVT(), GT2N6TW31ELVT()]:
         project.add_asiclib(lib)
 
     # 2. Configure Compilation Flows
