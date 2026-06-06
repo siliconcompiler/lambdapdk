@@ -35,9 +35,9 @@ def gt2n_demo(
     # 1. Load Standard Cell Library
     # Sets the primary standard cell library for the design. This library
     # contains the basic building blocks (gates, flip-flops) for synthesis.
-    main = GT2N6TW31LVT()
+    main = GT2N6TW31SVT()
     project.set_mainlib(main)
-    for lib in [main, GT2N6TW31HVT(), GT2N6TW31SVT(), GT2N6TW31ULVT(), GT2N6TW31ELVT()]:
+    for lib in [main, GT2N6TW31HVT(), GT2N6TW31LVT(), GT2N6TW31ULVT(), GT2N6TW31ELVT()]:
         project.add_asiclib(lib)
 
     # 2. Configure Compilation Flows
