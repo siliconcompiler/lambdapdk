@@ -12,6 +12,7 @@ class _GT2NPath(_LambdaPath):
                           f"https://github.com/azadnaeemi/GT2N/archive/{pdk_rev}.tar.gz",
                           pdk_rev)
 
+
 class GT2NPDK(LambdaPDK, _GT2NPath):
     '''
     GT2N PDK. It is based on 2nm GAAFET with BSPDN.
@@ -19,7 +20,10 @@ class GT2NPDK(LambdaPDK, _GT2NPath):
     More information:
 
     * https://github.com/azadnaeemi/GT2N/
-    * D. Jang, P. Kumar, M. N. H. Shazon, S. J. Ram, A. Svizhenko, V. Moroz, A. Ceyhan, N. A. Radhakrishn, and A. Naeemi, "GT2N: An Open-Source 2nm Nanosheet PDK Enabling Multi-Width/VT Benchmarking," in IEEE International Symposium on Circuits and Systems (ISCAS) 2026 link.
+    * D. Jang, P. Kumar, M. N. H. Shazon, S. J. Ram, A. Svizhenko, V. Moroz, A. Ceyhan,
+    N. A. Radhakrishn, and A. Naeemi, "GT2N: An Open-Source 2nm Nanosheet PDK Enabling
+    Multi-Width/VT Benchmarking," in IEEE International Symposium on Circuits and Systems
+    (ISCAS) 2026.
 
 
     Sources: https://github.com/azadnaeemi/GT2N/

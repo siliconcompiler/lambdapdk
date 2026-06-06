@@ -212,7 +212,8 @@ def get_libs():
         FakeRAM45_512x64, \
         FakeRAM45Lambdalib_SinglePort, \
         FakeRAM45Lambdalib_SinglePortRegfile
-    from lambdapdk.gt2n.libs.stdcells import GT2N6TW13HVT, GT2N6TW13SVT, GT2N6TW13LVT, GT2N6TW13ULVT, GT2N6TW13ELVT, \
+    from lambdapdk.gt2n.libs.stdcells import GT2N6TW13HVT, GT2N6TW13SVT, GT2N6TW13LVT, \
+        GT2N6TW13ULVT, GT2N6TW13ELVT, \
         GT2N6TW31HVT, GT2N6TW31SVT, GT2N6TW31LVT, GT2N6TW31ULVT, GT2N6TW31ELVT
     from lambdapdk.gf180.libs.gf180io import GF180_IO_3LM, GF180_IO_4LM, GF180_IO_5LM, \
         GF180Lambdalib_la_iovdd_3LM, \
