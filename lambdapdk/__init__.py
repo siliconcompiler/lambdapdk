@@ -54,6 +54,7 @@ def get_pdks():
     from lambdapdk.asap7 import ASAP7PDK
     from lambdapdk.freepdk45 import FreePDK45PDK
     from lambdapdk.sky130 import Sky130PDK
+    from lambdapdk.gt2n import GT2NPDK
     from lambdapdk.gf180 import GF180_3LM_1TM_6K_7t, \
         GF180_3LM_1TM_6K_9t, \
         GF180_3LM_1TM_9K_7t, \
@@ -95,6 +96,7 @@ def get_pdks():
         FreePDK45PDK(),
         Sky130PDK(),
         IHP130PDK(),
+        GT2NPDK(),
         GF180_3LM_1TM_6K_7t(),
         GF180_3LM_1TM_6K_9t(),
         GF180_3LM_1TM_9K_7t(),
@@ -210,6 +212,9 @@ def get_libs():
         FakeRAM45_512x64, \
         FakeRAM45Lambdalib_SinglePort, \
         FakeRAM45Lambdalib_SinglePortRegfile
+    from lambdapdk.gt2n.libs.stdcells import GT2N6TW13HVT, GT2N6TW13SVT, GT2N6TW13LVT, \
+        GT2N6TW13ULVT, GT2N6TW13ELVT, \
+        GT2N6TW31HVT, GT2N6TW31SVT, GT2N6TW31LVT, GT2N6TW31ULVT, GT2N6TW31ELVT
     from lambdapdk.gf180.libs.gf180io import GF180_IO_3LM, GF180_IO_4LM, GF180_IO_5LM, \
         GF180Lambdalib_la_iovdd_3LM, \
         GF180Lambdalib_la_iocorner_3LM, \
@@ -362,6 +367,8 @@ def get_libs():
         FakeRAM45_512x64(),
         FakeRAM45Lambdalib_SinglePort(),
         FakeRAM45Lambdalib_SinglePortRegfile(),
+        GT2N6TW13HVT(), GT2N6TW13SVT(), GT2N6TW13LVT(), GT2N6TW13ULVT(), GT2N6TW13ELVT(),
+        GT2N6TW31HVT(), GT2N6TW31SVT(), GT2N6TW31LVT(), GT2N6TW31ULVT(), GT2N6TW31ELVT(),
         GF180_IO_3LM(), GF180_IO_4LM(), GF180_IO_5LM(),
         GF180_MCU_7T_3LMLibrary(),
         GF180_MCU_7T_4LMLibrary(),
