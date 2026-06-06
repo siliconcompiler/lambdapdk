@@ -5,7 +5,6 @@
  <dbu>0.0005</dbu>
  <base-path></base-path>
  <original-base-path></original-base-path>
- <layer-properties_file>gt2.lyp</layer-properties_file>
  <add-other-layers>true</add-other-layers>
  <reader-options>
   <gds2>
@@ -51,7 +50,6 @@
    <produce-routing>true</produce-routing>
    <routing-suffix></routing-suffix>
    <routing-datatype>0</routing-datatype>
-   <lef-files>./platforms/gt2n/lef/gt2_tech.lef</lef-files>
   </lefdef>
  </reader-options>
  <writer-options>

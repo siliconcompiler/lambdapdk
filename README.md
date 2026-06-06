@@ -35,7 +35,7 @@ Lambdapdk is a collection of open-source Process Design Kits (PDKs) that enable 
 
 | PDK | Node | Libraries | Source |
 |-----|------|-----------|--------|
-| [GT2N](lambdapdk/gt2n/README.md) | 2nm GAAFET | Standard cells (HVT/SVT/LVT/ULVT/ELVT) | Georgia Institute of Technology
+| [GT2N](lambdapdk/gt2n/README.md) | 2nm GAAFET | Standard cells (HVT/SVT/LVT/ULVT/ELVT) | Georgia Institute of Technology |
 | [ASAP7](lambdapdk/asap7/README.md) | 7nm FinFET | Standard cells (RVT/LVT/SLVT), I/O, SRAM | Arizona State University |
 | [FreePDK45](lambdapdk/freepdk45/base/README.md) | 45nm | Nangate standard cells, SRAM | NC State / Nangate |
 | [Sky130](lambdapdk/sky130/README.md) | 130nm | Standard cells (HD/HDLL), I/O, SRAM | Google / Skywater |
