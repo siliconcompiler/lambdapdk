@@ -90,6 +90,7 @@ class _GF180PDK(LambdaPDK):
 
             self.add_klayout_drcparam(drc, "input=<input>")
             self.add_klayout_drcparam(drc, "topcell=<topcell>")
+            self.add_klayout_drcparam(drc, "report=<report>")
             self.add_klayout_drcparam(drc, "thr=<threads>")
             self.add_klayout_drcparam(drc, "run_mode=flat")
             self.add_klayout_drcparam(drc, "offgrid=true")
