@@ -28,7 +28,7 @@ class _LambdaPath(PathSchema):
 
         _version = f"v{__version__}"
         url_suffix = "refs/tags/"
-        if version != __version__:
+        if _gitcommit and version != __version__:
             # use git commit
             _version = _gitcommit[1:]  # remove leading 'g'
             url_suffix = ""
