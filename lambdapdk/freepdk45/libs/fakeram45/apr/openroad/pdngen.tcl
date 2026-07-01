@@ -3,7 +3,7 @@
 ####################################
 define_pdn_grid -name {fakeram45} -voltage_domains {CORE} -macro \
     -orient {R0 R180 MX MY} \
-    -halo {2.0 2.0 2.0 2.0} \
+    -halo {1.0 1.0 1.0 1.0} \
     -cells {fakeram45_.*}
 add_pdn_stripe -grid {fakeram45} -layer {metal4} -width {0.93} -pitch {10.0} -offset {2}
 add_pdn_stripe -grid {fakeram45} -layer {metal5} -width {0.93} -pitch {10.0} -offset {2}
