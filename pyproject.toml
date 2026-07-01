@@ -13,6 +13,7 @@ write_to_template = '''
 
 __version__ = "{version}"
 __base_version__ = "{scm_version.tag}"
+__git_commit__ = "{scm_version.node}"
 '''
 
 [project]
