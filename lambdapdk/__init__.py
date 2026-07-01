@@ -14,21 +14,31 @@ from siliconcompiler.tools.klayout import KLayoutLibrary
 try:
     from lambdapdk._version import __base_version__ as version
     from lambdapdk._version import __version__ as __version__
+    from lambdapdk._version import __git_commit__ as _gitcommit
 except ImportError:
     # This only exists in installations
     version = None
     __version__ = None
+    _gitcommit = None
 
 
 class _LambdaPath(PathSchema):
     def __init__(self):
         super().__init__()
+
+        _version = f"v{__version__}"
+        url_suffix = "refs/tags/"
+        if version != __version__:
+            # use git commit
+            _version = _gitcommit[1:]  # remove leading 'g'
+            url_suffix = ""
+
         PythonPathResolver.set_dataroot(
             self,
             "lambdapdk",
             "lambdapdk",
-            "https://github.com/siliconcompiler/lambdapdk/archive/refs/tags/",
-            alternative_ref=f"v{__version__}",
+            f"https://github.com/siliconcompiler/lambdapdk/archive/{url_suffix}",
+            alternative_ref=_version,
             python_module_path_append="..")
 
 
