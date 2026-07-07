@@ -2,6 +2,9 @@ from pathlib import Path
 
 from lambdapdk import LambdaPDK
 
+# Capacitance unit multiplier: values below are quoted in fF/um.
+fF = 1e-15
+
 
 class _Interposer(LambdaPDK):
     '''
@@ -61,14 +64,30 @@ class _Interposer(LambdaPDK):
         self.set_openroad_rclayers(signal="metal2", clock="metal2")
         self.add_openroad_pinlayers(vertical="metal2", horizontal="metal3")
 
+        # PEX (Liberty units are fF,kOhm). The parasitics are uniform across the
+        # routing metals; the min/max corners bracket the typical values by +/-30%.
+        metal_resistance = 1.5      # ohms/um
+        metal_capacitance = 0.1     # fF/um
+        via_resistance = 10         # ohms/cut
+        corner_factor = {"minimum": 0.7, "typical": 1.0, "maximum": 1.3}
+        num_metal = int(stackup[0])
+        metals = [f"metal{n}" for n in range(1, num_metal)] + ["topmetal"]
+        vias = [f"via{n}" for n in range(1, num_metal)]
+        for corner in ["minimum", "typical", "maximum"]:
+            factor = corner_factor[corner]
+            for layer in metals:
+                self.add_openroad_rclayer(corner, "routing", layer,
+                                            metal_resistance * factor,
+                                            metal_capacitance * factor * fF)
+            for layer in vias:
+                self.add_openroad_rclayer(corner, "via", layer, via_resistance * factor)
+
         with self.active_dataroot("lambdapdk"):
             with self.active_fileset("openroad.fill"):
                 self.add_file(pdk_path / "dfm" / "openroad" / f"{stackup}.fill.json",
                               filetype="fill")
                 self.add_aprtechfileset("openroad")
 
-            # PEX
-            for corner in ["minimum", "typical", "maximum"]:
                 with self.active_fileset(f"openroad.pex.{corner}"):
                     self.add_file(pdk_path / "pex" / "openroad" / f"{stackup}.{corner}.tcl",
                                   filetype="tcl")

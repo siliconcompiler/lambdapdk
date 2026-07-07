@@ -2,6 +2,9 @@ from pathlib import Path
 
 from lambdapdk import LambdaPDK
 
+# Capacitance unit multiplier: values below are quoted in fF/um.
+fF = 1e-15
+
 
 class ASAP7PDK(LambdaPDK):
     '''
@@ -100,6 +103,23 @@ class ASAP7PDK(LambdaPDK):
                 self.add_file(pdk_path / "apr" / "openroad_relaxed_rules.tcl", filetype="tcl")
 
             # PEX
+            self.add_openroad_rclayer("typical", "routing", "M1", 138.89, 1.1368e-01 * fF)
+            self.add_openroad_rclayer("typical", "routing", "M2", 24.222, 1.3426e-01 * fF)
+            self.add_openroad_rclayer("typical", "routing", "M3", 24.222, 1.2918e-01 * fF)
+            self.add_openroad_rclayer("typical", "routing", "M4", 16.778, 1.1396e-01 * fF)
+            self.add_openroad_rclayer("typical", "routing", "M5", 14.677, 1.3323e-01 * fF)
+            self.add_openroad_rclayer("typical", "routing", "M6", 10.371, 1.1575e-01 * fF)
+            self.add_openroad_rclayer("typical", "routing", "M7", 9.672, 1.3293e-01 * fF)
+            self.add_openroad_rclayer("typical", "routing", "M8", 7.431, 1.1822e-01 * fF)
+            self.add_openroad_rclayer("typical", "routing", "M9", 6.874, 1.3497e-01 * fF)
+            self.add_openroad_rclayer("typical", "via", "V1", 17.2)
+            self.add_openroad_rclayer("typical", "via", "V2", 17.2)
+            self.add_openroad_rclayer("typical", "via", "V3", 17.2)
+            self.add_openroad_rclayer("typical", "via", "V4", 11.8)
+            self.add_openroad_rclayer("typical", "via", "V5", 11.8)
+            self.add_openroad_rclayer("typical", "via", "V6", 8.2)
+            self.add_openroad_rclayer("typical", "via", "V7", 8.2)
+            self.add_openroad_rclayer("typical", "via", "V8", 6.3)
             with self.active_fileset("openroad.pex"):
                 self.add_file(pdk_path / "pex" / "openroad" / "typical.tcl", filetype="tcl")
                 self.add_file(pdk_path / "pex" / "openroad" / "typical.rules", filetype="openrcx")

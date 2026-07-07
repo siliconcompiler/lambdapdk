@@ -2,6 +2,9 @@ from pathlib import Path
 
 from lambdapdk import LambdaPDK, _LambdaPath
 
+# Capacitance unit multiplier: values below are quoted in pF/um.
+pF = 1e-12
+
 
 pdk_rev = 'd490cfb2e3258f71f362167e74e1fcfc55381ab4'
 
@@ -90,6 +93,19 @@ class IHP130PDK(LambdaPDK, _IHP130Path):
             self.set_openroad_globalroutingderating(layer, adj)
 
         # PEX
+        self.add_openroad_rclayer("typical", "routing", "Metal1", 0.135, 3.49E-05 * pF)
+        self.add_openroad_rclayer("typical", "routing", "Metal2", 0.103, 1.81E-05 * pF)
+        self.add_openroad_rclayer("typical", "routing", "Metal3", 0.103, 2.14962E-04 * pF)
+        self.add_openroad_rclayer("typical", "routing", "Metal4", 0.103, 1.48128E-04 * pF)
+        self.add_openroad_rclayer("typical", "routing", "Metal5", 0.103, 1.54087E-04 * pF)
+        self.add_openroad_rclayer("typical", "routing", "TopMetal1", 0.021, 1.54087E-04 * pF)
+        self.add_openroad_rclayer("typical", "routing", "TopMetal2", 0.0145, 1.54087E-04 * pF)
+        self.add_openroad_rclayer("typical", "via", "Via1", 2)
+        self.add_openroad_rclayer("typical", "via", "Via2", 2)
+        self.add_openroad_rclayer("typical", "via", "Via3", 2)
+        self.add_openroad_rclayer("typical", "via", "Via4", 2)
+        self.add_openroad_rclayer("typical", "via", "TopVia1", 0.4)
+        self.add_openroad_rclayer("typical", "via", "TopVia2", 0.22)
         with self.active_dataroot("lambdapdk"):
             with self.active_fileset("openroad.pex"):
                 self.add_file(pdk_path / "pex" / "openroad" / "typical.tcl", filetype="tcl")
