@@ -22,17 +22,18 @@
 
 (* keep_hierarchy *)
 module la_dpram #(
-    parameter DW      = 32,         // Memory width
-    parameter AW      = 10,         // Address width (derived)
-    parameter PROP    = "DEFAULT",  // Pass through variable for hard macro
-    parameter CTRLW   = 32,         // Width of ctrl interface
-    parameter STATUSW = 32          // Width of status interface
+    parameter DW       = 32,         // Memory width
+    parameter AW       = 10,         // Address width (derived)
+    parameter BYTEMASK = 0,          // 1=byte mask, 0=bit mask
+    parameter PROP     = "DEFAULT",  // Pass through variable for hard macro
+    parameter CTRLW    = 32,         // Width of ctrl interface
+    parameter STATUSW  = 32          // Width of status interface
 ) (  // Memory interface
      // Write port
     input wr_clk,  // write clock
     input wr_ce,  // write chip-enable
     input wr_we,  // write enable
-    input [DW-1:0] wr_wmask,  // write mask
+    input [(BYTEMASK?DW/8 : DW)-1:0] wr_wmask,  // bit or byte write mask
     input [AW-1:0] wr_addr,  // write address
     input [DW-1:0] wr_din,  //write data in
     // Read port
@@ -103,6 +104,7 @@ module la_dpram #(
       la_dpram_impl #(
           .DW(DW),
           .AW(AW),
+          .BYTEMASK(BYTEMASK),
           .PROP(PROP),
           .CTRLW(CTRLW),
           .STATUSW(STATUSW)
@@ -129,6 +131,17 @@ module la_dpram #(
       // Create memories
       // When AW < MEM_DEPTH, force single-macro case (MEM_ADDRS = 1)
       localparam MEM_ADDRS = (AW >= MEM_DEPTH) ? 2 ** (AW - MEM_DEPTH) : 1;
+
+      // Generate a single bitmask
+      wire [DW-1:0] wr_wmask_int;
+      genvar gwm;
+      if (BYTEMASK) begin : g_wm_byte
+        for (gwm = 0; gwm < DW / 8; gwm = gwm + 1) begin : g_wm_lane
+          assign wr_wmask_int[gwm*8+:8] = {8{wr_wmask[gwm]}};
+        end
+      end else begin : g_wm_bit
+        assign wr_wmask_int = wr_wmask;
+      end
 
       genvar o;
       for (o = 0; o < DW; o = o + 1) begin : OUTPUTS
@@ -190,7 +203,7 @@ module la_dpram #(
           for (i = 0; i < MEM_WIDTH; i = i + 1) begin : WORD_SELECT
             if (n + i < DW) begin : ACTIVE
               assign mem_din[i] = wr_din[n+i];
-              assign mem_wmask[i] = wr_wmask[n+i];
+              assign mem_wmask[i] = wr_wmask_int[n+i];
               assign OUTPUTS[n+i].mem_outputs[a] = re_selected_reg ? mem_dout[i] : 1'b0;
             end else begin : INACTIVE
               assign mem_din[i]   = 1'b0;

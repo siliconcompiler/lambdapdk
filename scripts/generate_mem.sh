@@ -1,0 +1,5 @@
+python3 -m lambdapdk.asap7.libs.fakeram7 --verible_bin $(which verible-verilog-format)
+python3 -m lambdapdk.freepdk45.libs.fakeram45 --verible_bin $(which verible-verilog-format)
+python3 -m lambdapdk.gf180.libs.gf180sram --verible_bin $(which verible-verilog-format)
+python3 -m lambdapdk.ihp130.libs.sg13g2_sram --verible_bin $(which verible-verilog-format)
+python3 -m lambdapdk.sky130.libs.sky130sram --verible_bin $(which verible-verilog-format)
