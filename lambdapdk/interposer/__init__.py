@@ -73,26 +73,24 @@ class _Interposer(LambdaPDK):
         num_metal = int(stackup[0])
         metals = [f"metal{n}" for n in range(1, num_metal)] + ["topmetal"]
         vias = [f"via{n}" for n in range(1, num_metal)]
-        for corner in ["minimum", "typical", "maximum"]:
-            factor = corner_factor[corner]
-            for layer in metals:
-                self.add_openroad_rclayer(corner, "routing", layer,
-                                          metal_resistance * factor,
-                                          metal_capacitance * factor * fF)
-            for layer in vias:
-                self.add_openroad_rclayer(corner, "via", layer, via_resistance * factor)
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("openroad.fill"):
+                self.add_file(pdk_path / "dfm" / "openroad" / f"{stackup}.fill.json",
+                              filetype="fill")
+                self.add_aprtechfileset("openroad")
 
-            with self.active_dataroot("lambdapdk"):
-                with self.active_fileset("openroad.fill"):
-                    self.add_file(pdk_path / "dfm" / "openroad" / f"{stackup}.fill.json",
-                                  filetype="fill")
-                    self.add_aprtechfileset("openroad")
-
-                    with self.active_fileset(f"openroad.pex.{corner}"):
-                        self.add_file(pdk_path / "pex" / "openroad" / f"{stackup}.{corner}.tcl",
-                                      filetype="tcl")
-
-                        self.add_pexmodelfileset("openroad", corner)
+            for corner in ["minimum", "typical", "maximum"]:
+                factor = corner_factor[corner]
+                for layer in metals:
+                    self.add_openroad_rclayer(corner, "routing", layer,
+                                              metal_resistance * factor,
+                                              metal_capacitance * factor * fF)
+                for layer in vias:
+                    self.add_openroad_rclayer(corner, "via", layer, via_resistance * factor)
+                with self.active_fileset(f"openroad.pex.{corner}"):
+                    self.add_file(pdk_path / "pex" / "openroad" / f"{stackup}.{corner}.tcl",
+                                  filetype="tcl")
+                    self.add_pexmodelfileset("openroad", corner)
 
         # DRC
         with self.active_dataroot("lambdapdk"):

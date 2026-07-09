@@ -351,10 +351,10 @@ class _GF180PDK(LambdaPDK):
 
         # PEX (Liberty units are pf,Ohm)
         with self.active_dataroot("lambdapdk"):
-            for corner in ["bst", "typ", "wst"]:
-                if stackup not in _PEX:
-                    continue
+            if stackup not in _PEX:
+                return
 
+            for corner in ["bst", "typ", "wst"]:
                 for layer, res, cap in _PEX[stackup][corner]:
                     if cap is None:
                         self.add_openroad_rclayer(corner, "via", layer, res)
