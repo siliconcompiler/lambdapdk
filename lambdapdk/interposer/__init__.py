@@ -87,10 +87,6 @@ class _Interposer(LambdaPDK):
                                               metal_capacitance * factor * fF)
                 for layer in vias:
                     self.add_openroad_rclayer(corner, "via", layer, via_resistance * factor)
-                with self.active_fileset(f"openroad.pex.{corner}"):
-                    self.add_file(pdk_path / "pex" / "openroad" / f"{stackup}.{corner}.tcl",
-                                  filetype="tcl")
-                    self.add_pexmodelfileset("openroad", corner)
 
         # DRC
         with self.active_dataroot("lambdapdk"):

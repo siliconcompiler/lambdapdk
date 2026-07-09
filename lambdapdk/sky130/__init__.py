@@ -129,9 +129,6 @@ class Sky130PDK(LambdaPDK):
         with self.active_dataroot("lambdapdk"):
             for corner in ["minimum", "typical", "maximum"]:
                 with self.active_fileset(f"openroad.pex.{corner}"):
-                    self.add_file(pdk_path / "pex" / "openroad" / f"{corner}.tcl", filetype="tcl")
                     self.add_file(pdk_path / "pex" / "openroad" / f"{corner}.rules",
                                   filetype="openrcx")
-
                     self.add_pexmodelfileset("openroad", corner)
-                    self.add_pexmodelfileset("openroad-openrcx", corner)

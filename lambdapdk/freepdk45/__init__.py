@@ -84,8 +84,5 @@ class FreePDK45PDK(LambdaPDK):
             self.add_openroad_rclayer("typical", "routing", "metal9", 0.0375, 3.6864e-02 * fF)
             self.add_openroad_rclayer("typical", "routing", "metal10", 0.0375, 2.8042e-02 * fF)
             with self.active_fileset("openroad.pex"):
-                self.add_file(pdk_path / "pex" / "openroad" / "typical.tcl", filetype="tcl")
                 self.add_file(pdk_path / "pex" / "openroad" / "typical.rules", filetype="openrcx")
-
                 self.add_pexmodelfileset("openroad", "typical")
-                self.add_pexmodelfileset("openroad-openrcx", "typical")
