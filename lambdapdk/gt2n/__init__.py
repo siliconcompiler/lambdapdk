@@ -119,7 +119,3 @@ class GT2NPDK(LambdaPDK, _GT2NPath):
             self.add_openroad_rclayer("typical", "via", "BV2", 8)
             self.add_openroad_rclayer("typical", "via", "BV3", 5)
             self.add_openroad_rclayer("typical", "via", "BV4", 5)
-            with self.active_fileset("openroad.pex"):
-                self.add_file(pdk_path / "pex" / "openroad" / "typical.tcl", filetype="tcl")
-
-                self.add_pexmodelfileset("openroad", "typical")
