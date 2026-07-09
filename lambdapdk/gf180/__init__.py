@@ -363,13 +363,10 @@ class _GF180PDK(LambdaPDK):
 
                 base_name = f'gf180mcu_1p{stackup.replace("L", "").lower()}_sp_smim_OPTB_{corner}'
                 with self.active_fileset(f"openroad.pex.{corner}"):
-                    self.add_file(pdk_path / "pex" / "openroad" / f"{base_name}.tcl",
-                                  filetype="tcl")
                     self.add_file(pdk_path / "pex" / "openroad" / f"{base_name}.rules",
                                   filetype="openrcx")
 
                     self.add_pexmodelfileset("openroad", corner)
-                    self.add_pexmodelfileset("openroad-openrcx", corner)
 
 
 class GF180_3LM_1TM_6K_7t(_GF180PDK):

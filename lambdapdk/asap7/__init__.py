@@ -121,8 +121,5 @@ class ASAP7PDK(LambdaPDK):
             self.add_openroad_rclayer("typical", "via", "V7", 8.2)
             self.add_openroad_rclayer("typical", "via", "V8", 6.3)
             with self.active_fileset("openroad.pex"):
-                self.add_file(pdk_path / "pex" / "openroad" / "typical.tcl", filetype="tcl")
                 self.add_file(pdk_path / "pex" / "openroad" / "typical.rules", filetype="openrcx")
-
                 self.add_pexmodelfileset("openroad", "typical")
-                self.add_pexmodelfileset("openroad-openrcx", "typical")
