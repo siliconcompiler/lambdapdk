@@ -2,6 +2,9 @@ from pathlib import Path
 
 from lambdapdk import LambdaPDK, _LambdaPath
 
+# Capacitance unit multiplier: values below are quoted in pF/um.
+pF = 1e-12
+
 pdk_rev = '54f81feb2b9c334d283538c1bc91bf3a34b02c02'
 
 
@@ -86,6 +89,36 @@ class GT2NPDK(LambdaPDK, _GT2NPath):
             self.add_openroad_pinlayers(vertical="M3", horizontal="M2")
 
             # PEX
+            self.add_openroad_rclayer("typical", "routing", "M0", 622, 1.5e-4 * pF)
+            self.add_openroad_rclayer("typical", "routing", "M1", 438, 1.5e-4 * pF)
+            self.add_openroad_rclayer("typical", "routing", "M2", 622, 1.5e-4 * pF)
+            self.add_openroad_rclayer("typical", "routing", "M3", 438, 1.5e-4 * pF)
+            self.add_openroad_rclayer("typical", "routing", "M4", 166, 1.7e-4 * pF)
+            self.add_openroad_rclayer("typical", "routing", "M5", 166, 1.7e-4 * pF)
+            self.add_openroad_rclayer("typical", "routing", "M6", 26, 2.0e-4 * pF)
+            self.add_openroad_rclayer("typical", "routing", "M7", 26, 2.0e-4 * pF)
+            self.add_openroad_rclayer("typical", "routing", "M8", 26, 2.0e-4 * pF)
+            self.add_openroad_rclayer("typical", "routing", "M9", 26, 2.0e-4 * pF)
+            self.add_openroad_rclayer("typical", "routing", "M10", 7.5, 2.5e-4 * pF)
+            self.add_openroad_rclayer("typical", "routing", "M11", 7.5, 2.5e-4 * pF)
+            self.add_openroad_rclayer("typical", "routing", "M12", 0.64, 3.0e-4 * pF)
+            self.add_openroad_rclayer("typical", "routing", "M13", 0.64, 3.0e-4 * pF)
+            self.add_openroad_rclayer("typical", "routing", "BPR", 28, 1.0e-4 * pF)
+            self.add_openroad_rclayer("typical", "routing", "BM1", 7.5, 1.5e-4 * pF)
+            self.add_openroad_rclayer("typical", "routing", "BM2", 7.5, 1.5e-4 * pF)
+            self.add_openroad_rclayer("typical", "routing", "BM3", 0.64, 1.5e-4 * pF)
+            self.add_openroad_rclayer("typical", "routing", "BM4", 0.64, 1.5e-4 * pF)
+            self.add_openroad_rclayer("typical", "via", "V0", 10)
+            self.add_openroad_rclayer("typical", "via", "V1", 10)
+            self.add_openroad_rclayer("typical", "via", "V2", 8)
+            self.add_openroad_rclayer("typical", "via", "V3", 8)
+            self.add_openroad_rclayer("typical", "via", "V4", 5)
+            self.add_openroad_rclayer("typical", "via", "V5", 5)
+            self.add_openroad_rclayer("typical", "via", "BV0", 10)
+            self.add_openroad_rclayer("typical", "via", "BV1", 8)
+            self.add_openroad_rclayer("typical", "via", "BV2", 8)
+            self.add_openroad_rclayer("typical", "via", "BV3", 5)
+            self.add_openroad_rclayer("typical", "via", "BV4", 5)
             with self.active_fileset("openroad.pex"):
                 self.add_file(pdk_path / "pex" / "openroad" / "typical.tcl", filetype="tcl")
 

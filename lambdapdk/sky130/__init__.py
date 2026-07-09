@@ -2,6 +2,9 @@ from pathlib import Path
 
 from lambdapdk import LambdaPDK
 
+# Capacitance unit multiplier: values below are quoted in pF/um.
+pF = 1e-12
+
 
 class Sky130PDK(LambdaPDK):
     '''
@@ -90,6 +93,39 @@ class Sky130PDK(LambdaPDK):
         self.add_openroad_pinlayers(vertical="met2", horizontal="met3")
 
         # OpenROAD PEX
+        self.add_openroad_rclayer("minimum", "routing", "li1", 54.11765, 2.582652E-4 * pF)
+        self.add_openroad_rclayer("minimum", "via", "mcon", 1.6)
+        self.add_openroad_rclayer("minimum", "routing", "met1", 0.75, 2.246984E-4 * pF)
+        self.add_openroad_rclayer("minimum", "via", "via", 4)
+        self.add_openroad_rclayer("minimum", "routing", "met2", 0.75, 1.384201E-4 * pF)
+        self.add_openroad_rclayer("minimum", "via", "via2", 0.5)
+        self.add_openroad_rclayer("minimum", "routing", "met3", 0.1266667, 7.435933E-5 * pF)
+        self.add_openroad_rclayer("minimum", "via", "via3", 0.5)
+        self.add_openroad_rclayer("minimum", "routing", "met4", 0.1266667, 6.030297E-5 * pF)
+        self.add_openroad_rclayer("minimum", "via", "via4", 0.012)
+        self.add_openroad_rclayer("minimum", "routing", "met5", 0.01325, 4.057272E-5 * pF)
+        self.add_openroad_rclayer("typical", "routing", "li1", 75.29412, 2.582652E-4 * pF)
+        self.add_openroad_rclayer("typical", "via", "mcon", 9.3)
+        self.add_openroad_rclayer("typical", "routing", "met1", 0.8928571, 2.246984E-4 * pF)
+        self.add_openroad_rclayer("typical", "via", "via", 9)
+        self.add_openroad_rclayer("typical", "routing", "met2", 0.8928571, 1.384201E-4 * pF)
+        self.add_openroad_rclayer("typical", "via", "via2", 3.41)
+        self.add_openroad_rclayer("typical", "routing", "met3", 0.1566667, 7.435933E-5 * pF)
+        self.add_openroad_rclayer("typical", "via", "via3", 3.41)
+        self.add_openroad_rclayer("typical", "routing", "met4", 0.1566667, 6.030297E-5 * pF)
+        self.add_openroad_rclayer("typical", "via", "via4", 0.38)
+        self.add_openroad_rclayer("typical", "routing", "met5", 0.0178125, 4.057272E-5 * pF)
+        self.add_openroad_rclayer("maximum", "routing", "li1", 100, 2.582652E-4 * pF)
+        self.add_openroad_rclayer("maximum", "via", "mcon", 23)
+        self.add_openroad_rclayer("maximum", "routing", "met1", 1.035714, 2.246984E-4 * pF)
+        self.add_openroad_rclayer("maximum", "via", "via", 30)
+        self.add_openroad_rclayer("maximum", "routing", "met2", 1.035714, 1.384201E-4 * pF)
+        self.add_openroad_rclayer("maximum", "via", "via2", 8)
+        self.add_openroad_rclayer("maximum", "routing", "met3", 0.1866667, 7.435933E-5 * pF)
+        self.add_openroad_rclayer("maximum", "via", "via3", 8)
+        self.add_openroad_rclayer("maximum", "routing", "met4", 0.1866667, 6.030297E-5 * pF)
+        self.add_openroad_rclayer("maximum", "via", "via4", 0.891)
+        self.add_openroad_rclayer("maximum", "routing", "met5", 0.022375, 4.057272E-5 * pF)
         with self.active_dataroot("lambdapdk"):
             for corner in ["minimum", "typical", "maximum"]:
                 with self.active_fileset(f"openroad.pex.{corner}"):

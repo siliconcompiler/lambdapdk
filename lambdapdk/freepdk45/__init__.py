@@ -2,6 +2,9 @@ from pathlib import Path
 
 from lambdapdk import LambdaPDK
 
+# Capacitance unit multiplier: values below are quoted in fF/um.
+fF = 1e-15
+
 
 class FreePDK45PDK(LambdaPDK):
     '''
@@ -70,6 +73,16 @@ class FreePDK45PDK(LambdaPDK):
             self.add_openroad_pinlayers(vertical="metal6", horizontal="metal5")
 
             # PEX
+            self.add_openroad_rclayer("typical", "routing", "metal1", 5.4286, 7.41819E-02 * fF)
+            self.add_openroad_rclayer("typical", "routing", "metal2", 3.5714, 6.74606E-02 * fF)
+            self.add_openroad_rclayer("typical", "routing", "metal3", 3.5714, 8.88758E-02 * fF)
+            self.add_openroad_rclayer("typical", "routing", "metal4", 1.5, 1.07121E-01 * fF)
+            self.add_openroad_rclayer("typical", "routing", "metal5", 1.5, 1.08964E-01 * fF)
+            self.add_openroad_rclayer("typical", "routing", "metal6", 1.5, 1.02044E-01 * fF)
+            self.add_openroad_rclayer("typical", "routing", "metal7", 0.1875, 1.10436E-01 * fF)
+            self.add_openroad_rclayer("typical", "routing", "metal8", 0.1875, 9.69714E-02 * fF)
+            self.add_openroad_rclayer("typical", "routing", "metal9", 0.0375, 3.6864e-02 * fF)
+            self.add_openroad_rclayer("typical", "routing", "metal10", 0.0375, 2.8042e-02 * fF)
             with self.active_fileset("openroad.pex"):
                 self.add_file(pdk_path / "pex" / "openroad" / "typical.tcl", filetype="tcl")
                 self.add_file(pdk_path / "pex" / "openroad" / "typical.rules", filetype="openrcx")
