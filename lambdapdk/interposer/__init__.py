@@ -77,22 +77,22 @@ class _Interposer(LambdaPDK):
             factor = corner_factor[corner]
             for layer in metals:
                 self.add_openroad_rclayer(corner, "routing", layer,
-                                            metal_resistance * factor,
-                                            metal_capacitance * factor * fF)
+                                          metal_resistance * factor,
+                                          metal_capacitance * factor * fF)
             for layer in vias:
                 self.add_openroad_rclayer(corner, "via", layer, via_resistance * factor)
 
-        with self.active_dataroot("lambdapdk"):
-            with self.active_fileset("openroad.fill"):
-                self.add_file(pdk_path / "dfm" / "openroad" / f"{stackup}.fill.json",
-                              filetype="fill")
-                self.add_aprtechfileset("openroad")
+            with self.active_dataroot("lambdapdk"):
+                with self.active_fileset("openroad.fill"):
+                    self.add_file(pdk_path / "dfm" / "openroad" / f"{stackup}.fill.json",
+                                  filetype="fill")
+                    self.add_aprtechfileset("openroad")
 
-                with self.active_fileset(f"openroad.pex.{corner}"):
-                    self.add_file(pdk_path / "pex" / "openroad" / f"{stackup}.{corner}.tcl",
-                                  filetype="tcl")
+                    with self.active_fileset(f"openroad.pex.{corner}"):
+                        self.add_file(pdk_path / "pex" / "openroad" / f"{stackup}.{corner}.tcl",
+                                      filetype="tcl")
 
-                    self.add_pexmodelfileset("openroad", corner)
+                        self.add_pexmodelfileset("openroad", corner)
 
         # DRC
         with self.active_dataroot("lambdapdk"):
