@@ -121,5 +121,6 @@ class GT2NPDK(LambdaPDK, _GT2NPath):
             self.add_openroad_rclayer("typical", "via", "BV4", 5)
 
             # Add for compatibility with OpenROAD driver
+            self.get("fileset", "openroad.pex", field="schema")
             with self.active_fileset("openroad.pex"):
                 self.add_pexmodelfileset("openroad", "typical")
