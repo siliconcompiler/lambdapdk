@@ -26,6 +26,7 @@ class ASAP7PDK(LambdaPDK):
     * spice (hspice)
     * extraction runsets (calibre)
     * drc runsets (calibre)
+    * lvs runsets (klayout)
     * APR technology files
     * 7.5 track multi-vt standard cell libraries
 
@@ -76,6 +77,12 @@ class ASAP7PDK(LambdaPDK):
                 self.add_layermapfileset("klayout", "def", "klayout")
                 self.add_displayfileset("klayout")
             self.add_layermapfileset("klayout", "def", "gds", fileset="layermap")
+
+            # Klayout LVS runset
+            with self.active_fileset("klayout.lvs"):
+                self.add_file(pdk_path / "setup" / "klayout" / "lvs" / "asap7.lvs",
+                              filetype="lvs")
+                self.add_runsetfileset("lvs", "klayout", "lvs")
 
             self.set_aprroutinglayers(min="M2", max="M7")
 
