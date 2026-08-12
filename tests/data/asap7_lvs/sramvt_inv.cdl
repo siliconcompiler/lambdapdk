@@ -1,0 +1,9 @@
+* Reference netlist for the ASAP7 SRAM-VT LVS test article.
+* The layout is built by generate.py; see that script for the layer recipe.
+* This exercises the SRAMVT (110/0) branch of the ASAP7 KLayout LVS runset,
+* which none of the shipped standard cell libraries instantiate.
+
+.SUBCKT sramvt_inv A VDD VSS Y
+MM0 Y A VSS VSS nmos_sram w=81.0n l=20n nfin=3
+MM1 Y A VDD VDD pmos_sram w=81.0n l=20n nfin=3
+.ENDS
