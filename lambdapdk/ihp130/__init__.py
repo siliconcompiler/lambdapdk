@@ -111,6 +111,11 @@ class IHP130PDK(LambdaPDK, _IHP130Path):
                 self.add_file(pdk_path / "pex" / "openroad" / "typical.rules", filetype="openrcx")
                 self.add_pexmodelfileset("openroad", "typical")
 
+            # Metal fill
+            with self.active_fileset("openroad.fill"):
+                self.add_file(pdk_path / "dfm" / "openroad" / "fill.json", filetype="fill")
+                self.add_aprtechfileset("openroad")
+
         # DRC
         drcs = {
             "drc": 'ihp-sg13g2/libs.tech/klayout/tech/drc/ihp-sg13g2.drc',
