@@ -1,4 +1,6 @@
 import os.path
+from typing import List, Union
+
 from siliconcompiler.schema_support.pathschema import PathSchema
 
 from siliconcompiler.package import PythonPathResolver
@@ -45,6 +47,39 @@ class _LambdaPath(PathSchema):
 class LambdaPDK(KLayoutPDK, OpenROADPDK, _LambdaPath):
     def __init__(self):
         super().__init__()
+
+        # KLayout LVS deck parameters. siliconcompiler defines drc_params for
+        # KLayout DRC decks but has no LVS counterpart, so the key is defined
+        # here with the same shape. Guarded, so that a siliconcompiler which
+        # ships its own lvs_params wins instead of colliding -- a repeated
+        # define_tool_parameter raises. When that happens, this block and
+        # add_klayout_lvsparam below can both go.
+        if "lvs_params" not in self.getkeys("tool", "klayout"):
+            self.define_tool_parameter(
+                "klayout", "lvs_params", "{(str,str)}",
+                "Set of parameters to include for a particular lvs deck, in the "
+                "form (deck name, parameter).")
+
+    def add_klayout_lvsparam(self, deck: str, param: Union[str, List[str]],
+                             clobber: bool = False):
+        """
+        Adds one or more parameter to the LVS deck definition.
+
+        Mirrors :meth:`KLayoutPDK.add_klayout_drcparam`.
+
+        Args:
+            deck (str): name of the LVS deck.
+            param (Union[str, List[str]]): Parameters for the specified deck.
+            clobber (bool, optional): If True, overwrites the existing list of parameters.
+                                      If False, appends to the list. Defaults to False.
+        """
+        if isinstance(param, str):
+            param = [param]
+        if clobber:
+            self.unset("tool", "klayout", "lvs_params")
+
+        for p in param:
+            self.add("tool", "klayout", "lvs_params", (deck, p))
 
 
 class LambdaLibrary(YosysStdCellLibrary,

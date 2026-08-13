@@ -23,6 +23,17 @@
 #  report         - path to the LVS database report
 #  target_netlist - path for the extracted netlist
 #  threads        - number of threads to use
+#  run_mode       - "deep" (hierarchical, the default) or "flat". Flat is a
+#                   debugging aid only: it is impractically slow on anything
+#                   larger than a handful of cells.
+#  blackbox       - ';'-separated list of cell name globs whose contents are
+#                   dropped from both the layout and the reference netlist,
+#                   leaving only their pins. Use this to check that the routing
+#                   and the row abutment implement the netlist without also
+#                   re-checking cell internals -- see the README for the cells
+#                   whose CDL is not structurally isomorphic to their layout.
+#                   A glob must not match the top cell. A black-boxed run does
+#                   not verify cell internals; run the deck per cell for that.
 #
 # Relative paths given to KLayout's schematic()/target_netlist() are resolved
 # against the *layout* directory, not the working directory, so every path
@@ -43,7 +54,8 @@
 # that is electrically equivalent to the layout but not structurally isomorphic
 # to it -- either the layout folds a device into multiple fingers where the CDL
 # describes it unfolded, or a series stack is drawn in a different order. See the
-# README next to this deck for the cell lists and details.
+# README next to this deck for the cell lists and details. At block level the
+# blackbox parameter sidesteps this, at the price of not checking cell internals.
 
 #================================================
 #----------------- FILE SETUP -------------------
@@ -68,7 +80,11 @@ schematic(File.expand_path($schematic))
 threads($threads ? $threads.to_i : 4)
 
 # Hierarchical mode: standard cells are compared cell by cell.
-deep
+case ($run_mode || "deep")
+when "deep" then deep
+when "flat" then flat
+else raise "unknown run_mode '#{$run_mode}' (expected deep or flat)"
+end
 
 #================================================
 #------------- LAYERS DEFINITIONS ---------------
@@ -145,8 +161,8 @@ pgate["rvt"]  = pgate_all - lvt - slvt - sramvt
 
 # Standard cells carry no physical well/substrate taps; base/README.md states
 # that the well and p_sub pins stand in for them and are to be tied by name.
-# The n-well takes its name from its 1/251 label and the substrate is a global
-# net named after the 3/251 p_sub pin.
+# Neither does TAPCELL, so there is no physical tie anywhere in the hierarchy
+# and both the well and the substrate must be global nets -- see CONNECTIVITY.
 sub = polygon_layer
 
 #================================================
@@ -198,8 +214,27 @@ connect(m9, v9)
 connect(m1, m1_lbl)
 connect(nwell, nwell_lbl)
 
-# Substrate and well are tied by name, per base/README.md.
-connect_global(sub, "VSS")
+# Substrate and well are tied by name, per base/README.md. Both are declared
+# global, and both are also joined implicitly to the identically named rail.
+#
+# The global is what makes hierarchy work. A label-only tie is enough when the
+# cell is the top cell, because inside the cell both the well net (1/251 label)
+# and the M1 rail (19/251 label) are named VDD. One level up the well net has no
+# label of its own, so the implicit join cannot be made there, and KLayout
+# reports the cell's unsatisfied must-connect requirement as an extraction
+# error. connect_global names the net in every circuit; connect_implicit then
+# unites it with the rail of the same name inside each circuit, and that is what
+# satisfies must-connect at every level up to the top cell.
+#
+# The two are needed together: the global alone leaves the well and the rail as
+# separate same-named nets, which surface as duplicate VDD/VSS pins that the
+# four-pin CDL cannot match.
+#
+# These names are the ones the standard cells label their rails with, so they
+# are deliberately not parameterized: renaming them would break the in-cell
+# join that the whole scheme rests on.
+connect_global(sub,   "VSS")
+connect_global(nwell, "VDD")
 connect_implicit("VDD")
 connect_implicit("VSS")
 
@@ -228,6 +263,44 @@ netlist.simplify
 netlist.purge
 
 schematic.simplify
+
+#================================================
+#----------------- BLACK BOXES -----------------
+#================================================
+
+# Drop the contents of the named cells from both netlists, keeping their pins.
+# What remains to compare is the parent's connectivity: whether the routing and
+# the row abutment implement the netlist.
+if $blackbox
+  top_cell = source.cell_name
+  blanked = []
+
+  $blackbox.split(";").each do |glob|
+    pattern = glob.strip
+    next if pattern.empty?
+
+    # Blanking the top cell on both sides leaves nothing to compare, and the
+    # compare then trivially passes. Refuse rather than report a false clean.
+    if File.fnmatch(pattern, top_cell, File::FNM_CASEFOLD)
+      raise "blackbox glob '#{pattern}' matches the top cell '#{top_cell}': " \
+            "blanking the top cell compares nothing"
+    end
+
+    # blank_circuit matches case sensitively, and the CDL reader upcases circuit
+    # names while the layout keeps the GDS spelling. Both spellings have to be
+    # given or only one side of the compare is blanked, which shows up as a
+    # mismatch rather than as an error.
+    blank_circuit(pattern)
+    blank_circuit(pattern.upcase) if pattern.upcase != pattern
+    blanked << pattern
+  end
+
+  # A black-boxed result is a weaker claim than a plain one, so say so in the log.
+  unless blanked.empty?
+    puts "LVS_BLACKBOX: #{blanked.join(' ')}"
+    puts "LVS_BLACKBOX_NOTE: cell internals were not compared for these globs"
+  end
+end
 
 #================================================
 #-------------------- COMPARE -------------------

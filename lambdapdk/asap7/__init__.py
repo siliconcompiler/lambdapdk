@@ -78,11 +78,34 @@ class ASAP7PDK(LambdaPDK):
                 self.add_displayfileset("klayout")
             self.add_layermapfileset("klayout", "def", "gds", fileset="layermap")
 
-            # Klayout LVS runset
+            # Klayout LVS runset. Registered twice: the same deck under two deck
+            # names that differ only in their parameters, so a flow can pick the
+            # behavior it wants by name.
             with self.active_fileset("klayout.lvs"):
                 self.add_file(pdk_path / "setup" / "klayout" / "lvs" / "asap7.lvs",
                               filetype="lvs")
                 self.add_runsetfileset("lvs", "klayout", "lvs")
+            self.add_runsetfileset("lvs", "klayout", "lvs_blackbox", fileset="klayout.lvs")
+
+            # The <...> entries are placeholders for the caller to substitute.
+            # There is no KLayout LVS task in siliconcompiler, so these are
+            # metadata for whichever flow drives the deck; the deck itself takes
+            # them as '-rd name=value'. Note the report is a .lvsdb, not .lyrdb.
+            for lvs_deck in ("lvs", "lvs_blackbox"):
+                self.add_klayout_lvsparam(lvs_deck, "input=<input>")
+                self.add_klayout_lvsparam(lvs_deck, "topcell=<topcell>")
+                self.add_klayout_lvsparam(lvs_deck, "schematic=<schematic>")
+                self.add_klayout_lvsparam(lvs_deck, "target_netlist=<target_netlist>")
+                self.add_klayout_lvsparam(lvs_deck, "report=<report>")
+                self.add_klayout_lvsparam(lvs_deck, "threads=<threads>")
+                self.add_klayout_lvsparam(lvs_deck, "run_mode=deep")
+
+            # Standard cells reduced to their pins, which checks that the routing
+            # and the row abutment implement the netlist. This is the deck to use
+            # at block level: it is unaffected by the 17 of 209 cells whose CDL is
+            # not structurally isomorphic to their layout. It does not check cell
+            # internals -- the "lvs" deck run per cell does that.
+            self.add_klayout_lvsparam("lvs_blackbox", "blackbox=*_ASAP7_75t_*")
 
             self.set_aprroutinglayers(min="M2", max="M7")
 
