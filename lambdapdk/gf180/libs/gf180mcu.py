@@ -33,8 +33,10 @@ class _GF180_MCULibrary(LambdaLibrary):
         super().__init__()
         self.set_name(f"gf180mcu_fd_sc_mcu{libtype}5v0_{stackup}")
 
+        pdn_stackup = stackup
         if libtype == "7t":
             if stackup == "3LM":
+                pdn_stackup += "_7t"
                 self.add_asic_pdk(GF180_3LM_1TM_6K_7t(), default=False)
                 self.add_asic_pdk(GF180_3LM_1TM_9K_7t(), default=False)
                 self.add_asic_pdk(GF180_3LM_1TM_11K_7t(), default=False)
@@ -49,12 +51,14 @@ class _GF180_MCULibrary(LambdaLibrary):
                 self.add_asic_pdk(GF180_5LM_1TM_11K_7t(), default=False)
             elif stackup == "6LM":
                 self.add_asic_pdk(GF180_6LM_1TM_9K_7t())
+                pdn_stackup = "5LM"
             else:
                 raise ValueError(f"{stackup} is not supported")
 
             self.add_asic_site("GF018hv5v_mcu_sc7")
         elif libtype == "9t":
             if stackup == "3LM":
+                pdn_stackup += "_9t"
                 self.add_asic_pdk(GF180_3LM_1TM_6K_9t(), default=False)
                 self.add_asic_pdk(GF180_3LM_1TM_9K_9t(), default=False)
                 self.add_asic_pdk(GF180_3LM_1TM_11K_9t(), default=False)
@@ -69,6 +73,7 @@ class _GF180_MCULibrary(LambdaLibrary):
                 self.add_asic_pdk(GF180_5LM_1TM_11K_9t(), default=False)
             elif stackup == "6LM":
                 self.add_asic_pdk(GF180_6LM_1TM_9K_9t())
+                pdn_stackup = "5LM"
             else:
                 raise ValueError(f"{stackup} is not supported")
 
@@ -157,7 +162,7 @@ class _GF180_MCULibrary(LambdaLibrary):
         # Setup for OpenROAD
         with self.active_dataroot("lambdapdk"):
             with self.active_fileset("openroad.powergrid"):
-                self.add_file(lib_path / "apr" / "openroad" / "pdngen.tcl")
+                self.add_file(lib_path / "apr" / "openroad" / f"pdngen_{pdn_stackup}.tcl")
                 self.add_openroad_powergridfileset()
             with self.active_fileset("openroad.globalconnect"):
                 self.add_file(lib_path / "apr" / "openroad" / "global_connect.tcl")
