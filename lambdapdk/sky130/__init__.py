@@ -127,6 +127,11 @@ class Sky130PDK(LambdaPDK):
         self.add_openroad_rclayer("maximum", "via", "via4", 0.891)
         self.add_openroad_rclayer("maximum", "routing", "met5", 0.022375, 4.057272E-5 * pF)
         with self.active_dataroot("lambdapdk"):
+            # Metal fill
+            with self.active_fileset("openroad.fill"):
+                self.add_file(pdk_path / "dfm" / "fill.json", filetype="fill")
+                self.add_aprtechfileset("openroad")
+
             for corner in ["minimum", "typical", "maximum"]:
                 with self.active_fileset(f"openroad.pex.{corner}"):
                     self.add_file(pdk_path / "pex" / "openroad" / f"{corner}.rules",
