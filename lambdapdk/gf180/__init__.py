@@ -326,7 +326,11 @@ class _GF180PDK(LambdaPDK):
         # OpenROAD setup
         if max_layer == 3:
             self.set_openroad_rclayers(signal="Metal2", clock="Metal2")
-            self.add_openroad_pinlayers(vertical="Metal2", horizontal="Metal3")
+            if libtype == "7t":
+                self.add_openroad_pinlayers(vertical="Metal2", horizontal="Metal3")
+            else:
+                self.add_openroad_pinlayers(vertical="Metal3", horizontal="Metal2")
+            self.set_aprroutinglayers(min="Metal2", max="Metal3")
         elif max_layer == 4:
             self.set_openroad_rclayers(signal="Metal2", clock="Metal3")
             self.add_openroad_pinlayers(vertical="Metal4", horizontal="Metal3")
