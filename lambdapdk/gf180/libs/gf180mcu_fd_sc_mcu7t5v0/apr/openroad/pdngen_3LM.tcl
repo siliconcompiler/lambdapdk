@@ -27,7 +27,7 @@ proc snap_grid {value} {
     return [ord::dbu_to_microns $val_snapped]
 }
 
-add_pdn_stripe -grid {grid} -layer {Metal2} -width {0.280} -pitch [snap_grid $metal2_pitch] \
+add_pdn_stripe -grid {grid} -layer {Metal2} -width {1.600} -pitch [snap_grid $metal2_pitch] \
     -offset [snap_grid [expr {$metal2_pitch / 4}]]
 add_pdn_stripe -grid {grid} -layer {Metal3} -width {1.600} -pitch [snap_grid $metal3_pitch] \
     -offset [snap_grid [expr {$metal3_pitch / 4}]]

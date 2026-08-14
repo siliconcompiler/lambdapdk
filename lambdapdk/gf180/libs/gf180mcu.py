@@ -36,7 +36,6 @@ class _GF180_MCULibrary(LambdaLibrary):
         pdn_stackup = stackup
         if libtype == "7t":
             if stackup == "3LM":
-                pdn_stackup += "_7t"
                 self.add_asic_pdk(GF180_3LM_1TM_6K_7t(), default=False)
                 self.add_asic_pdk(GF180_3LM_1TM_9K_7t(), default=False)
                 self.add_asic_pdk(GF180_3LM_1TM_11K_7t(), default=False)
@@ -58,7 +57,6 @@ class _GF180_MCULibrary(LambdaLibrary):
             self.add_asic_site("GF018hv5v_mcu_sc7")
         elif libtype == "9t":
             if stackup == "3LM":
-                pdn_stackup += "_9t"
                 self.add_asic_pdk(GF180_3LM_1TM_6K_9t(), default=False)
                 self.add_asic_pdk(GF180_3LM_1TM_9K_9t(), default=False)
                 self.add_asic_pdk(GF180_3LM_1TM_11K_9t(), default=False)
