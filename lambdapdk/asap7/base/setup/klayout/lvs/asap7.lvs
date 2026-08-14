@@ -34,6 +34,10 @@
 #                   whose CDL is not structurally isomorphic to their layout.
 #                   A glob must not match the top cell. A black-boxed run does
 #                   not verify cell internals; run the deck per cell for that.
+#                   Name the granularity the run is about: on a single hardened
+#                   block that is the standard cells, but on an array of abutted
+#                   blocks it is the block cells -- blanking standard cells there
+#                   still extracts and compares every block interior.
 #
 # Relative paths given to KLayout's schematic()/target_netlist() are resolved
 # against the *layout* directory, not the working directory, so every path
@@ -104,21 +108,29 @@ v0        = polygons(18, 0)
 m1        = polygons(19, 0)
 m1_lbl    = labels(19, 251)
 m2        = polygons(20, 0)
+m2_lbl    = labels(20, 251)
 v1        = polygons(21, 0)
 v2        = polygons(25, 0)
 m3        = polygons(30, 0)
+m3_lbl    = labels(30, 251)
 v3        = polygons(35, 0)
 m4        = polygons(40, 0)
+m4_lbl    = labels(40, 251)
 v4        = polygons(45, 0)
 m5        = polygons(50, 0)
+m5_lbl    = labels(50, 251)
 v5        = polygons(55, 0)
 m6        = polygons(60, 0)
+m6_lbl    = labels(60, 251)
 v6        = polygons(65, 0)
 m7        = polygons(70, 0)
+m7_lbl    = labels(70, 251)
 v7        = polygons(75, 0)
 m8        = polygons(80, 0)
+m8_lbl    = labels(80, 251)
 v8        = polygons(85, 0)
 m9        = polygons(90, 0)
+m9_lbl    = labels(90, 251)
 v9        = polygons(95, 0)
 sdt       = polygons(88, 0)
 slvt      = polygons(97, 0)
@@ -209,9 +221,28 @@ connect(v8, m9)
 # for it. There is therefore nothing above V9 to connect to.
 connect(m9, v9)
 
-# Attach labels. Port names live on the M1 pin layer as text objects; the M1
-# label layer (19/2) is empty in the shipped standard cells.
+# Attach labels. Port names live on the <metal>/251 pin layers as text objects;
+# the M1 label layer (19/2) is empty in the shipped standard cells.
+#
+# The whole stack is read, not just M1. A standard cell happens to carry its pin
+# labels on M1 only, but a *block*'s ports are wherever its pin geometry lands,
+# and for a design that abuts hardened blocks that is the upper metals -- a tile
+# whose boundary pins are on M4/M5 loses every pin name if only 19/251 is read,
+# and a block whose ports are all above M1 loses its pins outright.
+#
+# This is a soundness fix as much as an enabling one: KLayout treats unnamed pins
+# as equivalent while named pins must correspond exactly, so an abstract circuit
+# (see BLACK BOXES) whose pins went unnamed can match positionally on the wrong
+# pins and report a false clean.
 connect(m1, m1_lbl)
+connect(m2, m2_lbl)
+connect(m3, m3_lbl)
+connect(m4, m4_lbl)
+connect(m5, m5_lbl)
+connect(m6, m6_lbl)
+connect(m7, m7_lbl)
+connect(m8, m8_lbl)
+connect(m9, m9_lbl)
 connect(nwell, nwell_lbl)
 
 # Substrate and well are tied by name, per base/README.md. Both are declared
@@ -259,10 +290,6 @@ align
 
 netlist.make_top_level_pins
 netlist.combine_devices
-netlist.simplify
-netlist.purge
-
-schematic.simplify
 
 #================================================
 #----------------- BLACK BOXES -----------------
@@ -271,6 +298,10 @@ schematic.simplify
 # Drop the contents of the named cells from both netlists, keeping their pins.
 # What remains to compare is the parent's connectivity: whether the routing and
 # the row abutment implement the netlist.
+#
+# This runs *before* simplify/purge, as the KLayout manual requires: blank_circuit
+# sets a flag that prevents an abstract circuit from being purged, so a blanked
+# circuit that is emptied first can simply be purged away instead.
 if $blackbox
   top_cell = source.cell_name
   blanked = []
@@ -301,6 +332,15 @@ if $blackbox
     puts "LVS_BLACKBOX_NOTE: cell internals were not compared for these globs"
   end
 end
+
+#================================================
+#---------------- NETLIST REDUCTION -------------
+#================================================
+
+netlist.simplify
+netlist.purge
+
+schematic.simplify
 
 #================================================
 #-------------------- COMPARE -------------------

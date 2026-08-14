@@ -240,6 +240,102 @@ def build_row(libcls, cell, count, tmp_path, route=False, miswire=False):
 
 
 #
+# Pin geometry above M1. A standard cell carries its pin labels on M1 only, so
+# nothing in the library exercises the rest of the label stack; a hardened block
+# in an abutting design does the opposite, putting every port on the upper
+# metals. This article is that shape, in miniature.
+#
+
+# Bottom-up from the M1 pin shape to the M4 pad, alternating metal and via.
+UPPER_PIN_STACK = [(19, 0), (21, 0), (20, 0), (25, 0), (30, 0), (35, 0), (40, 0)]
+UPPER_PIN_LABEL = (40, 251)
+
+
+def build_upper_metal_row(libcls, cell, tmp_path, swap_inputs=False):
+    '''Builds two abutted `cell` instances whose signal ports are M4 pins.
+
+    Each instance's A and Y are carried from the cell's own M1 pin shape up a via
+    stack to an M4 pad, and the port name is a text object on 40/251 -- nothing
+    on M1 names them. The rails stay labelled on M1, as they are in a real block.
+
+    swap_inputs=True writes a CDL that exchanges the two inputs, i.e. a netlist
+    the layout does not implement. The two are distinguishable only if the pins
+    carry names: the instances are identical, so with the port names stripped the
+    swapped netlist is isomorphic to the correct one and KLayout -- which matches
+    unnamed pins permissively -- reports a false clean.
+
+    Returns (gds, cdl, topcell).
+    '''
+
+    db = pytest.importorskip("klayout.db",
+                             reason="klayout python module needed to build the row article")
+
+    lib = libcls()
+    layout = db.Layout()
+    layout.read(lib.get_file("models.physical", "gds")[0])
+    src = layout.cell(cell)
+    assert src, f"{cell} not in the library GDS"
+
+    m1 = layout.layer(19, 0)
+    m1_lbl = layout.layer(19, 251)
+    stack = [layout.layer(*spec) for spec in UPPER_PIN_STACK]
+    top_lbl = layout.layer(*UPPER_PIN_LABEL)
+
+    pitch = max([shape.box.right for shape in src.shapes(m1).each()
+                 if shape.is_box() and shape.box.left == 0] or [0])
+    assert pitch > 0, f"no power rail found on 19/0 in {cell}"
+
+    pins = {shape.text.string: (shape.text.trans.disp.x, shape.text.trans.disp.y)
+            for shape in src.shapes(m1_lbl).each() if shape.is_text()}
+    assert set(pins) >= {"A", "Y"}, f"{cell} has no A/Y pins: {sorted(pins)}"
+
+    top = layout.create_cell(ROW_TOPCELL)
+
+    for inst in range(2):
+        offset = inst * pitch
+        top.insert(db.CellInstArray(src.cell_index(), db.Trans(db.Vector(offset, 0))))
+
+        for name in ("A", "Y"):
+            x, y = pins[name]
+            x += offset
+            # One box per layer at the same spot. LVS is connectivity, not DRC,
+            # so full overlap is all the stack needs to be a conductor.
+            box = db.Box(x - PIN_PAD, y - PIN_PAD, x + PIN_PAD, y + PIN_PAD)
+            for layer in stack:
+                top.shapes(layer).insert(box)
+            top.shapes(top_lbl).insert(db.Text(f"{name}{inst}",
+                                               db.Trans(db.Vector(x, y))))
+
+    # The rails are labelled on M1, the way a block's power pins really are.
+    for name, y in (("VDD", RAIL_TOP), ("VSS", 0)):
+        top.shapes(m1).insert(db.Box(0, y - PIN_PAD, 2 * PIN_PAD, y + PIN_PAD))
+        top.shapes(m1_lbl).insert(db.Text(name, db.Trans(db.Vector(PIN_PAD, y))))
+
+    gds = tmp_path / f"{ROW_TOPCELL}_m4.gds"
+    layout.write(str(gds))
+
+    cell_cdl = extract_subckt(lib.get_file("models.lvs", "cdl")[0], cell,
+                              tmp_path / f"{cell}.cdl")
+    with open(cell_cdl) as fobj:
+        body = fobj.readlines()
+    order = body[0].split()[2:]
+
+    inputs = ["A1", "A0"] if swap_inputs else ["A0", "A1"]
+    nets = [{"A": inputs[inst], "Y": f"Y{inst}"} for inst in range(2)]
+
+    cdl = tmp_path / f"{ROW_TOPCELL}_m4.cdl"
+    with open(cdl, "w") as fobj:
+        fobj.writelines(body)
+        fobj.write(f".SUBCKT {ROW_TOPCELL} A0 Y0 A1 Y1 VDD VSS\n")
+        for inst in range(2):
+            conn = [pin if pin in ("VDD", "VSS") else nets[inst][pin] for pin in order]
+            fobj.write(f"XI{inst} {' '.join(conn)} {cell}\n")
+        fobj.write(".ENDS\n")
+
+    return gds, cdl, ROW_TOPCELL
+
+
+#
 # Registration -- runs everywhere, no tools required.
 #
 
@@ -391,6 +487,64 @@ def test_lvs_hierarchical_row_detects_miswire(deck, tmp_path):
 
     assert "LVS_RESULT: MISMATCH" in proc.stdout, \
         f"expected a mismatch:\n{proc.stdout}\n{proc.stderr}"
+    assert proc.returncode != 0
+
+
+#
+# Pin labels above M1. The deck connects every <metal>/251 label layer, not just
+# M1's, because a block's ports are wherever its pin geometry lands.
+#
+
+@needs_klayout
+def test_lvs_reads_pin_labels_above_m1(deck, tmp_path):
+    '''Ports on M4 must reach the netlist by name.
+
+    With only connect(m1, m1_lbl) in the deck these four pins are nameless: the
+    extracted netlist keeps the two M1-labelled rails and nothing else, so a
+    block whose ports are all above M1 loses its pins outright.
+    '''
+
+    gds, cdl, topcell = build_upper_metal_row(ASAP7SC7p5RVT, "INVx1_ASAP7_75t_R",
+                                              tmp_path)
+    proc = run_lvs(deck, gds, topcell, cdl, tmp_path)
+
+    assert "LVS_RESULT: MATCH" in proc.stdout, \
+        f"M4-pinned row did not compare clean:\n{proc.stdout}\n{proc.stderr}"
+    assert proc.returncode == 0
+
+    # The decisive assertion, read off the layout side of the LVS database: the
+    # four M4 port names, which exist nowhere but 40/251. The extracted SPICE is
+    # no good for this -- KLayout's writer numbers pins rather than naming them,
+    # in that netlist even the M1-labelled rails come out as "5" and "6".
+    db = pytest.importorskip("klayout.db")
+    lvsdb = db.LayoutVsSchematic()
+    lvsdb.read(str(tmp_path / f"{topcell}.lvsdb"))
+    circuit = lvsdb.netlist().circuit_by_name(topcell)
+    assert circuit, f"no {topcell} circuit in the extracted netlist"
+
+    pins = {pin.name() for pin in circuit.each_pin()}
+    assert pins == {"A0", "Y0", "A1", "Y1", "VDD", "VSS"}, \
+        f"expected the M4 pin names on the layout side, got {sorted(pins)}"
+
+
+@needs_klayout
+def test_lvs_upper_metal_pins_are_matched_by_name(deck, tmp_path):
+    '''The soundness half: unnamed pins match permissively.
+
+    The layout is the same two inverters either way; only the port names tell the
+    correct netlist from the one with its inputs exchanged. A deck that does not
+    read 40/251 leaves those pins unnamed, and KLayout treats unnamed pins as
+    equivalent -- so it reports this swapped netlist as a match.
+    '''
+
+    gds, _, topcell = build_upper_metal_row(ASAP7SC7p5RVT, "INVx1_ASAP7_75t_R",
+                                            tmp_path)
+    _, cdl, _ = build_upper_metal_row(ASAP7SC7p5RVT, "INVx1_ASAP7_75t_R",
+                                      tmp_path, swap_inputs=True)
+    proc = run_lvs(deck, gds, topcell, cdl, tmp_path)
+
+    assert "LVS_RESULT: MISMATCH" in proc.stdout, \
+        f"swapped M4 ports must not match:\n{proc.stdout}\n{proc.stderr}"
     assert proc.returncode != 0
 
 

@@ -102,9 +102,14 @@ class ASAP7PDK(LambdaPDK):
 
             # Standard cells reduced to their pins, which checks that the routing
             # and the row abutment implement the netlist. This is the deck to use
-            # at block level: it is unaffected by the 17 of 209 cells whose CDL is
-            # not structurally isomorphic to their layout. It does not check cell
-            # internals -- the "lvs" deck run per cell does that.
+            # on a single hardened block: it is unaffected by the 17 of 209 cells
+            # whose CDL is not structurally isomorphic to their layout. It does
+            # not check cell internals -- the "lvs" deck run per cell does that.
+            #
+            # It is *not* the deck for an array of abutted blocks. Blanking the
+            # standard cells does not blank the blocks, so every block interior is
+            # still extracted and compared, and blocks are the granularity an
+            # array run needs. Pass a blackbox glob naming the blocks instead.
             self.add_klayout_lvsparam("lvs_blackbox", "blackbox=*_ASAP7_75t_*")
 
             self.set_aprroutinglayers(min="M2", max="M7")

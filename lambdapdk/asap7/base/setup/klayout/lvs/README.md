@@ -6,7 +6,11 @@ object under two deck names that are the same file with different parameters:
 | Deck name | Parameters | Use |
 | --- | --- | --- |
 | `('pdk', 'lvs', 'runsetfileset', 'klayout', 'lvs')` | no `blackbox` | per-cell checks; full hierarchical check of a block |
-| `('pdk', 'lvs', 'runsetfileset', 'klayout', 'lvs_blackbox')` | `blackbox=*_ASAP7_75t_*` | block level: routing and abutment only |
+| `('pdk', 'lvs', 'runsetfileset', 'klayout', 'lvs_blackbox')` | `blackbox=*_ASAP7_75t_*` | one hardened block: its routing and row abutment only |
+
+Note the second is for a *single* block. An array of abutted blocks needs a
+`blackbox` glob naming the blocks, not the standard cells — see
+[Block-level use](#block-level-use).
 
 ASAP7 upstream ships only a Calibre SVRF LVS deck
 (`calibre/ruledirs/lvs/lvsRules_calibre_asap7.rul`), and that deck is not
@@ -88,6 +92,13 @@ Use it at block level. It is the practical answer to the folded-cell limitation
 below — those cells make a hierarchical compare fail on the cell even when the
 block is wired correctly — and it also cuts runtime on large arrays.
 
+`blank_circuit` is applied **before** `netlist.simplify`/`netlist.purge`, as the
+KLayout manual requires: the flag it sets is what stops an abstract circuit from
+being purged. On KLayout 0.28.16 the order was measured to make no difference to
+any article in this repository — the black-boxed folded-cell row and a row with
+deliberately floating instance pins produce byte-identical `.cir` and `.lvsdb`
+either way — so this is a conformance fix, not a fix for an observed failure.
+
 What a black-boxed run **does** check: every net at and above the black-boxed
 level, which pin of which instance each net reaches, and therefore the routing
 and the abutment. A miswired route is still reported as a mismatch.
@@ -104,6 +115,41 @@ Two constraints:
   names, so the deck applies each glob in both the given and the upper-cased
   spelling. A glob whose letter case is inconsistent with the GDS cell names may
   match only one side, which surfaces as a mismatch.
+
+## Block-level use
+
+Above the cell the check is normally run in **tiers**, and the tier decides what
+`blackbox` should name. For a design that hardens blocks separately and then
+abuts them into an array:
+
+| Tier | Layout | Netlist | `blackbox` |
+| --- | --- | --- | --- |
+| block | one hardened block | that block's `write_cdl` | `*_ASAP7_75t_*` — standard cells |
+| array | the abutted array | the hierarchical netlist | the *block* cells, e.g. `tile_*` |
+
+At the array tier the thing being checked is block-pin to block-pin: whether
+abutment and top-level routing implement the netlist, independent of block
+interiors, which the block tier already covered. This is the documented use of
+abstract circuits — take out the big IP blocks that were verified separately.
+
+**Blanking standard cells is the wrong glob for an array**, even though it is
+what the registered `lvs_blackbox` deck name passes. It does not blank the
+blocks, so every block interior is still extracted and compared; blocks are the
+granularity an array run needs. `lvs_blackbox` is the deck for a *single hardened
+block*, not for an abutted array — at the array tier, pass a `blackbox` glob that
+names the blocks.
+
+Blanking is also what makes an array run affordable: a blanked circuit's interior
+is never extracted, so the work is skipped rather than done and discarded. The
+manual describes `blank_circuit` as acting on the netlist after extraction, but
+deep extraction is lazy enough in practice that the saving is real and large.
+
+Two caveats carry over from above. A blanked run is a **weaker claim** than a
+plain one — it says nothing about what is inside the blanked cells, which is why
+the deck prints `LVS_BLACKBOX_NOTE:`. And an abstract circuit matches on pin
+count and pin name, so block pins must actually be **named**: that is what the
+`<metal>/251` label stack above is for, and without it an array-level "clean" is
+not trustworthy.
 
 ## Devices
 
@@ -164,8 +210,26 @@ The `"VDD"` and `"VSS"` names are deliberately not parameterized: they are the
 names the standard cells label their own rails with, so renaming them would break
 the in-cell join that the whole scheme rests on.
 
-Port names come from **text objects on the M1 pin layer, `19/251`**. The M1
+## Pin labels
+
+Port names come from **text objects on the `<metal>/251` pin layers**, and the
+deck connects the whole stack — `19/251` through `90/251` — not just M1's. The M1
 label layer `19/2` is empty in the shipped standard cells.
+
+A standard cell only ever needs `19/251`; it labels its pins on M1 and nothing
+else. A **block** is the opposite case: its ports are wherever its pin geometry
+lands, which for a design that abuts hardened blocks is the upper metals. A tile
+whose boundary pins sit on M4 and M5 loses every port name if only `19/251` is
+read, and a block whose ports are *all* above M1 loses its pins outright.
+
+This matters for correctness and not only for coverage, because **KLayout treats
+unnamed pins as equivalent** while named pins must correspond exactly. An
+abstract circuit (see [Black-boxing](#black-boxing)) whose pins went unnamed can
+therefore be matched positionally and report a **false clean**. Measured on the
+two-inverter M4-pinned article in `tests/test_asap7_klayout_lvs.py`: reading M1
+labels alone, the top cell extracts **2 pins** (the rails) against the 6 its
+netlist declares, and a netlist with its two inputs *exchanged* still compares
+`MATCH`. With the stack connected it is correctly a `MISMATCH`.
 
 ## Verified coverage
 
@@ -180,6 +244,19 @@ Hierarchy is covered separately: `tests/test_asap7_klayout_lvs.py` builds rows o
 abutted instances at test time and compares them against a generated netlist, both
 plainly and black-boxed, including negative cases (a miswired route must still be
 reported, black-boxed or not).
+
+Block-shaped use is covered by the M4-pinned article in the same file, which
+carries its ports up a via stack to `40/0` and names them on `40/251`, as a
+hardened block does. It asserts the port names reach the *layout* side of the
+LVS database, and that exchanging two of those ports in the netlist is reported
+as a mismatch. Note that the extracted `.cir` is no good for such an assertion:
+KLayout's SPICE writer numbers pins rather than naming them, so even M1-labelled
+rails appear there as `5` and `6`. Read the `.lvsdb` instead.
+
+**Not covered here:** a real multi-block array. The tiered scheme in
+[Block-level use](#block-level-use) is exercised only at the scale of rows and a
+two-instance block article; the pin counts and runtimes it describes were
+measured by a consumer, on designs that do not live in this repository.
 
 ## Known limitations
 
