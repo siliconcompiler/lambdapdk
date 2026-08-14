@@ -6,7 +6,7 @@ set_voltage_domain -name {CORE} -power {VDD} -ground {VSS}
 # standard cell grid
 ####################################
 define_pdn_grid -name {grid} -voltage_domains {CORE} -pins {Metal3}
-add_pdn_stripe -grid {grid} -layer {Metal1} -width {0.600} -pitch {3.92} -offset {0} -followpins
+add_pdn_stripe -grid {grid} -layer {Metal1} -width {0.900} -pitch {5.040} -offset {0} -followpins
 
 set metal3_pitch [expr {([lindex [ord::get_core_area] 3] - [lindex [ord::get_core_area] 1]) / 2}]
 if {$metal3_pitch > 89.6} {
