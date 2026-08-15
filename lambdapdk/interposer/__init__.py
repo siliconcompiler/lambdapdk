@@ -77,7 +77,7 @@ class _Interposer(LambdaPDK):
             with self.active_fileset("openroad.fill"):
                 self.add_file(pdk_path / "dfm" / "openroad" / f"{stackup}.fill.json",
                               filetype="fill")
-                self.add_aprtechfileset("openroad")
+                self.add_runsetfileset("fill", "openroad", "beol")
 
             for corner in ["minimum", "typical", "maximum"]:
                 factor = corner_factor[corner]

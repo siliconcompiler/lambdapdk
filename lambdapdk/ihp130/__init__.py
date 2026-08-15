@@ -114,7 +114,7 @@ class IHP130PDK(LambdaPDK, _IHP130Path):
             # Metal fill
             with self.active_fileset("openroad.fill"):
                 self.add_file(pdk_path / "dfm" / "openroad" / "fill.json", filetype="fill")
-                self.add_aprtechfileset("openroad")
+                self.add_runsetfileset("fill", "openroad", "beol")
 
         # DRC
         drcs = {
