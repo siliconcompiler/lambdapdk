@@ -248,14 +248,18 @@ class _GF180PDK(LambdaPDK):
 
         max_layer = int(stackup[0])
 
+        # Name of the top routing layer. Only the 6LM stackup calls it
+        # 'MetalTop'; 3/4/5LM top out at Metal3/4/5. No GF180 tech LEF defines a
+        # 'Metal6', so deriving the name as Metal<max_layer> makes OpenROAD fail
+        # with 'GRT-0005 Layer Metal6 not found' on the 6LM variants.
+        top_layer = "MetalTop" if max_layer == 6 else f"Metal{max_layer}"
+
         with self.active_dataroot("lambdapdk"):
             # APR Setup
             with self.active_fileset("views.lef"):
                 self.add_file(pdk_path / "apr" / f"gf180mcu_{stackup}_{libtype}_tech.lef")
                 for tool in ('openroad', 'klayout', 'magic'):
                     self.add_aprtechfileset(tool)
-
-            self.set_aprroutinglayers(min="metal2", max="metal7")
 
             if stackup in ('6LM_1TM_9K', '5LM_1TM_9K'):
                 with self.active_fileset("layermap"):
@@ -269,7 +273,7 @@ class _GF180PDK(LambdaPDK):
                 self.add_file(pdk_path / "spice" / "xyce" / "smbb000149.xyce", filetype="xyce")
                 self.add_devmodelfileset("xyce", "spice")
 
-        self.set_aprroutinglayers(min="Metal1", max=f"Metal{max_layer}")
+        self.set_aprroutinglayers(min="Metal1", max=top_layer)
 
         # Klayout setup
         with self.active_dataroot("lambdapdk"), self.active_fileset("klayout.techmap"):
@@ -338,19 +342,18 @@ class _GF180PDK(LambdaPDK):
             self.set_openroad_rclayers(signal="Metal3", clock="Metal4")
             self.add_openroad_pinlayers(vertical="Metal4", horizontal="Metal3")
 
-        # Openroad global routing grid derating
+        # Openroad global routing grid derating, up to this stackup's top layer.
         openroad_layer_adjustments = {
                 'Metal1': 0.25,
                 'Metal2': 0.25,
                 'Metal3': 0.25,
                 'Metal4': 0.25,
                 'Metal5': 0.25,
-                'Metal6': 0.25,
                 'MetalTop': 1.0
         }
         for layer, adj in openroad_layer_adjustments.items():
             self.set_openroad_globalroutingderating(layer, adj)
-            if layer == f"Metal{max_layer}":
+            if layer == top_layer:
                 break
 
         # PEX (Liberty units are pf,Ohm)
