@@ -130,7 +130,7 @@ class Sky130PDK(LambdaPDK):
             # Metal fill
             with self.active_fileset("openroad.fill"):
                 self.add_file(pdk_path / "dfm" / "fill.json", filetype="fill")
-                self.add_aprtechfileset("openroad")
+                self.add_runsetfileset("fill", "openroad", "beol")
 
             for corner in ["minimum", "typical", "maximum"]:
                 with self.active_fileset(f"openroad.pex.{corner}"):
