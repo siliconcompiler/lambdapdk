@@ -28,7 +28,11 @@ class _GT2NBase(LambdaLibrary, _GT2NPath):
         # filler
         self.add_asic_celllist('filler', [f"gt2_6t_filler_w{width}_{vt}"])
 
-        # Tapcell
+        # decap
+        self.add_asic_celllist('decap', [f"gt2_6t_decapcc_w{width}_{vt}"])
+
+        # Tapcell. The PDN here is backside-only, so use the backside-PDN tap
+        # variant (BPR pins only, half width); the frontside variant is unused.
         self.add_asic_celllist('tap', f"gt2_6t_tapbspdn_w{width}_{vt}")
 
         # Cells with actual view
@@ -87,8 +91,6 @@ class _GT2NBase(LambdaLibrary, _GT2NPath):
             self.set_openroad_tiehigh_cell(f"gt2_6t_tiehigh_w{width}_{vt}", "Y")
             self.set_openroad_macro_placement_halo(1, 1)
             self.set_openroad_tapcells_file(lib_path / "apr" / "openroad" / "tapcells.tcl")
-
-        self.add_klayout_allowmissingcell(f"gt2_6t_tapbspdn_w{width}_{vt}")
 
 
 class GT2N6TW13HVT(_GT2NBase):
