@@ -14,76 +14,8 @@
    <marked>false</marked>
    <xfill>false</xfill>
    <animation>0</animation>
-   <name>2    / 1   ACT drawing</name>
-   <source>2/1@1</source>
-  </properties>
-  <properties>
-   <frame-color>#00ff00</frame-color>
-   <fill-color>#00ff00</fill-color>
-   <frame-brightness>0</frame-brightness>
-   <fill-brightness>0</fill-brightness>
-   <dither-pattern>I1</dither-pattern>
-   <line-style/>
-   <valid>true</valid>
-   <visible>true</visible>
-   <transparent>false</transparent>
-   <width/>
-   <marked>false</marked>
-   <xfill>false</xfill>
-   <animation>0</animation>
-   <name>2    / 2   ACT label</name>
-   <source>2/2@1</source>
-  </properties>
-  <properties>
-   <frame-color>#00ff00</frame-color>
-   <fill-color>#00ff00</fill-color>
-   <frame-brightness>0</frame-brightness>
-   <fill-brightness>0</fill-brightness>
-   <dither-pattern>I1</dither-pattern>
-   <line-style/>
-   <valid>true</valid>
-   <visible>true</visible>
-   <transparent>false</transparent>
-   <width/>
-   <marked>false</marked>
-   <xfill>false</xfill>
-   <animation>0</animation>
-   <name>2    / 6   ACT pin</name>
-   <source>2/6@1</source>
-  </properties>
-  <properties>
-   <frame-color>#00ff00</frame-color>
-   <fill-color>#00ff00</fill-color>
-   <frame-brightness>0</frame-brightness>
-   <fill-brightness>0</fill-brightness>
-   <dither-pattern>I1</dither-pattern>
-   <line-style/>
-   <valid>true</valid>
-   <visible>true</visible>
-   <transparent>false</transparent>
-   <width/>
-   <marked>false</marked>
-   <xfill>false</xfill>
-   <animation>0</animation>
-   <name>2    / 3   ACT obs</name>
-   <source>2/3@1</source>
-  </properties>
-  <properties>
-   <frame-color>#00ff00</frame-color>
-   <fill-color>#00ff00</fill-color>
-   <frame-brightness>0</frame-brightness>
-   <fill-brightness>0</fill-brightness>
-   <dither-pattern>I1</dither-pattern>
-   <line-style/>
-   <valid>true</valid>
-   <visible>true</visible>
-   <transparent>false</transparent>
-   <width/>
-   <marked>false</marked>
-   <xfill>false</xfill>
-   <animation>0</animation>
-   <name>2    / 4   ACT blockage</name>
-   <source>2/4@1</source>
+   <name>ACT - 2/1</name>
+   <source>ACT 2/1@1</source>
   </properties>
   <properties>
    <frame-color>#a4d4a4</frame-color>
@@ -99,15 +31,15 @@
    <marked>false</marked>
    <xfill>false</xfill>
    <animation>0</animation>
-   <name>9    / 1   NW1 drawing</name>
-   <source>9/1@1</source>
+   <name>NW1 - 9/1</name>
+   <source>NW1 9/1@1</source>
   </properties>
   <properties>
-   <frame-color>#a4d4a4</frame-color>
-   <fill-color>#a4d4a4</fill-color>
+   <frame-color>#ff69b4</frame-color>
+   <fill-color>#ff69b4</fill-color>
    <frame-brightness>0</frame-brightness>
    <fill-brightness>0</fill-brightness>
-   <dither-pattern>I5</dither-pattern>
+   <dither-pattern>I9</dither-pattern>
    <line-style/>
    <valid>true</valid>
    <visible>true</visible>
@@ -116,15 +48,15 @@
    <marked>false</marked>
    <xfill>false</xfill>
    <animation>0</animation>
-   <name>9    / 2   NW1 label</name>
-   <source>9/2@1</source>
+   <name>NVTL - 17/1</name>
+   <source>NVTL 17/1@1</source>
   </properties>
   <properties>
-   <frame-color>#a4d4a4</frame-color>
-   <fill-color>#a4d4a4</fill-color>
+   <frame-color>#ff1493</frame-color>
+   <fill-color>#ff1493</fill-color>
    <frame-brightness>0</frame-brightness>
    <fill-brightness>0</fill-brightness>
-   <dither-pattern>I5</dither-pattern>
+   <dither-pattern>I9</dither-pattern>
    <line-style/>
    <valid>true</valid>
    <visible>true</visible>
@@ -133,15 +65,15 @@
    <marked>false</marked>
    <xfill>false</xfill>
    <animation>0</animation>
-   <name>9    / 6   NW1 pin</name>
-   <source>9/6@1</source>
+   <name>PVTL - 18/1</name>
+   <source>PVTL 18/1@1</source>
   </properties>
   <properties>
-   <frame-color>#a4d4a4</frame-color>
-   <fill-color>#a4d4a4</fill-color>
+   <frame-color>#87ceeb</frame-color>
+   <fill-color>#87ceeb</fill-color>
    <frame-brightness>0</frame-brightness>
    <fill-brightness>0</fill-brightness>
-   <dither-pattern>I5</dither-pattern>
+   <dither-pattern>I9</dither-pattern>
    <line-style/>
    <valid>true</valid>
    <visible>true</visible>
@@ -150,15 +82,15 @@
    <marked>false</marked>
    <xfill>false</xfill>
    <animation>0</animation>
-   <name>9    / 3   NW1 obs</name>
-   <source>9/3@1</source>
+   <name>NVTH - 21/1</name>
+   <source>NVTH 21/1@1</source>
   </properties>
   <properties>
-   <frame-color>#a4d4a4</frame-color>
-   <fill-color>#a4d4a4</fill-color>
+   <frame-color>#4682b4</frame-color>
+   <fill-color>#4682b4</fill-color>
    <frame-brightness>0</frame-brightness>
    <fill-brightness>0</fill-brightness>
-   <dither-pattern>I5</dither-pattern>
+   <dither-pattern>I9</dither-pattern>
    <line-style/>
    <valid>true</valid>
    <visible>true</visible>
@@ -167,25 +99,8 @@
    <marked>false</marked>
    <xfill>false</xfill>
    <animation>0</animation>
-   <name>9    / 4   NW1 blockage</name>
-   <source>9/4@1</source>
-  </properties>
-  <properties>
-   <frame-color>#ff0000</frame-color>
-   <fill-color>#ff0000</fill-color>
-   <frame-brightness>0</frame-brightness>
-   <fill-brightness>0</fill-brightness>
-   <dither-pattern>I2</dither-pattern>
-   <line-style/>
-   <valid>true</valid>
-   <visible>true</visible>
-   <transparent>false</transparent>
-   <width/>
-   <marked>false</marked>
-   <xfill>false</xfill>
-   <animation>0</animation>
-   <name>41   / 1   POLY drawing</name>
-   <source>41/1@1</source>
+   <name>PVTH - 22/1</name>
+   <source>PVTH 22/1@1</source>
   </properties>
   <properties>
    <frame-color>#ff0000</frame-color>
@@ -201,59 +116,8 @@
    <marked>false</marked>
    <xfill>false</xfill>
    <animation>0</animation>
-   <name>41   / 2   POLY label</name>
-   <source>41/2@1</source>
-  </properties>
-  <properties>
-   <frame-color>#ff0000</frame-color>
-   <fill-color>#ff0000</fill-color>
-   <frame-brightness>0</frame-brightness>
-   <fill-brightness>0</fill-brightness>
-   <dither-pattern>I2</dither-pattern>
-   <line-style/>
-   <valid>true</valid>
-   <visible>true</visible>
-   <transparent>false</transparent>
-   <width/>
-   <marked>false</marked>
-   <xfill>false</xfill>
-   <animation>0</animation>
-   <name>41   / 6   POLY pin</name>
-   <source>41/6@1</source>
-  </properties>
-  <properties>
-   <frame-color>#ff0000</frame-color>
-   <fill-color>#ff0000</fill-color>
-   <frame-brightness>0</frame-brightness>
-   <fill-brightness>0</fill-brightness>
-   <dither-pattern>I2</dither-pattern>
-   <line-style/>
-   <valid>true</valid>
-   <visible>true</visible>
-   <transparent>false</transparent>
-   <width/>
-   <marked>false</marked>
-   <xfill>false</xfill>
-   <animation>0</animation>
-   <name>41   / 3   POLY obs</name>
-   <source>41/3@1</source>
-  </properties>
-  <properties>
-   <frame-color>#ff0000</frame-color>
-   <fill-color>#ff0000</fill-color>
-   <frame-brightness>0</frame-brightness>
-   <fill-brightness>0</fill-brightness>
-   <dither-pattern>I2</dither-pattern>
-   <line-style/>
-   <valid>true</valid>
-   <visible>true</visible>
-   <transparent>false</transparent>
-   <width/>
-   <marked>false</marked>
-   <xfill>false</xfill>
-   <animation>0</animation>
-   <name>41   / 4   POLY blockage</name>
-   <source>41/4@1</source>
+   <name>POLY - 41/1</name>
+   <source>POLY 41/1@1</source>
   </properties>
   <properties>
    <frame-color>#8080ff</frame-color>
@@ -269,76 +133,8 @@
    <marked>false</marked>
    <xfill>false</xfill>
    <animation>0</animation>
-   <name>52   / 1   NP drawing</name>
-   <source>52/1@1</source>
-  </properties>
-  <properties>
-   <frame-color>#8080ff</frame-color>
-   <fill-color>#8080ff</fill-color>
-   <frame-brightness>0</frame-brightness>
-   <fill-brightness>0</fill-brightness>
-   <dither-pattern>I6</dither-pattern>
-   <line-style/>
-   <valid>true</valid>
-   <visible>true</visible>
-   <transparent>false</transparent>
-   <width/>
-   <marked>false</marked>
-   <xfill>false</xfill>
-   <animation>0</animation>
-   <name>52   / 2   NP label</name>
-   <source>52/2@1</source>
-  </properties>
-  <properties>
-   <frame-color>#8080ff</frame-color>
-   <fill-color>#8080ff</fill-color>
-   <frame-brightness>0</frame-brightness>
-   <fill-brightness>0</fill-brightness>
-   <dither-pattern>I6</dither-pattern>
-   <line-style/>
-   <valid>true</valid>
-   <visible>true</visible>
-   <transparent>false</transparent>
-   <width/>
-   <marked>false</marked>
-   <xfill>false</xfill>
-   <animation>0</animation>
-   <name>52   / 6   NP pin</name>
-   <source>52/6@1</source>
-  </properties>
-  <properties>
-   <frame-color>#8080ff</frame-color>
-   <fill-color>#8080ff</fill-color>
-   <frame-brightness>0</frame-brightness>
-   <fill-brightness>0</fill-brightness>
-   <dither-pattern>I6</dither-pattern>
-   <line-style/>
-   <valid>true</valid>
-   <visible>true</visible>
-   <transparent>false</transparent>
-   <width/>
-   <marked>false</marked>
-   <xfill>false</xfill>
-   <animation>0</animation>
-   <name>52   / 3   NP obs</name>
-   <source>52/3@1</source>
-  </properties>
-  <properties>
-   <frame-color>#8080ff</frame-color>
-   <fill-color>#8080ff</fill-color>
-   <frame-brightness>0</frame-brightness>
-   <fill-brightness>0</fill-brightness>
-   <dither-pattern>I6</dither-pattern>
-   <line-style/>
-   <valid>true</valid>
-   <visible>true</visible>
-   <transparent>false</transparent>
-   <width/>
-   <marked>false</marked>
-   <xfill>false</xfill>
-   <animation>0</animation>
-   <name>52   / 4   NP blockage</name>
-   <source>52/4@1</source>
+   <name>NP - 52/1</name>
+   <source>NP 52/1@1</source>
   </properties>
   <properties>
    <frame-color>#ff8080</frame-color>
@@ -354,76 +150,8 @@
    <marked>false</marked>
    <xfill>false</xfill>
    <animation>0</animation>
-   <name>53   / 1   PP drawing</name>
-   <source>53/1@1</source>
-  </properties>
-  <properties>
-   <frame-color>#ff8080</frame-color>
-   <fill-color>#ff8080</fill-color>
-   <frame-brightness>0</frame-brightness>
-   <fill-brightness>0</fill-brightness>
-   <dither-pattern>I6</dither-pattern>
-   <line-style/>
-   <valid>true</valid>
-   <visible>true</visible>
-   <transparent>false</transparent>
-   <width/>
-   <marked>false</marked>
-   <xfill>false</xfill>
-   <animation>0</animation>
-   <name>53   / 2   PP label</name>
-   <source>53/2@1</source>
-  </properties>
-  <properties>
-   <frame-color>#ff8080</frame-color>
-   <fill-color>#ff8080</fill-color>
-   <frame-brightness>0</frame-brightness>
-   <fill-brightness>0</fill-brightness>
-   <dither-pattern>I6</dither-pattern>
-   <line-style/>
-   <valid>true</valid>
-   <visible>true</visible>
-   <transparent>false</transparent>
-   <width/>
-   <marked>false</marked>
-   <xfill>false</xfill>
-   <animation>0</animation>
-   <name>53   / 6   PP pin</name>
-   <source>53/6@1</source>
-  </properties>
-  <properties>
-   <frame-color>#ff8080</frame-color>
-   <fill-color>#ff8080</fill-color>
-   <frame-brightness>0</frame-brightness>
-   <fill-brightness>0</fill-brightness>
-   <dither-pattern>I6</dither-pattern>
-   <line-style/>
-   <valid>true</valid>
-   <visible>true</visible>
-   <transparent>false</transparent>
-   <width/>
-   <marked>false</marked>
-   <xfill>false</xfill>
-   <animation>0</animation>
-   <name>53   / 3   PP obs</name>
-   <source>53/3@1</source>
-  </properties>
-  <properties>
-   <frame-color>#ff8080</frame-color>
-   <fill-color>#ff8080</fill-color>
-   <frame-brightness>0</frame-brightness>
-   <fill-brightness>0</fill-brightness>
-   <dither-pattern>I6</dither-pattern>
-   <line-style/>
-   <valid>true</valid>
-   <visible>true</visible>
-   <transparent>false</transparent>
-   <width/>
-   <marked>false</marked>
-   <xfill>false</xfill>
-   <animation>0</animation>
-   <name>53   / 4   PP blockage</name>
-   <source>53/4@1</source>
+   <name>PP - 53/1</name>
+   <source>PP 53/1@1</source>
   </properties>
   <properties>
    <frame-color>#ffffff</frame-color>
@@ -439,42 +167,8 @@
    <marked>false</marked>
    <xfill>false</xfill>
    <animation>0</animation>
-   <name>72   / 1   CT drawing</name>
-   <source>72/1@1</source>
-  </properties>
-  <properties>
-   <frame-color>#ffffff</frame-color>
-   <fill-color>#ffffff</fill-color>
-   <frame-brightness>0</frame-brightness>
-   <fill-brightness>0</fill-brightness>
-   <dither-pattern>I0</dither-pattern>
-   <line-style/>
-   <valid>true</valid>
-   <visible>true</visible>
-   <transparent>false</transparent>
-   <width/>
-   <marked>false</marked>
-   <xfill>false</xfill>
-   <animation>0</animation>
-   <name>72   / 3   CT obs</name>
-   <source>72/3@1</source>
-  </properties>
-  <properties>
-   <frame-color>#ffffff</frame-color>
-   <fill-color>#ffffff</fill-color>
-   <frame-brightness>0</frame-brightness>
-   <fill-brightness>0</fill-brightness>
-   <dither-pattern>I0</dither-pattern>
-   <line-style/>
-   <valid>true</valid>
-   <visible>true</visible>
-   <transparent>false</transparent>
-   <width/>
-   <marked>false</marked>
-   <xfill>false</xfill>
-   <animation>0</animation>
-   <name>72   / 4   CT blockage</name>
-   <source>72/4@1</source>
+   <name>CT - 72/1</name>
+   <source>CT 72/1@1</source>
   </properties>
   <properties>
    <frame-color>#39bfff</frame-color>
@@ -490,8 +184,8 @@
    <marked>false</marked>
    <xfill>false</xfill>
    <animation>0</animation>
-   <name>81   / 1   MET1 drawing</name>
-   <source>81/1@1</source>
+   <name>MET1 - 81/1</name>
+   <source>MET1 81/1@1</source>
   </properties>
   <properties>
    <frame-color>#39bfff</frame-color>
@@ -507,8 +201,8 @@
    <marked>false</marked>
    <xfill>false</xfill>
    <animation>0</animation>
-   <name>81   / 2   MET1 label</name>
-   <source>81/2@1</source>
+   <name>MET1.label - 81/2</name>
+   <source>MET1 81/2@1</source>
   </properties>
   <properties>
    <frame-color>#39bfff</frame-color>
@@ -524,42 +218,8 @@
    <marked>false</marked>
    <xfill>false</xfill>
    <animation>0</animation>
-   <name>81   / 6   MET1 pin</name>
-   <source>81/6@1</source>
-  </properties>
-  <properties>
-   <frame-color>#39bfff</frame-color>
-   <fill-color>#39bfff</fill-color>
-   <frame-brightness>0</frame-brightness>
-   <fill-brightness>0</fill-brightness>
-   <dither-pattern>I3</dither-pattern>
-   <line-style/>
-   <valid>true</valid>
-   <visible>true</visible>
-   <transparent>false</transparent>
-   <width/>
-   <marked>false</marked>
-   <xfill>false</xfill>
-   <animation>0</animation>
-   <name>81   / 3   MET1 obs</name>
-   <source>81/3@1</source>
-  </properties>
-  <properties>
-   <frame-color>#39bfff</frame-color>
-   <fill-color>#39bfff</fill-color>
-   <frame-brightness>0</frame-brightness>
-   <fill-brightness>0</fill-brightness>
-   <dither-pattern>I3</dither-pattern>
-   <line-style/>
-   <valid>true</valid>
-   <visible>true</visible>
-   <transparent>false</transparent>
-   <width/>
-   <marked>false</marked>
-   <xfill>false</xfill>
-   <animation>0</animation>
-   <name>81   / 4   MET1 blockage</name>
-   <source>81/4@1</source>
+   <name>MET1.pin - 81/6</name>
+   <source>MET1 81/6@1</source>
   </properties>
   <properties>
    <frame-color>#cccccc</frame-color>
@@ -575,42 +235,8 @@
    <marked>false</marked>
    <xfill>false</xfill>
    <animation>0</animation>
-   <name>91   / 1   VIA1 drawing</name>
-   <source>91/1@1</source>
-  </properties>
-  <properties>
-   <frame-color>#cccccc</frame-color>
-   <fill-color>#cccccc</fill-color>
-   <frame-brightness>0</frame-brightness>
-   <fill-brightness>0</fill-brightness>
-   <dither-pattern>I0</dither-pattern>
-   <line-style/>
-   <valid>true</valid>
-   <visible>true</visible>
-   <transparent>false</transparent>
-   <width/>
-   <marked>false</marked>
-   <xfill>false</xfill>
-   <animation>0</animation>
-   <name>91   / 3   VIA1 obs</name>
-   <source>91/3@1</source>
-  </properties>
-  <properties>
-   <frame-color>#cccccc</frame-color>
-   <fill-color>#cccccc</fill-color>
-   <frame-brightness>0</frame-brightness>
-   <fill-brightness>0</fill-brightness>
-   <dither-pattern>I0</dither-pattern>
-   <line-style/>
-   <valid>true</valid>
-   <visible>true</visible>
-   <transparent>false</transparent>
-   <width/>
-   <marked>false</marked>
-   <xfill>false</xfill>
-   <animation>0</animation>
-   <name>91   / 4   VIA1 blockage</name>
-   <source>91/4@1</source>
+   <name>VIA1 - 91/1</name>
+   <source>VIA1 91/1@1</source>
   </properties>
   <properties>
    <frame-color>#ffa6d9</frame-color>
@@ -626,8 +252,8 @@
    <marked>false</marked>
    <xfill>false</xfill>
    <animation>0</animation>
-   <name>82   / 1   MET2 drawing</name>
-   <source>82/1@1</source>
+   <name>MET2 - 82/1</name>
+   <source>MET2 82/1@1</source>
   </properties>
   <properties>
    <frame-color>#ffa6d9</frame-color>
@@ -643,8 +269,8 @@
    <marked>false</marked>
    <xfill>false</xfill>
    <animation>0</animation>
-   <name>82   / 2   MET2 label</name>
-   <source>82/2@1</source>
+   <name>MET2.label - 82/2</name>
+   <source>MET2 82/2@1</source>
   </properties>
   <properties>
    <frame-color>#ffa6d9</frame-color>
@@ -660,42 +286,8 @@
    <marked>false</marked>
    <xfill>false</xfill>
    <animation>0</animation>
-   <name>82   / 6   MET2 pin</name>
-   <source>82/6@1</source>
-  </properties>
-  <properties>
-   <frame-color>#ffa6d9</frame-color>
-   <fill-color>#ffa6d9</fill-color>
-   <frame-brightness>0</frame-brightness>
-   <fill-brightness>0</fill-brightness>
-   <dither-pattern>I4</dither-pattern>
-   <line-style/>
-   <valid>true</valid>
-   <visible>true</visible>
-   <transparent>false</transparent>
-   <width/>
-   <marked>false</marked>
-   <xfill>false</xfill>
-   <animation>0</animation>
-   <name>82   / 3   MET2 obs</name>
-   <source>82/3@1</source>
-  </properties>
-  <properties>
-   <frame-color>#ffa6d9</frame-color>
-   <fill-color>#ffa6d9</fill-color>
-   <frame-brightness>0</frame-brightness>
-   <fill-brightness>0</fill-brightness>
-   <dither-pattern>I4</dither-pattern>
-   <line-style/>
-   <valid>true</valid>
-   <visible>true</visible>
-   <transparent>false</transparent>
-   <width/>
-   <marked>false</marked>
-   <xfill>false</xfill>
-   <animation>0</animation>
-   <name>82   / 4   MET2 blockage</name>
-   <source>82/4@1</source>
+   <name>MET2.pin - 82/6</name>
+   <source>MET2 82/6@1</source>
   </properties>
   <properties>
    <frame-color>#cccccc</frame-color>
@@ -711,42 +303,8 @@
    <marked>false</marked>
    <xfill>false</xfill>
    <animation>0</animation>
-   <name>92   / 1   VIA2 drawing</name>
-   <source>92/1@1</source>
-  </properties>
-  <properties>
-   <frame-color>#cccccc</frame-color>
-   <fill-color>#cccccc</fill-color>
-   <frame-brightness>0</frame-brightness>
-   <fill-brightness>0</fill-brightness>
-   <dither-pattern>I0</dither-pattern>
-   <line-style/>
-   <valid>true</valid>
-   <visible>true</visible>
-   <transparent>false</transparent>
-   <width/>
-   <marked>false</marked>
-   <xfill>false</xfill>
-   <animation>0</animation>
-   <name>92   / 3   VIA2 obs</name>
-   <source>92/3@1</source>
-  </properties>
-  <properties>
-   <frame-color>#cccccc</frame-color>
-   <fill-color>#cccccc</fill-color>
-   <frame-brightness>0</frame-brightness>
-   <fill-brightness>0</fill-brightness>
-   <dither-pattern>I0</dither-pattern>
-   <line-style/>
-   <valid>true</valid>
-   <visible>true</visible>
-   <transparent>false</transparent>
-   <width/>
-   <marked>false</marked>
-   <xfill>false</xfill>
-   <animation>0</animation>
-   <name>92   / 4   VIA2 blockage</name>
-   <source>92/4@1</source>
+   <name>VIA2 - 92/1</name>
+   <source>VIA2 92/1@1</source>
   </properties>
   <properties>
    <frame-color>#f8d570</frame-color>
@@ -762,8 +320,8 @@
    <marked>false</marked>
    <xfill>false</xfill>
    <animation>0</animation>
-   <name>83   / 1   MET3 drawing</name>
-   <source>83/1@1</source>
+   <name>MET3 - 83/1</name>
+   <source>MET3 83/1@1</source>
   </properties>
   <properties>
    <frame-color>#f8d570</frame-color>
@@ -779,8 +337,8 @@
    <marked>false</marked>
    <xfill>false</xfill>
    <animation>0</animation>
-   <name>83   / 2   MET3 label</name>
-   <source>83/2@1</source>
+   <name>MET3.label - 83/2</name>
+   <source>MET3 83/2@1</source>
   </properties>
   <properties>
    <frame-color>#f8d570</frame-color>
@@ -796,42 +354,8 @@
    <marked>false</marked>
    <xfill>false</xfill>
    <animation>0</animation>
-   <name>83   / 6   MET3 pin</name>
-   <source>83/6@1</source>
-  </properties>
-  <properties>
-   <frame-color>#f8d570</frame-color>
-   <fill-color>#f8d570</fill-color>
-   <frame-brightness>0</frame-brightness>
-   <fill-brightness>0</fill-brightness>
-   <dither-pattern>I7</dither-pattern>
-   <line-style/>
-   <valid>true</valid>
-   <visible>true</visible>
-   <transparent>false</transparent>
-   <width/>
-   <marked>false</marked>
-   <xfill>false</xfill>
-   <animation>0</animation>
-   <name>83   / 3   MET3 obs</name>
-   <source>83/3@1</source>
-  </properties>
-  <properties>
-   <frame-color>#f8d570</frame-color>
-   <fill-color>#f8d570</fill-color>
-   <frame-brightness>0</frame-brightness>
-   <fill-brightness>0</fill-brightness>
-   <dither-pattern>I7</dither-pattern>
-   <line-style/>
-   <valid>true</valid>
-   <visible>true</visible>
-   <transparent>false</transparent>
-   <width/>
-   <marked>false</marked>
-   <xfill>false</xfill>
-   <animation>0</animation>
-   <name>83   / 4   MET3 blockage</name>
-   <source>83/4@1</source>
+   <name>MET3.pin - 83/6</name>
+   <source>MET3 83/6@1</source>
   </properties>
   <properties>
    <frame-color>#cccccc</frame-color>
@@ -847,42 +371,8 @@
    <marked>false</marked>
    <xfill>false</xfill>
    <animation>0</animation>
-   <name>93   / 1   VIA3 drawing</name>
-   <source>93/1@1</source>
-  </properties>
-  <properties>
-   <frame-color>#cccccc</frame-color>
-   <fill-color>#cccccc</fill-color>
-   <frame-brightness>0</frame-brightness>
-   <fill-brightness>0</fill-brightness>
-   <dither-pattern>I0</dither-pattern>
-   <line-style/>
-   <valid>true</valid>
-   <visible>true</visible>
-   <transparent>false</transparent>
-   <width/>
-   <marked>false</marked>
-   <xfill>false</xfill>
-   <animation>0</animation>
-   <name>93   / 3   VIA3 obs</name>
-   <source>93/3@1</source>
-  </properties>
-  <properties>
-   <frame-color>#cccccc</frame-color>
-   <fill-color>#cccccc</fill-color>
-   <frame-brightness>0</frame-brightness>
-   <fill-brightness>0</fill-brightness>
-   <dither-pattern>I0</dither-pattern>
-   <line-style/>
-   <valid>true</valid>
-   <visible>true</visible>
-   <transparent>false</transparent>
-   <width/>
-   <marked>false</marked>
-   <xfill>false</xfill>
-   <animation>0</animation>
-   <name>93   / 4   VIA3 blockage</name>
-   <source>93/4@1</source>
+   <name>VIA3 - 93/1</name>
+   <source>VIA3 93/1@1</source>
   </properties>
   <properties>
    <frame-color>#ff8000</frame-color>
@@ -898,8 +388,8 @@
    <marked>false</marked>
    <xfill>false</xfill>
    <animation>0</animation>
-   <name>84   / 1   MET4 drawing</name>
-   <source>84/1@1</source>
+   <name>MET4 - 84/1</name>
+   <source>MET4 84/1@1</source>
   </properties>
   <properties>
    <frame-color>#ff8000</frame-color>
@@ -915,8 +405,8 @@
    <marked>false</marked>
    <xfill>false</xfill>
    <animation>0</animation>
-   <name>84   / 2   MET4 label</name>
-   <source>84/2@1</source>
+   <name>MET4.label - 84/2</name>
+   <source>MET4 84/2@1</source>
   </properties>
   <properties>
    <frame-color>#ff8000</frame-color>
@@ -932,42 +422,8 @@
    <marked>false</marked>
    <xfill>false</xfill>
    <animation>0</animation>
-   <name>84   / 6   MET4 pin</name>
-   <source>84/6@1</source>
-  </properties>
-  <properties>
-   <frame-color>#ff8000</frame-color>
-   <fill-color>#ff8000</fill-color>
-   <frame-brightness>0</frame-brightness>
-   <fill-brightness>0</fill-brightness>
-   <dither-pattern>I8</dither-pattern>
-   <line-style/>
-   <valid>true</valid>
-   <visible>true</visible>
-   <transparent>false</transparent>
-   <width/>
-   <marked>false</marked>
-   <xfill>false</xfill>
-   <animation>0</animation>
-   <name>84   / 3   MET4 obs</name>
-   <source>84/3@1</source>
-  </properties>
-  <properties>
-   <frame-color>#ff8000</frame-color>
-   <fill-color>#ff8000</fill-color>
-   <frame-brightness>0</frame-brightness>
-   <fill-brightness>0</fill-brightness>
-   <dither-pattern>I8</dither-pattern>
-   <line-style/>
-   <valid>true</valid>
-   <visible>true</visible>
-   <transparent>false</transparent>
-   <width/>
-   <marked>false</marked>
-   <xfill>false</xfill>
-   <animation>0</animation>
-   <name>84   / 4   MET4 blockage</name>
-   <source>84/4@1</source>
+   <name>MET4.pin - 84/6</name>
+   <source>MET4 84/6@1</source>
   </properties>
   <properties>
    <frame-color>#cccccc</frame-color>
@@ -983,42 +439,8 @@
    <marked>false</marked>
    <xfill>false</xfill>
    <animation>0</animation>
-   <name>94   / 1   VIA4 drawing</name>
-   <source>94/1@1</source>
-  </properties>
-  <properties>
-   <frame-color>#cccccc</frame-color>
-   <fill-color>#cccccc</fill-color>
-   <frame-brightness>0</frame-brightness>
-   <fill-brightness>0</fill-brightness>
-   <dither-pattern>I0</dither-pattern>
-   <line-style/>
-   <valid>true</valid>
-   <visible>true</visible>
-   <transparent>false</transparent>
-   <width/>
-   <marked>false</marked>
-   <xfill>false</xfill>
-   <animation>0</animation>
-   <name>94   / 3   VIA4 obs</name>
-   <source>94/3@1</source>
-  </properties>
-  <properties>
-   <frame-color>#cccccc</frame-color>
-   <fill-color>#cccccc</fill-color>
-   <frame-brightness>0</frame-brightness>
-   <fill-brightness>0</fill-brightness>
-   <dither-pattern>I0</dither-pattern>
-   <line-style/>
-   <valid>true</valid>
-   <visible>true</visible>
-   <transparent>false</transparent>
-   <width/>
-   <marked>false</marked>
-   <xfill>false</xfill>
-   <animation>0</animation>
-   <name>94   / 4   VIA4 blockage</name>
-   <source>94/4@1</source>
+   <name>VIA4 - 94/1</name>
+   <source>VIA4 94/1@1</source>
   </properties>
   <properties>
    <frame-color>#a0a0ff</frame-color>
@@ -1034,8 +456,8 @@
    <marked>false</marked>
    <xfill>false</xfill>
    <animation>0</animation>
-   <name>85   / 1   MET5 drawing</name>
-   <source>85/1@1</source>
+   <name>MET5 - 85/1</name>
+   <source>MET5 85/1@1</source>
   </properties>
   <properties>
    <frame-color>#a0a0ff</frame-color>
@@ -1051,8 +473,8 @@
    <marked>false</marked>
    <xfill>false</xfill>
    <animation>0</animation>
-   <name>85   / 2   MET5 label</name>
-   <source>85/2@1</source>
+   <name>MET5.label - 85/2</name>
+   <source>MET5 85/2@1</source>
   </properties>
   <properties>
    <frame-color>#a0a0ff</frame-color>
@@ -1068,42 +490,8 @@
    <marked>false</marked>
    <xfill>false</xfill>
    <animation>0</animation>
-   <name>85   / 6   MET5 pin</name>
-   <source>85/6@1</source>
-  </properties>
-  <properties>
-   <frame-color>#a0a0ff</frame-color>
-   <fill-color>#a0a0ff</fill-color>
-   <frame-brightness>0</frame-brightness>
-   <fill-brightness>0</fill-brightness>
-   <dither-pattern>I9</dither-pattern>
-   <line-style/>
-   <valid>true</valid>
-   <visible>true</visible>
-   <transparent>false</transparent>
-   <width/>
-   <marked>false</marked>
-   <xfill>false</xfill>
-   <animation>0</animation>
-   <name>85   / 3   MET5 obs</name>
-   <source>85/3@1</source>
-  </properties>
-  <properties>
-   <frame-color>#a0a0ff</frame-color>
-   <fill-color>#a0a0ff</fill-color>
-   <frame-brightness>0</frame-brightness>
-   <fill-brightness>0</fill-brightness>
-   <dither-pattern>I9</dither-pattern>
-   <line-style/>
-   <valid>true</valid>
-   <visible>true</visible>
-   <transparent>false</transparent>
-   <width/>
-   <marked>false</marked>
-   <xfill>false</xfill>
-   <animation>0</animation>
-   <name>85   / 4   MET5 blockage</name>
-   <source>85/4@1</source>
+   <name>MET5.pin - 85/6</name>
+   <source>MET5 85/6@1</source>
   </properties>
   <properties>
    <frame-color>#cccccc</frame-color>
@@ -1119,42 +507,8 @@
    <marked>false</marked>
    <xfill>false</xfill>
    <animation>0</animation>
-   <name>113  / 1   T4V2 drawing</name>
-   <source>113/1@1</source>
-  </properties>
-  <properties>
-   <frame-color>#cccccc</frame-color>
-   <fill-color>#cccccc</fill-color>
-   <frame-brightness>0</frame-brightness>
-   <fill-brightness>0</fill-brightness>
-   <dither-pattern>I0</dither-pattern>
-   <line-style/>
-   <valid>true</valid>
-   <visible>true</visible>
-   <transparent>false</transparent>
-   <width/>
-   <marked>false</marked>
-   <xfill>false</xfill>
-   <animation>0</animation>
-   <name>113  / 3   T4V2 obs</name>
-   <source>113/3@1</source>
-  </properties>
-  <properties>
-   <frame-color>#cccccc</frame-color>
-   <fill-color>#cccccc</fill-color>
-   <frame-brightness>0</frame-brightness>
-   <fill-brightness>0</fill-brightness>
-   <dither-pattern>I0</dither-pattern>
-   <line-style/>
-   <valid>true</valid>
-   <visible>true</visible>
-   <transparent>false</transparent>
-   <width/>
-   <marked>false</marked>
-   <xfill>false</xfill>
-   <animation>0</animation>
-   <name>113  / 4   T4V2 blockage</name>
-   <source>113/4@1</source>
+   <name>T4V2 - 113/1</name>
+   <source>T4V2 113/1@1</source>
   </properties>
   <properties>
    <frame-color>#c8c800</frame-color>
@@ -1170,8 +524,8 @@
    <marked>false</marked>
    <xfill>false</xfill>
    <animation>0</animation>
-   <name>103  / 1   T4M2 drawing</name>
-   <source>103/1@1</source>
+   <name>T4M2 - 103/1</name>
+   <source>T4M2 103/1@1</source>
   </properties>
   <properties>
    <frame-color>#c8c800</frame-color>
@@ -1187,8 +541,8 @@
    <marked>false</marked>
    <xfill>false</xfill>
    <animation>0</animation>
-   <name>103  / 2   T4M2 label</name>
-   <source>103/2@1</source>
+   <name>T4M2.label - 103/2</name>
+   <source>T4M2 103/2@1</source>
   </properties>
   <properties>
    <frame-color>#c8c800</frame-color>
@@ -1204,42 +558,8 @@
    <marked>false</marked>
    <xfill>false</xfill>
    <animation>0</animation>
-   <name>103  / 6   T4M2 pin</name>
-   <source>103/6@1</source>
-  </properties>
-  <properties>
-   <frame-color>#c8c800</frame-color>
-   <fill-color>#c8c800</fill-color>
-   <frame-brightness>0</frame-brightness>
-   <fill-brightness>0</fill-brightness>
-   <dither-pattern>I5</dither-pattern>
-   <line-style/>
-   <valid>true</valid>
-   <visible>true</visible>
-   <transparent>false</transparent>
-   <width/>
-   <marked>false</marked>
-   <xfill>false</xfill>
-   <animation>0</animation>
-   <name>103  / 3   T4M2 obs</name>
-   <source>103/3@1</source>
-  </properties>
-  <properties>
-   <frame-color>#c8c800</frame-color>
-   <fill-color>#c8c800</fill-color>
-   <frame-brightness>0</frame-brightness>
-   <fill-brightness>0</fill-brightness>
-   <dither-pattern>I5</dither-pattern>
-   <line-style/>
-   <valid>true</valid>
-   <visible>true</visible>
-   <transparent>false</transparent>
-   <width/>
-   <marked>false</marked>
-   <xfill>false</xfill>
-   <animation>0</animation>
-   <name>103  / 4   T4M2 blockage</name>
-   <source>103/4@1</source>
+   <name>T4M2.pin - 103/6</name>
+   <source>T4M2 103/6@1</source>
   </properties>
   <properties>
    <frame-color>#e0b0ff</frame-color>
@@ -1255,8 +575,8 @@
    <marked>false</marked>
    <xfill>false</xfill>
    <animation>0</animation>
-   <name>123  / 1   RDL drawing</name>
-   <source>123/1@1</source>
+   <name>RDL - 123/1</name>
+   <source>RDL 123/1@1</source>
   </properties>
   <properties>
    <frame-color>#e0b0ff</frame-color>
@@ -1272,8 +592,8 @@
    <marked>false</marked>
    <xfill>false</xfill>
    <animation>0</animation>
-   <name>123  / 2   RDL label</name>
-   <source>123/2@1</source>
+   <name>RDL.label - 123/2</name>
+   <source>RDL 123/2@1</source>
   </properties>
   <properties>
    <frame-color>#e0b0ff</frame-color>
@@ -1289,12 +609,12 @@
    <marked>false</marked>
    <xfill>false</xfill>
    <animation>0</animation>
-   <name>123  / 6   RDL pin</name>
-   <source>123/6@1</source>
+   <name>RDL.pin - 123/6</name>
+   <source>RDL 123/6@1</source>
   </properties>
   <properties>
-   <frame-color>#e0b0ff</frame-color>
-   <fill-color>#e0b0ff</fill-color>
+   <frame-color>#ffff00</frame-color>
+   <fill-color>#ffff00</fill-color>
    <frame-brightness>0</frame-brightness>
    <fill-brightness>0</fill-brightness>
    <dither-pattern>I5</dither-pattern>
@@ -1306,15 +626,15 @@
    <marked>false</marked>
    <xfill>false</xfill>
    <animation>0</animation>
-   <name>123  / 3   RDL obs</name>
-   <source>123/3@1</source>
+   <name>ANTMK - 191/12</name>
+   <source>ANTMK 191/12@1</source>
   </properties>
   <properties>
-   <frame-color>#e0b0ff</frame-color>
-   <fill-color>#e0b0ff</fill-color>
+   <frame-color>#a4d4a4</frame-color>
+   <fill-color>#a4d4a4</fill-color>
    <frame-brightness>0</frame-brightness>
    <fill-brightness>0</fill-brightness>
-   <dither-pattern>I5</dither-pattern>
+   <dither-pattern>I1</dither-pattern>
    <line-style/>
    <valid>true</valid>
    <visible>true</visible>
@@ -1323,16 +643,16 @@
    <marked>false</marked>
    <xfill>false</xfill>
    <animation>0</animation>
-   <name>123  / 4   RDL blockage</name>
-   <source>123/4@1</source>
+   <name>VPW - 261/12</name>
+   <source>VPW 261/12@1</source>
   </properties>
   <properties>
-   <frame-color>#ffffff</frame-color>
-   <fill-color>#ffffff</fill-color>
+   <frame-color>#ffae00</frame-color>
+   <fill-color/>
    <frame-brightness>0</frame-brightness>
    <fill-brightness>0</fill-brightness>
-   <dither-pattern>I0</dither-pattern>
-   <line-style/>
+   <dither-pattern>I1</dither-pattern>
+   <line-style>I1</line-style>
    <valid>true</valid>
    <visible>true</visible>
    <transparent>false</transparent>
@@ -1340,7 +660,7 @@
    <marked>false</marked>
    <xfill>false</xfill>
    <animation>0</animation>
-   <name>351  / 12  PRBND drawing</name>
-   <source>351/12@1</source>
+   <name>PRBND - 351/12</name>
+   <source>PRBND 351/12@1</source>
   </properties>
 </layer-properties>

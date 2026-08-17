@@ -63,6 +63,10 @@ class ICS55PDK(LambdaPDK, _ICS55Path):
                 self.add_layermapfileset("klayout", "def", "klayout")
                 self.add_displayfileset("klayout")
 
+            # Every cell carries its outline, so leaving the boundary on covers the
+            # layout in a grid of rectangles.
+            self.add_klayout_hidelayers("PRBND")
+
             # MET1 is reserved for the cell rails and pin access.
             self.set_aprroutinglayers(min="MET2", max="MET5")
 

@@ -13,6 +13,9 @@
       layer (91/1, 0.090um = VIA1 WIDTH).
     * MET3/MET4/MET5 (83/84/85) and VIA2/VIA3/VIA4 (92/93/94) follow the same
       pattern in the IO GDS, whose cut layers are all 0.090um.
+    * T4M2 is 103 and RDL is 123, matched positionally against the IO LEF: the
+      RDL obstruction of P65_1233_VSS3 (3 4.5 62 63.5) is on 123/1 shape for
+      shape.
     * All drawing geometry is on datatype 1, not 0. Pin text is on datatype 6,
       labels on datatype 2, cell outlines on 351/12.
 
@@ -40,7 +43,7 @@
   </common>
   <lefdef>
    <read-all-layers>true</read-all-layers>
-   <layer-map>layer_map('DIEAREA : 351/12';'BOUNDARY : 351/12';'ACT : 2/1';'NW1 : 9/1';'POLY : 41/1';'NP : 52/1';'PP : 53/1';'CT : 72/1';'MET1 : 81/1';'MET1.LABEL : 81/2';'MET1.PIN : 81/6';'MET2 : 82/1';'MET2.LABEL : 82/2';'MET2.PIN : 82/6';'MET3 : 83/1';'MET3.LABEL : 83/2';'MET3.PIN : 83/6';'MET4 : 84/1';'MET4.LABEL : 84/2';'MET4.PIN : 84/6';'MET5 : 85/1';'MET5.LABEL : 85/2';'MET5.PIN : 85/6';'T4M2 : 103/1';'T4M2.LABEL : 103/2';'T4M2.PIN : 103/6';'VIA1 : 91/1';'VIA2 : 92/1';'VIA3 : 93/1';'VIA4 : 94/1';'T4V2 : 113/1')</layer-map>
+   <layer-map>layer_map('DIEAREA : 351/12';'BOUNDARY : 351/12';'ACT : 2/1';'NW1 : 9/1';'POLY : 41/1';'NP : 52/1';'PP : 53/1';'CT : 72/1';'MET1 : 81/1';'MET1.LABEL : 81/2';'MET1.PIN : 81/6';'MET2 : 82/1';'MET2.LABEL : 82/2';'MET2.PIN : 82/6';'MET3 : 83/1';'MET3.LABEL : 83/2';'MET3.PIN : 83/6';'MET4 : 84/1';'MET4.LABEL : 84/2';'MET4.PIN : 84/6';'MET5 : 85/1';'MET5.LABEL : 85/2';'MET5.PIN : 85/6';'T4M2 : 103/1';'T4M2.LABEL : 103/2';'T4M2.PIN : 103/6';'RDL : 123/1';'RDL.LABEL : 123/2';'RDL.PIN : 123/6';'VIA1 : 91/1';'VIA2 : 92/1';'VIA3 : 93/1';'VIA4 : 94/1';'T4V2 : 113/1')</layer-map>
    <dbu>0.001</dbu>
    <produce-net-names>true</produce-net-names>
    <net-property-name>#1</net-property-name>
