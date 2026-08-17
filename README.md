@@ -75,7 +75,30 @@ project.summary()
 
 Available targets: `asap7_demo`, `freepdk45_demo`, `skywater130_demo`, `gf180_demo`, `ihp130_demo`, `interposer_demo`
 
+GT2N ships its target in this package instead of SiliconCompiler:
+
+```python
+from lambdapdk.gt2n.target import gt2n_demo
+```
+
 ## Cell Library Inventory
+
+### GT2N (2nm)
+
+Ten standard cell libraries covering two nanosheet width flavors and five threshold voltages:
+
+| Library | Nanosheet width | Vt flavors | Cells |
+|---------|-----------------|------------|-------|
+| [gt2_6t_w13_*](lambdapdk/gt2n/libs) | 13nm | HVT, SVT, LVT, ULVT, ELVT | 72 each |
+| [gt2_6t_w31_*](lambdapdk/gt2n/libs) | 31nm | HVT, SVT, LVT, ULVT, ELVT | 72 each |
+
+Python classes follow the pattern `GT2N6TW<width><vt>`, e.g. `GT2N6TW31SVT` (the `gt2n_demo` main library).
+
+**Cell categories:** AND, OR, NAND, NOR, XOR, XNOR, INV, BUF, MUX, DFF (async reset), AO, AOI, OA, OAI, Tie, Filler, Decap, Tap
+
+Note: GT2N is backside-power-delivery (BSPDN); the libraries use the backside tap cell variant. Cell
+views are downloaded from the upstream [GT2N repository](https://github.com/azadnaeemi/GT2N/); this
+package provides the technology setup and APR scripts.
 
 ### ASAP7 (7nm)
 
@@ -164,6 +187,9 @@ Stackup variants: 3ML, 4ML, 5ML with 400um, 800um, and 2000um bump pitches.
 
 ```
 lambdapdk/
+├── gt2n/            # 2nm GAAFET PDK
+│   ├── base/        # Technology files
+│   └── libs/        # Standard cells
 ├── asap7/           # 7nm FinFET PDK
 │   ├── base/        # Technology files, DRC rules
 │   └── libs/        # Standard cells, I/O, memory
