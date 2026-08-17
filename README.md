@@ -38,6 +38,7 @@ Lambdapdk is a collection of open-source Process Design Kits (PDKs) that enable 
 | [GT2N](lambdapdk/gt2n/README.md) | 2nm GAAFET | Standard cells (HVT/SVT/LVT/ULVT/ELVT) | Georgia Institute of Technology |
 | [ASAP7](lambdapdk/asap7/README.md) | 7nm FinFET | Standard cells (RVT/LVT/SLVT), I/O, SRAM | Arizona State University |
 | [FreePDK45](lambdapdk/freepdk45/base/README.md) | 45nm | Nangate standard cells, SRAM | NC State / Nangate |
+| [ICsprout55](lambdapdk/icsprout55/README.md) | 55nm | Standard cells (HVT/RVT/LVT) | ICsprout / ECOS |
 | [Sky130](lambdapdk/sky130/README.md) | 130nm | Standard cells (HD/HDLL), I/O, SRAM | Google / Skywater |
 | [GF180](lambdapdk/gf180/README.md) | 180nm | Standard cells (7T/9T), I/O, SRAM | Google / GlobalFoundries |
 | [IHP130](https://github.com/IHP-GmbH/IHP-Open-PDK) | 130nm SiGe | Standard cells, I/O, SRAM | IHP GmbH |
@@ -75,10 +76,11 @@ project.summary()
 
 Available targets: `asap7_demo`, `freepdk45_demo`, `skywater130_demo`, `gf180_demo`, `ihp130_demo`, `interposer_demo`
 
-GT2N ships its target in this package instead of SiliconCompiler:
+GT2N and ICsprout55 ship their targets in this package instead of SiliconCompiler:
 
 ```python
 from lambdapdk.gt2n.target import gt2n_demo
+from lambdapdk.icsprout55.target import ics55_demo
 ```
 
 ## Cell Library Inventory
@@ -133,6 +135,20 @@ Standard cell libraries with three threshold voltage variants:
 | Configuration | Verilog |
 |--------------|---------|
 | 64x32 to 512x64 | [verilog](lambdapdk/freepdk45/libs/fakeram45/verilog) |
+
+### ICsprout55 (55nm)
+
+Three threshold-voltage variants of the same 7-track library, on a 1.4um `core7` site:
+
+| Library | Type | Cells |
+|---------|------|-------|
+| ics55_stdcell_h | High Vt | 747 |
+| ics55_stdcell_r | Regular Vt | 747 |
+| ics55_stdcell_l | Low Vt | 747 |
+
+**Cell categories:** AND, OR, NAND, NOR, XOR, XNOR, INV, BUF, Tristate, MUX, DFF, Scan DFF, Latch, AOI, OAI, ICG, Delay, Adder, Tie, Filler, Decap, Tap, Antenna
+
+Nothing from ICsprout55 is vendored here: LEF, CDL and Verilog are fetched from the upstream repository archive, and liberty and GDS from the matching [release assets](https://github.com/openecos-projects/icsprout55-pdk/releases). See the [PDK README](lambdapdk/icsprout55/README.md) for the collateral that lambdapdk supplies itself, and for the gaps (no DRC/LVS decks, no SRAM, no I/O yet).
 
 ### Sky130 (130nm)
 
@@ -194,6 +210,9 @@ lambdapdk/
 │   ├── base/        # Technology files, DRC rules
 │   └── libs/        # Standard cells, I/O, memory
 ├── freepdk45/       # 45nm PDK
+│   ├── base/
+│   └── libs/
+├── icsprout55/      # 55nm PDK
 │   ├── base/
 │   └── libs/
 ├── sky130/          # 130nm PDK
