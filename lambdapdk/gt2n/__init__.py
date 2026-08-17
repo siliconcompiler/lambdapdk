@@ -5,7 +5,7 @@ from lambdapdk import LambdaPDK, _LambdaPath
 # Capacitance unit multiplier: values below are quoted in pF/um.
 pF = 1e-12
 
-pdk_rev = '54f81feb2b9c334d283538c1bc91bf3a34b02c02'
+pdk_rev = '308b221b82e19199a9691f2f78cbc7ce981481ca'
 
 
 class _GT2NPath(_LambdaPath):
@@ -66,7 +66,7 @@ class GT2NPDK(LambdaPDK, _GT2NPath):
             self.set_aprroutinglayers(min="M1", max="M11")
 
             # OpenROAD setup
-            self.set_openroad_rclayers(signal="M3", clock="M4")
+            self.set_openroad_rclayers(signal="M3", clock="M5")
 
             # Openroad global routing grid derating
             for layer, derate in [
@@ -89,36 +89,66 @@ class GT2NPDK(LambdaPDK, _GT2NPath):
             self.add_openroad_pinlayers(vertical="M3", horizontal="M2")
 
             # PEX
-            self.add_openroad_rclayer("typical", "routing", "M0", 622, 1.5e-4 * pF)
-            self.add_openroad_rclayer("typical", "routing", "M1", 438, 1.5e-4 * pF)
-            self.add_openroad_rclayer("typical", "routing", "M2", 622, 1.5e-4 * pF)
-            self.add_openroad_rclayer("typical", "routing", "M3", 438, 1.5e-4 * pF)
-            self.add_openroad_rclayer("typical", "routing", "M4", 166, 1.7e-4 * pF)
-            self.add_openroad_rclayer("typical", "routing", "M5", 166, 1.7e-4 * pF)
-            self.add_openroad_rclayer("typical", "routing", "M6", 26, 2.0e-4 * pF)
-            self.add_openroad_rclayer("typical", "routing", "M7", 26, 2.0e-4 * pF)
-            self.add_openroad_rclayer("typical", "routing", "M8", 26, 2.0e-4 * pF)
-            self.add_openroad_rclayer("typical", "routing", "M9", 26, 2.0e-4 * pF)
-            self.add_openroad_rclayer("typical", "routing", "M10", 7.5, 2.5e-4 * pF)
-            self.add_openroad_rclayer("typical", "routing", "M11", 7.5, 2.5e-4 * pF)
-            self.add_openroad_rclayer("typical", "routing", "M12", 0.64, 3.0e-4 * pF)
-            self.add_openroad_rclayer("typical", "routing", "M13", 0.64, 3.0e-4 * pF)
-            self.add_openroad_rclayer("typical", "routing", "BPR", 28, 1.0e-4 * pF)
-            self.add_openroad_rclayer("typical", "routing", "BM1", 7.5, 1.5e-4 * pF)
-            self.add_openroad_rclayer("typical", "routing", "BM2", 7.5, 1.5e-4 * pF)
-            self.add_openroad_rclayer("typical", "routing", "BM3", 0.64, 1.5e-4 * pF)
-            self.add_openroad_rclayer("typical", "routing", "BM4", 0.64, 1.5e-4 * pF)
-            self.add_openroad_rclayer("typical", "via", "V0", 10)
-            self.add_openroad_rclayer("typical", "via", "V1", 10)
-            self.add_openroad_rclayer("typical", "via", "V2", 8)
-            self.add_openroad_rclayer("typical", "via", "V3", 8)
-            self.add_openroad_rclayer("typical", "via", "V4", 5)
-            self.add_openroad_rclayer("typical", "via", "V5", 5)
-            self.add_openroad_rclayer("typical", "via", "BV0", 10)
-            self.add_openroad_rclayer("typical", "via", "BV1", 8)
-            self.add_openroad_rclayer("typical", "via", "BV2", 8)
-            self.add_openroad_rclayer("typical", "via", "BV3", 5)
-            self.add_openroad_rclayer("typical", "via", "BV4", 5)
+            #
+            # Per-length wire RC derived analytically from GT2N/nxtgrd/GT2.itf,
+            # the StarRC interconnect tech file shipped with the PDK:
+            #
+            #   R/um = RPSQ / WMIN
+            #   C/um = (Ca + Cb) * fringe + 2 * Cc      with
+            #     Ca = eps0 * eps_above * W / d_above   plate to neighbor above
+            #     Cb = eps0 * eps_below * W / d_below   plate to neighbor below
+            #     Cc = eps0 * eps_side  * T / SMIN      sidewall to min-spaced
+            #                                          neighbor on this layer
+            #     fringe factor 1.5x for a coarse fringe-field correction.
+            #
+            # These are physically grounded but still approximate; a calibrated
+            # extraction pass is the proper fix. Matches the table ORFS derives
+            # in flow/platforms/gt2n/setRC.tcl via itf_to_rc.py.
+            #
+            # Frontside routing
+            self.add_openroad_rclayer("typical", "routing", "M0", 621.75, 1.200e-4 * pF)
+            self.add_openroad_rclayer("typical", "routing", "M1", 437.50, 1.023e-4 * pF)
+            self.add_openroad_rclayer("typical", "routing", "M2", 621.75, 9.980e-5 * pF)
+            self.add_openroad_rclayer("typical", "routing", "M3", 437.50, 1.023e-4 * pF)
+            self.add_openroad_rclayer("typical", "routing", "M4", 166.95, 1.088e-4 * pF)
+            self.add_openroad_rclayer("typical", "routing", "M5", 166.95, 1.051e-4 * pF)
+            self.add_openroad_rclayer("typical", "routing", "M6", 26.55, 1.119e-4 * pF)
+            self.add_openroad_rclayer("typical", "routing", "M7", 26.55, 1.051e-4 * pF)
+            self.add_openroad_rclayer("typical", "routing", "M8", 26.55, 1.051e-4 * pF)
+            self.add_openroad_rclayer("typical", "routing", "M9", 26.55, 1.051e-4 * pF)
+            self.add_openroad_rclayer("typical", "routing", "M10", 7.48, 1.091e-4 * pF)
+            self.add_openroad_rclayer("typical", "routing", "M11", 7.48, 1.051e-4 * pF)
+            self.add_openroad_rclayer("typical", "routing", "M12", 0.64, 1.205e-4 * pF)
+            self.add_openroad_rclayer("typical", "routing", "M13", 0.64, 1.205e-4 * pF)
+            self.add_openroad_rclayer("typical", "routing", "RDL", 0.01, 3.572e-4 * pF)
+            # Backside routing
+            self.add_openroad_rclayer("typical", "routing", "BPR", 24.31, 7.793e-5 * pF)
+            self.add_openroad_rclayer("typical", "routing", "BM1", 7.48, 1.535e-4 * pF)
+            self.add_openroad_rclayer("typical", "routing", "BM2", 7.48, 1.051e-4 * pF)
+            self.add_openroad_rclayer("typical", "routing", "BM3", 0.64, 1.205e-4 * pF)
+            self.add_openroad_rclayer("typical", "routing", "BM4", 0.64, 8.666e-5 * pF)
+            self.add_openroad_rclayer("typical", "routing", "BRDL", 0.01, 1.006e-4 * pF)
+            # Frontside via R (per via, derived from ITF RPV)
+            self.add_openroad_rclayer("typical", "via", "V0", 54.99)
+            self.add_openroad_rclayer("typical", "via", "V1", 54.99)
+            self.add_openroad_rclayer("typical", "via", "V2", 54.99)
+            self.add_openroad_rclayer("typical", "via", "V3", 45.78)
+            self.add_openroad_rclayer("typical", "via", "V4", 27.80)
+            self.add_openroad_rclayer("typical", "via", "V5", 14.89)
+            self.add_openroad_rclayer("typical", "via", "V6", 13.26)
+            self.add_openroad_rclayer("typical", "via", "V7", 13.26)
+            self.add_openroad_rclayer("typical", "via", "V8", 13.26)
+            self.add_openroad_rclayer("typical", "via", "V9", 7.65)
+            self.add_openroad_rclayer("typical", "via", "V10", 6.08)
+            self.add_openroad_rclayer("typical", "via", "V11", 6.08)
+            self.add_openroad_rclayer("typical", "via", "V12", 0.95)
+            self.add_openroad_rclayer("typical", "via", "V13", 0.15)
+            # Backside via R (per via, derived from ITF RPV)
+            self.add_openroad_rclayer("typical", "via", "BV0", 25.10)
+            self.add_openroad_rclayer("typical", "via", "BV1", 6.08)
+            self.add_openroad_rclayer("typical", "via", "BV2", 6.08)
+            self.add_openroad_rclayer("typical", "via", "BV3", 0.95)
+            self.add_openroad_rclayer("typical", "via", "BV4", 0.15)
 
             # Add for compatibility with OpenROAD driver
             self.get("fileset", "openroad.pex", field="schema")
