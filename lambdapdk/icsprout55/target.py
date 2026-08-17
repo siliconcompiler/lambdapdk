@@ -6,7 +6,7 @@ from siliconcompiler.flows import asicflow, synflow
 
 from siliconcompiler.targets._utils import detect_elaboration_language
 
-from lambdapdk.icsprout55.libs.stdcells import ICS55StdCellRVT
+from lambdapdk.icsprout55.libs.stdcells import ICS55StdCellRVT, ICS55StdCellHVT, ICS55StdCellLVT
 
 
 ####################################################
@@ -46,6 +46,9 @@ def ics55_demo(
     # default. The Verilog models of the three declare the same UDP primitive names,
     # so a multi-Vt netlist cannot be compiled for gate-level simulation.
     project.set_mainlib(ICS55StdCellRVT())
+    project.add_asiclib(ICS55StdCellRVT())
+    project.add_asiclib(ICS55StdCellHVT())
+    project.add_asiclib(ICS55StdCellLVT())
 
     # 2. Configure Compilation Flows
     # Defines the sequence of steps (tools) for the complete ASIC design flow
