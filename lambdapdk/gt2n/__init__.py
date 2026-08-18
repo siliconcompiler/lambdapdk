@@ -24,9 +24,9 @@ class GT2NPDK(LambdaPDK, _GT2NPath):
 
     * https://github.com/azadnaeemi/GT2N/
     * D. Jang, P. Kumar, M. N. H. Shazon, S. J. Ram, A. Svizhenko, V. Moroz, A. Ceyhan,
-    N. A. Radhakrishn, and A. Naeemi, "GT2N: An Open-Source 2nm Nanosheet PDK Enabling
-    Multi-Width/VT Benchmarking," in IEEE International Symposium on Circuits and Systems
-    (ISCAS) 2026.
+      N. A. Radhakrishn, and A. Naeemi, "GT2N: An Open-Source 2nm Nanosheet PDK Enabling
+      Multi-Width/VT Benchmarking," in IEEE International Symposium on Circuits and Systems
+      (ISCAS) 2026.
 
 
     Sources: https://github.com/azadnaeemi/GT2N/
