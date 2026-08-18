@@ -1,0 +1,666 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-properties>
+  <properties>
+   <frame-color>#00ff00</frame-color>
+   <fill-color>#00ff00</fill-color>
+   <frame-brightness>0</frame-brightness>
+   <fill-brightness>0</fill-brightness>
+   <dither-pattern>I1</dither-pattern>
+   <line-style/>
+   <valid>true</valid>
+   <visible>true</visible>
+   <transparent>false</transparent>
+   <width/>
+   <marked>false</marked>
+   <xfill>false</xfill>
+   <animation>0</animation>
+   <name>ACT - 2/1</name>
+   <source>ACT 2/1@1</source>
+  </properties>
+  <properties>
+   <frame-color>#a4d4a4</frame-color>
+   <fill-color>#a4d4a4</fill-color>
+   <frame-brightness>0</frame-brightness>
+   <fill-brightness>0</fill-brightness>
+   <dither-pattern>I5</dither-pattern>
+   <line-style/>
+   <valid>true</valid>
+   <visible>true</visible>
+   <transparent>false</transparent>
+   <width/>
+   <marked>false</marked>
+   <xfill>false</xfill>
+   <animation>0</animation>
+   <name>NW1 - 9/1</name>
+   <source>NW1 9/1@1</source>
+  </properties>
+  <properties>
+   <frame-color>#ff69b4</frame-color>
+   <fill-color>#ff69b4</fill-color>
+   <frame-brightness>0</frame-brightness>
+   <fill-brightness>0</fill-brightness>
+   <dither-pattern>I9</dither-pattern>
+   <line-style/>
+   <valid>true</valid>
+   <visible>true</visible>
+   <transparent>false</transparent>
+   <width/>
+   <marked>false</marked>
+   <xfill>false</xfill>
+   <animation>0</animation>
+   <name>NVTL - 17/1</name>
+   <source>NVTL 17/1@1</source>
+  </properties>
+  <properties>
+   <frame-color>#ff1493</frame-color>
+   <fill-color>#ff1493</fill-color>
+   <frame-brightness>0</frame-brightness>
+   <fill-brightness>0</fill-brightness>
+   <dither-pattern>I9</dither-pattern>
+   <line-style/>
+   <valid>true</valid>
+   <visible>true</visible>
+   <transparent>false</transparent>
+   <width/>
+   <marked>false</marked>
+   <xfill>false</xfill>
+   <animation>0</animation>
+   <name>PVTL - 18/1</name>
+   <source>PVTL 18/1@1</source>
+  </properties>
+  <properties>
+   <frame-color>#87ceeb</frame-color>
+   <fill-color>#87ceeb</fill-color>
+   <frame-brightness>0</frame-brightness>
+   <fill-brightness>0</fill-brightness>
+   <dither-pattern>I9</dither-pattern>
+   <line-style/>
+   <valid>true</valid>
+   <visible>true</visible>
+   <transparent>false</transparent>
+   <width/>
+   <marked>false</marked>
+   <xfill>false</xfill>
+   <animation>0</animation>
+   <name>NVTH - 21/1</name>
+   <source>NVTH 21/1@1</source>
+  </properties>
+  <properties>
+   <frame-color>#4682b4</frame-color>
+   <fill-color>#4682b4</fill-color>
+   <frame-brightness>0</frame-brightness>
+   <fill-brightness>0</fill-brightness>
+   <dither-pattern>I9</dither-pattern>
+   <line-style/>
+   <valid>true</valid>
+   <visible>true</visible>
+   <transparent>false</transparent>
+   <width/>
+   <marked>false</marked>
+   <xfill>false</xfill>
+   <animation>0</animation>
+   <name>PVTH - 22/1</name>
+   <source>PVTH 22/1@1</source>
+  </properties>
+  <properties>
+   <frame-color>#ff0000</frame-color>
+   <fill-color>#ff0000</fill-color>
+   <frame-brightness>0</frame-brightness>
+   <fill-brightness>0</fill-brightness>
+   <dither-pattern>I2</dither-pattern>
+   <line-style/>
+   <valid>true</valid>
+   <visible>true</visible>
+   <transparent>false</transparent>
+   <width/>
+   <marked>false</marked>
+   <xfill>false</xfill>
+   <animation>0</animation>
+   <name>POLY - 41/1</name>
+   <source>POLY 41/1@1</source>
+  </properties>
+  <properties>
+   <frame-color>#8080ff</frame-color>
+   <fill-color>#8080ff</fill-color>
+   <frame-brightness>0</frame-brightness>
+   <fill-brightness>0</fill-brightness>
+   <dither-pattern>I6</dither-pattern>
+   <line-style/>
+   <valid>true</valid>
+   <visible>true</visible>
+   <transparent>false</transparent>
+   <width/>
+   <marked>false</marked>
+   <xfill>false</xfill>
+   <animation>0</animation>
+   <name>NP - 52/1</name>
+   <source>NP 52/1@1</source>
+  </properties>
+  <properties>
+   <frame-color>#ff8080</frame-color>
+   <fill-color>#ff8080</fill-color>
+   <frame-brightness>0</frame-brightness>
+   <fill-brightness>0</fill-brightness>
+   <dither-pattern>I6</dither-pattern>
+   <line-style/>
+   <valid>true</valid>
+   <visible>true</visible>
+   <transparent>false</transparent>
+   <width/>
+   <marked>false</marked>
+   <xfill>false</xfill>
+   <animation>0</animation>
+   <name>PP - 53/1</name>
+   <source>PP 53/1@1</source>
+  </properties>
+  <properties>
+   <frame-color>#ffffff</frame-color>
+   <fill-color>#ffffff</fill-color>
+   <frame-brightness>0</frame-brightness>
+   <fill-brightness>0</fill-brightness>
+   <dither-pattern>I0</dither-pattern>
+   <line-style/>
+   <valid>true</valid>
+   <visible>true</visible>
+   <transparent>false</transparent>
+   <width/>
+   <marked>false</marked>
+   <xfill>false</xfill>
+   <animation>0</animation>
+   <name>CT - 72/1</name>
+   <source>CT 72/1@1</source>
+  </properties>
+  <properties>
+   <frame-color>#39bfff</frame-color>
+   <fill-color>#39bfff</fill-color>
+   <frame-brightness>0</frame-brightness>
+   <fill-brightness>0</fill-brightness>
+   <dither-pattern>I3</dither-pattern>
+   <line-style/>
+   <valid>true</valid>
+   <visible>true</visible>
+   <transparent>false</transparent>
+   <width/>
+   <marked>false</marked>
+   <xfill>false</xfill>
+   <animation>0</animation>
+   <name>MET1 - 81/1</name>
+   <source>MET1 81/1@1</source>
+  </properties>
+  <properties>
+   <frame-color>#39bfff</frame-color>
+   <fill-color>#39bfff</fill-color>
+   <frame-brightness>0</frame-brightness>
+   <fill-brightness>0</fill-brightness>
+   <dither-pattern>I3</dither-pattern>
+   <line-style/>
+   <valid>true</valid>
+   <visible>true</visible>
+   <transparent>false</transparent>
+   <width/>
+   <marked>false</marked>
+   <xfill>false</xfill>
+   <animation>0</animation>
+   <name>MET1.label - 81/2</name>
+   <source>MET1 81/2@1</source>
+  </properties>
+  <properties>
+   <frame-color>#39bfff</frame-color>
+   <fill-color>#39bfff</fill-color>
+   <frame-brightness>0</frame-brightness>
+   <fill-brightness>0</fill-brightness>
+   <dither-pattern>I3</dither-pattern>
+   <line-style/>
+   <valid>true</valid>
+   <visible>true</visible>
+   <transparent>false</transparent>
+   <width/>
+   <marked>false</marked>
+   <xfill>false</xfill>
+   <animation>0</animation>
+   <name>MET1.pin - 81/6</name>
+   <source>MET1 81/6@1</source>
+  </properties>
+  <properties>
+   <frame-color>#cccccc</frame-color>
+   <fill-color>#cccccc</fill-color>
+   <frame-brightness>0</frame-brightness>
+   <fill-brightness>0</fill-brightness>
+   <dither-pattern>I0</dither-pattern>
+   <line-style/>
+   <valid>true</valid>
+   <visible>true</visible>
+   <transparent>false</transparent>
+   <width/>
+   <marked>false</marked>
+   <xfill>false</xfill>
+   <animation>0</animation>
+   <name>VIA1 - 91/1</name>
+   <source>VIA1 91/1@1</source>
+  </properties>
+  <properties>
+   <frame-color>#ffa6d9</frame-color>
+   <fill-color>#ffa6d9</fill-color>
+   <frame-brightness>0</frame-brightness>
+   <fill-brightness>0</fill-brightness>
+   <dither-pattern>I4</dither-pattern>
+   <line-style/>
+   <valid>true</valid>
+   <visible>true</visible>
+   <transparent>false</transparent>
+   <width/>
+   <marked>false</marked>
+   <xfill>false</xfill>
+   <animation>0</animation>
+   <name>MET2 - 82/1</name>
+   <source>MET2 82/1@1</source>
+  </properties>
+  <properties>
+   <frame-color>#ffa6d9</frame-color>
+   <fill-color>#ffa6d9</fill-color>
+   <frame-brightness>0</frame-brightness>
+   <fill-brightness>0</fill-brightness>
+   <dither-pattern>I4</dither-pattern>
+   <line-style/>
+   <valid>true</valid>
+   <visible>true</visible>
+   <transparent>false</transparent>
+   <width/>
+   <marked>false</marked>
+   <xfill>false</xfill>
+   <animation>0</animation>
+   <name>MET2.label - 82/2</name>
+   <source>MET2 82/2@1</source>
+  </properties>
+  <properties>
+   <frame-color>#ffa6d9</frame-color>
+   <fill-color>#ffa6d9</fill-color>
+   <frame-brightness>0</frame-brightness>
+   <fill-brightness>0</fill-brightness>
+   <dither-pattern>I4</dither-pattern>
+   <line-style/>
+   <valid>true</valid>
+   <visible>true</visible>
+   <transparent>false</transparent>
+   <width/>
+   <marked>false</marked>
+   <xfill>false</xfill>
+   <animation>0</animation>
+   <name>MET2.pin - 82/6</name>
+   <source>MET2 82/6@1</source>
+  </properties>
+  <properties>
+   <frame-color>#cccccc</frame-color>
+   <fill-color>#cccccc</fill-color>
+   <frame-brightness>0</frame-brightness>
+   <fill-brightness>0</fill-brightness>
+   <dither-pattern>I0</dither-pattern>
+   <line-style/>
+   <valid>true</valid>
+   <visible>true</visible>
+   <transparent>false</transparent>
+   <width/>
+   <marked>false</marked>
+   <xfill>false</xfill>
+   <animation>0</animation>
+   <name>VIA2 - 92/1</name>
+   <source>VIA2 92/1@1</source>
+  </properties>
+  <properties>
+   <frame-color>#f8d570</frame-color>
+   <fill-color>#f8d570</fill-color>
+   <frame-brightness>0</frame-brightness>
+   <fill-brightness>0</fill-brightness>
+   <dither-pattern>I7</dither-pattern>
+   <line-style/>
+   <valid>true</valid>
+   <visible>true</visible>
+   <transparent>false</transparent>
+   <width/>
+   <marked>false</marked>
+   <xfill>false</xfill>
+   <animation>0</animation>
+   <name>MET3 - 83/1</name>
+   <source>MET3 83/1@1</source>
+  </properties>
+  <properties>
+   <frame-color>#f8d570</frame-color>
+   <fill-color>#f8d570</fill-color>
+   <frame-brightness>0</frame-brightness>
+   <fill-brightness>0</fill-brightness>
+   <dither-pattern>I7</dither-pattern>
+   <line-style/>
+   <valid>true</valid>
+   <visible>true</visible>
+   <transparent>false</transparent>
+   <width/>
+   <marked>false</marked>
+   <xfill>false</xfill>
+   <animation>0</animation>
+   <name>MET3.label - 83/2</name>
+   <source>MET3 83/2@1</source>
+  </properties>
+  <properties>
+   <frame-color>#f8d570</frame-color>
+   <fill-color>#f8d570</fill-color>
+   <frame-brightness>0</frame-brightness>
+   <fill-brightness>0</fill-brightness>
+   <dither-pattern>I7</dither-pattern>
+   <line-style/>
+   <valid>true</valid>
+   <visible>true</visible>
+   <transparent>false</transparent>
+   <width/>
+   <marked>false</marked>
+   <xfill>false</xfill>
+   <animation>0</animation>
+   <name>MET3.pin - 83/6</name>
+   <source>MET3 83/6@1</source>
+  </properties>
+  <properties>
+   <frame-color>#cccccc</frame-color>
+   <fill-color>#cccccc</fill-color>
+   <frame-brightness>0</frame-brightness>
+   <fill-brightness>0</fill-brightness>
+   <dither-pattern>I0</dither-pattern>
+   <line-style/>
+   <valid>true</valid>
+   <visible>true</visible>
+   <transparent>false</transparent>
+   <width/>
+   <marked>false</marked>
+   <xfill>false</xfill>
+   <animation>0</animation>
+   <name>VIA3 - 93/1</name>
+   <source>VIA3 93/1@1</source>
+  </properties>
+  <properties>
+   <frame-color>#ff8000</frame-color>
+   <fill-color>#ff8000</fill-color>
+   <frame-brightness>0</frame-brightness>
+   <fill-brightness>0</fill-brightness>
+   <dither-pattern>I8</dither-pattern>
+   <line-style/>
+   <valid>true</valid>
+   <visible>true</visible>
+   <transparent>false</transparent>
+   <width/>
+   <marked>false</marked>
+   <xfill>false</xfill>
+   <animation>0</animation>
+   <name>MET4 - 84/1</name>
+   <source>MET4 84/1@1</source>
+  </properties>
+  <properties>
+   <frame-color>#ff8000</frame-color>
+   <fill-color>#ff8000</fill-color>
+   <frame-brightness>0</frame-brightness>
+   <fill-brightness>0</fill-brightness>
+   <dither-pattern>I8</dither-pattern>
+   <line-style/>
+   <valid>true</valid>
+   <visible>true</visible>
+   <transparent>false</transparent>
+   <width/>
+   <marked>false</marked>
+   <xfill>false</xfill>
+   <animation>0</animation>
+   <name>MET4.label - 84/2</name>
+   <source>MET4 84/2@1</source>
+  </properties>
+  <properties>
+   <frame-color>#ff8000</frame-color>
+   <fill-color>#ff8000</fill-color>
+   <frame-brightness>0</frame-brightness>
+   <fill-brightness>0</fill-brightness>
+   <dither-pattern>I8</dither-pattern>
+   <line-style/>
+   <valid>true</valid>
+   <visible>true</visible>
+   <transparent>false</transparent>
+   <width/>
+   <marked>false</marked>
+   <xfill>false</xfill>
+   <animation>0</animation>
+   <name>MET4.pin - 84/6</name>
+   <source>MET4 84/6@1</source>
+  </properties>
+  <properties>
+   <frame-color>#cccccc</frame-color>
+   <fill-color>#cccccc</fill-color>
+   <frame-brightness>0</frame-brightness>
+   <fill-brightness>0</fill-brightness>
+   <dither-pattern>I0</dither-pattern>
+   <line-style/>
+   <valid>true</valid>
+   <visible>true</visible>
+   <transparent>false</transparent>
+   <width/>
+   <marked>false</marked>
+   <xfill>false</xfill>
+   <animation>0</animation>
+   <name>VIA4 - 94/1</name>
+   <source>VIA4 94/1@1</source>
+  </properties>
+  <properties>
+   <frame-color>#a0a0ff</frame-color>
+   <fill-color>#a0a0ff</fill-color>
+   <frame-brightness>0</frame-brightness>
+   <fill-brightness>0</fill-brightness>
+   <dither-pattern>I9</dither-pattern>
+   <line-style/>
+   <valid>true</valid>
+   <visible>true</visible>
+   <transparent>false</transparent>
+   <width/>
+   <marked>false</marked>
+   <xfill>false</xfill>
+   <animation>0</animation>
+   <name>MET5 - 85/1</name>
+   <source>MET5 85/1@1</source>
+  </properties>
+  <properties>
+   <frame-color>#a0a0ff</frame-color>
+   <fill-color>#a0a0ff</fill-color>
+   <frame-brightness>0</frame-brightness>
+   <fill-brightness>0</fill-brightness>
+   <dither-pattern>I9</dither-pattern>
+   <line-style/>
+   <valid>true</valid>
+   <visible>true</visible>
+   <transparent>false</transparent>
+   <width/>
+   <marked>false</marked>
+   <xfill>false</xfill>
+   <animation>0</animation>
+   <name>MET5.label - 85/2</name>
+   <source>MET5 85/2@1</source>
+  </properties>
+  <properties>
+   <frame-color>#a0a0ff</frame-color>
+   <fill-color>#a0a0ff</fill-color>
+   <frame-brightness>0</frame-brightness>
+   <fill-brightness>0</fill-brightness>
+   <dither-pattern>I9</dither-pattern>
+   <line-style/>
+   <valid>true</valid>
+   <visible>true</visible>
+   <transparent>false</transparent>
+   <width/>
+   <marked>false</marked>
+   <xfill>false</xfill>
+   <animation>0</animation>
+   <name>MET5.pin - 85/6</name>
+   <source>MET5 85/6@1</source>
+  </properties>
+  <properties>
+   <frame-color>#cccccc</frame-color>
+   <fill-color>#cccccc</fill-color>
+   <frame-brightness>0</frame-brightness>
+   <fill-brightness>0</fill-brightness>
+   <dither-pattern>I0</dither-pattern>
+   <line-style/>
+   <valid>true</valid>
+   <visible>true</visible>
+   <transparent>false</transparent>
+   <width/>
+   <marked>false</marked>
+   <xfill>false</xfill>
+   <animation>0</animation>
+   <name>T4V2 - 113/1</name>
+   <source>T4V2 113/1@1</source>
+  </properties>
+  <properties>
+   <frame-color>#c8c800</frame-color>
+   <fill-color>#c8c800</fill-color>
+   <frame-brightness>0</frame-brightness>
+   <fill-brightness>0</fill-brightness>
+   <dither-pattern>I5</dither-pattern>
+   <line-style/>
+   <valid>true</valid>
+   <visible>true</visible>
+   <transparent>false</transparent>
+   <width/>
+   <marked>false</marked>
+   <xfill>false</xfill>
+   <animation>0</animation>
+   <name>T4M2 - 103/1</name>
+   <source>T4M2 103/1@1</source>
+  </properties>
+  <properties>
+   <frame-color>#c8c800</frame-color>
+   <fill-color>#c8c800</fill-color>
+   <frame-brightness>0</frame-brightness>
+   <fill-brightness>0</fill-brightness>
+   <dither-pattern>I5</dither-pattern>
+   <line-style/>
+   <valid>true</valid>
+   <visible>true</visible>
+   <transparent>false</transparent>
+   <width/>
+   <marked>false</marked>
+   <xfill>false</xfill>
+   <animation>0</animation>
+   <name>T4M2.label - 103/2</name>
+   <source>T4M2 103/2@1</source>
+  </properties>
+  <properties>
+   <frame-color>#c8c800</frame-color>
+   <fill-color>#c8c800</fill-color>
+   <frame-brightness>0</frame-brightness>
+   <fill-brightness>0</fill-brightness>
+   <dither-pattern>I5</dither-pattern>
+   <line-style/>
+   <valid>true</valid>
+   <visible>true</visible>
+   <transparent>false</transparent>
+   <width/>
+   <marked>false</marked>
+   <xfill>false</xfill>
+   <animation>0</animation>
+   <name>T4M2.pin - 103/6</name>
+   <source>T4M2 103/6@1</source>
+  </properties>
+  <properties>
+   <frame-color>#e0b0ff</frame-color>
+   <fill-color>#e0b0ff</fill-color>
+   <frame-brightness>0</frame-brightness>
+   <fill-brightness>0</fill-brightness>
+   <dither-pattern>I5</dither-pattern>
+   <line-style/>
+   <valid>true</valid>
+   <visible>true</visible>
+   <transparent>false</transparent>
+   <width/>
+   <marked>false</marked>
+   <xfill>false</xfill>
+   <animation>0</animation>
+   <name>RDL - 123/1</name>
+   <source>RDL 123/1@1</source>
+  </properties>
+  <properties>
+   <frame-color>#e0b0ff</frame-color>
+   <fill-color>#e0b0ff</fill-color>
+   <frame-brightness>0</frame-brightness>
+   <fill-brightness>0</fill-brightness>
+   <dither-pattern>I5</dither-pattern>
+   <line-style/>
+   <valid>true</valid>
+   <visible>true</visible>
+   <transparent>false</transparent>
+   <width/>
+   <marked>false</marked>
+   <xfill>false</xfill>
+   <animation>0</animation>
+   <name>RDL.label - 123/2</name>
+   <source>RDL 123/2@1</source>
+  </properties>
+  <properties>
+   <frame-color>#e0b0ff</frame-color>
+   <fill-color>#e0b0ff</fill-color>
+   <frame-brightness>0</frame-brightness>
+   <fill-brightness>0</fill-brightness>
+   <dither-pattern>I5</dither-pattern>
+   <line-style/>
+   <valid>true</valid>
+   <visible>true</visible>
+   <transparent>false</transparent>
+   <width/>
+   <marked>false</marked>
+   <xfill>false</xfill>
+   <animation>0</animation>
+   <name>RDL.pin - 123/6</name>
+   <source>RDL 123/6@1</source>
+  </properties>
+  <properties>
+   <frame-color>#ffff00</frame-color>
+   <fill-color>#ffff00</fill-color>
+   <frame-brightness>0</frame-brightness>
+   <fill-brightness>0</fill-brightness>
+   <dither-pattern>I5</dither-pattern>
+   <line-style/>
+   <valid>true</valid>
+   <visible>true</visible>
+   <transparent>false</transparent>
+   <width/>
+   <marked>false</marked>
+   <xfill>false</xfill>
+   <animation>0</animation>
+   <name>ANTMK - 191/12</name>
+   <source>ANTMK 191/12@1</source>
+  </properties>
+  <properties>
+   <frame-color>#a4d4a4</frame-color>
+   <fill-color>#a4d4a4</fill-color>
+   <frame-brightness>0</frame-brightness>
+   <fill-brightness>0</fill-brightness>
+   <dither-pattern>I1</dither-pattern>
+   <line-style/>
+   <valid>true</valid>
+   <visible>true</visible>
+   <transparent>false</transparent>
+   <width/>
+   <marked>false</marked>
+   <xfill>false</xfill>
+   <animation>0</animation>
+   <name>VPW - 261/12</name>
+   <source>VPW 261/12@1</source>
+  </properties>
+  <properties>
+   <frame-color>#ffae00</frame-color>
+   <fill-color/>
+   <frame-brightness>0</frame-brightness>
+   <fill-brightness>0</fill-brightness>
+   <dither-pattern>I1</dither-pattern>
+   <line-style>I1</line-style>
+   <valid>true</valid>
+   <visible>true</visible>
+   <transparent>false</transparent>
+   <width/>
+   <marked>false</marked>
+   <xfill>false</xfill>
+   <animation>0</animation>
+   <name>PRBND - 351/12</name>
+   <source>PRBND 351/12@1</source>
+  </properties>
+</layer-properties>
