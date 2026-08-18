@@ -74,14 +74,7 @@ project.run()
 project.summary()
 ```
 
-Available targets: `asap7_demo`, `freepdk45_demo`, `skywater130_demo`, `gf180_demo`, `ihp130_demo`, `interposer_demo`
-
-GT2N and ICsprout55 ship their targets in this package instead of SiliconCompiler:
-
-```python
-from lambdapdk.gt2n.target import gt2n_demo
-from lambdapdk.icsprout55.target import ics55_demo
-```
+Available targets: `asap7_demo`, `freepdk45_demo`, `skywater130_demo`, `gf180_demo`, `ihp130_demo`, `interposer_demo`, `gt2n_demo`, and `icsprout55_demo`.
 
 ## Cell Library Inventory
 
