@@ -1,4 +1,5 @@
 # Import necessary classes from the siliconcompiler framework and the LambdaPDK.
+import warnings
 from typing import Optional
 
 from siliconcompiler import ASIC
@@ -36,6 +37,28 @@ def gt2n_demo(
             * route_np (int): Parallelism for routing.
             * timing_np (int): Parallelism for timing analysis (synthesis-only flow).
         """
+    try:
+        from siliconcompiler.targets import gt2n_demo as sc_gt2n_demo
+    except ImportError:
+        sc_gt2n_demo = None
+
+    if sc_gt2n_demo is not None:
+        warnings.warn(
+            "lambdapdk.gt2n.target.gt2n_demo is deprecated, "
+            "please use siliconcompiler.targets.gt2n_demo instead",
+            DeprecationWarning,
+            stacklevel=2)
+        sc_gt2n_demo(
+            project=project,
+            syn_np=syn_np,
+            floorplan_np=floorplan_np,
+            place_np=place_np,
+            cts_np=cts_np,
+            route_np=route_np,
+            timing_np=timing_np,
+            language=language)
+        return
+
     if language is None:
         language = detect_elaboration_language(project)
 

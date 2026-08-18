@@ -1,4 +1,5 @@
 # Import necessary classes from the siliconcompiler framework and the LambdaPDK.
+import warnings
 from typing import Optional
 
 from siliconcompiler import ASIC
@@ -36,6 +37,28 @@ def ics55_demo(
             * timing_np (int): Parallelism for timing analysis (synthesis-only flow).
             * language (str): Elaboration language, detected from the design if not given.
         """
+    try:
+        from siliconcompiler.targets import icsprout55_demo as sc_ics55_demo
+    except ImportError:
+        sc_ics55_demo = None
+
+    if sc_ics55_demo is not None:
+        warnings.warn(
+            "lambdapdk.icsprout55.target.ics55_demo is deprecated, "
+            "please use siliconcompiler.targets.icsprout55_demo instead",
+            DeprecationWarning,
+            stacklevel=2)
+        sc_ics55_demo(
+            project=project,
+            syn_np=syn_np,
+            floorplan_np=floorplan_np,
+            place_np=place_np,
+            cts_np=cts_np,
+            route_np=route_np,
+            timing_np=timing_np,
+            language=language)
+        return
+
     if language is None:
         language = detect_elaboration_language(project)
 
