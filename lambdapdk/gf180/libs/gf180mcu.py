@@ -29,22 +29,40 @@ class _GF180_MCULibrary(LambdaLibrary):
     '''
     GF180 standard cell library.
     '''
-    def __init__(self, libtype, stackup):
+    def __init__(self, libtype, stackup, thickness=None):
+        """
+        Args:
+            libtype (str): cell height, '7t' or '9t'.
+            stackup (str): routing layer count, '3LM' through '6LM'.
+            thickness (str, optional): top-metal thickness option, when this
+                library is specific to one. Only '30K' is used: its top metal
+                has a 2.2um minimum width, so it needs its own power grid
+                rather than the 1.6um stripe the thinner options share.
+        """
         super().__init__()
-        self.set_name(f"gf180mcu_fd_sc_mcu{libtype}5v0_{stackup}")
+        name = f"gf180mcu_fd_sc_mcu{libtype}5v0_{stackup}"
+        if thickness:
+            if stackup not in ("3LM", "4LM"):
+                raise ValueError(f"{stackup} ships no {thickness} option")
+            name += f"_{thickness}"
+        self.set_name(name)
 
         pdn_stackup = stackup
         if libtype == "7t":
             if stackup == "3LM":
-                self.add_asic_pdk(GF180_3LM_1TM_6K_7t(), default=False)
-                self.add_asic_pdk(GF180_3LM_1TM_9K_7t(), default=False)
-                self.add_asic_pdk(GF180_3LM_1TM_11K_7t(), default=False)
-                self.add_asic_pdk(GF180_3LM_1TM_30K_7t(), default=False)
+                if thickness == "30K":
+                    self.add_asic_pdk(GF180_3LM_1TM_30K_7t())
+                else:
+                    self.add_asic_pdk(GF180_3LM_1TM_6K_7t(), default=False)
+                    self.add_asic_pdk(GF180_3LM_1TM_9K_7t(), default=False)
+                    self.add_asic_pdk(GF180_3LM_1TM_11K_7t(), default=False)
             elif stackup == "4LM":
-                self.add_asic_pdk(GF180_4LM_1TM_6K_7t(), default=False)
-                self.add_asic_pdk(GF180_4LM_1TM_9K_7t(), default=False)
-                self.add_asic_pdk(GF180_4LM_1TM_11K_7t(), default=False)
-                self.add_asic_pdk(GF180_4LM_1TM_30K_7t(), default=False)
+                if thickness == "30K":
+                    self.add_asic_pdk(GF180_4LM_1TM_30K_7t())
+                else:
+                    self.add_asic_pdk(GF180_4LM_1TM_6K_7t(), default=False)
+                    self.add_asic_pdk(GF180_4LM_1TM_9K_7t(), default=False)
+                    self.add_asic_pdk(GF180_4LM_1TM_11K_7t(), default=False)
             elif stackup == "5LM":
                 self.add_asic_pdk(GF180_5LM_1TM_9K_7t(), default=False)
                 self.add_asic_pdk(GF180_5LM_1TM_11K_7t(), default=False)
@@ -57,15 +75,19 @@ class _GF180_MCULibrary(LambdaLibrary):
             self.add_asic_site("GF018hv5v_mcu_sc7")
         elif libtype == "9t":
             if stackup == "3LM":
-                self.add_asic_pdk(GF180_3LM_1TM_6K_9t(), default=False)
-                self.add_asic_pdk(GF180_3LM_1TM_9K_9t(), default=False)
-                self.add_asic_pdk(GF180_3LM_1TM_11K_9t(), default=False)
-                self.add_asic_pdk(GF180_3LM_1TM_30K_9t(), default=False)
+                if thickness == "30K":
+                    self.add_asic_pdk(GF180_3LM_1TM_30K_9t())
+                else:
+                    self.add_asic_pdk(GF180_3LM_1TM_6K_9t(), default=False)
+                    self.add_asic_pdk(GF180_3LM_1TM_9K_9t(), default=False)
+                    self.add_asic_pdk(GF180_3LM_1TM_11K_9t(), default=False)
             elif stackup == "4LM":
-                self.add_asic_pdk(GF180_4LM_1TM_6K_9t(), default=False)
-                self.add_asic_pdk(GF180_4LM_1TM_9K_9t(), default=False)
-                self.add_asic_pdk(GF180_4LM_1TM_11K_9t(), default=False)
-                self.add_asic_pdk(GF180_4LM_1TM_30K_9t(), default=False)
+                if thickness == "30K":
+                    self.add_asic_pdk(GF180_4LM_1TM_30K_9t())
+                else:
+                    self.add_asic_pdk(GF180_4LM_1TM_6K_9t(), default=False)
+                    self.add_asic_pdk(GF180_4LM_1TM_9K_9t(), default=False)
+                    self.add_asic_pdk(GF180_4LM_1TM_11K_9t(), default=False)
             elif stackup == "5LM":
                 self.add_asic_pdk(GF180_5LM_1TM_9K_9t(), default=False)
                 self.add_asic_pdk(GF180_5LM_1TM_11K_9t(), default=False)
@@ -160,7 +182,10 @@ class _GF180_MCULibrary(LambdaLibrary):
         # Setup for OpenROAD
         with self.active_dataroot("lambdapdk"):
             with self.active_fileset("openroad.powergrid"):
-                self.add_file(lib_path / "apr" / "openroad" / f"pdngen_{pdn_stackup}.tcl")
+                pdn_name = pdn_stackup
+                if thickness:
+                    pdn_name += f"_{thickness}"
+                self.add_file(lib_path / "apr" / "openroad" / f"pdngen_{pdn_name}.tcl")
                 self.add_openroad_powergridfileset()
             with self.active_fileset("openroad.globalconnect"):
                 self.add_file(lib_path / "apr" / "openroad" / "global_connect.tcl")
@@ -181,9 +206,23 @@ class GF180_MCU_7T_3LMLibrary(_GF180_MCULibrary):
         super().__init__("7t", "3LM")
 
 
+class GF180_MCU_7T_3LM_30KLibrary(_GF180_MCULibrary):
+    """3LM 7t paired with the 30K top metal, whose 2.2um minimum width the
+    shared 1.6um power stripe violates."""
+    def __init__(self):
+        super().__init__("7t", "3LM", thickness="30K")
+
+
 class GF180_MCU_7T_4LMLibrary(_GF180_MCULibrary):
     def __init__(self):
         super().__init__("7t", "4LM")
+
+
+class GF180_MCU_7T_4LM_30KLibrary(_GF180_MCULibrary):
+    """4LM 7t paired with the 30K top metal, whose 2.2um minimum width the
+    shared 1.6um power stripe violates."""
+    def __init__(self):
+        super().__init__("7t", "4LM", thickness="30K")
 
 
 class GF180_MCU_7T_5LMLibrary(_GF180_MCULibrary):
@@ -201,9 +240,23 @@ class GF180_MCU_9T_3LMLibrary(_GF180_MCULibrary):
         super().__init__("9t", "3LM")
 
 
+class GF180_MCU_9T_3LM_30KLibrary(_GF180_MCULibrary):
+    """3LM 9t paired with the 30K top metal, whose 2.2um minimum width the
+    shared 1.6um power stripe violates."""
+    def __init__(self):
+        super().__init__("9t", "3LM", thickness="30K")
+
+
 class GF180_MCU_9T_4LMLibrary(_GF180_MCULibrary):
     def __init__(self):
         super().__init__("9t", "4LM")
+
+
+class GF180_MCU_9T_4LM_30KLibrary(_GF180_MCULibrary):
+    """4LM 9t paired with the 30K top metal, whose 2.2um minimum width the
+    shared 1.6um power stripe violates."""
+    def __init__(self):
+        super().__init__("9t", "4LM", thickness="30K")
 
 
 class GF180_MCU_9T_5LMLibrary(_GF180_MCULibrary):

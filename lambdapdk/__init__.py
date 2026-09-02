@@ -270,6 +270,10 @@ def get_libs():
         GF180Lambdalib_la_iorxdiff_5LM, \
         GF180Lambdalib_la_iobidir_5LM
     from lambdapdk.gf180.libs.gf180mcu import GF180_MCU_7T_3LMLibrary, \
+        GF180_MCU_7T_3LM_30KLibrary, \
+        GF180_MCU_7T_4LM_30KLibrary, \
+        GF180_MCU_9T_3LM_30KLibrary, \
+        GF180_MCU_9T_4LM_30KLibrary, \
         GF180_MCU_7T_4LMLibrary, \
         GF180_MCU_7T_5LMLibrary, \
         GF180_MCU_7T_6LMLibrary, \
@@ -386,6 +390,10 @@ def get_libs():
         ICS55StdCellHVT(), ICS55StdCellRVT(), ICS55StdCellLVT(),
         GF180_IO_3LM(), GF180_IO_4LM(), GF180_IO_5LM(),
         GF180_MCU_7T_3LMLibrary(),
+        GF180_MCU_7T_3LM_30KLibrary(),
+        GF180_MCU_7T_4LM_30KLibrary(),
+        GF180_MCU_9T_3LM_30KLibrary(),
+        GF180_MCU_9T_4LM_30KLibrary(),
         GF180_MCU_7T_4LMLibrary(),
         GF180_MCU_7T_5LMLibrary(),
         GF180_MCU_7T_6LMLibrary(),
