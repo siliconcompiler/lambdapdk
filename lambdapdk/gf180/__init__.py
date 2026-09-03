@@ -254,6 +254,11 @@ class _GF180PDK(LambdaPDK):
         # with 'GRT-0005 Layer Metal6 not found' on the 6LM variants.
         top_layer = "MetalTop" if max_layer == 6 else f"Metal{max_layer}"
 
+        # The 30K thickness option gives the top metal a 2.2um minimum width,
+        # which changes both what the power grid may draw on it and whether the
+        # router can use it at all. Only 3LM and 4LM ship a 30K option.
+        thick_top = stackup.endswith("_30K")
+
         with self.active_dataroot("lambdapdk"):
             # APR Setup
             with self.active_fileset("views.lef"):
@@ -337,7 +342,22 @@ class _GF180PDK(LambdaPDK):
             self.set_aprroutinglayers(min="Metal2", max="Metal3")
         elif max_layer == 4:
             self.set_openroad_rclayers(signal="Metal2", clock="Metal3")
-            self.add_openroad_pinlayers(vertical="Metal4", horizontal="Metal3")
+            if thick_top:
+                # The 30K option's top metal is a 2.2um-minimum-width power/RDL
+                # layer, not a signal layer. OpenROAD cannot build a legal
+                # single-cut via up to it -- the enclosure rule yields a 0.50um
+                # landing pad against a 2.2um minimum width, so detailed routing
+                # fails with 'DRT-0234 Via3 does not have single-cut via' -- and
+                # a signal wire there would be 2.2um wide on a 4.0um pitch,
+                # carrying almost no routing capacity for the trouble. Stop
+                # signals below it and leave it to the power grid, which is what
+                # its width suits it for. Pin layers follow the routing down;
+                # directions are the tech LEF's (Metal2 vertical, Metal3
+                # horizontal).
+                self.set_aprroutinglayers(min="Metal1", max="Metal3")
+                self.add_openroad_pinlayers(vertical="Metal2", horizontal="Metal3")
+            else:
+                self.add_openroad_pinlayers(vertical="Metal4", horizontal="Metal3")
         elif max_layer >= 5:
             self.set_openroad_rclayers(signal="Metal3", clock="Metal4")
             self.add_openroad_pinlayers(vertical="Metal4", horizontal="Metal3")
