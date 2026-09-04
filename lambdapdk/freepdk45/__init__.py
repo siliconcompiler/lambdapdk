@@ -72,17 +72,29 @@ class FreePDK45PDK(LambdaPDK):
 
             self.add_openroad_pinlayers(vertical="metal6", horizontal="metal5")
 
-            # PEX
-            self.add_openroad_rclayer("typical", "routing", "metal1", 5.4286, 7.41819E-02 * fF)
-            self.add_openroad_rclayer("typical", "routing", "metal2", 3.5714, 6.74606E-02 * fF)
-            self.add_openroad_rclayer("typical", "routing", "metal3", 3.5714, 8.88758E-02 * fF)
-            self.add_openroad_rclayer("typical", "routing", "metal4", 1.5, 1.07121E-01 * fF)
-            self.add_openroad_rclayer("typical", "routing", "metal5", 1.5, 1.08964E-01 * fF)
-            self.add_openroad_rclayer("typical", "routing", "metal6", 1.5, 1.02044E-01 * fF)
-            self.add_openroad_rclayer("typical", "routing", "metal7", 0.1875, 1.10436E-01 * fF)
-            self.add_openroad_rclayer("typical", "routing", "metal8", 0.1875, 9.69714E-02 * fF)
-            self.add_openroad_rclayer("typical", "routing", "metal9", 0.0375, 3.6864e-02 * fF)
-            self.add_openroad_rclayer("typical", "routing", "metal10", 0.0375, 2.8042e-02 * fF)
+            # PEX. Measured 2026-09-02 by the OpenROAD PEX calibration sweep
+            # (lambdapdk/scripts/pex_calibrate_all.py) rather than hand-derived:
+            # rclayer routing values come from bench_wires against this PDK's OpenRCX
+            # deck, via values are carried over, and the cap_factors are the pooled
+            # design-survey correction. nseg records how many routed segments backed
+            # each factor -- the upper layers of tall stacks are thinly sampled.
+            self.add_openroad_rclayer("typical", "routing", "metal1", 5.42857, 0.159352 * fF)
+            self.add_openroad_rclayer("typical", "routing", "metal2", 3.57143, 0.119382 * fF)
+            self.add_openroad_rclayer("typical", "routing", "metal3", 3.57143, 0.155445 * fF)
+            self.add_openroad_rclayer("typical", "routing", "metal4", 1.5, 0.159325 * fF)
+            self.add_openroad_rclayer("typical", "routing", "metal5", 1.5, 0.156474 * fF)
+            self.add_openroad_rclayer("typical", "routing", "metal6", 1.5, 0.15526 * fF)
+            self.add_openroad_rclayer("typical", "routing", "metal7", 0.1875, 0.145336 * fF)
+            self.add_openroad_rclayer("typical", "routing", "metal8", 0.1875, 0.146827 * fF)
+            self.add_openroad_rclayer("typical", "routing", "metal9", 0.0375, 0.157309 * fF)
+            self.add_openroad_rclayer("typical", "routing", "metal10", 0.0375, 0.152678 * fF)
+
+            self.add_openroad_rccorrection("typical", "metal2", cap_factor=0.7294)  # nseg=282466
+            self.add_openroad_rccorrection("typical", "metal3", cap_factor=0.6962)  # nseg=163577
+            self.add_openroad_rccorrection("typical", "metal4", cap_factor=0.7448)  # nseg=13255
+            self.add_openroad_rccorrection("typical", "metal5", cap_factor=0.6401)  # nseg=3133
+            self.add_openroad_rccorrection("typical", "metal6", cap_factor=0.5067)  # nseg=1004
+            self.add_openroad_rccorrection("typical", "metal7", cap_factor=0.7259)  # nseg=24
             with self.active_fileset("openroad.pex"):
                 self.add_file(pdk_path / "pex" / "openroad" / "typical.rules", filetype="openrcx")
                 self.add_pexmodelfileset("openroad", "typical")
