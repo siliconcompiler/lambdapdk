@@ -338,6 +338,31 @@ _PEX = {
 # only where few segments were sampled. A stackup absent here has no correction
 # -- 3LM cannot route the survey designs at all, so it has none to give, and its
 # rclayer estimate above stands uncorrected.
+# MIM option shipping an OpenRCX deck for each stackup. Hardcoding OPTB used to
+# make the five OPTA-only stackups fall out of _PEX and silently ship no PEX
+# data at all; where both options exist, OPTB is kept so the six stackups that
+# already had PEX keep the decks they had.
+#
+# This is a static table on purpose. The decks live under the 'lambdapdk'
+# dataroot, which resolves either to a checkout or to an archive unpacked under
+# ~/.sc -- never to the installed package, which carries no PDK data -- so
+# probing the filesystem from here would look in the wrong place and pick OPTA
+# for everything, naming a deck that does not exist for the OPTB-only stackups.
+# Probing during PDK setup is also needless work on every construction.
+_PEX_MIM_OPTION = {
+    "3LM_1TM_6K": "A",
+    "3LM_1TM_9K": "A",
+    "3LM_1TM_11K": "A",
+    "3LM_1TM_30K": "A",
+    "4LM_1TM_6K": "A",
+    "4LM_1TM_9K": "B",
+    "4LM_1TM_11K": "B",
+    "4LM_1TM_30K": "B",
+    "5LM_1TM_9K": "B",
+    "5LM_1TM_11K": "B",
+    "6LM_1TM_9K": "B",
+}
+
 _PEX_CORRECTION = {
     "4LM_1TM_6K": {
         "bst": [
@@ -674,13 +699,8 @@ class _GF180PDK(LambdaPDK):
                     else:
                         self.add_openroad_rclayer(corner, "routing", layer, res, cap * pF)
 
-                # MIM option: the thicker OPTB where it exists, OPTA otherwise.
-                # Hardcoding OPTB used to make five stackups fall out of the
-                # table above and silently ship no PEX data at all.
-                deck_dir = Path(__file__).parent / "base" / "pex" / "openroad"
                 stem = f'gf180mcu_1p{stackup.replace("L", "").lower()}_sp_smim'
-                option = "B" if (deck_dir / f"{stem}_OPTB_{corner}.rules").is_file() else "A"
-                base_name = f"{stem}_OPT{option}_{corner}"
+                base_name = f"{stem}_OPT{_PEX_MIM_OPTION[stackup]}_{corner}"
                 with self.active_fileset(f"openroad.pex.{corner}"):
                     self.add_file(pdk_path / "pex" / "openroad" / f"{base_name}.rules",
                                   filetype="openrcx")
