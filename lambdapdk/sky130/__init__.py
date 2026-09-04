@@ -93,39 +93,61 @@ class Sky130PDK(LambdaPDK):
         self.add_openroad_pinlayers(vertical="met2", horizontal="met3")
 
         # OpenROAD PEX
-        self.add_openroad_rclayer("minimum", "routing", "li1", 54.11765, 2.582652E-4 * pF)
+        # PEX. Measured 2026-09-02 by the OpenROAD PEX calibration sweep
+        # (lambdapdk/scripts/pex_calibrate_all.py) rather than hand-derived:
+        # rclayer routing values come from bench_wires against this PDK's OpenRCX
+        # deck, via values are carried over, and the cap_factors are the pooled
+        # design-survey correction. nseg records how many routed segments backed
+        # each factor -- the upper layers of tall stacks are thinly sampled.
+        self.add_openroad_rclayer("minimum", "routing", "li1", 54.1176, 8.85038e-05 * pF)
+        self.add_openroad_rclayer("minimum", "routing", "met1", 0.75, 8.55626e-05 * pF)
+        self.add_openroad_rclayer("minimum", "routing", "met2", 0.75, 6.85688e-05 * pF)
+        self.add_openroad_rclayer("minimum", "routing", "met3", 0.126667, 7.82352e-05 * pF)
+        self.add_openroad_rclayer("minimum", "routing", "met4", 0.126667, 7.13804e-05 * pF)
+        self.add_openroad_rclayer("minimum", "routing", "met5", 0.01325, 8.39864e-05 * pF)
         self.add_openroad_rclayer("minimum", "via", "mcon", 1.6)
-        self.add_openroad_rclayer("minimum", "routing", "met1", 0.75, 2.246984E-4 * pF)
         self.add_openroad_rclayer("minimum", "via", "via", 4)
-        self.add_openroad_rclayer("minimum", "routing", "met2", 0.75, 1.384201E-4 * pF)
         self.add_openroad_rclayer("minimum", "via", "via2", 0.5)
-        self.add_openroad_rclayer("minimum", "routing", "met3", 0.1266667, 7.435933E-5 * pF)
         self.add_openroad_rclayer("minimum", "via", "via3", 0.5)
-        self.add_openroad_rclayer("minimum", "routing", "met4", 0.1266667, 6.030297E-5 * pF)
         self.add_openroad_rclayer("minimum", "via", "via4", 0.012)
-        self.add_openroad_rclayer("minimum", "routing", "met5", 0.01325, 4.057272E-5 * pF)
-        self.add_openroad_rclayer("typical", "routing", "li1", 75.29412, 2.582652E-4 * pF)
+        self.add_openroad_rclayer("typical", "routing", "li1", 75.2941, 8.85038e-05 * pF)
+        self.add_openroad_rclayer("typical", "routing", "met1", 0.892857, 8.55626e-05 * pF)
+        self.add_openroad_rclayer("typical", "routing", "met2", 0.892857, 6.85688e-05 * pF)
+        self.add_openroad_rclayer("typical", "routing", "met3", 0.156667, 7.82352e-05 * pF)
+        self.add_openroad_rclayer("typical", "routing", "met4", 0.156667, 7.13804e-05 * pF)
+        self.add_openroad_rclayer("typical", "routing", "met5", 0.0178125, 8.39864e-05 * pF)
         self.add_openroad_rclayer("typical", "via", "mcon", 9.3)
-        self.add_openroad_rclayer("typical", "routing", "met1", 0.8928571, 2.246984E-4 * pF)
         self.add_openroad_rclayer("typical", "via", "via", 9)
-        self.add_openroad_rclayer("typical", "routing", "met2", 0.8928571, 1.384201E-4 * pF)
         self.add_openroad_rclayer("typical", "via", "via2", 3.41)
-        self.add_openroad_rclayer("typical", "routing", "met3", 0.1566667, 7.435933E-5 * pF)
         self.add_openroad_rclayer("typical", "via", "via3", 3.41)
-        self.add_openroad_rclayer("typical", "routing", "met4", 0.1566667, 6.030297E-5 * pF)
         self.add_openroad_rclayer("typical", "via", "via4", 0.38)
-        self.add_openroad_rclayer("typical", "routing", "met5", 0.0178125, 4.057272E-5 * pF)
-        self.add_openroad_rclayer("maximum", "routing", "li1", 100, 2.582652E-4 * pF)
+        self.add_openroad_rclayer("maximum", "routing", "li1", 100, 8.85038e-05 * pF)
+        self.add_openroad_rclayer("maximum", "routing", "met1", 1.03571, 8.55626e-05 * pF)
+        self.add_openroad_rclayer("maximum", "routing", "met2", 1.03571, 6.85688e-05 * pF)
+        self.add_openroad_rclayer("maximum", "routing", "met3", 0.186667, 7.82352e-05 * pF)
+        self.add_openroad_rclayer("maximum", "routing", "met4", 0.186667, 7.13804e-05 * pF)
+        self.add_openroad_rclayer("maximum", "routing", "met5", 0.022375, 8.39864e-05 * pF)
         self.add_openroad_rclayer("maximum", "via", "mcon", 23)
-        self.add_openroad_rclayer("maximum", "routing", "met1", 1.035714, 2.246984E-4 * pF)
         self.add_openroad_rclayer("maximum", "via", "via", 30)
-        self.add_openroad_rclayer("maximum", "routing", "met2", 1.035714, 1.384201E-4 * pF)
         self.add_openroad_rclayer("maximum", "via", "via2", 8)
-        self.add_openroad_rclayer("maximum", "routing", "met3", 0.1866667, 7.435933E-5 * pF)
         self.add_openroad_rclayer("maximum", "via", "via3", 8)
-        self.add_openroad_rclayer("maximum", "routing", "met4", 0.1866667, 6.030297E-5 * pF)
         self.add_openroad_rclayer("maximum", "via", "via4", 0.891)
-        self.add_openroad_rclayer("maximum", "routing", "met5", 0.022375, 4.057272E-5 * pF)
+
+        self.add_openroad_rccorrection("minimum", "met1", cap_factor=0.9940)  # nseg=548274
+        self.add_openroad_rccorrection("minimum", "met2", cap_factor=0.9971)  # nseg=330485
+        self.add_openroad_rccorrection("minimum", "met3", cap_factor=0.9982)  # nseg=29921
+        self.add_openroad_rccorrection("minimum", "met4", cap_factor=0.9990)  # nseg=7066
+        self.add_openroad_rccorrection("minimum", "met5", cap_factor=0.9996)  # nseg=180
+        self.add_openroad_rccorrection("typical", "met1", cap_factor=0.9940)  # nseg=548274
+        self.add_openroad_rccorrection("typical", "met2", cap_factor=0.9971)  # nseg=330485
+        self.add_openroad_rccorrection("typical", "met3", cap_factor=0.9982)  # nseg=29921
+        self.add_openroad_rccorrection("typical", "met4", cap_factor=0.9990)  # nseg=7066
+        self.add_openroad_rccorrection("typical", "met5", cap_factor=0.9996)  # nseg=180
+        self.add_openroad_rccorrection("maximum", "met1", cap_factor=0.9940)  # nseg=548274
+        self.add_openroad_rccorrection("maximum", "met2", cap_factor=0.9971)  # nseg=330485
+        self.add_openroad_rccorrection("maximum", "met3", cap_factor=0.9982)  # nseg=29921
+        self.add_openroad_rccorrection("maximum", "met4", cap_factor=0.9990)  # nseg=7066
+        self.add_openroad_rccorrection("maximum", "met5", cap_factor=0.9996)  # nseg=180
         with self.active_dataroot("lambdapdk"):
             # Metal fill
             with self.active_fileset("openroad.fill"):

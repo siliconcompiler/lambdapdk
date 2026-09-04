@@ -5,33 +5,158 @@ from lambdapdk import LambdaPDK
 # Capacitance unit multiplier: values below are quoted in pF/um.
 pF = 1e-12
 
-# Per-length RC parasitics extracted from the smim OPTB decks, keyed by stackup and
-# corner. Resistance is in ohms/um (vias in ohms/cut); capacitance is in pF/um.
+# Per-length RC parasitics measured from the OpenRCX decks by the PEX
+# calibration sweep (lambdapdk/scripts/pex_calibrate_all.py, 2026-09-02), keyed
+# by stackup and corner. Resistance is in ohms/um (vias in ohms/cut);
+# capacitance is in pF/um. Routing values are bench_wires measurements against
+# each stackup's own deck; via resistance is uniform across every gf180 stackup
+# and is carried over (the bench characterizes routing layers only).
 _PEX = {
-    "4LM_1TM_9K": {
+    "3LM_1TM_6K": {
         "bst": [
-            ("Metal1", 0.274687, 0.000117288942),
-            ("Metal2", 0.225636, 0.000110534225),
-            ("Metal3", 0.225636, 0.0001137302252),
-            ("Metal4", 0.0585537, 0.00012007187059999999),
+            ("Metal1", 0.274687, 0.000199583),
+            ("Metal2", 0.225636, 0.000177551),
+            ("Metal3", 0.114611, 0.000165869),
+            ("Via1", 4.23, None),
+            ("Via2", 4.23, None),
+        ],
+        "typ": [
+            ("Metal1", 0.395696, 0.000233663),
+            ("Metal2", 0.325036, 0.000202592),
+            ("Metal3", 0.169472, 0.000188486),
+            ("Via1", 4.5, None),
+            ("Via2", 4.5, None),
+        ],
+        "wst": [
+            ("Metal1", 0.628392, 0.000274718),
+            ("Metal2", 0.516178, 0.000231725),
+            ("Metal3", 0.275028, 0.000214676),
+            ("Via1", 16.845, None),
+            ("Via2", 16.845, None),
+        ],
+    },
+    "3LM_1TM_9K": {
+        "bst": [
+            ("Metal1", 0.274687, 0.000203621),
+            ("Metal2", 0.225636, 0.000182064),
+            ("Metal3", 0.0585537, 0.000175562),
+            ("Via1", 4.23, None),
+            ("Via2", 4.23, None),
+        ],
+        "typ": [
+            ("Metal1", 0.395696, 0.000238789),
+            ("Metal2", 0.325036, 0.00020803),
+            ("Metal3", 0.0932048, 0.000198698),
+            ("Via1", 4.5, None),
+            ("Via2", 4.5, None),
+        ],
+        "wst": [
+            ("Metal1", 0.628392, 0.000281156),
+            ("Metal2", 0.516178, 0.000238201),
+            ("Metal3", 0.161545, 0.000224413),
+            ("Via1", 16.845, None),
+            ("Via2", 16.845, None),
+        ],
+    },
+    "3LM_1TM_11K": {
+        "bst": [
+            ("Metal1", 0.274687, 0.000203671),
+            ("Metal2", 0.225636, 0.000182232),
+            ("Metal3", 0.0585537, 0.000197217),
+            ("Via1", 4.23, None),
+            ("Via2", 4.23, None),
+        ],
+        "typ": [
+            ("Metal1", 0.395696, 0.000238841),
+            ("Metal2", 0.325036, 0.000208202),
+            ("Metal3", 0.0932048, 0.000224775),
+            ("Via1", 4.5, None),
+            ("Via2", 4.5, None),
+        ],
+        "wst": [
+            ("Metal1", 0.628392, 0.00028123),
+            ("Metal2", 0.516178, 0.00023837),
+            ("Metal3", 0.161545, 0.000255501),
+            ("Via1", 16.845, None),
+            ("Via2", 16.845, None),
+        ],
+    },
+    "3LM_1TM_30K": {
+        "bst": [
+            ("Metal1", 0.274687, 0.000230547),
+            ("Metal2", 0.225636, 0.000212425),
+            ("Metal3", 0.00257977, 0.000150937),
+            ("Via1", 4.23, None),
+            ("Via2", 4.23, None),
+        ],
+        "typ": [
+            ("Metal1", 0.395696, 0.000273014),
+            ("Metal2", 0.325036, 0.000244897),
+            ("Metal3", 0.00473371, 0.000172753),
+            ("Via1", 4.5, None),
+            ("Via2", 4.5, None),
+        ],
+        "wst": [
+            ("Metal1", 0.628392, 0.000324185),
+            ("Metal2", 0.516178, 0.000282321),
+            ("Metal3", 0.00959318, 0.000198361),
+            ("Via1", 16.845, None),
+            ("Via2", 16.845, None),
+        ],
+    },
+    "4LM_1TM_6K": {
+        "bst": [
+            ("Metal1", 0.274687, 0.000207878),
+            ("Metal2", 0.225636, 0.000183315),
+            ("Metal3", 0.225636, 0.000186094),
+            ("Metal4", 0.114611, 0.000176574),
             ("Via1", 4.23, None),
             ("Via2", 4.23, None),
             ("Via3", 4.23, None),
         ],
         "typ": [
-            ("Metal1", 0.395696, 0.00013979170800000002),
-            ("Metal2", 0.325036, 0.00012702322499999998),
-            ("Metal3", 0.325036, 0.0001304462252),
-            ("Metal4", 0.0932048, 0.0001372748706),
+            ("Metal1", 0.395696, 0.000244258),
+            ("Metal2", 0.325036, 0.000209643),
+            ("Metal3", 0.325036, 0.000212497),
+            ("Metal4", 0.169472, 0.000201752),
             ("Via1", 4.5, None),
             ("Via2", 4.5, None),
             ("Via3", 4.5, None),
         ],
         "wst": [
-            ("Metal1", 0.628392, 0.00016733222),
-            ("Metal2", 0.5161779999999999, 0.000145721225),
-            ("Metal3", 0.5161779999999999, 0.0001494402252),
-            ("Metal4", 0.161545, 0.0001560958706),
+            ("Metal1", 0.628392, 0.000288148),
+            ("Metal2", 0.516178, 0.000240223),
+            ("Metal3", 0.516178, 0.000243214),
+            ("Metal4", 0.275028, 0.000231023),
+            ("Via1", 16.845, None),
+            ("Via2", 16.845, None),
+            ("Via3", 16.845, None),
+        ],
+    },
+    "4LM_1TM_9K": {
+        "bst": [
+            ("Metal1", 0.274687, 0.000209935),
+            ("Metal2", 0.225636, 0.000186466),
+            ("Metal3", 0.225636, 0.000188559),
+            ("Metal4", 0.0585537, 0.000185851),
+            ("Via1", 4.23, None),
+            ("Via2", 4.23, None),
+            ("Via3", 4.23, None),
+        ],
+        "typ": [
+            ("Metal1", 0.395696, 0.000246878),
+            ("Metal2", 0.325036, 0.00021366),
+            ("Metal3", 0.325036, 0.00021541),
+            ("Metal4", 0.0932048, 0.000210793),
+            ("Via1", 4.5, None),
+            ("Via2", 4.5, None),
+            ("Via3", 4.5, None),
+        ],
+        "wst": [
+            ("Metal1", 0.628392, 0.000291446),
+            ("Metal2", 0.516178, 0.000245422),
+            ("Metal3", 0.516178, 0.000246575),
+            ("Metal4", 0.161545, 0.000238467),
             ("Via1", 16.845, None),
             ("Via2", 16.845, None),
             ("Via3", 16.845, None),
@@ -39,28 +164,28 @@ _PEX = {
     },
     "4LM_1TM_11K": {
         "bst": [
-            ("Metal1", 0.274687, 0.000117295802),
-            ("Metal2", 0.225636, 0.000110515225),
-            ("Metal3", 0.225636, 0.0001136912252),
-            ("Metal4", 0.0585537, 0.0001367308706),
+            ("Metal1", 0.274687, 0.000209937),
+            ("Metal2", 0.225636, 0.000186465),
+            ("Metal3", 0.225636, 0.000188551),
+            ("Metal4", 0.0585537, 0.000209222),
             ("Via1", 4.23, None),
             ("Via2", 4.23, None),
             ("Via3", 4.23, None),
         ],
         "typ": [
-            ("Metal1", 0.395696, 0.000139802044),
-            ("Metal2", 0.325036, 0.000126998225),
-            ("Metal3", 0.325036, 0.0001303952252),
-            ("Metal4", 0.0932048, 0.0001574718706),
+            ("Metal1", 0.395696, 0.000246881),
+            ("Metal2", 0.325036, 0.000213656),
+            ("Metal3", 0.325036, 0.000215399),
+            ("Metal4", 0.0932048, 0.000239053),
             ("Via1", 4.5, None),
             ("Via2", 4.5, None),
             ("Via3", 4.5, None),
         ],
         "wst": [
-            ("Metal1", 0.628392, 0.00016734556),
-            ("Metal2", 0.516178, 0.000145689225),
-            ("Metal3", 0.516178, 0.0001493762252),
-            ("Metal4", 0.161545, 0.0001803548706),
+            ("Metal1", 0.628392, 0.000291449),
+            ("Metal2", 0.516178, 0.000245427),
+            ("Metal3", 0.516178, 0.000246558),
+            ("Metal4", 0.161545, 0.000272243),
             ("Via1", 16.845, None),
             ("Via2", 16.845, None),
             ("Via3", 16.845, None),
@@ -68,28 +193,28 @@ _PEX = {
     },
     "4LM_1TM_30K": {
         "bst": [
-            ("Metal1", 0.274687, 0.00011732346),
-            ("Metal2", 0.225636, 0.00011044322500000001),
-            ("Metal3", 0.225636, 0.0001135502252),
-            ("Metal4", 0.00260141, 0.0001030823),
+            ("Metal1", 0.274687, 0.000230121),
+            ("Metal2", 0.225636, 0.000211199),
+            ("Metal3", 0.225636, 0.000214069),
+            ("Metal4", 0.00260141, 0.000147721),
             ("Via1", 4.23, None),
             ("Via2", 4.23, None),
             ("Via3", 4.23, None),
         ],
         "typ": [
-            ("Metal1", 0.395696, 0.000139827402),
-            ("Metal2", 0.325036, 0.000126936225),
-            ("Metal3", 0.325036, 0.0001302702252),
-            ("Metal4", 0.00477733, 0.0001189289),
+            ("Metal1", 0.395696, 0.000272509),
+            ("Metal2", 0.325036, 0.000243409),
+            ("Metal3", 0.325036, 0.000246591),
+            ("Metal4", 0.00477733, 0.000168978),
             ("Via1", 4.5, None),
             ("Via2", 4.5, None),
             ("Via3", 4.5, None),
         ],
         "wst": [
-            ("Metal1", 0.628392, 0.00016736756),
-            ("Metal2", 0.516178, 0.000145631225),
-            ("Metal3", 0.516178, 0.0001492622252),
-            ("Metal4", 0.00968639, 0.0001370178),
+            ("Metal1", 0.628392, 0.000323601),
+            ("Metal2", 0.516178, 0.000280337),
+            ("Metal3", 0.516178, 0.000284132),
+            ("Metal4", 0.00968639, 0.000193798),
             ("Via1", 16.845, None),
             ("Via2", 16.845, None),
             ("Via3", 16.845, None),
@@ -97,33 +222,33 @@ _PEX = {
     },
     "5LM_1TM_9K": {
         "bst": [
-            ("Metal1", 0.274687, 0.000117319004),
-            ("Metal2", 0.225636, 0.000110440225),
-            ("Metal3", 0.225636, 0.00011356522519999999),
-            ("Metal4", 0.225636, 0.000114632225),
-            ("Metal5", 0.0585537, 0.00012182687059999999),
+            ("Metal1", 0.274687, 0.000214383),
+            ("Metal2", 0.225636, 0.00019026),
+            ("Metal3", 0.225636, 0.000189821),
+            ("Metal4", 0.225636, 0.000193857),
+            ("Metal5", 0.0585537, 0.000194276),
             ("Via1", 4.23, None),
             ("Via2", 4.23, None),
             ("Via3", 4.23, None),
             ("Via4", 4.23, None),
         ],
         "typ": [
-            ("Metal1", 0.395696, 0.000139818446),
-            ("Metal2", 0.325036, 0.00012695122499999998),
-            ("Metal3", 0.325036, 0.0001302842252),
-            ("Metal4", 0.325036, 0.000131493225),
-            ("Metal5", 0.0932048, 0.00013908187060000002),
+            ("Metal1", 0.395696, 0.000252568),
+            ("Metal2", 0.325036, 0.000218289),
+            ("Metal3", 0.325036, 0.000217273),
+            ("Metal4", 0.325036, 0.000221603),
+            ("Metal5", 0.0932048, 0.000220497),
             ("Via1", 4.5, None),
             ("Via2", 4.5, None),
             ("Via3", 4.5, None),
             ("Via4", 4.5, None),
         ],
         "wst": [
-            ("Metal1", 0.628392, 0.00016735626),
-            ("Metal2", 0.516178, 0.000145656225),
-            ("Metal3", 0.516178, 0.0001492922252),
-            ("Metal4", 0.516178, 0.000150656225),
-            ("Metal5", 0.161545, 0.0001579818706),
+            ("Metal1", 0.628392, 0.00029864),
+            ("Metal2", 0.516178, 0.000250934),
+            ("Metal3", 0.516178, 0.000249336),
+            ("Metal4", 0.516178, 0.000253673),
+            ("Metal5", 0.161545, 0.000249563),
             ("Via1", 16.845, None),
             ("Via2", 16.845, None),
             ("Via3", 16.845, None),
@@ -132,33 +257,33 @@ _PEX = {
     },
     "5LM_1TM_11K": {
         "bst": [
-            ("Metal1", 0.274687, 0.00011732371400000001),
-            ("Metal2", 0.225636, 0.00011043022500000001),
-            ("Metal3", 0.225636, 0.0001135432252),
-            ("Metal4", 0.225636, 0.000114599225),
-            ("Metal5", 0.0585537, 0.00013851387060000002),
+            ("Metal1", 0.274687, 0.000214384),
+            ("Metal2", 0.225636, 0.000190257),
+            ("Metal3", 0.225636, 0.000189814),
+            ("Metal4", 0.225636, 0.000193844),
+            ("Metal5", 0.0585537, 0.000219158),
             ("Via1", 4.23, None),
             ("Via2", 4.23, None),
             ("Via3", 4.23, None),
             ("Via4", 4.23, None),
         ],
         "typ": [
-            ("Metal1", 0.395696, 0.000139823708),
-            ("Metal2", 0.325036, 0.000126936225),
-            ("Metal3", 0.325036, 0.0001302552252),
-            ("Metal4", 0.325036, 0.000131445225),
-            ("Metal5", 0.0932048, 0.00015928687060000002),
+            ("Metal1", 0.395696, 0.000252568),
+            ("Metal2", 0.325036, 0.000218294),
+            ("Metal3", 0.325036, 0.000217263),
+            ("Metal4", 0.325036, 0.000221582),
+            ("Metal5", 0.0932048, 0.000250472),
             ("Via1", 4.5, None),
             ("Via2", 4.5, None),
             ("Via3", 4.5, None),
             ("Via4", 4.5, None),
         ],
         "wst": [
-            ("Metal1", 0.628392, 0.0001673649),
-            ("Metal2", 0.516178, 0.000145636225),
-            ("Metal3", 0.516178, 0.0001492552252),
-            ("Metal4", 0.516178, 0.000150594225),
-            ("Metal5", 0.161545, 0.0001822508706),
+            ("Metal1", 0.628392, 0.00029864),
+            ("Metal2", 0.516178, 0.000250927),
+            ("Metal3", 0.516178, 0.000249323),
+            ("Metal4", 0.516178, 0.000253651),
+            ("Metal5", 0.161545, 0.000285447),
             ("Via1", 16.845, None),
             ("Via2", 16.845, None),
             ("Via3", 16.845, None),
@@ -167,12 +292,12 @@ _PEX = {
     },
     "6LM_1TM_9K": {
         "bst": [
-            ("Metal1", 0.274687, 0.000117339274),
-            ("Metal2", 0.225636, 0.000110389225),
-            ("Metal3", 0.225636, 0.0001134552252),
-            ("Metal4", 0.225636, 0.000114480225),
-            ("Metal5", 0.225636, 0.00011609922519999999),
-            ("MetalTop", 0.0585537, 0.00012224587060000002),
+            ("Metal1", 0.274687, 0.000217855),
+            ("Metal2", 0.225636, 0.000193923),
+            ("Metal3", 0.225636, 0.00019227),
+            ("Metal4", 0.225636, 0.000193035),
+            ("Metal5", 0.225636, 0.000198857),
+            ("MetalTop", 0.0585537, 0.000200704),
             ("Via1", 4.23, None),
             ("Via2", 4.23, None),
             ("Via3", 4.23, None),
@@ -180,12 +305,12 @@ _PEX = {
             ("Via5", 4.23, None),
         ],
         "typ": [
-            ("Metal1", 0.395696, 0.000139835598),
-            ("Metal2", 0.325036, 0.000126902225),
-            ("Metal3", 0.325036, 0.0001302022252),
-            ("Metal4", 0.325036, 0.00013133622499999999),
-            ("Metal5", 0.325036, 0.0001330372252),
-            ("MetalTop", 0.0932048, 0.00013952087060000002),
+            ("Metal1", 0.395696, 0.000257017),
+            ("Metal2", 0.325036, 0.000222233),
+            ("Metal3", 0.325036, 0.0002198),
+            ("Metal4", 0.325036, 0.000220865),
+            ("Metal5", 0.325036, 0.000227328),
+            ("MetalTop", 0.0932048, 0.000227934),
             ("Via1", 4.5, None),
             ("Via2", 4.5, None),
             ("Via3", 4.5, None),
@@ -193,17 +318,199 @@ _PEX = {
             ("Via5", 4.5, None),
         ],
         "wst": [
-            ("Metal1", 0.628392, 0.00016737654),
-            ("Metal2", 0.516178, 0.000145608225),
-            ("Metal3", 0.516178, 0.0001492182252),
-            ("Metal4", 0.516178, 0.000150508225),
-            ("Metal5", 0.516178, 0.0001522992252),
-            ("MetalTop", 0.161545, 0.0001584638706),
+            ("Metal1", 0.628392, 0.000304275),
+            ("Metal2", 0.516178, 0.000255412),
+            ("Metal3", 0.516178, 0.000252171),
+            ("Metal4", 0.516178, 0.000253328),
+            ("Metal5", 0.516178, 0.000260183),
+            ("MetalTop", 0.161545, 0.000258161),
             ("Via1", 16.845, None),
             ("Via2", 16.845, None),
             ("Via3", 16.845, None),
             ("Via4", 16.845, None),
             ("Via5", 16.845, None),
+        ],
+    },
+}
+
+# Pooled design-survey correction factors, same keying. Pooled across cell
+# heights with nseg weighting: the two heights agree to 2.5% median and diverge
+# only where few segments were sampled. A stackup absent here has no correction
+# -- 3LM cannot route the survey designs at all, so it has none to give, and its
+# rclayer estimate above stands uncorrected.
+# MIM option shipping an OpenRCX deck for each stackup. Hardcoding OPTB used to
+# make the five OPTA-only stackups fall out of _PEX and silently ship no PEX
+# data at all; where both options exist, OPTB is kept so the six stackups that
+# already had PEX keep the decks they had.
+#
+# This is a static table on purpose. The decks live under the 'lambdapdk'
+# dataroot, which resolves either to a checkout or to an archive unpacked under
+# ~/.sc -- never to the installed package, which carries no PDK data -- so
+# probing the filesystem from here would look in the wrong place and pick OPTA
+# for everything, naming a deck that does not exist for the OPTB-only stackups.
+# Probing during PDK setup is also needless work on every construction.
+_PEX_MIM_OPTION = {
+    "3LM_1TM_6K": "A",
+    "3LM_1TM_9K": "A",
+    "3LM_1TM_11K": "A",
+    "3LM_1TM_30K": "A",
+    "4LM_1TM_6K": "A",
+    "4LM_1TM_9K": "B",
+    "4LM_1TM_11K": "B",
+    "4LM_1TM_30K": "B",
+    "5LM_1TM_9K": "B",
+    "5LM_1TM_11K": "B",
+    "6LM_1TM_9K": "B",
+}
+
+_PEX_CORRECTION = {
+    "4LM_1TM_6K": {
+        "bst": [
+            ("Metal1", 0.6009),  # nseg=1583
+            ("Metal2", 0.7094),  # nseg=386666
+            ("Metal3", 0.7320),  # nseg=155062
+            ("Metal4", 0.6842),  # nseg=4982
+        ],
+        "typ": [
+            ("Metal1", 0.5666),  # nseg=1583
+            ("Metal2", 0.6923),  # nseg=386666
+            ("Metal3", 0.7157),  # nseg=155062
+            ("Metal4", 0.6646),  # nseg=4982
+        ],
+        "wst": [
+            ("Metal1", 0.5376),  # nseg=1583
+            ("Metal2", 0.6791),  # nseg=386666
+            ("Metal3", 0.7023),  # nseg=155062
+            ("Metal4", 0.6511),  # nseg=4982
+        ],
+    },
+    "4LM_1TM_9K": {
+        "bst": [
+            ("Metal1", 0.5863),  # nseg=861
+            ("Metal2", 0.7298),  # nseg=766918
+            ("Metal3", 0.7415),  # nseg=296401
+            ("Metal4", 0.7665),  # nseg=4229
+        ],
+        "typ": [
+            ("Metal1", 0.5516),  # nseg=861
+            ("Metal2", 0.7171),  # nseg=766918
+            ("Metal3", 0.7285),  # nseg=296401
+            ("Metal4", 0.7523),  # nseg=4229
+        ],
+        "wst": [
+            ("Metal1", 0.5209),  # nseg=861
+            ("Metal2", 0.7104),  # nseg=766918
+            ("Metal3", 0.7203),  # nseg=296401
+            ("Metal4", 0.7434),  # nseg=4229
+        ],
+    },
+    "4LM_1TM_11K": {
+        "bst": [
+            ("Metal1", 0.5837),  # nseg=855
+            ("Metal2", 0.7296),  # nseg=766429
+            ("Metal3", 0.7415),  # nseg=295852
+            ("Metal4", 0.7413),  # nseg=4206
+        ],
+        "typ": [
+            ("Metal1", 0.5488),  # nseg=855
+            ("Metal2", 0.7169),  # nseg=766429
+            ("Metal3", 0.7285),  # nseg=295852
+            ("Metal4", 0.7260),  # nseg=4206
+        ],
+        "wst": [
+            ("Metal1", 0.5183),  # nseg=855
+            ("Metal2", 0.7102),  # nseg=766429
+            ("Metal3", 0.7204),  # nseg=295852
+            ("Metal4", 0.7154),  # nseg=4206
+        ],
+    },
+    "4LM_1TM_30K": {
+        "bst": [
+            ("Metal1", 0.5768),  # nseg=1271
+            ("Metal2", 0.6587),  # nseg=826139
+            ("Metal3", 0.6671),  # nseg=262177
+        ],
+        "typ": [
+            ("Metal1", 0.5449),  # nseg=1271
+            ("Metal2", 0.6444),  # nseg=826139
+            ("Metal3", 0.6515),  # nseg=262177
+        ],
+        "wst": [
+            ("Metal1", 0.5170),  # nseg=1271
+            ("Metal2", 0.6373),  # nseg=826139
+            ("Metal3", 0.6418),  # nseg=262177
+        ],
+    },
+    "5LM_1TM_9K": {
+        "bst": [
+            ("Metal1", 0.5771),  # nseg=830
+            ("Metal2", 0.7096),  # nseg=762266
+            ("Metal3", 0.7551),  # nseg=280473
+            ("Metal4", 0.6517),  # nseg=9290
+            ("Metal5", 0.6876),  # nseg=535
+        ],
+        "typ": [
+            ("Metal1", 0.5424),  # nseg=830
+            ("Metal2", 0.6958),  # nseg=762266
+            ("Metal3", 0.7426),  # nseg=280473
+            ("Metal4", 0.6315),  # nseg=9290
+            ("Metal5", 0.6625),  # nseg=535
+        ],
+        "wst": [
+            ("Metal1", 0.5116),  # nseg=830
+            ("Metal2", 0.6881),  # nseg=762266
+            ("Metal3", 0.7352),  # nseg=280473
+            ("Metal4", 0.6178),  # nseg=9290
+            ("Metal5", 0.6431),  # nseg=535
+        ],
+    },
+    "5LM_1TM_11K": {
+        "bst": [
+            ("Metal1", 0.5867),  # nseg=890
+            ("Metal2", 0.7092),  # nseg=762677
+            ("Metal3", 0.7555),  # nseg=280750
+            ("Metal4", 0.6555),  # nseg=9262
+            ("Metal5", 0.6468),  # nseg=518
+        ],
+        "typ": [
+            ("Metal1", 0.5516),  # nseg=890
+            ("Metal2", 0.6953),  # nseg=762677
+            ("Metal3", 0.7430),  # nseg=280750
+            ("Metal4", 0.6356),  # nseg=9262
+            ("Metal5", 0.6215),  # nseg=518
+        ],
+        "wst": [
+            ("Metal1", 0.5205),  # nseg=890
+            ("Metal2", 0.6876),  # nseg=762677
+            ("Metal3", 0.7356),  # nseg=280750
+            ("Metal4", 0.6221),  # nseg=9262
+            ("Metal5", 0.6013),  # nseg=518
+        ],
+    },
+    "6LM_1TM_9K": {
+        "bst": [
+            ("Metal1", 0.5527),  # nseg=1037
+            ("Metal2", 0.6967),  # nseg=760157
+            ("Metal3", 0.7441),  # nseg=279909
+            ("Metal4", 0.6561),  # nseg=8004
+            ("Metal5", 0.6304),  # nseg=1008
+            ("MetalTop", 0.5338),  # nseg=4
+        ],
+        "typ": [
+            ("Metal1", 0.5155),  # nseg=1037
+            ("Metal2", 0.6838),  # nseg=760157
+            ("Metal3", 0.7326),  # nseg=279909
+            ("Metal4", 0.6353),  # nseg=8004
+            ("Metal5", 0.6032),  # nseg=1008
+            ("MetalTop", 0.5046),  # nseg=4
+        ],
+        "wst": [
+            ("Metal1", 0.4824),  # nseg=1037
+            ("Metal2", 0.6763),  # nseg=760157
+            ("Metal3", 0.7254),  # nseg=279909
+            ("Metal4", 0.6208),  # nseg=8004
+            ("Metal5", 0.5801),  # nseg=1008
+            ("MetalTop", 0.4816),  # nseg=4
         ],
     },
 }
@@ -381,6 +688,10 @@ class _GF180PDK(LambdaPDK):
             if stackup not in _PEX:
                 return
 
+            for corner, layers in _PEX_CORRECTION.get(stackup, {}).items():
+                for layer, cap_factor in layers:
+                    self.add_openroad_rccorrection(corner, layer, cap_factor=cap_factor)
+
             for corner in ["bst", "typ", "wst"]:
                 for layer, res, cap in _PEX[stackup][corner]:
                     if cap is None:
@@ -388,7 +699,8 @@ class _GF180PDK(LambdaPDK):
                     else:
                         self.add_openroad_rclayer(corner, "routing", layer, res, cap * pF)
 
-                base_name = f'gf180mcu_1p{stackup.replace("L", "").lower()}_sp_smim_OPTB_{corner}'
+                stem = f'gf180mcu_1p{stackup.replace("L", "").lower()}_sp_smim'
+                base_name = f"{stem}_OPT{_PEX_MIM_OPTION[stackup]}_{corner}"
                 with self.active_fileset(f"openroad.pex.{corner}"):
                     self.add_file(pdk_path / "pex" / "openroad" / f"{base_name}.rules",
                                   filetype="openrcx")

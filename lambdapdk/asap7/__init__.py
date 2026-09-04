@@ -102,16 +102,21 @@ class ASAP7PDK(LambdaPDK):
                 # Relaxed routing rules
                 self.add_file(pdk_path / "apr" / "openroad_relaxed_rules.tcl", filetype="tcl")
 
-            # PEX
-            self.add_openroad_rclayer("typical", "routing", "M1", 138.89, 1.1368e-01 * fF)
-            self.add_openroad_rclayer("typical", "routing", "M2", 24.222, 1.3426e-01 * fF)
-            self.add_openroad_rclayer("typical", "routing", "M3", 24.222, 1.2918e-01 * fF)
-            self.add_openroad_rclayer("typical", "routing", "M4", 16.778, 1.1396e-01 * fF)
-            self.add_openroad_rclayer("typical", "routing", "M5", 14.677, 1.3323e-01 * fF)
-            self.add_openroad_rclayer("typical", "routing", "M6", 10.371, 1.1575e-01 * fF)
-            self.add_openroad_rclayer("typical", "routing", "M7", 9.672, 1.3293e-01 * fF)
-            self.add_openroad_rclayer("typical", "routing", "M8", 7.431, 1.1822e-01 * fF)
-            self.add_openroad_rclayer("typical", "routing", "M9", 6.874, 1.3497e-01 * fF)
+            # PEX. Measured 2026-09-02 by the OpenROAD PEX calibration sweep
+            # (lambdapdk/scripts/pex_calibrate_all.py) rather than hand-derived:
+            # rclayer routing values come from bench_wires against this PDK's OpenRCX
+            # deck, via values are carried over, and the cap_factors are the pooled
+            # design-survey correction. nseg records how many routed segments backed
+            # each factor -- the upper layers of tall stacks are thinly sampled.
+            self.add_openroad_rclayer("typical", "routing", "M1", 31.287, 0.217533 * fF)
+            self.add_openroad_rclayer("typical", "routing", "M2", 29.7125, 0.214875 * fF)
+            self.add_openroad_rclayer("typical", "routing", "M3", 31.287, 0.210778 * fF)
+            self.add_openroad_rclayer("typical", "routing", "M4", 18.0365, 0.234963 * fF)
+            self.add_openroad_rclayer("typical", "routing", "M5", 18.9934, 0.237596 * fF)
+            self.add_openroad_rclayer("typical", "routing", "M6", 11.8795, 0.244198 * fF)
+            self.add_openroad_rclayer("typical", "routing", "M7", 12.5095, 0.244487 * fF)
+            self.add_openroad_rclayer("typical", "routing", "M8", 8.44656, 0.219046 * fF)
+            self.add_openroad_rclayer("typical", "routing", "M9", 8.89465, 0.222947 * fF)
             self.add_openroad_rclayer("typical", "via", "V1", 17.2)
             self.add_openroad_rclayer("typical", "via", "V2", 17.2)
             self.add_openroad_rclayer("typical", "via", "V3", 17.2)
@@ -120,6 +125,13 @@ class ASAP7PDK(LambdaPDK):
             self.add_openroad_rclayer("typical", "via", "V6", 8.2)
             self.add_openroad_rclayer("typical", "via", "V7", 8.2)
             self.add_openroad_rclayer("typical", "via", "V8", 6.3)
+
+            self.add_openroad_rccorrection("typical", "M2", cap_factor=0.7676)  # nseg=718363
+            self.add_openroad_rccorrection("typical", "M3", cap_factor=0.7001)  # nseg=662335
+            self.add_openroad_rccorrection("typical", "M4", cap_factor=0.6986)  # nseg=86397
+            self.add_openroad_rccorrection("typical", "M5", cap_factor=0.5547)  # nseg=8360
+            self.add_openroad_rccorrection("typical", "M6", cap_factor=0.6031)  # nseg=545
+            self.add_openroad_rccorrection("typical", "M7", cap_factor=0.4823)  # nseg=42
             with self.active_fileset("openroad.pex"):
                 self.add_file(pdk_path / "pex" / "openroad" / "typical.rules", filetype="openrcx")
                 self.add_pexmodelfileset("openroad", "typical")
