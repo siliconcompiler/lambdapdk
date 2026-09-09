@@ -49,7 +49,7 @@ class _IHP130StdCell(LambdaLibrary, _IHP130Path):
                 self.add_file("ihp-sg13g2/libs.ref/sg13g2_stdcell/cdl/sg13g2_stdcell.cdl")
                 self.add_asic_aprfileset()
 
-            with self.active_fileset("rtl"):
+            with self.active_fileset("models.sim"):
                 self.add_file("ihp-sg13g2/libs.ref/sg13g2_stdcell/verilog/sg13g2_stdcell.v")
                 self.add_asic_aprfileset()
 

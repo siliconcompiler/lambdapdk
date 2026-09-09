@@ -75,6 +75,11 @@ class _ASAP7SC7p5Base(LambdaLibrary):
                 self.add_file(lib_path / "netlist" / f"asap7sc7p5t_28_{suffix}.cdl")
                 self.add_asic_aprfileset()
 
+            with self.active_fileset("models.sim"):
+                for lib_type in ('AO', 'INVBUF', 'OA', 'SEQ', 'SIMPLE'):
+                    self.add_file(lib_path / "verilog" /
+                                  f"asap7sc7p5t_{lib_type}_{suffix}VT_TT.v")
+
         # Setup for yosys
         with self.active_dataroot("lambdapdk"):
             self.set_yosys_driver_cell(f"BUFx2_ASAP7_75t_{suffix}")
