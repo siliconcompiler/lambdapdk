@@ -39,7 +39,7 @@ class _Sky130_SCLibrary(LambdaLibrary):
                 self.add_file(lib_path / "cdl" / f"sky130_fd_sc_{libtype}.cdl")
                 self.add_asic_aprfileset()
 
-            with self.active_fileset("rtl"):
+            with self.active_fileset("models.sim"):
                 self.add_file(lib_path / "verilog" / f"sky130_fd_sc_{libtype}.v")
                 self.add_file(lib_path / "verilog" / "primitives.v")
 
