@@ -14,10 +14,10 @@ from lambdapdk.sky130 import Sky130PDK
 from lambdapdk.utils import format_verilog
 
 
-class Sky130_SRAM_64x256(LambdaLibrary, RAMTechLib):
+class Sky130_SRAM_32x512(LambdaLibrary, RAMTechLib):
     def __init__(self):
         super().__init__()
-        self.set_name('sky130_sram_1rw1r_64x256_8')
+        self.set_name('sky130_sram_2kbyte_1rw1r_32x512_8')
 
         self.add_asic_pdk(Sky130PDK())
 
@@ -30,7 +30,7 @@ class Sky130_SRAM_64x256(LambdaLibrary, RAMTechLib):
 
         with self.active_dataroot("lambdapdk"):
             with self.active_fileset("models.physical"):
-                self.add_file(path_base / self.name / "lef" / f"{self.name}.lef.gz")
+                self.add_file(path_base / self.name / "lef" / f"{self.name}.lef")
                 self.add_file(path_base / self.name / "gds" / f"{self.name}.gds")
                 self.add_asic_aprfileset()
 
@@ -113,7 +113,7 @@ class Sky130_SRAM_64x256(LambdaLibrary, RAMTechLib):
 class Sky130Lambdalib_SinglePort(LambalibTechLibrary, _LambdaPath):
     def __init__(self):
         super().__init__("la_spram", [
-            Sky130_SRAM_64x256])
+            Sky130_SRAM_32x512])
         self.set_name("sky130_la_spram")
 
         # version

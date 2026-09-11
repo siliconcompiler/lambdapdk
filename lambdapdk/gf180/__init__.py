@@ -585,7 +585,7 @@ class _GF180PDK(LambdaPDK):
                 self.add_file(pdk_path / "spice" / "xyce" / "smbb000149.xyce", filetype="xyce")
                 self.add_devmodelfileset("xyce", "spice")
 
-        self.set_aprroutinglayers(min="Metal1", max=top_layer)
+        self.set_aprroutinglayers(min="Metal2", max=top_layer)
 
         # Klayout setup
         with self.active_dataroot("lambdapdk"), self.active_fileset("klayout.techmap"):
@@ -661,7 +661,7 @@ class _GF180PDK(LambdaPDK):
                 # its width suits it for. Pin layers follow the routing down;
                 # directions are the tech LEF's (Metal2 vertical, Metal3
                 # horizontal).
-                self.set_aprroutinglayers(min="Metal1", max="Metal3")
+                self.set_aprroutinglayers(min="Metal2", max="Metal3")
                 self.add_openroad_pinlayers(vertical="Metal2", horizontal="Metal3")
             else:
                 self.add_openroad_pinlayers(vertical="Metal4", horizontal="Metal3")

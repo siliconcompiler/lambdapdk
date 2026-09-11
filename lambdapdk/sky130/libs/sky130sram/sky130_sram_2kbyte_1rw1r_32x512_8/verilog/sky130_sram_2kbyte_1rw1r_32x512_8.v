@@ -1,22 +1,32 @@
 // OpenRAM SRAM model
-// Words: 256
-// Word size: 64
+// Words: 512
+// Word size: 32
 // Write size: 8
 
-module sky130_sram_1rw1r_64x256_8(
+module sky130_sram_2kbyte_1rw1r_32x512_8(
+`ifdef USE_POWER_PINS
+    vccd1,
+    vssd1,
+`endif
 // Port 0: RW
     clk0,csb0,web0,wmask0,addr0,din0,dout0,
 // Port 1: R
     clk1,csb1,addr1,dout1
   );
 
-  parameter NUM_WMASKS = 8 ;
-  parameter DATA_WIDTH = 64 ;
-  parameter ADDR_WIDTH = 8 ;
+  parameter NUM_WMASKS = 4 ;
+  parameter DATA_WIDTH = 32 ;
+  parameter ADDR_WIDTH = 9 ;
   parameter RAM_DEPTH = 1 << ADDR_WIDTH;
   // FIXME: This delay is arbitrary.
   parameter DELAY = 3 ;
+  parameter VERBOSE = 1 ; //Set to 0 to only display warnings
+  parameter T_HOLD = 1 ; //Delay to hold dout value after posedge. Value is arbitrary
 
+`ifdef USE_POWER_PINS
+    inout vccd1;
+    inout vssd1;
+`endif
   input  clk0; // clock
   input   csb0; // active low chip select
   input  web0; // active low write control
@@ -44,10 +54,10 @@ module sky130_sram_1rw1r_64x256_8(
     wmask0_reg = wmask0;
     addr0_reg = addr0;
     din0_reg = din0;
-    dout0 = 64'bx;
-    if ( !csb0_reg && web0_reg ) 
+    #(T_HOLD) dout0 = 32'bx;
+    if ( !csb0_reg && web0_reg && VERBOSE ) 
       $display($time," Reading %m addr0=%b dout0=%b",addr0_reg,mem[addr0_reg]);
-    if ( !csb0_reg && !web0_reg )
+    if ( !csb0_reg && !web0_reg && VERBOSE )
       $display($time," Writing %m addr0=%b din0=%b wmask0=%b",addr0_reg,din0_reg,wmask0_reg);
   end
 
@@ -62,8 +72,8 @@ module sky130_sram_1rw1r_64x256_8(
     addr1_reg = addr1;
     if (!csb0 && !web0 && !csb1 && (addr0 == addr1))
          $display($time," WARNING: Writing and reading addr0=%b and addr1=%b simultaneously!",addr0,addr1);
-    dout1 = 64'bx;
-    if ( !csb1_reg ) 
+    #(T_HOLD) dout1 = 32'bx;
+    if ( !csb1_reg && VERBOSE ) 
       $display($time," Reading %m addr1=%b dout1=%b",addr1_reg,mem[addr1_reg]);
   end
 
@@ -82,14 +92,6 @@ reg [DATA_WIDTH-1:0]    mem [0:RAM_DEPTH-1];
                 mem[addr0_reg][23:16] = din0_reg[23:16];
         if (wmask0_reg[3])
                 mem[addr0_reg][31:24] = din0_reg[31:24];
-        if (wmask0_reg[4])
-                mem[addr0_reg][39:32] = din0_reg[39:32];
-        if (wmask0_reg[5])
-                mem[addr0_reg][47:40] = din0_reg[47:40];
-        if (wmask0_reg[6])
-                mem[addr0_reg][55:48] = din0_reg[55:48];
-        if (wmask0_reg[7])
-                mem[addr0_reg][63:56] = din0_reg[63:56];
     end
   end
 

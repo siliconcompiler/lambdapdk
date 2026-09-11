@@ -157,7 +157,7 @@ Nothing from ICsprout55 is vendored here: LEF, CDL and Verilog are fetched from 
 
 | Configuration | Verilog |
 |--------------|---------|
-| 1RW1R 64x256 | [verilog](lambdapdk/sky130/libs/sky130sram/sky130_sram_1rw1r_64x256_8/verilog) |
+| 1RW1R 32x512 | [verilog](lambdapdk/sky130/libs/sky130sram/sky130_sram_2kbyte_1rw1r_32x512_8/verilog) |
 
 ### GF180 (180nm)
 
