@@ -124,3 +124,33 @@ Copied from open_pdks at commit d8bfd6f2a19026ad9b614424c249243b670e2ab2, no mod
 Source: [open_pdks](https://github.com/RTimothyEdwards/open_pdks)
 
 Copied from open_pdks at commit d8bfd6f2a19026ad9b614424c249243b670e2ab2, no modifications, then gzipped.
+
+### `libs/sky130io/lef/`
+
+`sky130_ef_io.lef`
+
+Source: [open_pdks](https://github.com/RTimothyEdwards/open_pdks)
+
+Every pad carries a
+65.4um x 75.4um bond pad plate on met4 and met5, labelled `<PIN>_PAD` in the
+GDS, but the vendor LEF only declared a shrunken part of it as the pin and left
+the rest inside `OBS`. A bond pad placed on the plate therefore landed on what
+the abstract called an obstruction, which a power grid short check reads as the
+supply net shorting to the pad instance. The script gives the plate back to the
+pin it belongs to and takes it out of `OBS`; nothing else in the file changes.
+
+### `libs/sky130sram/`
+
+`sky130_sram_2kbyte_1rw1r_32x512_8`
+
+Source: [sky130_sram_macros](https://github.com/fossi-foundation/sky130_sram_macros)
+
+Copied at commit 5ad1c96053ee8223fe7e956e314646adfce605dd, no modifications.
+
+Replaces the earlier `sky130_sram_1rw1r_64x256_8`, whose layout overlaps `vdd`
+and `gnd` on met3 in 260 places -- two whole power via stacks drawn 0.06um
+apart, in columns at x = 164.015 and x = 876.595. The GDS and the LEF agree, so
+it is a defect in the macro rather than in its abstract, and a power grid short
+check reports every one of them. This macro holds the same 2kbyte and declares
+its supplies as four met3/met4 rings on `vccd1`/`vssd1`, which is also why
+`apr/openroad/global_connect.tcl` matches those pin names.

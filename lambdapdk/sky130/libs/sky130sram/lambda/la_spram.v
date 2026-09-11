@@ -47,12 +47,12 @@ module la_spram #(
 
   // Determine which memory to select
   //verilator lint_off WIDTHEXPAND
-  localparam MEM_PROP = (PROP != "DEFAULT") ? PROP : "sky130_sram_1rw1r_64x256_8";
+  localparam MEM_PROP = (PROP != "DEFAULT") ? PROP : "sky130_sram_2kbyte_1rw1r_32x512_8";
   //verilator lint_on WIDTHEXPAND
 
-  localparam MEM_WIDTH = (MEM_PROP == "sky130_sram_1rw1r_64x256_8") ? 64 : 0;
+  localparam MEM_WIDTH = (MEM_PROP == "sky130_sram_2kbyte_1rw1r_32x512_8") ? 32 : 0;
 
-  localparam MEM_DEPTH = (MEM_PROP == "sky130_sram_1rw1r_64x256_8") ? 8 : 0;
+  localparam MEM_DEPTH = (MEM_PROP == "sky130_sram_2kbyte_1rw1r_32x512_8") ? 9 : 0;
 
   generate
     if (MEM_PROP == "SOFT") begin : isoft
@@ -152,10 +152,10 @@ module la_spram #(
           assign ce_in = ce && selected;
           assign we_in = we && selected;
 
-          if (MEM_PROP == "sky130_sram_1rw1r_64x256_8") begin : isky130_sram_1rw1r_64x256_8
+          if (MEM_PROP == "sky130_sram_2kbyte_1rw1r_32x512_8") begin: isky130_sram_2kbyte_1rw1r_32x512_8
             wire [0:0] mem_ctrl;
             assign mem_ctrl = selctrl ? ctrl[0:0] : 1'b0;
-            sky130_sram_1rw1r_64x256_8 memory (
+            sky130_sram_2kbyte_1rw1r_32x512_8 memory (
                 .addr0 (mem_addr),
                 .addr1 (mem_addr),
                 .clk0  (clk),
