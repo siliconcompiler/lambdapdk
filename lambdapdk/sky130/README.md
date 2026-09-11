@@ -145,7 +145,15 @@ pin it belongs to and takes it out of `OBS`; nothing else in the file changes.
 
 Source: [sky130_sram_macros](https://github.com/fossi-foundation/sky130_sram_macros)
 
-Copied at commit 5ad1c96053ee8223fe7e956e314646adfce605dd, no modifications.
+Copied at commit 5ad1c96053ee8223fe7e956e314646adfce605dd. One modification: the
+three `max_transition : 0.04;` lines the liberty file put on the `addr0`,
+`wmask0` and `addr1` buses are removed, so the library's own
+`default_max_transition : 0.5` applies to them as it does to every other pin.
+0.04ns is simply the top of the characterised slew axis
+(`index_1("0.00125, 0.005, 0.04")`), not a design rule, and no sky130hd cell can
+drive it -- the best achievable is 0.062ns -- so the resizer fails with RSZ-0090
+on any design that instantiates this macro. The macro it replaces carried no
+pin-level `max_transition` at all.
 
 Replaces the earlier `sky130_sram_1rw1r_64x256_8`, whose layout overlaps `vdd`
 and `gnd` on met3 in 260 places -- two whole power via stacks drawn 0.06um
