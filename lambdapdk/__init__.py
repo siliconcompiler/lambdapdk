@@ -335,8 +335,10 @@ def get_libs():
         Sky130Lambdalib_la_iovssa, \
         Sky130Lambdalib_la_iovssio
     from lambdapdk.sky130.libs.sky130sc import Sky130_SCHDLibrary, Sky130_SCHDLLLibrary
-    from lambdapdk.sky130.libs.sky130sram import Sky130_SRAM_32x512, \
-        Sky130Lambdalib_SinglePort, Sky130Lambdalib_SinglePortRegfile
+    from lambdapdk.sky130.libs.sky130sram import Sky130_SRAM_32x256, \
+        Sky130_SRAM_8x1024, Sky130_SRAM_32x512, \
+        Sky130Lambdalib_SinglePort, Sky130Lambdalib_DualPort, \
+        Sky130Lambdalib_SinglePortRegfile
 
     return set([
         ASAP7SC7p5RVT(), ASAP7SC7p5SLVT(), ASAP7SC7p5LVT(),
@@ -417,7 +419,9 @@ def get_libs():
         BumpLibrary(),
         Sky130_IOLibrary(),
         Sky130_SCHDLibrary(), Sky130_SCHDLLLibrary(),
-        Sky130_SRAM_32x512(), Sky130Lambdalib_SinglePort(), Sky130Lambdalib_SinglePortRegfile(),
+        Sky130_SRAM_32x256(), Sky130_SRAM_8x1024(), Sky130_SRAM_32x512(),
+        Sky130Lambdalib_SinglePort(), Sky130Lambdalib_DualPort(),
+        Sky130Lambdalib_SinglePortRegfile(),
         Sky130Lambdalib_la_ioanalog(),
         Sky130Lambdalib_la_iobidir(),
         Sky130Lambdalib_la_ioclamp(),

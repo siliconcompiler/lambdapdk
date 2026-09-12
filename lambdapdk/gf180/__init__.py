@@ -1,9 +1,95 @@
 from pathlib import Path
 
-from lambdapdk import LambdaPDK
+from lambdapdk import LambdaPDK, _LambdaPath
 
 # Capacitance unit multiplier: values below are quoted in pF/um.
 pF = 1e-12
+
+# open_pdks install variant per metal stack, from gf180mcu/Makefile.in's
+# *_FULLSTACK definitions:
+#
+#   gf180mcuA = 3LM_1TM_30K    gf180mcuC = 5LM_1TM_9K
+#   gf180mcuB = 4LM_1TM_11K    gf180mcuD = 5LM_1TM_11K
+#
+# Only the GDS and the tech LEFs differ between them; the cell LEF, the liberty,
+# the CDL and the SPICE netlist are byte-identical across all four, so a library
+# view that is not layout takes the same bytes whichever variant it is read
+# from. Keyed on metal count because that is all the GDS depends on -- 6LM has
+# no upstream variant and reuses the 5LM layout, which is what this repository
+# already did with its own per-stackup GDS directories.
+
+
+def variant(stackup):
+    """Returns the open_pdks install variant a stackup's layout comes from.
+
+    Args:
+        stackup (str): Stackup name, either the short ``"3LM"`` form or a full
+            ``"3LM_1TM_30K"``.
+
+    Returns:
+        str: The variant directory name, e.g. ``"gf180mcuA"``.
+    """
+    return {
+        "3LM": "gf180mcuA",
+        "4LM": "gf180mcuB",
+        "5LM": "gf180mcuC",
+        "6LM": "gf180mcuC",
+    }[stackup[:3]]
+
+
+class _GF180Data(_LambdaPath):
+    '''
+    Registers the upstream archives gf180 cell libraries are referenced from.
+
+    Only the *libraries* come from here. The technology collateral -- tech LEFs,
+    OpenRCX decks, magic/netgen/KLayout setup -- stays vendored, because
+    upstream builds four variants where this PDK exposes eleven stackups. See
+    README.md.
+
+    Each archive URL is fully determined by the library name and the revision,
+    so no index is resolved and nothing here touches the network at import time.
+    Registering an archive costs nothing until a file in it is referenced, so
+    every gf180 object declares all of them.
+    '''
+    #: Date of the pinned open_pdks revision, used as the package version.
+    #:
+    #: Everything mixing this in is pinned to one revision, so the revision is
+    #: the version. Its date rather than its SHA -- both name the same pin, and
+    #: only one of them is readable in a manifest or a summary table.
+    PDK_VERSION = "2026-08-27"
+
+    def __init__(self):
+        super().__init__()
+
+        pdk_rev = '1689ac3f2dc763876eaf967227c7dfe831b031ae'
+
+        for library in ("gf180mcu_fd_sc_mcu7t5v0",
+                        "gf180mcu_fd_sc_mcu9t5v0",
+                        "gf180mcu_fd_io",
+                        "gf180mcu_fd_ip_sram",
+                        # Not a cell library: the shared 'libs.tech' tree, of
+                        # which only the Xyce device models are used here.
+                        "common"):
+            self.set_dataroot(
+                library,
+                "https://github.com/fossi-foundation/ciel-releases/releases/download/"
+                f"gf180mcu-{pdk_rev}/{library}.tar.zst",
+                pdk_rev)
+
+        # Tech LEFs are not an open_pdks output. open_pdks installs one per
+        # install variant and builds four, where this PDK exposes eleven
+        # stackups; the standard cell library repositories carry all twelve per
+        # track height, which is the full set this PDK needs. Pinned separately
+        # because they are separate repositories with their own history.
+        for library, lib_rev in (
+                ("gf180mcu_fd_sc_mcu7t5v0", "0ef8889a8df0acf959683fbe73013f342a2206a2"),
+                ("gf180mcu_fd_sc_mcu9t5v0", "02b7af3f8d88c0b014d9af3db6a17f02aa983305")):
+            self.set_dataroot(
+                f"{library}_tech",
+                "https://github.com/fossi-foundation/"
+                f"globalfoundries-pdk-libs-{library}/archive/{lib_rev}.tar.gz",
+                lib_rev)
+
 
 # Per-length RC parasitics measured from the OpenRCX decks by the PEX
 # calibration sweep (lambdapdk/scripts/pex_calibrate_all.py, 2026-09-02), keyed
@@ -363,6 +449,13 @@ _PEX_MIM_OPTION = {
     "6LM_1TM_9K": "B",
 }
 
+#: Stackups open_pdks publishes OpenRCX decks for, and the variant that carries
+#: them. The other nine keep the decks vendored under base/pex/openroad.
+_PEX_UPSTREAM = {
+    "5LM_1TM_9K": "gf180mcuC",
+    "5LM_1TM_11K": "gf180mcuD",
+}
+
 _PEX_CORRECTION = {
     "4LM_1TM_6K": {
         "bst": [
@@ -516,7 +609,7 @@ _PEX_CORRECTION = {
 }
 
 
-class _GF180PDK(LambdaPDK):
+class _GF180PDK(LambdaPDK, _GF180Data):
     '''
     The 'gf180' Open Source PDK is a collaboration between Google and
     Global Foundries to provide a fully open source Process
@@ -547,6 +640,7 @@ class _GF180PDK(LambdaPDK):
         self.set_name(f"GF180_{stackup}_{libtype}")
 
         self.set_foundry("globalfoundries")
+        self.package.set_version(self.PDK_VERSION)
         self.set_node(180)
         self.set_stackup(stackup)
         self.set_wafersize(200)
@@ -566,67 +660,88 @@ class _GF180PDK(LambdaPDK):
         # router can use it at all. Only 3LM and 4LM ship a 30K option.
         thick_top = stackup.endswith("_30K")
 
-        with self.active_dataroot("lambdapdk"):
-            # APR Setup
+        # APR Setup -- the tech LEF comes from the standard cell library
+        # repository, which publishes one per stackup per track height.
+        with self.active_dataroot(f"gf180mcu_fd_sc_mcu{libtype}5v0_tech"):
             with self.active_fileset("views.lef"):
-                self.add_file(pdk_path / "apr" / f"gf180mcu_{stackup}_{libtype}_tech.lef")
+                self.add_file(Path("tech", f"gf180mcu_{stackup}_{libtype}_tech.lef"))
                 for tool in ('openroad', 'klayout', 'magic'):
                     self.add_aprtechfileset(tool)
 
-            if stackup in ('6LM_1TM_9K', '5LM_1TM_9K'):
+        with self.active_dataroot("lambdapdk"):
+            # 6LM keeps the vendored DEF->GDS map: upstream's single
+            # klayout/tech/gf180mcu.map stops at Metal5 and has no MetalTop,
+            # which is the only name 6LM gives its top layer.
+            if stackup == '6LM_1TM_9K':
                 with self.active_fileset("layermap"):
                     self.add_file(pdk_path / "apr" / f"gf180mcu_{stackup}_9t_edi2gds.layermap",
                                   filetype="layermap")
                     self.add_layermapfileset("klayout", "def", "gds")
 
+        if stackup == '5LM_1TM_9K':
+            # Upstream's map covers this stackup: the same Metal1-5 numbers, and
+            # it additionally maps each Metal<n> PIN to datatype 10 where the
+            # vendored file routed that through separate NAME entries.
+            with self.active_dataroot("common"), self.active_fileset("layermap"):
+                self.add_file(
+                    Path(variant(stackup), "libs.tech", "klayout", "tech", "gf180mcu.map"),
+                    filetype="layermap")
+                self.add_layermapfileset("klayout", "def", "gds")
+
+        with self.active_dataroot("common"):
+            # Device models, referenced: upstream ships these under the same
+            # names, plus the .spice and _mim variants this does not register.
             with self.active_fileset("models.spice"):
-                self.add_file(pdk_path / "spice" / "xyce" / "design.xyce", filetype="xyce")
-                self.add_file(pdk_path / "spice" / "xyce" / "sm141064.xyce", filetype="xyce")
-                self.add_file(pdk_path / "spice" / "xyce" / "smbb000149.xyce", filetype="xyce")
+                xyce = Path(variant(stackup), "libs.tech", "xyce")
+                self.add_file(xyce / "design.xyce", filetype="xyce")
+                self.add_file(xyce / "sm141064.xyce", filetype="xyce")
+                self.add_file(xyce / "smbb000149.xyce", filetype="xyce")
                 self.add_devmodelfileset("xyce", "spice")
 
         self.set_aprroutinglayers(min="Metal2", max=top_layer)
 
-        # Klayout setup
+        # Klayout setup. Unlike sky130's, gf180's upstream .lyt is a clean
+        # superset of the copy this repo vendored -- same schema, same tech
+        # name, and it adds <default-grids> -- so both it and the .lyp are
+        # referenced.
+        klayout_tech = Path(variant(stackup), "libs.tech", "klayout", "tech")
+        with self.active_dataroot("common"), self.active_fileset("klayout.techmap"):
+            self.add_file(klayout_tech / "gf180mcu.lyt", filetype="layermap")
+            self.add_file(klayout_tech / "gf180mcu.lyp", filetype="display")
         with self.active_dataroot("lambdapdk"), self.active_fileset("klayout.techmap"):
-            self.add_file(pdk_path / "setup" / "klayout" / "tech" / "gf180mcu.lyt",
-                          filetype="layermap")
-            self.add_file(pdk_path / "setup" / "klayout" / "tech" / "gf180mcu.lyp",
-                          filetype="display")
             self.add_layermapfileset("klayout", "def", "klayout")
             self.add_displayfileset("klayout")
 
         # KLayout DRC
         metal_level, _, metal_top = stackup.split('_')
-        drcs = {
-            "drc": pdk_path / "setup" / "klayout" / "drc" / "gf180mcu.drc",
-            "drc_feol": pdk_path / "setup" / "klayout" / "drc" / "gf180mcu.drc",
-            "drc_beol": pdk_path / "setup" / "klayout" / "drc" / "gf180mcu.drc",
-            "antenna": pdk_path / "setup" / "klayout" / "drc" / "gf180mcu_antenna.drc",
-            "density": pdk_path / "setup" / "klayout" / "drc" / "gf180mcu_density.drc"
-        }
-        for drc, runset in drcs.items():
-            with self.active_dataroot("lambdapdk"), self.active_fileset(f"klayout.drc.{drc}"):
+
+        # Upstream ships a single runset that selects rule decks by tag, where
+        # this repo vendored three entry points and boolean feol/beol switches.
+        # The tags come from the decks themselves ('all', 'feol', 'beol',
+        # 'antenna', 'density'); metal_top / metal_level / mim_option are passed
+        # explicitly rather than through the deck's own variant table, which
+        # only names the six variants open_pdks knows about.
+        runset = Path(variant(stackup), "libs.tech", "klayout", "tech", "drc",
+                      "gf180mcu.drc")
+        for drc, decks in (("drc", "all"),
+                           ("drc_feol", "feol"),
+                           ("drc_beol", "beol"),
+                           ("antenna", "antenna"),
+                           ("density", "density")):
+            with self.active_dataroot("common"), self.active_fileset(f"klayout.drc.{drc}"):
                 self.add_file(runset, filetype="drc")
                 self.add_runsetfileset("drc", "klayout", drc)
 
             self.add_klayout_drcparam(drc, "input=<input>")
             self.add_klayout_drcparam(drc, "topcell=<topcell>")
             self.add_klayout_drcparam(drc, "report=<report>")
-            self.add_klayout_drcparam(drc, "thr=<threads>")
+            # Upstream names this 'threads'; the vendored runset called it
+            # 'thr'. Offgrid is no longer a boolean -- its decks carry the
+            # 'offgrid' tag and are already part of 'all'.
+            self.add_klayout_drcparam(drc, "threads=<threads>")
             self.add_klayout_drcparam(drc, "run_mode=flat")
-            self.add_klayout_drcparam(drc, "offgrid=true")
 
-            if drc in ("drc", "drc_feol", "drc_beol"):
-                feol = "true"
-                beol = "true"
-                if drc == "drc_feol":
-                    beol = "false"
-                if drc == "drc_beol":
-                    feol = "false"
-
-                self.add_klayout_drcparam(drc, f"feol={feol}")
-                self.add_klayout_drcparam(drc, f"beol={beol}")
+            self.add_klayout_drcparam(drc, f"decks={decks}")
 
             self.add_klayout_drcparam(drc, f"metal_top={metal_top}")
             self.add_klayout_drcparam(drc, f"metal_level={metal_level}")
@@ -699,9 +814,29 @@ class _GF180PDK(LambdaPDK):
                     else:
                         self.add_openroad_rclayer(corner, "routing", layer, res, cap * pF)
 
+                # open_pdks publishes extraction rules for two of the eleven
+                # stackups -- gf180mcuC (5LM_1TM_9K) and gf180mcuD
+                # (5LM_1TM_11K) -- so those are referenced and the rest stay
+                # vendored. The suffix-less upstream form is the matching
+                # lineage: gf180mcuD's is byte-identical to the copy this repo
+                # carried, where the '.magic' form differs throughout.
+                upstream_corner = {"bst": "min", "typ": "nom", "wst": "max"}[corner]
+                upstream_variant = _PEX_UPSTREAM.get(stackup)
+
+                if upstream_variant:
+                    with self.active_dataroot("common"), \
+                            self.active_fileset(f"openroad.pex.{corner}"):
+                        self.add_file(
+                            Path(upstream_variant, "libs.tech", "librelane",
+                                 f"rules.openrcx.{upstream_variant}.{upstream_corner}"),
+                            filetype="openrcx")
+                        self.add_pexmodelfileset("openroad", corner)
+                    continue
+
                 stem = f'gf180mcu_1p{stackup.replace("L", "").lower()}_sp_smim'
                 base_name = f"{stem}_OPT{_PEX_MIM_OPTION[stackup]}_{corner}"
-                with self.active_fileset(f"openroad.pex.{corner}"):
+                with self.active_dataroot("lambdapdk"), \
+                        self.active_fileset(f"openroad.pex.{corner}"):
                     self.add_file(pdk_path / "pex" / "openroad" / f"{base_name}.rules",
                                   filetype="openrcx")
 

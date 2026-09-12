@@ -1,47 +1,58 @@
 from pathlib import Path
 
 from lambdapdk import LambdaLibrary
-from lambdapdk.sky130 import Sky130PDK
+from lambdapdk.sky130 import Sky130PDK, _Sky130Data
 
 
-class _Sky130_SCLibrary(LambdaLibrary):
+class _Sky130_SCLibrary(LambdaLibrary, _Sky130Data):
     '''
     Skywater130 standard cell library.
     '''
     def __init__(self, libtype, slow_v):
         super().__init__()
         self.set_name(f"sky130{libtype}")
-
-        self.package.set_version("v0_0_2")
+        self.package.set_version(self.PDK_VERSION)
 
         self.add_asic_pdk(Sky130PDK())
 
         self.add_asic_site(["unithd", "unithddbl"])
 
+        # Upstream views come from the published archive; only the collateral
+        # lambdapdk authors itself -- techmaps, PDN and tapcell scripts -- is
+        # vendored under lib_path.
+        upstream = f"sky130_fd_sc_{libtype}"
+        upstream_path = Path("sky130A", "libs.ref", upstream)
         lib_path = Path("lambdapdk", "sky130", "libs", self.name)
 
-        with self.active_dataroot("lambdapdk"):
+        with self.active_dataroot(upstream):
+            # Upstream ships 18 corners for hd and 13 for hdll, uncompressed. Only
+            # the three the demo scenarios name are registered; the rest are in
+            # the same dataroot and cost nothing extra to add later.
             for corner_name, filename in [
-                    ('slow', f'sky130_fd_sc_{libtype}__ss_n40C_{slow_v}.lib.gz'),
-                    ('typical', f'sky130_fd_sc_{libtype}__tt_025C_1v80.lib.gz'),
-                    ('fast', f'sky130_fd_sc_{libtype}__ff_100C_1v95.lib.gz')]:
+                    ('slow', f'{upstream}__ss_n40C_{slow_v}.lib'),
+                    ('typical', f'{upstream}__tt_025C_1v80.lib'),
+                    ('fast', f'{upstream}__ff_100C_1v95.lib')]:
                 with self.active_fileset(f"models.timing.{corner_name}.nldm"):
-                    self.add_file(lib_path / "nldm" / filename)
+                    self.add_file(upstream_path / "lib" / filename)
                     self.add_asic_libcornerfileset(corner_name, "nldm")
 
-        with self.active_dataroot("lambdapdk"):
             with self.active_fileset("models.physical"):
-                self.add_file(lib_path / "lef" / f"sky130_fd_sc_{libtype}_merged.lef")
-                self.add_file(lib_path / "gds" / f"sky130_fd_sc_{libtype}.gds")
+                # Cell LEF only -- the tech section comes from the PDK, which
+                # registers the same artifact's techlef. The ORFS '_merged.lef'
+                # this replaces carried both, duplicating the tech LEF.
+                self.add_file(upstream_path / "lef" / f"{upstream}.lef")
+                self.add_file(upstream_path / "gds" / f"{upstream}.gds")
                 self.add_asic_aprfileset()
 
             with self.active_fileset("models.lvs"):
-                self.add_file(lib_path / "cdl" / f"sky130_fd_sc_{libtype}.cdl")
+                self.add_file(upstream_path / "cdl" / f"{upstream}.cdl")
                 self.add_asic_aprfileset()
 
             with self.active_fileset("models.sim"):
-                self.add_file(lib_path / "verilog" / f"sky130_fd_sc_{libtype}.v")
-                self.add_file(lib_path / "verilog" / "primitives.v")
+                self.add_file(upstream_path / "verilog" / f"{upstream}.v")
+                self.add_file(upstream_path / "verilog" / "primitives.v")
+
+        with self.active_dataroot("lambdapdk"):
 
             # antenna cells
             self.add_asic_celllist('antenna', f'sky130_fd_sc_{libtype}__diode_2')
@@ -162,7 +173,15 @@ class _Sky130_SCLibrary(LambdaLibrary):
             self.set_openroad_placement_density(0.60)
             self.set_openroad_tielow_cell(f"sky130_fd_sc_{libtype}__conb_1", "LO")
             self.set_openroad_tiehigh_cell(f"sky130_fd_sc_{libtype}__conb_1", "HI")
-            self.set_openroad_macro_placement_halo(40, 40)
+            # 40um was the widest halo of any PDK here, on the second-finest
+            # process -- gf180 uses 15 at 180nm, freepdk45 22.4/15.12, asap7 5.
+            # It also made small floorplans untilable: two 479.78 x 397.5 SRAM
+            # macros grow to 559.78 x 477.5 each, which needs 1119.6um to sit
+            # side by side where a density-0.4 die for that design gives
+            # 1111.8um, and 955um stacked against 889.4um. MPL-0003, no valid
+            # tiling, with the macros occupying 54% of the die. At 20um the
+            # same pair needs 1039.6um or 875um and both orientations fit.
+            self.set_openroad_macro_placement_halo(20, 20)
             self.set_openroad_tapcells_file(lib_path / "apr" / "openroad" / "tapcell.tcl")
 
         # Setup for bambu
