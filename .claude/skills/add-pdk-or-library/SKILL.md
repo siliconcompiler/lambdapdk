@@ -1,0 +1,157 @@
+---
+name: add-pdk-or-library
+description: Add a new PDK, or a new standard-cell / IO / SRAM library to an existing PDK, in the lambdapdk repo. Covers the LambdaPDK / LambdaLibrary class layout, dataroots, filesets, cell lists, OpenROAD / Yosys / KLayout setup, lambdalib wrappers, registration in get_pdks / get_libs, and the matching siliconcompiler demo target. Use when asked to port, add, wire up, or integrate a PDK, process node, standard cell library, IO library, or SRAM macro.
+---
+
+# Adding a PDK or library to lambdapdk
+
+## 1. Decide what you are adding
+
+| The ask | What to build |
+| --- | --- |
+| A new process node (new tech LEF) | New PDK: `lambdapdk/<pdk>/__init__.py` **and** its first stdcell library **and** the SC demo target |
+| A cell library on a node lambdapdk already has | New library module: `lambdapdk/<pdk>/libs/<name>.py` |
+| A Vt / track / stackup variant of a library already here | New subclass in the existing `libs/*.py` module — factor the shared body into a private `_Base` class taking the variant as a ctor arg (see `icsprout55/libs/stdcells.py`, `gt2n/libs/stdcells.py`) |
+| Verilog-level portability (`la_spram`, `la_iobidir`, …) | A `LambalibTechLibrary` wrapper — see `references/lambdalib.md` |
+
+A PDK alone runs nothing: SC needs a main standard cell library. Treat "add a PDK" as the full set — PDK class, first stdcell library, registration, demo target.
+
+**Canonical worked examples**, in order of usefulness:
+
+- `lambdapdk/icsprout55/` — newest, smallest, fetches everything from upstream, heavily commented. Read this first.
+- `lambdapdk/gt2n/` — upstream archive pinned to a git SHA, analytically derived RC.
+- `lambdapdk/sky130/` — the full-featured one: DRC/LVS runsets, OpenRCX PEX decks per corner, metal fill, IO and SRAM libraries, lambdalib wrappers.
+
+## 2. Ground rules
+
+- **Verify API against the source checkouts** at `~/siliconcompiler` (main) and `~/lambdalib`, not `lambdapdk/.venv` — the venv copy is stale and off-main.
+- flake8 max line length **100** (`.flake8`). Tcl is linted *and* format-checked by `tclint` / `tclfmt`, line length 100 (`[tool.tclint]` in `pyproject.toml`). Both are CI gates.
+- `MANIFEST.in` prunes `lambdapdk/*/base` and `lambdapdk/*/libs/*` from the sdist. Collateral reaches users through **dataroots**, not the wheel. Never assume a vendored file ships.
+- Prefer fetching upstream collateral through a dataroot over vendoring it. Vendor only what lambdapdk itself authors: KLayout `.lyt`/`.lyp`, `pdngen.tcl`, `global_connect.tcl`, `tapcells.tcl`, Yosys techmaps, blackbox Verilog, generated lambda views.
+- **Comment the non-obvious.** Reviewers here expect a stated reason for every deviation: which LEF/GDS pair was chosen and why, which liberty corner is skipped and why, where an RC number came from. `icsprout55/libs/stdcells.py` is the model.
+- Do not add symlinks anywhere under the repo — `tests/test_paths.py::test_symbolic_links` fails on them.
+
+## 3. Gather the inputs
+
+Before writing any code, pin down:
+
+1. **Upstream source and revision.** A tag, release, or commit SHA — never a branch. It becomes `pdk_rev` at module top.
+2. **How collateral is distributed.** Repo archive? Release assets? Both (icsprout55 needs three dataroots: repo, liberty tarball, GDS tarball)?
+3. **What exists**: tech LEF, cell LEF, liberty (which corners?), GDS, CDL, Verilog, DRC/LVS decks, OpenRCX/ITF extraction data, layer map.
+4. **What is missing**, and what lambdapdk must therefore author itself (layer map, PDN script, techmaps, RC estimates).
+5. **Metal stack**: layer names, which layers are routable (bottom layer is usually rails/pin-access only), pin layers, preferred directions.
+6. **Site name(s)** and cell naming (prefixes/suffixes per Vt flavor).
+7. **Licensing** — record it in the READMEs.
+
+If any of these is unresolvable from the upstream repo, say so and proceed with the rest rather than blocking; note the gap in the PDK README.
+
+## 4. Directory layout
+
+```
+lambdapdk/<pdk>/
+├── __init__.py            # the PDK class + the _<Pdk>Path dataroot mixin
+├── README.md              # release notes, upstream link, known gaps
+├── target.py              # only if a deprecated alias is needed (see step 8)
+├── base/                  # collateral lambdapdk authors for the PDK
+│   ├── apr/               # tech LEF if vendored
+│   ├── setup/klayout/     # <pdk>.lyt (layermap) + <pdk>.lyp (display)
+│   ├── setup/magic/  setup/netgen/    # DRC/LVS decks
+│   ├── pex/openroad/      # OpenRCX .rules per corner
+│   └── dfm/               # fill.json
+└── libs/
+    ├── stdcells.py        # or <pdk>sc.py / <pdk>mcu.py — follow the PDK's own naming
+    ├── <pdk>io.py
+    ├── <pdk>sram.py
+    └── <libname>/         # per-library authored collateral
+        ├── apr/openroad/  # pdngen.tcl, global_connect.tcl, tapcells.tcl
+        ├── techmap/yosys/ # cells_latch.v, cells_adders.v, cells_tristatebuf.v
+        ├── blackbox/      # generated by scripts/make_blackbox.py
+        └── lambda/        # generated lambdalib views
+```
+
+Collateral shared by every Vt flavor goes in a common dir (`libs/ics55_stdcell/apr/openroad/pdngen.tcl`); per-flavor collateral goes in the flavor's own dir.
+
+## 5. Write the PDK module
+
+Read `references/pdk-setup.md` for the full API, the dataroot mixin pattern, fileset naming, and the RC/PEX conventions.
+
+The short version:
+
+```python
+from pathlib import Path
+from lambdapdk import LambdaPDK, _LambdaPath
+
+pF = 1e-12
+pdk_rev = 'v1.0.0'
+
+
+class _FooPath(_LambdaPath):
+    def __init__(self):
+        super().__init__()
+        self.set_dataroot("foo", f"https://…/archive/refs/tags/{pdk_rev}.tar.gz", pdk_rev)
+
+
+class FooPDK(LambdaPDK, _FooPath):
+    '''Docstring — this is published as the PDK's reference documentation.
+    Describe the process, what the kit contains, and list Sources: links.'''
+
+    def __init__(self):
+        super().__init__()
+        self.set_name("foo130")
+        ...
+```
+
+The separate `_FooPath` mixin exists so the library classes can bind the same upstream dataroot without inheriting the PDK. Always create one when the PDK fetches from upstream.
+
+## 6. Write the library module
+
+Read `references/library-setup.md` for the full API: filesets, cell lists, Yosys/OpenROAD/KLayout/Bambu setup.
+
+Minimum for a usable stdcell library: liberty for at least one corner, LEF + GDS (`models.physical`), a site, the `tie`/`filler`/`tap`/`physicalonly` cell lists, Yosys buffer/driver/tie cells + `set_yosys_abc`, and OpenROAD tie cells + placement density + `pdngen.tcl` / `global_connect.tcl`.
+
+Before trusting a LEF: check every signal pin actually has a routable access point. icsprout55 needed a patched LEF because 50 pins across 49 cells had none — that failure surfaces late, in detailed routing.
+
+## 7. Register everything in lambdapdk
+
+`references/registration.md` has the exact checklist. In brief:
+
+- `lambdapdk/__init__.py`: import + instantiate in `get_pdks()` and `get_libs()`.
+- `lambdapdk/<pdk>/README.md`: new file — release notes, upstream link, explicit list of gaps.
+- Root `README.md`: supported-PDK table, cell library inventory section, architecture tree, license table.
+- `tests/test_lambdalib_interface.py`: only if you added lambdalib memory wrappers.
+
+## 8. Add the siliconcompiler demo target
+
+Demo targets now live in **siliconcompiler**, not here (`lambdapdk/*/target.py` is only a deprecated forwarding shim, kept for PDKs that once shipped one — a brand-new PDK does not need one). In `~/siliconcompiler`:
+
+- `siliconcompiler/targets/<pdk>_demo.py` — copy `icsprout55_demo.py`; set mainlib, add asiclibs, set flows, `set_pdk`, make slow/typical/fast scenarios matching your liberty corners, `set_asic_delaymodel`, area density/margin.
+- `siliconcompiler/targets/__init__.py` — import + `__all__`.
+- `siliconcompiler/targets/_utils.py` — add a branch to `asic_target()`.
+- `tests/targets/test_targets.py` — add to the parametrize list.
+- `docs/reference_manual/predef_modules/{pdks,libs,targets}.rst` and `docs/user_guide/include/supported_technologies.inc`.
+
+The scenario corner names must match the `add_asic_libcornerfileset` corner names in the library, and the pexcorner must match a corner registered via `add_pexmodelfileset` / `add_openroad_rclayer` on the PDK.
+
+## 9. Verify
+
+```bash
+cd /home/pgadfort/lambdapdk
+flake8 --statistics .
+tclfmt --check . && tclint .
+mkdir -p /tmp/lpdk-testrun && cd /tmp/lpdk-testrun && pytest /home/pgadfort/lambdapdk
+```
+
+`tests/test_paths.py` parametrizes over `get_pdks()` / `get_libs()` and calls `check_filepaths()` on each — for a PDK with remote dataroots this **downloads the upstream archives**, so the first run is slow and needs network. Run it from a scratch directory, as CI does.
+
+Then smoke the target end to end:
+
+```python
+from siliconcompiler import ASIC, Design
+from siliconcompiler.targets import foo130_demo
+
+d = Design("heartbeat"); ...
+p = ASIC(d); p.add_fileset(["rtl", "sdc"]); foo130_demo(p)
+p.run(); p.summary()
+```
+
+A flow that reaches route + DRC-clean GDS is the real acceptance test — path checks only prove the files resolve. Report honestly which stages you actually ran.
