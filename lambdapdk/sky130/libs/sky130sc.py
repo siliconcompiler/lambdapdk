@@ -173,7 +173,15 @@ class _Sky130_SCLibrary(LambdaLibrary, _Sky130Data):
             self.set_openroad_placement_density(0.60)
             self.set_openroad_tielow_cell(f"sky130_fd_sc_{libtype}__conb_1", "LO")
             self.set_openroad_tiehigh_cell(f"sky130_fd_sc_{libtype}__conb_1", "HI")
-            self.set_openroad_macro_placement_halo(40, 40)
+            # 40um was the widest halo of any PDK here, on the second-finest
+            # process -- gf180 uses 15 at 180nm, freepdk45 22.4/15.12, asap7 5.
+            # It also made small floorplans untilable: two 479.78 x 397.5 SRAM
+            # macros grow to 559.78 x 477.5 each, which needs 1119.6um to sit
+            # side by side where a density-0.4 die for that design gives
+            # 1111.8um, and 955um stacked against 889.4um. MPL-0003, no valid
+            # tiling, with the macros occupying 54% of the die. At 20um the
+            # same pair needs 1039.6um or 875um and both orientations fit.
+            self.set_openroad_macro_placement_halo(20, 20)
             self.set_openroad_tapcells_file(lib_path / "apr" / "openroad" / "tapcell.tcl")
 
         # Setup for bambu
