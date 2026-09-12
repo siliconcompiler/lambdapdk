@@ -9,7 +9,7 @@ from typing import Dict, Tuple
 
 from lambdalib import LambalibTechLibrary
 from lambdapdk import LambdaLibrary, _LambdaPath
-from lambdalib.ramlib import Dpram, Spram, RAMTechLib
+from lambdalib.ramlib import Dpram, RAMTechLib
 from lambdapdk.sky130 import Sky130PDK, _Sky130Data
 from lambdapdk.utils import format_verilog
 
@@ -207,7 +207,9 @@ class Sky130Lambdalib_SinglePort(LambalibTechLibrary, _LambdaPath):
     wrong.
     """
     def __init__(self):
-        super().__init__("la_spram", Sky130Lambdalib_DualPort().techlibs)
+        dpram = Sky130Lambdalib_DualPort()
+
+        super().__init__("la_spram", dpram.techlibs)
         self.set_name("sky130_la_spram")
 
         # version
@@ -218,13 +220,18 @@ class Sky130Lambdalib_SinglePort(LambalibTechLibrary, _LambdaPath):
         with self.active_dataroot("lambdapdk"):
             with self.active_fileset("rtl"):
                 self.add_file(lib_path / "lambda" / "la_spram.v")
-                self.add_depfileset(Dpram(), "rtl")
+                # The sky130 dpram, not lambdalib's generic one: this adapter
+                # instantiates la_dpram, and depending on the generic cell would
+                # leave it to an alias that the consumer may never apply --
+                # giving the behavioural model instead of the macros.
+                self.add_depfileset(dpram, "rtl")
 
 
 class Sky130Lambdalib_SinglePortRegfile(LambalibTechLibrary, _LambdaPath):
     def __init__(self):
-        super().__init__("la_spregfile",
-                         Sky130Lambdalib_SinglePort().techlibs)
+        spram = Sky130Lambdalib_SinglePort()
+
+        super().__init__("la_spregfile", spram.techlibs)
         self.set_name("sky130_la_spregfile")
 
         # version
@@ -235,7 +242,7 @@ class Sky130Lambdalib_SinglePortRegfile(LambalibTechLibrary, _LambdaPath):
         with self.active_dataroot("lambdapdk"):
             with self.active_fileset("rtl"):
                 self.add_file(lib_path / "lambda" / "la_spregfile.v")
-                self.add_depfileset(Spram(), "rtl")
+                self.add_depfileset(spram, "rtl")
 
 
 if __name__ == "__main__":

@@ -197,8 +197,9 @@ class GF180Lambdalib_SinglePort(LambalibTechLibrary, _LambdaPath):
 
 class GF180Lambdalib_SinglePortRegfile(LambalibTechLibrary, _LambdaPath):
     def __init__(self):
-        super().__init__("la_spregfile",
-                         GF180Lambdalib_SinglePort().techlibs)
+        spram = GF180Lambdalib_SinglePort()
+
+        super().__init__("la_spregfile", spram.techlibs)
         self.set_name("gf180_la_spregfile")
 
         # version
@@ -209,7 +210,12 @@ class GF180Lambdalib_SinglePortRegfile(LambalibTechLibrary, _LambdaPath):
         with self.active_dataroot("lambdapdk"):
             with self.active_fileset("rtl"):
                 self.add_file(lib_path / "lambda" / "la_spregfile.v")
-                self.add_depfileset(Spram(), "rtl")
+                # This PDK's own la_spram, not lambdalib's generic cell: the
+                # regfile wrapper instantiates la_spram, and depending on the
+                # generic one leaves the substitution to an alias the consumer
+                # may never apply -- giving the behavioural model rather than
+                # the macros.
+                self.add_depfileset(spram, "rtl")
 
 
 if __name__ == "__main__":
