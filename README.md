@@ -141,23 +141,21 @@ Three threshold-voltage variants of the same 7-track library, on a 1.4um `core7`
 
 **Cell categories:** AND, OR, NAND, NOR, XOR, XNOR, INV, BUF, Tristate, MUX, DFF, Scan DFF, Latch, AOI, OAI, ICG, Delay, Adder, Tie, Filler, Decap, Tap, Antenna
 
-Nothing from ICsprout55 is vendored here: LEF, CDL and Verilog are fetched from the upstream repository archive, and liberty and GDS from the matching [release assets](https://github.com/openecos-projects/icsprout55-pdk/releases). See the [PDK README](lambdapdk/icsprout55/README.md) for the collateral that lambdapdk supplies itself, and for the gaps (no DRC/LVS decks, no SRAM, no I/O yet).
-
 ### Sky130 (130nm)
 
-| Library | Type | Cells | Verilog |
-|---------|------|-------|---------|
-| [sky130hd](lambdapdk/sky130/libs/sky130hd) | High Density | ~430 unique | [verilog](lambdapdk/sky130/libs/sky130hd/verilog) |
-| [sky130hdll](lambdapdk/sky130/libs/sky130hdll) | High Density Low Leakage | ~140 unique | [verilog](lambdapdk/sky130/libs/sky130hdll/verilog) |
-| [sky130io](lambdapdk/sky130/libs/sky130io) | I/O cells | Various | [verilog](lambdapdk/sky130/libs/sky130io/verilog) |
+| Library | Type | Cells | Upstream |
+|---------|------|-------|----------|
+| [sky130hd](lambdapdk/sky130/libs/sky130sc.py) | High Density | ~430 unique | `sky130_fd_sc_hd` |
+| [sky130hdll](lambdapdk/sky130/libs/sky130sc.py) | High Density Low Leakage | ~140 unique | `sky130_fd_sc_hdll` |
+| [sky130io](lambdapdk/sky130/libs/sky130io.py) | I/O cells | Various | `sky130_fd_io` |
 
 **Cell categories:** AND, OR, NAND, NOR, XOR, INV, BUF, MUX, DFF, Latch, AOI, OAI, Delay, Tie, Filler, Decap, Tap, Antenna
 
-**Memory macros ([sky130sram](lambdapdk/sky130/libs/sky130sram)):**
+**Memory macros ([sky130sram](lambdapdk/sky130/libs/sky130sram.py)):**
 
-| Configuration | Verilog |
-|--------------|---------|
-| 1RW1R 32x512 | [verilog](lambdapdk/sky130/libs/sky130sram/sky130_sram_2kbyte_1rw1r_32x512_8/verilog) |
+| Configuration | Upstream |
+|--------------|----------|
+| 1RW1R 32x512 | `sky130_sram_macros` |
 
 ### GF180 (180nm)
 

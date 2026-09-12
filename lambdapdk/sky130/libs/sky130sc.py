@@ -1,10 +1,10 @@
 from pathlib import Path
 
 from lambdapdk import LambdaLibrary
-from lambdapdk.sky130 import Sky130PDK
+from lambdapdk.sky130 import Sky130PDK, _Sky130Data
 
 
-class _Sky130_SCLibrary(LambdaLibrary):
+class _Sky130_SCLibrary(LambdaLibrary, _Sky130Data):
     '''
     Skywater130 standard cell library.
     '''
@@ -18,30 +18,42 @@ class _Sky130_SCLibrary(LambdaLibrary):
 
         self.add_asic_site(["unithd", "unithddbl"])
 
+        # Upstream views come from the published archive; only the collateral
+        # lambdapdk authors itself -- techmaps, PDN and tapcell scripts -- is
+        # vendored under lib_path.
+        upstream = f"sky130_fd_sc_{libtype}"
+        upstream_path = Path("sky130A", "libs.ref", upstream)
         lib_path = Path("lambdapdk", "sky130", "libs", self.name)
 
-        with self.active_dataroot("lambdapdk"):
+        with self.active_dataroot(upstream):
+            # Upstream ships 18 corners for hd and 13 for hdll, uncompressed. Only
+            # the three the demo scenarios name are registered; the rest are in
+            # the same dataroot and cost nothing extra to add later.
             for corner_name, filename in [
-                    ('slow', f'sky130_fd_sc_{libtype}__ss_n40C_{slow_v}.lib.gz'),
-                    ('typical', f'sky130_fd_sc_{libtype}__tt_025C_1v80.lib.gz'),
-                    ('fast', f'sky130_fd_sc_{libtype}__ff_100C_1v95.lib.gz')]:
+                    ('slow', f'{upstream}__ss_n40C_{slow_v}.lib'),
+                    ('typical', f'{upstream}__tt_025C_1v80.lib'),
+                    ('fast', f'{upstream}__ff_100C_1v95.lib')]:
                 with self.active_fileset(f"models.timing.{corner_name}.nldm"):
-                    self.add_file(lib_path / "nldm" / filename)
+                    self.add_file(upstream_path / "lib" / filename)
                     self.add_asic_libcornerfileset(corner_name, "nldm")
 
-        with self.active_dataroot("lambdapdk"):
             with self.active_fileset("models.physical"):
-                self.add_file(lib_path / "lef" / f"sky130_fd_sc_{libtype}_merged.lef")
-                self.add_file(lib_path / "gds" / f"sky130_fd_sc_{libtype}.gds")
+                # Cell LEF only -- the tech section comes from the PDK, which
+                # registers the same artifact's techlef. The ORFS '_merged.lef'
+                # this replaces carried both, duplicating the tech LEF.
+                self.add_file(upstream_path / "lef" / f"{upstream}.lef")
+                self.add_file(upstream_path / "gds" / f"{upstream}.gds")
                 self.add_asic_aprfileset()
 
             with self.active_fileset("models.lvs"):
-                self.add_file(lib_path / "cdl" / f"sky130_fd_sc_{libtype}.cdl")
+                self.add_file(upstream_path / "cdl" / f"{upstream}.cdl")
                 self.add_asic_aprfileset()
 
             with self.active_fileset("models.sim"):
-                self.add_file(lib_path / "verilog" / f"sky130_fd_sc_{libtype}.v")
-                self.add_file(lib_path / "verilog" / "primitives.v")
+                self.add_file(upstream_path / "verilog" / f"{upstream}.v")
+                self.add_file(upstream_path / "verilog" / "primitives.v")
+
+        with self.active_dataroot("lambdapdk"):
 
             # antenna cells
             self.add_asic_celllist('antenna', f'sky130_fd_sc_{libtype}__diode_2')

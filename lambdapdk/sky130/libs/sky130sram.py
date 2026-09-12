@@ -10,11 +10,11 @@ from typing import Dict, Tuple
 from lambdalib import LambalibTechLibrary
 from lambdapdk import LambdaLibrary, _LambdaPath
 from lambdalib.ramlib import Spram, RAMTechLib
-from lambdapdk.sky130 import Sky130PDK
+from lambdapdk.sky130 import Sky130PDK, _Sky130Data
 from lambdapdk.utils import format_verilog
 
 
-class Sky130_SRAM_32x512(LambdaLibrary, RAMTechLib):
+class Sky130_SRAM_32x512(LambdaLibrary, RAMTechLib, _Sky130Data):
     def __init__(self):
         super().__init__()
         self.set_name('sky130_sram_2kbyte_1rw1r_32x512_8')
@@ -23,24 +23,43 @@ class Sky130_SRAM_32x512(LambdaLibrary, RAMTechLib):
 
         path_base = Path('lambdapdk', 'sky130', 'libs', "sky130sram")
 
+        # The upstream archive carries four OpenRAM macros; this library
+        # exposes the 2kbyte part.
+        upstream_path = Path("sky130A", "libs.ref", "sky130_sram_macros")
+
         with self.active_dataroot("lambdapdk"):
             with self.active_fileset("models.timing.nldm"):
+                # Vendored, not referenced: upstream puts max_transition 0.04 on
+                # the addr0/wmask0/addr1 buses, which no sky130hd cell can drive,
+                # so the resizer fails with RSZ-0090 on any design using this
+                # macro. This copy is the upstream liberty at pdk_rev with those
+                # three lines removed -- regenerate it with
+                # scripts/patch_sky130sram_maxtran.py. See PATCHES.md.
                 self.add_file(path_base / self.name / "nldm" / f"{self.name}_TT_1p8V_25C.lib")
                 self.add_asic_libcornerfileset("generic", "nldm")
 
-        with self.active_dataroot("lambdapdk"):
+        with self.active_dataroot("sky130_sram_macros"):
             with self.active_fileset("models.physical"):
-                self.add_file(path_base / self.name / "lef" / f"{self.name}.lef")
-                self.add_file(path_base / self.name / "gds" / f"{self.name}.gds")
+                # Byte-identical to what this repo used to vendor.
+                self.add_file(upstream_path / "lef" / f"{self.name}.lef")
+                self.add_file(upstream_path / "gds" / f"{self.name}.gds")
                 self.add_asic_aprfileset()
 
             with self.active_fileset("models.lvs"):
-                self.add_file(path_base / self.name / "spice" / f"{self.name}.lvs.sp",
+                # The upstream 'spice' view *is* the LVS netlist -- its header
+                # says so, and it matches the copy this repo used to vendor
+                # except that open_pdks strips the 'u' from the W=/L= device
+                # parameters. That stripping is open_pdks' own transform, not
+                # drift: fossi-foundation/sky130_sram_macros still writes 0.21u
+                # at HEAD. This is the form open_pdks installs and the form its
+                # netgen setup is written against.
+                self.add_file(upstream_path / "spice" / f"{self.name}.spice",
                               filetype="cdl")
                 self.add_asic_aprfileset()
 
-            with self.active_fileset("models.spice"):
-                self.add_file(path_base / self.name / "spice" / f"{self.name}.sp")
+        # There is no 'models.spice' fileset: open_pdks installs only the LVS
+        # netlist, and the OpenRAM simulation netlist it omits was dropped rather
+        # than carried here, since nothing in this repository can maintain it.
 
         with self.active_dataroot("lambdapdk"):
             with self.active_fileset("openroad.powergrid"):
