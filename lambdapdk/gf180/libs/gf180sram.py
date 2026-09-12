@@ -10,7 +10,7 @@ from typing import Dict, Tuple
 from lambdalib import LambalibTechLibrary
 from lambdapdk import LambdaLibrary, _LambdaPath
 from lambdalib.ramlib import Spram, RAMTechLib
-from lambdapdk.gf180 import GF180_3LM_1TM_6K_7t, \
+from lambdapdk.gf180 import _GF180Data, GF180_3LM_1TM_6K_7t, \
     GF180_3LM_1TM_6K_9t, \
     GF180_3LM_1TM_9K_7t, \
     GF180_3LM_1TM_9K_9t, \
@@ -35,10 +35,11 @@ from lambdapdk.gf180 import GF180_3LM_1TM_6K_7t, \
 from lambdapdk.utils import format_verilog
 
 
-class _GF180SRAMLibrary(LambdaLibrary, RAMTechLib):
+class _GF180SRAMLibrary(LambdaLibrary, RAMTechLib, _GF180Data):
     def __init__(self, config):
         super().__init__()
         self.set_name(f"gf180mcu_fd_ip_sram__sram{config}m8wm1")
+        self.package.set_version(self.PDK_VERSION)
 
         self.add_asic_pdk(GF180_3LM_1TM_6K_7t(), default=False)
         self.add_asic_pdk(GF180_3LM_1TM_6K_9t(), default=False)
@@ -65,27 +66,33 @@ class _GF180SRAMLibrary(LambdaLibrary, RAMTechLib):
 
         path_base = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_ip_sram")
 
-        with self.active_dataroot("lambdapdk"):
+        # These macros are identical in all four install variants -- every one
+        # of the 76 library files matches byte for byte -- so the variant in the
+        # path is arbitrary and gf180mcuA is used throughout.
+        upstream = Path("gf180mcuA", "libs.ref", "gf180mcu_fd_ip_sram")
+
+        with self.active_dataroot("gf180mcu_fd_ip_sram"):
             with self.active_fileset("models.physical"):
-                self.add_file(path_base / "lef" / f"{self.name}.lef")
-                self.add_file(path_base / "gds" / f"{self.name}.gds.gz")
+                self.add_file(upstream / "lef" / f"{self.name}.lef")
+                self.add_file(upstream / "gds" / f"{self.name}.gds")
                 self.add_asic_aprfileset()
 
             with self.active_fileset("models.lvs"):
-                self.add_file(path_base / "cdl" / f"{self.name}.cdl")
+                self.add_file(upstream / "cdl" / f"{self.name}.cdl")
                 self.add_asic_aprfileset()
 
             for corner_name, filename in [
-                    ('slow', f'{self.name}__ss_125C_4v50.lib.gz'),
-                    ('typical', f'{self.name}__tt_025C_5v00.lib.gz'),
-                    ('fast', f'{self.name}__ff_n40C_5v50.lib.gz')]:
+                    ('slow', f'{self.name}__ss_125C_4v50.lib'),
+                    ('typical', f'{self.name}__tt_025C_5v00.lib'),
+                    ('fast', f'{self.name}__ff_n40C_5v50.lib')]:
                 with self.active_fileset(f"models.timing.nldm.{corner_name}"):
-                    self.add_file(path_base / "nldm" / filename)
+                    self.add_file(upstream / "lib" / filename)
                     self.add_asic_libcornerfileset(corner_name, "nldm")
 
             with self.active_fileset("models.spice"):
-                self.add_file(path_base / "spice" / f"{self.name}.spice")
+                self.add_file(upstream / "spice" / f"{self.name}.spice")
 
+        with self.active_dataroot("lambdapdk"):
             with self.active_fileset("openroad.powergrid"):
                 self.add_file(path_base / "apr" / "openroad" / "pdngen.tcl")
                 self.add_openroad_powergridfileset()

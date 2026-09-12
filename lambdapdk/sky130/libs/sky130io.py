@@ -87,6 +87,7 @@ class Sky130_IOLibrary(LambdaLibrary, _Sky130Data):
     def __init__(self):
         super().__init__()
         self.set_name("sky130io")
+        self.package.set_version(self.PDK_VERSION)
 
         self.add_asic_pdk(Sky130PDK())
 

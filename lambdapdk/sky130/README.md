@@ -5,9 +5,12 @@ The SkyWater 130nm open source PDK, wired into SiliconCompiler.
 Collateral is **fetched, not vendored**. Every liberty, LEF, tech LEF, GDS, CDL and Verilog view is
 referenced out of the published build of the
 [open_pdks](https://github.com/RTimothyEdwards/open_pdks) revision pinned as `pdk_rev` in
-[`__init__.py`](__init__.py), the same way `ihp130` and `gt2n` reach their upstreams. Bumping
+`_Sky130Data` ([`__init__.py`](__init__.py)), the same way `ihp130` and `gt2n` reach their upstreams. Bumping
 `pdk_rev` re-points the standard cells, the IO and the memories together, so they stay mutually
 consistent the way an open_pdks install is.
+
+The PDK and every library report that revision's date, `2026-08-27`, as their package version
+(`PDK_VERSION` on the dataroot mixin) — so a manifest says which pin a run used.
 
 Upstream libraries used, each registered as its own dataroot so a design downloads only what it uses:
 

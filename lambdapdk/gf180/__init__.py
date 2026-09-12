@@ -1,9 +1,81 @@
 from pathlib import Path
 
-from lambdapdk import LambdaPDK
+from lambdapdk import LambdaPDK, _LambdaPath
 
 # Capacitance unit multiplier: values below are quoted in pF/um.
 pF = 1e-12
+
+# open_pdks install variant per metal stack, from gf180mcu/Makefile.in's
+# *_FULLSTACK definitions:
+#
+#   gf180mcuA = 3LM_1TM_30K    gf180mcuC = 5LM_1TM_9K
+#   gf180mcuB = 4LM_1TM_11K    gf180mcuD = 5LM_1TM_11K
+#
+# Only the GDS and the tech LEFs differ between them; the cell LEF, the liberty,
+# the CDL and the SPICE netlist are byte-identical across all four, so a library
+# view that is not layout takes the same bytes whichever variant it is read
+# from. Keyed on metal count because that is all the GDS depends on -- 6LM has
+# no upstream variant and reuses the 5LM layout, which is what this repository
+# already did with its own per-stackup GDS directories.
+
+
+def variant(stackup):
+    """Returns the open_pdks install variant a stackup's layout comes from.
+
+    Args:
+        stackup (str): Stackup name, either the short ``"3LM"`` form or a full
+            ``"3LM_1TM_30K"``.
+
+    Returns:
+        str: The variant directory name, e.g. ``"gf180mcuA"``.
+    """
+    return {
+        "3LM": "gf180mcuA",
+        "4LM": "gf180mcuB",
+        "5LM": "gf180mcuC",
+        "6LM": "gf180mcuC",
+    }[stackup[:3]]
+
+
+class _GF180Data(_LambdaPath):
+    '''
+    Registers the upstream archives gf180 cell libraries are referenced from.
+
+    Only the *libraries* come from here. The technology collateral -- tech LEFs,
+    OpenRCX decks, magic/netgen/KLayout setup -- stays vendored, because
+    upstream builds four variants where this PDK exposes eleven stackups. See
+    README.md.
+
+    Each archive URL is fully determined by the library name and the revision,
+    so no index is resolved and nothing here touches the network at import time.
+    Registering an archive costs nothing until a file in it is referenced, so
+    every gf180 object declares all of them.
+    '''
+    #: Date of the pinned open_pdks revision, used as the package version.
+    #:
+    #: Everything mixing this in is pinned to one revision, so the revision is
+    #: the version. Its date rather than its SHA -- both name the same pin, and
+    #: only one of them is readable in a manifest or a summary table.
+    PDK_VERSION = "2026-08-27"
+
+    def __init__(self):
+        super().__init__()
+
+        pdk_rev = '1689ac3f2dc763876eaf967227c7dfe831b031ae'
+
+        for library in ("gf180mcu_fd_sc_mcu7t5v0",
+                        "gf180mcu_fd_sc_mcu9t5v0",
+                        "gf180mcu_fd_io",
+                        "gf180mcu_fd_ip_sram",
+                        # Not a cell library: the shared 'libs.tech' tree, of
+                        # which only the Xyce device models are used here.
+                        "common"):
+            self.set_dataroot(
+                library,
+                "https://github.com/fossi-foundation/ciel-releases/releases/download/"
+                f"gf180mcu-{pdk_rev}/{library}.tar.zst",
+                pdk_rev)
+
 
 # Per-length RC parasitics measured from the OpenRCX decks by the PEX
 # calibration sweep (lambdapdk/scripts/pex_calibrate_all.py, 2026-09-02), keyed
@@ -516,7 +588,7 @@ _PEX_CORRECTION = {
 }
 
 
-class _GF180PDK(LambdaPDK):
+class _GF180PDK(LambdaPDK, _GF180Data):
     '''
     The 'gf180' Open Source PDK is a collaboration between Google and
     Global Foundries to provide a fully open source Process
@@ -547,6 +619,7 @@ class _GF180PDK(LambdaPDK):
         self.set_name(f"GF180_{stackup}_{libtype}")
 
         self.set_foundry("globalfoundries")
+        self.package.set_version(self.PDK_VERSION)
         self.set_node(180)
         self.set_stackup(stackup)
         self.set_wafersize(200)
@@ -579,10 +652,14 @@ class _GF180PDK(LambdaPDK):
                                   filetype="layermap")
                     self.add_layermapfileset("klayout", "def", "gds")
 
+        with self.active_dataroot("common"):
+            # Device models, referenced: upstream ships these under the same
+            # names, plus the .spice and _mim variants this does not register.
             with self.active_fileset("models.spice"):
-                self.add_file(pdk_path / "spice" / "xyce" / "design.xyce", filetype="xyce")
-                self.add_file(pdk_path / "spice" / "xyce" / "sm141064.xyce", filetype="xyce")
-                self.add_file(pdk_path / "spice" / "xyce" / "smbb000149.xyce", filetype="xyce")
+                xyce = Path(variant(stackup), "libs.tech", "xyce")
+                self.add_file(xyce / "design.xyce", filetype="xyce")
+                self.add_file(xyce / "sm141064.xyce", filetype="xyce")
+                self.add_file(xyce / "smbb000149.xyce", filetype="xyce")
                 self.add_devmodelfileset("xyce", "spice")
 
         self.set_aprroutinglayers(min="Metal2", max=top_layer)

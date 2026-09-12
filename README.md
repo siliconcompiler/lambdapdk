@@ -159,19 +159,19 @@ Three threshold-voltage variants of the same 7-track library, on a 1.4um `core7`
 
 ### GF180 (180nm)
 
-| Library | Type | Cells | Verilog |
-|---------|------|-------|---------|
-| [gf180mcu_fd_sc_mcu7t5v0](lambdapdk/gf180/libs/gf180mcu_fd_sc_mcu7t5v0) | 7-track | ~230 | [verilog](lambdapdk/gf180/libs/gf180mcu_fd_sc_mcu7t5v0/verilog) |
-| [gf180mcu_fd_sc_mcu9t5v0](lambdapdk/gf180/libs/gf180mcu_fd_sc_mcu9t5v0) | 9-track | ~230 | [verilog](lambdapdk/gf180/libs/gf180mcu_fd_sc_mcu9t5v0/verilog) |
-| [gf180mcu_fd_io](lambdapdk/gf180/libs/gf180mcu_fd_io) | I/O cells | Various | [verilog](lambdapdk/gf180/libs/gf180mcu_fd_io/verilog) |
+| Library | Type | Upstream |
+|---------|------|----------|
+| [gf180mcu_fd_sc_mcu7t5v0](lambdapdk/gf180/libs/gf180mcu.py) | 7-track standard cells | `gf180mcu_fd_sc_mcu7t5v0` |
+| [gf180mcu_fd_sc_mcu9t5v0](lambdapdk/gf180/libs/gf180mcu.py) | 9-track standard cells | `gf180mcu_fd_sc_mcu9t5v0` |
+| [gf180mcu_fd_io](lambdapdk/gf180/libs/gf180io.py) | I/O cells | `gf180mcu_fd_io` |
 
 **Cell categories:** AND, OR, NAND, NOR, XOR, INV, BUF, MUX, DFF, Latch, AOI, OAI, Tristate, Delay, Tie, Filler, Decap, Tap, Antenna
 
-**Memory macros ([gf180sram](lambdapdk/gf180/libs/gf180mcu_fd_ip_sram)):**
+**Memory macros ([gf180sram](lambdapdk/gf180/libs/gf180sram.py)):**
 
-| Configuration | Verilog |
-|--------------|---------|
-| 64x8 to 512x8 | [verilog](lambdapdk/gf180/libs/gf180mcu_fd_ip_sram/verilog) |
+| Configuration | Upstream |
+|--------------|----------|
+| 64x8 to 512x8 | `gf180mcu_fd_ip_sram` |
 
 ### IHP130 (130nm SiGe)
 

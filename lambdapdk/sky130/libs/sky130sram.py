@@ -18,6 +18,7 @@ class Sky130_SRAM_32x512(LambdaLibrary, RAMTechLib, _Sky130Data):
     def __init__(self):
         super().__init__()
         self.set_name('sky130_sram_2kbyte_1rw1r_32x512_8')
+        self.package.set_version(self.PDK_VERSION)
 
         self.add_asic_pdk(Sky130PDK())
 

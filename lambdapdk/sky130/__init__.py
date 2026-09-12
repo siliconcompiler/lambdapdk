@@ -5,51 +5,52 @@ from lambdapdk import LambdaPDK, _LambdaPath
 # Capacitance unit multiplier: values below are quoted in pF/um.
 pF = 1e-12
 
-# The open_pdks revision every sky130 view is taken from.
-#
-# open_pdks builds these libraries and publishes one archive per installed
-# library directory for each revision, so a library reaches its files through
-# set_dataroot the same way ihp130 and gt2n reach theirs -- nothing is copied
-# into this repository except the two files that need a local patch (see
-# PATCHES.md).
-#
-# Bumping this re-points every sky130 dataroot at once, which is the point: one
-# revision keeps the standard cells, the IO and the memories mutually
-# consistent, the way an open_pdks install is.
-pdk_rev = '1689ac3f2dc763876eaf967227c7dfe831b031ae'
-
-# The published archives sky130 collateral is referenced from, each registered
-# under its own name so that a design downloads only the libraries it uses.
-#
-# Paths into them are written out at each use and look like
-# 'sky130A/libs.ref/<library>/<view>/<file>'. The 'sky130A' variant is the
-# plain library; 'sky130B' is the same thing plus the ReRAM module, which
-# nothing here uses. Every archive carries both.
-_LIBRARIES = (
-    "sky130_fd_sc_hd",
-    "sky130_fd_sc_hdll",
-    "sky130_fd_io",
-    "sky130_sram_macros",
-    # Not a cell library: the shared 'libs.tech' tree, holding the tool setup --
-    # KLayout display and DRC, magic, netgen, ngspice models, the OpenRCX decks.
-    # 60 MB unpacked, the smallest of the archives by an order of magnitude.
-    "common",
-)
-
 
 class _Sky130Data(_LambdaPath):
     '''
     Registers the upstream archives sky130 collateral is referenced from.
 
-    Each archive URL is fully determined by the library name and ``pdk_rev``, so
-    no index is resolved and nothing here touches the network at import time.
+    open_pdks builds these libraries and publishes one archive per installed
+    library directory for each revision, so a library reaches its files through
+    set_dataroot the same way ihp130 and gt2n reach theirs -- nothing is copied
+    into this repository except the two files that need a local patch (see
+    PATCHES.md).
+
+    Each archive URL is fully determined by the library name and the revision,
+    so no index is resolved and nothing here touches the network at import time.
     Registering an archive costs nothing until a file in it is referenced, so
     every sky130 object declares all of them.
+
+    Paths into an unpacked archive are written out at each use and look like
+    'sky130A/libs.ref/<library>/<view>/<file>'. The 'sky130A' variant is the
+    plain library; 'sky130B' is the same thing plus the ReRAM module, which
+    nothing here uses. Every archive carries both.
     '''
+    #: Date of the pinned open_pdks revision, used as the package version.
+    #:
+    #: Everything mixing this in is pinned to one revision, so the revision is
+    #: the version. Its date rather than its SHA -- both name the same pin, and
+    #: only one of them is readable in a manifest or a summary table.
+    PDK_VERSION = "2026-08-27"
+
     def __init__(self):
         super().__init__()
 
-        for library in _LIBRARIES:
+        # Bumping this re-points every sky130 dataroot at once, which is the
+        # point: one revision keeps the standard cells, the IO and the memories
+        # mutually consistent, the way an open_pdks install is.
+        pdk_rev = '1689ac3f2dc763876eaf967227c7dfe831b031ae'
+
+        for library in ("sky130_fd_sc_hd",
+                        "sky130_fd_sc_hdll",
+                        "sky130_fd_io",
+                        "sky130_sram_macros",
+                        # Not a cell library: the shared 'libs.tech' tree with
+                        # the tool setup -- KLayout display and DRC, magic,
+                        # netgen, ngspice models, the OpenRCX decks. 60 MB
+                        # unpacked, the smallest archive by an order of
+                        # magnitude.
+                        "common"):
             self.set_dataroot(
                 library,
                 "https://github.com/fossi-foundation/ciel-releases/releases/download/"
@@ -91,7 +92,7 @@ class Sky130PDK(LambdaPDK, _Sky130Data):
         self.set_name("skywater130")
 
         self.set_foundry("skywater")
-        self.package.set_version("v0_0_2")
+        self.package.set_version(self.PDK_VERSION)
         self.set_stackup("5M1LI")
         self.set_node(130)
 
@@ -99,13 +100,12 @@ class Sky130PDK(LambdaPDK, _Sky130Data):
 
         # APR Setup
         #
-        # The tech LEF is taken by reference from the upstream archive: the
-        # '__nom.tlef' there is byte-identical to the copy this repo used to
-        # vendor as base/apr/sky130_fd_sc.tlef, so this is a pure sourcing
-        # change. min/max variants sit beside it in the same dataroot.
+        # The tech LEF is taken by reference: the '__nom.tlef' upstream is
+        # byte-identical to the copy this repo used to vendor as
+        # base/apr/sky130_fd_sc.tlef, so this is a pure sourcing change.
         # open_pdks emits one tech LEF per standard cell library rather than one
         # per process; they describe the same metal stack, and hd is the main
-        # library here. min/max variants sit beside it in the same dataroot.
+        # library here. min/max sit beside it in the same dataroot.
         with self.active_dataroot("sky130_fd_sc_hd"):
             with self.active_fileset("views.lef"):
                 self.add_file(
