@@ -19,7 +19,7 @@ Upstream libraries used, each registered as its own dataroot so a design downloa
 | `sky130_fd_sc_hd` | `sky130hd` cells, and the tech LEF the PDK registers |
 | `sky130_fd_sc_hdll` | `sky130hdll` cells |
 | `sky130_fd_io` | `sky130io` timing, GDS and Verilog |
-| `sky130_sram_macros` | `sky130sram` LEF, GDS and LVS netlist |
+| `sky130_sram_macros` | `sky130sram` LEF, GDS and LVS netlist for all three macros |
 | `common` | the shared `libs.tech` tree — KLayout display, OpenRCX decks |
 
 Paths into an unpacked archive look like `sky130A/libs.ref/<library>/<view>/<file>`. `sky130A` is the
