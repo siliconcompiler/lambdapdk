@@ -179,9 +179,11 @@ class _Sky130_SCLibrary(LambdaLibrary, _Sky130Data):
             # macros grow to 559.78 x 477.5 each, which needs 1119.6um to sit
             # side by side where a density-0.4 die for that design gives
             # 1111.8um, and 955um stacked against 889.4um. MPL-0003, no valid
-            # tiling, with the macros occupying 54% of the die. At 20um the
-            # same pair needs 1039.6um or 875um and both orientations fit.
-            self.set_openroad_macro_placement_halo(20, 20)
+            # tiling, with the macros occupying 54% of the die. 20um tiled but
+            # left too little channel and the design then failed global routing,
+            # so 30um: the same pair needs 1079.6um side by side, which still
+            # fits, and it keeps three quarters of the original channel.
+            self.set_openroad_macro_placement_halo(30, 30)
             self.set_openroad_tapcells_file(lib_path / "apr" / "openroad" / "tapcell.tcl")
 
         # Setup for bambu
