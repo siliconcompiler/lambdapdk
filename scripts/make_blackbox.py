@@ -32,9 +32,12 @@ def get_cells(path):
     return cells
 
 
-def write_blackbox(lef_file, filename):
+def write_blackbox(lef_file, filename, source=None):
     with open(filename, 'w') as f:
-        f.write(f"// Source {os.path.relpath(lef_file, os.getcwd())}\n")
+        # The recorded source is a label, not a path to open: a LEF read out of a
+        # fetched dataroot lives under a machine-specific cache directory, which
+        # must not end up in a committed file.
+        f.write(f"// Source {source or os.path.relpath(lef_file, os.getcwd())}\n")
 
         for cell, pins in get_cells(lef_file).items():
             f.write("\n(* blackbox *)\n")
@@ -54,7 +57,9 @@ if __name__ == "__main__":
         description='Create blackbox verilog model file from lef file')
     parser.add_argument('--lef', required=True, help='Liberty file', metavar='<file>')
     parser.add_argument('--output', required=True, help='Output file', metavar='<file>')
+    parser.add_argument('--source', help='Source label recorded in the output, for a LEF read '
+                                         'from a dataroot cache', metavar='<label>')
 
     args = parser.parse_args()
 
-    write_blackbox(args.lef, args.output)
+    write_blackbox(args.lef, args.output, args.source)

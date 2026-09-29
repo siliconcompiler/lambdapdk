@@ -3,7 +3,7 @@ from pathlib import Path
 from siliconcompiler import ASIC
 from lambdalib import LambalibTechLibrary
 from lambdapdk import LambdaLibrary, _LambdaPath
-from lambdapdk.gf180 import GF180_3LM_1TM_6K_7t, \
+from lambdapdk.gf180 import _GF180Data, variant, GF180_3LM_1TM_6K_7t, \
     GF180_3LM_1TM_6K_9t, \
     GF180_3LM_1TM_9K_7t, \
     GF180_3LM_1TM_9K_9t, \
@@ -25,13 +25,35 @@ from lambdapdk.gf180 import GF180_3LM_1TM_6K_7t, \
     GF180_5LM_1TM_11K_9t
 
 
-class _GF180IOLibrary(LambdaLibrary):
+# The IO cells, one LEF each upstream. 'ef' is the Efabless-generated wrapper
+# that open_pdks builds alongside the foundry 'fd' cells.
+_IO_CELLS = (
+    "gf180mcu_ef_io__bi_t",
+    "gf180mcu_fd_io__asig_5p0",
+    "gf180mcu_fd_io__bi_24t",
+    "gf180mcu_fd_io__bi_t",
+    "gf180mcu_fd_io__brk2",
+    "gf180mcu_fd_io__brk5",
+    "gf180mcu_fd_io__cor",
+    "gf180mcu_fd_io__dvdd",
+    "gf180mcu_fd_io__dvss",
+    "gf180mcu_fd_io__fill1",
+    "gf180mcu_fd_io__fill10",
+    "gf180mcu_fd_io__fill5",
+    "gf180mcu_fd_io__fillnc",
+    "gf180mcu_fd_io__in_c",
+    "gf180mcu_fd_io__in_s",
+)
+
+
+class _GF180IOLibrary(LambdaLibrary, _GF180Data):
     '''
     GloabalFoundries 180 I/O library.
     '''
     def __init__(self, stackup):
         super().__init__()
         self.set_name(f"gf180mcu_fd_io_{stackup}")
+        self.package.set_version(self.PDK_VERSION)
 
         path_base = Path("lambdapdk", "gf180", "libs", "gf180mcu_fd_io")
 
@@ -61,26 +83,35 @@ class _GF180IOLibrary(LambdaLibrary):
         else:
             raise ValueError(f"{stackup} is not supported")
 
-        with self.active_dataroot("lambdapdk"):
+        upstream_path = Path(variant(stackup), "libs.ref", "gf180mcu_fd_io")
+
+        with self.active_dataroot("gf180mcu_fd_io"):
+            # Upstream ships 12 corners uncompressed; these three are the set
+            # this library has always registered.
             for corner_name, filename in [
-                    ('slow', 'gf180mcu_fd_io__ss_125C_2v97.lib.gz'),
-                    ('typical', 'gf180mcu_fd_io__tt_025C_3v30.lib.gz'),
-                    ('fast', 'gf180mcu_fd_io__ff_125C_3v63.lib.gz')]:
+                    ('slow', 'gf180mcu_fd_io__ss_125C_2v97.lib'),
+                    ('typical', 'gf180mcu_fd_io__tt_025C_3v30.lib'),
+                    ('fast', 'gf180mcu_fd_io__ff_125C_3v63.lib')]:
                 with self.active_fileset(f"models.timing.{corner_name}.nldm"):
-                    self.add_file(path_base / "nldm" / filename)
+                    self.add_file(upstream_path / "lib" / filename)
                     self.add_asic_libcornerfileset(corner_name, "nldm")
 
             with self.active_fileset("models.spice"):
-                self.add_file(path_base / "spice" / stackup / "gf180mcu_fd_io.spice")
+                self.add_file(upstream_path / "spice" / "gf180mcu_fd_io.spice")
 
-        with self.active_dataroot("lambdapdk"):
             with self.active_fileset("models.physical"):
-                self.add_file(path_base / "lef" / stackup / "gf180mcu_fd_io.lef")
-                self.add_file(path_base / "gds" / stackup / "gf180mcu_fd_io.gds.gz")
+                # One LEF per cell, not the single merged file this used to
+                # vendor. That merged LEF declared every macro *twice* -- 28
+                # MACRO statements for 14 cells, in all three stackups -- and
+                # was missing gf180mcu_ef_io__bi_t, which upstream ships.
+                for cell in _IO_CELLS:
+                    self.add_file(upstream_path / "lef" / f"{cell}.lef")
+                self.add_file(upstream_path / "gds" / "gf180mcu_fd_io.gds")
+                self.add_file(upstream_path / "gds" / "gf180mcu_ef_io.gds")
                 self.add_asic_aprfileset()
 
             with self.active_fileset("models.lvs"):
-                self.add_file(path_base / "cdl" / "gf180mcu_fd_io.cdl")
+                self.add_file(upstream_path / "cdl" / "gf180mcu_fd_io.cdl")
                 self.add_asic_aprfileset()
 
         self.add_asic_celllist("filler", [

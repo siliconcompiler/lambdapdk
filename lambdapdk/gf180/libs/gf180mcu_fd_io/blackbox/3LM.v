@@ -1,4 +1,25 @@
-// Source lambdapdk/gf180/libs/gf180mcu_fd_io/lef/3LM/gf180mcu_fd_io.lef
+// Source gf180mcuA/libs.ref/gf180mcu_fd_io/lef/*.lef @ pdk_rev
+
+(* blackbox *)
+module gf180mcu_ef_io__bi_t (
+    input A,
+    input CS,
+    inout DVDD,
+    inout DVSS,
+    input IE,
+    input OE,
+    inout PAD,
+    input PD,
+    input PDRV0,
+    input PDRV1,
+    input PU,
+    input SL,
+    inout VDD,
+    inout VSS,
+    output Y,
+    inout ANA
+);
+endmodule
 
 (* blackbox *)
 module gf180mcu_fd_io__asig_5p0 (
@@ -12,39 +33,39 @@ endmodule
 
 (* blackbox *)
 module gf180mcu_fd_io__bi_24t (
-    inout PAD,
     input A,
     input CS,
+    inout DVDD,
+    inout DVSS,
     input IE,
     input OE,
+    inout PAD,
     input PD,
     input PU,
     input SL,
-    output Y,
-    inout DVDD,
-    inout DVSS,
     inout VDD,
-    inout VSS
+    inout VSS,
+    output Y
 );
 endmodule
 
 (* blackbox *)
 module gf180mcu_fd_io__bi_t (
-    inout PAD,
     input A,
     input CS,
+    inout DVDD,
+    inout DVSS,
     input IE,
     input OE,
+    inout PAD,
     input PD,
     input PDRV0,
     input PDRV1,
     input PU,
     input SL,
-    output Y,
-    inout DVDD,
-    inout DVSS,
     inout VDD,
-    inout VSS
+    inout VSS,
+    output Y
 );
 endmodule
 
@@ -79,9 +100,18 @@ endmodule
 
 (* blackbox *)
 module gf180mcu_fd_io__dvss (
-    inout DVSS,
     inout DVDD,
+    inout DVSS,
     inout VDD
+);
+endmodule
+
+(* blackbox *)
+module gf180mcu_fd_io__fill10 (
+    inout DVDD,
+    inout DVSS,
+    inout VDD,
+    inout VSS
 );
 endmodule
 
@@ -104,15 +134,6 @@ module gf180mcu_fd_io__fill5 (
 endmodule
 
 (* blackbox *)
-module gf180mcu_fd_io__fill10 (
-    inout DVDD,
-    inout DVSS,
-    inout VDD,
-    inout VSS
-);
-endmodule
-
-(* blackbox *)
 module gf180mcu_fd_io__fillnc (
     inout DVDD,
     inout DVSS,
@@ -123,26 +144,26 @@ endmodule
 
 (* blackbox *)
 module gf180mcu_fd_io__in_c (
+    inout DVDD,
+    inout DVSS,
     input PAD,
     input PD,
     input PU,
-    output Y,
-    inout DVDD,
-    inout DVSS,
     inout VDD,
-    inout VSS
+    inout VSS,
+    output Y
 );
 endmodule
 
 (* blackbox *)
 module gf180mcu_fd_io__in_s (
+    inout DVDD,
+    inout DVSS,
     input PAD,
     input PD,
     input PU,
-    output Y,
-    inout DVDD,
-    inout DVSS,
     inout VDD,
-    inout VSS
+    inout VSS,
+    output Y
 );
 endmodule

@@ -2,6 +2,7 @@ import pytest
 
 from lambdapdk.sky130.libs.sky130sram import (
     Sky130Lambdalib_SinglePort,
+    Sky130Lambdalib_DualPort,
     Sky130Lambdalib_SinglePortRegfile,
 )
 from lambdapdk.gf180.libs.gf180sram import (
@@ -28,6 +29,7 @@ from lambdapdk.ihp130.libs.sg13g2_sram import (
 # wrapper's interface against the canonical lambda cell it substitutes.
 MEMORY_TECHLIBS = [
     Sky130Lambdalib_SinglePort,
+    Sky130Lambdalib_DualPort,
     Sky130Lambdalib_SinglePortRegfile,
     GF180Lambdalib_SinglePort,
     GF180Lambdalib_SinglePortRegfile,

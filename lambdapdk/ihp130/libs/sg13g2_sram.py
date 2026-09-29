@@ -174,8 +174,9 @@ class IHP130Lambdalib_SinglePort(LambalibTechLibrary, _LambdaPath):
 
 class IHP130Lambdalib_SinglePortRegfile(LambalibTechLibrary, _LambdaPath):
     def __init__(self):
-        super().__init__("la_spregfile",
-                         IHP130Lambdalib_SinglePort().techlibs)
+        spram = IHP130Lambdalib_SinglePort()
+
+        super().__init__("la_spregfile", spram.techlibs)
         self.set_name("ihp130_la_spregfile")
 
         # version
@@ -186,7 +187,12 @@ class IHP130Lambdalib_SinglePortRegfile(LambalibTechLibrary, _LambdaPath):
         with self.active_dataroot("lambdapdk"):
             with self.active_fileset("rtl"):
                 self.add_file(lib_path / "lambda" / "la_spregfile.v")
-                self.add_depfileset(Spram(), "rtl")
+                # This PDK's own la_spram, not lambdalib's generic cell: the
+                # regfile wrapper instantiates la_spram, and depending on the
+                # generic one leaves the substitution to an alias the consumer
+                # may never apply -- giving the behavioural model rather than
+                # the macros.
+                self.add_depfileset(spram, "rtl")
 
 
 if __name__ == "__main__":

@@ -1,7 +1,7 @@
 from pathlib import Path
 
 from lambdapdk import LambdaLibrary
-from lambdapdk.gf180 import GF180_3LM_1TM_6K_7t, \
+from lambdapdk.gf180 import _GF180Data, variant, GF180_3LM_1TM_6K_7t, \
     GF180_3LM_1TM_6K_9t, \
     GF180_3LM_1TM_9K_7t, \
     GF180_3LM_1TM_9K_9t, \
@@ -25,7 +25,7 @@ from lambdapdk.gf180 import GF180_3LM_1TM_6K_7t, \
     GF180_6LM_1TM_9K_9t
 
 
-class _GF180_MCULibrary(LambdaLibrary):
+class _GF180_MCULibrary(LambdaLibrary, _GF180Data):
     '''
     GF180 standard cell library.
     '''
@@ -46,6 +46,7 @@ class _GF180_MCULibrary(LambdaLibrary):
                 raise ValueError(f"{stackup} ships no {thickness} option")
             name += f"_{thickness}"
         self.set_name(name)
+        self.package.set_version(self.PDK_VERSION)
 
         pdn_stackup = stackup
         if libtype == "7t":
@@ -103,30 +104,40 @@ class _GF180_MCULibrary(LambdaLibrary):
 
         lib_path = Path("lambdapdk", "gf180", "libs", f"gf180mcu_fd_sc_mcu{libtype}5v0")
 
-        with self.active_dataroot("lambdapdk"):
+        # Cell views are referenced from the upstream archive. Only the GDS
+        # depends on the metal stack; the rest is byte-identical across the four
+        # install variants, so the variant in the path is picked once, from the
+        # metal count, rather than each view choosing for itself.
+        upstream = f"gf180mcu_fd_sc_mcu{libtype}5v0"
+        upstream_path = Path(variant(stackup), "libs.ref", upstream)
+
+        with self.active_dataroot(upstream):
+            # Upstream ships 15 corners uncompressed -- three supply voltages
+            # (1v98/3v60/5v50 fast, 1v62/3v00/4v50 slow, 1v80/3v30/5v00
+            # typical) across two temperatures. These are the 5V set.
             for corner_name, filename in [
-                    ('slow', f'gf180mcu_fd_sc_mcu{libtype}5v0__ss_125C_4v50.lib.gz'),
-                    ('typical', f'gf180mcu_fd_sc_mcu{libtype}5v0__tt_025C_5v00.lib.gz'),
-                    ('fast', f'gf180mcu_fd_sc_mcu{libtype}5v0__ff_n40C_5v50.lib.gz')]:
+                    ('slow', f'{upstream}__ss_125C_4v50.lib'),
+                    ('typical', f'{upstream}__tt_025C_5v00.lib'),
+                    ('fast', f'{upstream}__ff_n40C_5v50.lib')]:
                 with self.active_fileset(f"models.timing.{corner_name}.nldm"):
-                    self.add_file(lib_path / "nldm" / filename)
+                    self.add_file(upstream_path / "lib" / filename)
                     self.add_asic_libcornerfileset(corner_name, "nldm")
 
             with self.active_fileset("models.spice"):
-                self.add_file(lib_path / "spice" / f"gf180mcu_fd_sc_mcu{libtype}5v0.spice")
+                self.add_file(upstream_path / "spice" / f"{upstream}.spice")
 
-        with self.active_dataroot("lambdapdk"):
             with self.active_fileset("models.physical"):
-                self.add_file(lib_path / "lef" / f"gf180mcu_fd_sc_mcu{libtype}5v0.lef")
-                gds_dir = stackup[0:3]
-                if gds_dir == "6LM":
-                    gds_dir = "5LM"
-                self.add_file(lib_path / "gds" / gds_dir / f"gf180mcu_fd_sc_mcu{libtype}5v0.gds.gz")
+                self.add_file(upstream_path / "lef" / f"{upstream}.lef")
+                self.add_file(upstream_path / "gds" / f"{upstream}.gds")
                 self.add_asic_aprfileset()
 
             with self.active_fileset("models.lvs"):
-                self.add_file(lib_path / "cdl" / f"gf180mcu_fd_sc_mcu{libtype}5v0.cdl")
+                self.add_file(upstream_path / "cdl" / f"{upstream}.cdl")
                 self.add_asic_aprfileset()
+
+            with self.active_fileset("models.sim"):
+                self.add_file(upstream_path / "verilog" / f"{upstream}.v")
+                self.add_file(upstream_path / "verilog" / "primitives.v")
 
         # antenna cells
         self.add_asic_celllist('antenna', f'gf180mcu_fd_sc_mcu{libtype}5v0__antenna')
@@ -136,11 +147,11 @@ class _GF180_MCULibrary(LambdaLibrary):
             self.add_asic_celllist('clkbuf', f'gf180mcu_fd_sc_mcu{libtype}5v0__clkbuf_{size}')
 
         # hold cells
-        for variant in ('a', 'b', 'c', 'd'):
+        for flavor in ('a', 'b', 'c', 'd'):
             for size in (1, 2, 4):
                 self.add_asic_celllist(
                     'hold',
-                    f'gf180mcu_fd_sc_mcu{libtype}5v0__dly{variant}_{size}')
+                    f'gf180mcu_fd_sc_mcu{libtype}5v0__dly{flavor}_{size}')
 
         # Decoupling
         for size in (4, 8, 16, 32, 64):
