@@ -476,9 +476,10 @@ LAYER V6
  CUTCLASS Vx_2p176 WIDTH 0.032 LENGTH 0.544 CUTS 16 ;
  " ;
 
+ # 0.045 per DRM V6.S.1-3 (Table 3.17.1); 0.034 was carried over from V4/V5.
  PROPERTY LEF58_SPACINGTABLE "
     SPACINGTABLE
- DEFAULT 0.034
+ DEFAULT 0.045
  CUTCLASS Vx Vx_0p640 Vx_1p152 Vx_1p664 Vx_2p176
         Vx       -  -        -        -        - -  -        -        -        -
         Vx_0p640 -  -        -        -        - -  -        -        -        -
