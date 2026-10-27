@@ -154,6 +154,10 @@ LAYER M2
   # They can be 1x or 2x (2x causes DRCs on SAV V1). However, this seems to allow a double width M2
   # on vias, which violates. Thus, this is added. Note that wide power follow rails will violate.
 
+ PROPERTY LEF58_RECTONLY "
+      RECTONLY ;
+ " ;
+
 END M2
 
 LAYER V2
@@ -193,6 +197,10 @@ LAYER M3
 
   # to make the special route widths integer values of the tracks, i.e., 1, 5, 9, 13... min widths
   # the widths should be calculated in the APR tool, since viaGen does not seem to respect these
+
+ PROPERTY LEF58_RECTONLY "
+      RECTONLY ;
+ " ;
 
 END M3
 
