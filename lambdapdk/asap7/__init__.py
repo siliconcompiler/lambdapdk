@@ -77,6 +77,16 @@ class ASAP7PDK(LambdaPDK):
                 self.add_displayfileset("klayout")
             self.add_layermapfileset("klayout", "def", "gds", fileset="layermap")
 
+            # KLayout DRC, taken from OpenROAD-flow-scripts (flow/platforms/asap7/drc)
+            with self.active_fileset("klayout.drc"):
+                self.add_file(pdk_path / "setup" / "klayout" / "asap7.lydrc", filetype="drc")
+                self.add_runsetfileset("drc", "klayout", "drc")
+
+            self.add_klayout_drcparam("drc", "in_gds=<input>")
+            self.add_klayout_drcparam("drc", "topcell=<topcell>")
+            self.add_klayout_drcparam("drc", "report_file=<report>")
+            self.add_klayout_drcparam("drc", "threads=<threads>")
+
             self.set_aprroutinglayers(min="M2", max="M7")
 
             # OpenROAD setup
