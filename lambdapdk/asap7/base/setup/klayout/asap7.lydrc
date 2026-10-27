@@ -60,6 +60,8 @@
 #    * M1.S.2 is reported under its rule name instead of a blank category
 #    * V5.M6.AUX.2 and V7.M8.AUX.2 look for the flush via edges along M6/M8's
 #      length (horizontal), not across it; upstream had them vertical
+#    * V1.M2.EN.2 accepts an M2 end cap of exactly 5 nm (DRM: >= 5), like the
+#      V1.M1 / V2.M3 / V3.M4 enclosure checks; upstream required more than 5 nm
 #
 ##########################################################################################
 
@@ -345,7 +347,7 @@ v1.width(18.nm).output("V1.W.1", "V1.W.1 : Min. width of V1 : 18nm")
 v1.space(18.nm, projection).output("V1.S.1", "V1.S.1 : Min. spacing between V1 instances [on the same M2 track or on parallel M2 tracks, if they are fully or partially aligned with each other : 18nm")
 v1spaceortho = v1.space(27.nm, projection).polygons
 v1.space(27.nm, projection).polygons.not_interacting(v1spaceortho).output("V1.S.1", "V1.S.1 : Min. spacing between V1 instances on parallel M2 tracks, if they are not aligned with each other : 27nm")
-m2ovlp5v1 = (m2 &amp; v1.sized(5.nm + 2.dbu) - v1).sized(-2.5.nm).sized(2.5.nm)
+m2ovlp5v1 = (m2 &amp; v1.sized(5.nm + 2.dbu) - v1).sized(-2.5.nm+1.dbu).sized(2.5.nm-1.dbu)
 v1.edges.and(m2ovlp5v1).space(23.nm, euclidian).polygons.not(v1spaceortho).output("V1.S.2", "V1.S.2 : Min. corner-to-corner spacing between two V1 instances—both with a 5 nm M2 end-cap : 23nm")
 v1.edges.not_interacting(m2ovlp5v1).space(30.nm, euclidian).output("V1.S.3", "V1.S.3 : Min. corner-to-corner spacing between two V1 instances—both without a 5 nm M2 end-cap : 30nm")
 v1.edges.and(m2ovlp5v1).separation(v1.edges.not_interacting(m2ovlp5v1), 27.nm, euclidian).output("V1.S.4", "V1.S.4 : Min. corner-to-corner spacing between two V1 instances—one with and another without, a 5 nm M2 end-cap : 27nm")
