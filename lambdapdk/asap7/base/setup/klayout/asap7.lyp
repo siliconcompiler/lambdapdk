@@ -290,6 +290,24 @@
  </properties>
  <properties>
   <expanded>false</expanded>
+  <frame-color>#ff8000</frame-color>
+  <fill-color>#ff8000</fill-color>
+  <frame-brightness>0</frame-brightness>
+  <fill-brightness>0</fill-brightness>
+  <dither-pattern>I1</dither-pattern>
+  <line-style>C18</line-style>
+  <valid>true</valid>
+  <visible>true</visible>
+  <transparent>false</transparent>
+  <width>1</width>
+  <marked>false</marked>
+  <xfill>false</xfill>
+  <animation>0</animation>
+  <name>LIG blockage - 16/4</name>
+  <source>16/4@1</source>
+ </properties>
+ <properties>
+  <expanded>false</expanded>
   <frame-color>#ffff00</frame-color>
   <fill-color>#ffff00</fill-color>
   <frame-brightness>0</frame-brightness>
@@ -362,6 +380,24 @@
  </properties>
  <properties>
   <expanded>false</expanded>
+  <frame-color>#ffff00</frame-color>
+  <fill-color>#ffff00</fill-color>
+  <frame-brightness>0</frame-brightness>
+  <fill-brightness>0</fill-brightness>
+  <dither-pattern>I1</dither-pattern>
+  <line-style>C18</line-style>
+  <valid>true</valid>
+  <visible>true</visible>
+  <transparent>false</transparent>
+  <width>1</width>
+  <marked>false</marked>
+  <xfill>false</xfill>
+  <animation>0</animation>
+  <name>LISD blockage - 17/4</name>
+  <source>17/4@1</source>
+ </properties>
+ <properties>
+  <expanded>false</expanded>
   <frame-color>#ff00ff</frame-color>
   <fill-color>#ff00ff</fill-color>
   <frame-brightness>0</frame-brightness>
@@ -377,6 +413,42 @@
   <animation>0</animation>
   <name>V0 drawing - 18/0</name>
   <source>18/0@1</source>
+ </properties>
+ <properties>
+  <expanded>false</expanded>
+  <frame-color>#ff00ff</frame-color>
+  <fill-color>#ff00ff</fill-color>
+  <frame-brightness>0</frame-brightness>
+  <fill-brightness>0</fill-brightness>
+  <dither-pattern>I1</dither-pattern>
+  <line-style>C18</line-style>
+  <valid>true</valid>
+  <visible>true</visible>
+  <transparent>false</transparent>
+  <width>1</width>
+  <marked>false</marked>
+  <xfill>false</xfill>
+  <animation>0</animation>
+  <name>V0 pin - 18/251</name>
+  <source>18/251@1</source>
+ </properties>
+ <properties>
+  <expanded>false</expanded>
+  <frame-color>#ff00ff</frame-color>
+  <fill-color>#ff00ff</fill-color>
+  <frame-brightness>0</frame-brightness>
+  <fill-brightness>0</fill-brightness>
+  <dither-pattern>I1</dither-pattern>
+  <line-style>C18</line-style>
+  <valid>true</valid>
+  <visible>true</visible>
+  <transparent>false</transparent>
+  <width>1</width>
+  <marked>false</marked>
+  <xfill>false</xfill>
+  <animation>0</animation>
+  <name>V0 blockage - 18/4</name>
+  <source>18/4@1</source>
  </properties>
  <properties>
   <expanded>false</expanded>
@@ -488,6 +560,42 @@
  </properties>
  <properties>
   <expanded>false</expanded>
+  <frame-color>#ff8000</frame-color>
+  <fill-color>#ff8000</fill-color>
+  <frame-brightness>0</frame-brightness>
+  <fill-brightness>0</fill-brightness>
+  <dither-pattern>I1</dither-pattern>
+  <line-style>C18</line-style>
+  <valid>true</valid>
+  <visible>true</visible>
+  <transparent>false</transparent>
+  <width>1</width>
+  <marked>false</marked>
+  <xfill>false</xfill>
+  <animation>0</animation>
+  <name>V1 pin - 21/251</name>
+  <source>21/251@1</source>
+ </properties>
+ <properties>
+  <expanded>false</expanded>
+  <frame-color>#ff8000</frame-color>
+  <fill-color>#ff8000</fill-color>
+  <frame-brightness>0</frame-brightness>
+  <fill-brightness>0</fill-brightness>
+  <dither-pattern>I1</dither-pattern>
+  <line-style>C18</line-style>
+  <valid>true</valid>
+  <visible>true</visible>
+  <transparent>false</transparent>
+  <width>1</width>
+  <marked>false</marked>
+  <xfill>false</xfill>
+  <animation>0</animation>
+  <name>V1 blockage - 21/4</name>
+  <source>21/4@1</source>
+ </properties>
+ <properties>
+  <expanded>false</expanded>
   <frame-color>#00ffff</frame-color>
   <fill-color>#00ffff</fill-color>
   <frame-brightness>0</frame-brightness>
@@ -593,6 +701,42 @@
   <animation>0</animation>
   <name>V2 drawing - 25/0</name>
   <source>25/0@1</source>
+ </properties>
+ <properties>
+  <expanded>false</expanded>
+  <frame-color>#d9e6ff</frame-color>
+  <fill-color>#d9e6ff</fill-color>
+  <frame-brightness>0</frame-brightness>
+  <fill-brightness>0</fill-brightness>
+  <dither-pattern>I1</dither-pattern>
+  <line-style>C18</line-style>
+  <valid>true</valid>
+  <visible>true</visible>
+  <transparent>false</transparent>
+  <width>1</width>
+  <marked>false</marked>
+  <xfill>false</xfill>
+  <animation>0</animation>
+  <name>V2 pin - 25/251</name>
+  <source>25/251@1</source>
+ </properties>
+ <properties>
+  <expanded>false</expanded>
+  <frame-color>#d9e6ff</frame-color>
+  <fill-color>#d9e6ff</fill-color>
+  <frame-brightness>0</frame-brightness>
+  <fill-brightness>0</fill-brightness>
+  <dither-pattern>I1</dither-pattern>
+  <line-style>C18</line-style>
+  <valid>true</valid>
+  <visible>true</visible>
+  <transparent>false</transparent>
+  <width>1</width>
+  <marked>false</marked>
+  <xfill>false</xfill>
+  <animation>0</animation>
+  <name>V2 blockage - 25/4</name>
+  <source>25/4@1</source>
  </properties>
  <properties>
   <expanded>false</expanded>
@@ -704,6 +848,42 @@
  </properties>
  <properties>
   <expanded>false</expanded>
+  <frame-color>#ffffcc</frame-color>
+  <fill-color>#ffffcc</fill-color>
+  <frame-brightness>0</frame-brightness>
+  <fill-brightness>0</fill-brightness>
+  <dither-pattern>I1</dither-pattern>
+  <line-style>C18</line-style>
+  <valid>true</valid>
+  <visible>true</visible>
+  <transparent>false</transparent>
+  <width>1</width>
+  <marked>false</marked>
+  <xfill>false</xfill>
+  <animation>0</animation>
+  <name>V3 pin - 35/251</name>
+  <source>35/251@1</source>
+ </properties>
+ <properties>
+  <expanded>false</expanded>
+  <frame-color>#ffffcc</frame-color>
+  <fill-color>#ffffcc</fill-color>
+  <frame-brightness>0</frame-brightness>
+  <fill-brightness>0</fill-brightness>
+  <dither-pattern>I1</dither-pattern>
+  <line-style>C18</line-style>
+  <valid>true</valid>
+  <visible>true</visible>
+  <transparent>false</transparent>
+  <width>1</width>
+  <marked>false</marked>
+  <xfill>false</xfill>
+  <animation>0</animation>
+  <name>V3 blockage - 35/4</name>
+  <source>35/4@1</source>
+ </properties>
+ <properties>
+  <expanded>false</expanded>
   <frame-color>#c08040</frame-color>
   <fill-color>#c08040</fill-color>
   <frame-brightness>0</frame-brightness>
@@ -809,6 +989,42 @@
   <animation>0</animation>
   <name>V4 drawing - 45/0</name>
   <source>45/0@1</source>
+ </properties>
+ <properties>
+  <expanded>false</expanded>
+  <frame-color>#5e00e6</frame-color>
+  <fill-color>#5e00e6</fill-color>
+  <frame-brightness>0</frame-brightness>
+  <fill-brightness>0</fill-brightness>
+  <dither-pattern>I1</dither-pattern>
+  <line-style>C18</line-style>
+  <valid>true</valid>
+  <visible>true</visible>
+  <transparent>false</transparent>
+  <width>1</width>
+  <marked>false</marked>
+  <xfill>false</xfill>
+  <animation>0</animation>
+  <name>V4 pin - 45/251</name>
+  <source>45/251@1</source>
+ </properties>
+ <properties>
+  <expanded>false</expanded>
+  <frame-color>#5e00e6</frame-color>
+  <fill-color>#5e00e6</fill-color>
+  <frame-brightness>0</frame-brightness>
+  <fill-brightness>0</fill-brightness>
+  <dither-pattern>I1</dither-pattern>
+  <line-style>C18</line-style>
+  <valid>true</valid>
+  <visible>true</visible>
+  <transparent>false</transparent>
+  <width>1</width>
+  <marked>false</marked>
+  <xfill>false</xfill>
+  <animation>0</animation>
+  <name>V4 blockage - 45/4</name>
+  <source>45/4@1</source>
  </properties>
  <properties>
   <expanded>false</expanded>
@@ -920,6 +1136,42 @@
  </properties>
  <properties>
   <expanded>false</expanded>
+  <frame-color>#00cc66</frame-color>
+  <fill-color>#00cc66</fill-color>
+  <frame-brightness>0</frame-brightness>
+  <fill-brightness>0</fill-brightness>
+  <dither-pattern>I1</dither-pattern>
+  <line-style>C18</line-style>
+  <valid>true</valid>
+  <visible>true</visible>
+  <transparent>false</transparent>
+  <width>1</width>
+  <marked>false</marked>
+  <xfill>false</xfill>
+  <animation>0</animation>
+  <name>V5 pin - 55/251</name>
+  <source>55/251@1</source>
+ </properties>
+ <properties>
+  <expanded>false</expanded>
+  <frame-color>#00cc66</frame-color>
+  <fill-color>#00cc66</fill-color>
+  <frame-brightness>0</frame-brightness>
+  <fill-brightness>0</fill-brightness>
+  <dither-pattern>I1</dither-pattern>
+  <line-style>C18</line-style>
+  <valid>true</valid>
+  <visible>true</visible>
+  <transparent>false</transparent>
+  <width>1</width>
+  <marked>false</marked>
+  <xfill>false</xfill>
+  <animation>0</animation>
+  <name>V5 blockage - 55/4</name>
+  <source>55/4@1</source>
+ </properties>
+ <properties>
+  <expanded>false</expanded>
   <frame-color>#ff0000</frame-color>
   <fill-color>#ff0000</fill-color>
   <frame-brightness>0</frame-brightness>
@@ -1025,6 +1277,42 @@
   <animation>0</animation>
   <name>V6 drawing - 65/0</name>
   <source>65/0@1</source>
+ </properties>
+ <properties>
+  <expanded>false</expanded>
+  <frame-color>#00ffff</frame-color>
+  <fill-color>#00ffff</fill-color>
+  <frame-brightness>0</frame-brightness>
+  <fill-brightness>0</fill-brightness>
+  <dither-pattern>I1</dither-pattern>
+  <line-style>C18</line-style>
+  <valid>true</valid>
+  <visible>true</visible>
+  <transparent>false</transparent>
+  <width>1</width>
+  <marked>false</marked>
+  <xfill>false</xfill>
+  <animation>0</animation>
+  <name>V6 pin - 65/251</name>
+  <source>65/251@1</source>
+ </properties>
+ <properties>
+  <expanded>false</expanded>
+  <frame-color>#00ffff</frame-color>
+  <fill-color>#00ffff</fill-color>
+  <frame-brightness>0</frame-brightness>
+  <fill-brightness>0</fill-brightness>
+  <dither-pattern>I1</dither-pattern>
+  <line-style>C18</line-style>
+  <valid>true</valid>
+  <visible>true</visible>
+  <transparent>false</transparent>
+  <width>1</width>
+  <marked>false</marked>
+  <xfill>false</xfill>
+  <animation>0</animation>
+  <name>V6 blockage - 65/4</name>
+  <source>65/4@1</source>
  </properties>
  <properties>
   <expanded>false</expanded>
@@ -1136,6 +1424,42 @@
  </properties>
  <properties>
   <expanded>false</expanded>
+  <frame-color>#ffffff</frame-color>
+  <fill-color>#ffffff</fill-color>
+  <frame-brightness>0</frame-brightness>
+  <fill-brightness>0</fill-brightness>
+  <dither-pattern>I1</dither-pattern>
+  <line-style>C18</line-style>
+  <valid>true</valid>
+  <visible>true</visible>
+  <transparent>false</transparent>
+  <width>1</width>
+  <marked>false</marked>
+  <xfill>false</xfill>
+  <animation>0</animation>
+  <name>V7 pin - 75/251</name>
+  <source>75/251@1</source>
+ </properties>
+ <properties>
+  <expanded>false</expanded>
+  <frame-color>#ffffff</frame-color>
+  <fill-color>#ffffff</fill-color>
+  <frame-brightness>0</frame-brightness>
+  <fill-brightness>0</fill-brightness>
+  <dither-pattern>I1</dither-pattern>
+  <line-style>C18</line-style>
+  <valid>true</valid>
+  <visible>true</visible>
+  <transparent>false</transparent>
+  <width>1</width>
+  <marked>false</marked>
+  <xfill>false</xfill>
+  <animation>0</animation>
+  <name>V7 blockage - 75/4</name>
+  <source>75/4@1</source>
+ </properties>
+ <properties>
+  <expanded>false</expanded>
   <frame-color>#268c6b</frame-color>
   <fill-color>#268c6b</fill-color>
   <frame-brightness>0</frame-brightness>
@@ -1241,6 +1565,42 @@
   <animation>0</animation>
   <name>V8 drawing - 85/0</name>
   <source>85/0@1</source>
+ </properties>
+ <properties>
+  <expanded>false</expanded>
+  <frame-color>#bf4026</frame-color>
+  <fill-color>#bf4026</fill-color>
+  <frame-brightness>0</frame-brightness>
+  <fill-brightness>0</fill-brightness>
+  <dither-pattern>I1</dither-pattern>
+  <line-style>C18</line-style>
+  <valid>true</valid>
+  <visible>true</visible>
+  <transparent>false</transparent>
+  <width>1</width>
+  <marked>false</marked>
+  <xfill>false</xfill>
+  <animation>0</animation>
+  <name>V8 pin - 85/251</name>
+  <source>85/251@1</source>
+ </properties>
+ <properties>
+  <expanded>false</expanded>
+  <frame-color>#bf4026</frame-color>
+  <fill-color>#bf4026</fill-color>
+  <frame-brightness>0</frame-brightness>
+  <fill-brightness>0</fill-brightness>
+  <dither-pattern>I1</dither-pattern>
+  <line-style>C18</line-style>
+  <valid>true</valid>
+  <visible>true</visible>
+  <transparent>false</transparent>
+  <width>1</width>
+  <marked>false</marked>
+  <xfill>false</xfill>
+  <animation>0</animation>
+  <name>V8 blockage - 85/4</name>
+  <source>85/4@1</source>
  </properties>
  <properties>
   <expanded>false</expanded>
@@ -1352,6 +1712,42 @@
  </properties>
  <properties>
   <expanded>false</expanded>
+  <frame-color>#00ff00</frame-color>
+  <fill-color>#ffffff</fill-color>
+  <frame-brightness>0</frame-brightness>
+  <fill-brightness>0</fill-brightness>
+  <dither-pattern>I1</dither-pattern>
+  <line-style>C18</line-style>
+  <valid>true</valid>
+  <visible>true</visible>
+  <transparent>false</transparent>
+  <width>1</width>
+  <marked>false</marked>
+  <xfill>false</xfill>
+  <animation>0</animation>
+  <name>V9 pin - 95/251</name>
+  <source>95/251@1</source>
+ </properties>
+ <properties>
+  <expanded>false</expanded>
+  <frame-color>#00ff00</frame-color>
+  <fill-color>#ffffff</fill-color>
+  <frame-brightness>0</frame-brightness>
+  <fill-brightness>0</fill-brightness>
+  <dither-pattern>I1</dither-pattern>
+  <line-style>C18</line-style>
+  <valid>true</valid>
+  <visible>true</visible>
+  <transparent>false</transparent>
+  <width>1</width>
+  <marked>false</marked>
+  <xfill>false</xfill>
+  <animation>0</animation>
+  <name>V9 blockage - 95/4</name>
+  <source>95/4@1</source>
+ </properties>
+ <properties>
+  <expanded>false</expanded>
   <frame-color>#ffbff2</frame-color>
   <fill-color>#ffbff2</fill-color>
   <frame-brightness>0</frame-brightness>
@@ -1367,6 +1763,24 @@
   <animation>0</animation>
   <name>SDT drawing - 88/0</name>
   <source>88/0@1</source>
+ </properties>
+ <properties>
+  <expanded>false</expanded>
+  <frame-color>#ffbff2</frame-color>
+  <fill-color>#ffbff2</fill-color>
+  <frame-brightness>0</frame-brightness>
+  <fill-brightness>0</fill-brightness>
+  <dither-pattern>I1</dither-pattern>
+  <line-style>C18</line-style>
+  <valid>true</valid>
+  <visible>true</visible>
+  <transparent>false</transparent>
+  <width>1</width>
+  <marked>false</marked>
+  <xfill>false</xfill>
+  <animation>0</animation>
+  <name>SDT blockage - 88/4</name>
+  <source>88/4@1</source>
  </properties>
  <properties>
   <expanded>false</expanded>
