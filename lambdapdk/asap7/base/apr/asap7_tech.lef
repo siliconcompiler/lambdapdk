@@ -92,7 +92,7 @@ LAYER M1
  PITCH 0.036 ;
  WIDTH 0.018 ;
  SPACING 0.018 ;
- AREA 0.000666 ; # Min Area
+ AREA 0.000504 ; # Min Area
                                     # we only allow landing on pins (set in router) so area should not matter
  SPACING 0.018 RANGE 0.036 1.0 ; # This rule is redundant with the SPACING rule
 
@@ -122,7 +122,7 @@ LAYER M2
   #  MINSIZE 0.112 0.072 ; 
   # area is adjusted to match this (Nanoroute requires both AREA and MINSIZE)
 
- AREA 0.000666 ;
+ AREA 0.000504 ;
  MINSIZE 0.037 0.018 ;
 
  PITCH 0.045 0.036 ;
@@ -139,7 +139,7 @@ LAYER M2
   #   SPACING 0.124 ENDOFLINE 0.1 WITHIN 0.070 ;
 
  PROPERTY LEF58_SPACING
- " SPACING 0.018 ENDOFLINE 0.025 WITHIN 0.02 ENDTOEND 0.031
+ " SPACING 0.018 ENDOFLINE 0.025 WITHIN 0 ENDTOEND 0.031
  PARALLELEDGE 0.025 WITHIN 0.02 ; " ;
 
  PROPERTY LEF58_EOLKEEPOUT "
@@ -147,24 +147,12 @@ LAYER M2
  " ;
 
  PROPERTY LEF58_CORNERSPACING "
- CORNERSPACING CONVEXCORNER WIDTH 0.0 SPACING 0.02 ;
+ CORNERSPACING CONVEXCORNER CORNERONLY 0.02 WIDTH 0.0 SPACING 0.02 ;
  " ; # CORNER to CORNER SPACING Rule
 
   # Originally no width table for M2 since it is the follow rails. 
   # They can be 1x or 2x (2x causes DRCs on SAV V1). However, this seems to allow a double width M2
   # on vias, which violates. Thus, this is added. Note that wide power follow rails will violate.
-
- PROPERTY LEF58_WIDTHTABLE "
- WIDTHTABLE 0.018 0.09 0.162 0.234 0.306 0.378 ;
- " ;
-
- PROPERTY LEF58_RIGHTWAYONGRIDONLY "
-      RIGHTWAYONGRIDONLY ;
- " ;
-
- PROPERTY LEF58_RECTONLY "
-      RECTONLY ;
- " ;
 
 END M2
 
@@ -187,7 +175,7 @@ LAYER M3
   #  MINSIZE 0.112 0.072 ; 
   # area is adjusted to match this (Nanoroute requires both AREA and MINSIZE)
 
- AREA 0.000666 ;
+ AREA 0.000504 ;
  MINSIZE 0.037 0.018 ;
 
  PROPERTY LEF58_SPACING
@@ -199,23 +187,12 @@ LAYER M3
  " ;
 
  PROPERTY LEF58_CORNERSPACING "
- CORNERSPACING CONVEXCORNER WIDTH 0.0 SPACING 0.02
+ CORNERSPACING CONVEXCORNER CORNERONLY 0.02 WIDTH 0.0 SPACING 0.02
    ;
  " ; # CORNER to CORNER SPACING Rule
 
   # to make the special route widths integer values of the tracks, i.e., 1, 5, 9, 13... min widths
   # the widths should be calculated in the APR tool, since viaGen does not seem to respect these
-
- PROPERTY LEF58_WIDTHTABLE
- " WIDTHTABLE 0.018 0.09 0.162 0.234 0.306 0.378 ; " ;
-
- PROPERTY LEF58_RIGHTWAYONGRIDONLY "
-      RIGHTWAYONGRIDONLY ;
- " ;
-
- PROPERTY LEF58_RECTONLY "
-      RECTONLY ;
- " ;
 
 END M3
 
