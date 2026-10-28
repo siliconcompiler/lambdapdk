@@ -124,19 +124,19 @@ logger.info("Evaluate switches.")
 
 # FEOL
 if $feol == "false"
-  FEOL = $feol
+  FEOL = false
   logger.info("FEOL is disabled.")
 else
-  FEOL = "true"
+  FEOL = true
   logger.info("FEOL is enabled.")
 end # FEOL
 
 # BEOL
 if $beol == "false"
-  BEOL = $beol
+  BEOL = false
   logger.info("BEOL is disabled.")
 else
-  BEOL = "true"
+  BEOL = true
   logger.info("BEOL is enabled.")
 end # BEOL
 
