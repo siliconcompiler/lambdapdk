@@ -35,8 +35,11 @@ DIVIDERCHAR "/" ;
 CLEARANCEMEASURE EUCLIDEAN ;
 USEMINSPACING OBS OFF ;
 
+# 4000, not 1000: several rules are written on a quarter nanometre (M1's
+# EOLKEEPOUT width 0.01825, M4-M7's side extension 0.02425 and 0.03225, M8/M9's
+# SPACINGTABLE thresholds 0.05975 ... 1.79975), which a 1 nm database rounds off.
 UNITS
- DATABASE MICRONS 1000 ;
+ DATABASE MICRONS 4000 ;
 END UNITS
  MANUFACTURINGGRID 0.001 ;
 
@@ -89,13 +92,21 @@ LAYER M1
  PITCH 0.036 ;
  WIDTH 0.018 ;
  SPACING 0.018 ;
- AREA 0.000666 ; # Min Area
+ AREA 0.000504 ; # Min Area
                                     # we only allow landing on pins (set in router) so area should not matter
  SPACING 0.018 RANGE 0.036 1.0 ; # This rule is redundant with the SPACING rule
 
  PROPERTY LEF58_EOLKEEPOUT "EOLKEEPOUT 0.01825 EXTENSION 0.0 0.0 0.031 ;" ; # Tip to Tip Spacing
 
- PROPERTY LEF58_CORNERSPACING "CORNERSPACING CONVEXCORNER CORNERONLY 0.01 WIDTH 0.018 SPACING 0.018 ;" ;
+ # DRM S.6: 20 nm corner to corner, measured diagonally (Fig. 3.12.1d). CORNERTOCORNER
+ # makes OpenROAD measure the Euclidean distance instead of max(dx, dy).
+ PROPERTY LEF58_CORNERSPACING "CORNERSPACING CONVEXCORNER CORNERTOCORNER WIDTH 0.0 SPACING 0.020 ;" ;
+ # DRM Table 3.12.1 (M1 rules, which also apply to M2 and M3): an edge of 36 nm or less
+ # needs 25 nm to a longer edge (S.2) and 31 nm to another short edge (S.4/S.5; also
+ # used for S.3's 27 nm, since OpenROAD does not check OTHERENDWIDTH). ENDOFLINE is a
+ # strict "<", so 0.037 means "36 nm or less" on the 1 nm manufacturing grid.
+ PROPERTY LEF58_SPACING
+ " SPACING 0.025 ENDOFLINE 0.037 WITHIN 0 ENDTOEND 0.031 ; " ;
  OFFSET 0.0 ;
 
 END M1
@@ -119,7 +130,7 @@ LAYER M2
   #  MINSIZE 0.112 0.072 ; 
   # area is adjusted to match this (Nanoroute requires both AREA and MINSIZE)
 
- AREA 0.000666 ;
+ AREA 0.000504 ;
  MINSIZE 0.037 0.018 ;
 
  PITCH 0.045 0.036 ;
@@ -135,29 +146,26 @@ LAYER M2
   # 0.070 is to avoid conflicts with the adjacent lines. This should be caught by CORNERSPACING below
   #   SPACING 0.124 ENDOFLINE 0.1 WITHIN 0.070 ;
 
+ # DRM Table 3.12.1 (M1 rules, which also apply to M2 and M3): an edge of 36 nm or less
+ # needs 25 nm to a longer edge (S.2) and 31 nm to another short edge (S.4/S.5; also
+ # used for S.3's 27 nm, since OpenROAD does not check OTHERENDWIDTH). ENDOFLINE is a
+ # strict "<", so 0.037 means "36 nm or less" on the 1 nm manufacturing grid.
  PROPERTY LEF58_SPACING
- " SPACING 0.018 ENDOFLINE 0.025 WITHIN 0.02 ENDTOEND 0.031
- PARALLELEDGE 0.025 WITHIN 0.02 ; " ;
+ " SPACING 0.025 ENDOFLINE 0.037 WITHIN 0 ENDTOEND 0.031 ; " ;
 
  PROPERTY LEF58_EOLKEEPOUT "
  EOLKEEPOUT 0.025 EXTENSION 0.0 0.0125 0.031 CORNERONLY ;
  " ;
 
+ # DRM S.6: 20 nm corner to corner, measured diagonally (Fig. 3.12.1d). CORNERTOCORNER
+ # makes OpenROAD measure the Euclidean distance instead of max(dx, dy).
  PROPERTY LEF58_CORNERSPACING "
- CORNERSPACING CONVEXCORNER WIDTH 0.0 SPACING 0.02 ;
+ CORNERSPACING CONVEXCORNER CORNERTOCORNER WIDTH 0.0 SPACING 0.020 ;
  " ; # CORNER to CORNER SPACING Rule
 
   # Originally no width table for M2 since it is the follow rails. 
   # They can be 1x or 2x (2x causes DRCs on SAV V1). However, this seems to allow a double width M2
   # on vias, which violates. Thus, this is added. Note that wide power follow rails will violate.
-
- PROPERTY LEF58_WIDTHTABLE "
- WIDTHTABLE 0.018 0.09 0.162 0.234 0.306 0.378 ;
- " ;
-
- PROPERTY LEF58_RIGHTWAYONGRIDONLY "
-      RIGHTWAYONGRIDONLY ;
- " ;
 
  PROPERTY LEF58_RECTONLY "
       RECTONLY ;
@@ -184,31 +192,29 @@ LAYER M3
   #  MINSIZE 0.112 0.072 ; 
   # area is adjusted to match this (Nanoroute requires both AREA and MINSIZE)
 
- AREA 0.000666 ;
+ AREA 0.000504 ;
  MINSIZE 0.037 0.018 ;
 
+ # DRM Table 3.12.1 (M1 rules, which also apply to M2 and M3): an edge of 36 nm or less
+ # needs 25 nm to a longer edge (S.2) and 31 nm to another short edge (S.4/S.5; also
+ # used for S.3's 27 nm, since OpenROAD does not check OTHERENDWIDTH). ENDOFLINE is a
+ # strict "<", so 0.037 means "36 nm or less" on the 1 nm manufacturing grid.
  PROPERTY LEF58_SPACING
- " SPACING 0.018 ENDOFLINE 0.025 WITHIN 0.0125 ENDTOEND 0.031
- PARALLELEDGE 0.025 WITHIN 0.02 ; " ;
+ " SPACING 0.025 ENDOFLINE 0.037 WITHIN 0 ENDTOEND 0.031 ; " ;
 
  PROPERTY LEF58_EOLKEEPOUT "
  EOLKEEPOUT 0.025 EXTENSION 0.0 0.0125 0.031 CORNERONLY ;
  " ;
 
+ # DRM S.6: 20 nm corner to corner, measured diagonally (Fig. 3.12.1d). CORNERTOCORNER
+ # makes OpenROAD measure the Euclidean distance instead of max(dx, dy).
  PROPERTY LEF58_CORNERSPACING "
- CORNERSPACING CONVEXCORNER WIDTH 0.0 SPACING 0.02
+ CORNERSPACING CONVEXCORNER CORNERTOCORNER WIDTH 0.0 SPACING 0.020
    ;
  " ; # CORNER to CORNER SPACING Rule
 
   # to make the special route widths integer values of the tracks, i.e., 1, 5, 9, 13... min widths
   # the widths should be calculated in the APR tool, since viaGen does not seem to respect these
-
- PROPERTY LEF58_WIDTHTABLE
- " WIDTHTABLE 0.018 0.09 0.162 0.234 0.306 0.378 ; " ;
-
- PROPERTY LEF58_RIGHTWAYONGRIDONLY "
-      RIGHTWAYONGRIDONLY ;
- " ;
 
  PROPERTY LEF58_RECTONLY "
       RECTONLY ;
@@ -473,9 +479,10 @@ LAYER V6
  CUTCLASS Vx_2p176 WIDTH 0.032 LENGTH 0.544 CUTS 16 ;
  " ;
 
+ # 0.045 per DRM V6.S.1-3 (Table 3.17.1); 0.034 was carried over from V4/V5.
  PROPERTY LEF58_SPACINGTABLE "
     SPACINGTABLE
- DEFAULT 0.034
+ DEFAULT 0.045
  CUTCLASS Vx Vx_0p640 Vx_1p152 Vx_1p664 Vx_2p176
         Vx       -  -        -        -        - -  -        -        -        -
         Vx_0p640 -  -        -        -        - -  -        -        -        -
