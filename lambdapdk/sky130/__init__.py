@@ -31,7 +31,7 @@ class _Sky130Data(_LambdaPath):
     #: Everything mixing this in is pinned to one revision, so the revision is
     #: the version. Its date rather than its SHA -- both name the same pin, and
     #: only one of them is readable in a manifest or a summary table.
-    PDK_VERSION = "2026-08-27"
+    PDK_VERSION = "2026-10-19"
 
     def __init__(self):
         super().__init__()
@@ -39,7 +39,7 @@ class _Sky130Data(_LambdaPath):
         # Bumping this re-points every sky130 dataroot at once, which is the
         # point: one revision keeps the standard cells, the IO and the memories
         # mutually consistent, the way an open_pdks install is.
-        pdk_rev = '1689ac3f2dc763876eaf967227c7dfe831b031ae'
+        pdk_rev = '792ef67037d74c8c51811eab3ce23cf793491296'
 
         for library in ("sky130_fd_sc_hd",
                         "sky130_fd_sc_hdll",

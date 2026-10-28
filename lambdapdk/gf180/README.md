@@ -7,7 +7,7 @@ standard cells, the IO and the memories are referenced out of the published buil
 [open_pdks](https://github.com/RTimothyEdwards/open_pdks) revision pinned as `pdk_rev` in
 `_GF180Data` ([`__init__.py`](__init__.py)).
 
-The PDK and every library report that revision's date, `2026-08-27`, as their package version
+The PDK and every library report that revision's date, `2026-10-19`, as their package version
 (`PDK_VERSION` on the dataroot mixin) — so a manifest says which pin a run used.
 
 | Dataroot | Provides |

@@ -41,6 +41,11 @@ originally vendored from attached the shrunken rect to the net pin itself (`VCCD
 revision upstream has added a separate `VCCD_PAD` pin, but gave it the same shrunken rect
 (60.8 × 60.8 µm) instead of the plate. The script handles both spellings.
 
+Still present at `792ef67` (2026-10-19): that revision changed only the `CLASS` of three slice cells
+in this file. Nor can the bond pad simply be left out to avoid the overlap — the pad cells stop at
+the met4/met5 plate and carry no passivation opening (`pad`, 76/20); `bare_pad` is the only cell
+that does, so it has to be placed, and its metal then necessarily sits on upstream's `OBS`.
+
 The patch gives the plate back to the pin the GDS says it belongs to and subtracts it from `OBS`,
 rect by rect so that obstructions not meeting the plate stay exactly as upstream wrote them. Nothing
 else in the file changes.

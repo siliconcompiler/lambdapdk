@@ -9,7 +9,7 @@ referenced out of the published build of the
 `pdk_rev` re-points the standard cells, the IO and the memories together, so they stay mutually
 consistent the way an open_pdks install is.
 
-The PDK and every library report that revision's date, `2026-08-27`, as their package version
+The PDK and every library report that revision's date, `2026-10-19`, as their package version
 (`PDK_VERSION` on the dataroot mixin) — so a manifest says which pin a run used.
 
 Upstream libraries used, each registered as its own dataroot so a design downloads only what it uses:

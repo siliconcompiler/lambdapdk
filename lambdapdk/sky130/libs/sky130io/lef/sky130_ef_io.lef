@@ -1762,7 +1762,7 @@ END sky130_ef_io__com_bus_slice_20um
 #--------EOF---------
 
 MACRO sky130_ef_io__connect_vcchib_vccd_and_vswitch_vddio_slice_20um
-  CLASS PAD AREAIO ;
+  CLASS PAD SPACER ;
   FOREIGN sky130_ef_io__connect_vcchib_vccd_and_vswitch_vddio_slice_20um ;
   ORIGIN 0.000 0.000 ;
   SIZE 20.000 BY 197.965 ;
@@ -2478,7 +2478,7 @@ END sky130_ef_io__corner_pad
 #--------EOF---------
 
 MACRO sky130_ef_io__disconnect_vccd_slice_5um
-  CLASS PAD AREAIO ;
+  CLASS PAD SPACER ;
   FOREIGN sky130_ef_io__disconnect_vccd_slice_5um ;
   ORIGIN 0.000 0.000 ;
   SIZE 5.000 BY 197.965 ;
@@ -2628,7 +2628,7 @@ END sky130_ef_io__disconnect_vccd_slice_5um
 #--------EOF---------
 
 MACRO sky130_ef_io__disconnect_vdda_slice_5um
-  CLASS PAD AREAIO ;
+  CLASS PAD SPACER ;
   FOREIGN sky130_ef_io__disconnect_vdda_slice_5um ;
   ORIGIN 0.000 0.000 ;
   SIZE 5.000 BY 197.965 ;
