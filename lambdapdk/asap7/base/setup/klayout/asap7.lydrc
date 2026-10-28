@@ -62,6 +62,10 @@
 #      length (horizontal), not across it; upstream had them vertical
 #    * V1.M2.EN.2 accepts an M2 end cap of exactly 5 nm (DRM: >= 5), like the
 #      V1.M1 / V2.M3 / V3.M4 enclosure checks; upstream required more than 5 nm
+#    * M1-M3 spacing (DRM Table 3.12.1) classes each edge by its own length; upstream
+#      filtered space regions by the edges they touch, which also counts the 18 nm line
+#      ends at their corners, so violations between min-width wires went unreported.
+#      S.4 and S.5 are now separate rules, as in the DRM
 #
 ##########################################################################################
 
@@ -156,6 +160,23 @@ class DRC::DRCLayer
     DRC::DRCLayer::new(@engine, new_data)
   end
 end 
+
+# DRM Table 3.12.1: the M1 spacing rules, which also apply to M2 and M3. W1/W2 are the
+# lengths of the two facing edges (Fig. 3.12.1), so each edge is classed by its own length
+# and the classes are checked pairwise.
+def bmetal_spacing(layer, name)
+  e = layer.edges
+  lt24 = e.with_length(0, 24.nm)                 # W &lt; 24 nm
+  mid = e.with_length(24.nm, 36.nm + 1.dbu)      # 24 nm &lt;= W &lt;= 36 nm
+  short = e.with_length(0, 36.nm + 1.dbu)        # W &lt;= 36 nm
+  long = e.without_length(0, 36.nm + 1.dbu)      # W &gt; 36 nm
+  long.space(18.nm, projection).output("#{name}.S.1", "#{name}.S.1 : Min. spacing between two #{name} edges, when both edges are &gt; 36 nm : 18nm")
+  short.separation(long, 25.nm, projection).output("#{name}.S.2", "#{name}.S.2 : Min. spacing between two #{name} edges, when one edge is &lt;= 36 nm and the other is &gt; 36 nm : 25nm")
+  mid.space(27.nm, projection).output("#{name}.S.3", "#{name}.S.3 : Min. spacing between two #{name} edges, when both edges are &gt;= 24 nm and &lt;= 36 nm : 27nm")
+  lt24.space(31.nm, projection).output("#{name}.S.4", "#{name}.S.4 : Min. spacing between two #{name} edges, when both edges are &lt; 24 nm : 31nm")
+  mid.separation(lt24, 31.nm, projection).output("#{name}.S.5", "#{name}.S.5 : Min. spacing between two #{name} edges, when one edge is &gt;= 24 nm and &lt;= 36 nm and the other is &lt; 24 nm : 31nm")
+  layer.space(20.nm, euclidian, projection_limits(nil, 1.dbu)).output("#{name}.S.6", "#{name}.S.6 : Min. corner-to-corner spacing between two #{name} : 20nm")
+end
 
 # DRC section
 ########################
@@ -309,35 +330,17 @@ v0.not_interacting(m1.enclosing(v0, 1.dbu, projection, two_opposite_sides_allowe
 
 ###   M1
 m1.width(18.nm).output("M1.W.1", "M1.W.1 : Min. width of M1 : 18nm")
-m1.space(18.nm).polygons.not_interacting(m1.edges.with_length(0..36.nm)).output("M1.S.1", "M1.S.1 : Min. spacing between two M1' edges, when both edges are &gt; 36 nm : 18nm")
-m1.space(25.nm).polygons.not_interacting(m1.edges.with_length(36.nm..100.mm)).output("M1.S.2", "M1.S.2 :Min. spacing between two M1' edges, when one edge is &gt; 36 nm : 25nm")
-m1.space(27.nm).polygons.not_interacting(m1.edges.with_length(0..24.nm)).not_interacting(m1.edges.with_length(36.nm..100.mm)).output("M1.S.3", "M1.S.3 : Min. spacing between two M1' edges, when both edges are &gt;=24nm and =&lt; 36 nm : 27nm")
-m1.space(31.nm).polygons.not_interacting(m1.edges.with_length(24.nm..100.mm)).output("M1.S.4-5", "M1.S.4-5 : Min. spacing between two M1' edges, when both edge are =&lt; 24 nm : 31nm")
-m1long = m1.space(20.nm, projection).polygons.interacting(m1.edges.with_length(36.nm..100.mm))
-m1.space(20.nm, euclidian).polygons.not_interacting(m1long).output("M1.S.6", "M1.S.6 : Min. corner-to-corner spacing between two M1 : 20nm")
-m1long.forget
+bmetal_spacing(m1, "M1")
 m1.with_area(0 .. 0.000504).output("M1.A.1", "M1.A.1 : Min. area of M1 : 504nm2")
 
 ###   M2
 m2.width(18.nm).output("M2.W.1", "M2.W.1 : Min. width of M2 : 18nm")
-m2.space(18.nm).polygons.not_interacting(m2.edges.with_length(0..36.nm)).output("M2.S.1", "M2.S.1 : Min. spacing between two M2' edges, when both edges are &gt; 36 nm : 18nm")
-m2.space(25.nm).polygons.not_interacting(m2.edges.with_length(36.nm..100.mm)).output("M2.S.2", "M2.S.2 : Min. spacing between two M2' edges, when one edge is &gt; 36 nm : 25nm")
-m2.space(27.nm).polygons.not_interacting(m2.edges.with_length(0..24.nm)).not_interacting(m2.edges.with_length(36.nm..100.mm)).output("M2.S.3", "M2.S.3 : Min. spacing between two M2' edges, when both edges are &gt;=24nm and =&lt; 36 nm : 27nm")
-m2.space(31.nm).polygons.not_interacting(m2.edges.with_length(24.nm..100.mm)).output("M2.S.4-5", "M2.S.4-5 : Min. spacing between two M2' edges, when both edge are =&lt; 24 nm : 31nm")
-m2long = m2.space(20.nm, projection).polygons.interacting(m2.edges.with_length(36.nm..100.mm))
-m2.space(20.nm, euclidian).polygons.not_interacting(m2long).output("M2.S.6", "M2.S.6 : Min. corner-to-corner spacing between two M2 : 20nm")
-m2long.forget
+bmetal_spacing(m2, "M2")
 m2.with_area(0 .. 0.000504).output("M2.A.1", "M2.A.1 : Min. area of M2 : 504nm2")
 
 ###   M3
 m3.width(18.nm).output("M3.W.1", "M3.W.1 : Min. width of M3 : 18nm")
-m3.space(18.nm).polygons.not_interacting(m3.edges.with_length(0..36.nm)).output("M3.S.1", "M3.S.1 : Min. spacing between two M3' edges, when both edges are &gt; 36 nm : 18nm")
-m3.space(25.nm).polygons.not_interacting(m3.edges.with_length(36.nm..100.mm)).output("M3.S.2", "M3.S.2 : Min. spacing between two M3' edges, when one edge is &gt; 36 nm : 25nm")
-m3.space(27.nm).polygons.not_interacting(m3.edges.with_length(0..24.nm)).not_interacting(m3.edges.with_length(36.nm..100.mm)).output("M3.S.3", "M3.S.3 : Min. spacing between two M3' edges, when both edges are &gt;=24nm and =&lt; 36 nm : 27nm")
-m3.space(31.nm).polygons.not_interacting(m3.edges.with_length(24.nm..100.mm)).output("M3.S.4-5", "M3.S.4-5 : Min. spacing between two M3' edges, when both edge are =&lt; 24 nm : 31nm")
-m3long = m3.space(20.nm, projection).polygons.interacting(m3.edges.with_length(36.nm..100.mm))
-m3.space(20.nm, euclidian).polygons.not_interacting(m3long).output("M3.S.6", "M3.S.6 : Min. corner-to-corner spacing between two M3 : 20nm")
-m3long.forget
+bmetal_spacing(m3, "M3")
 m3.with_area(0 .. 0.000504).output("M3.A.1", "M3.A.1 : Min. area of M3 : 504nm2")
 
 
