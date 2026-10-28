@@ -119,12 +119,16 @@ class Sky130_IOLibrary(LambdaLibrary, _Sky130Data):
 
         with self.active_dataroot("sky130_fd_io"):
             with self.active_fileset("models.physical"):
-                # The three GDS are read as a set: upstream's wrapper GDS holds
-                # only the wrapper cell and an empty placeholder for the macro it
-                # wraps, which sky130_ef_io.gds supplies.
+                # The GDS are read as a set: upstream's wrapper GDS holds only the
+                # wrapper cell and an empty placeholder for the macro it wraps,
+                # which sky130_ef_io.gds supplies.
                 self.add_file(upstream_path / "gds" / "sky130_ef_io.gds")
                 self.add_file(upstream_path / "gds" / "sky130_fd_io.gds")
                 self.add_file(upstream_path / "gds" / "sky130_ef_io__gpiov2_pad_wrapped.gds")
+                # The bond pad. It is in the LEF but in neither library GDS, and
+                # it is the only cell carrying the passivation opening (pad,
+                # 76/20) -- the pad cells stop at the met4/met5 plate it lands on.
+                self.add_file(upstream_path / "gds" / "sky130_ef_io__bare_pad.gds")
                 self.add_asic_aprfileset()
 
             with self.active_fileset("rtl"):
