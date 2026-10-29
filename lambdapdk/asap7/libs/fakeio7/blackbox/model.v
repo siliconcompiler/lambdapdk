@@ -148,6 +148,18 @@ module FAKEIO7_BREAKER_V (
 endmodule
 
 (* blackbox *)
+module FAKEIO7_BREAKER_IO_V (
+    inout DVDDA,
+    inout DVDDB,
+    inout DVSSA,
+    inout DVSSB,
+    inout VDD,
+    inout VSS,
+    inout [1:0] RING
+);
+endmodule
+
+(* blackbox *)
 module FAKEIO7_DIFFTX_V (
     inout PADP,
     inout PADN,
@@ -431,6 +443,18 @@ module FAKEIO7_BREAKER_H (
     inout VSS,
     inout [1:0] RINGA,
     inout [1:0] RINGB
+);
+endmodule
+
+(* blackbox *)
+module FAKEIO7_BREAKER_IO_H (
+    inout DVDDA,
+    inout DVDDB,
+    inout DVSSA,
+    inout DVSSB,
+    inout VDD,
+    inout VSS,
+    inout [1:0] RING
 );
 endmodule
 

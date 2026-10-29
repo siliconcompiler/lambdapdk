@@ -168,6 +168,7 @@ def get_libs():
         FakeIO7Lambdalib_la_ioanalog, \
         FakeIO7Lambdalib_la_ioinput, \
         FakeIO7Lambdalib_la_iocut, \
+        FakeIO7Lambdalib_la_iocutvddio, \
         FakeIO7Lambdalib_la_iovss, \
         FakeIO7Lambdalib_la_iovddio, \
         FakeIO7Lambdalib_la_iovssio, \
@@ -501,6 +502,7 @@ def get_libs():
         FakeIO7Lambdalib_la_ioanalog(),
         FakeIO7Lambdalib_la_ioinput(),
         FakeIO7Lambdalib_la_iocut(),
+        FakeIO7Lambdalib_la_iocutvddio(),
         FakeIO7Lambdalib_la_iovss(),
         FakeIO7Lambdalib_la_iovddio(),
         FakeIO7Lambdalib_la_iovssio(),

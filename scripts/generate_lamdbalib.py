@@ -396,6 +396,7 @@ def iolib(verible_bin):
                                 "la_ioinput",
                                 "la_iocorner",
                                 "la_iocut",
+                                "la_iocutvddio",
                                 "la_iopoc",
                                 "la_iovdd",
                                 "la_iovss",
