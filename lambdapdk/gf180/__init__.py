@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from lambdapdk import LambdaPDK
+from lambdapdk import LambdaPDK, _LambdaPath
 
 # Capacitance unit multiplier: values below are quoted in pF/um.
 pF = 1e-12
@@ -516,7 +516,21 @@ _PEX_CORRECTION = {
 }
 
 
-class _GF180PDK(LambdaPDK):
+# KLayout DRC decks from GlobalFoundries' physical verification repository
+pv_rev = 'a561909c667ce1e8485313f5d280a7014f524e49'
+
+
+class _GF180PVPath(_LambdaPath):
+    def __init__(self):
+        super().__init__()
+        self.set_dataroot(
+            "gf180mcu_fd_pv",
+            "https://github.com/fossi-foundation/globalfoundries-pdk-libs-gf180mcu_fd_pv/"
+            f"archive/{pv_rev}.tar.gz",
+            pv_rev)
+
+
+class _GF180PDK(LambdaPDK, _GF180PVPath):
     '''
     The 'gf180' Open Source PDK is a collaboration between Google and
     Global Foundries to provide a fully open source Process
@@ -596,44 +610,41 @@ class _GF180PDK(LambdaPDK):
             self.add_layermapfileset("klayout", "def", "klayout")
             self.add_displayfileset("klayout")
 
-        # KLayout DRC
+        # KLayout DRC. One deck; each runset picks rule decks by tag. "all" includes
+        # antenna and density, which have runsets of their own. The deck only accepts
+        # a metal_top of 9K, 11K or 30K, so the 6K stackups have no DRC.
         metal_level, _, metal_top = stackup.split('_')
         drcs = {
-            "drc": pdk_path / "setup" / "klayout" / "drc" / "gf180mcu.drc",
-            "drc_feol": pdk_path / "setup" / "klayout" / "drc" / "gf180mcu.drc",
-            "drc_beol": pdk_path / "setup" / "klayout" / "drc" / "gf180mcu.drc",
-            "antenna": pdk_path / "setup" / "klayout" / "drc" / "gf180mcu_antenna.drc",
-            "density": pdk_path / "setup" / "klayout" / "drc" / "gf180mcu_density.drc"
+            "drc": "all,-antenna,-density",
+            "drc_feol": "feol,-antenna",
+            "drc_beol": "beol",
+            "antenna": "antenna",
+            "density": "density"
         }
-        for drc, runset in drcs.items():
-            with self.active_dataroot("lambdapdk"), self.active_fileset(f"klayout.drc.{drc}"):
-                self.add_file(runset, filetype="drc")
-                self.add_runsetfileset("drc", "klayout", drc)
+        if max_layer == 3:
+            # The metal slotting rules look for MIM bottom plates on Metal4, which
+            # the deck does not define below 4 metal levels
+            drcs["drc"] += ",-mslot"
+            drcs["drc_beol"] += ",-mslot"
+        if metal_top != "6K":
+            with self.active_dataroot("gf180mcu_fd_pv"), self.active_fileset("klayout.drc"):
+                self.add_file("klayout/drc/gf180mcu.drc", filetype="drc")
+                for drc in drcs:
+                    self.add_runsetfileset("drc", "klayout", drc)
 
-            self.add_klayout_drcparam(drc, "input=<input>")
-            self.add_klayout_drcparam(drc, "topcell=<topcell>")
-            self.add_klayout_drcparam(drc, "report=<report>")
-            self.add_klayout_drcparam(drc, "thr=<threads>")
-            self.add_klayout_drcparam(drc, "run_mode=flat")
-            self.add_klayout_drcparam(drc, "offgrid=true")
-
-            if drc in ("drc", "drc_feol", "drc_beol"):
-                feol = "true"
-                beol = "true"
-                if drc == "drc_feol":
-                    beol = "false"
-                if drc == "drc_beol":
-                    feol = "false"
-
-                self.add_klayout_drcparam(drc, f"feol={feol}")
-                self.add_klayout_drcparam(drc, f"beol={beol}")
-
-            self.add_klayout_drcparam(drc, f"metal_top={metal_top}")
-            self.add_klayout_drcparam(drc, f"metal_level={metal_level}")
-            if max_layer == 3:
-                self.add_klayout_drcparam(drc, "mim_option=A")
-            elif max_layer == 4 or max_layer == 5:
-                self.add_klayout_drcparam(drc, "mim_option=B")
+            for drc, decks in drcs.items():
+                self.add_klayout_drcparam(drc, "input=<input>")
+                self.add_klayout_drcparam(drc, "topcell=<topcell>")
+                self.add_klayout_drcparam(drc, "report=<report>")
+                self.add_klayout_drcparam(drc, "threads=<threads>")
+                self.add_klayout_drcparam(drc, "run_mode=flat")
+                self.add_klayout_drcparam(drc, f"decks={decks}")
+                self.add_klayout_drcparam(drc, f"metal_top={metal_top}")
+                self.add_klayout_drcparam(drc, f"metal_level={metal_level}")
+                if max_layer == 3:
+                    self.add_klayout_drcparam(drc, "mim_option=A")
+                elif max_layer == 4 or max_layer == 5:
+                    self.add_klayout_drcparam(drc, "mim_option=B")
 
         self.add_klayout_hidelayers('Dualgate')
         self.add_klayout_hidelayers('V5_XTOR')
