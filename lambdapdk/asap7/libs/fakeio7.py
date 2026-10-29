@@ -133,6 +133,21 @@ class FakeIO7Lambdalib_la_iocut(LambalibTechLibrary, _LambdaPath):
                 self.add_file(lib_path / "lambda" / "la_iocut.v")
 
 
+class FakeIO7Lambdalib_la_iocutvddio(LambalibTechLibrary, _LambdaPath):
+    def __init__(self):
+        super().__init__("la_iocutvddio", [FakeIO7Library])
+        self.set_name("fakeio7_la_iocutvddio")
+
+        # version
+        self.package.set_version("v1")
+
+        lib_path = Path("lambdapdk", "asap7", "libs", "fakeio7")
+
+        with self.active_dataroot("lambdapdk"):
+            with self.active_fileset("rtl"):
+                self.add_file(lib_path / "lambda" / "la_iocutvddio.v")
+
+
 class FakeIO7Lambdalib_la_iovss(LambalibTechLibrary, _LambdaPath):
     def __init__(self):
         super().__init__("la_iovss", [FakeIO7Library])
@@ -263,6 +278,7 @@ class FakeIO7Lambdalib_IO(LambalibTechLibrary):
         FakeIO7Lambdalib_la_ioanalog.alias(project)
         FakeIO7Lambdalib_la_ioinput.alias(project)
         FakeIO7Lambdalib_la_iocut.alias(project)
+        FakeIO7Lambdalib_la_iocutvddio.alias(project)
         FakeIO7Lambdalib_la_iovss.alias(project)
         FakeIO7Lambdalib_la_iovddio.alias(project)
         FakeIO7Lambdalib_la_iovssio.alias(project)
