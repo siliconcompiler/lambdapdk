@@ -42,7 +42,7 @@ timeout = "180"
 # Test dependencies.
 test = [
     "flake8 == 7.4.1",
-    "pytest == 9.1.1",
+    "pytest == 9.2.0",
     "pytest-timeout == 2.4.0",
     "tclint == 0.9.0",
     "sc-leflib == 0.5.2",
