@@ -27,17 +27,17 @@ class _LambdaPath(PathSchema):
         super().__init__()
 
         _version = f"v{__version__}"
-        url_suffix = "refs/tags/"
         if _gitcommit and version != __version__:
             # use git commit
             _version = _gitcommit[1:]  # remove leading 'g'
-            url_suffix = ""
 
+        # archive/<ref> takes a tag or a commit, so a remote run from an
+        # editable checkout can swap in the commit it has out
         PythonPathResolver.set_dataroot(
             self,
             "lambdapdk",
             "lambdapdk",
-            f"https://github.com/siliconcompiler/lambdapdk/archive/{url_suffix}",
+            "https://github.com/siliconcompiler/lambdapdk/archive/",
             alternative_ref=_version,
             python_module_path_append="..")
 
